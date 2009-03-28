@@ -1,0 +1,685 @@
+body 
+{
+	margin-top: 0;
+	margin-bottom: 0;
+	margin-left: 0;
+  	margin-right: 0;
+  	padding-left: 0;
+  	padding-right: 0;
+  	background-color: #FFFFFF;
+  	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+div.content {
+	margin: 0pt auto;
+	padding: 10px;
+	width: 850px;
+}
+
+div.logo {
+	background-color: #EEEEEE;
+	background-repeat: no-repeat;	
+/*	background-image: url(../images/rdf_flyer.64.gif);*/
+	font-size: 16pt;
+	padding: 15px 0px 0px 80px;		
+	height: 60px;
+}
+
+div.body {
+	margin: 10px;	
+	font-size: 10pt;	
+}
+
+td.left_aligned {
+	text-align: left;
+	vertical-align: text-top;
+}
+
+
+td.right_aligned {
+	text-align: right;
+	vertical-align: text-top;
+}
+
+/* start span */
+span.bold {
+	font-weight: bold;
+}
+
+span.red_text {
+	font-size: 0.7em;
+	color: red;
+}
+
+span.centered_text {
+	text-align: center;
+}
+
+/* end span */
+
+/* start users data table*/
+table.usersTable {
+	text-align: center;
+	width: 100%;
+	border-collapse:collapse; 
+	border-style: solid; 
+	border-width: 1px; 
+	border-color: #CACACA;
+}
+
+tr.usersTable_oddrow{
+	background-color: #FFFFFF;
+}
+
+tr.usersTable_evenrow{
+	background-color: #EEEEEE;
+}
+
+td.usersTable_usernameCol {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CACACA;
+	width: 100px;
+}
+
+td.usersTable_adminCol {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CACACA;
+	width: 50px;
+}
+
+td.usersTable_ontLeftCol {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CACACA;
+	width: 50px;
+}
+
+td.usersTable_fullNameCol {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CACACA;
+	width: 110px;
+}
+
+td.usersTable_emailCol {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CACACA;
+	width: 100px;
+}
+
+td.usersTable_lastLoginCol {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CACACA;
+	width: 50px;
+}
+
+td.usersTable_isAcceptedCol {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CACACA;
+	width: 50px;
+}
+
+td.usersTable_editCol {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CACACA;
+	width: 50px;
+}
+
+th.usersTable_header {
+	height: 30px;
+    border-style: solid;
+    border-width: 1px;   
+    border-color: #CACACA;
+    background-color: #E1E1E1;
+}
+
+/* end users data table*/
+
+/* start ontologies data table*/
+table.ontsTable {
+	text-align: center;
+	width: 100%;
+	border-collapse:collapse; 
+	border-style: solid; 
+	border-width: 1px; 
+	border-color: #CACACA;
+}
+
+tr.ontsTable_oddrow{
+	background-color: #FFFFFF;
+}
+
+tr.ontsTable_evenrow{
+	background-color: #EEEEEE;
+}
+
+td.ontsTable_baseUriCol {
+	text-align: left;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CACACA;
+	width: 330px;
+}
+
+td.ontsTable_ontologyNameCol {
+	text-align: left;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CACACA;
+	width: 300px;
+}
+
+td.ontsTable_versionsCol {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CACACA;
+	width: 70px;
+}
+
+td.ontsTable_subscribeCol {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CACACA;
+	width: 70px;
+}
+
+th.ontsTable_header {
+	height: 30px;
+    border-style: solid;
+    border-width: 1px;   
+    border-color: #CACACA;
+    background-color: #E1E1E1;
+}
+
+table.ontVersionsTable {
+	text-align: center;
+	width: 100%;
+	border-collapse:collapse; 
+	border-style: solid; 
+	border-width: 1px; 
+	border-color: #CACACA;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+tr.ontVersionsTable_oddrow{
+	background-color: #FFFFFF;
+}
+
+tr.ontVersionsTable_evenrow{
+	background-color: #EEEEEE;
+}
+
+td.ontVersionsTable_versionCol {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CACACA;
+	width: 100px;
+}
+
+td.ontVersionsTable_subversionCol {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CACACA;
+	width: 100px;
+}
+
+td.ontVersionsTable_versionDescriptionCol {
+	text-align: left;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CACACA;
+	width: 500px;
+}
+
+th.ontVersionsTable_header {
+	height: 30px;
+    border-style: solid;
+    border-width: 1px;   
+    border-color: #CACACA;
+    background-color: #C0C0C0;
+}
+
+/* end ontologies data table*/
+
+/* start popup element*/
+.popup {
+    background-color:rgb(255,255,255);
+    color: #000000;
+    border: 1px solid #CCCCCC;
+    font-size:smaller;
+    padding: 5px;
+    width: 150px
+}
+/* end popup element*/
+
+
+#header {
+	padding: 10px;	
+	margin: 10px;	
+	height: 100px;
+	background-color: #EEEEEE;	
+	background-repeat: no-repeat;
+	background-position: 0% 25%;
+	border-color: #DADADA;
+	border-style: solid;
+	border-width: 1px; 
+}
+
+#footer {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 10px;
+	margin-right: 10px;
+	font-size:.6em;
+	color:#000;
+	text-align:center;
+	border-top-color: #DADADA;
+	border-top-style: solid;
+	border-top-width: 1px; 
+	background-color: #FFFFFF;	
+	vertical-align: bottom;
+	height: 40px;
+	clear: both;
+}
+
+#footer ul { margin-left: 0; margin-bottom: 5px; padding-left: 0; display:inline; } 
+#footer ul li { margin-left: 0; padding: 4px 9px 4px 8px; list-style: none; display: inline; border-right: 1px dotted #066; }
+#footer ul li.last { border-right: 0px; }
+#footer a:link, #footer a:visited { color:#000; text-decoration:underline; }
+#footer a:hover { color:#6C99FF; }
+
+#navigation {
+		vertical-align:middle;
+		text-transform:capitalize;
+		font-size:0.75em;
+		font-weight:bold;
+		border-top-color: #DADADA; 
+		border-top-style: solid; 
+		border-top-width: 1px
+	}
+	
+	#rt_nav_container{
+	  float: right;
+	  text-align: right;
+	}
+
+
+	#navigation ul { margin-left: 0; padding-left: 0; display:inline; } 
+
+	#navigation ul li { margin-left: 0; padding: 4px 9px 4px 8px; list-style: none; display: inline; border-right: 1px solid #DADADA;  }
+	
+	#navigation a:link, #navigation a:visited { color:#333333; text-decoration:none; }
+
+	#navigation a:hover { color:#6C99FF; text-decoration:none; }
+
+	.padded_container {
+		padding-top: 7px;
+		padding-bottom: 7px;
+	}
+
+
+/*-----------------------------------*/
+
+#left {
+	position: absolute;
+	left: 10px;
+	top: 134px;
+	width: 180px;
+	background-color: #FFFFFF;
+	border: 2px none #666666;
+}
+
+#center {
+	top: 0;
+	margin-left: 200px;
+	margin-right: 230px;
+	height: 400px;
+	min-height: 400px;
+}
+
+*>#center {
+	height: auto;
+}
+
+#center_more {
+	top: 0;
+	margin-left: 200px;
+	margin-right: 10px;
+	height: 400px;
+	min-height: 400px;
+	text-align: left;
+}
+
+*>#center_more {
+	height: auto;
+}
+
+#right {
+	position: absolute;
+	right: 10px;
+	top: 134px;
+	width: 200px;
+	border: 2px solid #666666;
+	background-color: #FFFFCC;
+	padding-right: 5px;
+	padding-left: 5px;
+	padding-bottom: 10px;
+	padding-top: 5px;
+}
+
+.leftAlignedImage {
+	margin: 5px 12px 15px 5px;
+	float: left;
+}
+
+
+
+/* general anchor colors */
+a:link, a:visited { color:#333333; text-decoration:underline; }
+a:hover { color:#6C99FF; text-decoration:underline; }
+
+/* center lists */
+#center ul li {
+	margin-left: 0;
+	margin-bottom: 5px;
+	padding-left: 0;
+	font-size: .75em;
+}
+
+/* NAVIGATION FORMATTING BEGIN */
+
+	
+
+	/* top right nav */
+	#rt_navigation {
+		float: right;
+		text-align: right;
+		vertical-align:top;
+		text-transform:capitalize;
+		font-size:0.75em;
+		font-weight:bold;
+		background-color: #FFCC33;
+	}
+	#rt_navigation ul { margin-left: 0; padding-left: 0; } 
+
+	#rt_navigation ul li { margin-left: 0; padding: 0 9px 0 8px; list-style: none; }
+
+	#rt_navigation a:link, #rt_navigation a:visited { color:#fff; text-decoration:none; }
+
+	#rt_navigation a:hover { color:#6C99FF; text-decoration:none; }
+
+	
+	/* Experiment */
+	div.header_row {
+	  clear: both;
+	  padding-top: 0px;
+	}
+	
+	div.top_row {
+		clear: both;
+		padding-top: 0px;
+	}
+	
+	div.top_row div.logo {
+		float: left;
+		width: 49%;
+	}
+	div.top_row div.logo img {
+		margin-top:15px;
+		margin-bottom:10px;
+		margin-left:10px;
+	}
+	
+	div.top_row div.top_nav {
+	float: right;
+	width: 49%;
+	text-align: right;
+	vertical-align:top;
+	text-transform:capitalize;
+	font-size:0.75em;
+	font-weight:bold;
+	}
+	
+	div.top_row div.top_nav ul {
+	margin-left: 0;
+	margin-top: 15px;
+	padding-left: 0;
+	} 
+
+	div.top_row div.top_nav ul li {
+	margin-left: 0;
+	padding: 0 9px 0 8px;
+	list-style: none;
+	border-right-width: 2px;
+	border-right-style: solid;
+	border-right-color: #666666;
+}
+
+	div.top_row div.top_nav a:link { color:#000; text-decoration:none; }
+	div.top_row div.top_nav a:visited { color:#333333; text-decoration:none; }
+
+	div.top_row div.top_nav a:hover { color:#6C99FF; text-decoration:none; }
+	
+	div.header_row div.nav {
+		float: left;
+		width: 100%;
+		border-top: 2px solid #3B6CFF;
+		border-bottom: 2px solid #3B6CFF;
+		background-color: #CCCCCC;
+		padding: 5px 0;
+	}
+	
+	/* left hand column nav */
+	.lt_navigation {
+	vertical-align:middle;
+	text-transform:capitalize;
+	font-size:0.7em;
+	font-weight:bold;
+	background-color: #FFFFFF;
+	}
+	
+	.lt_navigation div.nav_header {
+	font-size:1.1em;
+	margin: 0px 0px 0px 4px;
+	padding: 0px;
+	}
+	
+	.lt_navigation ul {
+	margin-left: 0;
+	padding-left: 5px;
+	border-top: 2px solid #666666;
+	border-right: 2px solid #666666;
+	border-bottom: 2px solid #666666;
+	border-left: 2px none #666666;
+	padding-right: 5px;
+	padding-bottom: 10px;
+	background-color: #FFFFCC;
+	padding-top: 0px;
+	} 
+
+	.lt_navigation ul li { padding: 0px 0px 5px; list-style: url(../images/arrow.gif) none inside; }
+
+	.lt_navigation a:link, .lt_navigation a:visited { color:#333333; text-decoration:none; }
+
+	.lt_navigation a:hover { color:#6C99FF; text-decoration:none; }
+	
+	/* center area stuff */
+	#center h1 {
+		font-size:0.95em;
+		font-weight:bold;
+	}
+	
+	#center h2 {
+	font-size:0.85em;
+	font-weight: bold;
+	}
+	
+	#center h3 {
+	font-size: 0.8em;
+	}
+	
+	#center p {
+		font-size:0.75em;
+	}
+	
+	#center table {
+		font-size: 0.75em;
+	}
+	
+	#center table td.course {
+	background-color: #FFFFCC;
+	border-top-width: 2px;
+	border-right-width: 2px;
+	border-bottom-width: 2px;
+	border-left-width: 2px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-top-color: #999999;
+	border-right-color: #999999;
+	border-bottom-color: #999999;
+	border-left-color: #999999;
+	}
+	
+	#center_more h1 {
+		font-size:0.95em;
+		font-weight:bold;
+	}
+	
+	#center_more h2 {
+	font-size:0.85em;
+	font-weight:bold;
+	}
+	
+	#center_more h3 {
+	font-size: 0.8em;
+	}
+	
+	#center_more p {
+		font-size:0.75em;
+	}
+	
+	#center_more table {
+		font-size: 0.75em;
+	}
+	
+	#center_more table td.course {
+	background-color: #FFFFCC;
+	border-top-width: 2px;
+	border-right-width: 2px;
+	border-bottom-width: 2px;
+	border-left-width: 2px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-top-color: #999999;
+	border-right-color: #999999;
+	border-bottom-color: #999999;
+	border-left-color: #999999;
+	}
+	
+	/* center area stuff */
+	#right h1 {
+		font-size:0.85em;
+		font-weight:bold;
+	}
+	
+	#right h2 {
+		font-size:0.75em;
+		font-weight:bold;
+	}
+	
+	#right p {
+		font-size:0.65em;
+	}
+	
+	#right span.headline {
+		font-weight:bold;
+	}
+	
+	#right a:link, #right a:visited { color:#333333; text-decoration:underline; }
+	#right a:hover { color:#6C99FF; text-decoration:underline; }
+
+.book {
+	padding: 1em;
+	margin: 0.5em;
+	clear: both;
+	width: 100%;
+}
+
+.book span.cover {
+	vertical-align: top;
+	float: left;
+	width: 23%;
+	padding: 2px;
+	}
+.book h2, .book p {
+	float: right;
+	width: 75%;
+	vertical-align: top;
+	margin: 0px;
+	padding: 0px;
+	}
+
+/* shopping cart stuff */
+#center_more table {
+		font-size: 0.75em;
+	}
+.header {
+	background-color: #FFFFCC;
+	border-top-width: 2px;
+	border-right-width: 2px;
+	border-bottom-width: 2px;
+	border-left-width: 2px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-top-color: #999999;
+	border-right-color: #999999;
+	border-bottom-color: #999999;
+	border-left-color: #999999;
+}
+
+.category_row {
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	border-top-color: #999999;
+}
+
+td.label {
+    font-size: .65em;
+}
+
+p.darkred {
+    font-size: .65em;
+    color:#c00;
+}
+
+		.oddRow {background-color: gray}
+		.evenRow {background-color: lightblue}
+		.ocean {background-color: cyan}
+		.tableHeader {background-color: white}
+
+.row1 {
+	background-color : lightgrey
+}
+
+.row2 {
+	background-color : white
+}
+
+.label {
+ 	width :  .8in;
+}
+
+.errorText {
+	color : red;
+}
+

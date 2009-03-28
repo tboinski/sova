@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
+	version="1.2">
+
+	<application>
+
+		<locale-config>
+			<default-locale>en</default-locale>
+			<supported-locale>pl</supported-locale>
+		</locale-config>
+
+		<resource-bundle>
+			<base-name>
+				org.pg.eti.kask.ont.web.res.communicates
+			</base-name>
+			<var>communicates</var>
+		</resource-bundle>
+
+		<resource-bundle>
+			<base-name>
+				org.pg.eti.kask.ont.web.res.errors
+			</base-name>
+			<var>errors</var>
+		</resource-bundle>
+
+
+	</application>
+
+	<managed-bean>
+		<managed-bean-name>changeLocaleBean</managed-bean-name>
+		<managed-bean-class>
+			org.pg.eti.kask.ont.web.util.ChangeLocaleBean
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>userCredentialsBean</managed-bean-name>
+		<managed-bean-class>
+			org.pg.eti.kask.ont.web.users.UserCredentialsBean
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>registerUserBean</managed-bean-name>
+		<managed-bean-class>
+			org.pg.eti.kask.ont.web.users.RegisterUserBean
+		</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>usersListBean</managed-bean-name>
+		<managed-bean-class>
+			org.pg.eti.kask.ont.web.users.UsersListBean
+		</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>addOntologyExpertsBean</managed-bean-name>
+		<managed-bean-class>
+			org.pg.eti.kask.ont.web.ontologies.AddOntologyExpertsBean
+		</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>		
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>ontologiesListBean</managed-bean-name>
+		<managed-bean-class>
+			org.pg.eti.kask.ont.web.ontologies.OntologiesListBean
+		</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>		
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>detailTogglerBean</managed-bean-name>
+		<managed-bean-class>
+			org.pg.eti.kask.ont.web.util.DetailTogglerBean
+		</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>		
+	</managed-bean>
+			
+	<managed-bean>
+		<managed-bean-name>userEditBean</managed-bean-name>
+		<managed-bean-class>
+			org.pg.eti.kask.ont.web.users.UserEditBean
+		</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+		
+	<navigation-rule>
+		<display-name>pages/register</display-name>
+		<from-view-id>/pages/register.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/pages/registrationSuccesful.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>pages/admin/userEdit</display-name>
+		<from-view-id>/pages/admin/userEdit.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/pages/admin/usersList.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancel</from-outcome>
+			<to-view-id>/pages/admin/usersList.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>pages/user/addOntologyExperts</display-name>
+		<from-view-id>/pages/user/addOntologyExperts.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/pages/user/ontologiesList.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cancel</from-outcome>
+			<to-view-id>/pages/user/ontologiesList.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>pages/login</display-name>
+		<from-view-id>/pages/login.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>loginFailure</from-outcome>
+			<to-view-id>/pages/loginFailure.jsp</to-view-id>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>loginSucceded</from-outcome>
+			<to-view-id>/pages/home.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+</faces-config>
+
