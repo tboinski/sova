@@ -1,0 +1,136 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+%custom margins
+\usepackage[left=2.5cm, top=2.5cm, bottom=3cm, right=2cm, foot=2cm, head=0.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage[bookmarks=true, pdftex]{hyperref}
+
+%styl nagłowków
+\pagestyle{fancy} 
+\parindent 2cm 
+
+%opening
+\title{Studium wykonalności}
+\author{3@KASK}
+
+\begin{document}
+\bibliographystyle{plain}
+
+
+\maketitle
+
+
+\begin{center}
+%budowanie tabeli
+\begin{tabular}{|p{7cm}|p{7cm}|}
+\hline
+Symbol projektu: & Opiekun projektu:   \tabularnewline 
+3@KASK & Tomasz Boiński    \tabularnewline \hline
+\multicolumn{2}{|l|}{Nazwa Projektu: } \tabularnewline
+\multicolumn{2}{|l|}{Wizualizacja grafów za pomocą biblioteki Prefuse } \tabularnewline 
+\hline
+\multicolumn{2}{l}{ } \tabularnewline %pusta linijka
+\hline 
+Nazwa Dokumentu: & Nr wersji:   \tabularnewline 
+Studium wykonalności & 0.0 \tabularnewline \hline
+Odpowiedzialny za dokument: & Data pierwszego sporządzenia:   \tabularnewline 
+Anna Jaworska & 31.03.09 \tabularnewline \hline
+Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline 
+WEWNĘTRZNE & 31.03.09 \tabularnewline \hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|p{4cm}|c|c|c|}
+\multicolumn{5}{c}{\textbf{Historia dokumentu}} \tabularnewline \hline
+\textbf{Wersja} & \textbf{Opis modyfikacji} & \textbf{Rozdział/strona} & \textbf{Autor modyfikacji} & \textbf{Data} \tabularnewline \hline 
+1 & Przygotowanie zarys dokumnetu i określenie zakresu badań & wszystkie & Anna Jaworska & 31.03.09 \tabularnewline \hline
+& & & &\tabularnewline \hline
+\end{tabular}
+ 
+
+\end{center}
+
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Założenia realizacji studium}
+
+\subsection{Podstawa wykonania i temat studium}
+\paragraph{} Studium wykonywane jest przede wszystkim aby określic możliwe sposoby realizacji projektu. Ma także za zadanie zebranie i podsumowanie informacji potrzebnych zespołowi do realizacji projektu. 
+
+\subsection{Cel studium}
+\paragraph{} Celem studium jest zbadanie na potrzeby projektu \textit{Wizualizacja grafów za pomocą biblioteki Prefuse}: 
+\begin{itemize}
+ 	\item jak należy tworzyć biblioteki w technologii JAVA
+ 	\item jakich mechnizmów wizualizacji grafów dostarczają biblioteki JAVA 
+	\item czy realizacja projektu za pomocą Prefuse jest odpowiednim rozwiązaniem
+	\item jaki standard OWL powinien być wspierany przez wytworzony produkt
+\end{itemize}
+
+\subsection{Ograniczenia}
+\paragraph{} Do podstawowych ograniczeń należą:
+\begin{itemize}
+ 	\item konieczność realizacji projektu w języku JAVA
+	\item 
+\end{itemize}
+
+
+
+\section{Stan istniejący}
+
+\subsection{Inne systemy i zasoby mające wpływ lub będące pod wypływem planowanego produktu}
+
+\begin{itemize}
+ 	\item OCS
+	\item OWL API 
+\end{itemize}
+
+
+\subsection{Istniejące na rynku podobne rozwiązania}
+
+\begin{itemize}
+ \item 
+\end{itemize}
+
+\subsection{Problem i motywacja wdrożenia nowego produktu}
+\paragraph{} 
+
+
+\section{Ogólne wymagania stawiane produktowi i ich priorytety}
+
+\subsection{Architektura}
+
+\subsection{Użytkownicy}
+
+\subsection{Dane}
+
+\subsection{Funkcjonalność}
+
+\subsection{Wymogi techniczno - technologiczne}
+
+\section{Ogólna ocena ryzyka i planowany sposób zarzadzania nim}
+
+\section{Uwarunkowania prawne i inne}
+%na jakiej to ma byc licencji - tylko dla KASK-u ?
+
+
+\section{Proponowane rozwiązania}
+
+%wybór w dizedzinach - biblioteki i Java - wersje itp, wersja OWL(RDF?), wersja standardu tworzenia biblioteki, wzorować się na cyzms istniejącym (?)
+
+\section{Porównanie wariantów i rekomendacja}
+
+\section{Strategia i wstępny harmonogram}
+
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Literatura}
+\bibliography{biblio}
+
+\end{document}

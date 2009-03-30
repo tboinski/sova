@@ -1,0 +1,80 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+%custom margins
+\usepackage[left=2.5cm, top=2.5cm, bottom=3cm, right=2cm, foot=2cm, head=0.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage[bookmarks=true, pdftex]{hyperref}
+
+%styl nagłowków
+\pagestyle{fancy} 
+\parindent 2cm 
+
+%opening
+\title{Tytuł dokumentu}
+\author{3@KASK}
+
+\begin{document}
+\bibliographystyle{plain}
+
+
+\maketitle
+
+
+\begin{center}
+%budowanie tabeli
+\begin{tabular}{|p{7cm}|p{7cm}|}
+\hline
+Symbol projektu: & Opiekun projektu:   \tabularnewline 
+3@KASK & mgr inż. Tomasz Boiński    \tabularnewline \hline
+\multicolumn{2}{|l|}{Nazwa Projektu: } \tabularnewline
+\multicolumn{2}{|l|}{Wizualizacja grafów za pomocą biblioteki Prefuse } \tabularnewline 
+\hline
+\multicolumn{2}{l}{ } \tabularnewline %pusta linijka
+\hline 
+Nazwa Dokumentu: & Nr wersji:   \tabularnewline 
+Słownik pojęć & 0.0 \tabularnewline \hline
+Odpowiedzialny za dokument: & Data pierwszego sporządzenia:   \tabularnewline 
+Piotr Orłowski & 31.03.09 \tabularnewline \hline
+Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline 
+Wewnętrzne & 31.03.09 \tabularnewline \hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|p{4cm}|c|c|c|}
+\multicolumn{5}{c}{\textbf{Historia dokumentu}} \tabularnewline \hline
+\textbf{Wersja} & \textbf{Opis modyfikacji} & \textbf{Rozdział/strona} & \textbf{Autor modyfikacji} & \textbf{Data} \tabularnewline \hline 
+1 & Stworzenie zarysu słownika & wszystkie & Anna Jaworska & 31.03.09 \tabularnewline \hline
+& & & &\tabularnewline \hline
+\end{tabular}
+\end{center}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Jak korzystać ze slownika}
+
+\section{Pojęcia ogólne}
+\begin{description}
+	\item[WETI/ETI] Wydział Elektroniki, Telekomunikacji i Informatyki Politechniki Gdańskiej
+	\item[KASK] Katedra Architektury Systemów Komputerowych WETI
+ 	\item[OCS] Ontology  C.. System - projekt realizowany w ramach grantu (tu id grantu) na KASK-u
+	\item[JAVA] Obiektowy język programowania; pojęcie używane czasem w sensie maszyny wirtualnej jezyka JAVA  
+	\item[Prefuse] Biblioteka języka JAVA, pozwalająca na estetyczna prezentacje danych, w szczególności grafów  
+\end{description}
+
+
+
+\section{Pojęcia specificzne dla projektu}
+
+
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Literatura}
+\bibliography{biblio}
+
+\end{document}
