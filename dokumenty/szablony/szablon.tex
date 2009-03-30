@@ -1,0 +1,90 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+%custom margins
+\usepackage[left=2.5cm, top=2.5cm, bottom=3cm, right=2cm, foot=2cm, head=0.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage[bookmarks=true, pdftex]{hyperref}
+
+%styl nagłowków
+\pagestyle{fancy} 
+\parindent 2cm 
+
+%opening
+\title{Tytuł dokumentu}
+\author{3@KASK}
+
+\begin{document}
+\bibliographystyle{plain}
+
+
+\maketitle
+
+
+\begin{center}
+%budowanie tabeli
+\begin{tabular}{|p{7cm}|p{7cm}|}
+\hline
+Symbol projektu: & Opiekun projektu:   \tabularnewline 
+WSTAW SYMBOL & Tomasz Boiński    \tabularnewline \hline
+\multicolumn{2}{|l|}{Nazwa Projektu: } \tabularnewline
+\multicolumn{2}{|l|}{WSTAW NAZWE } \tabularnewline 
+\hline
+\multicolumn{2}{l}{ } \tabularnewline %pusta linijka
+\hline 
+Nazwa Dokumentu: & Nr wersji:   \tabularnewline 
+WSTAW TYTUL & WSTAW WERSJE \tabularnewline \hline
+Odpowiedzialny za dokument: & Data pierwszego sporządzenia:   \tabularnewline 
+WSTAW OSOBĘ & WSTAW DATĘ \tabularnewline \hline
+Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline 
+??? & WSTAW DATĘ \tabularnewline \hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|p{4cm}|c|c|c|}
+\multicolumn{5}{c}{\textbf{Historia dokumentu}} \tabularnewline \hline
+\textbf{Wersja} & \textbf{Opis modyfikacji} & \textbf{Rozdział/strona} & \textbf{Autor modyfikacji} & \textbf{Data} \tabularnewline \hline 
+1 & Stworzenie & wszystkie & Anna Jaworska & 30.03.09 \tabularnewline \hline
+& & & &\tabularnewline \hline
+\end{tabular}
+ 
+
+\end{center}
+
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Cele i opis projektu}
+\subsection{podpkt}
+\subsubsection{kolejny}
+	
+\section{Zleceniodawca}
+\paragraph{}
+przykladowy akapit co ma troche tekstu a nawet troche wiecej a co czemu by nie bo taka jest moja wola. I może sobie iśc bo taaaak.
+\paragraph{z tytułem}
+a to sobie jest paragfra z tytułem. a to sobie jest paragfra z tytułem.a to sobie jest
+ paragfra z tytułem.a to sobie jest paragfra z tytułem.a to sobie jest paragfra z tytułem.a 
+to sobie jest paragfra z tytułem.a to sobie jest paragfra z tytułem.a to sobie jest paragfra 
+z tytułem.a to sobie jest paragfra z tytułem.a to sobie jest paragfra z tytułem.a to sobie 
+jest paragfra z tytułem.a to sobie jest paragfra z tytułem.a to sobie jest paragfra z tytułem.a to sobie jest paragfra z tytułem.a to sobie jest paragfra z tytułem.a to sobie jest paragfra z tytułem.a to sobie jest paragfra z tytułem.a to sobie jest paragfra z tytułem.a to sobie jest paragfra z tytułem.a to sobie jest paragfra z tytułem.a to sobie jest paragfra z tytułem.a to sobie jest paragfra z tytułem.a to sobie jest paragfra z tytułem.a to sobie jest paragfra z tytułem.
+\subsection{podpkt}
+\marginpar{notatka na marginesie bo jesteśmy kul}
+
+\section{Zleceniobiorca}
+\subsection{podpkt}
+tekscik wprowadzjacy \cite{historia}
+
+\subsection{podpkt}
+
+\section{Zakres prac}
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Literatura}
+\bibliography{biblio}
+
+\end{document}
