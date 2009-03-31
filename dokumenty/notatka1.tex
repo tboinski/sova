@@ -1,0 +1,75 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+%custom margins
+\usepackage[left=2.5cm, top=2.5cm, bottom=3cm, right=2cm, foot=2cm, head=0.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage[bookmarks=true, pdftex]{hyperref}
+
+%styl nagłowków
+\pagestyle{fancy} 
+\parindent 2cm 
+
+%opening
+\title{Notatka ze spotkania}
+\author{3@KASK}
+
+\begin{document}
+\bibliographystyle{plain}
+
+
+\maketitle
+
+
+\begin{center}
+%budowanie tabeli
+\begin{tabular}{|p{7cm}|p{7cm}|}
+\hline
+Symbol projektu: & Opiekun projektu:   \tabularnewline 
+3@KASK & mgr inż. Tomasz Boiński    \tabularnewline \hline
+\multicolumn{2}{|l|}{Nazwa Projektu: } \tabularnewline
+\multicolumn{2}{|l|}{Wizualizacja grafów za pomocą biblioteki Prefuse } \tabularnewline 
+\hline
+\multicolumn{2}{l}{ } \tabularnewline %pusta linijka
+\hline 
+Nazwa Dokumentu: & Data spotkania:   \tabularnewline 
+Notatka ze spotkania & 30.03.09 \tabularnewline \hline
+Odpowiedzialny za dokument: & Obecni na spotkaniu:   \tabularnewline 
+Anna Jaworska  & Kompletny zespół \tabularnewline \hline
+Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline 
+WEWNĘTRZNE & 31.03.09 \tabularnewline \hline
+\end{tabular}
+\end{center}
+
+\section{Temat spotkania}
+\paragraph{}Sporządzenie dokumentu zlecenia projektowego. Identyfikacja  zagadnień do poruszenia w studium wykonalności. 
+
+\section{Poruszone zagadnienia}
+\begin{itemize}
+	\item Prezentacja przygotowanego w TeX przez Anię szablonu dokumentów 
+	\item Krytyczne przejrzenie punktów w dostarczonym przez KASK szablonie \textit{Zlecenia projektowego}
+	\item Zdefiniowanie celów projektu
+	\item Sporządzenie pierwszej wersji \textit{Zlecenia projektowego}
+	\item Identyfikacja zagadnień do rozważenia w \textit{Studium wykonalności}
+\end{itemize}
+
+
+\section{Podjęte ustalenia}
+\paragraph{} Dalsze prace podzielono następująco:
+	\begin{itemize}
+ 		\item Anna Jaworska - dopracowanie szablonów w TeXu, umieszczenie dotychczasowych wyników prac na SVN
+		\item Radosław Kleczkowski  - zbadanie tematu istnienia standardów tworzenia bibliotek JAVA 
+ 		\item Piotr Kunowski - przygotowanie krótkiego przeglądu bibliotek alternatywnych do Prefuse
+		\item Piotr Orłowski  - przygotowanie wylistowania elementów do wizualizacji używanych w OWL 
+	\end{itemize}
+
+
+
+
+%\clearpage
+%\phantomsection
+%\addcontentsline{toc}{section}{Literatura}
+%\bibliography{biblio}
+
+\end{document}

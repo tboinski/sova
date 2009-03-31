@@ -27,7 +27,7 @@
 \begin{tabular}{|p{7cm}|p{7cm}|}
 \hline
 Symbol projektu: & Opiekun projektu:   \tabularnewline 
-3@KASK & Tomasz Boiński    \tabularnewline \hline
+3@KASK & mgr inż. Tomasz Boiński    \tabularnewline \hline
 \multicolumn{2}{|l|}{Nazwa Projektu: } \tabularnewline
 \multicolumn{2}{|l|}{Wizualizacja grafów za pomocą biblioteki Prefuse } \tabularnewline 
 \hline
@@ -46,7 +46,7 @@ WEWNĘTRZNE & 31.03.09 \tabularnewline \hline
 \begin{tabular}{|c|p{4cm}|c|c|c|}
 \multicolumn{5}{c}{\textbf{Historia dokumentu}} \tabularnewline \hline
 \textbf{Wersja} & \textbf{Opis modyfikacji} & \textbf{Rozdział/strona} & \textbf{Autor modyfikacji} & \textbf{Data} \tabularnewline \hline 
-1 & Przygotowanie zarys dokumnetu i określenie zakresu badań & wszystkie & Anna Jaworska & 31.03.09 \tabularnewline \hline
+1 & Przygotowanie zarysu dokumnetu i określenie zakresu badań & wszystkie & Anna Jaworska & 31.03.09 \tabularnewline \hline
 & & & &\tabularnewline \hline
 \end{tabular}
  
@@ -76,7 +76,8 @@ WEWNĘTRZNE & 31.03.09 \tabularnewline \hline
 \paragraph{} Do podstawowych ograniczeń należą:
 \begin{itemize}
  	\item konieczność realizacji projektu w języku JAVA
-	\item 
+	\item konieczność wykorzystania wersji bibliotek zgodnych z użytymi w OCS
+	\item limit czasowy projektu 
 \end{itemize}
 
 
@@ -86,8 +87,9 @@ WEWNĘTRZNE & 31.03.09 \tabularnewline \hline
 \subsection{Inne systemy i zasoby mające wpływ lub będące pod wypływem planowanego produktu}
 
 \begin{itemize}
- 	\item OCS
-	\item OWL API 
+ 	\item OCS - Ontology C.. System 
+	\item OWL API ver 2.1.1 - API do przetwarzania plików w formacie OWL zgodnych ze standardem W3C; ta wersja API została użyta w projekcie OCS
+	\item 
 \end{itemize}
 
 
@@ -98,29 +100,137 @@ WEWNĘTRZNE & 31.03.09 \tabularnewline \hline
 \end{itemize}
 
 \subsection{Problem i motywacja wdrożenia nowego produktu}
-\paragraph{} 
+\paragraph{} Nowa biblioteka powinna powstać aby:
+\begin{itemize}
+ \item ułatwić programistą wizualizację ontologii
+\end{itemize}
+
 
 
 \section{Ogólne wymagania stawiane produktowi i ich priorytety}
+\paragraph{} Wymienione wymagania mają charakter orientacyjny, pozwalajacy nakreślic zakres problemu jaki ma pokrywać projekt. Szczegółową definicję wymagań zawiera dokument \textit{Specyfikacji wymagań}
 
 \subsection{Architektura}
 
 \subsection{Użytkownicy}
-
+\paragraph{} Użytkownikami biblioteki będą programiści tworzący aplikacje wizualizujące ontologie. Inicjalnie będą to programiści związani z projektem OCS, później mogą to być dowolni inni programiści chętni do korzystania z biblioteki.  
 \subsection{Dane}
+\paragraph{} Biblioteka powinna obsługiwać te same formaty danych co OWL API (zgodne ze specyfikacją W3C):
+\begin{itemize}
+ 	\item RDF
+	\item OWL Lite
+	\item OWL DL
+	\item OWL Full
+\end{itemize}
+
+\paragraph{}Ponadto dane te powinny być wczytywane poprzez:
+\begin{itemize}
+ 	\item podanie ścieżki do pliku OWL na dysku 
+	\item podanie adresu sieciowego zasobu z plikiem OWL
+	\item podanie strumienia/kontenera z XML 
+\end{itemize}
+
 
 \subsection{Funkcjonalność}
+% tu mozna o OWL napisać i pare innych
+\paragraph{} Zakładamy, że biblioteka będzie zawierać następujace funkcjonalności:
+\begin{itemize}
+ 	\item wizualizacja elmentów OWL 
+	\item pozwalać użytkownikowi na definiowanie akcji dla zdarzeń okna
+	\item zawierać standardowe definicje zdarzeń
+	\item  
+\end{itemize}
+
+
 
 \subsection{Wymogi techniczno - technologiczne}
+%tu beda radkowe zalecenia
 
 \section{Ogólna ocena ryzyka i planowany sposób zarzadzania nim}
+
+
+\paragraph{}Schemat opisu czynnika ryzyka
+\begin{center}
+\begin{tabular}{|l|p{12cm}|}
+\hline
+\textbf{ID czynnika} &  RISKXX \tabularnewline \hline
+\textbf{Nazwa czynnika} & Nazwa \tabularnewline \hline
+\textbf{Opis czynnika} & Opis... \tabularnewline \hline
+\textbf{Sposób zarządzania} & Opis.. \tabularnewline \hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|l|p{12cm}|}
+\hline
+\textbf{ID czynnika} &  RISK01 \tabularnewline \hline
+\textbf{Nazwa czynnika} & Problemy logistyczne zespołu  \tabularnewline \hline
+\textbf{Opis czynnika} & Uwzględniamy możliwość wystąpienia problemów osobistych członków zespołu powodujących ich wyłączenie z prac. \tabularnewline \hline
+\textbf{Sposób zarządzania} & Jeśli ktoś zostanie wyłaczony z prac, reszta zespołu musi podzielić między siebie jego obowiązki i informować osobę wyłaczaną o postempach, tak aby miała wgląd w archiwa.  \tabularnewline \hline
+\end{tabular}
+\end{center}
+
+
+\begin{center}
+\begin{tabular}{|l|p{12cm}|}
+\hline
+\textbf{ID czynnika} &  RISK02 \tabularnewline \hline
+\textbf{Nazwa czynnika} & Problemy członków zespołu na uczelni \tabularnewline \hline
+\textbf{Opis czynnika} & Możliwe jest powstanie zaległości związanych z innymi uczelnianymi obowiązkami    \tabularnewline \hline
+\textbf{Sposób zarządzania} & Członek zespołu musi zgłosić swoje problemy reszcie zespołu. W zależnosci od sytuacji termin wykonania jego zadań zostanie przedłużony lub zadania te przejmie ktoś inny. \tabularnewline \hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|l|p{12cm}|}
+\hline
+\textbf{ID czynnika} &  RISK03 \tabularnewline \hline
+\textbf{Nazwa czynnika} & Niedostępność opiekuna/klienta \tabularnewline \hline
+\textbf{Opis czynnika} & Z różnych przyczyn niezależnych od zespołu opiekun może stać sie niedostępny.  \tabularnewline \hline
+\textbf{Sposób zarządzania} & Wszelkie problemy wymagjace według zespołu poznania opinii opiekuna będą musiały zostać rozwiązanie poprzez podjęcie decyzji przez zespół bez wsparcia. Wszelkie problemy organizacyjne zwiazane z projektem grupowym powinny pod nieobecność zgłaszane do katedralnego koordynatora projektów grupowych.     \tabularnewline \hline
+\end{tabular}
+\end{center}
+
+
+\begin{center}
+\begin{tabular}{|l|p{12cm}|}
+\hline
+\textbf{ID czynnika} &  RISKXX \tabularnewline \hline
+\textbf{Nazwa czynnika} & Nazwa \tabularnewline \hline
+\textbf{Opis czynnika} & Opis... \tabularnewline \hline
+\textbf{Sposób zarządzania} & Opis.. \tabularnewline \hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|l|p{12cm}|}
+\hline
+\textbf{ID czynnika} &  RISKXX \tabularnewline \hline
+\textbf{Nazwa czynnika} & Nazwa \tabularnewline \hline
+\textbf{Opis czynnika} & Opis... \tabularnewline \hline
+\textbf{Sposób zarządzania} & Opis.. \tabularnewline \hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|l|p{12cm}|}
+\hline
+\textbf{ID czynnika} &  RISKXX \tabularnewline \hline
+\textbf{Nazwa czynnika} & Nazwa \tabularnewline \hline
+\textbf{Opis czynnika} & Opis... \tabularnewline \hline
+\textbf{Sposób zarządzania} & Opis.. \tabularnewline \hline
+\end{tabular}
+\end{center}
 
 \section{Uwarunkowania prawne i inne}
 %na jakiej to ma byc licencji - tylko dla KASK-u ?
 
 
+
 \section{Proponowane rozwiązania}
 
+%wariant z DL 
+%wariant z Full
 %wybór w dizedzinach - biblioteki i Java - wersje itp, wersja OWL(RDF?), wersja standardu tworzenia biblioteki, wzorować się na cyzms istniejącym (?)
 
 \section{Porównanie wariantów i rekomendacja}

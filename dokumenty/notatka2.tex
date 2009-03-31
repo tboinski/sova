@@ -1,0 +1,92 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+%custom margins
+\usepackage[left=2.5cm, top=2.5cm, bottom=3cm, right=2cm, foot=2cm, head=0.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage[bookmarks=true, pdftex]{hyperref}
+
+%styl nagłowków
+\pagestyle{fancy} 
+\parindent 2cm 
+
+%opening
+\title{Notatka ze spotkania}
+\author{3@KASK}
+
+\begin{document}
+\bibliographystyle{plain}
+
+
+\maketitle
+
+
+\begin{center}
+%budowanie tabeli
+\begin{tabular}{|p{7cm}|p{7cm}|}
+\hline
+Symbol projektu: & Opiekun projektu:   \tabularnewline 
+3@KASK & mgr inż. Tomasz Boiński    \tabularnewline \hline
+\multicolumn{2}{|l|}{Nazwa Projektu: } \tabularnewline
+\multicolumn{2}{|l|}{Wizualizacja grafów za pomocą biblioteki Prefuse } \tabularnewline 
+\hline
+\multicolumn{2}{l}{ } \tabularnewline %pusta linijka
+\hline 
+Nazwa Dokumentu: & Data spotkania:   \tabularnewline 
+Notatka ze spotkania & 31.03.09 \tabularnewline \hline
+Odpowiedzialny za dokument: & Obecni na spotkaniu:   \tabularnewline 
+Anna Jaworska & Kompletny zespół \tabularnewline \hline
+Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline 
+WEWNĘTRZNE & WSTAW DATĘ \tabularnewline \hline
+\end{tabular}
+\end{center}
+
+%\newpage
+%\tableofcontents
+%\newpage
+
+\section{Temat spotkania}
+\paragraph{}Spotkanie ma na celu omówienie zagadnień do poruszenia w \textit{Studium wykonalności} i przygotowanie pierwszej wersji tego dokumentu. Ponadto powinny zostać podjęte decyzje odnośnie dalszego przebiegu prac. 
+
+\section{Poruszone zagadnienia}
+\begin{itemize}
+ 	\item Przegląd proponowanych dokumentów
+	\item Utwardzenie decyzji o tworzeniu notatek
+	\item Prezentacja przez Piotra K. bibliotek do wizualizacji grafów: JGraph, Piccolo Toolkit, JUNG, Prefuse
+	\item Prezentacj przez Piotra K. programu do wizualizacji ontologii Protege (plugin Jambalaya) 
+	\item Piotr K. dostarczył ciekawy artykul o Prefuse \cite{art}
+	\item Raport Radka o tworzeniu bibliotek na podstawie  \cite{pdfik}
+	\item Podjęcie decyzji aby w przysłości przygotować szablon do implementacji klas
+	\item Jak testować - JUINT a TestNG, \cite{linczek}  sprawdzanie pokrycia by EMMA \cite{innylinczke}
+	\item  Przegląd elmentów OWL prezentowany przez Piotra O. \cite{linkW3c}	
+	\item Przegląd informacji o OWL zawartych w pracy magisterskiej Andrzeja Jakowski \cite{pracka}
+	\item Wybranie własności property jako głównego elementu nad zdefiniowanie którego należy skupić się definiując reprezentację graficzną
+	   
+\end{itemize}
+
+
+\section{Podjęte ustalenia}
+\begin{itemize}
+	\item kolega Andrzej K., który przypałętał się na spotkanie, nic nie robi
+ 	\item Należy zapytać opiekuna na jakiej licencji ma być wytworzona przez nas biblioteka 
+	\item Należy zapytać opiekuna gdzie są biblioteki i pliki np. ikonek do uruchomienia portalSubsystem
+	\item Piotr K. opisze biblioteki JAVA do wizualizacji grafów/danych ze szczególnym naciskiem na Prefuse
+	\item Ania dokończy Studium
+	\item Radek opisze wymogi technologiczne (standardy tworzenia biblioteki)
+	\item Radek poszuka tutoriala do TestNG
+	\item Wszyscy przeczytają informacje o Prefuse
+	\item Piotr O. zidentyfikuje fragmenty kodu portalSubsystem odpowiedzialne za tłumaczenie OWL na wizualizację w Prefuse
+	\item Piotr O. zaktualizuje słownik
+\end{itemize}
+
+
+
+
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Literatura}
+\bibliography{biblio}
+
+\end{document}
