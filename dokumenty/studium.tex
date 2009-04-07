@@ -38,7 +38,7 @@ Studium wykonalności & 0.4 \tabularnewline \hline
 Odpowiedzialny za dokument: & Data pierwszego sporządzenia:   \tabularnewline 
 Anna Jaworska & 31.03.09 \tabularnewline \hline
 Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline 
-WEWNĘTRZNE & 31.03.09 \tabularnewline \hline
+WEWNĘTRZNE & 07.04.09 \tabularnewline \hline
 \end{tabular}
 \end{center}
 
@@ -46,12 +46,13 @@ WEWNĘTRZNE & 31.03.09 \tabularnewline \hline
 \begin{tabular}{|c|p{4cm}|c|c|c|}
 \multicolumn{5}{c}{\textbf{Historia dokumentu}} \tabularnewline \hline
 \textbf{Wersja} & \textbf{Opis modyfikacji} & \textbf{Rozdział/strona} & \textbf{Autor modyfikacji} & \textbf{Data} \tabularnewline \hline 
-0.0 & Przygotowanie zarysu dokumnetu i określenie zakresu badań & wszystkie & Anna Jaworska & 31.03.09 \tabularnewline \hline
+0.0 & Przygotowanie zarysu dokumentu i określenie zakresu badań & wszystkie & Anna Jaworska & 31.03.09 \tabularnewline \hline
 0.1 & Zdefiniowanie wymagań  & 3 & Cały zespół & 31.03.09  \tabularnewline \hline
 0.2 & Dołaczenie opisu poprawnego tworzenia bibliotek & 3.5 & Radosław Kleczkowski & 01.04.09\tabularnewline \hline
 0.3 & Dołączenie opisów bibliotek graficznych  & 6.2 & Piotr Kunowski & 02.04.09 \tabularnewline \hline
 0.4 & Opis uwarunkowań prawnych i rozszerzenie opisu wariantów & 6.1 & Anna Jaworska & 06.04.09\tabularnewline \hline
 0.5 & Uzupełnienie braków & wszystkie  & Cały zespół & 07.04.09 \tabularnewline \hline
+0.6 & Dołączenie opisu odmian języka OWL i korekta & 6.1, 7  & Piotr Orłowski & 07.04.09 \tabularnewline \hline
 
 \end{tabular}
  
@@ -101,7 +102,7 @@ WEWNĘTRZNE & 31.03.09 \tabularnewline \hline
 \subsection{Istniejące na rynku podobne rozwiązania}
 
 \begin{itemize}
- \item Protege - bardzo znany system do edycji i wizualizacji ontologii autorstwa Stanford University. Napisany w JAVA. Ze względu na fakt, iż jest aplikacją standalone, wykorzystującą stosunkowo duże zasby systemowe i tudną do integracji z portalem OCS, nie może zostać wykorzystana jako gotowe rozwiązanie.
+ \item Protege - bardzo znany system do edycji i wizualizacji ontologii autorstwa Stanford University. Napisany w JAVA. Ze względu na fakt, iż jest aplikacją standalone, wykorzystującą stosunkowo duże zasby systemowe i trudną do integracji z portalem OCS, nie może zostać wykorzystana jako gotowe rozwiązanie.
 
 \end{itemize}
 
@@ -116,7 +117,7 @@ WEWNĘTRZNE & 31.03.09 \tabularnewline \hline
 
 
 \section{Ogólne wymagania stawiane produktowi i ich priorytety}
-\paragraph{} Wymienione wymagania mają charakter orientacyjny, pozwalający nakreślić zakres problemu jaki ma pokrywać projekt. Szczegółową definicję wymagań będzie zawierać dokument \textit{Specyfikacji wymagań}. W szczególność możliwe jest, że niektóre z wymienionych poniżej wymagań zostaną usunięte lub zmieniona oraz mogą zostać dodane inne wymagania.  
+\paragraph{} Wymienione wymagania mają charakter orientacyjny, pozwalający nakreślić zakres problemu jaki ma pokrywać projekt. Szczegółową definicję wymagań będzie zawierać dokument \textit{Specyfikacji wymagań}. W szczególność możliwe jest, że niektóre z wymienionych poniżej wymagań zostaną usunięte lub zmieniona oraz to, że mogą zostać dodane inne wymagania.  
 
 \subsection{Użytkownicy}
 \paragraph{} Użytkownikami biblioteki będą programiści tworzący aplikacje wizualizujące ontologie. Inicjalnie będą to programiści związani z projektem OCS, później mogą to być dowolni inni programiści chętni do korzystania z biblioteki.  
@@ -191,7 +192,7 @@ WEWNĘTRZNE & 31.03.09 \tabularnewline \hline
 \textbf{ID czynnika} &  RISK01 \tabularnewline \hline
 \textbf{Nazwa czynnika} & Problemy logistyczne zespołu  \tabularnewline \hline
 \textbf{Opis czynnika} & Uwzględniamy możliwość wystąpienia problemów osobistych członków zespołu powodujących ich wyłączenie z prac. \tabularnewline \hline
-\textbf{Sposób zarządzania} & Jeśli ktoś zostanie wyłączony z prac, reszta zespołu musi podzielić między siebie jego obowiązki i informować osobę wyłączoną o postępach, tak aby miała wgląd w postęp prac, które miała wykonywać i kontynuować je po niedyspozycji.  \tabularnewline \hline
+\textbf{Sposób zarządzania} & Jeśli ktoś zostanie wyłączony z prac, reszta zespołu musi podzielić między siebie jego obowiązki i informować osobę wyłączoną o postępach, tak aby ona miała wgląd w postęp prac, które miała wykonywać i kontynuować je po niedyspozycji.  \tabularnewline \hline
 \end{tabular}
 \end{center}
 
@@ -246,7 +247,7 @@ WEWNĘTRZNE & 31.03.09 \tabularnewline \hline
 
 \section{Proponowane rozwiązania}
 
-\paragraph{} Rozważane rozwiązania zostaną rozważone pod względem wersji OWL oraz wykorzystaną biblioteką graficzną. 
+\paragraph{} Proponowane rozwiązania zostaną rozważone pod względem wersji OWL oraz biblioteki graficznej. 
 
 %wariant z DL 
 %wariant z Full
@@ -255,18 +256,36 @@ WEWNĘTRZNE & 31.03.09 \tabularnewline \hline
 
 \subsubsection{Lite}
 	\begin{itemize}
-	 \item zawiera bazowe elementy OWL
+	 \item zawiera bazowe elementy OWL i RDF
+		\begin{itemize}
+ 		\item typy: Class, Property, Individual
+		\item podstawowe nierówności, zależności, charakterystyki
+		\item elementarna kardynalność
+		\item adnotacje
+		\end{itemize}
+	\item pozwala budować hierarchię elementów
+	\item wymaga separacji typów
 	\end{itemize}
 
 \subsubsection{DL}
 	\begin{itemize}
- 		\item 
+	\item zawiera wszystkie elementy języka OWL Lite 
+	\item dodatkowo zawiera zaawansowane elementy języka OWL
+		\begin{itemize}
+ 		\item ma rozwiniętą obsługe zależności między elementami podstawowymi
+		\item obsługuje kardynalność w jej pełnej formie
+		\end{itemize}
+	\item można go bezpośrednio mapować na logikę opisową SHOIN - jest rozstrzygalny
+	\item tą wersję obsługuje portalSubsystem
 	\end{itemize}
 
 
 \subsubsection{Full}
 	\begin{itemize}
-	 \item definiuje 
+	\item zawiera wszystkie elementy OWL DL 
+	\item nie wymaga separacji typów
+	\item ma mniejsze ograniczenia od OWL DL
+	\item nie ma w nim gwarancji rozstrzygalności dla wnioskowań
 	\end{itemize}
 
 \paragraph{} Należy zwrócić uwagę, że specyfikacja OWL jest dobrze zdefiniowana (standard W3C) co sprawia, że zachodzi spójność. Zaimplementowanie wersji bardziej rozwiniętej oznacza, że wymogi dla wersji niższej także zostaną spełnione.
@@ -303,7 +322,7 @@ WEWNĘTRZNE & 31.03.09 \tabularnewline \hline
 \section{Rekomendowany wariant}
 
 
-\paragraph{OWL} 
+\paragraph{OWL} Po zapoznaniu się ze specyfikacją stworzoną przez W3C najbardziej sensownym wydaje się być wykorzystanie wersji DL języka OWL. Dodatkowo wersja ta była dotychczas wykorzystywana przez portalSubsystem. Grupa nie odrzuca możliwości zaimplementowania obsługi wersji OWL Full, która pod względem zawartych w niej elementów zasadniczo nie różni się od wersji DL. Na jej niekorzyść przemawia jednak argument w postaci tego, że umożliwia pewne niejasności w prezentacji (szczególnie pod względem rozróżniania typów).
 
 \paragraph{Biblioteka }Po uważnym przejrzeniu bibliotek najbardziej użyteczne wydają się Prefuse oraz Piccolo. Ze względu na dostępność dużej ilości przykładowego kodu wykorzystującego Prefuse w portalSubsystem wykorzystana zostanie biblioteka Prefuse. Ponadto opinie wyrażone w pracy magisterskiej Andrzeja Jakowskiego silnie przemawiają na korzyśc Prefuse.
 
