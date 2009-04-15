@@ -12,7 +12,7 @@
 \parindent 2cm 
 
 %opening
-\title{Tytuł dokumentu}
+\title{Specyfikacja wymagań systemowych}
 \author{3@KASK}
 
 \begin{document}
@@ -27,26 +27,27 @@
 \begin{tabular}{|p{7cm}|p{7cm}|}
 \hline
 Symbol projektu: & Opiekun projektu:   \tabularnewline 
-WSTAW SYMBOL & Tomasz Boiński    \tabularnewline \hline
+3@KASK & Tomasz Boiński    \tabularnewline \hline
 \multicolumn{2}{|l|}{Nazwa Projektu: } \tabularnewline
-\multicolumn{2}{|l|}{WSTAW NAZWE } \tabularnewline 
+\multicolumn{2}{|l|}{Wizualizacja grafów za pomocą biblioteki Prefuse } \tabularnewline 
 \hline
 \multicolumn{2}{l}{ } \tabularnewline %pusta linijka
 \hline 
 Nazwa Dokumentu: & Nr wersji:   \tabularnewline 
-WSTAW TYTUL & WSTAW WERSJE \tabularnewline \hline
+Specyfikacja wymagań systemowych & 0.0 \tabularnewline \hline
 Odpowiedzialny za dokument: & Data pierwszego sporządzenia:   \tabularnewline 
-WSTAW OSOBĘ & WSTAW DATĘ \tabularnewline \hline
+Piotr Orłowski & 15 kwietnia 2009 \tabularnewline \hline
 Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline 
-??? & WSTAW DATĘ \tabularnewline \hline
+??? & \today \tabularnewline \hline
 \end{tabular}
 \end{center}
+
 
 \begin{center}
 \begin{tabular}{|c|p{4cm}|c|c|c|}
 \multicolumn{5}{c}{\textbf{Historia dokumentu}} \tabularnewline \hline
 \textbf{Wersja} & \textbf{Opis modyfikacji} & \textbf{Rozdział/strona} & \textbf{Autor modyfikacji} & \textbf{Data} \tabularnewline \hline 
-1 & Stworzenie & wszystkie & Anna Jaworska & 30.03.09 \tabularnewline \hline
+1 & Stworzenie & wszystkie & Grupa projektowa & 15.04.09 \tabularnewline \hline
 & & & &\tabularnewline \hline
 \end{tabular}
  
@@ -60,7 +61,7 @@ Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline
 
 \section{Cele systemu}
 
-Chociaż cele projektu zostały sformułowane w zleceniu projektowym, to w tym miejscu precyzuje się je z podziałem na cele biznesowe i cele funkcjonalne. Zdarza się tak, że zleceniodawca początkowo wymienia tylko cele funkcjonalne zachowując do swojej wiadomości cele biznesowe. Aby jednak właściwie rozumieć te funkcje w odpowiednim kontekście, zespół projektowy musi poznać motywacje biznesowe klienta.
+%Chociaż cele projektu zostały sformułowane w zleceniu projektowym, to w tym miejscu precyzuje się je z podziałem na cele biznesowe i cele funkcjonalne. Zdarza się tak, że zleceniodawca początkowo wymienia tylko cele funkcjonalne zachowując do swojej wiadomości cele biznesowe. Aby jednak właściwie rozumieć te funkcje w odpowiednim kontekście, zespół projektowy musi poznać motywacje biznesowe klienta.
 
 \subsection{Cele biznesowe}
 
@@ -69,17 +70,58 @@ Cele biznesowe precyzują korzyści związane z wdrożeniem systemu.
 \begin{center}
 \begin{tabular}{|l|l|} \hline
 
-Tutaj jest ID & A tutaj nazwa \\ \hline
+CB001 & Ułatwienie pracy programistom tworzącym aplikacje wizualizujące ontologie  \\ \hline
 Opis: &  \\ \hline
-Źródło: &  \\ \hline
-Priorytet: &  \\ \hline
-
+Źródło: & Wstępna specyfikacja projektu \\ \hline
+Priorytet: & bardzo ważne \\ \hline
 \end{tabular}
 \end{center}
+%priorytety  00 01 10 11
+%priorytety bardzo wazne, wazne, średnio ważne, mało wazne
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+CB002 & Ułatwienie zakończenia projektu OCS   \\ \hline
+Opis: &  \\ \hline
+Źródło: &  \\ \hline
+Priorytet: & bardzo ważne \\ \hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+CB003 & Zwiększenie aktrakcyjności portalu OCS   \\ \hline
+Opis: &  \\ \hline
+Źródło: &  \\ \hline
+Priorytet: & mało ważne \\ \hline
+\end{tabular}
+\end{center}
+
 
 \subsection{Cele funkcjonalne}
 
 Cele funkcjonalne wymieniają główne funkcje, które ma spełniać system.
+
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+
+CF001 & Intuicyjne API \\ \hline
+Opis: &  \\ \hline
+Źródło: &  \\ \hline
+Priorytet: & średnio ważne  \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+
+CF002 & Dobra dokumentacja \\ \hline
+Opis: &  \\ \hline
+Źródło: &  \\ \hline
+Priorytet: & bardzo ważne \\ \hline
+
+\end{tabular}
+\end{center}
 
 \begin{center}
 \begin{tabular}{|l|l|} \hline
@@ -91,6 +133,18 @@ Priorytet: &  \\ \hline
 
 \end{tabular}
 \end{center}
+
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+
+Tutaj jest ID & A tutaj nazwa \\ \hline
+Opis: &  \\ \hline
+Źródło: &  \\ \hline
+Priorytet: &  \\ \hline
+
+\end{tabular}
+\end{center}
+
 
 \section{Otoczenie systemu}
 

@@ -131,22 +131,17 @@ WEWNĘTRZNE & 07.04.09 \tabularnewline \hline
 	\item OWL Full
 \end{itemize}
 
-\paragraph{Wczytywanie danych}Ponadto dane te powinny być wczytywane poprzez:
-\begin{itemize}
- 	\item podanie ścieżki do pliku OWL na dysku 
-	\item podanie adresu sieciowego zasobu z plikiem OWL
-	\item podanie strumienia/kontenera z XML 
-\end{itemize}
+\paragraph{Wczytywanie danych}Ponadto dane te powinny być przekazywane poprzez obiekt OWL API.
 
-\paragraph{Modyfikowalność danych} Biblioteka powinna udostępniać metody do modyfikacji wczytanych danych i możliwość zapisania zmienionych danych. Dane powinny być dostarczane użytkownikowi w postaci strumienia/kontenera z poprawnie sformatowanym plikiem OWL. Biblioteka nie musi sprawdzać czy zmiany wprowadzone przez użytkownika są logicznie poprawne.   
+\paragraph{Modyfikowalność danych} Biblioteka powinna udostępniać metody do modyfikacji wczytanych danych i możliwość zapisania zmienionych danych. Dane powinny być dostarczane użytkownikowi w postaci obietków OWL API. Biblioteka nie musi sprawdzać czy zmiany wprowadzone przez użytkownika są logicznie poprawne.   
 
 \subsection{Funkcjonalność}
 % tu mozna o OWL napisać i pare innych
 \paragraph{} Zakładamy, że biblioteka będzie zawierać następujące funkcjonalności:
 \begin{itemize}
  	\item wizualizacja elmentów OWL 
-	\item pozwalać użytkownikowi na definiowanie akcji dla zdarzeń okna
-	\item zawierać standardowe definicje zdarzeń
+	\item pozwalać użytkownikowi na definiowanie własnych akcji dla zdarzeń okna (np. klinięcie, przeciągnięcie wierzchołka grafu)
+	\item zawierać standardowe definicje zdarzeń okna
 	\item wczytywanie, modyfikowanie i zapis ontologi
 	\item definiowanie parametrów wyglądu, w szczególności ilości widocznych poziomów grafu 
 \end{itemize}
@@ -242,7 +237,7 @@ WEWNĘTRZNE & 07.04.09 \tabularnewline \hline
 
 \section{Uwarunkowania prawne i inne}
 %na jakiej to ma byc licencji - tylko dla KASK-u ?
-\paragraph{} Docelowy produkt będzie własnością KASK.  Należy zadbać  o to aby używane w projekcie biblioteki były na licencjach pozwalających na użycie w produkcie zamkniętym. W szczególności należy zwrocić uwagę aby biblioteki nie były na licencji GPL, która narzuca produktowi również licencję GPL, co sprawia, że produkt nie musi zostać upubliczniony.   
+\paragraph{} Docelowy produkt będzie własnością Katedry Architektury Systemów Komputerowych wydziału Elektroniki, Telekomunikacji i Informatyki Politechniki Gdańskiej.  Należy zadbać  o to aby używane w projekcie biblioteki były na licencjach pozwalających na użycie w produkcie zamkniętym. 
 
 
 \section{Proponowane rozwiązania}
@@ -324,7 +319,7 @@ WEWNĘTRZNE & 07.04.09 \tabularnewline \hline
 
 \paragraph{OWL} Po zapoznaniu się ze specyfikacją stworzoną przez W3C najbardziej sensownym wydaje się być wykorzystanie wersji DL języka OWL. Dodatkowo wersja ta była dotychczas wykorzystywana przez portalSubsystem. Grupa nie odrzuca możliwości zaimplementowania obsługi wersji OWL Full, która pod względem zawartych w niej elementów zasadniczo nie różni się od wersji DL. Na jej niekorzyść przemawia jednak argument w postaci tego, że umożliwia pewne niejasności w prezentacji (szczególnie pod względem rozróżniania typów).
 
-\paragraph{Biblioteka }Po uważnym przejrzeniu bibliotek najbardziej użyteczne wydają się Prefuse oraz Piccolo. Ze względu na dostępność dużej ilości przykładowego kodu wykorzystującego Prefuse w portalSubsystem wykorzystana zostanie biblioteka Prefuse. Ponadto opinie wyrażone w pracy magisterskiej Andrzeja Jakowskiego silnie przemawiają na korzyśc Prefuse.
+\paragraph{Biblioteka }Po uważnym przejrzeniu bibliotek najbardziej użyteczne wydają się Prefuse oraz Piccolo. Ze względu na dostępność dużej ilości przykładowego kodu wykorzystującego Prefuse w portalSubsystem wykorzystana zostanie biblioteka Prefuse. Ponadto opinie wyrażone w pracy magisterskiej Andrzeja Jakowskiego silnie przemawiają na korzyść Prefuse.
 
 
 \section{Strategia i wstępny harmonogram}
@@ -336,6 +331,8 @@ WEWNĘTRZNE & 07.04.09 \tabularnewline \hline
 \item modele dynamiki zostaną okrojone do ilości faktycznie potrzebnej programistom
 \end{itemize}
 \paragraph{}Pomimo ustalenia harmonogramu z terminami oddania dokumentów należy wziąć pod uwagę charakter metodyki RUP, która zakłada przyrostowe wytwarzanie dokumentacji - w póżniejszych etapach projektu pojawią się zmodyfikowane wersje wytorzonych wcześniej dokumentów.
+
+Z uwagi na przyjętą metodykę wytwarzania oprogramowania (RUP) ta część dokumentu zostanie rozwinięta później.
 
 
 \clearpage
