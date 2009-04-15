@@ -1,0 +1,364 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+%custom margins
+\usepackage[left=2.5cm, top=2.5cm, bottom=3cm, right=2cm, foot=2cm, head=0.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage[bookmarks=true, pdftex]{hyperref}
+
+%styl nagłowków
+\pagestyle{fancy} 
+\parindent 2cm 
+
+%opening
+\title{Tytuł dokumentu}
+\author{3@KASK}
+
+\begin{document}
+\bibliographystyle{plain}
+
+
+\maketitle
+
+
+\begin{center}
+%budowanie tabeli
+\begin{tabular}{|p{7cm}|p{7cm}|}
+\hline
+Symbol projektu: & Opiekun projektu:   \tabularnewline 
+WSTAW SYMBOL & Tomasz Boiński    \tabularnewline \hline
+\multicolumn{2}{|l|}{Nazwa Projektu: } \tabularnewline
+\multicolumn{2}{|l|}{WSTAW NAZWE } \tabularnewline 
+\hline
+\multicolumn{2}{l}{ } \tabularnewline %pusta linijka
+\hline 
+Nazwa Dokumentu: & Nr wersji:   \tabularnewline 
+WSTAW TYTUL & WSTAW WERSJE \tabularnewline \hline
+Odpowiedzialny za dokument: & Data pierwszego sporządzenia:   \tabularnewline 
+WSTAW OSOBĘ & WSTAW DATĘ \tabularnewline \hline
+Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline 
+??? & WSTAW DATĘ \tabularnewline \hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|p{4cm}|c|c|c|}
+\multicolumn{5}{c}{\textbf{Historia dokumentu}} \tabularnewline \hline
+\textbf{Wersja} & \textbf{Opis modyfikacji} & \textbf{Rozdział/strona} & \textbf{Autor modyfikacji} & \textbf{Data} \tabularnewline \hline 
+1 & Stworzenie & wszystkie & Anna Jaworska & 30.03.09 \tabularnewline \hline
+& & & &\tabularnewline \hline
+\end{tabular}
+ 
+
+\end{center}
+
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Cele systemu}
+
+Chociaż cele projektu zostały sformułowane w zleceniu projektowym, to w tym miejscu precyzuje się je z podziałem na cele biznesowe i cele funkcjonalne. Zdarza się tak, że zleceniodawca początkowo wymienia tylko cele funkcjonalne zachowując do swojej wiadomości cele biznesowe. Aby jednak właściwie rozumieć te funkcje w odpowiednim kontekście, zespół projektowy musi poznać motywacje biznesowe klienta.
+
+\subsection{Cele biznesowe}
+
+Cele biznesowe precyzują korzyści związane z wdrożeniem systemu.
+
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+
+Tutaj jest ID & A tutaj nazwa \\ \hline
+Opis: &  \\ \hline
+Źródło: &  \\ \hline
+Priorytet: &  \\ \hline
+
+\end{tabular}
+\end{center}
+
+\subsection{Cele funkcjonalne}
+
+Cele funkcjonalne wymieniają główne funkcje, które ma spełniać system.
+
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+
+Tutaj jest ID & A tutaj nazwa \\ \hline
+Opis: &  \\ \hline
+Źródło: &  \\ \hline
+Priorytet: &  \\ \hline
+
+\end{tabular}
+\end{center}
+
+\section{Otoczenie systemu}
+
+Zespół projektowy musi poznać otoczenie, w jakim ma pracować system. Z rozmów z klientem powinno dać się wyszczególnić użytkowników oraz systemy zewnętrzne. Jeśli się nie da, to otoczenie systemu trzeba będzie zdefiniować w trakcie analizy funkcjonalnej.
+
+\subsection{Użytkownicy}
+
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+
+Tutaj jest ID & A tutaj nazwa \\ \hline
+Opis: &  \\ \hline
+Potrzeby: &  \\ \hline
+Zadania: &  \\ \hline
+Źródło: &  \\ \hline
+Priorytet: &  \\ \hline
+
+\end{tabular}
+\end{center}
+
+\subsection{Systemy zewnętrzne}
+
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+
+Tutaj jest ID & A tutaj nazwa \\ \hline
+Opis: &  \\ \hline
+Interfejsy: &  \\ \hline
+Źródło: &  \\ \hline
+Priorytet: &  \\ \hline
+
+\end{tabular}
+\end{center}
+
+\section{Przewidywane komponenty systemu}
+
+Wyszczególnienie komponentów systemu powinno pomóc w uzyskaniu kompletności wymagań. Trzeba wówczas sprawdzić, czy każdy komponent ma jakieś wymagania (zwłaszcza funkcjonalne). W przypadku bardziej złożonego systemu może być konieczne wyszczególnienie podsystemów.
+
+\subsection{Podsystemy}
+
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+
+Tutaj jest ID & A tutaj nazwa \\ \hline
+Opis: &  \\ \hline
+Lokalizacja: &  \\ \hline
+Komponenty: & \\ \hline
+Źródło: &  \\ \hline
+Priorytet: &  \\ \hline
+
+\end{tabular}
+\end{center}
+
+\subsection{Komponenty sprzętowe}
+
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+
+Tutaj jest ID & A tutaj nazwa \\ \hline
+Opis: &  \\ \hline
+Powiązania: &  \\ \hline
+Źródło: &  \\ \hline
+Priorytet: &  \\ \hline
+
+\end{tabular}
+\end{center}
+
+\subsection{Programowe}
+
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+
+Tutaj jest ID & A tutaj nazwa \\ \hline
+Opis: &  \\ \hline
+Powiązania: &  \\ \hline
+Źródło: &  \\ \hline
+Priorytet: &  \\ \hline
+
+\end{tabular}
+\end{center}
+
+\section{Wymagania funkcjonalne}
+
+Wymagania funkcjonalne stanowią mocno rozbudowaną część specyfikacji. Można je podzielić na grupy dotyczące różnych zadań, różnych użytkowników (systemów zewnętrznych) albo różnych komponentów.
+
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+
+Tutaj jest ID & A tutaj nazwa \\ \hline
+Opis: &  \\ \hline
+Dotyczy: &  \\ \hline
+Źródło: &  \\ \hline
+Powiązania: & \\ \hline
+Priorytet: &  \\ \hline
+
+\end{tabular}
+\end{center}
+
+\section{Wymagania na dane}
+
+Wymagania na dane pomagają w określeniu, jakie dane będą przetwarzane w systemie. Nie trzeba precyzować wszystkich danych. Szczegóły znajdą się w projekcie bazy danych.
+
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+
+Tutaj jest ID & A tutaj nazwa \\ \hline
+Opis: &  \\ \hline
+Powiązania: &  \\ \hline
+Źródło: &  \\ \hline
+Priorytet: &  \\ \hline
+
+\end{tabular}
+\end{center}
+
+\section{Wymagania jakościowe}
+
+Określenie wymagań jakościowych ułatwia późniejsze uzyskanie wysokiej jakości systemu. Podział wymagań jakościowych na kategorie jest związany z drzewem jakości (dotyczy wszystkich gałęzi drzewa za wyjątkiem funkcjonalności).
+
+\subsection{Wymagania w zakresie wiarygodności}
+
+Wymagania w zakresie wiarygodności będą rozszerzały wymagania funkcjonalne. 
+
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+
+Tutaj jest ID & A tutaj nazwa \\ \hline
+Opis: &  \\ \hline
+Powiązania: &  \\ \hline
+Źródło: &  \\ \hline
+Priorytet: &  \\ \hline
+
+\end{tabular}
+\end{center}
+
+\subsection{Wymagania w zakresie wydajności}
+
+Wymagania w zakresie wydajności będą miały zastosowanie w czasie projektowania architektury systemu.
+
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+
+Tutaj jest ID & A tutaj nazwa \\ \hline
+Opis: &  \\ \hline
+Powiązania: &  \\ \hline
+Źródło: &  \\ \hline
+Priorytet: &  \\ \hline
+
+\end{tabular}
+\end{center}
+
+\subsection{Wymagania w zakresie elastyczności}
+
+Wymagania w zakresie elastyczności będą miały zastosowanie w czasie wyboru koncepcji systemu.
+
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+
+Tutaj jest ID & A tutaj nazwa \\ \hline
+Opis: &  \\ \hline
+Powiązania: &  \\ \hline
+Źródło: &  \\ \hline
+Priorytet: &  \\ \hline
+
+\end{tabular}
+\end{center}
+
+\subsection{Wymagania w zakresie użyteczności}
+
+Wymagania w zakresie użyteczności będą brane pod uwagę głównie w czasie projektowania interfejsu użytkownika.
+
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+
+Tutaj jest ID & A tutaj nazwa \\ \hline
+Opis: &  \\ \hline
+Powiązania: &  \\ \hline
+Źródło: &  \\ \hline
+Priorytet: &  \\ \hline
+
+\end{tabular}
+\end{center}
+
+\section{Sytuacje wyjątkowe}
+
+Sytuacje wyjątkowe stanowią dalsze rozszerzenie wymagań funkcjonalnych i wiarygodnościowych.
+
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+
+Tutaj jest ID & A tutaj nazwa \\ \hline
+Opis: &  \\ \hline
+Powiązania: &  \\ \hline
+Źródło: &  \\ \hline
+Priorytet: &  \\ \hline
+
+\end{tabular}
+\end{center}
+
+\section{Dodatkowe wymagania}
+
+W tym miejscu podaje się te wymagania, które nie mieszczą się w zakresie poprzednich kategorii wymagań.
+
+\subsection{Wymagania sprzętowe}
+
+Wymagania sprzętowe można by umieścić w ramach specyfikacji komponentów sprzętowych, ale jeśli jest wiele komponentów sprzętowych różnych z punktu widzenia funkcjonalnego, ale o wspólnych wymaganiach sprzętowych, to można te wymagania umieścić właśnie tutaj.
+
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+
+Tutaj jest ID & A tutaj nazwa \\ \hline
+Opis: &  \\ \hline
+Dotyczy: &  \\ \hline
+Źródło: &  \\ \hline
+Priorytet: &  \\ \hline
+
+\end{tabular}
+\end{center}
+
+\subsection{Wymagania programowe}
+
+Trzeba odróżniać rzeczywiste wymagania programowe klienta od jego sugestii (np. przez podanie opcjonalnego priorytetu).
+
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+
+Tutaj jest ID & A tutaj nazwa \\ \hline
+Opis: &  \\ \hline
+Dotyczy: &  \\ \hline
+Źródło: &  \\ \hline
+Priorytet: &  \\ \hline
+
+\end{tabular}
+\end{center}
+
+\subsection{Inne wymagania}
+ 
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+
+Tutaj jest ID & A tutaj nazwa \\ \hline
+Opis: &  \\ \hline
+Dotyczy: &  \\ \hline
+Źródło: &  \\ \hline
+Priorytet: &  \\ \hline
+
+\end{tabular}
+\end{center} 
+ 
+\section{Kryteria akceptacyjne}
+
+Tu podać kryteria, jakim zostanie poddany gotowy system przed ostatecznym jego przyjęciem.
+
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+
+Tutaj jest ID & A tutaj nazwa \\ \hline
+Opis: &  \\ \hline
+Dotyczy: &  \\ \hline
+Źródło: &  \\ \hline
+Priorytet: &  \\ \hline
+
+\end{tabular}
+\end{center}
+
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Literatura}
+\bibliography{biblio}
+
+\end{document}
