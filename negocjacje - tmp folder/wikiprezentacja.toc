@@ -1,0 +1,9 @@
+\beamer@endinputifotherversion {3.07pt}
+\beamer@sectionintoc {1}{Wst\k ep}{3}{0}{1}
+\beamer@sectionintoc {2}{Technologie}{7}{0}{2}
+\beamer@sectionintoc {3}{Organizacji i edycja informacji}{13}{0}{3}
+\beamer@sectionintoc {4}{Zastosowania}{15}{0}{4}
+\beamer@sectionintoc {5}{Zanim wdro\.zysz}{19}{0}{5}
+\beamer@sectionintoc {6}{Przyk\IeC {\l }ady wdro\.ze\'n}{26}{0}{6}
+\beamer@sectionintoc {7}{Podsumowanie}{29}{0}{7}
+\beamer@sectionintoc {8}{Bibliografia}{30}{0}{8}
