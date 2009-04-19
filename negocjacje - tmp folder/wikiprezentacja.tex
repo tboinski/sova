@@ -11,7 +11,7 @@
 
 
 \author{Anna Jaworska, Piotr Or³owski}
-\institute[Politechnika Gdañska]{}
+\institute[Politechnika Gdañska]{WETI}
 
 \subject{Zastosowanie aplikacji WIKI w przetwarzaniu zespo³owym}
 %\AtBeginSubsection[]
@@ -34,7 +34,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Table of contents}
+	\frametitle{Agenda}
 	\tableofcontents
 \end{frame}
 
@@ -79,9 +79,11 @@
 
 	\begin{block}{Wiki over DNS}
 		\begin{itemize}
-			\item ...
+			\item napisane w Perl
+			\item wykorzystanie asjocjacji DNS (has³o + definicja) 
 		\end{itemize}
 	\end{block}
+%https://dgl.cx/wikipedia-dns
 
 \begin{block}{}
 		\begin{itemize}
@@ -133,9 +135,23 @@
 
 \begin{frame}
 	\frametitle{Integracja z innymi narzêdziami}
-	\begin{block}{...}
+	\begin{block}{RSS}
 		\begin{itemize}
-			\item ...
+			\item Raportowanie o aktualizacjach i nowych artyku³ach na WIKI
+			\item Wystêpuje przewa¿nie w WIKI komercyjnych
+		\end{itemize}
+	\end{block}
+	\begin{block}{SVN}
+		\begin{itemize}
+			\item Praktycznie w ka¿dej WIKI
+			\item Przewa¿nie wizualna prezentacja zmian
+			\item Równie¿ inne systemy kontroli wersji 
+		\end{itemize}
+	\end{block}
+\begin{block}{LDAP}
+		\begin{itemize}
+			\item Istotne dla firm - integracja z istniej¹c¹ baz¹ u¿ytkowników
+			\item Wystêpuje przewa¿nie w WIKI komercyjnych
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -152,20 +168,73 @@
 \section{Organizacji i edycja informacji}
 \begin{frame}
 	\frametitle{Edytory i metajêzyki}
-%kombinacje technologii z przk³adami
-	\begin{block}{...}
+	\begin{block}{WYSIWY(m)G}
 		\begin{itemize}
-			\item ...
-		\end{itemize}
+			\item What You See Is What You \textbf{might} Get
+			\item Du¿e oczekiwania u¿ytkowników - np. kopiowanie z pakietu Office
+			\item Problemy z parsowaniem wyjœcia edytora na metajêzyk Wiki
+		\end{itemize} 
+	\end{block}
+	\begin{block}{WYSIWYG - TinyMCE}
+		\begin{itemize}
+			\item Najpopularniejszy edytor w JavaScript
+			\item LGPL
+			\item Musi byæ przystosowywany do konkretnych metajêzyków Wiki
+			\item W wiêkszoœci Wiki po jednokrotnym zintegrowaniu nie aktualizowany  
+		\end{itemize} %http://tinymce.moxiecode.com/
 	\end{block}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Organizacja informacji}
-%kombinacje technologii z przk³adami
-	\begin{block}{...}
+	\frametitle{Edytory i metajêzyki}
+	\begin{block}{WYMIWYG}
 		\begin{itemize}
-			\item ...
+			\item What You Mean Is What You Get
+			\item Wykorzystanie metajêzyków Wiki
+			\item Istniej¹ parsery do transformacji z jednego metajêzyka Wiki na inny
+		\end{itemize} 
+	\end{block}
+	Przyk³ad metajêzyka: %trzeba dorzuciæ przyk³ad
+\end{frame}
+
+\begin{frame}
+	\frametitle{Edytory i metajêzyki}
+	\begin{block}{Edycja w programach zewnêtrznych}
+		\begin{itemize}
+			\item Udostêpnianie edycji plików z artyku³ami przez WebDAV 
+			\item Edycja artyku³ów w MS Word
+			\item Du¿e u³atwienie dla niedoœwiadczonych u¿ytkowników
+		\end{itemize} 
+	\end{block}
+	\begin{block}{Edycja na podstawie szablonów}
+		\begin{itemize}
+			\item Specjalna funkcjonalnoœæ tworzenia szablonów 
+			\item Przydatne do powtarzaj¹cych siê dokumentów
+			\item Czasami dostêpna mo¿liwoœæ modyfikacji szablonów i wszystkich utworzonych na jego podstawie dokumentów
+		\end{itemize} 
+	\end{block}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Edytory i metajêzyki}
+	\begin{block}{Konwencje nazywania artyku³ów}
+		\begin{itemize}
+			\item CamelCase - automatyczne tworzenie linków; nie zawsze akceptowane przez u¿ytkowników 
+			\item Nazwy unikalne dla ca³ej Wiki - nie zawsze wygodne 
+			\item Dowolne nazwy powtarzalne powi¹zane z lokalizacj¹ artyku³u
+			\item Permalinki - linki do artyku³ów nie zwi¹zane z ich po³o¿eniem; przydatne do tworzenia odnoœników w innych programach
+		\end{itemize} 
+	\end{block}
+	
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Organizacja informacji}
+	\begin{block}{LuŸny zestaw artyku³ów}
+		\begin{itemize}
+			\item 
 		\end{itemize}
 	\end{block}
 \end{frame}
