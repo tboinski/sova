@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.9 (MiKTeX 2.7) (preloaded format=pdflatex 2009.4.18)  19 APR 2009 14:40
+This is pdfTeX, Version 3.1415926-1.40.9 (MiKTeX 2.7) (preloaded format=pdflatex 2009.4.18)  19 APR 2009 16:54
 entering extended mode
 **wikiprezentacja.tex
 (wikiprezentacja.tex
@@ -1497,6 +1497,10 @@ Overfull \hbox (5.4274pt too wide) has occurred while \output is active
 [25
 
 ]
+Overfull \vbox (7.75583pt too high) detected at line 357
+ []
+
+
 Overfull \hbox (2.85968pt too wide) has occurred while \output is active
  []\OT4/cmss/m/n/5 Zastosowanie 
  []
@@ -1744,10 +1748,10 @@ Overfull \hbox (5.4274pt too wide) has occurred while \output is active
 \tf@snm=\write7
  (wikiprezentacja.aux) ) 
 Here is how much of TeX's memory you used:
- 13563 strings out of 95297
- 233745 string characters out of 1183615
- 329377 words of memory out of 1500000
- 16359 multiletter control sequences out of 110000
+ 13569 strings out of 95297
+ 233798 string characters out of 1183615
+ 334377 words of memory out of 1500000
+ 16365 multiletter control sequences out of 110000
  7631 words of font info for 23 fonts, out of 3000000 for 5000
  34 hyphenation exceptions out of 8191
  43i,16n,60p,342b,652s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1756,7 +1760,7 @@ c}<d:/Program Files/MiKTeX 2.7/fonts/type1/public/pl/plss10.pfb><d:/Program Fil
 es/MiKTeX 2.7/fonts/type1/public/pl/plss8.pfb><d:/Program Files/MiKTeX 2.7/font
 s/type1/public/pl/plss9.pfb><d:/Program Files/MiKTeX 2.7/fonts/type1/public/pl/
 plssbx10.pfb>
-Output written on wikiprezentacja.pdf (36 pages, 336752 bytes).
+Output written on wikiprezentacja.pdf (36 pages, 339333 bytes).
 PDF statistics:
  1375 PDF objects out of 1440 (max. 8388607)
  82 named destinations out of 1000 (max. 131072)
