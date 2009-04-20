@@ -87,8 +87,11 @@
 	\end{block}
 
 \end{frame} 
+
 \begin{frame}
-	\frametitle{Najwiêkszy problem Wikipedii} 
+	\frametitle{Najwiêkszy problem Wikipedii}
+%http://xkcd.com/545/ -inny komiks
+ \pause
 	\begin{center}
  \scalebox{0.45}{\includegraphics{screenshots/the_problem_with_wikipedia.jpg}}
 \end{center}
@@ -326,18 +329,22 @@
 		\end{itemize} 
 	\end{block}
 	Przyk³ad metajêzyka: %trzeba dorzuciæ przyk³ad
-	\begin{center}
+	
 % use packages: array
-\begin{tabular}{|l|l|l|}
+\begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|}
 \hline
 \textbf{MediaWiki} & \textbf{DokuWiki} & \textbf{HTML} \\ \hline  
-'''bold''' & **bold** & <b> bold <$\backslash$b> \\ \hline
-%/[/[a link|with title/]/] & /[/[link|With a Title/]/] & <a href=\"link'\"> Link with Title </a> \\ \hline
-%==Section== & ====== Level 1 ====== & <h1> Text </h1> \hline
+%nie mam pomys³u - wstawmy screenshota :P
+%'''bold''' & **bold** & \begin{verbatim}<b> bold <\b>\end{verbatim} \\
+ %\hline
+%drgui wiersz tabeli
+%\begin{verbatim} [[a link|with title]] \end{verbatim} &\begin{verbatim}[[link|With a Title]]\end{verbatim}& \begin{verbatim}<a href="link"> Link with Title </a> \end{verbatim}
+%\hline
+%trzeci wiersz tabeli
+%\begin{verbatim}==Section==\end{verbatim} &\begin{verbatim}====== Level 1 ======\end{verbatim}&\begin{verbatim}<h1> Text </h1>\end{verbatim}
+%\hline
 	\end{tabular}
-	\end{center}
-
-
+	
 \end{frame}
 
 \begin{frame}
