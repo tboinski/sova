@@ -45,6 +45,9 @@
 
 \begin{frame}
 	\frametitle{Historia}
+	\begin{block}{Co to znaczy wiki?}
+		S³owo ``wiki'' w jêzyka hawajskim, oznacza szybko. Okreœleniem ``wiki wiki'' okreœlane s¹ w Honolulu autobusy kursuj¹ce pomiêdzy terminalami lotniska.
+	\end{block}
 	\begin{block}{Chronologia Wiki}
 		Inspiracje...
 		\begin{itemize}
@@ -285,10 +288,10 @@
 	\end{block}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Integracja z innymi narzêdziami}
-
-\end{frame}
+%\begin{frame}
+%	\frametitle{Integracja z innymi narzêdziami}
+%
+%\end{frame}
 
 \begin{frame}
 	\frametitle{Przyk³ady}
@@ -329,11 +332,12 @@
 		\end{itemize} 
 	\end{block}
 	Przyk³ad metajêzyka: %trzeba dorzuciæ przyk³ad
-	
+	\includegraphics[width=1\textwidth]{screenshots/markups.jpg}
+	%\scalebox{0.47}{\includegraphics{screenshots/markups.jpg}}	
 % use packages: array
-\begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|}
-\hline
-\textbf{MediaWiki} & \textbf{DokuWiki} & \textbf{HTML} \\ \hline  
+%\begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|}
+%\hline
+%\textbf{MediaWiki} & \textbf{DokuWiki} & \textbf{HTML} \\ \hline  
 %nie mam pomys³u - wstawmy screenshota :P
 %'''bold''' & **bold** & \begin{verbatim}<b> bold <\b>\end{verbatim} \\
  %\hline
@@ -343,7 +347,7 @@
 %trzeci wiersz tabeli
 %\begin{verbatim}==Section==\end{verbatim} &\begin{verbatim}====== Level 1 ======\end{verbatim}&\begin{verbatim}<h1> Text </h1>\end{verbatim}
 %\hline
-	\end{tabular}
+%	\end{tabular}
 	
 \end{frame}
 
@@ -455,8 +459,18 @@
 \section{Zanim wdro¿ysz}
 \begin{frame}
 	\frametitle{Licencjonowanie}
-	\begin{block}{...}
+	\begin{block}{Wolne oprogramowanie}
 		\begin{itemize}
+			\item GPL v1, v2, v3...
+			\item LGPL
+			\item BSD Licence
+			\item Apache Licence
+			\item CPL
+		\end{itemize}
+	\end{block}
+	\begin{block}{Inne}
+		\begin{itemize}
+			\item produkty w pe³ni komeryjne
 			\item ...
 		\end{itemize}
 	\end{block}
@@ -481,9 +495,11 @@
 \begin{frame}
 	\frametitle{Internacjonalizacja}
 %kombinacje technologii z przk³adami
-	\begin{block}{...}
+	\begin{block}{Na co warto zwróciæ uwagê:}
 		\begin{itemize}
-			\item ...
+			\item Czy dana Wiki obs³uguje utf8?
+			\item Czy posiada wszystkie wymagane wersje jêzykowe?
+			\item Czy baza danych i SVN danej Wiki te¿ obs³uguje utf8?
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -571,9 +587,12 @@
 \end{frame}
 \begin{frame}
 	\frametitle{Jak przekonaæ ludzi do Wiki}
-	\begin{block}{...}
+	\begin{block}{Typowe metody}
 		\begin{itemize}
-			\item ...
+			\item Nie mówiæ, ¿e nowe oprogramowanie jest Wiki...
+			\item Przekonaæ kierownictwo do zalet Wiki
+			\item Zachêciæ ludzi do publikowania na Wiki
+			\item Wyt³umaczyæ kierownictwu, ¿e publikowanie na Wiki to te¿ praca
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -614,23 +633,29 @@
 		\end{itemize}
 	\end{block}
 \end{frame}
+
+\section{Pytania}
+\begin{frame}
+	\frametitle{Czas na pytania}
+	\begin{center}
+		Pytania?
+	\end{center}
+\end{frame}
+
 \section{Bibliografia}
 \begin{frame}
 	\frametitle{Bibliografia}
 	\begin{block}{Historia wiki}
 		\begin{itemize}
-			\item ...
-		\end{itemize}
-		\begin{itemize}
  			\item \url{http://www.oreillynet.com/pub/a/oreilly/tim/news/2005/09/30/what-is-web-20.html}
 			\item \url{http://en.wikipedia.org/wiki/History_of_wikis}
 		\end{itemize}
 	\end{block}
-	%\begin{block}{Porównanie wiki}
-	%	\begin{itemize}
-	%		%\item http://www.wikimatrix.org
-	%		%\item http://en.wikipedia.org/wiki/Comparison_of_wiki_software
-	%	\end{itemize}
-	%\end{block}
+	\begin{block}{Porównanie wiki}
+		\begin{itemize}
+			\item \url{http://www.wikimatrix.org}
+			\item \url{http://en.wikipedia.org/wiki/Comparison_of_wiki_software}
+		\end{itemize}
+	\end{block}
 \end{frame}
 \end{document}
