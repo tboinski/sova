@@ -2,6 +2,8 @@
 \usepackage{polski}
 \usepackage[cp1250]{inputenc}
 \usepackage{floatflt,graphics,textcomp}
+\usepackage{hyperref}
+
 % ********** Styl prezentacji **********
 \mode<presentation>
 {
@@ -64,13 +66,38 @@
 
 \begin{frame}
 	\frametitle{Wiki a Wikipedia}
-	\begin{block}{...}
+	\begin{block}{Kultura Wikipedii}
 		\begin{itemize}
 			% http://c2.com/cgi/wiki?WikiIsNotWikipedia
-			\item ...
+			\item Podawaj Ÿród³a
+			\item Pisz chronologicznie
+			\item Wszystko dostêpne dla wszystkich
+			\item Ka¿dy mo¿e zostaæ u¿ytkownkiem i edytowaæ dokumenty
+			\item Dyskusje nad zmianami
 		\end{itemize}
 	\end{block}
+	\begin{block}{Kultura Wiki}
+		\begin{itemize}
+			% http://c2.com/cgi/wiki?WikiIsNotWikipedia
+			\item Mo¿na definiowaæ, kto mo¿e edytowaæ (np. tylko twój zespó³ projektowy)
+			\item Format dokumentów jest dowolny
+			\item \textbf{Wiki nie musi byæ w Internecie!!!}
+			\item Sam ustalasz zasady dzia³ania Twojej Wiki
+		\end{itemize}
+	\end{block}
+
 \end{frame} 
+\begin{frame}
+	\frametitle{Najwiêkszy problem Wikipedii} 
+	\begin{center}
+ \scalebox{0.45}{\includegraphics{screenshots/the_problem_with_wikipedia.jpg}}
+\end{center}
+
+	
+
+\end{frame}
+
+
 
 \begin{frame}
 	\frametitle{Web 2.0}
@@ -192,7 +219,7 @@
 		\end{itemize}
 	\end{block}
 
-	\begin{block}{Pearl}
+	\begin{block}{Perl}
 		\begin{itemize}
 			\item TWiki
 			\item Foswiki
@@ -233,16 +260,11 @@
 
 \begin{frame}
 	\frametitle{Technologie pomocnicze}
-	\begin{block}{RSS}
+	\begin{block}{RSS, Atom}
 		\begin{itemize}
 			\item Raportowanie o aktualizacjach i nowych artyku³ach na WIKI
-			\item Wystêpuje przewa¿nie w WIKI komercyjnych
-		\end{itemize}
-	\end{block}
-	\begin{block}{Atom}
-		\begin{itemize}
-			\item Zastosowanie takie jak RSS
-			\item Nieco mniej popularny
+			\item Wystêpuj¹ przewa¿nie w WIKI komercyjnych
+			\item Niektóre Wiki maj¹ wbudowane czytniki RSS/Atom
 		\end{itemize}
 	\end{block}
 	\begin{block}{SVN}
@@ -304,6 +326,18 @@
 		\end{itemize} 
 	\end{block}
 	Przyk³ad metajêzyka: %trzeba dorzuciæ przyk³ad
+	\begin{center}
+% use packages: array
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{MediaWiki} & \textbf{DokuWiki} & \textbf{HTML} \\ \hline  
+'''bold''' & **bold** & <b> bold <$\backslash$b> \\ \hline
+%/[/[a link|with title/]/] & /[/[link|With a Title/]/] & <a href=\"link'\"> Link with Title </a> \\ \hline
+%==Section== & ====== Level 1 ====== & <h1> Text </h1> \hline
+	\end{tabular}
+	\end{center}
+
+
 \end{frame}
 
 \begin{frame}
@@ -580,10 +614,10 @@
 		\begin{itemize}
 			\item ...
 		\end{itemize}
-		%\begin{itemize}
- 			%\item http://www.oreillynet.com/pub/a/oreilly/tim/news/2005/09/30/what-is-web-20.html
-			%\item http://en.wikipedia.org/wiki/History_of_wikis 
-		%\end{itemize}
+		\begin{itemize}
+ 			\item \url{http://www.oreillynet.com/pub/a/oreilly/tim/news/2005/09/30/what-is-web-20.html}
+			\item \url{http://en.wikipedia.org/wiki/History_of_wikis}
+		\end{itemize}
 	\end{block}
 	%\begin{block}{Porównanie wiki}
 	%	\begin{itemize}
