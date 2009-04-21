@@ -48,7 +48,7 @@ Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline
 \multicolumn{5}{c}{\textbf{Historia dokumentu}} \tabularnewline \hline
 \textbf{Wersja} & \textbf{Opis modyfikacji} & \textbf{Rozdział/strona} & \textbf{Autor modyfikacji} & \textbf{Data} \tabularnewline \hline 
 1 & Stworzenie & wszystkie & Grupa projektowa & 15.04.09 \tabularnewline \hline
-& & & &\tabularnewline \hline
+2 & Wpisanie celów &  & &\tabularnewline \hline
 \end{tabular}
  
 
@@ -71,7 +71,7 @@ Cele biznesowe precyzują korzyści związane z wdrożeniem systemu.
 \begin{tabular}{|l|l|} \hline
 
 CB001 & Ułatwienie pracy programistom tworzącym aplikacje wizualizujące ontologie  \\ \hline
-Opis: &  \\ \hline
+Opis: & Istnieje zapotrzebowanie na bibliotekę tłumaczącą OWL bezpośrednio na elementy graficzne.  \\ \hline
 Źródło: & Wstępna specyfikacja projektu \\ \hline
 Priorytet: & bardzo ważne \\ \hline
 \end{tabular}
@@ -81,8 +81,8 @@ Priorytet: & bardzo ważne \\ \hline
 \begin{center}
 \begin{tabular}{|l|l|} \hline
 CB002 & Ułatwienie zakończenia projektu OCS   \\ \hline
-Opis: &  \\ \hline
-Źródło: &  \\ \hline
+Opis: & Moduł wizualizujący ontolgie w OCS wymaga modernizacji i rozbudowy funkcjonalności. Zapewnienie biblioteki wizualizującej ontologie ułatwi i przyspieszy ten proces.  \\ \hline
+Źródło: Klient - mgr inż. Tomasz Boiński &  \\ \hline
 Priorytet: & bardzo ważne \\ \hline
 \end{tabular}
 \end{center}
@@ -90,9 +90,18 @@ Priorytet: & bardzo ważne \\ \hline
 \begin{center}
 \begin{tabular}{|l|l|} \hline
 CB003 & Zwiększenie aktrakcyjności portalu OCS   \\ \hline
-Opis: &  \\ \hline
-Źródło: &  \\ \hline
+Opis: & Poprawa estetyki modułu wizualizującego ontologię moze przyczynic się do sukcesu portalu po jego wdrożeniu.  \\ \hline
+Źródło: & Klient - mgr inż. Tomasz Boiński \\ \hline
 Priorytet: & mało ważne \\ \hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+CB004 &    \\ \hline
+Opis: &   \\ \hline
+Źródło: &  \\ \hline
+Priorytet: & \\ \hline
 \end{tabular}
 \end{center}
 
@@ -116,8 +125,8 @@ Priorytet: & średnio ważne  \\ \hline
 \begin{tabular}{|l|l|} \hline
 
 CF002 & Dobra dokumentacja \\ \hline
-Opis: &  \\ \hline
-Źródło: &  \\ \hline
+Opis: & Przygotowanie dokumentacji w Javadoc ułatwi pracę użytkownikom biblioteki. \\ \hline
+Źródło: & Klient - mgr inż. Tomasz Boiński  \\ \hline
 Priorytet: & bardzo ważne \\ \hline
 
 \end{tabular}
@@ -126,10 +135,10 @@ Priorytet: & bardzo ważne \\ \hline
 \begin{center}
 \begin{tabular}{|l|l|} \hline
 
-Tutaj jest ID & A tutaj nazwa \\ \hline
-Opis: &  \\ \hline
-Źródło: &  \\ \hline
-Priorytet: &  \\ \hline
+CF003 & Wizualizacja ontologii \\ \hline
+Opis: & Stworzenie biblioteki, która pozwoli na wizualizacje obiektów OWL API przy użyciu odpowiedniej biblioteki graficznej. \\ \hline
+Źródło:  & Specyfikacja projektu  \\ \hline
+Priorytet: & bardzo ważne \\ \hline
 
 \end{tabular}
 \end{center}
@@ -137,10 +146,22 @@ Priorytet: &  \\ \hline
 \begin{center}
 \begin{tabular}{|l|l|} \hline
 
-Tutaj jest ID & A tutaj nazwa \\ \hline
-Opis: &  \\ \hline
-Źródło: &  \\ \hline
-Priorytet: &  \\ \hline
+CF004 & Umożliwienie graficznej edycji i dodawania obiektów OWL API \\ \hline
+Opis: &  Dostarczenie tej funkcjonalności ułatwi tworzenie programów z interfejsem pozwalającym na edycję ontologii zapisanych w OWL API. \\ \hline
+Źródło: & Klient - mgr inż. Tomasz Boiński i Anna Jaworska \\ \hline
+Priorytet: & średnio ważne \\ \hline
+
+\end{tabular}
+\end{center}
+
+
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+
+CF005 & Udostępnienie informacji do debuggowania  \\ \hline
+Opis: &  Biblioteka powinna wysyłać komunikaty informacyjne, ostrzegawcze oraz informujace o błędach na strumień udostępniony użytkownikowi.  \\ \hline
+Źródło: & Standard tworzenia biblioteki \cite{artOstandardach} \\ \hline
+Priorytet: & średnio ważne \\ \hline
 
 \end{tabular}
 \end{center}
@@ -184,33 +205,10 @@ Priorytet: &  \\ \hline
 Wyszczególnienie komponentów systemu powinno pomóc w uzyskaniu kompletności wymagań. Trzeba wówczas sprawdzić, czy każdy komponent ma jakieś wymagania (zwłaszcza funkcjonalne). W przypadku bardziej złożonego systemu może być konieczne wyszczególnienie podsystemów.
 
 \subsection{Podsystemy}
-
-\begin{center}
-\begin{tabular}{|l|l|} \hline
-
-Tutaj jest ID & A tutaj nazwa \\ \hline
-Opis: &  \\ \hline
-Lokalizacja: &  \\ \hline
-Komponenty: & \\ \hline
-Źródło: &  \\ \hline
-Priorytet: &  \\ \hline
-
-\end{tabular}
-\end{center}
+Specyfika projektu sprawia, że podsystemy nie będa rozpatrywane.
 
 \subsection{Komponenty sprzętowe}
-
-\begin{center}
-\begin{tabular}{|l|l|} \hline
-
-Tutaj jest ID & A tutaj nazwa \\ \hline
-Opis: &  \\ \hline
-Powiązania: &  \\ \hline
-Źródło: &  \\ \hline
-Priorytet: &  \\ \hline
-
-\end{tabular}
-\end{center}
+Specyfika projektu sprawia, że komponenty sprzętowe nie będa rozpatrywane. 
 
 \subsection{Programowe}
 
@@ -233,8 +231,20 @@ Wymagania funkcjonalne stanowią mocno rozbudowaną część specyfikacji. Możn
 \begin{center}
 \begin{tabular}{|l|l|} \hline
 
-Tutaj jest ID & A tutaj nazwa \\ \hline
-Opis: &  \\ \hline
+WF001 & Udostępnienie kilku algorytmów wizualizacji \\ \hline
+Opis: & Biblioteka powinna udostępniać kilka trybów prezentacji grafów (np. w formie drzewa, w formie gwiazdy i innych).    \\ \hline
+Dotyczy: &  \\ \hline
+Źródło: &  \\ \hline
+Powiązania: & \\ \hline
+Priorytet: &  \\ \hline
+
+\end{tabular}
+\end{center}
+\begin{center}
+\begin{tabular}{|l|l|} \hline
+
+WF002 & Parametryzacja trybów wizualizacyjnych \\ \hline
+Opis: & Domyślne parametry w trybach wizualizacji (takie jak długość krawędzi grafu, automatyczne układanie) powinny zostać dobrane w taki sposób, by obraz był przejrzysty, stabilny i czytelny.    \\ \hline
 Dotyczy: &  \\ \hline
 Źródło: &  \\ \hline
 Powiązania: & \\ \hline
@@ -243,6 +253,43 @@ Priorytet: &  \\ \hline
 \end{tabular}
 \end{center}
 
+
+
+
+\begin{tabular}{|l|l|} \hline
+
+WF003 &   \\ \hline
+Opis: &     \\ \hline
+Dotyczy: &  \\ \hline
+Źródło: &  \\ \hline
+Powiązania: & \\ \hline
+Priorytet: &  \\ \hline
+
+\end{tabular}
+
+\begin{tabular}{|l|l|} \hline
+
+WF002 &  \\ \hline
+Opis: &     \\ \hline
+Dotyczy: &  \\ \hline
+Źródło: &  \\ \hline
+Powiązania: & \\ \hline
+Priorytet: &  \\ \hline
+
+\end{tabular}
+
+\begin{tabular}{|l|l|} \hline
+
+WF002 &  \\ \hline
+Opis: &     \\ \hline
+Dotyczy: &  \\ \hline
+Źródło: &  \\ \hline
+Powiązania: & \\ \hline
+Priorytet: &  \\ \hline
+
+\end{tabular}
+
+
 \section{Wymagania na dane}
 
 Wymagania na dane pomagają w określeniu, jakie dane będą przetwarzane w systemie. Nie trzeba precyzować wszystkich danych. Szczegóły znajdą się w projekcie bazy danych.
@@ -250,11 +297,11 @@ Wymagania na dane pomagają w określeniu, jakie dane będą przetwarzane w syst
 \begin{center}
 \begin{tabular}{|l|l|} \hline
 
-Tutaj jest ID & A tutaj nazwa \\ \hline
-Opis: &  \\ \hline
+WD001 & Obsługa obiektów OWL API \\ \hline
+Opis: & Bibliotek będzie przystosowana do pobierania, obróki i zwracania obiektów OWL API \\ \hline
 Powiązania: &  \\ \hline
-Źródło: &  \\ \hline
-Priorytet: &  \\ \hline
+Źródło: & Klient - mgr inż. Tomasz Boiński  \\ \hline
+Priorytet: &  bardzo ważne \\ \hline
 
 \end{tabular}
 \end{center}

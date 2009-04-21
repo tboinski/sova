@@ -1,0 +1,84 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+%custom margins
+\usepackage[left=2.5cm, top=2.5cm, bottom=3cm, right=2cm, foot=2cm, head=0.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage[bookmarks=true, pdftex]{hyperref}
+
+%styl nagłowków
+\pagestyle{fancy} 
+\parindent 2cm 
+
+%opening
+\title{Notatka ze spotkania}
+\author{3@KASK}
+
+\begin{document}
+\bibliographystyle{plain}
+
+
+\maketitle
+
+
+\begin{center}
+%budowanie tabeli
+\begin{tabular}{|p{7cm}|p{7cm}|}
+\hline
+Symbol projektu: & Opiekun projektu:   \tabularnewline 
+3@KASK & mgr inż. Tomasz Boiński    \tabularnewline \hline
+\multicolumn{2}{|l|}{Nazwa Projektu: } \tabularnewline
+\multicolumn{2}{|l|}{Wizualizacja grafów za pomocą biblioteki Prefuse } \tabularnewline 
+\hline
+\multicolumn{2}{l}{ } \tabularnewline %pusta linijka
+\hline 
+Nazwa Dokumentu: & Data spotkania:   \tabularnewline 
+Notatka ze spotkania & 21 kwietnia 2009 \tabularnewline \hline
+Odpowiedzialny za dokument: & Obecni na spotkaniu:   \tabularnewline 
+Anna Jaworska & Zespół projektowy \tabularnewline \hline
+Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline 
+WEWNĘTRZNE & \today \tabularnewline \hline
+\end{tabular}
+\end{center}
+
+
+
+\section{Temat spotkania}
+
+SWs i przygotowania do konsultacji z klientem.
+
+\section{Poruszone zagadnienia}
+
+\begin{itemize}
+ 	\item Dalsze uzupełnianie SWS
+	\item Jak konkretnie wizualizaować rózne elementy ontologii
+	\item Problem okienka właściwości
+	\item Klasy i obiekty przedstawiamy przy pomocy figur geometrycznych
+	\item Zwiazki (property) za pomocą strzałek/linii
+	\item zalezności miedzy klasami musza sie roznic od zwiazków predykatowych
+	
+\end{itemize}
+
+
+\section{Podjęte ustalenia}
+\begin{itemize}
+ \item naley sprawdzic jakie kształy i jakie rodzaje kresek mozna rysować w Prefuse - Piotr K.
+\item Należy zdefiniować co ma w wizualizacji ontologii różnić sie od siebie - Piotr O.
+\item Przejrzeć jak róznice są wizualizowane w innych programach - Radek
+\item Ania poszuka danych testowych	
+ \item całość na poniedziałek godz. 11
+\end{itemize}
+
+
+\newpage
+\tableofcontents
+\newpage
+
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Literatura}
+\bibliography{biblio}
+
+\end{document}
