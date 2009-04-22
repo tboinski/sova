@@ -8,7 +8,7 @@
 \mode<presentation>
 {
 	\usetheme{PaloAlto}
-	\usecolortheme[named=SeaGreen]{structure}
+	\usecolortheme[named=orange]{structure}
 }
 
 
@@ -31,6 +31,21 @@
 
 \begin{document}
 
+\AtBeginSection[]
+{
+   \begin{frame}
+       \frametitle{}
+			\begin{center}
+\begin{Huge}
+\textcolor{brown}{\textbf{\insertsectionhead}}
+\end{Huge}
+		
+\end{center}
+
+       %\tableofcontents[currentsection]
+   \end{frame}
+}
+
 \begin{frame}
 	\titlepage
 \end{frame}
@@ -41,6 +56,17 @@
 \end{frame}
 
 \section{Wstêp}
+
+\begin{frame}
+	\frametitle{O czym jest ta prezentacja?}
+	\begin{block}{}
+		\begin{itemize}
+			\item Przydatnoœæ Wiki z punktu widzenia firmy
+			\item Wiki od strony technologicznej
+			\item Sposoby wdra¿ania Wiki
+	\end{itemize}
+	\end{block}
+\end{frame}
 
 
 \begin{frame}
@@ -137,23 +163,7 @@
 
 
 
-\begin{frame}
-	\frametitle{Dziwne Wiki}
 
-	\begin{block}{Wiki over DNS}
-		\begin{itemize}
-			\item napisane w Perl
-			\item wykorzystanie asocjacji DNS (has³o + definicja) 
-		\end{itemize}
-	\end{block}
-%https://dgl.cx/wikipedia-dns
-
-\begin{block}{}
-		\begin{itemize}
-			\item ...
-		\end{itemize}
-	\end{block}
-\end{frame}
 
 \section{Technologie}
 \begin{frame}
@@ -259,11 +269,9 @@
 	\end{block}
 	\begin{block}{Inne}
 		\begin{itemize}
-			\item Javascript - TiddlyWiki
 			\item Basic4PPC - Personal PPC Wiki
 			\item Smalltalk - Pier, WikiDoc
-			\item Lua - Sputnik
-			\item Shell - WikiSH
+			\item Lua - Sputnik 
 			\item Tdbengine - GeboGebo
 		\end{itemize}
 	\end{block}
@@ -298,14 +306,35 @@
 %	\frametitle{Integracja z innymi narzêdziami}
 %
 %\end{frame}
-
 \begin{frame}
-	\frametitle{Przyk³ady}
-	\begin{block}{...}
+	\frametitle{Dziwne Wiki}
+
+	\begin{block}{Wiki over DNS}
 		\begin{itemize}
-			\item ...
+			\item napisane w Perl
+			\item wykorzystanie asocjacji DNS (has³o + definicja) 
 		\end{itemize}
 	\end{block}
+%https://dgl.cx/wikipedia-dns
+
+\begin{block}{ TiddlyWiki}
+		\begin{itemize}
+			\item Javascript 
+			\item Jednoosobowe Wiki
+		\end{itemize}
+	\end{block}
+\begin{block}{WikiSH}
+		\begin{itemize}
+			\item Shell 
+			\item Zwyk³a lekka Wiki
+		\end{itemize}
+	\end{block}
+
+
+\end{frame}
+\begin{frame}
+	\frametitle{Przyk³ady}
+	\includegraphics[width=1\textwidth]{screenshots/por.jpg}
 \end{frame}
 
 \section{Organizacji i edycja informacji}
@@ -397,12 +426,14 @@
 			\item Brak organizacji wiedzy, dobre dla ma³ych projektów
 		\end{itemize}
 	\end{block}
+\pause
 	\begin{block}{Przestrzenie nazw}
 		\begin{itemize}
 			\item Pomys³ po¿yczony z jêzyków obiektowych
 			\item U¿ywany w Wikipedii
 		\end{itemize}
 	\end{block}
+\pause
 \begin{block}{Dzia³y}
 		\begin{itemize}
 			\item Dobre dla firmy - podzia³ na projekty lub dzia³y w firmie
@@ -410,6 +441,7 @@
 			\item Hierarchia artyku³ów
 		\end{itemize}
 	\end{block}
+\pause
 \begin{block}{Tag clouds}
 		\begin{itemize}
 			\item Alternatywna organizacja informacji
@@ -492,18 +524,33 @@
 \end{frame}
 \begin{frame}
 	\frametitle{Sposoby instalacji}
-	\begin{block}{...}
+	\begin{block}{Proste}
 		\begin{itemize}
-			\item ...
+			\item "Ceg³a na Enterze"
+			\item Menad¿er pakietów
+			\item make install
+		\end{itemize}
+	\end{block}
+\begin{block}{Konfiguracja po instalacji}
+		\begin{itemize}
+			\item Ustawienia lokalne
+			\item Pod³¹czenie bazy danych
+			\item Inne
 		\end{itemize}
 	\end{block}
 \end{frame}
 \begin{frame}
 	\frametitle{Bezpieczeñstwo}
 %kombinacje technologii z przk³adami
-	\begin{block}{...}
+	\begin{block}{SSL}
 		\begin{itemize}
-			\item ...
+			\item Twoja Wiki mo¿e korzystaæ z HTTPS
+		\end{itemize}
+	\end{block}
+	\begin{block}{Bezpieczeñstwo wewn¹trz Wiki}
+		\begin{itemize}
+			\item Poziomy dostêpu
+			\item Role u¿ytkowników
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -520,12 +567,14 @@
 \end{frame}
 \begin{frame}
 	\frametitle{Wsparcie techniczne}
+\pause
 	\begin{block}{Dla u¿ytkowników indywidualnych}
 		\begin{itemize}
 			\item Zwróæ uwagê na istnienie forum, grupy dyskusyjnej, mo¿liwoœæ raportowania b³êdów 
 			\item Nie wydawaj pieniêdzy na nadmiarowe wsparcie komercyjne
 		\end{itemize}
 	\end{block}
+\pause
 	\begin{block}{Dla ma³ych grup komercyjnych}
 		\begin{itemize}
 			\item Ma³a firma lub dzia³/grupa robocza w du¿ej firmie
@@ -534,6 +583,7 @@
 			\item Nie kupuj wsparcia na zapas, zbadaj czy na pewno jest Ci potrzebne
 		\end{itemize}
 	\end{block}
+\pause
 \begin{block}{Dla du¿ych organizacji i firm}
 		\begin{itemize}
 			\item Wybierz dojrza³¹ Wiki w technologii, z któr¹ firma ma najwiêksze doœwiadczenie 
@@ -541,6 +591,7 @@
 			\item Korzystaj ze wsparcia, w koñcu za nie p³acisz
 		\end{itemize}
 	\end{block}
+\pause
 
 \end{frame}
 
@@ -555,12 +606,14 @@
 			\item Nie wyrzucaj informacji razem z pracownikiem
 		\end{itemize}
 	\end{block}
+\pause
 	\begin{block}{Zmiana sposobu obiegu dokumentów}
 		\begin{itemize}
 			\item Zapomnij o za³¹cznikach w e-mailach i uzyskiwanych dziêki nim tysi¹com wersji jednego dokumentu
 			\item Twórz plan spotkania wspólnie z jego uczestnikami
 		\end{itemize}
 	\end{block}
+\pause
 	\begin{block}{Problem w³asnoœci informacji}
 		\begin{itemize}
 			\item Nie tylko eksperci maj¹ wiedzê
@@ -568,17 +621,21 @@
 			\item Jeœli ktoœ znajdzie b³¹d w Twoim dokumencie sam mo¿e go naprawiæ
 		\end{itemize}
 	\end{block}
+\pause
 \end{frame}
 \begin{frame}
 	\frametitle{Korzyœci}
 	\begin{block}{Change summary - nadzór pracy}
 		\begin{itemize}
-			\item ...
+			\item Strony z podsumowaniem ostatnich zmian
+			\item Raporty na email o aktywnoœci u¿ytkowników
 		\end{itemize}
 	\end{block}
+\pause
 	\begin{block}{Pluginy}
 		\begin{itemize}
-			\item ...
+			\item Mo¿liwoœæ rozbudowywania na w³asne potrzeby istniej¹cej Wiki	
+			\item Mo¿liwoœæ integracji programów dedykowanych
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -634,20 +691,20 @@
 			\item warto zachêcaæ wiêcej ludzi do pisania przez przyk³ady, szablony, wyró¿nianie aktywnych u¿ytkowników
 		\end{itemize}
 	\end{block}
-
+\pause
 	\begin{block}{BarnRising}
 		\begin{itemize}
 			\item Zorganizuj nieformalne spotkanie zespo³u, produktem którego bêd¹ strony w nowej Wiki
 		\end{itemize}
 	\end{block}
-
+\pause
 \begin{block}{Czempion}
 		\begin{itemize}
 			\item Entuzjasta, który podejmie siê opieki nad Wiki
 			\item Pomoc dla nowych u¿ytkowników i rozpowszechnianie Wiki
 		\end{itemize}
 	\end{block}
-
+\pause
 \begin{block}{MySpace}
 		\begin{itemize}
 			\item Niech ka¿dy stworzy stronê o sobie - to dobry pomys³ na pierwsz¹ stworzon¹ w Wiki stronê
@@ -665,14 +722,14 @@
 			\item U¿ytkownik musz¹cy podpisaæ siê w³asnym nazwiskiem bardziej przy³o¿y siê do tworzonej treœci
 		\end{itemize}
 	\end{block}
-
+\pause
 \begin{block}{Patron}
 		\begin{itemize}
 			\item Wyt³umacz szefowi ideê Wiki, zdob¹dŸ i upublicznij (na Wiki :D) jego aprobatê
 			\item Wykorzystanie przekonania, ¿e co szef popiera to jest dobre
 		\end{itemize}
 	\end{block}
-
+\pause
 \begin{block}{Wirusowe rozprzestrzenianie Wiki}
 		\begin{itemize}
 			\item Jeœli wszystko pójdzie dobrze wkrótce pracownicy zaczn¹ sami wspieraæ i rozpowszechniaæ wœród kolegów u¿ycie Wiki
@@ -721,6 +778,7 @@
 		\begin{itemize}
 			\item Nie mówiæ, ¿e nowe oprogramowanie jest Wiki...
 			\item Przekonaæ kierownictwo do zalet Wiki
+			\item Zacznij od grupy pilota¿owej
 			\item Zachêciæ ludzi do publikowania na Wiki
 			\item Wyt³umaczyæ kierownictwu, ¿e publikowanie na Wiki to te¿ praca
 		\end{itemize}
@@ -733,15 +791,35 @@
 	\frametitle{Firma informatyczna}
 	\begin{block}{Sun Microsystems} %wikipatterns 61
 		\begin{itemize}
-			\item ...
+			\item Confluence
+			\item 25 000 u¿ytkowników (pracownicy i eksperci z zewn¹trz)
+			\item Dobra polityka firmy i zaufanie do pracowników
+			\item Wykorzystanie wielu pozytywnych wikipatterns: Czempion, Ogrodnik
+			\item System nagradzania aktywnoœci 
+		\end{itemize}
+	\end{block}
+\begin{block}{VMWare - konferencja VMWorld} %wikipatterns 61
+		\begin{itemize}
+			\item Clearspace - JiveSoftware
+			\item 50 000 u¿ytkowników (eksperci, wystawcy na konferencji i jej entuzjaœci)
+			\item Stworzenie przez VMWare specjalnych pluginów
+			\item Oszczêdzenie 250 000\$ na zarz¹dzaniu konferencjami
 		\end{itemize}
 	\end{block}
 \end{frame}
 \begin{frame}
-	\frametitle{Firma nieinformatyczna}
-	\begin{block}{GE Money Bank?}
+	\frametitle{Firmy nieinformatyczne}
+	\begin{block}{Disney}
 		\begin{itemize}
-			\item ...
+			\item TWiki
+			\item Wymiana informacji w zespole rozwijaj¹cym g³ówny portal informacyjny firmy
+		\end{itemize}
+	\end{block}
+\begin{block}{Texas Instruments}
+		\begin{itemize}
+			\item TWiki
+			\item Prowadzenie dokumentacji projektowej
+			\item audyt ISO zakoñczony sukcesem
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -750,28 +828,44 @@
 %wiki patterns str. 37
 	\begin{block}{Uniwersytet Johna Hopkinsa} %wikipatterns str. 38
 		\begin{itemize}
-			\item ...
+			\item Confluence
+			\item 500 u¿ytkowników
+			\item Wymiana informacji wewnêtrznych o badaniach i projektach
 		\end{itemize}
 	\end{block}
+\begin{block}{Universitat Autonoma de Barcelona } 		
+\begin{itemize}
+			\item MoinMoin
+			\item Elearning przez Wiki
+			 \item Ka¿da grupa studentów tworzy dokumentacjê/projekty w swojej Wiki
+		\end{itemize}
+	\end{block}
+
 \end{frame}
 
 \section{Podsumowanie}
 \begin{frame}
 	\frametitle{Podsumowanie}
-	\begin{block}{...}
+	\begin{block}{}
 		\begin{itemize}
-			\item ...
+			\item Wiki to nie Wikipedia
+			\pause
+			\item Na pewno istnieje Wiki w Twojej ulubionej technologii
+			\pause
+			\item Jeœli czegoœ brakuje w Twojej Wiki mo¿esz dopisac to sam
+			\pause
+			\item Stworzenie Wiki nie jest trudne
+			\pause
+			\item Dziêki Wiki mo¿esz oszczêdziæ czas i pieni¹dze
+			\pause
+			\item	Zanim wdro¿ysz Wiki... 
+			\pause
 		\end{itemize}
 	\end{block}
 \end{frame}
 
 \section{Pytania}
-\begin{frame}
-	\frametitle{Czas na pytania}
-	\begin{center}
-		\begin{huge}Pytania?		\end{huge}
-	\end{center}
-\end{frame}
+
 
 \section{Bibliografia}
 \begin{frame}
