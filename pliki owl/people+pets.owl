@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<rdf:RDF xmlns:ns0="http://cohse.semanticweb.org/ontologies/people#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xml:base="http://cohse.semanticweb.org/ontologies/people"
+    xmlns="http://cohse.semanticweb.org/ontologies/people#">
+    <owl:Ontology rdf:about=""/>
+    <owl:Class rdf:about="#white_van_man">
+        <rdfs:label>white van man</rdfs:label>
+        <rdfs:comment><![CDATA[A white van man is a man who drives a white van.]]></rdfs:comment>
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#man"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#drives"/>
+                        <owl:someValuesFrom>
+                            <owl:Class>
+                                <owl:intersectionOf rdf:parseType="Collection">
+                                    <owl:Class rdf:about="#white_thing"/>
+                                    <owl:Class rdf:about="#van"/>
+                                </owl:intersectionOf>
+                            </owl:Class>
+                        </owl:someValuesFrom>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+ 
