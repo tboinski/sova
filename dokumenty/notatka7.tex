@@ -1,0 +1,79 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+%custom margins
+\usepackage[left=2.5cm, top=2.5cm, bottom=3cm, right=2cm, foot=2cm, head=0.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage[bookmarks=true, pdftex]{hyperref}
+
+%styl nagłowków
+\pagestyle{fancy} 
+\parindent 2cm 
+
+%opening
+\title{Notatka ze spotkania}
+\author{3@KASK}
+
+\begin{document}
+\bibliographystyle{plain}
+
+
+\maketitle
+
+
+\begin{center}
+%budowanie tabeli
+\begin{tabular}{|p{7cm}|p{7cm}|}
+\hline
+Symbol projektu: & Opiekun projektu:   \tabularnewline 
+3@KASK & mgr inż. Tomasz Boiński    \tabularnewline \hline
+\multicolumn{2}{|l|}{Nazwa Projektu: } \tabularnewline
+\multicolumn{2}{|l|}{Wizualizacja grafów za pomocą biblioteki Prefuse } \tabularnewline 
+\hline
+\multicolumn{2}{l}{ } \tabularnewline %pusta linijka
+\hline
+Nazwa Dokumentu: & Data spotkania:   \tabularnewline 
+Notatka ze spotkania & 28 kwietnia 2009 \tabularnewline \hline
+Odpowiedzialny za dokument: & Obecni na spotkaniu:   \tabularnewline 
+Anna Jaworska & Cały zespół \tabularnewline \hline
+Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline 
+WEWNĘTRZNE & \today \tabularnewline \hline
+\end{tabular}
+\end{center}
+
+
+
+\section{Temat spotkania}
+Walki z SWS ciąg dalszy.
+
+\section{Poruszone zagadnienia}
+\begin{itemize}
+ \item Przeglad OWLa 
+\item  Wspólne rysowanie notacji na podstawie GrOWL i wiedzy Piotra K. o Prefuse 
+\item  Zidentyfikowanie niejasności do konsultacji
+
+\end{itemize}
+
+
+
+\section{Podjęte ustalenia}
+\begin{itemize}
+ \item Należy skonsultować wyglad wizualizacji i wyjaśnić wątpliwości z opiekunem
+ \item konsultacje 29 kwietnia
+\end{itemize}
+
+
+
+
+\newpage
+\tableofcontents
+\newpage
+
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Literatura}
+\bibliography{biblio}
+
+\end{document}
