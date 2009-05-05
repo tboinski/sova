@@ -34,11 +34,11 @@ Symbol projektu: & Opiekun projektu:   \tabularnewline
 \multicolumn{2}{l}{ } \tabularnewline %pusta linijka
 \hline 
 Nazwa Dokumentu: & Nr wersji:   \tabularnewline 
-Specyfikacja wymagań systemowych & 0.0 \tabularnewline \hline
+Specyfikacja wymagań systemowych & 0.4 \tabularnewline \hline
 Odpowiedzialny za dokument: & Data pierwszego sporządzenia:   \tabularnewline 
 Piotr Orłowski & 15 kwietnia 2009 \tabularnewline \hline
 Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline 
-??? & \today \tabularnewline \hline
+DLA KLIENTA & \today \tabularnewline \hline
 \end{tabular}
 \end{center}
 
@@ -65,35 +65,36 @@ Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline
 
 \subsection{Cele biznesowe}
 
+
+
+
 \begin{center}
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+\begin{tabular}{|m{3cm}|m{9cm}|} \hline
 
 CB001 & Ułatwienie pracy programistom tworzącym aplikacje wizualizujące ontologie  \\ \hline
 Opis: & Istnieje zapotrzebowanie na bibliotekę tłumaczącą OWL bezpośrednio na elementy graficzne.  \\ \hline
 Źródło: & Wstępna specyfikacja projektu \\ \hline
 Priorytet: & bardzo ważne \\ \hline
-\end{tabular}
+\multicolumn{2}{c}{} \\
 
 %priorytety  00 01 10 11
 %priorytety bardzo wazne, wazne, średnio ważne, mało wazne
 
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+ \hline
 CB002 & Ułatwienie zakończenia projektu OCS   \\ \hline
 Opis: & Moduł wizualizujący ontolgie w OCS wymaga modernizacji i rozbudowy funkcjonalności. Zapewnienie biblioteki wizualizującej ontologie ułatwi i przyspieszy ten proces.  \\ \hline
 Źródło:& Klient - mgr inż. Tomasz Boiński   \\ \hline
 Priorytet: & bardzo ważne \\ \hline
-\end{tabular}
-
-
-
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+\multicolumn{2}{c}{} \\
+ \hline
 CB003 & Zwiększenie aktrakcyjności portalu OCS   \\ \hline
 Opis: & Poprawa estetyki modułu wizualizującego ontologię moze przyczynic się do sukcesu portalu po jego wdrożeniu.  \\ \hline
 Źródło: & Klient - mgr inż. Tomasz Boiński \\ \hline
 Priorytet: & mało ważne \\ \hline
+\multicolumn{2}{c}{} \\
 \end{tabular}
 
-%\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+%\begin{tabular}{|m{3cm}|m{9cm}|} \hline
 %CB004 &    \\ \hline
 %Opis: &   \\ \hline
 %Źródło: &  \\ \hline
@@ -108,43 +109,37 @@ Priorytet: & mało ważne \\ \hline
 
 \begin{center}
 
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+\begin{tabular}{|m{3cm}|m{9cm}|} \hline
 
 CF001 & Intuicyjne API \\ \hline
 Opis: & Na podstawie subiektywnej opinii kilku zewnętrznych osób nie należących do zespołu projektowego oraz oceny opiekuna projektu API powinno zostać uznane za nadające się do użytku. \\ \hline
 Źródło: & Klient - mgr inż. Tomasz Boiński \\ \hline
 Priorytet: & średnio ważne  \\ \hline
+\multicolumn{2}{c}{} \\
 
-\end{tabular}
-
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
-
+ \hline
 CF002 & Dobra dokumentacja \\ \hline
 Opis: & Przygotowanie dokumentacji w Javadoc ułatwi pracę użytkownikom biblioteki. \\ \hline
 Źródło: & Klient - mgr inż. Tomasz Boiński  \\ \hline
 Priorytet: & bardzo ważne \\ \hline
 
-\end{tabular}
-
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
-
+\multicolumn{2}{c}{} \\
+ \hline
 CF003 & Wizualizacja ontologii \\ \hline
 Opis: & Stworzenie biblioteki, która pozwoli na wizualizacje obiektów OWL API przy użyciu odpowiedniej biblioteki graficznej. \\ \hline
 Źródło:  & Specyfikacja projektu  \\ \hline
 Priorytet: & bardzo ważne \\ \hline
 
-\end{tabular}
-
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
-
+\multicolumn{2}{c}{} \\
+ \hline
 CF004 & Umożliwienie graficznej edycji i dodawania obiektów OWL API \\ \hline
 Opis: &  Dostarczenie tej funkcjonalności ułatwi tworzenie programów z interfejsem pozwalającym na edycję ontologii zapisanych w OWL API. \\ \hline
 Źródło: & Klient - mgr inż. Tomasz Boiński \\ \hline
 Priorytet: & średnio ważne \\ \hline
+\multicolumn{2}{c}{} \\
 
-\end{tabular}
 
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+ \hline
 
 CF005 & Udostępnienie informacji do debuggowania  \\ \hline
 Opis: &  Biblioteka powinna wysyłać komunikaty informacyjne, ostrzegawcze oraz informujace o błędach na strumień udostępniony użytkownikowi.  \\ \hline
@@ -163,7 +158,7 @@ Priorytet: & średnio ważne \\ \hline
 
 Specyfika projektu nie definiuje użytkowników systemu.
 
-%\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+%\begin{tabular}{|m{3cm}|m{9cm}|} \hline
 
 %Tutaj jest ID & A tutaj nazwa \\ \hline
 %Opis: &  \\ \hline
@@ -180,7 +175,7 @@ Specyfika projektu nie definiuje użytkowników systemu.
 Specyfika systemu nie wymaga definiowaia systemów zewnętrznych.
 
 %\begin{center}
-%\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+%\begin{tabular}{|m{3cm}|m{9cm}|} \hline
 
 %Tutaj jest ID & A tutaj nazwa \\ \hline
 %Opis: &  \\ \hline
@@ -204,7 +199,7 @@ Specyfika projektu sprawia, że komponenty sprzętowe nie będa rozpatrywane.
 \subsection{Programowe}
 
 \begin{center}
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+\begin{tabular}{|m{3cm}|m{9cm}|} \hline
 
 KS001 & Prefuse \\ \hline
 Opis: &  Biblioteka graficzna do wizualizacji grafów w języku Java\\ \hline
@@ -221,29 +216,27 @@ Priorytet: & bardzo ważne \\ \hline
 
 \begin{center}
 
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+\begin{tabular}{|m{3cm}|m{9cm}|} \hline
 
 WF001 & Udostępnienie kilku algorytmów wizualizacji \\ \hline
 Opis: & Biblioteka powinna udostępniać kilka trybów prezentacji grafów (np. w formie drzewa, w formie gwiazdy i innych).    \\ \hline
 Dotyczy: & CF003 \\ \hline
 Źródło: & klient - mgr Tomasz Boiński \\ \hline
-Powiązania: & \\ \hline
+Powiązania: &WF002 \\ \hline
 Priorytet: &  ważny\\ \hline
 
-\end{tabular}
-
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+\multicolumn{2}{c}{} \\
+ \hline
 
 WF002 & Parametryzacja trybów wizualizacyjnych \\ \hline
 Opis: & Domyślne parametry w trybach wizualizacji (takie jak długość krawędzi grafu, automatyczne układanie) powinny zostać dobrane w taki sposób, by obraz był przejrzysty, stabilny i czytelny.    \\ \hline
 Dotyczy: & CF003 \\ \hline
 Źródło: &  klient - mgr Tomasz Boiński\\ \hline
-Powiązania: &  \\ \hline
+Powiązania: & WF001 \\ \hline
 Priorytet: & średnio ważny \\ \hline
 
-\end{tabular}
-
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+\multicolumn{2}{c}{} \\
+ \hline
 
 WF003 & Udostępnienie strumienia błędów \\ \hline
 Opis: &   Biblioteka będzie udostępniać strumień danych, w którym znajdą się komunikaty o błędach. Strumień ten będzie mógł zostać wykorzystany przez użytkownika. \\ \hline
@@ -259,7 +252,7 @@ Priorytet: & ważne \\ \hline
 \subsection{Wymagania wizualizacji ontologii}
 
 \begin{center}
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+\begin{tabular}{|m{3cm}|m{9cm}|} \hline
 
 WF004 & Rozróżnialność podstawowych symboli  \\ \hline
 Opis: &  Class, Individual, Property powinny mieć rozróżnialne symbole   \\ \hline
@@ -269,9 +262,8 @@ Powiązania: & \\ \hline
 Priorytet: & bardzo ważne \\ \hline
 %Projekt: & \includegraphics{myimage.png}
 
-\end{tabular}
-
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+\multicolumn{2}{c}{} \\
+ \hline
 
 WF005 &   Rozróżnialność szczególnych typów Class\\ \hline
 Opis: &   Klasa anonimowa, datatype, Thing i Nothing powinny być łatwo rozpoznawalne.  \\ \hline
@@ -280,9 +272,8 @@ Dotyczy: &  CF003 \\ \hline
 Powiązania: & WF004 \\ \hline
 Priorytet: &  ważne \\ \hline
 
-\end{tabular}
-
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+\multicolumn{2}{c}{} \\
+ \hline
 
 WF006 &  Rozróżnialność związków między klasami (Class), instancjami (Individual) oraz predykatami (Property)\\ \hline
 Opis: & Rózne symobole dla equivalentClass, disjointWith, subClassOf, sameAs, differentFrom, allDifferent, oneOf, unionOf, intersectionOf, complementOf, subProperty, equivalentProperty, hasProperty.   \\ \hline
@@ -291,9 +282,8 @@ Dotyczy: &  CF003\\ \hline
 Powiązania: & WF005, WF004 \\ \hline
 Priorytet: & ważne \\ \hline
 
-\end{tabular}
-
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+\multicolumn{2}{c}{} \\
+ \hline
 
 WF007 & Rozróżnialność ograniczeń predykatów (Restrictions) \\ \hline
 Opis: & Wyróżnić kardynalność (cardinality), domeny (domains) predykatów, inverseOf, właściwości predykatów (transitive, symmetric, functional, inverseFunctional). \\ \hline
@@ -302,9 +292,8 @@ Dotyczy: &  CF003\\ \hline
 Powiązania: & WF004\\ \hline
 Priorytet: & ważne \\ \hline
 
-\end{tabular}
-
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+\multicolumn{2}{c}{} \\
+ \hline
 
 WF008 &  Podświetlanie wybranych związków i powiazań.\\ \hline
 Opis: &   Podświetlać subklasy danej klasy po ich wybraniu myszką po zdefiniowanym zdarzeniu; podobnie subproperty i complex class. \\ \hline
@@ -313,9 +302,8 @@ Dotyczy: &  CF003\\ \hline
 Powiązania: & WF006\\ \hline
 Priorytet: & mało ważne \\ \hline
 
-\end{tabular}
-
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+\multicolumn{2}{c}{} \\
+ \hline
 
 WF009 & Możliwość definiowania zdarzeń. \\ \hline
 Opis: &   Użytkownik będzie mógł pod uchwyty zdarzeń podpinać własne funkcje obsługi. \\ \hline
@@ -483,7 +471,7 @@ PW027: & cardinality &
 
 \begin{center}
  
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+\begin{tabular}{|m{3cm}|m{9cm}|} \hline
 
 WD001 & Obsługa obiektów OWL API \\ \hline
 Opis: & Biblioteka będzie przystosowana do pobierania, obróbki i zwracania obiektów OWL API. \\ \hline
@@ -506,7 +494,7 @@ Wymagania w zakresie wiarygodności będą rozszerzały wymagania funkcjonalne.
 
 \begin{center}
 
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+\begin{tabular}{|m{3cm}|m{9cm}|} \hline
 
 WJ001 & Poprawność wizualizacji \\ \hline
 Opis: & Wszystkie wizualizowane elementy powinny pochodzić z ontologii otrzymanej na wejściu programu. Program nie powinien dodawać własnych elementów (np. wywnioskowanych). \\ \hline
@@ -514,9 +502,8 @@ Powiązania: & WJ002 \\ \hline
 Źródło: &  klient - mgr inż. Tomasz Boiński \\ \hline
 Priorytet: & bardzo ważne \\ \hline
 
-\end{tabular}
-
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+\multicolumn{2}{c}{} \\
+ \hline
 
 WJ002 & Kompletność wizualizacji \\ \hline
 Opis: & Jeżeli biblioteka nie wizualizuje danej funkcji OWL API informacja o tym powinna znaleźć się w strumieniu błędów. \\ \hline
@@ -534,7 +521,7 @@ Priorytet: & ważne \\ \hline
 
 Brak wymogów wydajnościowych ze względu na specyfikę projektu.
 
-%\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+%\begin{tabular}{|m{3cm}|m{9cm}|} \hline
 
 %Tutaj jest ID & A tutaj nazwa \\ \hline
 %Opis: &  \\ \hline
@@ -551,7 +538,7 @@ Brak wymogów wydajnościowych ze względu na specyfikę projektu.
 
 \begin{center}
 
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+\begin{tabular}{|m{3cm}|m{9cm}|} \hline
 
 WJ003 & Obsługiwane wersje Javy \\ \hline
 Opis: & Biblioteka powinna wspierać wersje Javy 1.5 i nowsze.\\ \hline
@@ -559,9 +546,8 @@ Powiązania: &  \\ \hline
 Źródło: & klient - mgr inż. Tomasz Boiński \\ \hline
 Priorytet: & bardzo ważne \\ \hline
 
-\end{tabular}
-
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+\multicolumn{2}{c}{} \\
+ \hline
 
 WJ004 & Obsługiwane wersje OWL API \\ \hline
 Opis: & Powinna istnieć możliwość podpięcia zewnętrznego OWL API (wybranego przez użytkownika/programistę).\\ \hline
@@ -579,7 +565,7 @@ Priorytet: & bardzo ważne \\ \hline
 
 Ze względu na przyjętą metodykę wytwarzania oprogramowania zagadnienie to zostanie rozpatrzone w przyszłości.
 
-%\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+%\begin{tabular}{|m{3cm}|m{9cm}|} \hline
 
 %Tutaj jest ID & A tutaj nazwa \\ \hline
 %Opis: &  \\ \hline
@@ -596,7 +582,7 @@ Ze względu na przyjętą metodykę wytwarzania oprogramowania zagadnienie to zo
 
 Ze względu specyfikę projektu sytuacje wyjątkowe nie będą rozpatrywane.
 
-%\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+%\begin{tabular}{|m{3cm}|m{9cm}|} \hline
 
 %Tutaj jest ID & A tutaj nazwa \\ \hline
 %Opis: &  \\ \hline
@@ -617,7 +603,7 @@ Ze względu specyfikę projektu sytuacje wyjątkowe nie będą rozpatrywane.
 
 Ze względu na specyfikę projektu wymagania sprzętowe nie będą rozpatrywane.
 
-%\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+%\begin{tabular}{|m{3cm}|m{9cm}|} \hline
 
 %Tutaj jest ID & A tutaj nazwa \\ \hline
 %Opis: &  \\ \hline
@@ -634,7 +620,7 @@ Ze względu na specyfikę projektu wymagania sprzętowe nie będą rozpatrywane.
 
 \begin{center}
 
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+\begin{tabular}{|m{3cm}|m{9cm}|} \hline
 
 WD003 & JVM \\ \hline
 Opis: & Do skorzystania z biblioteki niezbędna jest JVM.\\ \hline
@@ -650,7 +636,7 @@ Priorytet: & ważne \\ \hline
  
 \begin{center}
 
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+\begin{tabular}{|m{3cm}|m{9cm}|} \hline
 
 WD001 & Dokumentacja w javadoc \\ \hline
 Opis: & Wszystkie ważne klasy i funkcje powinny mieć odpowiednią dokumentację w formacie javadoc.\\ \hline
@@ -658,9 +644,8 @@ Dotyczy: & CF001, CF002 \\ \hline
 Źródło: & klient - mgr inż. Tomasz Boiński \\ \hline
 Priorytet: & ważne \\ \hline
 
-\end{tabular}
-
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+\multicolumn{2}{c}{} \\
+ \hline
 
 WI002 & Dokumentacja w języku angielskim \\ \hline
 Opis: & Dokumentacja wszystkich funkcji i klas powinna posiadać angielską wersję językową.\\ \hline
@@ -668,9 +653,8 @@ Dotyczy: & CF001, CF002 \\ \hline
 Źródło: & klient - mgr inż. Tomasz Boiński \\ \hline
 Priorytet: & mało ważne \\ \hline
 
-\end{tabular}
-
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+\multicolumn{2}{c}{} \\
+ \hline
 
 WI003 & Dokumentacja w języku polskim \\ \hline
 Opis: & Dokumentacja wszystkich funkcji i klas powinna posiadać polską wersję językową. \\ \hline
@@ -678,10 +662,8 @@ Dotyczy: & CF001, CF002 \\ \hline
 Źródło: & klient - mgr inż. Tomasz Boiński \\ \hline
 Priorytet: & ważne \\ \hline
 
-\end{tabular}
-
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
-
+\multicolumn{2}{c}{} \\
+ \hline
 WI004 & Nazwy zmiennych i funkcji w języku angielskim \\ \hline
 Opis: & Nazwy zmiennych i funkcji powinny zostać dobrane w języku angielskim i zgodnie ze standardami programowania w javie[standardJava].\\ \hline
 Dotyczy: & CF001, CF002 \\ \hline
@@ -698,7 +680,7 @@ Priorytet: & ważne \\ \hline
 
 \begin{center}
 
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+\begin{tabular}{|m{3cm}|m{9cm}|} \hline
 
 KA001 & Spełnione są podstawowe wymagania wymienione w dokumencie SWS \\ \hline
 Opis: & Spełnione są wszystkie wymagania ważne i bardzo ważne zdefiniowane w SWS. \\ \hline
@@ -706,9 +688,8 @@ Dotyczy: & W* \\ \hline
 Źródło: & klient - mgr inż. Tomasz Boiński \\ \hline
 Priorytet: & ważne  \\ \hline %skonsultować z klientem
 
-\end{tabular}
-
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+\multicolumn{2}{c}{} \\
+ \hline
 
 KA002 & Biblioteka współpracuje z OWL API dostarczonym przez KASK \\ \hline
 Opis: & Biblioteka współpracuje z OWL API dostarczonym przez KASK ...\\ \hline
