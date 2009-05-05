@@ -237,9 +237,9 @@ Wymagania funkcjonalne stanowią mocno rozbudowaną część specyfikacji. Możn
 WF001 & Udostępnienie kilku algorytmów wizualizacji \\ \hline
 Opis: & Biblioteka powinna udostępniać kilka trybów prezentacji grafów (np. w formie drzewa, w formie gwiazdy i innych).    \\ \hline
 Dotyczy: &  \\ \hline
-Źródło: &  \\ \hline
-Powiązania: & \\ \hline
-Priorytet: &  \\ \hline
+Źródło: & klient - mgr Tomasz Boiński \\ \hline
+Powiązania: & Wizualiacja ontologii (CF003)\\ \hline
+Priorytet: &  ważny\\ \hline
 
 \end{tabular}
 
@@ -248,71 +248,80 @@ Priorytet: &  \\ \hline
 
 WF002 & Parametryzacja trybów wizualizacyjnych \\ \hline
 Opis: & Domyślne parametry w trybach wizualizacji (takie jak długość krawędzi grafu, automatyczne układanie) powinny zostać dobrane w taki sposób, by obraz był przejrzysty, stabilny i czytelny.    \\ \hline
-Dotyczy: &  \\ \hline
-Źródło: &  \\ \hline
-Powiązania: & \\ \hline
-Priorytet: &  \\ \hline
+Dotyczy: & CF003 \\ \hline
+Źródło: &  klient - mgr Tomasz Boiński\\ \hline
+Powiązania: &  \\ \hline
+Priorytet: & średnio ważny \\ \hline
 
 \end{tabular}
 
+\begin{tabular}{|p{3cm}|p{9cm}|} \hline
 
+WF003 & Udostępnienie strumienia błędów. \\ \hline
+Opis: &   Biblioteka będzie udostępniać strumień danych, w którym znajdą się komunikaty o błędach. Strumień ten będzie mógł zostać wykorzystany przez użytkownika. \\ \hline
+Dotyczy: &  CF005  \\ \hline
+Źródło: & klient - mgr inż. Tomasz Boiński \\ \hline
+Powiązania: & \\ \hline
+Priorytet: & ważne \\ \hline
+
+\end{tabular}
 
 \subsection{Wymagania wizualizacji ontologii}
 
 \begin{tabular}{|p{3cm}|p{9cm}|} \hline
 
-WF003 &   \\ \hline
-Opis: &  Property nie może wygladac jak Klasa   \\ \hline
-Dotyczy: &  \\ \hline
-Źródło: &  \\ \hline
+WF004 & Rozróżnialność podstawowych symboli  \\ \hline
+Opis: &  Class, Individual, Property powinny mieć rozróżnialne symbole   \\ \hline
+Dotyczy: &  CF003 \\ \hline
+Źródło: &  klient - mgr inż. Tomasz Boiński\\ \hline
 Powiązania: & \\ \hline
-Priorytet: &  \\ \hline
+Priorytet: & bardzo ważne \\ \hline
 %Projekt: & \includegraphics{myimage.png}
 
 \end{tabular}
 
 \begin{tabular}{|p{3cm}|p{9cm}|} \hline
 
-WF004 &  \\ \hline
-Opis: & Trzeba rozróżniać Klasy od Instancji    \\ \hline
-Dotyczy: &  \\ \hline
-Źródło: &  \\ \hline
-Powiązania: & \\ \hline
-Priorytet: &  \\ \hline
+WF005 &   Rozróżnialność szczególnych typów Class\\ \hline
+Opis: &   Klasa anonimowa, datatype, Thing i Nothing powinny być łatwo rozpoznawalne.  \\ \hline
+Dotyczy: &  CF003 \\ \hline
+Źródło: &  klient - mgr inż. Tomasz Boiński\\ \hline
+Powiązania: & WF004 \\ \hline
+Priorytet: &  ważne \\ \hline
 
 \end{tabular}
 
 \begin{tabular}{|p{3cm}|p{9cm}|} \hline
 
-WF005 &  \\ \hline
-Opis: & Rózne symobole dla same as i diffrent from   \\ \hline
-Dotyczy: &  \\ \hline
-Źródło: &  \\ \hline
-Powiązania: & \\ \hline
-Priorytet: &  \\ \hline
-
-\end{tabular}
-
-
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
-
-WF006 &  \\ \hline
-Opis: & Wyróżnić relacje subclass of     \\ \hline
-Dotyczy: &  \\ \hline
-Źródło: &  \\ \hline
-Powiązania: & \\ \hline
-Priorytet: &  \\ \hline
+WF006 &  Rozróżnialność związków między klasami (Class), instancjami (Individual) oraz predykatami (Property)\\ \hline
+Opis: & Rózne symobole dla equivalentClass, disjointWith, subClassOf, sameAs, differentFrom, allDifferent, oneOf, unionOf, intersectionOf, complementOf, subProperty, equivalentProperty, hasProperty.   \\ \hline
+Dotyczy: &  CF003\\ \hline
+Źródło: &  klient - mgr inż. Tomasz Boiński \\ \hline
+Powiązania: & WF005, WF004 \\ \hline
+Priorytet: & ważne \\ \hline
 
 \end{tabular}
 
 
 \begin{tabular}{|p{3cm}|p{9cm}|} \hline
 
-WF007 &  \\ \hline
-Opis: &   Podświetlać subclassy danej klasy  \\ \hline
-Dotyczy: &  \\ \hline
-Źródło: &  \\ \hline
-Powiązania: & \\ \hline
+WF007 & Rozróżnialność ograniczeń predykatów (Restrictions). \\ \hline
+Opis: & Wyróżnić kardynalność (cardinality), domeny (domains) predykatów, inverseOf, właściwości predykatów (transitive, symmetric, functional, inverseFunctional). \\ \hline
+Dotyczy: &  CF003\\ \hline
+Źródło: &  klient - mgr inż. Tomasz Boiński \\ \hline
+Powiązania: & WF004\\ \hline
+Priorytet: & ważne \\ \hline
+
+\end{tabular}
+
+
+\begin{tabular}{|p{3cm}|p{9cm}|} \hline
+
+WF008 &  Podświetlanie wybranych związków i powiazań.\\ \hline
+Opis: &   Podświetlać subklasy danej klasy po ich wybraniu myszką po zdefiniowanym zdarzeniu; podobnie subproperty i complex class. \\ \hline
+Dotyczy: &  CF003\\ \hline
+Źródło: &  klient - mgr inż. Tomasz Boiński \\ \hline
+Powiązania: & WF006\\ \hline
 Priorytet: & mało ważne \\ \hline
 
 \end{tabular}
@@ -320,84 +329,12 @@ Priorytet: & mało ważne \\ \hline
 
 \begin{tabular}{|p{3cm}|p{9cm}|} \hline
 
-WF008 &  \\ \hline
-Opis: &   Wyróznić complex Classess  \\ \hline
-Dotyczy: &  \\ \hline
-Źródło: &  \\ \hline
+WF009 & Możliwość definiowania zdarzeń. \\ \hline
+Opis: &   Użytkownik będzie mógł pod uchwyty zdarzeń podpinać własne funkcje obsługi. \\ \hline
+Dotyczy: & CF003, CF004  \\ \hline
+Źródło: & klient - mgr inż. Tomasz Boiński \\ \hline
 Powiązania: & \\ \hline
-Priorytet: &  \\ \hline
-
-\end{tabular}
-
-
-
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
-
-WF009 &  \\ \hline
-Opis: &   Wyróznić intersection i union od siebie (rózne symbole pośrednie i może kolory)  \\ \hline
-Dotyczy: &  \\ \hline
-Źródło: &  \\ \hline
-Powiązania: & \\ \hline
-Priorytet: &  \\ \hline
-
-\end{tabular}
-
-
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
-
-WF010 &  \\ \hline
-Opis: &   Pokazywać na strzałkach do property typ relacji (jednocześnie kilka)  \\ \hline
-Dotyczy: &  \\ \hline
-Źródło: &  \\ \hline
-Powiązania: & \\ \hline
-Priorytet: &  \\ \hline
-
-\end{tabular}
-
-
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
-
-WF011 &  \\ \hline
-Opis: &   Restrictions - pokazywać kwantyfikatorami  \\ \hline
-Dotyczy: &  \\ \hline
-Źródło: &  \\ \hline
-Powiązania: & \\ \hline
-Priorytet: &  \\ \hline
-
-\end{tabular}
-
-
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
-
-WF012 &  \\ \hline
-Opis: &   Pokazywać kardynalność na strzalkach związków \\ \hline
-Dotyczy: &  \\ \hline
-Źródło: &  \\ \hline
-Powiązania: & \\ \hline
-Priorytet: &  \\ \hline
-
-\end{tabular}
-
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
-
-WF013 &  \\ \hline
-Opis: &   Pokazywanie kardynalności w 3 opcjach - zawsze, nigdy, tam gdzie jest zdefiniowana  \\ \hline
-Dotyczy: &  \\ \hline
-Źródło: &  \\ \hline
-Powiązania: & \\ \hline
-Priorytet: & mało ważne  \\ \hline
-
-\end{tabular}
-
-
-\begin{tabular}{|p{3cm}|p{9cm}|} \hline
-
-WF014 &  \\ \hline
-Opis: &   wszystkie pokazywane opcje można włączac i wyłączać  \\ \hline
-Dotyczy: & tu wpisac wymogi wizualizacyjne  \\ \hline
-Źródło: &  \\ \hline
-Powiązania: & \\ \hline
-Priorytet: &  \\ \hline
+Priorytet: & mało ważne \\ \hline
 
 \end{tabular}
 
@@ -533,7 +470,12 @@ PW025: & hasProperty / domain &
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW026: & cardinality &  
+PW026: & minCardinality / maxCardinality &  
+ \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/cardinalityminmax.png}}
+ % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
+ \\ \hline
+
+PW027: & cardinality &  
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/cardinality.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
