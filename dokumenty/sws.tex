@@ -518,11 +518,18 @@ Wymagania w zakresie wiarygodności będą rozszerzały wymagania funkcjonalne.
 
 \begin{tabular}{|p{3cm}|p{9cm}|} \hline
 
-Tutaj jest ID & A tutaj nazwa \\ \hline
-Opis: &  \\ \hline
-Powiązania: &  \\ \hline
-Źródło: &  \\ \hline
-Priorytet: &  \\ \hline
+WJ001 & Poprawność wizualizacji \\ \hline
+Opis: & Wszystkie wizualizowane elementy powinny pochodzić z ontologii otrzymanej na wejściu programu. Program nie powinien dodawać własnych elementów (np. wywnioskowanych). \\ \hline
+Powiązania: & WJ002 \\ \hline
+Źródło: &  klient - mgr inż. Tomasz Boiński \\ \hline
+Priorytet: & bardzo ważne \\ \hline
+
+WJ002 & Kompletność wizualizacji \\ \hline
+Opis: & Jeżeli biblioteka nie wizualizuje danej funkcji OwlAPI informacja o tym powinna znaleźć się w strumieniu błędów. \\ \hline
+Powiązania: & CF005, WJ001, WD001 \\ \hline
+Źródło: & klient - mgr inż. Tomasz Boiński \\ \hline
+Priorytet: & ważne \\ \hline
+
 
 \end{tabular}
 
@@ -531,13 +538,14 @@ Priorytet: &  \\ \hline
 
 Wymagania w zakresie wydajności będą miały zastosowanie w czasie projektowania architektury systemu.
 
+Brak wymogów wydajnościowych ze względu na specyfikę projektu.
 
 \begin{tabular}{|p{3cm}|p{9cm}|} \hline
 
 Tutaj jest ID & A tutaj nazwa \\ \hline
 Opis: &  \\ \hline
 Powiązania: &  \\ \hline
-Źródło: &  \\ \hline
+Źródło: klient - mgr inż. Tomasz Boiński &  \\ \hline
 Priorytet: &  \\ \hline
 
 \end{tabular}
@@ -550,11 +558,17 @@ Wymagania w zakresie elastyczności będą miały zastosowanie w czasie wyboru k
 
 \begin{tabular}{|p{3cm}|p{9cm}|} \hline
 
-Tutaj jest ID & A tutaj nazwa \\ \hline
-Opis: &  \\ \hline
+WJ003 ID & Obsługiwane wersje Javy. \\ \hline
+Opis: & Biblioteka powinna wspierać wersje Javy 1.5 i nowsze.\\ \hline
 Powiązania: &  \\ \hline
-Źródło: &  \\ \hline
-Priorytet: &  \\ \hline
+Źródło: & klient - mgr inż. Tomasz Boiński \\ \hline
+Priorytet: & bardzo ważne \\ \hline
+
+WJ004 ID & Obsługiwane wersje OwlAPI. \\ \hline
+Opis: & Powinna istnieć możliwość podpięcia zewnętrznego OwlAPI (wybranego przez użytkownika/programistę).\\ \hline
+Powiązania: &  \\ \hline
+Źródło: & klient - mgr inż. Tomasz Boiński \\ \hline
+Priorytet: & bardzo ważne \\ \hline
 
 \end{tabular}
 
@@ -562,6 +576,8 @@ Priorytet: &  \\ \hline
 \subsection{Wymagania w zakresie użyteczności}
 
 Wymagania w zakresie użyteczności będą brane pod uwagę głównie w czasie projektowania interfejsu użytkownika.
+
+Ze względu na przyjętą metodykę wytwarzania oprogramowania zagadnienie to zostanie rozpatrzone w przyszłości.
 
 \begin{tabular}{|p{3cm}|p{9cm}|} \hline
 
@@ -578,6 +594,7 @@ Priorytet: &  \\ \hline
 
 Sytuacje wyjątkowe stanowią dalsze rozszerzenie wymagań funkcjonalnych i wiarygodnościowych.
 
+Ze względu specyfikę projektu sytuacje wyjątkowe nie będą rozpatrywane.
 
 \begin{tabular}{|p{3cm}|p{9cm}|} \hline
 
@@ -598,6 +615,7 @@ W tym miejscu podaje się te wymagania, które nie mieszczą się w zakresie pop
 
 Wymagania sprzętowe można by umieścić w ramach specyfikacji komponentów sprzętowych, ale jeśli jest wiele komponentów sprzętowych różnych z punktu widzenia funkcjonalnego, ale o wspólnych wymaganiach sprzętowych, to można te wymagania umieścić właśnie tutaj.
 
+Ze względu na specyfikę projektu wymagania sprzętowe nie będą rozpatrywane.
 
 \begin{tabular}{|p{3cm}|p{9cm}|} \hline
 
@@ -614,14 +632,13 @@ Priorytet: &  \\ \hline
 
 Trzeba odróżniać rzeczywiste wymagania programowe klienta od jego sugestii (np. przez podanie opcjonalnego priorytetu).
 
-
 \begin{tabular}{|p{3cm}|p{9cm}|} \hline
 
-Tutaj jest ID & A tutaj nazwa \\ \hline
-Opis: &  \\ \hline
-Dotyczy: &  \\ \hline
-Źródło: &  \\ \hline
-Priorytet: &  \\ \hline
+WD003 & JVM \\ \hline
+Opis: & Do skorzystania z biblioteki niezbędna jest JVM.\\ \hline
+Dotyczy: & CF001, CF002 \\ \hline
+Źródło: & klient - mgr inż. Tomasz Boiński \\ \hline
+Priorytet: & ważne \\ \hline
 
 \end{tabular}
 
@@ -631,11 +648,29 @@ Priorytet: &  \\ \hline
 
 \begin{tabular}{|p{3cm}|p{9cm}|} \hline
 
-Tutaj jest ID & A tutaj nazwa \\ \hline
-Opis: &  \\ \hline
-Dotyczy: &  \\ \hline
-Źródło: &  \\ \hline
-Priorytet: &  \\ \hline
+WD001 & Dokumentacja w javadoc \\ \hline
+Opis: & Wszystkie ważne klasy i funkcje powinny mieć odpowiednią dokumentację w formacie javadoc.\\ \hline
+Dotyczy: & CF001, CF002 \\ \hline
+Źródło: & klient - mgr inż. Tomasz Boiński \\ \hline
+Priorytet: & ważne \\ \hline
+
+WI002 & Dokumentacja w języku angielskim \\ \hline
+Opis: & Dokumentacja wszystkich funkcji i klas powinna posiadać angielską wersję językową.\\ \hline
+Dotyczy: & CF001, CF002 \\ \hline
+Źródło: & klient - mgr inż. Tomasz Boiński \\ \hline
+Priorytet: & mało ważne \\ \hline
+
+WI003 & Dokumentacja w języku polskim \\ \hline
+Opis: & Dokumentacja wszystkich funkcji i klas powinna posiadać polską wersję językową. \\ \hline
+Dotyczy: & CF001, CF002 \\ \hline
+Źródło: & klient - mgr inż. Tomasz Boiński \\ \hline
+Priorytet: & ważne \\ \hline
+
+WI004 & Nazwy zmiennych i funkcji w języku angielskim \\ \hline
+Opis: & Nazwy zmiennych i funkcji powinny zostać dobrane w języku angielskim i zgodnie ze standardami programowania w javie[standardJava].\\ \hline
+Dotyczy: & CF001, CF002 \\ \hline
+Źródło: & klient - mgr inż. Tomasz Boiński \\ \hline
+Priorytet: & ważne \\ \hline
 
 \end{tabular}
 
@@ -647,11 +682,11 @@ Tu podać kryteria, jakim zostanie poddany gotowy system przed ostatecznym jego 
 
 \begin{tabular}{|p{3cm}|p{9cm}|} \hline
 
-Tutaj jest ID & A tutaj nazwa \\ \hline
-Opis: &  \\ \hline
-Dotyczy: &  \\ \hline
-Źródło: &  \\ \hline
-Priorytet: &  \\ \hline
+KA001 & Spełnione są podstawowe wymagania wymienione w dokumencie SWS. \\ \hline
+Opis: & Spełnione są wszystkie wymagania ważne i bardzo ważne zdefiniowane w SWS. \\ \hline
+Dotyczy: W* &  \\ \hline
+Źródło: & klient - mgr inż. Tomasz Boiński \\ \hline
+Priorytet: & ważne  \\ \hline %skonsultować z klientem
 
 \end{tabular}
 
