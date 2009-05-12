@@ -1,0 +1,68 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+%custom margins
+\usepackage[left=2.5cm, top=2.5cm, bottom=3cm, right=2cm, foot=2cm, head=0.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage[bookmarks=true, pdftex]{hyperref}
+
+%styl nagłowków
+\pagestyle{fancy} 
+\parindent 2cm 
+
+%opening
+\title{Notatka ze spotkania}
+\author{3@KASK}
+
+\begin{document}
+\bibliographystyle{plain}
+
+
+\maketitle
+
+
+\begin{center}
+%budowanie tabeli
+\begin{tabular}{|p{7cm}|p{7cm}|}
+\hline
+Symbol projektu: & Opiekun projektu:   \tabularnewline 
+3@KASK & mgr inż. Tomasz Boiński    \tabularnewline \hline
+\multicolumn{2}{|l|}{Nazwa Projektu: } \tabularnewline
+\multicolumn{2}{|l|}{Wizualizacja grafów za pomocą biblioteki Prefuse } \tabularnewline 
+\hline
+\multicolumn{2}{l}{ } \tabularnewline %pusta linijka
+\hline 
+Nazwa Dokumentu: & Data spotkania:   \tabularnewline 
+Notatka ze spotkania & 12.05.09 \tabularnewline \hline
+Odpowiedzialny za dokument: & Obecni na spotkaniu:   \tabularnewline 
+Piotr Orłowski & Grupa projektowa \tabularnewline \hline
+Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline 
+WEWNĘTRZNE & 12.05.09 \tabularnewline \hline
+\end{tabular}
+\end{center}
+
+
+
+\section{Rysowanie pizzy przy użyciu wybranej przez nas notacji}
+
+
+\section{Poruszone zagadnienia}
+1. Wybór programu do tworzenia grafik, schematów i modeli.
+2. Tutorial Protege[protegeOwlTutorial] - ćwiczenia 1-... .
+
+\section{Podjęte ustalenia}
+1. Wszystkie rysunki wykonujemy w miarę możliwości w programach Dia oraz Inkscape i zapisujemy w formatach odpowiednio dia i svg.
+2. Nie rozumiemy ćwiczenia 17(str 45) i należy w związku z tym poprosić pana mgr inż. Tomasza Boińskiego o wytłumaczenie.
+3. Należy sprawdzić, jak Prefuse zachowa się, gdy istnieje kilka krawędzi między wierzchołkami i możliwości przedstawienia tego.
+\newpage
+\tableofcontents
+\newpage
+
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Literatura}
+\bibliography{biblio}
+
+\end{document}
