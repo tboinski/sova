@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1600px"
+   height="1200px"
+   id="svg3331"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   sodipodi:docname="property_kolory.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <defs
+     id="defs3333">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 600 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="1600 : 600 : 1"
+       inkscape:persp3d-origin="800 : 400 : 1"
+       id="perspective3339" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.42426407"
+     inkscape:cx="850.30159"
+     inkscape:cy="626.41872"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:window-width="1280"
+     inkscape:window-height="727"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     showguides="true"
+     inkscape:guide-bbox="true" />
+  <metadata
+     id="metadata3336">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer">
+    <g
+       id="g3290"
+       transform="translate(-462.514,187.87956)">
+      <g
+         id="g2458"
+         transform="translate(852.01986,-224.0389)">
+        <g
+           style="fill:#923dff;fill-opacity:1"
+           transform="matrix(1.4854957,0,0,1,-49.03467,-88.89313)"
+           id="g2460">
+          <path
+             sodipodi:nodetypes="csscccssssccccc"
+             style="opacity:1;fill:#923dff;fill-opacity:1;stroke:#000000;stroke-width:4.92283821;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             d="M 98.429098,257.11188 C 84.847978,257.11188 73.804098,275.83083 73.804098,298.89313 C 73.804098,321.95541 84.847968,340.67438 98.429098,340.67438 C 99.054618,340.67438 99.659018,340.62739 100.27285,340.54938 L 100.27285,340.64313 L 240.27285,340.64313 C 240.33443,340.64585 240.39866,340.64118 240.46035,340.64313 C 240.61507,340.64801 240.77369,340.67438 240.9291,340.67438 C 254.51022,340.67438 265.52327,321.95587 265.52327,298.8936 C 265.52327,275.83132 254.51023,257.11188 240.9291,257.11188 C 240.77369,257.11188 240.61507,257.13825 240.46035,257.14313 L 240.46035,257.11188 L 100.27285,257.11188 L 100.27285,257.23688 C 99.659018,257.15887 99.054608,257.11188 98.429098,257.11188 z"
+             id="path2462" />
+        </g>
+        <text
+           id="text2464"
+           y="224.91211"
+           x="85.390625"
+           style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+           xml:space="preserve"><tspan
+             y="224.91211"
+             x="85.390625"
+             id="tspan2466"
+             sodipodi:role="line">hasProperty</tspan></text>
+      </g>
+    </g>
+    <g
+       style="fill:#cb3dff;fill-opacity:1"
+       transform="matrix(1.4854957,0,0,1,341.34148,-7.98256)"
+       id="g2470">
+      <path
+         sodipodi:nodetypes="csscccssssccccc"
+         style="opacity:1;fill:#cb3dff;fill-opacity:1;stroke:#000000;stroke-width:4.92283821;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 98.429098,257.11188 C 84.847978,257.11188 73.804098,275.83083 73.804098,298.89313 C 73.804098,321.95541 84.847968,340.67438 98.429098,340.67438 C 99.054618,340.67438 99.659018,340.62739 100.27285,340.54938 L 100.27285,340.64313 L 240.27285,340.64313 C 240.33443,340.64585 240.39866,340.64118 240.46035,340.64313 C 240.61507,340.64801 240.77369,340.67438 240.9291,340.67438 C 254.51022,340.67438 265.52327,321.95587 265.52327,298.8936 C 265.52327,275.83132 254.51023,257.11188 240.9291,257.11188 C 240.77369,257.11188 240.61507,257.13825 240.46035,257.14313 L 240.46035,257.11188 L 100.27285,257.11188 L 100.27285,257.23688 C 99.659018,257.15887 99.054608,257.11188 98.429098,257.11188 z"
+         id="path2472" />
+    </g>
+    <text
+       id="text2474"
+       y="305.82269"
+       x="475.76675"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         y="305.82269"
+         x="475.76675"
+         id="tspan2476"
+         sodipodi:role="line">hasProperty</tspan></text>
+    <path
+       id="path3268"
+       d="M 481.51233,368.01771 C 461.33764,368.01771 444.932,386.73666 444.932,409.79896 C 444.932,432.86124 461.33762,451.58021 481.51233,451.58021 C 482.44154,451.58021 483.33937,451.53322 484.25122,451.45521 L 484.25122,451.54896 L 692.22062,451.54896 C 692.31209,451.55168 692.40751,451.54701 692.49915,451.54896 C 692.72898,451.55384 692.96461,451.58021 693.19547,451.58021 C 713.37017,451.58021 729.73001,432.8617 729.73001,409.79943 C 729.73001,386.73715 713.37018,368.01771 693.19547,368.01771 C 692.96461,368.01771 692.72898,368.04408 692.49915,368.04896 L 692.49915,368.01771 L 484.25122,368.01771 L 484.25122,368.14271 C 483.33937,368.0647 482.44152,368.01771 481.51233,368.01771 z"
+       style="fill:#9f98ff;fill-opacity:1;stroke:#000000;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       sodipodi:nodetypes="csscccssssccccc" />
+    <text
+       id="text3270"
+       y="422.69601"
+       x="469.72162"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         y="422.69601"
+         x="469.72162"
+         id="tspan3272"
+         sodipodi:role="line">hasProperty</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:30px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="809.68402"
+       y="176.05229"
+       id="text3297"><tspan
+         sodipodi:role="line"
+         id="tspan3299"
+         x="809.68402"
+         y="176.05229">definicja Property</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:30px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="806.97223"
+       y="296.95572"
+       id="text3301"><tspan
+         sodipodi:role="line"
+         id="tspan3303"
+         x="806.97223"
+         y="296.95572">Property z SomeValuseFrom</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:30px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="803.0174"
+       y="407.78387"
+       id="text3305"><tspan
+         sodipodi:role="line"
+         id="tspan3307"
+         x="803.0174"
+         y="407.78387">Property z AllValuesFrom</tspan></text>
+  </g>
+</svg>
