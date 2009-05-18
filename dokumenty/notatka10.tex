@@ -1,0 +1,70 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+%custom margins
+\usepackage[left=2.5cm, top=2.5cm, bottom=3cm, right=2cm, foot=2cm, head=0.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage[bookmarks=true, pdftex]{hyperref}
+
+%styl nagłowków
+\pagestyle{fancy} 
+\parindent 2cm 
+
+%opening
+\title{Notatka ze spotkania}
+\author{3@KASK}
+
+\begin{document}
+\bibliographystyle{plain}
+
+
+\maketitle
+
+
+\begin{center}
+%budowanie tabeli
+\begin{tabular}{|p{7cm}|p{7cm}|}
+\hline
+Symbol projektu: & Opiekun projektu:   \tabularnewline 
+3@KASK & mgr inż. Tomasz Boiński    \tabularnewline \hline
+\multicolumn{2}{|l|}{Nazwa Projektu: } \tabularnewline
+\multicolumn{2}{|l|}{Wizualizacja grafów za pomocą biblioteki Prefuse } \tabularnewline 
+\hline
+\multicolumn{2}{l}{ } \tabularnewline %pusta linijka
+\hline 
+Nazwa Dokumentu: & Data spotkania:   \tabularnewline 
+Notatka ze spotkania & 18.05.09 \tabularnewline \hline
+Odpowiedzialny za dokument: & Obecni na spotkaniu:   \tabularnewline 
+Piotr Orłowski & Grupa projektowa \tabularnewline \hline
+Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline 
+WEWNĘTRZNE & 18.05.09 \tabularnewline \hline
+\end{tabular}
+\end{center}
+
+
+
+\section{Temat spotkania: rysowanie pizzy przy użyciu wybranej przez nas notacji cz. 2.}
+
+
+\section{Poruszone zagadnienia}
+1. Ćwiczenia 18-22, 31. Ćwiczenia z wnioskowaniem przy użyciu Protege zostały w większości ominięte..
+2. Przygotowaia do tworzenia diagramu klas
+3. Pierwsza wersja diagramu klas
+
+\section{Podjęte ustalenia}
+1. Zmiana podejścia do wizualizacji property. Property będziemy wizualizować w dwóch formach: jego ogólnej definicji i zastosowaniach. Definicja i zastosowanie będą różniły się tłem (wyróżnione kolory).
+2. AllValuesFrom i SomeValuesFrom - zmieniamy sposób wizualizacji tych cech Property. Będą one różniły się odcieniem tła.  
+3. Sprawdzić jakie metody potrzebne są do rysowania krawędzi i wierzchołków - Ania
+4. Czy do prefuse należy napisać własny Reader i jakiego kontenera danych Prefuse użyć - Piotr K.
+5. Jak trzymane są dane w OWL API, jak je przeglądać itp. - Radek
+6. Jak w GrOWL wczytywane jest OWL API; zapoznać się z kodem w miarę szczegółowo - Piotr O.
+
+
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Literatura}
+\bibliography{biblio}
+
+\end{document}
