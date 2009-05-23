@@ -1,13 +1,13 @@
-<XMI xmi.version="1.2"  xmlns:UML="org.omg.xmi.namespace.UML"  timestamp="23 maj 2009 13:57:43 CEST" >
+<XMI xmi.version="1.2"  xmlns:UML="org.omg.xmi.namespace.UML"  timestamp="23 maj 2009 14:21:12 CEST" >
 <XMI.content>
-<UML:Diagram isVisible="false"  zoom="1.0"  name="Graph Class Diagram"  xmi.id="DCE.300FA8EB-0D11-1418-21FC-016957A2D04E" >
+<UML:Diagram isVisible="false"  zoom="1.58"  name="Graph Class Diagram"  xmi.id="DCE.300FA8EB-0D11-1418-21FC-016957A2D04E" >
 <UML:GraphElement.position>
      <XMI.field>0</XMI.field>
      <XMI.field>0</XMI.field>
 </UML:GraphElement.position>
 <UML:GraphNode.size>
-     <XMI.field>796</XMI.field>
-     <XMI.field>430</XMI.field>
+     <XMI.field>669</XMI.field>
+     <XMI.field>312</XMI.field>
 </UML:GraphNode.size>
 <UML:Diagram.viewport>
      <XMI.field>0</XMI.field>
@@ -90,7 +90,7 @@
 <UML:GraphElement.dependencies>
 </UML:GraphElement.dependencies>
 <UML:GraphElement.anchorage>
-<UML:GraphConnector xmi.id="DCE.DD5BB78C-4728-0244-93C2-7E9D4C086F98" >
+<UML:GraphConnector xmi.id="DCE.A07AE86E-94A3-62AC-3003-0260C6223341" >
 <UML:GraphConnector.position>
      <XMI.field>254</XMI.field>
      <XMI.field>145</XMI.field>
@@ -103,8 +103,8 @@
 </UML:GraphNode>
 <UML:GraphNode isVisible="false"  xmi.id="DCE.ED990BE7-3A7A-A1E3-D865-6C577D997583" >
 <UML:GraphElement.position>
-     <XMI.field>149</XMI.field>
-     <XMI.field>250</XMI.field>
+     <XMI.field>167</XMI.field>
+     <XMI.field>242</XMI.field>
 </UML:GraphElement.position>
 <UML:GraphNode.size>
      <XMI.field>471</XMI.field>
@@ -126,10 +126,10 @@
 <UML:GraphElement.dependencies>
 </UML:GraphElement.dependencies>
 <UML:GraphElement.anchorage>
-<UML:GraphConnector xmi.id="DCE.246A6156-0F50-3A00-B8F5-D2FD79BDFBC3" >
+<UML:GraphConnector xmi.id="DCE.D71A551D-7094-B888-3DA3-4DFF840BFEA9" >
 <UML:GraphConnector.position>
-     <XMI.field>384</XMI.field>
-     <XMI.field>280</XMI.field>
+     <XMI.field>402</XMI.field>
+     <XMI.field>272</XMI.field>
 </UML:GraphConnector.position>
 <UML:GraphConnector.graphEdge>
 <UML:GraphEdge xmi.idref="DCE.9FF155D5-61A7-B1E2-7B3E-F5A1BD9507B7" />
@@ -206,7 +206,7 @@
 <UML:GraphElement.dependencies>
 </UML:GraphElement.dependencies>
 <UML:GraphElement.anchorage>
-<UML:GraphConnector xmi.id="DCE.F3582C70-A6BB-08B2-8A22-4D4A238E254A" >
+<UML:GraphConnector xmi.id="DCE.0BFEFA8D-8F2A-A5AF-10B2-D1A70C46D801" >
 <UML:GraphConnector.position>
      <XMI.field>546</XMI.field>
      <XMI.field>145</XMI.field>
@@ -224,8 +224,8 @@
 </UML:GraphElement.position>
 <UML:GraphEdge.waypoints>
      <XMI.field>
-          <XMI.field>463</XMI.field>
-          <XMI.field>250</XMI.field>
+          <XMI.field>481</XMI.field>
+          <XMI.field>242</XMI.field>
      </XMI.field>
      <XMI.field>
           <XMI.field>546</XMI.field>
@@ -242,8 +242,8 @@
 <UML:GraphElement.contained>
 </UML:GraphElement.contained>
 <UML:GraphEdge.anchor>
-<UML:GraphConnector xmi.idref="DCE.246A6156-0F50-3A00-B8F5-D2FD79BDFBC3" />
-<UML:GraphConnector xmi.idref="DCE.F3582C70-A6BB-08B2-8A22-4D4A238E254A" />
+<UML:GraphConnector xmi.idref="DCE.D71A551D-7094-B888-3DA3-4DFF840BFEA9" />
+<UML:GraphConnector xmi.idref="DCE.0BFEFA8D-8F2A-A5AF-10B2-D1A70C46D801" />
 </UML:GraphEdge.anchor>
 </UML:GraphEdge>
 <UML:GraphEdge isVisible="false"  xmi.id="DCE.BEC56957-ABCC-0373-59BC-3A7F80144B16" >
@@ -253,8 +253,8 @@
 </UML:GraphElement.position>
 <UML:GraphEdge.waypoints>
      <XMI.field>
-          <XMI.field>306</XMI.field>
-          <XMI.field>250</XMI.field>
+          <XMI.field>324</XMI.field>
+          <XMI.field>242</XMI.field>
      </XMI.field>
      <XMI.field>
           <XMI.field>254</XMI.field>
@@ -271,8 +271,8 @@
 <UML:GraphElement.contained>
 </UML:GraphElement.contained>
 <UML:GraphEdge.anchor>
-<UML:GraphConnector xmi.idref="DCE.246A6156-0F50-3A00-B8F5-D2FD79BDFBC3" />
-<UML:GraphConnector xmi.idref="DCE.DD5BB78C-4728-0244-93C2-7E9D4C086F98" />
+<UML:GraphConnector xmi.idref="DCE.D71A551D-7094-B888-3DA3-4DFF840BFEA9" />
+<UML:GraphConnector xmi.idref="DCE.A07AE86E-94A3-62AC-3003-0260C6223341" />
 </UML:GraphEdge.anchor>
 </UML:GraphEdge>
 </UML:GraphElement.contained>

@@ -1,13 +1,13 @@
-<XMI xmi.version="1.2"  xmlns:UML="org.omg.xmi.namespace.UML"  timestamp="23 maj 2009 13:57:43 CEST" >
+<XMI xmi.version="1.2"  xmlns:UML="org.omg.xmi.namespace.UML"  timestamp="23 maj 2009 14:21:12 CEST" >
 <XMI.content>
-<UML:Diagram isVisible="false"  zoom="0.75"  name="Options Class Diagram"  xmi.id="DCE.923DE1FF-15FD-7E9A-2D38-C494D6D0CD0C" >
+<UML:Diagram isVisible="false"  zoom="0.8"  name="Options Class Diagram"  xmi.id="DCE.923DE1FF-15FD-7E9A-2D38-C494D6D0CD0C" >
 <UML:GraphElement.position>
      <XMI.field>14</XMI.field>
      <XMI.field>0</XMI.field>
 </UML:GraphElement.position>
 <UML:GraphNode.size>
-     <XMI.field>1034</XMI.field>
-     <XMI.field>1572</XMI.field>
+     <XMI.field>1050</XMI.field>
+     <XMI.field>621</XMI.field>
 </UML:GraphNode.size>
 <UML:Diagram.viewport>
      <XMI.field>0</XMI.field>
@@ -27,11 +27,12 @@
      <XMI.field>115</XMI.field>
 </UML:GraphElement.position>
 <UML:GraphNode.size>
-     <XMI.field>362</XMI.field>
-     <XMI.field>602</XMI.field>
+     <XMI.field>295</XMI.field>
+     <XMI.field>221</XMI.field>
 </UML:GraphNode.size>
 <UML:DiagramElement.property>
 <UML:Property value="MINIMUMSIZE"  key="ResizeMode" />
+<UML:Property value="COLLAPSED"  key="OperationsCompartment" />
 <UML:Property value="1"  key="WIDGET_INDEX" />
 <UML:Property value="DEFAULT_VIEW"  key="ViewName" />
 </UML:DiagramElement.property>
@@ -380,11 +381,12 @@
      <XMI.field>115</XMI.field>
 </UML:GraphElement.position>
 <UML:GraphNode.size>
-     <XMI.field>378</XMI.field>
-     <XMI.field>1457</XMI.field>
+     <XMI.field>311</XMI.field>
+     <XMI.field>506</XMI.field>
 </UML:GraphNode.size>
 <UML:DiagramElement.property>
 <UML:Property value="MINIMUMSIZE"  key="ResizeMode" />
+<UML:Property value="COLLAPSED"  key="OperationsCompartment" />
 <UML:Property value="0"  key="WIDGET_INDEX" />
 <UML:Property value="DEFAULT_VIEW"  key="ViewName" />
 </UML:DiagramElement.property>
