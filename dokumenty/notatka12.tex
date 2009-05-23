@@ -1,0 +1,77 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+%custom margins
+\usepackage[left=2.5cm, top=2.5cm, bottom=3cm, right=2cm, foot=2cm, head=0.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage[bookmarks=true, pdftex]{hyperref}
+
+%styl nagłowków
+\pagestyle{fancy} 
+\parindent 2cm 
+
+%opening
+\title{Notatka ze spotkania}
+\author{3@KASK}
+
+\begin{document}
+\bibliographystyle{plain}
+
+
+\maketitle
+
+
+\begin{center}
+%budowanie tabeli
+\begin{tabular}{|p{7cm}|p{7cm}|}
+\hline
+Symbol projektu: & Opiekun projektu:   \tabularnewline 
+3@KASK & mgr inż. Tomasz Boiński    \tabularnewline \hline
+\multicolumn{2}{|l|}{Nazwa Projektu: } \tabularnewline
+\multicolumn{2}{|l|}{Wizualizacja grafów za pomocą biblioteki Prefuse } \tabularnewline 
+\hline
+\multicolumn{2}{l}{ } \tabularnewline %pusta linijka
+\hline 
+Nazwa Dokumentu: & Data spotkania:   \tabularnewline 
+Notatka ze spotkania & 23.05.09 \tabularnewline \hline
+Odpowiedzialny za dokument: & Obecni na spotkaniu:   \tabularnewline 
+Piotr Orłowski & Grupa projektowa \tabularnewline \hline
+Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline 
+WEWNĘTRZNE & 23.05.09 \tabularnewline \hline
+\end{tabular}
+\end{center}
+
+
+
+\section{Temat spotkania}
+Diagram klas
+
+\section{Poruszone zagadnienia}
+\begin{enumerate}
+\item Rozwijanie diagramu klas.
+\item Dziedziczenie przez tworzone przez nas krawędzie i wierzchołki z klas prefuse.
+\item Widoki, które mają być udostępnione.
+\item Widok w formie drzewa - jak to zrobić? 
+\end{enumerate}
+
+
+\section{Podjęte ustalenia}
+\begin{enumerate}
+\item Kolory będą przechowywane w klasie statycznej opcji, natomiast każda klasa wierzchołka i krawędzi będzie posiadała odpowiednią funkcję get, która wywoła funkcję getColor z klasy opcji w taki sposób, że zostanie zwrócony kolor odpowiadające danej właściwości danej klasy. 
+\item Udostępnimy widoki: standardowy (widoczne jest wszystko), drzewiasty, pudełkowy (map traybox?).
+\item Ustalamy, że każdy node można zwinąć i rozwinąć.
+\item Definiujemy klasę OVFilter - rozszerzającą klasę Filter z Prefuse; klasy dziedziczące z niej zostaną zdefiniowane później.
+\item Napiszemy własną klasę layoutów - będzie ona zawierać pewne filtry, które odpowiednio sprawią, że niektóre dane nie zostaną wyświetlone (jako zbędne) natomiast pozwoli uwydatnić inne cechy.
+\item W początkowym etapie skupiamy się na zaprojektowaniu, implementacji i wizualizacji podstawowych zależności między klasami.
+\end{enumerate}
+
+
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Literatura}
+\bibliography{biblio}
+
+\end{document}
+
