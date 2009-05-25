@@ -1,0 +1,75 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+%custom margins
+\usepackage[left=2.5cm, top=2.5cm, bottom=3cm, right=2cm, foot=2cm, head=0.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage[bookmarks=true, pdftex]{hyperref}
+
+%styl nagłowków
+\pagestyle{fancy} 
+\parindent 2cm 
+
+%opening
+\title{Notatka ze spotkania}
+\author{3@KASK}
+
+\begin{document}
+\bibliographystyle{plain}
+
+
+\maketitle
+
+
+\begin{center}
+%budowanie tabeli
+\begin{tabular}{|p{7cm}|p{7cm}|}
+\hline
+Symbol projektu: & Opiekun projektu:   \tabularnewline 
+3@KASK & mgr inż. Tomasz Boiński    \tabularnewline \hline
+\multicolumn{2}{|l|}{Nazwa Projektu: } \tabularnewline
+\multicolumn{2}{|l|}{Wizualizacja grafów za pomocą biblioteki Prefuse } \tabularnewline 
+\hline
+\multicolumn{2}{l}{ } \tabularnewline %pusta linijka
+\hline 
+Nazwa Dokumentu: & Data spotkania:   \tabularnewline 
+Notatka ze spotkania & 25.05.09 \tabularnewline \hline
+Odpowiedzialny za dokument: & Obecni na spotkaniu:   \tabularnewline 
+Piotr Orłowski & Grupa projektowa \tabularnewline \hline
+Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline 
+WEWNĘTRZNE & \today \tabularnewline \hline
+\end{tabular}
+\end{center}
+
+
+
+\section{Temat spotkania}
+Prototypowanie i diagram interakcji
+
+\section{Poruszone zagadnienia}
+\begin{enumerate}
+\item Prototyp programu, który pokazuje zależności między klasami.
+\item Wstępne ustalenia odnośnie przetwarzania danych przez bibliotekę.
+\item Ustalenie nazwy biblioteki.
+\end{enumerate}
+
+
+\section{Podjęte ustalenia}
+\begin{enumerate}
+\item Stworzyliśmy protoryp programu, który wczytuje plik owl i rysuje przy użyciu biblioteki prefuse prosty graf ukazujący klasę i jej subklasy.
+\item Nazwy klas i identyfikatory wierszy (których używa prefuse w wizualizacji) będziemy przechowywać w odpowiedniej tablicy haszującej. Przy dodawaniu wierzchołków do grafu wykorzystamy tą tablicę aby ominąć wielokrotne dodawanie tego samego noda.
+\item Bibliotekę nazwiemy SOVA - Simple Ontology Visualization Api.
+\item Ponownie potwierdziliśmy ustalenie, że biblioteka ma wizualizować tylko poprawne ontologie.
+\item Radek stworzył projekt netbeansowy naszej biblioteki.
+\end{enumerate}
+
+
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Literatura}
+\bibliography{biblio}
+
+\end{document}
+
