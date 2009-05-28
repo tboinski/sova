@@ -7,7 +7,7 @@
 \title{Zastosowanie aplikacji WIKI w przetwarzaniu zespołowym}
 \author{Anna Jaworska, Piotr Orłowski}
 
-\date{...}
+\date{\today}
 
 \begin{document}
 \maketitle
@@ -16,15 +16,23 @@
 
 \section{Wstęp}
 
-% słowa wstępne...  Niniejszy referat ma na celu opisanie samego mechanizmu WIKI, 
-% zarówno przybliżenie czytelnikowi samego mechanizmu WIKI, który często mylnie kojarzony jest wyłącznie z Wikipedią
-% jak również, na co wskazuje sam tytuł, przedstawić możliwości zastosowania go w pracy zespołowej.
-% W rozdziale tym a tym przedstawimy to a to...
+Niniejszy referat ma na celu zarówno przybliżenie czytelnikowi samego mechanizmu WIKI, który często mylnie kojarzony jest wyłącznie z Wikipedią jak również, na co wskazuje sam tytuł, przedstawienie możliwości zastosowania go w pracy zespołowej.
 % do zrobienia: napisać to
 % do nauczenia się: inteligentne odnośniki do numerów sekcji
 
+	\subsection {W nurcie WEB 2.0}
 
-	\subsection {WIKI na tle WEB 2.0}
+	
+		\textit{WEB 2.0 jest rewolucją biznesową w świecie komputerowym, spowodowaną ruchem w stronę Internetu jako platformy, oraz próbą zrozumienia reguł zwycięstwa na tej platformie.
+		\begin{flushright}
+			Tim O’Reilly
+		\end{flushright}
+		}
+		WEB 2.0 to nurt w świecie Internetu, o którym od 2004 roku mówi się coraz częściej\footnote{Warto wspomnieć, że istnieje również pojęcie WEB 3.0, odnoszące się do Internetu zbudowanego wokół Sieci Semantycznej}. Nurt, którego głównym celem jest danie użytkownikowi www jak największej możliwości interakcji, integracji i personalizacji stron internetowych.
+
+		Jak coś mi do głowy przyjdzie co tu dalej pisać to to napiszę :)  
+
+
 % WIKI jest przedstawicielem nurtu zwanego WEB 2.0
 % - Co to jest WEB 2.0
 % - dlaczego WIKI jest jego przedstawicielem?
@@ -42,13 +50,41 @@
 %physical community
 
 %Back-office to Front-office str 95
-
-
+	\subsubsection{WIKI a Wikipedia}
+	Wiele osób kojarzy WIKI wyłącznie z Wikipedią. Poprzez to skojarzenie automatycznie widzą w niej mechanizm dostępny dla wszystkich, który wszyscy mogą edytować i czasem wręcz wandalizować. Jednocześnie wydaje się to być mechanizm nie zapewniający jakiejkolwiek wiarygodności danych w nim umieszczanych i dodatkowo mało bezpieczny. Prawdą jest, że Wikipedia (z uwagi na wykorzystywany w niej silnik MediaWiki) jest WIKI. Jednak sama WIKI absolutnie nie musi przypominać Wikipedii, gdyż jest to machina, którą można wykorzystać w zupełnie inny sposób, która wcale nie musi być dostępna dla każdego i która wcale nie musi być mało wiarygodna. Autorzy tego referatu mają nadzieję, że czytelnik po zapoznaniu się z nim, jeżeli dotąd uważał, że WIKI to to samo co Wikipedia, zmieni zdanie po zapoznaniu się z treścią kolejnych rozdziałów.
 	\subsection{Rys historyczny}
-	%   The first wiki, WikiWikiweb (http://c2.com/cgi/wiki?WelcomeVisitors),
+
+%The first wiki, WikiWikiweb (http://c2.com/cgi/wiki?WelcomeVisitors),
 %was created in 1995 by Ward Cunningham to document and collaboratively
-%update information on software design patterns.
-%wiki(z hawajskiego) szybki 
+%update information on software design patterns. Since then, wiki has grown
+%steadily into one of the most important tools in today’s enterprise, and has
+%become a fixture in popular culture thanks to the rapid rise and increasing
+%influence of Wikipedia. It’s commonly thought of today as a so-calledWeb 2.0
+%tool because of its proximity to blogs and social networks, but this is primarily
+%because its popularity and name recognition has taken off in tandem with the
+%Web 2.0 phenomenon.
+%Wiki is the Hawaiian word for quick. According to Cunningham, he chose
+%the words Wiki Wiki, or Wiki (short version), to describe this new tool after
+%remembering that a counter agent at Honolulu International Airport had
+%directed him to take the Wiki Wiki bus to travel between airport terminals,
+%and had explained that wiki is the word meaning ‘‘quick’’ in Hawaiian
+%(Cunningham, 2005).According to Cunningham in 2005, ‘‘I wanted an unusual
+%word to name what was an unusual technology. I was not trying to duplicate
+%any existing medium, like mail, so I didn’t want a name like electronic mail
+%(email) for my work.’’
+
+	\begin{itemize}
+		\item \textbf{1995 WikiWikiWeb, twórca: Ward Cunningham}
+		\item 1998 TWiki
+		\item 1999 PHPWiki
+		\item \textbf{2001 Wikipedia, Jimmy Wales}
+		\item 2001 JSPWiki
+		\item 2002 MediaWiki
+		\item 2004 Wikia
+	\end{itemize}
+
+	\textbf{Co to znaczy WIKI?}
+		Słowo ``wiki'' w języku hawajskim, oznacza szybko. ``Wiki wiki'' to także autobusy kursujące pomiędzy terminalami lotniska w Honolulu.
 
 % - skąd Cunningham wziął ten pomysł?
 % - historyjka o autobusie...
@@ -91,10 +127,13 @@
 Pierwsza WIKI, WikiWikiWeb, powstała na autorskim silniku napisanym w języku Pearl. Wkrótce po zaakceptowaniu przez programistów formy tego portalu zaczęły stopniowo pojawiać się jego klony pisane w różnych językach. Te popularniejsze wkrótce wewoluowały w potężne silniki z własną społecznością, które do dzisiaj stopniowo się rozwijają. 
 	\subsection{PHP} 
 %wymienić wiki z tym jezykiem, skrytykować że wersja jezyka jest stara
-	\subsection{JEE}
-%napisać coś
+	PHP to chyba najpopularniejszy język tworzenia WIKI, o czym świadczy to, że na 25 najpopularniejszych WIKI\footnote{Na podstawie danych z serwisu www.wikimatrix.net. Z serwisu tego pochodzą również wszystkie podawane w tym rozdziale statystyki.} aż 13 chociaż częściowo napisano w tym języku. Już w 1998 roku, kiedy był on jeszcze bardzo mało znany, powstał klon WikiWikiWeb o nazwie PHPWiki. Warto wspomnieć, że zarówno MediaWiki, w którym tworzona jest Wikipedia, jak i dość popularne DokuWiki powstająw PHP. Pod jednym względem silniki w tym języku są nieustannie krytykowane: używają najczęściej starych, uważanych już za mało bezpieczne i przestarzałe wersji języka PHP - przykładowo najnowsza MediaWiki używa wersji 5.0 (z 2004 roku) i wymaga instalowania dodatkowych łatek zabezpieczającyh.  
+	\subsection{Java}
+	Jest to obecnie druga najpopularniejsza technologia tworzenia WIKI. Powstał w niej m.in. Confluence (rozbudowana, komercyjna WIKI do zastosowań korporacyjnych) oraz JSPWiki - otwarta, używana zarówno w zastosowaniach prywatnych jak również jako podstawa portali Internetowych WIKI, którą rozwijały m.in. Sun i Apache Software Foundation.
 	\subsection{Perl}
+	Trzeci język WIKI. Jak już wspomniano wcześniej, w nim powstała prototypowa WikiWikiWeb. Obecnie najpopulaniejszym silnikiem powstającym w tym języku TWiki, jeden z bardziej rozbudowanych i popularnych do zastosowań biznesowych, oraz Foswiki, jego niekomercyjna wersja.  
 	\subsection{Inne}
+	Na podstawie informacji zawartych na wikimatrix.net można śmiało stwierdzić, że istnieją WIKI prawie we wszystkich używanych językach programowania. Są w śród nich silniki popularne, jak np. MoinMoin napisany w Pythonie (używany między innymi jako silnik oficjalnych WIKI systemów Ubuntu, Debian oraz Mercuriala). Jest również wiele takich, które są napisane raczej w celu udowodnienia, że można w tym języku stworzyć taki mechanizm. Przykładowo instnieje Sputnik napisany w Lua, GeboGebo stworzony w Tdbengine, jednoosobowe TiddlyWiki w Javascripcie, w pełni funkcjonalna WikiSH napisana w Shellu czy chociażby Wiki Over DNS. Krążą plotki\footnote{Na podstawie serwisu www.esolang.com.}, że istnieje w pełni funkcjonalna wiki napisane w Brainfucku. 	
 % wspomnieć, że wiki można napisać nawet w Javascripcie....
 
 \newpage
@@ -106,11 +145,12 @@ Pierwsza WIKI, WikiWikiWeb, powstała na autorskim silniku napisanym w języku P
 	\subsection{RSS}
 	%o tym, że WIKI stosują takie technologie jak RSS i Atom...
 \newpage
-\section{Bazy danych}
-	\subsection{Wiki bez bazy danych}
+\section{Przechowywanie danych}
+	\subsection{Bazy danych}
+	Najpopularniejszym wśród
+	\subsection{Pliki tekstowe}
 	% DokuWiki nie ma nawet Subversion... dlaczego co i jak jest w tym dobre
-	\subsection{Bazy Opensource}
-	\subsection{Bazy komercyjne}
+	\subsection{System kontroli wersji}
 
 \newpage
 \section{Edycja danych}
@@ -222,7 +262,7 @@ Kiedy już zdecydujemy, że WIKI jest dokładnie tym mechanizmem, który chcemy 
 	Zarówno przy wyborze WIKI komercyjnej jak i tej darmowej np. z otwartym kodem warto się zastanowić nad licencją, na której otrzymujemy to oprogramowanie.
 	\subsubsection{Licencje komercyjne}
 	% - zastanowić się, które WIKI mają restrykcyjne ograniczenia, np. licencję IBM albo coś w ten deseń, o ograniczeniach na ilość użytkowników nie wspominając...
-	\subsubsection{Licencje OpenSource}
+	\subsubsection{Licencje Wolnego Oprogramowania}
 	% - wspomnieć o zagrożeniach związanych z licnejcją GPL
 	% - wspomnieć o innych licencjach, np. tej M$ itp...
 	\subsection{Sposoby instalacji}
