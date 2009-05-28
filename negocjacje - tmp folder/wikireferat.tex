@@ -1,6 +1,8 @@
 \documentclass{article}
 \usepackage{polski}
 \usepackage[utf8]{inputenc} % by użyć polskich znaków w systemach Linux używamy kodowania "latin2", dla Windows "cp1250" 
+\usepackage{floatflt,graphics,textcomp}
+\usepackage{hyperref}
 
 \title{Zastosowanie aplikacji WIKI w przetwarzaniu zespołowym}
 \author{Anna Jaworska, Piotr Orłowski}
@@ -10,6 +12,7 @@
 \begin{document}
 \maketitle
 \tableofcontents
+\newpage
 
 \section{Wstęp}
 
@@ -83,6 +86,7 @@
 	
 % przetłumaczyt=ć to co powyżej - bo w sumie WIKI zamienia się w takie gie bo pisać w tym strony da się...
 
+\newpage
 \section{Stosowane języki programowania}
 Pierwsza WIKI, WikiWikiWeb, powstała na autorskim silniku napisanym w języku Pearl. Wkrótce po zaakceptowaniu przez programistów formy tego portalu zaczęły stopniowo pojawiać się jego klony pisane w różnych językach. Te popularniejsze wkrótce wewoluowały w potężne silniki z własną społecznością, które do dzisiaj stopniowo się rozwijają. 
 	\subsection{PHP} 
@@ -93,6 +97,7 @@ Pierwsza WIKI, WikiWikiWeb, powstała na autorskim silniku napisanym w języku P
 	\subsection{Inne}
 % wspomnieć, że wiki można napisać nawet w Javascripcie....
 
+\newpage
 \section{Technologie pomocnicze}
 	\subsection{Subversion}
 	% o tym, że większość WIKI z niego korzysta do przechowywania danych...  
@@ -100,13 +105,14 @@ Pierwsza WIKI, WikiWikiWeb, powstała na autorskim silniku napisanym w języku P
 	%SSO , poziomy dostępu, 
 	\subsection{RSS}
 	%o tym, że WIKI stosują takie technologie jak RSS i Atom...
-
+\newpage
 \section{Bazy danych}
 	\subsection{Wiki bez bazy danych}
 	% DokuWiki nie ma nawet Subversion... dlaczego co i jak jest w tym dobre
 	\subsection{Bazy Opensource}
 	\subsection{Bazy komercyjne}
 
+\newpage
 \section{Edycja danych}
 	\subsection{WYSIW(M)G}
 		%TinyMCE
@@ -131,6 +137,7 @@ What You Mean Is What You Get
 %różne podejścia...	
 %CamelCase 
 
+\newpage
 \section{Sposoby organizacji informacji}	
 	\subsection{Przestrzenie nazw}
 	\subsection{Tag clouds}
@@ -146,8 +153,9 @@ What You Mean Is What You Get
 	
 	%\subsection{Hierarchiczna organizacja)
 
-
-\section{Zastosowania}
+\newpage
+\section{Zastosowania w pracy zespołowej}
+Mechanizm WIKI, odpowiednio użyty, może znacząco ułatwić pracę realizowaną zespołowo. W niniejszym rozdziale zostaną przedstawione podstawowe zastosowania oraz problemy, które WIKI pozwala rozwiązywać dużo łatwiej. 
 	\subsection{Budowa portali}  
 	\subsection{Gromadzanie wiedzy}
 		%Błędy w oprogramowanie - testowanie
@@ -183,7 +191,8 @@ What You Mean Is What You Get
 	\subsection{Wiki jako współdzielony dysk}
 %str 99 beware of svn
 
-\subsection{Żywiolowa wymiana wiedzy i pomysłów}
+
+	\subsection{Żywiolowa wymiana wiedzy i pomysłów}
 %tego pragnie Pan Samolot najbardziej
 
 %                                                               That’s what makes
@@ -195,7 +204,7 @@ What You Mean Is What You Get
 %the need for everyone to be in the same place at the same time, and it documents
 %the interaction better than a traditional meeting could.
 
-\subsection{Szybsza edycja}
+	\subsection{Szybsza edycja}
 %tego też pragnie Pan Samolot :)
 
 %   By contrast, if we were using a wiki, you might see the wiki page at 2:55 P.M.
@@ -206,15 +215,71 @@ What You Mean Is What You Get
 %can keep moving forward because I can revise based on your edits, send it to
 %others for further input, and so on.
 
-
+\newpage
 \section{Zanim wdrożysz}
-	\subsection {Problem licencjonowania}
+Kiedy już zdecydujemy, że WIKI jest dokładnie tym mechanizmem, który chcemy zastosować np. w naszej firmie warto zastanowić się jeszcze nad kilkoma związanymi z tym oprogramowaniem problemami.
+	\subsection{Problem licencjonowania}
+	Zarówno przy wyborze WIKI komercyjnej jak i tej darmowej np. z otwartym kodem warto się zastanowić nad licencją, na której otrzymujemy to oprogramowanie.
+	\subsubsection{Licencje komercyjne}
+	% - zastanowić się, które WIKI mają restrykcyjne ograniczenia, np. licencję IBM albo coś w ten deseń, o ograniczeniach na ilość użytkowników nie wspominając...
+	\subsubsection{Licencje OpenSource}
+	% - wspomnieć o zagrożeniach związanych z licnejcją GPL
+	% - wspomnieć o innych licencjach, np. tej M$ itp...
 	\subsection{Sposoby instalacji}
+		Proste
+		\begin{itemize}
+			\item "Cegła na Enterze"
+			\item Menadżer pakietów
+			\item make install
+		\end{itemize}
+		Konfiguracja po instalacji
+		\begin{itemize}
+			\item Ustawienia lokalne
+			\item Podłączenie bazy danych
+			\item Inne
+		\end{itemize}
 	\subsection{Bezpieczeństwo}
+	%kombinacje technologii z przkładami
+		SSL
+		\begin{itemize}
+			\item Twoja Wiki może korzystać z HTTPS
+		\end{itemize}
+		Bezpieczeństwo wewnątrz Wiki
+		\begin{itemize}
+			\item Poziomy dostępu
+			\item Role użytkowników
+		\end{itemize}
 	\subsection{Internacjonalizacja}
-	\subsection{Support}
-
-\subsection{Wdrażanie}
+	%kombinacje technologii z przkładami
+		Na co warto zwrócić uwagę:
+		\begin{itemize}
+			\item Czy dana Wiki obsługuje utf8?
+			\item Czy posiada wszystkie wymagane wersje językowe?
+			\item Czy baza danych i SVN danej Wiki też obsługuje utf8?
+		\end{itemize}
+			
+	\subsection{Wsparcie techniczne}
+		Dla użytkowników indywidualnych
+		\begin{itemize}
+			\item Zwróć uwagę na istnienie forum, grupy dyskusyjnej, możliwość raportowania błędów 
+			\item Nie wydawaj pieniędzy na nadmiarowe wsparcie komercyjne
+		\end{itemize}
+		
+		Dla małych grup komercyjnych
+		\begin{itemize}
+			\item Mała firma lub dział/grupa robocza w dużej firmie
+			\item Rozważ wybór Wiki w technologii, którą potrafisz sam wspierać
+			\item Rozważ Wiki, którą możesz powiększyć, gdy znajdą się chętni z innych działów
+			\item Nie kupuj wsparcia na zapas, zbadaj czy na pewno jest Ci potrzebne
+		\end{itemize}
+		Dla dużych organizacji i firm
+		\begin{itemize}
+			\item Wybierz dojrzałą Wiki w technologii, z którą firma ma największe doświadczenie 
+			\item Wybierz Wiki wymagającą minimalnej pracy przy wdrażaniu (LDAP, baza danych, której serwer już masz... ) 
+			\item Korzystaj ze wsparcia, w końcu za nie płacisz
+		\end{itemize}
+\newpage
+\section{Wdrażanie}
 %tego się nie dotykam - Piotrek
 	\subsection{Problem zmiany polityki organizacji}
 	\subsection{Zmiana sposobu obiegu dokumentów}
@@ -240,10 +305,16 @@ What You Mean Is What You Get
 	%wazne jest aby organizacja mogła sama rozszerzać soft wiki poprzez pluginy
 	\subsection{Historie wdrożeń} %jak w firmie/uczelni
 
-
+\newpage
 \section{Podsumowanie}
 
+\newpage
 \section{Bibliografia}
-	
-
+	\begin{itemize}
+		\item 	Wikipatterns, Stewart Mader, Wiley Publishing, Inc., 2008
+ 		\item \url{http://www.oreillynet.com/pub/a/oreilly/tim/news/2005/09/30/what-is-web-20.html}
+		\item \url{http://en.wikipedia.org/wiki/History_of_wikis}
+		\item \url{http://www.wikimatrix.org}
+		\item \url{http://en.wikipedia.org/wiki/Comparison_of_wiki_software}
+	\end{itemize}
 \end{document}
