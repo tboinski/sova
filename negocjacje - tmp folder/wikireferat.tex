@@ -1,11 +1,11 @@
 \documentclass{article}
 \usepackage{polski}
-\usepackage[utf8]{inputenc} % by uÅ¼yÄ‡ polskich znakÃ³w w systemach Linux uÅ¼ywamy kodowania "latin2", dla Windows "cp1250" 
+\usepackage[cp1250]{inputenc} % by u¿yæ polskich znaków w systemach Linux u¿ywamy kodowania "latin2", dla Windows "cp1250" 
 \usepackage{floatflt,graphics,textcomp}
 \usepackage{hyperref}
 
-\title{Zastosowanie aplikacji WIKI w przetwarzaniu zespoÅ‚owym}
-\author{Anna Jaworska, Piotr OrÅ‚owski}
+\title{Zastosowanie aplikacji WIKI w przetwarzaniu zespo³owym}
+\author{Anna Jaworska, Piotr Or³owski}
 
 \date{\today}
 
@@ -14,23 +14,23 @@
 \tableofcontents
 \newpage
 
-\section{WstÄ™p}
+\section{Wstêp}
 
-Niniejszy referat ma na celu zarÃ³wno przybliÅ¼enie czytelnikowi samego mechanizmu WIKI, ktÃ³ry czÄ™sto mylnie kojarzony jest wyÅ‚Ä…cznie z WikipediÄ… jak rÃ³wnieÅ¼, na co wskazuje sam tytuÅ‚, przedstawienie moÅ¼liwoÅ›ci zastosowania go w pracy zespoÅ‚owej.
-% do zrobienia: napisaÄ‡ to
-% do nauczenia siÄ™: inteligentne odnoÅ›niki do numerÃ³w sekcji
+Niniejszy referat ma na celu zarówno przybli¿enie czytelnikowi samego mechanizmu WIKI, który czêsto mylnie kojarzony jest wy³¹cznie z Wikipedi¹ jak równie¿, na co wskazuje sam tytu³, przedstawienie mo¿liwoœci zastosowania go w pracy zespo³owej.
+% do zrobienia: napisaæ to
+% do nauczenia siê: inteligentne odnoœniki do numerów sekcji
 
 	\subsection {W nurcie WEB 2.0}
 
 	
-		\textit{WEB 2.0 jest rewolucjÄ… biznesowÄ… w Å›wiecie komputerowym, spowodowanÄ… ruchem w stronÄ™ Internetu jako platformy, oraz prÃ³bÄ… zrozumienia reguÅ‚ zwyciÄ™stwa na tej platformie.
+		\textit{WEB 2.0 jest rewolucj¹ biznesow¹ w œwiecie komputerowym, spowodowan¹ ruchem w stronê Internetu jako platformy, oraz prób¹ zrozumienia regu³ zwyciêstwa na tej platformie.
 		\begin{flushright}
-			Tim Oâ€™Reilly
+			Tim O’Reilly
 		\end{flushright}
 		}
-		WEB 2.0 to nurt w Å›wiecie Internetu, o ktÃ³rym od 2004 roku mÃ³wi siÄ™ coraz czÄ™Å›ciej\footnote{Warto wspomnieÄ‡, Å¼e istnieje rÃ³wnieÅ¼ pojÄ™cie WEB 3.0, odnoszÄ…ce siÄ™ do Internetu zbudowanego wokÃ³Å‚ Sieci Semantycznej}. Nurt, ktÃ³rego gÅ‚Ã³wnym celem jest danie uÅ¼ytkownikowi www jak najwiÄ™kszej moÅ¼liwoÅ›ci interakcji, integracji i personalizacji stron internetowych.
+		WEB 2.0 to nurt w œwiecie Internetu, o którym od 2004 roku mówi siê coraz czêœciej\footnote{Warto wspomnieæ, ¿e istnieje równie¿ pojêcie WEB 3.0, odnosz¹ce siê do Internetu zbudowanego wokó³ Sieci Semantycznej}. Nurt, którego g³ównym celem jest danie u¿ytkownikowi www jak najwiêkszej mo¿liwoœci interakcji, integracji i personalizacji stron internetowych.
 
-		Jak coÅ› mi do gÅ‚owy przyjdzie co tu dalej pisaÄ‡ to to napiszÄ™ :)  
+		Jak coœ mi do g³owy przyjdzie co tu dalej pisaæ to to napiszê :)  
 
 
 % WIKI jest przedstawicielem nurtu zwanego WEB 2.0
@@ -41,25 +41,25 @@ Niniejszy referat ma na celu zarÃ³wno przybliÅ¼enie czytelnikowi samego mechaniz
 	%we are moving from passive readers to active participants.
 
 %       The reality is, Wikipedia is quite different from organizational wiki sites
-%both because of its primary use â€” encyclopedia â€” and the way its community
-%is structured. I often say itâ€™s the most extreme instance of wiki in existence
+%both because of its primary use — encyclopedia — and the way its community
+%is structured. I often say it’s the most extreme instance of wiki in existence
 %because everyone can see its entire contents, anyone can contribute, and people
 %can do so anonymously.
 %                                                                     there are
-%two types of wiki communities â€” the all-virtual versus the wiki that mirrors a
+%two types of wiki communities — the all-virtual versus the wiki that mirrors a
 %physical community
 
 %Back-office to Front-office str 95
 	\subsubsection{WIKI a Wikipedia}
-	Wiele osÃ³b kojarzy WIKI wyÅ‚Ä…cznie z WikipediÄ…. Poprzez to skojarzenie automatycznie widzÄ… w niej mechanizm dostÄ™pny dla wszystkich, ktÃ³ry wszyscy mogÄ… edytowaÄ‡ i czasem wrÄ™cz wandalizowaÄ‡. JednoczeÅ›nie wydaje siÄ™ to byÄ‡ mechanizm nie zapewniajÄ…cy jakiejkolwiek wiarygodnoÅ›ci danych w nim umieszczanych i dodatkowo maÅ‚o bezpieczny. PrawdÄ… jest, Å¼e Wikipedia (z uwagi na wykorzystywany w niej silnik MediaWiki) jest WIKI. Jednak sama WIKI absolutnie nie musi przypominaÄ‡ Wikipedii, gdyÅ¼ jest to machina, ktÃ³rÄ… moÅ¼na wykorzystaÄ‡ w zupeÅ‚nie inny sposÃ³b, ktÃ³ra wcale nie musi byÄ‡ dostÄ™pna dla kaÅ¼dego i ktÃ³ra wcale nie musi byÄ‡ maÅ‚o wiarygodna. Autorzy tego referatu majÄ… nadziejÄ™, Å¼e czytelnik po zapoznaniu siÄ™ z nim, jeÅ¼eli dotÄ…d uwaÅ¼aÅ‚, Å¼e WIKI to to samo co Wikipedia, zmieni zdanie po zapoznaniu siÄ™ z treÅ›ciÄ… kolejnych rozdziaÅ‚Ã³w.
+	Wiele osób kojarzy WIKI wy³¹cznie z Wikipedi¹. Poprzez to skojarzenie automatycznie widz¹ w niej mechanizm dostêpny dla wszystkich, który wszyscy mog¹ edytowaæ i czasem wrêcz wandalizowaæ. Jednoczeœnie wydaje siê to byæ mechanizm nie zapewniaj¹cy jakiejkolwiek wiarygodnoœci danych w nim umieszczanych i dodatkowo ma³o bezpieczny. Prawd¹ jest, ¿e Wikipedia (z uwagi na wykorzystywany w niej silnik MediaWiki) jest WIKI. Jednak sama WIKI absolutnie nie musi przypominaæ Wikipedii, gdy¿ jest to machina, któr¹ mo¿na wykorzystaæ w zupe³nie inny sposób, która wcale nie musi byæ dostêpna dla ka¿dego i która wcale nie musi byæ ma³o wiarygodna. Autorzy tego referatu maj¹ nadziejê, ¿e czytelnik po zapoznaniu siê z nim, je¿eli dot¹d uwa¿a³, ¿e WIKI to to samo co Wikipedia, zmieni zdanie po zapoznaniu siê z treœci¹ kolejnych rozdzia³ów.
 	\subsection{Rys historyczny}
 
 %The first wiki, WikiWikiweb (http://c2.com/cgi/wiki?WelcomeVisitors),
 %was created in 1995 by Ward Cunningham to document and collaboratively
 %update information on software design patterns. Since then, wiki has grown
-%steadily into one of the most important tools in todayâ€™s enterprise, and has
+%steadily into one of the most important tools in today’s enterprise, and has
 %become a fixture in popular culture thanks to the rapid rise and increasing
-%influence of Wikipedia. Itâ€™s commonly thought of today as a so-calledWeb 2.0
+%influence of Wikipedia. It’s commonly thought of today as a so-calledWeb 2.0
 %tool because of its proximity to blogs and social networks, but this is primarily
 %because its popularity and name recognition has taken off in tandem with the
 %Web 2.0 phenomenon.
@@ -67,14 +67,14 @@ Niniejszy referat ma na celu zarÃ³wno przybliÅ¼enie czytelnikowi samego mechaniz
 %the words Wiki Wiki, or Wiki (short version), to describe this new tool after
 %remembering that a counter agent at Honolulu International Airport had
 %directed him to take the Wiki Wiki bus to travel between airport terminals,
-%and had explained that wiki is the word meaning â€˜â€˜quickâ€™â€™ in Hawaiian
-%(Cunningham, 2005).According to Cunningham in 2005, â€˜â€˜I wanted an unusual
+%and had explained that wiki is the word meaning ‘‘quick’’ in Hawaiian
+%(Cunningham, 2005).According to Cunningham in 2005, ‘‘I wanted an unusual
 %word to name what was an unusual technology. I was not trying to duplicate
-%any existing medium, like mail, so I didnâ€™t want a name like electronic mail
-%(email) for my work.â€™â€™
+%any existing medium, like mail, so I didn’t want a name like electronic mail
+%(email) for my work.’’
 
 	\begin{itemize}
-		\item \textbf{1995 WikiWikiWeb, twÃ³rca: Ward Cunningham}
+		\item \textbf{1995 WikiWikiWeb, twórca: Ward Cunningham}
 		\item 1998 TWiki
 		\item 1999 PHPWiki
 		\item \textbf{2001 Wikipedia, Jimmy Wales}
@@ -84,11 +84,11 @@ Niniejszy referat ma na celu zarÃ³wno przybliÅ¼enie czytelnikowi samego mechaniz
 	\end{itemize}
 
 	\textbf{Co to znaczy WIKI?}
-		SÅ‚owo ``wiki'' w jÄ™zyku hawajskim, oznacza szybko. ``Wiki wiki'' to takÅ¼e autobusy kursujÄ…ce pomiÄ™dzy terminalami lotniska w Honolulu.
+		S³owo ``wiki'' w jêzyku hawajskim, oznacza szybko. ``Wiki wiki'' to tak¿e autobusy kursuj¹ce pomiêdzy terminalami lotniska w Honolulu.
 
-% - skÄ…d Cunningham wziÄ…Å‚ ten pomysÅ‚?
+% - sk¹d Cunningham wzi¹³ ten pomys³?
 % - historyjka o autobusie...
-% - jak to ewoluowaÅ‚o i jak zmieniaÅ‚o siÄ™ podejÅ›cie innych ludzi
+% - jak to ewoluowa³o i jak zmienia³o siê podejœcie innych ludzi
 % 
 
 	\subsection{WIKI jako CMS}
@@ -98,85 +98,85 @@ Niniejszy referat ma na celu zarÃ³wno przybliÅ¼enie czytelnikowi samego mechaniz
 %erroneous information. The reality is quite different when a wiki is used inside
 %an organization, a
 
-%                                          most organizations donâ€™t really know
+%                                          most organizations don’t really know
 %what they know, and are poor at transmitting new ideas and new plans in a
-%way thatâ€™s understandable. Organizations are mostly organized around their
+%way that’s understandable. Organizations are mostly organized around their
 %current goals. Some organizations have a part that tries to improve the process
 %for attaining current goals. But very few organizations improve the process of
 %figuring out what the goals should be
-%   As I read this, I realized that itâ€™s a brilliant argument for why the wiki can be
-%a vital tool for organizations. Because it doesnâ€™t define the terms of interaction
+%   As I read this, I realized that it’s a brilliant argument for why the wiki can be
+%a vital tool for organizations. Because it doesn’t define the terms of interaction
 %and collaboration from the outset, and allows structure to be created, modified
 %and removed as needed, the wiki quickly becomes a desirable tool because
-%it â€˜â€˜learnsâ€™â€™ how people work as they work, not after the fact. This means it
+%it ‘‘learns’’ how people work as they work, not after the fact. This means it
 %captures more of the actual process, giving them an opportunity to regularly
 %look at how they collaborate, even during a current project.
 
 %   In the wiki of a private organization, this kind of vandalism or erroneous
 %editing is extremely unlikely to happen because the wiki is being used within
 %an already established social and organizational structure. The fact is people
-%just donâ€™t abuse tools that are important to their professional work.
+%just don’t abuse tools that are important to their professional work.
 			
 %Wiki versus Intranet Powered
 %by Content Management System  str 98
 	
-% przetÅ‚umaczyt=Ä‡ to co powyÅ¼ej - bo w sumie WIKI zamienia siÄ™ w takie gie bo pisaÄ‡ w tym strony da siÄ™...
+% przet³umaczyt=æ to co powy¿ej - bo w sumie WIKI zamienia siê w takie gie bo pisaæ w tym strony da siê...
 
 \newpage
-\section{Stosowane jÄ™zyki programowania}
-Pierwsza WIKI, WikiWikiWeb, powstaÅ‚a na autorskim silniku napisanym w jÄ™zyku Pearl. WkrÃ³tce po zaakceptowaniu przez programistÃ³w formy tego portalu zaczÄ™Å‚y stopniowo pojawiaÄ‡ siÄ™ jego klony pisane w rÃ³Å¼nych jÄ™zykach. Te popularniejsze wkrÃ³tce wewoluowaÅ‚y w potÄ™Å¼ne silniki z wÅ‚asnÄ… spoÅ‚ecznoÅ›ciÄ…, ktÃ³re do dzisiaj stopniowo siÄ™ rozwijajÄ…. 
+\section{Stosowane jêzyki programowania}
+Pierwsza WIKI, WikiWikiWeb, powsta³a na autorskim silniku napisanym w jêzyku Pearl. Wkrótce po zaakceptowaniu przez programistów formy tego portalu zaczê³y stopniowo pojawiaæ siê jego klony pisane w ró¿nych jêzykach. Te popularniejsze wkrótce wewoluowa³y w potê¿ne silniki z w³asn¹ spo³ecznoœci¹, które do dzisiaj stopniowo siê rozwijaj¹. 
 	\subsection{PHP} 
-%wymieniÄ‡ wiki z tym jezykiem, skrytykowaÄ‡ Å¼e wersja jezyka jest stara
-	PHP to chyba najpopularniejszy jÄ™zyk tworzenia WIKI, o czym Å›wiadczy to, Å¼e na 25 najpopularniejszych WIKI\footnote{Na podstawie danych z serwisu www.wikimatrix.net. Z serwisu tego pochodzÄ… rÃ³wnieÅ¼ wszystkie podawane w tym rozdziale statystyki.} aÅ¼ 13 chociaÅ¼ czÄ™Å›ciowo napisano w tym jÄ™zyku. JuÅ¼ w 1998 roku, kiedy byÅ‚ on jeszcze bardzo maÅ‚o znany, powstaÅ‚ klon WikiWikiWeb o nazwie PHPWiki. Warto wspomnieÄ‡, Å¼e zarÃ³wno MediaWiki, w ktÃ³rym tworzona jest Wikipedia, jak i doÅ›Ä‡ popularne DokuWiki powstajÄ…w PHP. Pod jednym wzglÄ™dem silniki w tym jÄ™zyku sÄ… nieustannie krytykowane: uÅ¼ywajÄ… najczÄ™Å›ciej starych, uwaÅ¼anych juÅ¼ za maÅ‚o bezpieczne i przestarzaÅ‚e wersji jÄ™zyka PHP - przykÅ‚adowo najnowsza MediaWiki uÅ¼ywa wersji 5.0 (z 2004 roku) i wymaga instalowania dodatkowych Å‚atek zabezpieczajÄ…cyh.  
+%wymieniæ wiki z tym jezykiem, skrytykowaæ ¿e wersja jezyka jest stara
+	PHP to chyba najpopularniejszy jêzyk tworzenia WIKI, o czym œwiadczy to, ¿e na 25 najpopularniejszych WIKI\footnote{Na podstawie danych z serwisu www.wikimatrix.net. Z serwisu tego pochodz¹ równie¿ wszystkie podawane w tym rozdziale statystyki.} a¿ 13 chocia¿ czêœciowo napisano w tym jêzyku. Ju¿ w 1998 roku, kiedy by³ on jeszcze bardzo ma³o znany, powsta³ klon WikiWikiWeb o nazwie PHPWiki. Warto wspomnieæ, ¿e zarówno MediaWiki, w którym tworzona jest Wikipedia, jak i doœæ popularne DokuWiki powstaj¹w PHP. Pod jednym wzglêdem silniki w tym jêzyku s¹ nieustannie krytykowane: u¿ywaj¹ najczêœciej starych, uwa¿anych ju¿ za ma³o bezpieczne i przestarza³e wersji jêzyka PHP - przyk³adowo najnowsza MediaWiki u¿ywa wersji 5.0 (z 2004 roku) i wymaga instalowania dodatkowych ³atek zabezpieczaj¹cyh.  
 	\subsection{Java}
-	Jest to obecnie druga najpopularniejsza technologia tworzenia WIKI. PowstaÅ‚ w niej m.in. Confluence (rozbudowana, komercyjna WIKI do zastosowaÅ„ korporacyjnych) oraz JSPWiki - otwarta, uÅ¼ywana zarÃ³wno w zastosowaniach prywatnych jak rÃ³wnieÅ¼ jako podstawa portali Internetowych WIKI, ktÃ³rÄ… rozwijaÅ‚y m.in. Sun i Apache Software Foundation.
+	Jest to obecnie druga najpopularniejsza technologia tworzenia WIKI. Powsta³ w niej m.in. Confluence (rozbudowana, komercyjna WIKI do zastosowañ korporacyjnych) oraz JSPWiki - otwarta, u¿ywana zarówno w zastosowaniach prywatnych jak równie¿ jako podstawa portali Internetowych WIKI, któr¹ rozwija³y m.in. Sun i Apache Software Foundation.
 	\subsection{Perl}
-	Trzeci jÄ™zyk WIKI. Jak juÅ¼ wspomniano wczeÅ›niej, w nim powstaÅ‚a prototypowa WikiWikiWeb. Obecnie najpopulaniejszym silnikiem powstajÄ…cym w tym jÄ™zyku TWiki, jeden z bardziej rozbudowanych i popularnych do zastosowaÅ„ biznesowych, oraz Foswiki, jego niekomercyjna wersja.  
+	Trzeci jêzyk WIKI. Jak ju¿ wspomniano wczeœniej, w nim powsta³a prototypowa WikiWikiWeb. Obecnie najpopulaniejszym silnikiem powstaj¹cym w tym jêzyku TWiki, jeden z bardziej rozbudowanych i popularnych do zastosowañ biznesowych, oraz Foswiki, jego niekomercyjna wersja.  
 	\subsection{Inne}
-	Na podstawie informacji zawartych na wikimatrix.net moÅ¼na Å›miaÅ‚o stwierdziÄ‡, Å¼e istniejÄ… WIKI prawie we wszystkich uÅ¼ywanych jÄ™zykach programowania. SÄ… w Å›rÃ³d nich silniki popularne, jak np. MoinMoin napisany w Pythonie (uÅ¼ywany miÄ™dzy innymi jako silnik oficjalnych WIKI systemÃ³w Ubuntu, Debian oraz Mercuriala). Jest rÃ³wnieÅ¼ wiele takich, ktÃ³re sÄ… napisane raczej w celu udowodnienia, Å¼e moÅ¼na w tym jÄ™zyku stworzyÄ‡ taki mechanizm. PrzykÅ‚adowo instnieje Sputnik napisany w Lua, GeboGebo stworzony w Tdbengine, jednoosobowe TiddlyWiki w Javascripcie, w peÅ‚ni funkcjonalna WikiSH napisana w Shellu czy chociaÅ¼by Wiki Over DNS. KrÄ…Å¼Ä… plotki\footnote{Na podstawie informacji z serwisu www.esolang.org.}, Å¼e istnieje w peÅ‚ni funkcjonalna wiki napisane w Brainfucku. 	
-% wspomnieÄ‡, Å¼e wiki moÅ¼na napisaÄ‡ nawet w Javascripcie....
+	Na podstawie informacji zawartych na wikimatrix.net mo¿na œmia³o stwierdziæ, ¿e istniej¹ WIKI prawie we wszystkich u¿ywanych jêzykach programowania. S¹ w œród nich silniki popularne, jak np. MoinMoin napisany w Pythonie (u¿ywany miêdzy innymi jako silnik oficjalnych WIKI systemów Ubuntu, Debian oraz Mercuriala). Jest równie¿ wiele takich, które s¹ napisane raczej w celu udowodnienia, ¿e mo¿na w tym jêzyku stworzyæ taki mechanizm. Przyk³adowo instnieje Sputnik napisany w Lua, GeboGebo stworzony w Tdbengine, jednoosobowe TiddlyWiki w Javascripcie, w pe³ni funkcjonalna WikiSH napisana w Shellu czy chocia¿by Wiki Over DNS. Kr¹¿¹ plotki\footnote{Na podstawie informacji z serwisu www.esolang.org.}, ¿e istnieje w pe³ni funkcjonalna wiki napisane w Brainfucku. 	
+% wspomnieæ, ¿e wiki mo¿na napisaæ nawet w Javascripcie....
 
 \newpage
 \section{Technologie pomocnicze}
 	\subsection{Subversion}
-	% o tym, Å¼e wiÄ™kszoÅ›Ä‡ WIKI z niego korzysta do przechowywania danych...  
+	% o tym, ¿e wiêkszoœæ WIKI z niego korzysta do przechowywania danych...  
 	\subsection{LDAP}
-	%SSO , poziomy dostÄ™pu, 
+	%SSO , poziomy dostêpu, 
 	\subsection{RSS}
-	%o tym, Å¼e WIKI stosujÄ… takie technologie jak RSS i Atom...
+	%o tym, ¿e WIKI stosuj¹ takie technologie jak RSS i Atom...
 \newpage
 \section{Przechowywanie danych}
-	WIKI mogÄ… korzystaÄ‡ z rÃ³Å¼nych systemÃ³w przechowywania danych. CzÄ™sto bardziej dojrzaÅ‚e projekty potrafiÄ… korzystaÄ‡ z kilku rÃ³Å¼nych (nawet jednoczeÅ›nie) i umoÅ¼liwiajÄ… dodanie innych od standardowych dziÄ™ki zastosowaniu mechanizmu wtyczek. NiektÃ³re zaÅ›, tak jak TrikiWiki wymagajÄ… pisania wÅ‚asnych, dedykowanych konkretnemu systemowi w ktÃ³rym instalujemy WIKI, wtyczek. 
+	WIKI mog¹ korzystaæ z ró¿nych systemów przechowywania danych. Czêsto bardziej dojrza³e projekty potrafi¹ korzystaæ z kilku ró¿nych (nawet jednoczeœnie) i umo¿liwiaj¹ dodanie innych od standardowych dziêki zastosowaniu mechanizmu wtyczek. Niektóre zaœ, tak jak TrikiWiki wymagaj¹ pisania w³asnych, dedykowanych konkretnemu systemowi w którym instalujemy WIKI, wtyczek. 
 	\subsection{Pliki tekstowe}
-	Stosowanym zarÃ³wno przez pierwszÄ… WIKI jak i projekty nowsze, takÅ¼e te dojrzaÅ‚e, metodÄ… przechowywania danych sÄ… specjalnie skonstruowane pliki tekstowe. ZarÃ³wno TWiki, PHPWiki jak i JSPWiki udostÄ™pniajÄ… taki sposÃ³b przechowywania informacji, natomiast w MoinMoin i DokuWiki jest to zasadniczo jedyna opcja przechowywania danych. SposÃ³b ten ma zarÃ³wno wady jak i zalety. ZaletÄ… jest niewÄ…tpliwie to, Å¼e sam silnik do dziaÅ‚ania nie wymaga ani bazy danych ani Å¼adnego dodatkowego systemu np bazodanowego - wystarczy, Å¼e zainstalujemy go na serwerze i spersonalizujemy a moÅ¼e on juÅ¼ w peÅ‚ni speÅ‚niaÄ‡ swoje funkcje. RozwiÄ…zanie to ma natomiast zasadniczÄ… wadÄ™ - pliki te najczÄ™Å›ciej nie zapewniajÄ… wydajnoÅ›ci wyszukiwania nawet porÃ³wnywalnej z bazami danych i innymi systemami przechowywania informacji. 
+	Stosowanym zarówno przez pierwsz¹ WIKI jak i projekty nowsze, tak¿e te dojrza³e, metod¹ przechowywania danych s¹ specjalnie skonstruowane pliki tekstowe. Zarówno TWiki, PHPWiki jak i JSPWiki udostêpniaj¹ taki sposób przechowywania informacji, natomiast w MoinMoin i DokuWiki jest to zasadniczo jedyna opcja przechowywania danych. Sposób ten ma zarówno wady jak i zalety. Zalet¹ jest niew¹tpliwie to, ¿e sam silnik do dzia³ania nie wymaga ani bazy danych ani ¿adnego dodatkowego systemu np bazodanowego - wystarczy, ¿e zainstalujemy go na serwerze i spersonalizujemy a mo¿e on ju¿ w pe³ni spe³niaæ swoje funkcje. Rozwi¹zanie to ma natomiast zasadnicz¹ wadê - pliki te najczêœciej nie zapewniaj¹ wydajnoœci wyszukiwania nawet porównywalnej z bazami danych i innymi systemami przechowywania informacji. 
 	\subsection{Bazy danych}
-	Najpopularniejszym obecnie wÅ›rÃ³d dojrzaÅ‚ych WIKI mechanizmem do przechowywania danych sÄ… bazy danych. NajczÄ™Å›ciej stosuje siÄ™ te naleÅ¼Ä…ce do Wolnego Oprogramowania, jak MySQL, PostgreSQL i SQLite - tych baz uÅ¼ywajÄ… np. MediaWiki, TikiWiki, aczkolwiek niektÃ³re silniki, m.in. komercyjny Confluence czy teÅ¼ XWiki, obsÅ‚ugujÄ… rÃ³wnieÅ¼ Oracle DB, MS SQL. ZaletÄ… uÅ¼ycia bazy danych jest duÅ¼o wiÄ™ksza wydajnoÅ›Ä‡ tego sposobu skÅ‚adowania informacji. WadÄ… jest niewiÄ…tpliwie to, Å¼e instalacja i konfiguracja samej WIKI staje siÄ™ przez zastosowanie tego mechanizmu trudniejsza.
+	Najpopularniejszym obecnie wœród dojrza³ych WIKI mechanizmem do przechowywania danych s¹ bazy danych. Najczêœciej stosuje siê te nale¿¹ce do Wolnego Oprogramowania, jak MySQL, PostgreSQL i SQLite - tych baz u¿ywaj¹ np. MediaWiki, TikiWiki, aczkolwiek niektóre silniki, m.in. komercyjny Confluence czy te¿ XWiki, obs³uguj¹ równie¿ Oracle DB, MS SQL. Zalet¹ u¿ycia bazy danych jest du¿o wiêksza wydajnoœæ tego sposobu sk³adowania informacji. Wad¹ jest niewi¹tpliwie to, ¿e instalacja i konfiguracja samej WIKI staje siê przez zastosowanie tego mechanizmu trudniejsza.
 	% DokuWiki nie ma nawet Subversion... dlaczego co i jak jest w tym dobre
 	\subsection{System kontroli wersji}
-	Alternatywnym sposobem przechowywania danych przez WIKI sÄ… systemy kontroli wersji, m.in. juÅ¼ nieco archaiczne RCS\footnote{Revision Control System, poprzednik CVS}, ktÃ³ry moÅ¼e stosowaÄ‡ m.in. TWiki czy PHPWiki, czy teÅ¼ CVS (MoniWiki, PHPWiki). Nie jest to sposÃ³b bardzo popularny, jedak warto o nim wspomnieÄ‡ z uwagi na to, Å¼e WIKI gdy takiego systemu nie uÅ¼ywa to i tak najczÄ™Å›ciej w jakiÅ› okreÅ›lony sposÃ³b wersjonuje dane, ktÃ³rych uÅ¼ywa.
+	Alternatywnym sposobem przechowywania danych przez WIKI s¹ systemy kontroli wersji, m.in. ju¿ nieco archaiczne RCS\footnote{Revision Control System, poprzednik CVS}, który mo¿e stosowaæ m.in. TWiki czy PHPWiki, czy te¿ CVS (MoniWiki, PHPWiki). Nie jest to sposób bardzo popularny, jedak warto o nim wspomnieæ z uwagi na to, ¿e WIKI gdy takiego systemu nie u¿ywa to i tak najczêœciej w jakiœ okreœlony sposób wersjonuje dane, których u¿ywa.
 \newpage
 \section{Edycja danych}
 	\subsection{WYSIW(M)G}
 		%TinyMCE
-	OdkÄ…d wiki staÅ‚y siÄ™ popularne wÅ›rÃ³d uÅ¼ytkownikÃ³w nieobeznanych z metajÄ™zykami, 
-w wiÄ™kszoÅ›ci pojawiÅ‚y siÄ™ edytory WYSWIG. Edycja staÅ‚a siÄ™ bardziej przyjazna uÅ¼ytkownikowi
+	Odk¹d wiki sta³y siê popularne wœród u¿ytkowników nieobeznanych z metajêzykami, 
+w wiêkszoœci pojawi³y siê edytory WYSWIG. Edycja sta³a siê bardziej przyjazna u¿ytkownikowi
 %   As wikis have grown more popular and entered the mainstream, wiki
 %vendors have added WYSIWYG (what you see is what you get) editors to
 %make the editing experience look and feel more like the Microsoft Word-style
 %interface many people are used to. The primary benefit of a WYSIWYG editor
-%is that it can ease the transition when people first start using a wiki, but hereâ€™s
-%the rub: if itâ€™s the only editing tool people use, the WYSIWYG editor offers a
+%is that it can ease the transition when people first start using a wiki, but here’s
+%the rub: if it’s the only editing tool people use, the WYSIWYG editor offers a
 %much more limited editing experience and prevents people from making the
 %leap necessary to fully understand the power of a wiki.
 
 	\subsection{WYMIWYG}
 What You Mean Is What You Get
 
-	\subsection{Edycja w programach zewnÄ™trznych}
+	\subsection{Edycja w programach zewnêtrznych}
 
 
-	\subsection{Nazywanie artykuÅ‚ow}
-%rÃ³Å¼ne podejÅ›cia...	
+	\subsection{Nazywanie artyku³ow}
+%ró¿ne podejœcia...	
 %CamelCase 
 
 \newpage
@@ -196,174 +196,218 @@ What You Mean Is What You Get
 	%\subsection{Hierarchiczna organizacja)
 
 \newpage
-\section{Zastosowania w pracy zespoÅ‚owej}
-Mechanizm WIKI, odpowiednio uÅ¼yty, moÅ¼e znaczÄ…co uÅ‚atwiÄ‡ pracÄ™ realizowanÄ… zespoÅ‚owo. W niniejszym rozdziale zostanÄ… przedstawione podstawowe zastosowania oraz problemy, ktÃ³re WIKI pozwala rozwiÄ…zywaÄ‡ duÅ¼o Å‚atwiej. 
+\section{Zastosowania w pracy zespo³owej}
+Mechanizm WIKI, odpowiednio u¿yty, mo¿e znacz¹co u³atwiæ pracê realizowan¹ zespo³owo. W niniejszym rozdziale zostan¹ przedstawione podstawowe zastosowania oraz problemy, które WIKI pozwala rozwi¹zywaæ du¿o ³atwiej. 
 	\subsection{Budowa portali}  
+
+
+
+
 	\subsection{Gromadzanie wiedzy}
-		%BÅ‚Ä™dy w oprogramowanie - testowanie
+
+		Wiki mo¿e pos³u¿yæ w organizacji jako uniwersalne narzêdzie do gromadzenia wiedzy i wymiany doœwiadczeñ miedzy pracownikami. Wiele firm korzysta z systemów zarz¹dzania wiedz¹ (Knowledge Managment systems), jednak s³u¿¹ one g³ównie do gromadzenia faktów i ustaleñ wewnêtrznych. Maj¹ zwykle formê bardzo formaln¹.
+
+	Wiki jest narzêdziem bardziej elastycznym. Mo¿e pos³u¿yæ jako wsparcie dla systemu KM. Dziêki Wiki ludzie mog¹ pracowaæ nad projektami w sposób bardzo podobny do naturalnej komunikacji. Dokumentacja tworzona na Wiki staje siê bogatszy, ni¿ zwyk³e dokumenty, przede wszystkim dziêki ³atwoœci i szybkoœci edycji. Chc¹c zmodyfikowaæ jakiœ dokument nie musimy szukaæ go na dysku, œci¹gaæ z repozytorium. Wystarczy wejœæ na stronê Wiki, skorzystaæ z mechanizmu wyszukiwania i zmieniæ po¿¹dany fragment. Zmiana stanie siê od razu widoczna dla innych u¿ytkowników, nie trzeba wys³aæ innym zmienionego pliku. Taka szybka edycja bardzo przypomina zwyczajna interakcjê miêdzy ludŸmi, gdzie jedna osoba rozpoczyna jakiœ pomys³, a kolejne rozbudowuj¹ go i zadaj¹ pytania na jego temat.
+
+	Niektóre Wiki mo¿na zintegrowaæ z systemami zarz¹dzania b³êdami. Przyk³adem mo¿e byæ Confluence, który mo¿na zintegrowaæ z innym produktem firmy Atlassian - JIRA - narzêdziem do zg³aszania b³êdów. Po zamkniêciu ticketu samo zagadnienie i sposób rozwi¹zania mo¿na szerzej opisaæ na Wiki w sposób prosty odwo³uj¹c siê do konkretnego ticketu. Ponadto w Confluence mo¿na wyœwietlaæ ró¿ne podsumowania na temat b³êdów zgromadzonych w systemie JIRA. Takie zestawienie mo¿e pos³u¿yæ do tworzenia automatycznych raportów o stanie prac w projekcie.
+
+	Jedna instalacja Wiki mo¿e staæ siê w organizacji uniwersalnym narzêdziem do gromadzenia wiedzy. Mo¿na zawrzeæ w Wiki zarówno informacje handlowe, ksiêgowe jak i dokumentacje poszczególnych projektów. Zgromadzenie takich danych za pomoc¹ jednego narzêdzia mo¿e byæ du¿ym u³atwieniem dla nowych pracowników, którzy musz¹ poznaæ tylko jedno narzêdzie, która ma "wszystko". 
+
+
+		%B³êdy w oprogramowanie - testowanie
 		%Dokumentacja
-		%Wiedza wewnÄ™trzna organizacji
+		%Wiedza wewnêtrzna organizacji
 %                Unlike KM systems, wikis focus completely on letting people
-%work together online the same way theyâ€™d work in person, and approach
+%work together online the same way they’d work in person, and approach
 %knowledge as the product of that organic, nonlinear human connection and
 %collaboration. 
 
-	\subsection{Integracja z innymi narzÄ™dziami}
+	\subsection{Integracja z innymi narzêdziami}
+
+	Wiêkszoœæ komercyjnych Wiki pozwala na integracje z popularnymi narzêdziami biurowymi. Mo¿liwa jest tak¿e integracja w narzêdziami typowo programistycznymi. Wœród przyk³adów takich po³¹czeñ warto wymieniæ:
+
+\begin{itemize}
+\item Confluence i Word - artyku³y Wiki mo¿na pobraæ za pomoc¹ WebDAV i  edytowaæ w MS Word; po u¿yciu zapisania zmiany automatycznie zostan¹ zapisane na Wiki
+\item TracWiki - Wiki zintegrowana z Trac pozwala trzymaæ dane o postêpie prac i dokumentacje w jednym miejscu; TracWiki zawiera gotowe mechanizmu pozwalaj¹ce odwo³ywaæ siê do konkretnych ticketów czy te¿ wersji kodu 
+
+\end{itemize} 
+
+
+
+
 	\subsection{Mniej emaili}
 %                             By reducing the number of general emails, people
 %will be more likely to pay attention to the few that really do affect them, and
 %by putting more specific communication on the wiki, people can identify and
-%keep up with whatâ€™s most relevant to them.
+%keep up with what’s most relevant to them.
 
 
-%    eep in mind that Iâ€™ve just given the simplest example with only two
-%people. If it can be this difficult for only two people to â€˜â€˜collaborateâ€™â€™ over
+%    eep in mind that I’ve just given the simplest example with only two
+%people. If it can be this difficult for only two people to ‘‘collaborate’’ over
 %email, imagine how these problems can balloon exponentially when more
 %people are involved! A new wiki user recently told me a story of how it took
 %three days to reconcile the edits that had gotten out of control when twelve
 %people tried to use email to collaborate on a press release. The edits themselves
-%didnâ€™t take that long â€” within a few hours after the file had been emailed
+%didn’t take that long — within a few hours after the file had been emailed
 %to everyone, twelve distinct files were returned with twelve different sets
 %of edits!
 
 	\subsection{Pisanie publikacji}
-	%ksiÄ…zki, artykuÅ‚y
+
+	Jednym z nietypowych zastosowañ Wiki mo¿e byæ u¿ycie jej do napisania artyku³u naukowego lub ksi¹¿ki. Takie formy publikacji zwykle wymagaj¹ pomocy korektora czy po prostu informowania wydawcy o postêpie prac. Pisanie ksi¹¿ki na Wiki pozwala wydawcy œledziæ postêp prac autora, na bie¿¹co zg³aszaæ uwagi a nawet wprowadzaæ korektê. Przyk³adem ksi¹¿ki napisanej w Wiki, jest wykorzystana  do stworzenia tego referatu ksi¹¿ka Wikipaterrns. \footnote{Wikipatterns, Stewart Mader, Wiley Publishing, Inc., 2008}
+
+	%ksi¹zki, artyku³y
 	%wydawaca/redaktor ma staly wglad w postepy prac
 
-	\subsection{Wiki jako wspÃ³Å‚dzielony dysk}
+	\subsection{Wiki jako wspó³dzielony dysk}
 %str 99 beware of svn
+		Przechowywanie plików na wspó³dzielonych przestrzeniach dyskowych jest powszechnie praktykowane w wielu firmach. Projekty programistyczne s¹ zwykle przechowywane w systemie wspomagaj¹cym kontrolê wersji, takim jak SVN. Sam kod to jednak nie jedyne dane przechowywane w firmie. 
+
+Przeciêtne u¿ytkownik komputera nie musi umieæ pos³ugiwaæ siê SVN. Analityk czy te¿ ksiêgowy mo¿e niechêtnie podejœæ do pomys³u przechowywania dokumentów w repozytorium, które mo¿e wydaæ siê skomplikowane w u¿yciu i czêsto brakuje dla niego prostego graficznego interfejsu. Ponadto repozytoria zapewniaj¹ wsparcie tylko dla plików tekstowych. 
+
+Wiki dziêki mechanizmowi za³¹czników do artyku³ów mo¿e zostaæ zaadaptowana w firmie jak pewna forma wspó³dzielonego dysku. Pliki mo¿na udostêpniaæ dostarczaj¹c ich opis na stronie Wiki. Ponadto z istnienia niektórych z nich mo¿na wrêcz zrezygnowaæ - zwyczajne dokumenty tekstowe mo¿na przechowywaæ po prostu jako strony Wiki.
+
+Nie stworzy to problemu w przypadku koniecznoœci wysy³ania takich dokumentów np, do klienta. Wcale nie trzeba udostêpniaæ wewnêtrznej Wiki. Wiele aplikacji Wiki udostêpnia mechanizmy eksportu dokumentów do PDF lub dokumentów Word.
 
 
-	\subsection{Å»ywiolowa wymiana wiedzy i pomysÅ‚Ã³w}
+
+	\subsection{¯ywiolowa wymiana wiedzy i pomys³ów}
 %tego pragnie Pan Samolot najbardziej
 
-%                                                               Thatâ€™s what makes
+%                                                               That’s what makes
 %a wiki so special; it enables the natural patterns of interaction that previously
-%could only happen in a physical meeting â€” fast-paced discussion, overlapping
+%could only happen in a physical meeting — fast-paced discussion, overlapping
 %ideas, quick decisions on changes, quick error correction, introducing different
-%viewpoints and collaboratively working to reach agreement â€” but it removes
+%viewpoints and collaboratively working to reach agreement — but it removes
  %                                                     Back-office to Front-office  57
 %the need for everyone to be in the same place at the same time, and it documents
 %the interaction better than a traditional meeting could.
 
 	\subsection{Szybsza edycja}
-%tego teÅ¼ pragnie Pan Samolot :)
+%tego te¿ pragnie Pan Samolot :)
 
 %   By contrast, if we were using a wiki, you might see the wiki page at 2:55 P.M.
 %waiting for your input, and decide to give it a quick read. If you get a great
 %idea, want to make some minor changes, or even just notice a typo, all you
-%have to do is click â€˜â€˜Editâ€™â€™, make some quick changes, click â€˜â€˜Saveâ€™â€™, and head
+%have to do is click ‘‘Edit’’, make some quick changes, click ‘‘Save’’, and head
 %off to your meeting. Now that the document has your input, collaboration
 %can keep moving forward because I can revise based on your edits, send it to
 %others for further input, and so on.
 
 \newpage
-\section{Zanim wdroÅ¼ysz}
-Kiedy juÅ¼ zdecydujemy, Å¼e WIKI jest dokÅ‚adnie tym mechanizmem, ktÃ³ry chcemy zastosowaÄ‡ np. w naszej firmie warto zastanowiÄ‡ siÄ™ jeszcze nad kilkoma zwiÄ…zanymi z tym oprogramowaniem problemami.
+\section{Zanim wdro¿ysz}
+Kiedy ju¿ zdecydujemy, ¿e WIKI jest dok³adnie tym mechanizmem, który chcemy zastosowaæ np. w naszej firmie warto zastanowiæ siê jeszcze nad kilkoma zwi¹zanymi z tym oprogramowaniem problemami.
 	\subsection{Problem licencjonowania}
-	ZarÃ³wno przy wyborze WIKI komercyjnej jak i tej darmowej np. z otwartym kodem warto siÄ™ zastanowiÄ‡ nad licencjÄ…, na ktÃ³rej otrzymujemy to oprogramowanie.
+	Zarówno przy wyborze WIKI komercyjnej jak i tej darmowej np. z otwartym kodem warto siê zastanowiæ nad licencj¹, na której otrzymujemy to oprogramowanie.
 	\subsubsection{Licencje komercyjne}
-	% - zastanowiÄ‡ siÄ™, ktÃ³re WIKI majÄ… restrykcyjne ograniczenia, np. licencjÄ™ IBM albo coÅ› w ten deseÅ„, o ograniczeniach na iloÅ›Ä‡ uÅ¼ytkownikÃ³w nie wspominajÄ…c...
+	% - zastanowiæ siê, które WIKI maj¹ restrykcyjne ograniczenia, np. licencjê IBM albo coœ w ten deseñ, o ograniczeniach na iloœæ u¿ytkowników nie wspominaj¹c...
 	\subsubsection{Licencje Wolnego Oprogramowania}
-	% - wspomnieÄ‡ o zagroÅ¼eniach zwiÄ…zanych z licnejcjÄ… GPL
-	% - wspomnieÄ‡ o innych licencjach, np. tej M$ itp...
+	% - wspomnieæ o zagro¿eniach zwi¹zanych z licnejcj¹ GPL
+	% - wspomnieæ o innych licencjach, np. tej M$ itp...
 	\subsection{Sposoby instalacji}
 		Proste
 		\begin{itemize}
-			\item "CegÅ‚a na Enterze"
-			\item MenadÅ¼er pakietÃ³w
+			\item "Ceg³a na Enterze"
+			\item Menad¿er pakietów
 			\item make install
 		\end{itemize}
 		Konfiguracja po instalacji
 		\begin{itemize}
 			\item Ustawienia lokalne
-			\item PodÅ‚Ä…czenie bazy danych
+			\item Pod³¹czenie bazy danych
 			\item Inne
 		\end{itemize}
-	\subsection{BezpieczeÅ„stwo}
-	%kombinacje technologii z przkÅ‚adami
+	\subsection{Bezpieczeñstwo}
+	%kombinacje technologii z przk³adami
 		SSL
 		\begin{itemize}
-			\item Twoja Wiki moÅ¼e korzystaÄ‡ z HTTPS
+			\item Twoja Wiki mo¿e korzystaæ z HTTPS
 		\end{itemize}
-		BezpieczeÅ„stwo wewnÄ…trz Wiki
+		Bezpieczeñstwo wewn¹trz Wiki
 		\begin{itemize}
-			\item Poziomy dostÄ™pu
-			\item Role uÅ¼ytkownikÃ³w
+			\item Poziomy dostêpu
+			\item Role u¿ytkowników
 		\end{itemize}
 	\subsection{Internacjonalizacja}
-	%kombinacje technologii z przkÅ‚adami
-		Na co warto zwrÃ³ciÄ‡ uwagÄ™:
+	%kombinacje technologii z przk³adami
+		Na co warto zwróciæ uwagê:
 		\begin{itemize}
-			\item Czy dana Wiki obsÅ‚uguje utf8?
-			\item Czy posiada wszystkie wymagane wersje jÄ™zykowe?
-			\item Czy baza danych i SVN danej Wiki teÅ¼ obsÅ‚uguje utf8?
+			\item Czy dana Wiki obs³uguje utf8?
+			\item Czy posiada wszystkie wymagane wersje jêzykowe?
+			\item Czy baza danych i SVN danej Wiki te¿ obs³uguje utf8?
 		\end{itemize}
 			
 	\subsection{Wsparcie techniczne}
-		\subsubsection{Dla uÅ¼ytkownikÃ³w indywidualnych}
+		\subsubsection{Dla u¿ytkowników indywidualnych}
 
 
-			Z zaÅ‚oÅ¼enia uÅ¼ytkownik indywidualny nie ma duÅ¼ych potrzeb z zakresu wsparcia technicznego. Nie opÅ‚aca mu siÄ™ wykupywaÄ‡, przewaÅ¼nie drogiego, wsparcia przez telefon. Problemy z instalacjÄ… i obsÅ‚ugÄ… Wiki taki uÅ¼ytkownik powinien rozwiÄ…zywaÄ‡ za pomocÄ… rÃ³Å¼nych narzÄ™dzi dla spoÅ‚ecznoÅ›ci, takich jak fora lub grupy dyskusyjne. WybierajÄ…c wiki dla uÅ¼ytkownika indywidualnego warto zwrÃ³ciÄ‡ uwagÄ™ na to czy te formy komunikacji miÄ™dzy uÅ¼ytkownikami oprogramowania istniejÄ… i czy ich uÅ¼ytkownicy sÄ… aktywni. Przydatna moÅ¼e siÄ™ takÅ¼e okazaÄ‡ moÅ¼liwoÅ›Ä‡ zgÅ‚aszania bÅ‚Ä™dÃ³w twÃ³rcom oprogramowania.
+			Z za³o¿enia u¿ytkownik indywidualny nie ma du¿ych potrzeb z zakresu wsparcia technicznego. Nie op³aca mu siê wykupywaæ, przewa¿nie drogiego, wsparcia przez telefon. Problemy z instalacj¹ i obs³ug¹ Wiki taki u¿ytkownik powinien rozwi¹zywaæ za pomoc¹ ró¿nych narzêdzi dla spo³ecznoœci, takich jak fora lub grupy dyskusyjne. Wybieraj¹c wiki dla u¿ytkownika indywidualnego warto zwróciæ uwagê na to czy te formy komunikacji miêdzy u¿ytkownikami oprogramowania istniej¹ i czy ich u¿ytkownicy s¹ aktywni. Przydatna mo¿e siê tak¿e okazaæ mo¿liwoœæ zg³aszania b³êdów twórcom oprogramowania.
 		
-		\subsubsection{Dla maÅ‚ych grup komercyjnych}
+		\subsubsection{Dla ma³ych grup komercyjnych}
 
 
-			MaÅ‚e grupy to na przykÅ‚ad maÅ‚e firmy lub grupy robocza w wiÄ™kszych formach. Taki zespÃ³Å‚ powinien sprÃ³bowaÄ‡ wybraÄ‡ Wiki stworzonÄ… w znanej sobie technologii, aby mÃ³c samodzielnie niÄ… zarzÄ…dzaÄ‡. Istotne jest takÅ¼e, aby byÅ‚a to Wiki, ktÃ³rÄ… moÅ¼na Å‚atwo poszerzyÄ‡ o kolejne sekcje czy dziaÅ‚y, poniewaÅ¼ bardzo moÅ¼liwe (w przypadku grupy roboczej w wiÄ™kszej firmie), Å¼e zachÄ™ceni sukcesem grupy znajdÄ… siÄ™ kolejni uÅ¼ytkownicy chÄ™tni do skorzystania z Wiki. 
+			Ma³e grupy to na przyk³ad ma³e firmy lub grupy robocza w wiêkszych formach. Taki zespó³ powinien spróbowaæ wybraæ Wiki stworzon¹ w znanej sobie technologii, aby móc samodzielnie ni¹ zarz¹dzaæ. Istotne jest tak¿e, aby by³a to Wiki, któr¹ mo¿na ³atwo poszerzyæ o kolejne sekcje czy dzia³y, poniewa¿ bardzo mo¿liwe (w przypadku grupy roboczej w wiêkszej firmie), ¿e zachêceni sukcesem grupy znajd¹ siê kolejni u¿ytkownicy chêtni do skorzystania z Wiki. 
 	
 
-	Kupowanie osobnego wsparcia, moÅ¼e okazaÄ‡ siÄ™ zbÄ™dnym wydatkiem, jeÅ›li pracownicy znajÄ… technologiÄ™ w jakiej wykonana jest wybrana Wiki.
+	Kupowanie osobnego wsparcia, mo¿e okazaæ siê zbêdnym wydatkiem, jeœli pracownicy znaj¹ technologiê w jakiej wykonana jest wybrana Wiki.
 		
-		\subsubsection{Dla duÅ¼ych organizacji i firm}
+		\subsubsection{Dla du¿ych organizacji i firm}
 		
 
-		DuÅ¼a firma powinna wybraÄ‡ Wiki, ktÃ³ra jest projektem dojrzaÅ‚ym. WaÅ¼ne jest aby technologia uÅ¼yta do jej wytworzenia byÅ‚a znana w firmie, co uÅ‚atwi pracÄ™ administratorom.
+		Du¿a firma powinna wybraæ Wiki, która jest projektem dojrza³ym. Wa¿ne jest aby technologia u¿yta do jej wytworzenia by³a znana w firmie, co u³atwi pracê administratorom.
 
-	NaleÅ¼y zwrÃ³ciÄ‡ uwagÄ™ na to, czy Wiki wspomaga technologie wspierajÄ…ce takie jak LDAP, co moÅ¼e przyspieszyÄ‡ jej wdraÅ¼anie. Nie ma takÅ¼e sensu wdraÅ¼aÄ‡ Wiki korzystajÄ…cej z bazy danych nie uÅ¼ywanej w firmie. 
+	Nale¿y zwróciæ uwagê na to, czy Wiki wspomaga technologie wspieraj¹ce takie jak LDAP, co mo¿e przyspieszyæ jej wdra¿anie. Nie ma tak¿e sensu wdra¿aæ Wiki korzystaj¹cej z bazy danych nie u¿ywanej w firmie. 
 
-	DuÅ¼a firma zwykle zmuszona jest poprzez regulacje wewnÄ™trzne do zakupu wsparcia technicznego. NaleÅ¼y pamiÄ™taÄ‡ o jego istnieniu i korzystaÄ‡ z niego bez wahania.
+	Du¿a firma zwykle zmuszona jest poprzez regulacje wewnêtrzne do zakupu wsparcia technicznego. Nale¿y pamiêtaæ o jego istnieniu i korzystaæ z niego bez wahania.
 
 \newpage
-\section{WdraÅ¼anie}
-%tego siÄ™ nie dotykam - Piotrek
+\section{Wdra¿anie}
+%tego siê nie dotykam - Piotrek
 	\subsection{Problem zmiany polityki organizacji}
 
 
-	W wielu organizacjach odpowiedzialnoÅ›ciÄ… za dokumenty z dokumentacjÄ… obciÄ…Å¼ane sÄ… konkretne osoby, nawet jeÅ›li sam dokument tworzÄ… zespoÅ‚y. W takich przypadkach wdroÅ¼enie Wiki, ktÃ³ra zakÅ‚ada wspÃ³Å‚pracÄ™ nad rozwojem dokumentÃ³w moÅ¼e zostaÄ‡ przyjÄ™te z niechÄ™ciÄ…. Osoby, ktÃ³re majÄ… obawy zwiÄ…zane z utratÄ™ kontroli nad ksztaÅ‚tem dokumentu lub sÄ…dzÄ…cym, Å¼e ktoÅ› ich pracÄ™ zniszczy, powinny zostaÄ‡ zapoznane bliÅ¼ej z mechanizmami kontroli wersji dokumentÃ³w i przede wszystkim moÅ¼liwoÅ›ciÄ… przywracania wczeÅ›niejszych wersji dokumentu. 
+	W wielu organizacjach odpowiedzialnoœci¹ za dokumenty z dokumentacj¹ obci¹¿ane s¹ konkretne osoby, nawet jeœli sam dokument tworz¹ zespo³y. W takich przypadkach wdro¿enie Wiki, która zak³ada wspó³pracê nad rozwojem dokumentów mo¿e zostaæ przyjête z niechêci¹. Osoby, które maj¹ obawy zwi¹zane z utratê kontroli nad kszta³tem dokumentu lub s¹dz¹cym, ¿e ktoœ ich pracê zniszczy, powinny zostaæ zapoznane bli¿ej z mechanizmami kontroli wersji dokumentów i przede wszystkim mo¿liwoœci¹ przywracania wczeœniejszych wersji dokumentu. 
 
-	Innym problemem moÅ¼e byÄ‡ niechÄ™Ä‡ dzielenia siÄ™ pracownikÃ³w wynikami swojej pracy. MogÄ… oni sÄ…dziÄ‡, Å¼e wykonana przez nich praca nie bÄ™dzie doceniona, jeÅ›li jej wyniki znajdÄ… siÄ™ na Wiki, zamiast w skrzynce mailowej szefa. Nic bardziej mylnego. DziÄ™ki Wiki wiÄ™cej osÃ³b moÅ¼e zapoznaÄ‡ siÄ™ z wynikami pracy, a jej autor bÄ™dzie znany, poniewaÅ¼ umieszczane na Wiki wpisy majÄ… wyrÃ³Å¼nionego autora.
+	Innym problemem mo¿e byæ niechêæ dzielenia siê pracowników wynikami swojej pracy. Mog¹ oni s¹dziæ, ¿e wykonana przez nich praca nie bêdzie doceniona, jeœli jej wyniki znajd¹ siê na Wiki, zamiast w skrzynce mailowej szefa. Nic bardziej mylnego. Dziêki Wiki wiêcej osób mo¿e zapoznaæ siê z wynikami pracy, a jej autor bêdzie znany, poniewa¿ umieszczane na Wiki wpisy maj¹ wyró¿nionego autora.
 
-	Ponadto z punktu widzenia pracodawcy czas spÄ™dzony nad uzupeÅ‚nianiem Wiki moÅ¼e byÄ‡ stracony. Nic bardziej mylnego. W przypadku zwolnienia pracownika jego wiedza pozostanie w firmie w postaci przyjaznych stron, z ktÃ³rymi z powodzeniem mogÄ… zapoznaÄ‡ siÄ™ jego nastÄ™pcy.
-
-		
+	Ponadto z punktu widzenia pracodawcy czas spêdzony nad uzupe³nianiem Wiki mo¿e byæ stracony. Nic bardziej mylnego. W przypadku zwolnienia pracownika jego wiedza pozostanie w firmie w postaci przyjaznych stron, z którymi z powodzeniem mog¹ zapoznaæ siê jego nastêpcy.
 
 		
 
+		
 
-	\subsection{Zmiana sposobu obiegu dokumentÃ³w}
+
+	\subsection{Zmiana sposobu obiegu dokumentów}
 
 
-	W wielu organizacjach dokumenty podrÃ³Å¼ujÄ… gÅ‚ownie drogÄ… mailowÄ…. Sprawia to, Å¼e pojawia siÄ™ ich wiele wersji. Ponadto uÅ¼ytkownicy nie sÄ… pewni czy mogÄ… dane dokument zmieniaÄ‡ po jego otrzymaniu. Do zmian zniechÄ™ca takÅ¼e koniecznoÅ›Ä‡ Å›ciÄ…gniÄ™cia zaÅ‚Ä…cznika i  otwarcia go w innym programie, czy teÅ¼ nie posiadanie wÅ‚aÅ›ciwego programu do jego otwarcia.
+	W wielu organizacjach dokumenty podró¿uj¹ g³ownie drog¹ mailow¹. Sprawia to, ¿e pojawia siê ich wiele wersji. Ponadto u¿ytkownicy nie s¹ pewni czy mog¹ dane dokument zmieniaæ po jego otrzymaniu. Do zmian zniechêca tak¿e koniecznoœæ œci¹gniêcia za³¹cznika i  otwarcia go w innym programie, czy te¿ nie posiadanie w³aœciwego programu do jego otwarcia.
 
-	PrzykÅ‚adem czÄ™sto pojawiajÄ…cego siÄ™ w organizacji dokumentu moÅ¼e byÄ‡ plan spotkania. Taki plan czÄ™sto pojawia na krÃ³tko przed samym spotkaniem. JeÅ›li zostanie wysÅ‚any np. 20 min przed spotkaniem, uczestnicy chcÄ…cy zmieniÄ‡ lub skorygowaÄ‡ niektÃ³re jego punkty mogÄ… nie zdÄ…Å¼yÄ‡ poinformowaÄ‡ o tym organizatora, aby ten naniÃ³sÅ‚ stosowane zmiany. JeÅ›li taki plan zostanie umieszczony na Wiki, kaÅ¼dy uczestnik bÄ™dzie mÃ³gÅ‚ bez problemu nanieÅ›Ä‡ poprawki, bez ingerencji organizatora. NastÄ™pnie taki plan moÅ¼e byÄ‡ uÅ¼yty w trakcie samego spotkania - wyÅ›wietlony na rzutniku. Ponadto nic nie stoi na przeszkodzie, aby w trakcie trwania spotkania dopisywaÄ‡ na Wiki podjÄ™te ustalenia na kolejne omawiane tematy.   
+	Przyk³adem czêsto pojawiaj¹cego siê w organizacji dokumentu mo¿e byæ plan spotkania. Taki plan czêsto pojawia na krótko przed samym spotkaniem. Jeœli zostanie wys³any np. 20 min przed spotkaniem, uczestnicy chc¹cy zmieniæ lub skorygowaæ niektóre jego punkty mog¹ nie zd¹¿yæ poinformowaæ o tym organizatora, aby ten naniós³ stosowane zmiany. Jeœli taki plan zostanie umieszczony na Wiki, ka¿dy uczestnik bêdzie móg³ bez problemu nanieœæ poprawki, bez ingerencji organizatora. Nastêpnie taki plan mo¿e byæ u¿yty w trakcie samego spotkania - wyœwietlony na rzutniku. Ponadto nic nie stoi na przeszkodzie, aby w trakcie trwania spotkania dopisywaæ na Wiki podjête ustalenia na kolejne omawiane tematy.   
 	
-	\subsection{Problem wÅ‚asnoÅ›ci informacji}
+	\subsection{Problem w³asnoœci informacji}
 
-	W wielu zÅ‚oÅ¼onych z rÃ³Å¼nych dziaÅ‚Ã³w organizacji zakÅ‚ada siÄ™, Å¼e pracownicy jednego dziaÅ‚u nie majÄ… dostatecznej wiedzy aby pojÄ…Ä‡ czym dokÅ‚adnie zajmuje siÄ™ inny dziaÅ‚. To sprawia, Å¼e nie widzi siÄ™ potrzeby udostÄ™pniania miedzy dziaÅ‚ami informacji o ich poczynaniach. 
+	W wielu z³o¿onych z ró¿nych dzia³ów organizacji zak³ada siê, ¿e pracownicy jednego dzia³u nie maj¹ dostatecznej wiedzy aby poj¹æ czym dok³adnie zajmuje siê inny dzia³. To sprawia, ¿e nie widzi siê potrzeby udostêpniania miedzy dzia³ami informacji o ich poczynaniach. 
 
-	Ponadto w takich sytuacjach pojawia siÄ™ brak zaufania do innych pracownikÃ³w, aby powierzyÄ‡ im wyniki swojej pracy, skoro ich ona nie dotyczy. Daje to osobie ukrywajÄ…cej informacje pewne poczucie kontroli nad tym co dzieje siÄ™ z posiadanymi przez niÄ… dokumentami. KaÅ¼dy, kto chce siÄ™ czegokolwiek dowiedzieÄ‡ o pracy takiej osoby, musi spytaÄ‡ ja osobiÅ›cie. 
+	Ponadto w takich sytuacjach pojawia siê brak zaufania do innych pracowników, aby powierzyæ im wyniki swojej pracy, skoro ich ona nie dotyczy. Daje to osobie ukrywaj¹cej informacje pewne poczucie kontroli nad tym co dzieje siê z posiadanymi przez ni¹ dokumentami. Ka¿dy, kto chce siê czegokolwiek dowiedzieæ o pracy takiej osoby, musi spytaæ ja osobiœcie. 
 
-	Takie podejÅ›cie obniÅ¼a wydajnoÅ›Ä‡ organizacji. MoÅ¼e zdarzyÄ‡ siÄ™, Å¼e nagle zacznÄ… byÄ‡ rÃ³wnoczeÅ›nie realizowane bardzo podobne projekty, ktÃ³re moÅ¼na poÅ‚Ä…czyÄ‡, ale ze wzglÄ™du na brak informacji nikt nie wpadnie na to odpowiednio wczeÅ›nie. Dochodzi rÃ³wnieÅ¼ do redundancji dokumentÃ³w, wiele pracy wykonywanej jest jednoczeÅ›nie przez wiele niezaleÅ¼nych osÃ³b.
+	Takie podejœcie obni¿a wydajnoœæ organizacji. Mo¿e zdarzyæ siê, ¿e nagle zaczn¹ byæ równoczeœnie realizowane bardzo podobne projekty, które mo¿na po³¹czyæ, ale ze wzglêdu na brak informacji nikt nie wpadnie na to odpowiednio wczeœnie. Dochodzi równie¿ do redundancji dokumentów, wiele pracy wykonywanej jest jednoczeœnie przez wiele niezale¿nych osób.
 
-	Z tych powodÃ³w naleÅ¼y zachÄ™caÄ‡ ludzi do dzielenia siÄ™ na Wiki postÄ™pami i tematykÄ… swojej pracy. Wiedza w duÅ¼ej organizacji powinna byÄ‡ wspÃ³Å‚dzielona, nawet jeÅ›li potencjalnie nie zainteresuje innych pracownikÃ³w. Przydatki, kiedy jednak okaÅ¼e siÄ™ przydatna mogÄ… bardzo przyspieszyÄ‡ niektÃ³re dziaÅ‚ania. Ponadto, jeÅ›li pracownik dokumentuje swojÄ… pracÄ™ za pomocÄ… ogÃ³lnodostÄ™pnego narzÄ™dzia, jego koledzy mogÄ… mieÄ‡ oglÄ…d na to czym tak naprawdÄ™ zajmuje siÄ™ ta osoba w danej organizacji. 
+	Z tych powodów nale¿y zachêcaæ ludzi do dzielenia siê na Wiki postêpami i tematyk¹ swojej pracy. Wiedza w du¿ej organizacji powinna byæ wspó³dzielona, nawet jeœli potencjalnie nie zainteresuje innych pracowników. Przydatki, kiedy jednak oka¿e siê przydatna mog¹ bardzo przyspieszyæ niektóre dzia³ania. Ponadto, jeœli pracownik dokumentuje swoj¹ pracê za pomoc¹ ogólnodostêpnego narzêdzia, jego koledzy mog¹ mieæ ogl¹d na to czym tak naprawdê zajmuje siê ta osoba w danej organizacji. 
 
-	\subsection{Change summary - Podsumowanie zmian i  jego przydatnoÅ›Ä‡ w organizacji}
+	\subsection{Change summary - Podsumowanie zmian i  jego przydatnoœæ w organizacji}
 	
-	Wiele Wiki udostÄ™pnia mechanizm podsumowania zmian
+	Wiele Wiki udostêpnia mechanizm podsumowania zmian. Zwykle ma on formê strony podsumowuj¹cej zmiany wprowadzone w Wiki przez pewien okres czas. Niektóre Wiki (np. Confluence) mog¹ tak¿e wysy³aæ takie raporty na e-mail. 
 
-	\subsection{IstotnoÅ›c pluginÃ³w}
-	%wazne jest aby organizacja mogÅ‚a sama rozszerzaÄ‡ soft wiki poprzez pluginy
-	\subsection{Historie wdroÅ¼eÅ„} %jak w firmie/uczelni
+	Takie podsumowanie mo¿e przydaæ siê kierownikom, aby oceniæ jak Wiki przydaje siê w organizacji. Zwykle s¹ oni mile zaskakiwani aktywnoœci¹ swoich pracowników. Ponadto edycje czy te¿ komentarze na niektórych stronach mog¹ zwróciæ uwagê kierownictwa na problemy obecnie wystêpuj¹ce w ich firmie. 
+
+	\subsection{Istotnoœc pluginów}
+	%wazne jest aby organizacja mog³a sama rozszerzaæ soft wiki poprzez pluginy
+
+	Niemal wszystkie Wiki budowane s¹ w taki sposób, aby mo¿na by³o do nich napisaæ w³asne pluginy. Zwykle ich obecnoœæ w Wiki objawia siê nowym poleceniem dostêpnym poprzez sk³adniê Wiki, lub rzadziej now¹ funkcjonalnoœci¹ interfejsu. 
+
+
+
+	\subsection{Historie wdro¿eñ} %jak w firmie/uczelni
 
 \newpage
 \section{Podsumowanie}
