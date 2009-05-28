@@ -133,7 +133,7 @@ Pierwsza WIKI, WikiWikiWeb, powstała na autorskim silniku napisanym w języku P
 	\subsection{Perl}
 	Trzeci język WIKI. Jak już wspomniano wcześniej, w nim powstała prototypowa WikiWikiWeb. Obecnie najpopulaniejszym silnikiem powstającym w tym języku TWiki, jeden z bardziej rozbudowanych i popularnych do zastosowań biznesowych, oraz Foswiki, jego niekomercyjna wersja.  
 	\subsection{Inne}
-	Na podstawie informacji zawartych na wikimatrix.net można śmiało stwierdzić, że istnieją WIKI prawie we wszystkich używanych językach programowania. Są w śród nich silniki popularne, jak np. MoinMoin napisany w Pythonie (używany między innymi jako silnik oficjalnych WIKI systemów Ubuntu, Debian oraz Mercuriala). Jest również wiele takich, które są napisane raczej w celu udowodnienia, że można w tym języku stworzyć taki mechanizm. Przykładowo instnieje Sputnik napisany w Lua, GeboGebo stworzony w Tdbengine, jednoosobowe TiddlyWiki w Javascripcie, w pełni funkcjonalna WikiSH napisana w Shellu czy chociażby Wiki Over DNS. Krążą plotki\footnote{Na podstawie serwisu www.esolang.com.}, że istnieje w pełni funkcjonalna wiki napisane w Brainfucku. 	
+	Na podstawie informacji zawartych na wikimatrix.net można śmiało stwierdzić, że istnieją WIKI prawie we wszystkich używanych językach programowania. Są w śród nich silniki popularne, jak np. MoinMoin napisany w Pythonie (używany między innymi jako silnik oficjalnych WIKI systemów Ubuntu, Debian oraz Mercuriala). Jest również wiele takich, które są napisane raczej w celu udowodnienia, że można w tym języku stworzyć taki mechanizm. Przykładowo instnieje Sputnik napisany w Lua, GeboGebo stworzony w Tdbengine, jednoosobowe TiddlyWiki w Javascripcie, w pełni funkcjonalna WikiSH napisana w Shellu czy chociażby Wiki Over DNS. Krążą plotki\footnote{Na podstawie informacji z serwisu www.esolang.org.}, że istnieje w pełni funkcjonalna wiki napisane w Brainfucku. 	
 % wspomnieć, że wiki można napisać nawet w Javascripcie....
 
 \newpage
@@ -146,12 +146,14 @@ Pierwsza WIKI, WikiWikiWeb, powstała na autorskim silniku napisanym w języku P
 	%o tym, że WIKI stosują takie technologie jak RSS i Atom...
 \newpage
 \section{Przechowywanie danych}
-	\subsection{Bazy danych}
-	Najpopularniejszym wśród
+	WIKI mogą korzystać z różnych systemów przechowywania danych. Często bardziej dojrzałe projekty potrafią korzystać z kilku różnych (nawet jednocześnie) i umożliwiają dodanie innych od standardowych dzięki zastosowaniu mechanizmu wtyczek. Niektóre zaś, tak jak TrikiWiki wymagają pisania własnych, dedykowanych konkretnemu systemowi w którym instalujemy WIKI, wtyczek. 
 	\subsection{Pliki tekstowe}
+	Stosowanym zarówno przez pierwszą WIKI jak i projekty nowsze, także te dojrzałe, metodą przechowywania danych są specjalnie skonstruowane pliki tekstowe. Zarówno TWiki, PHPWiki jak i JSPWiki udostępniają taki sposób przechowywania informacji, natomiast w MoinMoin i DokuWiki jest to zasadniczo jedyna opcja przechowywania danych. Sposób ten ma zarówno wady jak i zalety. Zaletą jest niewątpliwie to, że sam silnik do działania nie wymaga ani bazy danych ani żadnego dodatkowego systemu np bazodanowego - wystarczy, że zainstalujemy go na serwerze i spersonalizujemy a może on już w pełni spełniać swoje funkcje. Rozwiązanie to ma natomiast zasadniczą wadę - pliki te najczęściej nie zapewniają wydajności wyszukiwania nawet porównywalnej z bazami danych i innymi systemami przechowywania informacji. 
+	\subsection{Bazy danych}
+	Najpopularniejszym obecnie wśród dojrzałych WIKI mechanizmem do przechowywania danych są bazy danych. Najczęściej stosuje się te należące do Wolnego Oprogramowania, jak MySQL, PostgreSQL i SQLite - tych baz używają np. MediaWiki, TikiWiki, aczkolwiek niektóre silniki, m.in. komercyjny Confluence czy też XWiki, obsługują również Oracle DB, MS SQL. Zaletą użycia bazy danych jest dużo większa wydajność tego sposobu składowania informacji. Wadą jest niewiątpliwie to, że instalacja i konfiguracja samej WIKI staje się przez zastosowanie tego mechanizmu trudniejsza.
 	% DokuWiki nie ma nawet Subversion... dlaczego co i jak jest w tym dobre
 	\subsection{System kontroli wersji}
-
+	Alternatywnym sposobem przechowywania danych przez WIKI są systemy kontroli wersji, m.in. już nieco archaiczne RCS\footnote{Revision Control System, poprzednik CVS}, który może stosować m.in. TWiki czy PHPWiki, czy też CVS (MoniWiki, PHPWiki). Nie jest to sposób bardzo popularny, jedak warto o nim wspomnieć z uwagi na to, że WIKI gdy takiego systemu nie używa to i tak najczęściej w jakiś określony sposób wersjonuje dane, których używa.
 \newpage
 \section{Edycja danych}
 	\subsection{WYSIW(M)G}
@@ -374,5 +376,6 @@ Kiedy już zdecydujemy, że WIKI jest dokładnie tym mechanizmem, który chcemy 
 		\item \url{http://en.wikipedia.org/wiki/History_of_wikis}
 		\item \url{http://www.wikimatrix.org}
 		\item \url{http://en.wikipedia.org/wiki/Comparison_of_wiki_software}
+		\item \url{http://www.esolang.org}
 	\end{itemize}
 \end{document}
