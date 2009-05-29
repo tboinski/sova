@@ -174,10 +174,22 @@ What You Mean Is What You Get
 
 	\subsection{Edycja w programach zewnętrznych}
 
+Wiki niekonieczne musi być edytowana poprzez przeglądarkę. Przykładowo artykuł w Wiki zintegrowanej z MS Sharepoint może być edytowany jako zwykły plik tekstowy. Wymagana jest wówczas znajomość składni Wiki. Ponadto twórcy Confluence postawili na integrację z pakietem biurowym i podjęli już pierwsze próby zastąpienia wbudowanego w edytora zwykłym procesorem testu zainstalowanym u użytkownika, np. MS Word. Taka integracja ma jednak wiele ograniczeń, ponieważ parsery przenoszące format z procesora tekstu na Wiki są niedoskonałe. Ponadto składnie Wiki nie wspierają wszystkich opcji procesorów tekstu. 
 
-	\subsection{Nazywanie artykułow}
-%różne podejścia...	
-%CamelCase 
+
+
+	\subsection{Nazywanie artykułów}
+
+Wiki przewidują różne podejścia do zagadnienia nazywania artykułów. Generalnie można wyróżnić trzy podejścia:
+\begin{itemize}
+\item unikalne nazwy artykułów w całej Wiki - występuje głównie w Wiki mniej rozbudowanych, gdzie artykuły identyfikowane są w bazie danych dzięki ich nazwom
+\item unikalne nazwy w ramach jednego działu/namespace - bardziej wygodne identyfikowanie artykułów poprzez powiązanie ich z lokalizacją
+\item dowolne powtarzalne nazwy - podejście najbardziej elastyczna, gdzie aplikacja Wiki dla każdego artykułu generuje indywidualny identyfikator; pozwala to na tworzenie stałych adresów do artykułów (www.przyklad.pl/id=1234 zamiast www.przyklad.pl/Artykul) oraz umożliwia wprowadzenie mechanizmu automatycznych przekierowań - jeśli użytkownik odwoła się do adresu powiązanego z nazwą artykułu i jego lokalizacją zostanie on automatycznie przeniesiony do nowej lokalizacji danego artykułu. 
+\end{itemize}
+
+Poza adresami artykułu nazwy mają także wpływ na tworzenie linków wewnątrz Wiki. Takie linki zwykle wymagają podania tylko nazwy artykułu w Wiki, bez domeny, jak przy linkach zewnętrznych. Niektóre Wiki udostępniają możliwość nazywania artykułów z pomocą CamelCase. Jest to pomysł podobny do stosowanego w językach programowania - nazwa składająca się z wielu słów zapisywana jest bez spacji, początek nowego słowa sygnalizuje wielka litera. Przy takim podejściu Wiki zaczyna automatycznie tworzyć linki za słów zapisanych w formie CamelCase. Jednakże odchodzi się od tego rozwiązania, ponieważ wielu użytkowników uważa je za nieestetyczne oraz istnieją problemy, gdyż wszystkie skróty zapisywane wielkimi literami interpretowane są jako CamelCase, co jest zwykle niepożądane.
+
+
 
 \newpage
 \section{Sposoby organizacji informacji}	
@@ -405,9 +417,14 @@ Kiedy już zdecydujemy, że WIKI jest dokładnie tym mechanizmem, który chcemy 
 
 	Niemal wszystkie Wiki budowane są w taki sposób, aby można było do nich napisać własne pluginy. Zwykle ich obecność w Wiki objawia się nowym poleceniem dostępnym poprzez składnię Wiki, lub rzadziej nową funkcjonalnością interfejsu. 
 
+Możliwe jest przygotowanie pluginu pobierającego informacje poprzez usługę sieciową lub ze specyficznej bazy danych, innej niż ta przeznaczona dla Wiki. Ponadto można rozbudować funkcjonalność tak, aby wspierać charakterystyczne procesy firmy lub integrować się z aplikacjami dedykowanymi dla firmy. 
 
+Takie możliwości pluginów mogą sprawić, że Wiki stanie się dla organizacji jeszcze bardziej uniwersalnym narzędziem. 
 
 	\subsection{Historie wdrożeń} %jak w firmie/uczelni
+
+
+
 
 \newpage
 \section{Podsumowanie}
