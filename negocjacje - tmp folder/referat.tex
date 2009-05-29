@@ -169,7 +169,12 @@ Pierwsza Wiki, WikiWikiWeb, powstała na autorskim silniku napisanym w języku P
 	\subsection{Systemy kontroli wersji}
 	% o tym, że większość Wiki z niego korzysta do przechowywania danych...
 	Niektóre Wiki, np. TWiki, PHPWiki czy JSPWiki stosują lub mogą stosować systemy kontroli wersji do przechowywania danych. Często Wiki w praktyce może działa również jako pewnego rodzaju ``subversion dla ubogich'' - wersjonując tworzone przy ich pomocy dokumenty..  
-	\subsection{LDAP}
+\subsection{LDAP}
+
+Wprowadzenie Wiki w firmie wiąże się z umieszczeniem w nim kont dla pracowników. W przypadku większych firm byłoby to niewydajne. Dlatego dojrzałe Wiki umożliwiają migracje użytkowników z zewnętrznych baz. Wspomagane sa technologie takie jak LDAP, Active Directory itp. Synchronizacja z takim rozwiązaniem pozwala na zarządzanie użytkownikami niezależne kompletnie od aplikacji Wiki co może pozytwniej nastawić administratorów do wdrożenia Wiki,  
+
+Większość Wiki posiada typy użytkowników z różnymi uprawnieniami oraz umożliwia grupowanie użytkowników. Przy integracji z LDAP grupy już istniejace zostają przeniesione do Wiki. Administratorowi pozostaje jedynie nadanie im odpowiednich praw dostępu.
+
 	%SSO , poziomy dostępu, 
 	\subsection{RSS}
 	Jako reprezentant Web 2.0 Wiki może używać i udostępniać interfejsy XML, np. RSS i Atom. Dobrym przykładem jest tutaj Confluence, który potrafi zarówno użyć RSSów i danych Atom innych serwisów internetowych i automatycznie przetworzyć je i umieścić na wybranych stronach Wiki jak i udostępnia własne interfejsy XML.  
@@ -225,8 +230,24 @@ Poza adresami artykułu nazwy mają także wpływ na tworzenie linków wewnątrz
 \newpage
 \section{Sposoby organizacji informacji}	
 	\subsection{Przestrzenie nazw}
-	\subsection{Tag clouds}
-%                                                                      Tagging
+	
+
+	Niektóre Wiki, np. MediaWiki, organizują informacje w przestrzenie nazw. Jest to koncepcja zapożyczona z obiektowych języków programowania. Dane artykuł może należeć do kilku przestrzeni nazw. Na przykład \"Adam Mickiewicz\" moze być umieszczony w przestrzeni nazw \"pisarze\" oraz \"Polacy\". Artykuły dzięki temu można przeglądać poprzez kategorie.   
+ 
+\subsection{Hierarchiczna organizacja informacji}
+Większość nowych Wiki wspomaga hierachiczną organizację informacji. Strona glowna takiej Wiki zawiera przewaznie listę działów. W ramach jednego dzialu tworzona jest drzewiasta struktura artykułów.  
+
+	Istnienie działów pozwala stworzyć w organizacji iluzje istnienia wielu Wiki. Każdy projekt lub komórka w firmie może mieć swój dział. W większości Wiki każdy z działów może wyglądać inaczej. To podejście pozwala wizualnie wyróżnić różne grupy korzystajace z Wiki i przekazać użytkownikom kontrolę nad ich działem.
+
+
+
+
+\subsection{Tagi}
+
+	Niektóre aplikacje Wiki pozwalają dodawać do artykułów tagi. Grupowanie artykułów za pomocą tagów pozwala    na alternatywną klasyfikacje informacji zawartych w Wiki. Artykuły umieszczone w różnych działach, a dotyczące podobnej tematyki (np. opis rozwiązań problemów z narzędziami programistycznymi), mogą dzięki tagom być   przeglądane  w jednym widoku, niezależnie od ich położenia.
+Ponadto obecność tagów pozwala na poglądowe zapoznanie się z tematyką artykułów umieszczonych na Wiki.
+
+       %                                                             Tagging
 %has emerged as one of the most effective ways to organize information because
 %the organization is the result of a collaborative process where people create
 %tags as needed to describe content, and instead of putting content in folders
@@ -236,14 +257,17 @@ Poza adresami artykułu nazwy mają także wpływ na tworzenie linków wewnątrz
 
 
 	
-	%\subsection{Hierarchiczna organizacja)
+	
 
 \newpage
 \section{Zastosowania w pracy zespołowej}
 Mechanizm Wiki, odpowiednio użyty, może znacząco ułatwić pracę realizowaną zespołowo. W niniejszym rozdziale zostaną przedstawione podstawowe zastosowania oraz problemy, które Wiki pozwala rozwiązywać dużo łatwiej. 
+
 	\subsection{Budowa portali}  
 
-
+Wiki może stać się bazą do zbudowania portalu firmy. Jako, że większość Wiki można dostosować do własnych potrzeb dzięki pluginom (zmienić układ, kolorystykę), stają się one doskonałą bazą do zbudowania strony internetowej dostarczającej informacji o firmie. 
+Ponadto mechanizm Wiki odciąża programistów tworzących taki portal od konieczności implementacji większości mechanizmów, takich jak zamieszczanie artykułów czy wiadomości od firmy.
+Kolejnym plusem jest łatwość zarządzania użytkownikami - pracownikami, którzy będą umieszczać informacje na portalu.
 
 
 	\subsection{Gromadzanie wiedzy}
@@ -335,7 +359,7 @@ Mechanizm Wiki, odpowiednio użyty, może znacząco ułatwić pracę realizowan�
 
 		Współpraca wirtualna na Wiki zwykle przypada do gustu zespołom, które nie pracują w tej samej lokalizacji. Wspólna edycja dokumentu na Wiki może zastapić konieczność podróży i spotkania. 
 
-	\subsection{Szybsza edycja}
+%	\subsection{Szybsza edycja} to powiela to co zostało napisane już wcześniej, więc tego nie pisze :P
 %tego też pragnie Pan Samolot :)
 
 %   By contrast, if we were using a wiki, you might see the wiki page at 2:55 P.M.
@@ -346,7 +370,7 @@ Mechanizm Wiki, odpowiednio użyty, może znacząco ułatwić pracę realizowan�
 %can keep moving forward because I can revise based on your edits, send it to
 %others for further input, and so on.
 
-Edycja stworzonego przez kogoś dokumentu Word może być kłopotliwa. Przykładowo, jesli 
+%Edycja stworzonego przez kogoś dokumentu Word może być kłopotliwa. Przykładowo, jesli 
 
 \newpage
 \section{Zanim wdrożysz}
