@@ -11,4 +11,5 @@ package org.eti.kask.sova.demo1;
  */
 public final class Constants {
     public static final String ONTO_TEST_DIRECTORY = "file:/home/onot-test.owl";
+
 }
