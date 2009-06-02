@@ -2,6 +2,8 @@ package org.eti.kask.sova.edges;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.Point2D;
+import prefuse.visual.VisualItem;
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.B7C99D74-BF0F-4B05-D6B3-E7E54BDEE4F1]
@@ -22,6 +24,7 @@ public class Edge {
     // #[regen=yes,id=DCE.34E7DCE2-36DC-D3E7-7EC8-8CFDF8D4E076]
     // </editor-fold> 
     public Edge () {
+	    setStrokeColor(Color.BLACK);
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -55,7 +58,10 @@ public class Edge {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.7F2F96F8-B319-8EE3-7EDB-3C2A09BB1022]
     // </editor-fold> 
-    public void renderShape (Graphics2D g) {
+    public void renderShape (Graphics2D g, Point2D start, Point2D end, VisualItem sourceNode, VisualItem targetNode) {
+	    g.setPaint(strokeColor);
+
+
     }
 
 }

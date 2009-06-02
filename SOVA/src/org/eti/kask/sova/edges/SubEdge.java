@@ -1,6 +1,12 @@
 package org.eti.kask.sova.edges;
 
-import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Shape;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
+import prefuse.util.GraphicsLib;
+import prefuse.visual.VisualItem;
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.8F1FE813-4E1D-D395-E5D8-7F8461CB3BD1]
@@ -13,31 +19,33 @@ public class SubEdge extends Edge {
     public SubEdge () {
     }
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.3E5433A5-7CD9-2678-3D53-BF2850734F23]
-    // </editor-fold> 
-    public Color getStrokeColor () {
-        return null;
-    }
+	@Override
+	public void renderShape(Graphics2D g, Point2D start, Point2D end, VisualItem sourceNode, VisualItem targetNode)
+	{
+		//super.renderShape(g);
+		//Debug.sendMessage("SubEdgeRender"); - działa
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.37896C95-F2FC-1F62-03C6-A9995BD8584A]
-    // </editor-fold> 
-    public void setStrokeColor (Color val) {
-    }
+		//czesc kodu do przeniesienia do klasy Edge
+		g.setPaint(strokeColor);
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.1A793A73-A1B7-1447-0B94-C97930E7EB09]
-    // </editor-fold> 
-    public int getStrokeWidth () {
-        return 0;
-    }
+		/*Rectangle2D sourceNodeBounds = sourceNode.getBounds();
+		Point2D[] linePoints = new Point2D[2];
+		Point2D[] linePoints2 = new Point2D[2];
+		GraphicsLib.intersectLineRectangle(start, end, sourceNodeBounds, linePoints);
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.5E83E2BF-5363-8C12-A629-13B294C08D6D]
-    // </editor-fold> 
-    public void setStrokeWidth (int val) {
-    }
+		Rectangle2D targetNodeBounds = targetNode.getBounds();
+		int i2 = GraphicsLib.intersectLineRectangle(start, end, targetNodeBounds,
+					linePoints2);
+		if (i2 > 0)
+			end = linePoints2[0];
+*/
+		/*AffineTransform at2 = EdgeRenderer getArrowTrans(start, end, width);
+		Shape arrowHead2 = at2.createTransformedShape(m_arrowHead);
+
+			g.fill(arrowHead2);*/
+	}
+
+
 
 }
 

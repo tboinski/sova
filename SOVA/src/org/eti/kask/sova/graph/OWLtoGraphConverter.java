@@ -8,6 +8,7 @@ import prefuse.data.Edge;
 import prefuse.data.Graph;
 import prefuse.data.Node;
 import org.eti.kask.sova.utils.Debug;
+import prefuse.data.Table;
 
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
@@ -17,6 +18,8 @@ public class OWLtoGraphConverter
 {
 
 	private static final OWLtoGraphConverter INSTANCE = new OWLtoGraphConverter();
+
+	private Table edges;
 
 	// Private constructor prevents instantiation from other classes
 	private OWLtoGraphConverter()
@@ -43,38 +46,62 @@ public class OWLtoGraphConverter
 	{
 		// Tworzymy nowy graf
 		Graph graph = new Graph();
-		graph.addColumn( "label", String.class );
+		graph.addColumn( "node", org.eti.kask.sova.nodes.Node.class );
 
 		// Dodajemy węzeł Thing
 		Node thing = graph.addNode();
-		thing.set( "label", "Thing" );
+		org.eti.kask.sova.nodes.Node t = new org.eti.kask.sova.nodes.ThingNode();
+		thing.set( "node", t );
 
+		edges = graph.getEdgeTable();		
+		//edges.addColumn("DEFAULT_SOURCE_KEY", Integer.class);
+		//edges.addColumn("DEFAULT_TARGET_KEY", Integer.class);
+		//edges.addColumn("DEFAULT_NODE_KEY", Integer.class);
+		edges.addColumn("edge", org.eti.kask.sova.edges.Edge.class);
 
 		for (OWLClass cls : ontology.getReferencedClasses()) {
 			Debug.sendMessage( cls.toString() );
 
 			if (cls.getSuperClasses(ontology).isEmpty() == true) { //Thing jest superklasa
 				Node n = graph.addNode();
-				n.set("label", cls.toString());
-				graph.addEdge(thing, n);
+				org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.ClassNode();
+				node.setLabel(cls.toString());
+				n.set("node", node);
+
+				//graph.addEdge(thing, n);
+				int row = edges.addRow();
+				edges.set(row, "source", thing.getRow());
+				edges.set(row, "target", n.getRow());
+				edges.set(row, "edge", new org.eti.kask.sova.edges.SubEdge() );
+
+
 				Debug.sendMessage( cls.toString() );
 				recursiveSubClassReader(n, cls, ontology);
 
 			}
 		}
 
+		graph.setEdgeTable(edges);
+
 		return graph;
 	}
 
 
-	public static void recursiveSubClassReader(Node parent, OWLClass cls,OWLOntology ontology ){
+	public void recursiveSubClassReader(Node parent, OWLClass cls,OWLOntology ontology ){
 
 		for (OWLDescription sub : cls.getSubClasses( ontology)) {
 			Node n = parent.getGraph().addNode();
+			org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.ClassNode();
+			node.setLabel(sub.toString());
+			n.set("node", node);
 
-			n.set("label", sub.toString());
-			Edge e = parent.getGraph().addEdge(parent, n);
-			System.out.println("subclass "+ sub.toString() );
+			//Edge e = parent.getGraph().addEdge(parent, n);
+			int row = edges.addRow();
+			edges.set(row, "source", parent.getRow());
+			edges.set(row, "target", n.getRow());
+			edges.set(row, "edge", new org.eti.kask.sova.edges.SubEdge() );
+
+			Debug.sendMessage("subclass "+ sub.toString() );
 			recursiveSubClassReader(n, sub.asOWLClass(), ontology );
 
 		}

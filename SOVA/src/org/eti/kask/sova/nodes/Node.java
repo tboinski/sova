@@ -20,67 +20,66 @@ public abstract class Node {
 	protected int witdh;
 	protected String label;
 
-	 // <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-    // #[regen=yes,id=DCE.76EC33C6-092C-F1A2-EEC3-1B10722FE755]
-    // </editor-fold>
-    public Color getFillColor () {
-        return fillColor;
-    }
+	public Node()
+	{
+		label = "no label!";
+	}
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-    // #[regen=yes,id=DCE.1218DE4D-41DA-E1F0-3066-95B0D269F73D]
-    // </editor-fold>
-    public int getStrokeWidth () {
-        return strokeWitdh;
-    }
+	public Color getFillColor()
+	{
+		return fillColor;
+	}
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-    // #[regen=yes,id=DCE.4FE0F42C-A080-3632-E23F-80697C7FDD32]
-    // </editor-fold>
-    public void setStrokeWidth (int val) {
-	    strokeWitdh = val;
-    }
+	public void setFillColor(Color fillColor)
+	{
+		this.fillColor = fillColor;
+	}
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-    // #[regen=yes,id=DCE.E029E7B5-B039-30B5-F9A4-E53BBC53A0F6]
-    // </editor-fold>
-    public int getHeight () {
-        return height;
-    }
+	public int getHeight()
+	{
+		return height;
+	}
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-    // #[regen=yes,id=DCE.C786106A-2391-AFE0-9CBD-21ED3170DEEA]
-    // </editor-fold>
-    public void setHeight (int val) {
-	    height = val;
-    }
+	public void setHeight(int height)
+	{
+		this.height = height;
+	}
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-    // #[regen=yes,id=DCE.1384D658-6929-3EDC-0FBE-42BA184BCBB3]
-    // </editor-fold>
-    public int getWidth () {
-        return witdh;
-    }
+	public String getLabel()
+	{
+		return label;
+	}
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-    // #[regen=yes,id=DCE.59B43E97-0359-3D99-BF35-FB9E92810C58]
-    // </editor-fold>
-    public void setWidth (int val) {
-	    witdh = val;
-    }
+	public void setLabel(String label)
+	{
+		this.label = label;
+	}
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-    // #[regen=yes,id=DCE.607D7D42-8B35-4C8D-2C61-AC7C732D3EC2]
-    // </editor-fold>
-    public String getLabel () {
-        return label;
-    }
+	public int getStrokeWitdh()
+	{
+		return strokeWitdh;
+	}
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-    // #[regen=yes,id=DCE.AE4BEC30-488B-F660-B409-E8323D93BDC7]
-    // </editor-fold>
-    public void setLabel (String val) {
-	    label = val;
+	public void setStrokeWitdh(int strokeWitdh)
+	{
+		this.strokeWitdh = strokeWitdh;
+	}
+
+	public int getWitdh()
+	{
+		return witdh;
+	}
+
+	public void setWitdh(int witdh)
+	{
+		this.witdh = witdh;
+	}
+
+
+
+	@Override
+    public String toString() {
+	    return getLabel();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker ">
