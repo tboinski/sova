@@ -28,7 +28,7 @@ public class Demo
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		// We load an ontology from a physical URI - in this case we'll load the pizza
 		// ontology.
-		URI physicalURI = URI.create("file:/home/infinity/Projekty/svn/ocs_visualisation/onot-test.owl");
+		URI physicalURI = URI.create("file:/home/piotr/8semestr/pg/praktyka/repo/ocs_visualisation/onot-test.owl");
 		OVDisplay display;
 		try {
 			// Now ask the manager to load the ontology
