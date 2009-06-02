@@ -34,7 +34,7 @@ public class Demo
 		// We load an ontology from a physical URI - in this case we'll load the pizza
 		// ontology.
 
-		URI physicalURI = URI.create(ONTO_TEST_DIRECTORY);
+		URI physicalURI = URI.create(Constants.ONTO_TEST_DIRECTORY);
 
 		try {
 			// Now ask the manager to load the ontology
