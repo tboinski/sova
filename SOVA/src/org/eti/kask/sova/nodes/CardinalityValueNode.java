@@ -100,12 +100,6 @@ public class CardinalityValueNode extends Node {
     public void setComment (Comment val) {
     }*/
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.95B8427C-CADF-8E1C-0766-BBE85DB2D1FB]
-    // </editor-fold> 
-	@Override
-    public void renderShape (Graphics2D g) {
-    }
 
 }
 

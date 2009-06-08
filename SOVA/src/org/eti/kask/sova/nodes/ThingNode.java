@@ -13,16 +13,10 @@ public class ThingNode extends Node {
     // </editor-fold> 
     public ThingNode () {
 	    super();
-	    setLabel("Thing");
+	    setLabel("T");
+	    setFillColor(Color.GREEN);
     }
 
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.71C6D2FE-9851-BFA2-8E7C-A366FA8C8438]
-    // </editor-fold> 
-	@Override
-    public void renderShape (Graphics2D g) {
-    }
 
 }
 

@@ -12,6 +12,7 @@ public class ClassNode extends Node {
     // #[regen=yes,id=DCE.5FDCDDDC-F239-D6F1-7C0F-BD6A2BF250BE]
     // </editor-fold> 
     public ClassNode () {
+	    setFillColor(Color.CYAN);
     }
 
 

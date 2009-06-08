@@ -108,9 +108,4 @@ public abstract class Node {
     public void setComment (Comment val) {
     }*/
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-    // #[regen=yes,id=DCE.C7BA9BAB-22DE-6294-9E8D-B1F9C449B8A4]
-    // </editor-fold>
-    public void renderShape (Graphics2D g) {
-    }
 }

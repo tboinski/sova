@@ -108,7 +108,7 @@ public class OVDisplay extends Display {
 // draw the "name" label for NodeItems
 		org.eti.kask.sova.nodes.ThingNode t = new ThingNode();
 		Debug.sendMessage(t.toString());
-		LabelRenderer r = new LabelRenderer("node");
+		LabelRenderer r = (LabelRenderer)new NodeRenderer("node");
 		r.setRoundedCorner(8, 8); // round the corners
 
 // create a new default renderer factory

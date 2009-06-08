@@ -99,12 +99,6 @@ public class MinCardinalityValueNode extends CardinalityValueNode {
     public void setComment (Comment val) {
     }*/
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.B299F513-356F-C3C3-F026-DB060C40F532]
-    // </editor-fold> 
-	@Override
-    public void renderShape (Graphics2D g) {
-    }
 
 }
 
