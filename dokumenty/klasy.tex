@@ -113,6 +113,14 @@ Priorytet: & bardzo ważne \\ \hline
 
 %\multicolumn{2}{c}{} \\
 % \hline
+\multicolumn{2}{c}{} \\
+ \hline
+
+P005 & utils\\ \hline
+Opis: & Pakiet zawiera klasy pomocnicze \\ \hline
+Interfejsy: &     \\ \hline
+Realizowane wymagania: & CF005 \\ \hline
+Priorytet: & bardzo ważne \\ \hline
 
 \end{longtable}
 
@@ -219,19 +227,21 @@ Priorytet: & średnio ważny \\ \hline
 \begin{longtable}{|m{3cm}|m{9cm}|} \hline
 
 CN001 & Node \\ \hline
-Opis: & Abstrakcyjna klasa - nadrzędna względem wszystkich używanych klas obsługi wierzchołków. Zawiera definicje podstawowych pól o funkcji.    \\ \hline
+Opis: & Klasa nadrzędna względem wszystkich używanych klas obsługi wierzchołków. Zawiera definicje podstawowych pól o funkcji.    \\ \hline
 Klasy nadrzędne: &     \\ \hline
 Atrybuty: & \begin{itemize}
  \item strokeWidth
  \item height
  \item width
  \item annotation
- \item comment 
+ \item comment
+\item Color fillColor
+\item String label
 \end{itemize}
  \\ \hline
-Metody: & \begin{itemize}
- \item renderShape - metoda wizualizująca dany typ wierzchołka
-\end{itemize}
+Metody: &% \begin{itemize}
+ %\item renderShape - metoda wizualizująca dany typ wierzchołka
+%\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF004, WF005, WF006, WF007, WI004 \\ \hline
 Priorytet: & bardzo ważne  \\ \hline
@@ -665,16 +675,31 @@ Priorytet: & ważne  \\ \hline
 
 \begin{longtable}{|m{3cm}|m{9cm}|} \hline
 
-CE001 &  \\ \hline
-Opis: & Edge    \\ \hline
+CE001 & Edge \\ \hline
+Opis: &  Klasa reprezentująca krawędź na grafie    \\ \hline
 Klasy nadrzędne: &     \\ \hline
 Atrybuty: & \begin{itemize}
- \item strokeColor
- \item strokeWidth 
+\item Color strokeColor
+\item  int strokeWidth 
+\item boolean hasArrow
+\item    boolean hasInvertedArrow
+  \item  Polygon arrowHead
+  \item Color arrowHeadColor
 \end{itemize}
  \\ \hline
 Metody: & \begin{itemize}
- \item renderShape(Graphics2D g)
+ \item    getStrokeColor () 
+\item setStrokeColor (Color val)
+  \item  getStrokeWidth () 
+\item setStrokeWidth (int val) 
+\item getArrowHead()
+\item setArrowHead(Polygon arrowHead)
+\item isHasArrow()
+ \item setHasArrow(boolean hasArrow)
+  \item isHasInvertedArrow()
+\item setHasInvertedArrow(boolean hasInvertedArrow)
+\item getArrowHeadColor()
+ \item setArrowHeadColor(Color arrowHeadColor)
 \end{itemize}
   \\ \hline
 Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
@@ -683,8 +708,8 @@ Priorytet: & bardzo ważne  \\ \hline
 \multicolumn{2}{c}{} \\
  \hline
 
-CE002 &  \\ \hline
-Opis: & DisjointEdge    \\ \hline
+CE002 & DisjointEdge \\ \hline
+Opis: &     \\ \hline
 Klasy nadrzędne: & Edge    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
@@ -700,8 +725,8 @@ Priorytet: & ważne  \\ \hline
 \multicolumn{2}{c}{} \\
  \hline
 
-CE003 &  \\ \hline
-Opis: & DomainEdge    \\ \hline
+CE003 & DomainEdge  \\ \hline
+Opis: &    \\ \hline
 Klasy nadrzędne: & Edge    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
@@ -717,8 +742,8 @@ Priorytet: & ważne  \\ \hline
 \multicolumn{2}{c}{} \\
  \hline
 
-CE004 &  \\ \hline
-Opis: & EquivalentEdge    \\ \hline
+CE004 & EquivalentEdge \\ \hline
+Opis: &     \\ \hline
 Klasy nadrzędne: & Edge    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
@@ -734,8 +759,8 @@ Priorytet: & ważne  \\ \hline
 \multicolumn{2}{c}{} \\
  \hline
 
-CE005 &  \\ \hline
-Opis: & EquivalentPropertyEdge    \\ \hline
+CE005 & EquivalentPropertyEdge \\ \hline
+Opis: &     \\ \hline
 Klasy nadrzędne: & EquivalentEdge    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
@@ -751,8 +776,8 @@ Priorytet: & ważne  \\ \hline
 \multicolumn{2}{c}{} \\
  \hline
 
-CE006 &  \\ \hline
-Opis: & FunctionaltEdge    \\ \hline
+CE006 & FunctionaltEdge \\ \hline
+Opis: &     \\ \hline
 Klasy nadrzędne: & Edge    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
@@ -768,8 +793,8 @@ Priorytet: & ważne  \\ \hline
 \multicolumn{2}{c}{} \\
  \hline
 
-CE007 &  \\ \hline
-Opis: & InverseOfEdge    \\ \hline
+CE007 & InverseOfEdge \\ \hline
+Opis: &     \\ \hline
 Klasy nadrzędne: & Edge    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
@@ -785,8 +810,8 @@ Priorytet: & ważne  \\ \hline
 \multicolumn{2}{c}{} \\
  \hline
 
-CE008 &  \\ \hline
-Opis: & PropertyEdge    \\ \hline
+CE008 & PropertyEdge \\ \hline
+Opis: &  Klasa reprezentująca na grafie relację miedzy property a klasą   \\ \hline
 Klasy nadrzędne: & Edge    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
@@ -802,8 +827,8 @@ Priorytet: & ważne  \\ \hline
 \multicolumn{2}{c}{} \\
  \hline
 
-CE009 &  \\ \hline
-Opis: & RangeEdge    \\ \hline
+CE009 & RangeEdge \\ \hline
+Opis: & Klasa reprezentująca na grafie właściwość property Range     \\ \hline
 Klasy nadrzędne: & Edge    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
@@ -819,8 +844,8 @@ Priorytet: & ważne  \\ \hline
 \multicolumn{2}{c}{} \\
  \hline
 
-CE010 &  \\ \hline
-Opis: & SubEdge    \\ \hline
+CE010 & SubEdge \\ \hline
+Opis: & Klasa reprezentująca na grafie związek SubClass pomiędzy klasami   \\ \hline
 Klasy nadrzędne: & Edge    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
@@ -862,7 +887,7 @@ Atrybuty: & %\begin{itemize}
 %\end{itemize}
  \\ \hline
 Metody: & \begin{itemize}
- \item Render - metoda renderująca krawędź
+ \item render(Graphics2D g, VisualItem item) - metoda renderująca krawędź
 \end{itemize}
   \\ \hline
 Realizowane wymagania: & WF001, WF008, WI004 \\ \hline
@@ -879,7 +904,9 @@ Atrybuty: & %\begin{itemize}
 %\end{itemize}
  \\ \hline
 Metody: & \begin{itemize}
- \item Render - metoda renderująca wierzchołek
+ \item render (Graphics2D g, VisualItem item) - metoda renderująca wierzchołek
+\item drawString(Graphics2D g, FontMetrics fm, String text,
+            boolean useInt, double x, double y, double w) - metoda wypisujaca na wierzchołku String
 \end{itemize}
   \\ \hline
 Realizowane wymagania: & WF001, WF008, WI004 \\ \hline
@@ -889,15 +916,18 @@ Priorytet: & ważne  \\ \hline
  \hline
 
 CV003 & OVDisplay \\ \hline
-Opis: &     \\ \hline
+Opis: &  Klasa tworząca obiekt JComponent do umieszczenia na okienku JAVA zawierający wygenerowany graf z wizualizacją   \\ \hline
 Klasy nadrzędne: &  prefuse.Display   \\ \hline
-Atrybuty: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Atrybuty: & \begin{itemize}
+ \item Graph graph - obiekt typu prefuse.data.graph zawierajacy dane o grafie do wyświetlenia. 
+\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+ \item getGraph() - zwarca graf z wyśiwetlanymi danymi
+ \item setGraph(Graph graph) - nadpisuje obecny graf podanym
+ \item generateGraphFromOWl(OWLOntology ont) - wpisuje do klasy obiekt Grpah wygenrowany na podstawie ontologii
+	 
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF001, WF002, WF008, WI004 \\ \hline
 Priorytet: & ważne  \\ \hline
@@ -905,9 +935,9 @@ Priorytet: & ważne  \\ \hline
 \multicolumn{2}{c}{} \\
  \hline
 
-CV004 & OVRender \\ \hline
-Opis: &     \\ \hline
-Klasy nadrzędne: &  ???   \\ \hline
+CV004 & OVFilter \\ \hline
+Opis: & Klasa zawierająca filtry służace do wyświetlania danych w różnych zakresach    \\ \hline
+Klasy nadrzędne: &     \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
@@ -942,14 +972,15 @@ Priorytet: & ważne  \\ \hline
 \begin{longtable}{|m{3cm}|m{9cm}|} \hline
 
 CG001 & GraphToOWLConverter \\ \hline
-Opis: & Klasa zawierająca metody pozwalające na przetwarzanie obiektów grafów z prefuse na obiekty OWL API. \\ \hline
+Opis: & Klasa zawierająca metody pozwalające na przetwarzanie obiektów grafów z prefuse na obiekty OWL API. Klasa jest singletonem. \\ \hline
 Klasy nadrzędne: &     \\ \hline
-Atrybuty: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Atrybuty: & \begin{itemize}
+ \item INSTANCE - instancja klasy GraphToOWLConverter 
+\end{itemize}
  \\ \hline
 Metody: & \begin{itemize}
- \item GraphToOWL
+	\item getInstance() - zwraca instancję klasy
+	\item GraphToOWL(OWLOntology ontology) -Zamienia graf z biblioteki prefuse na ontologię zapisana w OWL API.
 \end{itemize}
   \\ \hline
 Realizowane wymagania: & WD001, WI004 \\ \hline
@@ -959,14 +990,16 @@ Priorytet: & ważne  \\ \hline
  \hline
 
 CG002 & OWLtoGraphConverter \\ \hline
-Opis: & Klasa zawierająca metody pozwalające na przetwarzanie obiektów OWL API na obiekty prefuse. \\ \hline
+Opis: & Klasa zawierająca metody pozwalające na przetwarzanie obiektów OWL API na obiekty prefuse. Klasa jest singletonem.\\ \hline
 Klasy nadrzędne: &     \\ \hline
-Atrybuty: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Atrybuty: & \begin{itemize}
+ \item INSTANCE - instancja klasy GraphToOWLConverter 
+\end{itemize}
  \\ \hline
 Metody: & \begin{itemize}
- \item OWLtoGraph
+	\item getInstance() - zwraca instancję klasy
+	\item recursiveSubClassReader(Node parent, OWLClass cls,OWLOntology ontology ) - wczytuje do grafu OWL wszystkie klasy wraz z ich podklasami.
+ 	\item OWLToGraph(OWLOntology ontology) -Zamienia ontologię w OWL API na graf z biblioteki prefuse.
 \end{itemize}
   \\ \hline
 Realizowane wymagania: & WD001, WI004 \\ \hline
@@ -980,6 +1013,41 @@ Priorytet: & ważne  \\ \hline
 
 \end{center}
 
+
+
+\section{Pakiet utils}
+
+\subsection{Diagram}
+
+ %\scalebox{0.26}{\includegraphics{./modelowanie/OV_UML/EdgeClassDiagram.png}}
+
+\subsection{Opis klasy}
+
+\begin{center}
+
+\begin{longtable}{|m{3cm}|m{9cm}|} \hline
+
+CU001 & Debug \\ \hline
+Opis: & Klasa do użycia przy debugowaniu, zapewnia strumien z błędami zwracanymi przez bibliotekę. Klasa jest singletonem.\\ \hline
+Klasy nadrzędne: &     \\ \hline
+Atrybuty: & \begin{itemize}
+ \item INSTANCE - instacja klasy Debug
+ \item Debug - Strumień do którego wpisywane są informacje potrzebne do debugowania
+\end{itemize}
+ \\ \hline
+Metody: & \begin{itemize}
+ \item getInstance() - zwraca instację klasy
+ \item setStream(PrintStream ps) - ustawia podany strumień jako strumień na który zwracane będa błędy
+ \item sendMessage(String s) - wysyła wiadomość na strumień do debugowania, jeżeli został wcześniej podpięty za pomocą funkcji setStream 	
+\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
+Priorytet: & bardzo ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+\end{longtable}
+\end{center}
 
 %\clearpage
 %\phantomsection
