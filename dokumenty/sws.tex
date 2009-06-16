@@ -8,8 +8,8 @@
 \usepackage[bookmarks=true, pdftex]{hyperref}
 
 %styl nagłowków
-\pagestyle{fancy} 
-\parindent 2cm 
+\pagestyle{fancy}
+\parindent 2cm
 
 %opening
 \title{Specyfikacja wymagań systemowych}
@@ -26,18 +26,18 @@
 %budowanie tabeli
 \begin{tabular}{|p{7cm}|p{7cm}|}
 \hline
-Symbol projektu: & Opiekun projektu:   \tabularnewline 
+Symbol projektu: & Opiekun projektu:   \tabularnewline
 3@KASK & mgr inż. Tomasz Boiński    \tabularnewline \hline
 \multicolumn{2}{|l|}{Nazwa Projektu: } \tabularnewline
-\multicolumn{2}{|l|}{Wizualizacja grafów za pomocą biblioteki Prefuse } \tabularnewline 
+\multicolumn{2}{|l|}{Wizualizacja grafów za pomocą biblioteki Prefuse } \tabularnewline
 \hline
 \multicolumn{2}{l}{ } \tabularnewline %pusta linijka
-\hline 
-Nazwa Dokumentu: & Nr wersji:   \tabularnewline 
-Specyfikacja wymagań systemowych & 0.4 \tabularnewline \hline
-Odpowiedzialny za dokument: & Data pierwszego sporządzenia:   \tabularnewline 
+\hline
+Nazwa Dokumentu: & Nr wersji:   \tabularnewline
+Specyfikacja wymagań systemowych & 0.7 \tabularnewline \hline
+Odpowiedzialny za dokument: & Data pierwszego sporządzenia:   \tabularnewline
 Piotr Orłowski & 15 kwietnia 2009 \tabularnewline \hline
-Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline 
+Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline
 DLA KLIENTA & \today \tabularnewline \hline
 \end{tabular}
 \end{center}
@@ -46,13 +46,14 @@ DLA KLIENTA & \today \tabularnewline \hline
 \begin{center}
 \begin{tabular}{|c|p{4cm}|c|c|c|}
 \multicolumn{5}{c}{\textbf{Historia dokumentu}} \tabularnewline \hline
-\textbf{Wersja} & \textbf{Opis modyfikacji} & \textbf{Rozdział/strona} & \textbf{Autor modyfikacji} & \textbf{Data} \tabularnewline \hline 
+\textbf{Wersja} & \textbf{Opis modyfikacji} & \textbf{Rozdział/strona} & \textbf{Autor modyfikacji} & \textbf{Data} \tabularnewline \hline
 1 & Stworzenie & wszystkie & Grupa projektowa & 15.04.09 \tabularnewline \hline
 2 & Wpisanie celów i wymogów ogólnych  & cele & Grupa projektowa & 16.04.09\tabularnewline \hline
 3 & Wpisanie funkcjonalnosci wizualizacyjnych & & Grupa projektowa & 28.04.09\tabularnewline \hline
 4 & Opis wymagań & & Grupa projektowa & 05.05.09\tabularnewline \hline
-5 & Zmiana kolorów Property (SomeValuesFrom i AllValuesFrom) & Projekt wizualizacji & Grupa projektowa & 18.05.09\tabularnewline
+5 & Zmiana kolorów Property (SomeValuesFrom i AllValuesFrom) & Projekt wizualizacji & Grupa projektowa & 18.05.09\tabularnewline \hline
 6 & WJ001 - klasa Thing w grafie & Wymagania jakościowe & Grupa projektowa & 25.05.09\tabularnewline \hline
+7 & Korekta & Całość & Piotr Orłowski i Piotr Kunowski & 16.06.09 \tabularnewline \hline
 \end{tabular}
 \end{center}
 
@@ -114,7 +115,7 @@ Priorytet: & mało ważne \\ \hline
 \begin{tabular}{|m{3cm}|m{9cm}|} \hline
 
 CF001 & Intuicyjne API \\ \hline
-Opis: & Na podstawie subiektywnej opinii kilku zewnętrznych osób nie należących do zespołu projektowego oraz oceny opiekuna projektu API powinno zostać uznane za nadające się do użytku. \\ \hline
+Opis: & API powinno być uznane za intuicyjne w opinii członków zespołu i klienta. \\ \hline
 Źródło: & Klient - mgr inż. Tomasz Boiński \\ \hline
 Priorytet: & średnio ważne  \\ \hline
 \multicolumn{2}{c}{} \\
@@ -196,7 +197,7 @@ Specyfika systemu nie wymaga definiowaia systemów zewnętrznych.
 Specyfika projektu sprawia, że podsystemy nie będa rozpatrywane.
 
 \subsection{Komponenty sprzętowe}
-Specyfika projektu sprawia, że komponenty sprzętowe nie będa rozpatrywane. 
+Specyfika projektu sprawia, że komponenty sprzętowe nie będa rozpatrywane.
 
 \subsection{Programowe}
 
@@ -208,6 +209,16 @@ Opis: &  Biblioteka graficzna do wizualizacji grafów w języku Java\\ \hline
 Powiązania: &  \\ \hline
 Źródło: & Specyfikacja projektu \\ \hline
 Priorytet: & bardzo ważne \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+KS002 & OWL API \\ \hline
+Opis: &  Biblioteka do przetwarzania ontologii zapisanych w języku OWL. Napisana w języku Java.\\ \hline
+Powiązania: &  \\ \hline
+Źródło: & Specyfikacja projektu \\ \hline
+Priorytet: & bardzo ważne \\ \hline
+
 
 \end{tabular}
 \end{center}
@@ -225,7 +236,7 @@ Opis: & Biblioteka powinna udostępniać kilka trybów prezentacji grafów (np. 
 Dotyczy: & CF003 \\ \hline
 Źródło: & klient - mgr Tomasz Boiński \\ \hline
 Powiązania: &WF002 \\ \hline
-Priorytet: &  ważny\\ \hline
+Priorytet: & średnio ważny\\ \hline
 
 \multicolumn{2}{c}{} \\
  \hline
@@ -329,163 +340,163 @@ Priorytet: & mało ważne \\ \hline
 \end{center}
 
 \subsection{Projekt wizualizacji}
- 
+
 \begin{longtable}{|c|c|p{7cm}|} \hline
 Identyfikator: & Nazwa & Wizualizacja \\ \hline
 
-PW001: & Thing &  
+PW001: & Thing &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/thing.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW002: & Nothing &  
+PW002: & Nothing &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/nothing.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW003: & Class &  
+PW003: & Class &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/class.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW004: & Individual &  
+PW004: & Individual &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/individual.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW005: & Property &  
+PW005: & Property &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/property.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW006: & Datatype &  
+PW006: & Datatype &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/datatype.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW007: & Anonymous Class &  
+PW007: & Anonymous Class &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/anonymousClass.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW008: & Subclass &  
+PW008: & Subclass &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/subclass.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW009: & instanceOf &  
+PW009: & instanceOf &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/instanceOf.png}} \newline
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/instanceOfDatatype.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW010: & equivalentClass &  
+PW010: & equivalentClass &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/equivalentClass.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW011: & disjointWith &  
+PW011: & disjointWith &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/disjointWith.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW012: & differentFrom / allDifferent &  
+PW012: & differentFrom / allDifferent &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/allDifferent.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW013: & sameAs &  
+PW013: & sameAs &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/sameAs.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW014: & oneOf &  
+PW014: & oneOf &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/oneOf.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW015: & unionOf &  
+PW015: & unionOf &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/unionOf.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW016: & intersectionOf &  
+PW016: & intersectionOf &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/intersectionOf.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW017: & complementOf &  
+PW017: & complementOf &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/complementOf.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW018: & subProperty &  
+PW018: & subProperty &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/subProperty.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW019: & inverseOf (property) &  
+PW019: & inverseOf (property) &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/inverseOf.png}} \newline
 \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/inverseOfProperty.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW020: & equivalentProperty &  
+PW020: & equivalentProperty &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/equivalentProperty.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW021: & functionalProperty &  
+PW021: & functionalProperty &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/functionalProperty.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW022: & inverseFunctionalProperty &  
+PW022: & inverseFunctionalProperty &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/inverseFunctionalProperty.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW023: & symmetricProperty &  
+PW023: & symmetricProperty &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/symmetricProperty.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW024: & transitiveProperty &  
+PW024: & transitiveProperty &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/transitiveProperty.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW025: & hasProperty &  
+PW025: & hasProperty &
  \scalebox{0.25}{\includegraphics{elementyGraficzne/drobne/hasProperty.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW026: & domain &  
+PW026: & domain &
  \scalebox{0.25}{\includegraphics{elementyGraficzne/drobne/domain.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW027: & range &  
+PW027: & range &
  \scalebox{0.25}{\includegraphics{elementyGraficzne/drobne/range.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW028: & allValuesFrom &  
+PW028: & allValuesFrom &
  \scalebox{0.25}{\includegraphics{elementyGraficzne/drobne/allValuesFrom.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW029: & someValuesFrom &  
+PW029: & someValuesFrom &
  \scalebox{0.25}{\includegraphics{elementyGraficzne/drobne/someValuesFrom.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW030: & minCardinality / maxCardinality &  
+PW030: & minCardinality / maxCardinality &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/cardinalityminmax.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
 
-PW031: & cardinality &  
+PW031: & cardinality &
  \scalebox{0.30}{\includegraphics{elementyGraficzne/drobne/cardinality.png}}
  % class.png: 194x86 pixel, 90dpi, 5.48x2.43 cm, bb=0 0 155 69
  \\ \hline
@@ -503,7 +514,7 @@ PW031: & cardinality &
 %Wymagania na dane pomagają w określeniu, jakie dane będą przetwarzane w systemie. Nie trzeba precyzować wszystkich danych. Szczegóły znajdą się w projekcie bazy danych.
 
 \begin{center}
- 
+
 \begin{tabular}{|m{3cm}|m{9cm}|} \hline
 
 WD001 & Obsługa obiektów OWL API \\ \hline
@@ -522,7 +533,7 @@ Priorytet: &  bardzo ważne \\ \hline
 
 \subsection{Wymagania w zakresie wiarygodności}
 
-%Wymagania w zakresie wiarygodności będą rozszerzały wymagania funkcjonalne. 
+%Wymagania w zakresie wiarygodności będą rozszerzały wymagania funkcjonalne.
 
 
 \begin{center}
@@ -589,7 +600,7 @@ Powiązania: &  \\ \hline
 Priorytet: & bardzo ważne \\ \hline
 
 \end{tabular}
- 
+
 \end{center}
 
 \subsection{Wymagania w zakresie użyteczności}
@@ -662,11 +673,11 @@ Dotyczy: & CF001, CF002 \\ \hline
 Priorytet: & ważne \\ \hline
 
 \end{tabular}
- 
+
 \end{center}
 
 \subsection{Inne wymagania}
- 
+
 \begin{center}
 
 \begin{tabular}{|m{3cm}|m{9cm}|} \hline
@@ -704,9 +715,9 @@ Dotyczy: & CF001, CF002 \\ \hline
 Priorytet: & ważne \\ \hline
 
 \end{tabular}
- 
+
 \end{center}
- 
+
 \section{Kryteria akceptacyjne}
 
 %Tu podać kryteria, jakim zostanie poddany gotowy system przed ostatecznym jego przyjęciem.
@@ -717,7 +728,7 @@ Priorytet: & ważne \\ \hline
 
 KA001 & Spełnione są podstawowe wymagania wymienione w dokumencie SWS \\ \hline
 Opis: & Spełnione są wszystkie wymagania ważne i bardzo ważne zdefiniowane w SWS. \\ \hline
-Dotyczy: & W* \\ \hline
+Dotyczy: & wszystkie wymagania ważne i bardzo ważne \\ \hline
 Źródło: & klient - mgr inż. Tomasz Boiński \\ \hline
 Priorytet: & ważne  \\ \hline %skonsultować z klientem
 
@@ -731,7 +742,7 @@ Dotyczy: & WJ004 \\ \hline
 Priorytet: & ważne  \\ \hline %skonsultować z klientem
 
 \end{tabular}
- 
+
 \end{center}
 
 \clearpage
