@@ -8,8 +8,8 @@
 \usepackage[bookmarks=true, pdftex]{hyperref}
 
 %styl nagłowków
-\pagestyle{fancy} 
-\parindent 2cm 
+\pagestyle{fancy}
+\parindent 2cm
 
 %opening
 \title{Studium wykonalności}
@@ -26,26 +26,26 @@
 %budowanie tabeli
 \begin{tabular}{|p{7cm}|p{7cm}|}
 \hline
-Symbol projektu: & Opiekun projektu:   \tabularnewline 
+Symbol projektu: & Opiekun projektu:   \tabularnewline
 3@KASK & mgr inż. Tomasz Boiński    \tabularnewline \hline
 \multicolumn{2}{|l|}{Nazwa Projektu: } \tabularnewline
-\multicolumn{2}{|l|}{Wizualizacja grafów za pomocą biblioteki Prefuse } \tabularnewline 
+\multicolumn{2}{|l|}{Wizualizacja grafów za pomocą biblioteki Prefuse } \tabularnewline
 \hline
 \multicolumn{2}{l}{ } \tabularnewline %pusta linijka
-\hline 
-Nazwa Dokumentu: & Nr wersji:   \tabularnewline 
+\hline
+Nazwa Dokumentu: & Nr wersji:   \tabularnewline
 Studium wykonalności & 0.6 \tabularnewline \hline
-Odpowiedzialny za dokument: & Data pierwszego sporządzenia:   \tabularnewline 
+Odpowiedzialny za dokument: & Data pierwszego sporządzenia:   \tabularnewline
 Anna Jaworska & 31.03.09 \tabularnewline \hline
-Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline 
-WEWNĘTRZNE & 07.04.09 \tabularnewline \hline
+Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline
+WEWNĘTRZNE & 15.06.09 \tabularnewline \hline
 \end{tabular}
 \end{center}
 
 \begin{center}
 \begin{tabular}{|c|p{4cm}|c|c|c|}
 \multicolumn{5}{c}{\textbf{Historia dokumentu}} \tabularnewline \hline
-\textbf{Wersja} & \textbf{Opis modyfikacji} & \textbf{Rozdział/strona} & \textbf{Autor modyfikacji} & \textbf{Data} \tabularnewline \hline 
+\textbf{Wersja} & \textbf{Opis modyfikacji} & \textbf{Rozdział/strona} & \textbf{Autor modyfikacji} & \textbf{Data} \tabularnewline \hline
 0.0 & Przygotowanie zarysu dokumentu i określenie zakresu badań & wszystkie & Anna Jaworska & 31.03.09 \tabularnewline \hline
 0.1 & Zdefiniowanie wymagań  & 3 & Cały zespół & 31.03.09  \tabularnewline \hline
 0.2 & Dołaczenie opisu poprawnego tworzenia bibliotek & 3.5 & Radosław Kleczkowski & 01.04.09\tabularnewline \hline
@@ -53,9 +53,9 @@ WEWNĘTRZNE & 07.04.09 \tabularnewline \hline
 0.4 & Opis uwarunkowań prawnych i rozszerzenie opisu wariantów & 5, 6.1, 7 & Anna Jaworska & 06.04.09\tabularnewline \hline
 0.5 & Uzupełnienie braków & wszystkie  & Cały zespół & 07.04.09 \tabularnewline \hline
 0.6 & Dołączenie opisu odmian języka OWL i korekta & 6.1, 7  & Piotr Orłowski & 07.04.09 \tabularnewline \hline
-
+0.7 & Korekta & 6.1, 7  & Radosław Kleczkowski i Piotr Orłowski & 15.06.09 \tabularnewline \hline
 \end{tabular}
- 
+
 
 \end{center}
 
@@ -67,13 +67,13 @@ WEWNĘTRZNE & 07.04.09 \tabularnewline \hline
 \section{Założenia realizacji studium}
 
 \subsection{Podstawa wykonania i temat studium}
-\paragraph{} Studium wykonywane jest przede wszystkim aby określić możliwe sposoby realizacji projektu. Ma także za zadanie zebranie i podsumowanie informacji potrzebnych zespołowi do realizacji projektu. 
+\paragraph{} Studium wykonywane jest przede wszystkim aby określić możliwe sposoby realizacji projektu. Ma także za zadanie zebranie i podsumowanie informacji potrzebnych zespołowi do realizacji projektu.
 
 \subsection{Cel studium}
-\paragraph{} Celem studium jest zbadanie na potrzeby projektu \textit{Wizualizacja grafów za pomocą biblioteki Prefuse}: 
+\paragraph{} Celem studium jest zbadanie na potrzeby projektu \textit{Wizualizacja grafów za pomocą biblioteki Prefuse}:
 \begin{itemize}
  	\item jak należy tworzyć biblioteki w technologii Java
- 	\item jakich mechnizmów wizualizacji grafów dostarczają biblioteki Java 
+ 	\item jakich mechnizmów wizualizacji grafów dostarczają biblioteki Java
 	\item czy realizacja projektu za pomocą Prefuse jest odpowiednim rozwiązaniem
 	\item jaki standard OWL powinien być wspierany przez wytworzony produkt
 \end{itemize}
@@ -83,7 +83,7 @@ WEWNĘTRZNE & 07.04.09 \tabularnewline \hline
 \begin{itemize}
  	\item konieczność realizacji projektu w języku Java
 	\item konieczność wykorzystania wersji bibliotek zgodnych z użytymi w OCS
-	\item limit czasowy projektu 
+	\item limit czasowy projektu
 \end{itemize}
 
 
@@ -93,7 +93,7 @@ WEWNĘTRZNE & 07.04.09 \tabularnewline \hline
 \subsection{Inne systemy i zasoby mające wpływ lub będące pod wypływem planowanego produktu}
 
 \begin{itemize}
- 	\item OCS - Ontology Creation System 
+ 	\item OCS - Ontology Creation System
 	\item OWL API ver 2.1.1 - API do przetwarzania plików w formacie OWL zgodnych ze standardem W3C; ta wersja API została użyta w projekcie OCS
 	\item biblioteki graficzne - w szczególności Prefuse
 \end{itemize}
@@ -102,7 +102,7 @@ WEWNĘTRZNE & 07.04.09 \tabularnewline \hline
 \subsection{Istniejące na rynku podobne rozwiązania}
 
 \begin{itemize}
- \item Protege - bardzo znany system do edycji i wizualizacji ontologii autorstwa Stanford University. Napisany w języku Java. Ze względu na fakt, iż jest aplikacją standalone, wykorzystującą stosunkowo duże zasby systemowe i trudną do integracji z portalem OCS, nie może zostać wykorzystana jako gotowe rozwiązanie.
+ \item Protege - bardzo znany system do edycji i wizualizacji ontologii autorstwa Stanford University. Napisany w języku Java. Ze względu na fakt, iż jest aplikacją standalone, wykorzystującą stosunkowo duże zasoby systemowe i trudną do integracji z portalem OCS, nie może zostać wykorzystana jako gotowe rozwiązanie.
 
 \end{itemize}
 
@@ -117,10 +117,10 @@ WEWNĘTRZNE & 07.04.09 \tabularnewline \hline
 
 
 \section{Ogólne wymagania stawiane produktowi i ich priorytety}
-\paragraph{} Wymienione wymagania mają charakter orientacyjny, pozwalający nakreślić zakres problemu jaki ma pokrywać projekt. Szczegółową definicję wymagań będzie zawierać dokument \textit{Specyfikacji wymagań}. W szczególność możliwe jest, że niektóre z wymienionych poniżej wymagań zostaną usunięte lub zmienione oraz to, że mogą zostać dodane inne wymagania.  
+\paragraph{} Wymienione wymagania mają charakter orientacyjny, pozwalający nakreślić zakres problemu jaki ma pokrywać projekt. Szczegółową definicję wymagań będzie zawierać dokument \textit{Specyfikacji wymagań}. W szczególność możliwe jest, że niektóre z wymienionych poniżej wymagań zostaną usunięte lub zmienione oraz to, że mogą zostać dodane inne wymagania.
 
 \subsection{Użytkownicy}
-\paragraph{} Użytkownikami biblioteki będą programiści tworzący aplikacje wizualizujące ontologie. Inicjalnie będą to programiści związani z projektem OCS, później mogą to być dowolni inni programiści chętni do korzystania z biblioteki.  
+\paragraph{} Użytkownikami biblioteki będą programiści tworzący aplikacje wizualizujące ontologie. Inicjalnie będą to programiści związani z projektem OCS, później mogą to być dowolni inni programiści chętni do korzystania z biblioteki.
 \subsection{Dane}
 \paragraph{Obsługiwane formaty} Biblioteka powinna obsługiwać te same formaty danych co OWL API (zgodne ze specyfikacją W3C):
 \begin{itemize}
@@ -133,17 +133,17 @@ WEWNĘTRZNE & 07.04.09 \tabularnewline \hline
 
 \paragraph{Wczytywanie danych}Ponadto dane te powinny być przekazywane poprzez obiekt OWL API.
 
-\paragraph{Modyfikowalność danych} Biblioteka powinna udostępniać metody do modyfikacji wczytanych danych i możliwość zapisania zmienionych danych. Dane powinny być dostarczane użytkownikowi w postaci obietków OWL API. Biblioteka nie musi sprawdzać czy zmiany wprowadzone przez użytkownika są logicznie poprawne.   
+\paragraph{Modyfikowalność danych} Biblioteka powinna udostępniać metody do modyfikacji wczytanych danych i możliwość zapisania zmienionych danych. Dane powinny być dostarczane użytkownikowi w postaci obietków OWL API. Biblioteka nie musi sprawdzać czy zmiany wprowadzone przez użytkownika są logicznie poprawne.
 
 \subsection{Funkcjonalność}
 % tu mozna o OWL napisać i pare innych
 \paragraph{} Zakładamy, że biblioteka będzie zawierać następujące funkcjonalności:
 \begin{itemize}
- 	\item wizualizacja elmentów OWL 
+ 	\item wizualizacja elmentów OWL
 	\item definiowanie przez użytkownika własnych akcji dla zdarzeń okna (np. klinięcie, przeciągnięcie wierzchołka grafu)
 	\item standardowe definicje zdarzeń okna
 	\item wczytywanie, modyfikowanie i zapis ontologi
-	\item definiowanie parametrów wyglądu, w szczególności ilości widocznych poziomów grafu 
+	\item definiowanie parametrów wyglądu, w szczególności ilości widocznych poziomów grafu
 \end{itemize}
 
 
@@ -160,9 +160,9 @@ WEWNĘTRZNE & 07.04.09 \tabularnewline \hline
 \item \textbf{Łatwość użycia.} Biblioteka powinna zawierać klasy, pokazujące przykłady wykorzystania jej klas i metod.
 \item \textbf{ Rozszerzalność.} Struktura wewnętrzna biblioteki powinna być odpowiednio podzielona na klasy (wykorzystując klasy abstrakcyjne i interfejsy. Dzięki temu użytkownik będzie miał możliwość stworzenia własnych klas, rozszerzających funkcjonalność biblioteki.
 \item \textbf{Uniwersalność.} Biblioteka powinna mieć jasno określony problem, który rozwiązuje. Wyniki powinny być podane użytkownikowi w wygodny dla niego sposób (lub na kilka sposobów), który będzie umożliwiał wykorzystanie biblioteki w różnych aplikacjach. Innymi słowy, biblioteka powinna udostępniać łatwy i przejrzysty dla użytkownika interfejs.
-\item Biblioteka powinna być napisana w taki sposób, aby użytkownik spojrzał na nią i mógł powiedzieć: "Wow, to jest dokładnie to, czego potrzebuję i dokładnie tak samo bym to napisał!" ;).
+\item Biblioteka powinna być napisana w taki sposób, aby użytkownik spojrzał na nią i mógł powiedzieć: "Wow, to jest dokładnie to, czego potrzebuję i dokładnie tak samo bym to napisał!".
 
-\end{enumerate} 
+\end{enumerate}
 
 
 
@@ -237,14 +237,14 @@ WEWNĘTRZNE & 07.04.09 \tabularnewline \hline
 
 \section{Uwarunkowania prawne i inne}
 %na jakiej to ma byc licencji - tylko dla KASK-u ?
-\paragraph{} Docelowy produkt będzie własnością Katedry Architektury Systemów Komputerowych wydziału Elektroniki, Telekomunikacji i Informatyki Politechniki Gdańskiej.  Należy zadbać  o to aby używane w projekcie biblioteki były na licencjach pozwalających na użycie w produkcie zamkniętym. 
+\paragraph{} Docelowy produkt będzie własnością Katedry Architektury Systemów Komputerowych wydziału Elektroniki, Telekomunikacji i Informatyki Politechniki Gdańskiej.  Należy zadbać  o to aby używane w projekcie biblioteki były na licencjach pozwalających na użycie w produkcie zamkniętym.
 
 
 \section{Proponowane rozwiązania}
 
-\paragraph{} Proponowane rozwiązania zostaną rozważone pod względem wersji OWL oraz biblioteki graficznej. 
+\paragraph{} Proponowane rozwiązania zostaną rozważone pod względem wersji OWL oraz biblioteki graficznej.
 
-%wariant z DL 
+%wariant z DL
 %wariant z Full
 %wybór w dizedzinach - biblioteki i Java - wersje itp, wersja OWL(RDF?), wersja standardu tworzenia biblioteki, wzorować się na cyzms istniejącym (?)
 \subsection{Wersja OWL}
@@ -264,7 +264,7 @@ WEWNĘTRZNE & 07.04.09 \tabularnewline \hline
 
 \subsubsection{DL}
 	\begin{itemize}
-	\item zawiera wszystkie elementy języka OWL Lite 
+	\item zawiera wszystkie elementy języka OWL Lite
 	\item dodatkowo zawiera zaawansowane elementy języka OWL
 		\begin{itemize}
  		\item ma rozwiniętą obsługe zależności między elementami podstawowymi
@@ -277,7 +277,7 @@ WEWNĘTRZNE & 07.04.09 \tabularnewline \hline
 
 \subsubsection{Full}
 	\begin{itemize}
-	\item zawiera wszystkie elementy OWL DL 
+	\item zawiera wszystkie elementy OWL DL
 	\item nie wymaga separacji typów
 	\item ma mniejsze ograniczenia od OWL DL
 	\item nie ma w nim gwarancji rozstrzygalności dla wnioskowań
@@ -289,15 +289,15 @@ WEWNĘTRZNE & 07.04.09 \tabularnewline \hline
 \subsection{Proponowane biblioteki do wizualizacji grafów}
 \subsubsection{Prefuse}
 
-\paragraph{} Prefuse jest elastycznym pakietem dostarczającym programiście narzędzia do przechowywania danych, manipulowania nimi oraz ich interaktywnej wizualizacji. Biblioteka jest rozwijana w całości w języku Java. Może być wykorzystana do budowania niezależnych aplikacji, wizualnych komponentów rozbudowanych aplikacji oraz tworzenia apletów. 
+\paragraph{} Prefuse jest elastycznym pakietem dostarczającym programiście narzędzia do przechowywania danych, manipulowania nimi oraz ich interaktywnej wizualizacji. Biblioteka jest rozwijana w całości w języku Java. Może być wykorzystana do budowania niezależnych aplikacji, wizualnych komponentów rozbudowanych aplikacji oraz tworzenia apletów.
 \paragraph{}Podstawowe cechy i elementy:
 \begin{itemize}
-\item kilkadziesiąt algorytmów i metod wizualizacji danych m.in: ForceDirectedLayout, RadialTreeLayout, NodeLinkTreeLayout, SquarifiedTreeMapLayout 
-\item dynamiczne rozmieszczanie i animacje 
-\item transformacje, przekształcenia geometryczne oraz przybliżanie/oddalanie obrazu 
-\item podstawowym elementem struktury danych jest krotka 
+\item kilkadziesiąt algorytmów i metod wizualizacji danych m.in: ForceDirectedLayout, RadialTreeLayout, NodeLinkTreeLayout, SquarifiedTreeMapLayout
+\item dynamiczne rozmieszczanie i animacje
+\item transformacje, przekształcenia geometryczne oraz przybliżanie/oddalanie obrazu
+\item podstawowym elementem struktury danych jest krotka
 \item krotki mogą być tworzone bezpośrednio w aplikacji lub na podstawie zewnętrznych danych
-\item wbudowany język zapytań do filtrowania danych 
+\item wbudowany język zapytań do filtrowania danych
 \item tworzenie struktur danych na podstawie zewnętrznych plików (CSV, XML) oraz bazy danych
 \item klasy wspomagające synchronizację danych pomiędzy tabelami Prefuse a bazą danych
 \item Prefuse posiada licencję BSD
@@ -331,6 +331,7 @@ WEWNĘTRZNE & 07.04.09 \tabularnewline \hline
 \item modele dynamiki zostaną okrojone do ilości faktycznie potrzebnej programistom
 \end{itemize}
 \paragraph{}Pomimo ustalenia harmonogramu z terminami oddania dokumentów należy wziąć pod uwagę charakter metodyki RUP, która zakłada przyrostowe wytwarzanie dokumentacji - w póżniejszych etapach projektu pojawią się zmodyfikowane wersje wytorzonych wcześniej dokumentów.
+
 
 Z uwagi na przyjętą metodykę wytwarzania oprogramowania (RUP) ta część dokumentu zostanie rozwinięta później.
 
