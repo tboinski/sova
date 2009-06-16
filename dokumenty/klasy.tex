@@ -3,7 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{array,floatflt,textcomp,graphicx,longtable}
 %custom margins
-\usepackage[left=2.5cm, top=2.5cm, bottom=3cm, right=2cm, foot=2cm, head=0.5cm]{geometry}
+\usepackage[left=3cm, top=2.5cm, bottom=3cm, right=2cm, foot=2cm, head=0.5cm]{geometry}
 \usepackage{fancyhdr}
 \usepackage[bookmarks=true, pdftex]{hyperref}
 
@@ -227,7 +227,7 @@ Priorytet: & średnio ważny \\ \hline
 \begin{longtable}{|m{3cm}|m{9cm}|} \hline
 
 CN001 & Node \\ \hline
-Opis: & Klasa nadrzędna względem wszystkich używanych klas obsługi wierzchołków. Zawiera definicje podstawowych pól o funkcji.    \\ \hline
+Opis: & Klasa nadrzędna względem wszystkich klas obsługi wierzchołków. Zawiera definicje podstawowych atrybutów i metod.    \\ \hline
 Klasy nadrzędne: &     \\ \hline
 Atrybuty: & \begin{itemize}
  \item strokeWidth
@@ -250,7 +250,7 @@ Priorytet: & bardzo ważne  \\ \hline
  \hline
 
 CN002 & AllValuesFromPropertyNode \\ \hline
-Opis: & Klasa reprezentuje wierzchołek     \\ \hline
+Opis: & Klasa reprezentuje wierzchołek, będący OWL Property typu AllValuesFrom.    \\ \hline
 Klasy nadrzędne: & Node     \\ \hline
 Atrybuty: & 
 %\begin{itemize}
@@ -352,7 +352,7 @@ Priorytet: & ważne  \\ \hline
 \multicolumn{2}{c}{} \\
  \hline
 
-CN008 & DatatypeNode \\ \hline
+CN008 & DataTypeNode \\ \hline
 Opis: & Klasa reprezentuje wierzchołek OWL DataType.    \\ \hline
 Klasy nadrzędne: & Node     \\ \hline
 Atrybuty: & %\begin{itemize}
@@ -472,7 +472,7 @@ Priorytet: & ważne  \\ \hline
  \hline
 
 CN015 & MaxCardinalityValueNode \\ \hline
-Opis: & Klasa reprezentuje wierzchołek ograniczenia OWL MaxCardinality.    \\ \hline
+Opis: & Klasa reprezentuje wierzchołek ograniczenia kardynalności OWL MaxCardinality.    \\ \hline
 Klasy nadrzędne: & CardinalityValueNode     \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
@@ -489,7 +489,7 @@ Priorytet: & ważne  \\ \hline
  \hline
 
 CN016 & MinCardinalityValueNode \\ \hline
-Opis: & Klasa reprezentuje wierzchołek ograniczenia OWL MinCardinality.    \\ \hline
+Opis: & Klasa reprezentuje wierzchołek ograniczenia kardynalności OWL MinCardinality.    \\ \hline
 Klasy nadrzędne: & CardinalityValueNode     \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
@@ -574,8 +574,8 @@ Priorytet: & ważne  \\ \hline
  \hline
 
 CN021 & SomeValuesFromPropertyNode \\ \hline
-Opis: &     \\ \hline
-Klasy nadrzędne: & PropertyNode     \\ \hline
+Opis: & Klasa reprezentuje wierzchołek, będący OWL Property typu SomeValuesFrom. \\ \hline
+Klasy nadrzędne: & PropertyNode \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
@@ -676,7 +676,7 @@ Priorytet: & ważne  \\ \hline
 \begin{longtable}{|m{3cm}|m{9cm}|} \hline
 
 CE001 & Edge \\ \hline
-Opis: &  Klasa reprezentująca krawędź na grafie    \\ \hline
+Opis: &  Klasa reprezentująca prostą krawędź na grafie. Jest nadklasą dla pozostałych klas krawędzi.  \\ \hline
 Klasy nadrzędne: &     \\ \hline
 Atrybuty: & \begin{itemize}
 \item Color strokeColor
@@ -709,7 +709,7 @@ Priorytet: & bardzo ważne  \\ \hline
  \hline
 
 CE002 & DisjointEdge \\ \hline
-Opis: &     \\ \hline
+Opis: & Klasa reprezentująca krawędź oznaczającą rozłączność klas (OWL Disjoint). \\ \hline
 Klasy nadrzędne: & Edge    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
@@ -726,8 +726,8 @@ Priorytet: & ważne  \\ \hline
  \hline
 
 CE003 & DomainEdge  \\ \hline
-Opis: &    \\ \hline
-Klasy nadrzędne: & Edge    \\ \hline
+Opis: & Klasa reprezentująca krawędź łączącą Property z klasą właściwości OWL DomainOf.   \\ \hline
+Klasy nadrzędne: & Edge \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
@@ -743,7 +743,7 @@ Priorytet: & ważne  \\ \hline
  \hline
 
 CE004 & EquivalentEdge \\ \hline
-Opis: &     \\ \hline
+Opis: & Klasa reprezentująca krawędź oznaczającą równoznaczność (OWL Equivalent).    \\ \hline
 Klasy nadrzędne: & Edge    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
@@ -760,7 +760,7 @@ Priorytet: & ważne  \\ \hline
  \hline
 
 CE005 & EquivalentPropertyEdge \\ \hline
-Opis: &     \\ \hline
+Opis: & Klasa reprezentująca krawędź oznaczającą równoznaczność OWL Property (OWL EquivalentProperty).    \\ \hline
 Klasy nadrzędne: & EquivalentEdge    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
@@ -777,7 +777,7 @@ Priorytet: & ważne  \\ \hline
  \hline
 
 CE006 & FunctionaltEdge \\ \hline
-Opis: &     \\ \hline
+Opis: & Klasa reprezentująca krawędź łączącą wierzchołki InformationNode(CN012) z OWL Property, którego dotyczy.   \\ \hline
 Klasy nadrzędne: & Edge    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
@@ -794,7 +794,7 @@ Priorytet: & ważne  \\ \hline
  \hline
 
 CE007 & InverseOfEdge \\ \hline
-Opis: &     \\ \hline
+Opis: & Klasa reprezentująca krawędź oznaczającą odwrotność (OWL InverseOf).    \\ \hline
 Klasy nadrzędne: & Edge    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
@@ -811,7 +811,7 @@ Priorytet: & ważne  \\ \hline
  \hline
 
 CE008 & PropertyEdge \\ \hline
-Opis: &  Klasa reprezentująca na grafie relację miedzy property a klasą   \\ \hline
+Opis: &  Klasa reprezentująca krawędź oznaczającą relację między Property a klasą.   \\ \hline
 Klasy nadrzędne: & Edge    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
@@ -828,7 +828,7 @@ Priorytet: & ważne  \\ \hline
  \hline
 
 CE009 & RangeEdge \\ \hline
-Opis: & Klasa reprezentująca na grafie właściwość property Range     \\ \hline
+Opis: & Klasa reprezentująca na grafie krawędź łączącą Property z klasą właściwości OWL Range.     \\ \hline
 Klasy nadrzędne: & Edge    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
@@ -845,7 +845,7 @@ Priorytet: & ważne  \\ \hline
  \hline
 
 CE010 & SubEdge \\ \hline
-Opis: & Klasa reprezentująca na grafie związek SubClass pomiędzy klasami   \\ \hline
+Opis: & Klasa reprezentująca krawędź związku OWL SubClass pomiędzy klasami.   \\ \hline
 Klasy nadrzędne: & Edge    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
