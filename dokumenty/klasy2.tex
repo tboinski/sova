@@ -1,0 +1,1039 @@
+
+\section{Analiza obiektowa}
+
+
+
+
+
+\begin{center}
+%budowanie tabeli
+\begin{longtable}{|p{7cm}|p{7cm}|}
+\hline
+Symbol projektu: & Opiekun projektu:   \tabularnewline 
+3@KASK & mgr inż. Tomasz Boiński    \tabularnewline \hline
+\multicolumn{2}{|l|}{Nazwa Projektu: } \tabularnewline
+\multicolumn{2}{|l|}{Wizualizacja grafów za pomocą biblioteki Prefuse } \tabularnewline 
+\hline
+\multicolumn{2}{l}{ } \tabularnewline %pusta linijka
+\hline 
+Nazwa Dokumentu: & Nr wersji:   \tabularnewline 
+Analiza obiektowa & 2.0 \tabularnewline \hline
+Odpowiedzialny za dokument: & Data pierwszego sporządzenia:   \tabularnewline 
+Piotr Kunowski & 23 maja 2009 \tabularnewline \hline
+Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline 
+DLA KLIENTA & \today \tabularnewline \hline
+\end{longtable}
+\end{center}
+
+
+\begin{center}
+\begin{longtable}{|c|p{4cm}|c|c|c|}
+\multicolumn{5}{c}{\textbf{Historia dokumentu}} \tabularnewline \hline
+\textbf{Wersja} & \textbf{Opis modyfikacji} & \textbf{Rozdział/strona} & \textbf{Autor modyfikacji} & \textbf{Data} \tabularnewline \hline 
+1 & Stworzenie & wszystkie & Grupa projektowa & 23.05.09 \tabularnewline \hline
+1.1 & Dodano pakiet Utils & 1, 3 & Anna Jaworska & 2.06.09 \tabularnewline \hline
+2 & Dodano zaktualizowane diagramy oraz opisy klas & wszystkie & Grupa projektowa & 16.06.09 \tabularnewline \hline
+
+\end{longtable}
+\end{center}
+
+
+
+
+\subsection{Pakiety}
+
+\subsubsection{Diagram}
+ \includegraphics[width=\linewidth]{./modelowanie/OV_UML/PackageDiagram.png}
+
+
+\subsubsection{Opis pakietów}
+
+
+\begin{center}
+\begin{longtable}{|m{3cm}|m{9cm}|} \hline
+
+P001 & options\\ \hline
+Opis: & Pakiet zawierający klasy z polami opisującymi różne (modyfikowalne) ustawienia wizualizacji takie jak: kolory, grubość linii itp.     \\ \hline
+Interfejsy: &     \\ \hline
+Realizowane wymagania: & WF002, WF001, WI004 \\ \hline
+Priorytet: & średnio ważne \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+P002 & nodes\\ \hline
+Opis: & Pakiet z klasami odpowiedzialnymi za wizualizację i przechowywanie danych o wierzchołkach.    \\ \hline
+Interfejsy: &     \\ \hline
+Realizowane wymagania: & WF004, WF005, WF006, WF007, WI004 \\ \hline
+Priorytet: & bardzo ważne \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+P003 & edges\\ \hline
+Opis: & Pakiet z klasami odpowiedzialnymi za wizualizację i przechowywanie danych o krawędziach.    \\ \hline
+Interfejsy: &     \\ \hline
+Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
+Priorytet: & bardzo ważne \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+P004 & visualization\\ \hline
+Opis: & Zawiera dodatkowe klasy przydatne w wizualizacji.\\ \hline
+Interfejsy: &     \\ \hline
+Realizowane wymagania: & WF001, WF008, WI004 \\ \hline
+Priorytet: & średnio ważne \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+P005 & graph\\ \hline
+Opis: & Pakiet zawiera klasy, które zawierają podstawowe operacje na danych OwlApi oraz graph. \\ \hline
+Interfejsy: &     \\ \hline
+Realizowane wymagania: & WD001 \\ \hline
+Priorytet: & bardzo ważne \\ \hline
+
+%\multicolumn{2}{c}{} \\
+% \hline
+\multicolumn{2}{c}{} \\
+ \hline
+
+P006 & utils\\ \hline
+Opis: & Pakiet zawiera klasy pomocnicze \\ \hline
+Interfejsy: &     \\ \hline
+Realizowane wymagania: & CF005 \\ \hline
+Priorytet: & bardzo ważne \\ \hline
+
+\end{longtable}
+
+\end{center}
+
+\subsection{Pakiet options}
+
+\subsubsection{Diagram}
+
+ \scalebox{0.50}{ \includegraphics{./modelowanie/OV_UML/OptionsClassDiagram.png}
+
+}
+
+\subsubsection{Opis klasy}
+
+\begin{center}
+ 
+
+
+\begin{longtable}{|m{3cm}|m{9cm}|} \hline
+
+CO001 & EdgeColors \\ \hline
+Opis: & Zawiera definicje kolorów dla poszczególnych rodzajów krawędzi.   \\ \hline
+Klasy nadrzędne: &     \\ \hline
+Atrybuty: & \begin{itemize}
+ \item domainEdgeColor
+ \item edgeColor
+ \item equivalentEdgeColor
+ \item equivalentPropertyEdgeColor
+ \item functionalEdgeColor
+ \item inverseOfEdgeColor
+ \item propertyEdgeColor
+ \item rangeEdgeColor
+ \item subEdgeColor
+
+\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+% \item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF002 \\ \hline
+Priorytet: & średnio ważny \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CO002 & NodeColors \\ \hline
+Opis: & Zawiera definicje kolorów dla poszczególnych rodzajów krawędzi.   \\ \hline
+Klasy nadrzędne: &     \\ \hline
+Atrybuty: & \begin{itemize}
+ \item allValuesFromNodeColor
+ \item cardinalityNodeColor
+ \item cardinalityValueNodeColor
+ \item classNodeColor
+ \item complementOfNodeColor
+ \item dataTypeNodeColor
+ \item differentNodeColor
+ \item functionalPropertyNodeColor
+ \item individualNodeColor
+ \item informationNodeColor
+ \item intersubsectionOfNodeColor
+ \item inverseFunctionalNodeColor
+ \item maxCardinalityValueNodeColor
+ \item minCardinalityValueNodeColor
+ \item nothingNodeColor
+ \item oneOfNodeColor
+ \item propertyNodeColor
+ \item sameAsNodeColor
+ \item someValuesFromNodeColor
+ \item symmetricPropertNodeColor
+ \item thingNodeColor
+ \item transitivePropertyNodeColor
+ \item unionOfNodeColor 
+\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF002 \\ \hline
+Priorytet: & średnio ważny \\ \hline
+
+%\multicolumn{2}{c}{} \\
+% \hline
+
+\end{longtable}
+
+
+\end{center}
+
+\subsection{Pakiet nodes}
+
+\subsubsection{Diagram}
+
+\begin{center}
+ \scalebox{0.38}{\includegraphics{./modelowanie/OV_UML/NodesClassDiagram.png}}\end{center}
+
+\subsubsection{Opis klasy}
+
+\begin{center}
+ 
+
+
+\begin{longtable}{|m{3cm}|m{9cm}|} \hline
+
+CN001 & Node \\ \hline
+Opis: & Klasa nadrzędna względem wszystkich klas obsługi wierzchołków. Zawiera definicje podstawowych atrybutów i metod.    \\ \hline
+Klasy nadrzędne: &     \\ \hline
+Atrybuty: & \begin{itemize}
+ \item strokeWidth
+ \item height
+ \item width
+ \item annotation
+ \item comment
+\item Color fillColor
+\item String label
+\end{itemize}
+ \\ \hline
+Metody: &% \begin{itemize}
+ %\item renderShape - metoda wizualizująca dany typ wierzchołka
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF004, WF005, WF006, WF007, WI004 \\ \hline
+Priorytet: & bardzo ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CN002 & AllValuesFromPropertyNode \\ \hline
+Opis: & Klasa reprezentuje wierzchołek, będący OWL Property typu AllValuesFrom.    \\ \hline
+Klasy nadrzędne: & Node     \\ \hline
+Atrybuty: & 
+%\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF004, WF006, WF007, WI004 \\ \hline
+Priorytet: & ważne \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CN003 & AnonymousClassNode \\ \hline
+Opis: & Klasa reprezentuje wierzchołek klas anonimowych OWL.    \\ \hline
+Klasy nadrzędne: & Node     \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF005, WI004 \\ \hline
+Priorytet: & ważne \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CN004 & CardinalityNode \\ \hline
+Opis: & Klasa reprezentuje wierzchołek klas anonimowych OWL będących wynikiem ograniczenia kardynalności.    \\ \hline
+Klasy nadrzędne: & AnonymousNode     \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF007, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CN005 & CardinalityValueNode \\ \hline
+Opis: & Klasa reprezentuje wierzchołek z dokładnym ograniczeniem kardynalności (OWL Cardinality). \\ \hline
+Klasy nadrzędne: & Node     \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF007, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CN006 & ClassNode \\ \hline
+Opis: & Klasa reprezentuje wierzchołek OWL Class.    \\ \hline
+Klasy nadrzędne: & Node     \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF004, WF005, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CN007 & ComplementOfNode \\ \hline
+Opis: & Klasa reprezentuje wierzchołek klas anonimowych OWL będących wynikiem dopełnienia (OWL ComplementOf).    \\ \hline
+Klasy nadrzędne: & Node     \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CN008 & DataTypeNode \\ \hline
+Opis: & Klasa reprezentuje wierzchołek OWL DataType.    \\ \hline
+Klasy nadrzędne: & Node     \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF004, WI04 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CN009 & DifferentNode \\ \hline
+Opis: & Klasa reprezentuje wierzchołek oznaczający relację DifferentFrom lub AllDifferent pomiędzy wystąpieniami klas (OWL Individual).    \\ \hline
+Klasy nadrzędne: & Node     \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CN010 & FunctionalPropertyNode \\ \hline
+Opis: & Klasa reprezentuje wierzchołek oznaczający, że dane OWL Property to FunctionalProperty.  \\ \hline
+Klasy nadrzędne: & InformationNode     \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CN011 & IndividualNode \\ \hline
+Opis: & Klasa reprezentuje wierzchołek instancji OWL Individual.  \\ \hline
+Klasy nadrzędne: & Node     \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF004, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CN012 & InformationNode \\ \hline
+Opis: & Klasa ta jest klasą nadrzędną, dla klas wierzchołków reprezentujących informacje o różnych właściwościach OWL Property.    \\ \hline
+Klasy nadrzędne: & Node     \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF010, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CN013 & IntersubsectionOfNode \\ \hline
+Opis: & Klasa reprezentuje wierzchołek klas anonimowych OWL będących wynikiem przecięcia (OWL IntersubsectionOf).    \\ \hline
+Klasy nadrzędne: & AnonymousNode     \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF005, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CN014 & inverseFunciotnalPropertyNode \\ \hline
+Opis: & Klasa reprezentuje wierzchołek oznaczający, że dane OWL Property to InverseFunctionalProperty.    \\ \hline
+Klasy nadrzędne: & InformationNode     \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF007, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CN015 & MaxCardinalityValueNode \\ \hline
+Opis: & Klasa reprezentuje wierzchołek ograniczenia kardynalności OWL MaxCardinality.    \\ \hline
+Klasy nadrzędne: & CardinalityValueNode     \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF007, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CN016 & MinCardinalityValueNode \\ \hline
+Opis: & Klasa reprezentuje wierzchołek ograniczenia kardynalności OWL MinCardinality.    \\ \hline
+Klasy nadrzędne: & CardinalityValueNode     \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF007, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CN017 & NothingNode \\ \hline
+Opis: & Klasa reprezentuje wierzchołek OWL Nothing.    \\ \hline
+Klasy nadrzędne: & Node     \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF004, WF005, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CN018 & OneOfNode \\ \hline
+Opis: & Klasa reprezentuje wierzchołek klas anonimowych OWL reprezentujących 1 z klas określonego zbioru (wynik OWL OneOf).    \\ \hline
+Klasy nadrzędne: & AnonymousClassNode     \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF005, WF006, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CN019 & PropertyNode \\ \hline
+Opis: & Klasa reprezentuje wierzchołek OWL Property.    \\ \hline
+Klasy nadrzędne: & Node     \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF004, WF007, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CN020 & SameAsNode \\ \hline
+Opis: & Klasa reprezentuje wierzchołek oznaczający relację OWL SameAs pomiędzy wystąpieniami klas (OWL Individual).    \\ \hline
+Klasy nadrzędne: & InformationNode     \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF005, WF006, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CN021 & SomeValuesFromPropertyNode \\ \hline
+Opis: & Klasa reprezentuje wierzchołek, będący OWL Property typu SomeValuesFrom. \\ \hline
+Klasy nadrzędne: & PropertyNode \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF005, WF006, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CN022 & SymmetricPropertNode \\ \hline
+Opis: & Klasa reprezentuje wierzchołek oznaczający, że dane OWL Property to SymmetricProperty.    \\ \hline
+Klasy nadrzędne: & InformationNode     \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF007, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CN023 & ThingNode \\ \hline
+Opis: & Klasa reprezentuje wierzchołek OWL Thing.    \\ \hline
+Klasy nadrzędne: & Node     \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF004, WF005, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CN024 & TreansitivePropertyNode \\ \hline
+Opis: & Klasa reprezentuje wierzchołek oznaczający, że dane OWL Property to TransitiveProperty.    \\ \hline
+Klasy nadrzędne: & InformationNode     \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CN025 & UnionOfNode \\ \hline
+Opis: & Klasa reprezentuje wierzchołek klas anonimowych OWL będących wynikiem unii (OWL UnionOf).    \\ \hline
+Klasy nadrzędne: & AnonymousNode     \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF005, WF006, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+%\multicolumn{2}{c}{} \\
+% \hline
+
+
+\end{longtable}
+
+\end{center}
+
+\subsection{Pakiet edges}
+
+\subsubsection{Diagram}
+
+\includegraphics[width=\linewidth]{./modelowanie/OV_UML/EdgeClassDiagram.png}
+
+\subsubsection{Opis klasy}
+
+\begin{center}
+
+\begin{longtable}{|m{3cm}|m{9cm}|} \hline
+
+CE001 & Edge \\ \hline
+Opis: &  Klasa reprezentująca prostą krawędź na grafie. Jest nadklasą dla pozostałych klas krawędzi.  \\ \hline
+Klasy nadrzędne: &     \\ \hline
+Atrybuty: & \begin{itemize}
+\item Color strokeColor
+\item  int strokeWidth 
+\item boolean hasArrow
+\item    boolean hasInvertedArrow
+  \item  Polygon arrowHead
+  \item Color arrowHeadColor
+\end{itemize}
+ \\ \hline
+Metody: & \begin{itemize}
+ \item    getStrokeColor () 
+\item setStrokeColor (Color val)
+  \item  getStrokeWidth () 
+\item setStrokeWidth (int val) 
+\item getArrowHead()
+\item setArrowHead(Polygon arrowHead)
+\item isHasArrow()
+ \item setHasArrow(boolean hasArrow)
+  \item isHasInvertedArrow()
+\item setHasInvertedArrow(boolean hasInvertedArrow)
+\item getArrowHeadColor()
+ \item setArrowHeadColor(Color arrowHeadColor)
+\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
+Priorytet: & bardzo ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CE002 & DisjointEdge \\ \hline
+Opis: & Klasa reprezentująca krawędź oznaczającą rozłączność klas (OWL Disjoint). \\ \hline
+Klasy nadrzędne: & Edge    \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CE003 & DomainEdge  \\ \hline
+Opis: & Klasa reprezentująca krawędź łączącą Property z klasą właściwości OWL DomainOf.   \\ \hline
+Klasy nadrzędne: & Edge \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CE004 & EquivalentEdge \\ \hline
+Opis: & Klasa reprezentująca krawędź oznaczającą równoznaczność (OWL Equivalent).    \\ \hline
+Klasy nadrzędne: & Edge    \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CE005 & EquivalentPropertyEdge \\ \hline
+Opis: & Klasa reprezentująca krawędź oznaczającą równoznaczność OWL Property (OWL EquivalentProperty).    \\ \hline
+Klasy nadrzędne: & EquivalentEdge    \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CE006 & FunctionaltEdge \\ \hline
+Opis: & Klasa reprezentująca krawędź łączącą wierzchołki InformationNode(CN012) z OWL Property, którego dotyczy.   \\ \hline
+Klasy nadrzędne: & Edge    \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CE007 & InverseOfEdge \\ \hline
+Opis: & Klasa reprezentująca krawędź oznaczającą odwrotność (OWL InverseOf).    \\ \hline
+Klasy nadrzędne: & Edge    \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CE008 & PropertyEdge \\ \hline
+Opis: &  Klasa reprezentująca krawędź oznaczającą relację między Property a klasą.   \\ \hline
+Klasy nadrzędne: & Edge    \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CE009 & RangeEdge \\ \hline
+Opis: & Klasa reprezentująca na grafie krawędź łączącą Property z klasą właściwości OWL Range.     \\ \hline
+Klasy nadrzędne: & Edge    \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CE010 & SubEdge \\ \hline
+Opis: & Klasa reprezentująca krawędź związku OWL SubClass pomiędzy klasami.   \\ \hline
+Klasy nadrzędne: & Edge    \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+%\multicolumn{2}{c}{} \\
+% \hline
+
+
+\end{longtable}
+
+\end{center}
+
+\subsection{Pakiet visualization }
+
+\subsubsection{Diagram}
+
+\includegraphics[width=\linewidth]{./modelowanie/OV_UML/VisualizationClassDiagram.png}
+
+\subsubsection{Opis klasy}
+
+\begin{center}
+ 
+
+\begin{longtable}{|m{3cm}|m{9cm}|} \hline
+
+CV001 & EdgeRenderer \\ \hline
+Opis: & Klasa przeciążająca metody renderowania krawędzi grafu z biblioteki prefuse. \\ \hline
+Klasy nadrzędne: &  prefuse.render.EdgeRenderer   \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & \begin{itemize}
+ \item render(Graphics2D g, VisualItem item) - metoda renderująca krawędź
+\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF001, WF008, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CV002 & NodeRenderer \\ \hline
+Opis: & Klasa przeciążająca metody renderowania wierzchołków grafu z biblioteki prefuse.    \\ \hline
+Klasy nadrzędne: &  prefuse.render.LabelRenderer   \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & \begin{itemize}
+ \item render (Graphics2D g, VisualItem item) - metoda renderująca wierzchołek
+\item drawString(Graphics2D g, FontMetrics fm, String text,
+            boolean useInt, double x, double y, double w) - metoda wypisujaca na wierzchołku String
+\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF001, WF008, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CV003 & OVDisplay \\ \hline
+Opis: &  Klasa tworząca obiekt JComponent do umieszczenia na okienku JAVA zawierający wygenerowany graf z wizualizacją   \\ \hline
+Klasy nadrzędne: &  prefuse.Display   \\ \hline
+Atrybuty: & \begin{itemize}
+ \item Graph graph - obiekt typu prefuse.data.graph zawierajacy dane o grafie do wyświetlenia. 
+\end{itemize}
+ \\ \hline
+Metody: & \begin{itemize}
+ \item getGraph() - zwarca graf z wyśiwetlanymi danymi
+ \item setGraph(Graph graph) - nadpisuje obecny graf podanym
+ \item generateGraphFromOWl(OWLOntology ont) - wpisuje do klasy obiekt Grpah wygenrowany na podstawie ontologii
+	 
+\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF001, WF002, WF008, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CV004 & OVFilter \\ \hline
+Opis: & Klasa zawierająca filtry służace do wyświetlania danych w różnych zakresach    \\ \hline
+Klasy nadrzędne: &     \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF001, WF008, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+%\multicolumn{2}{c}{} \\
+% \hline
+
+
+\end{longtable}
+
+\end{center}
+
+\subsection{Pakiet graph}
+
+\subsubsection{Diagram}
+
+\includegraphics[width=\linewidth]{./modelowanie/OV_UML/GraphClassDiagram.png}
+
+\subsubsection{Opis klasy}
+
+\begin{center}
+ 
+
+
+\begin{longtable}{|m{3cm}|m{9cm}|} \hline
+
+CG001 & GraphToOWLConverter \\ \hline
+Opis: & Klasa zawierająca metody pozwalające na przetwarzanie obiektów grafów z prefuse na obiekty OWL API. Klasa jest singletonem. \\ \hline
+Klasy nadrzędne: &     \\ \hline
+Atrybuty: & \begin{itemize}
+ \item INSTANCE - instancja klasy GraphToOWLConverter 
+\end{itemize}
+ \\ \hline
+Metody: & \begin{itemize}
+	\item getInstance() - zwraca instancję klasy
+	\item GraphToOWL(OWLOntology ontology) -Zamienia graf z biblioteki prefuse na ontologię zapisana w OWL API.
+\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WD001, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CG002 & OWLtoGraphConverter \\ \hline
+Opis: & Klasa zawierająca metody pozwalające na przetwarzanie obiektów OWL API na obiekty prefuse. Klasa jest singletonem.\\ \hline
+Klasy nadrzędne: &     \\ \hline
+Atrybuty: & \begin{itemize}
+ \item INSTANCE - instancja klasy GraphToOWLConverter 
+\end{itemize}
+ \\ \hline
+Metody: & \begin{itemize}
+	\item getInstance() - zwraca instancję klasy
+	\item recursiveSubClassReader(Node parent, OWLClass cls,OWLOntology ontology ) - wczytuje do grafu OWL wszystkie klasy wraz z ich podklasami.
+ 	\item OWLToGraph(OWLOntology ontology) -Zamienia ontologię w OWL API na graf z biblioteki prefuse.
+\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WD001, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+%\multicolumn{2}{c}{} \\
+% \hline
+
+
+\end{longtable}
+
+\end{center}
+
+
+
+\subsection{Pakiet utils}
+
+\subsubsection{Diagram}
+
+\includegraphics[width=0.5\linewidth]{./modelowanie/OV_UML/UtilsDiagram.png}
+
+\subsubsection{Opis klasy}
+
+\begin{center}
+
+\begin{tabular}{|m{3cm}|m{9cm}|} \hline
+
+CU001 & Debug \\ \hline
+Opis: & Klasa do użycia przy debugowaniu, zapewnia strumien z błędami zwracanymi przez bibliotekę. Klasa jest singletonem.\\ \hline
+Klasy nadrzędne: &     \\ \hline
+Atrybuty: & \begin{itemize}
+ \item INSTANCE - instacja klasy Debug
+ \item Debug - Strumień do którego wpisywane są informacje potrzebne do debugowania
+\end{itemize}
+ \\ \hline
+Metody: & \begin{itemize}
+ \item getInstance() - zwraca instację klasy
+ \item setStream(PrintStream ps) - ustawia podany strumień jako strumień na który zwracane będa błędy
+ \item sendMessage(String s) - wysyła wiadomość na strumień do debugowania, jeżeli został wcześniej podpięty za pomocą funkcji setStream 	
+\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
+Priorytet: & bardzo ważne  \\ \hline
+
+%\multicolumn{2}{c}{} \\
+% \hline
+\end{tabular}
+\end{center}
+
+%\clearpage
+%\phantomsubsection
+%\addcontentsline{toc}{subsection}{Literatura}
+

@@ -1,0 +1,161 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+%custom margins
+\usepackage[left=2.5cm, top=2.5cm, bottom=3cm, right=2cm, foot=2cm, head=0.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage[bookmarks=true, pdftex]{hyperref}
+
+%styl nagłowków
+\pagestyle{fancy}
+\parindent 2cm
+
+%opening
+\title{Zlecenie projektowe }
+\author{3@KASK}
+
+\begin{document}
+\bibliographystyle{plain}
+
+
+\maketitle
+
+
+\begin{center}
+%budowanie tabeli
+\begin{tabular}{|p{7cm}|p{7cm}|}
+\hline
+Symbol projektu: & Opiekun projektu:   \tabularnewline
+3@KASK & mgr inż. Tomasz Boiński    \tabularnewline \hline
+\multicolumn{2}{|l|}{Nazwa Projektu: } \tabularnewline
+\multicolumn{2}{|l|}{Wizualizacja grafów za pomocą biblioteki Prefuse} \tabularnewline
+\hline
+\multicolumn{2}{l}{ } \tabularnewline %pusta linijka
+\hline
+Nazwa Dokumentu: & Nr wersji:   \tabularnewline
+Zlecenie projektowe & 0.2 \tabularnewline \hline
+Odpowiedzialny za dokument: & Data pierwszego sporządzenia:   \tabularnewline
+Piotr Kunowski & 30 marca 2009 \tabularnewline \hline
+Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline
+Wewnętrzne & \today \tabularnewline \hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|p{4cm}|c|c|c|}
+\multicolumn{5}{c}{\textbf{Historia dokumentu}} \tabularnewline \hline
+\textbf{Wersja} & \textbf{Opis modyfikacji} & \textbf{Rozdział/strona} & \textbf{Autor modyfikacji} & \textbf{Data} \tabularnewline \hline
+1 & Stworzenie dokumentu & wszystkie & Grupa projektowa & 30.03.09 \tabularnewline \hline
+2 & Dodanie forumułki o RUP   & 4   & Anna Jaworska & 15.04.09\tabularnewline \hline
+\end{tabular}
+
+
+\end{center}
+
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Cele i opis projektu}
+\paragraph{} Celem projektu jest utworzenie biblioteki umożliwiającej wizualizację ontologii zapisanych w OWL API. Do tego celu należy wykorzystać język Java oraz bibliotekę Prefuse. Szczególny nacisk w projekcie należy położyć na:
+\begin{itemize}
+ \item Wizualizację elementów niejawnych (np. klasy anonimowe wyrażone
+poprzez unie, przecięcie itp. oraz dziedziczenie po tych klasach,
+łączenie wielu odwzorowań niejawnych)
+\item  Wizualizację powiązań między klasami oraz innymi elementami grafu
+\item  Udokumentowanie stworzonej biblioteki za pomoca JavaDoc
+\item  Zapewnienie możliowości integracji uzyskanej biblioteki z istniejącą aplikacją OCS
+\end{itemize}
+
+\section{Zleceniodawca}
+\paragraph{} mgr inż. Tomasz Boiński, Katedra Architektury Systemów Komputerowych, Wydział Elektroniki, Telekomunikacji i Informatyki, Politechnika Gdańska.
+
+
+\section{Zleceniobiorca}
+\paragraph{} Studenci wydziału Elektorniki, Telekomunikacji i Informatyki, Katedry Architektury Systemów Komputerowych.
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Imię i nazwisko} & \textbf{Rola} & \textbf{E-mail} & \textbf{Telefon} \tabularnewline \hline
+Piotr Kunowski & Kierownik projektu & p.kunos@gmail.com & 781-765-187 \tabularnewline \hline
+Anna Jaworska & Członek zespołu & valanthe86@gmail.com & 666-089-481 \tabularnewline \hline
+Radosław Kleczkowski & Członek zespołu & radoslaw1201@gmail.com & brak \tabularnewline \hline
+Piotr Orłowski & Członek zespołu & cmsptcp@gmail.com & brak \tabularnewline \hline
+\end{tabular}
+\end{center}
+
+\section{Zakres prac}
+
+\paragraph{} \textbf{Pierwszy etap projektu}
+
+\begin{enumerate}
+ \item Studium wykonalności - stworzenie następujących dokumentów:
+	\begin{itemize}
+ 		\item  Zlecenie projektowe
+		\item  Harmonogram
+		\item Słownik
+		\item Studium wykonalności
+	\end{itemize}
+
+\item Analiza wymagań - stworzenie następujących dokumentów:
+	\begin{itemize}
+ 		\item Specyfikacja wymagań
+		\item Specyfikacja przypadków użycia
+	\end{itemize}
+
+
+\item Analiza obiektowa - stworzenie następujących dokumentów:
+	\begin{itemize}
+ 		\item Model klas
+		\item Model dynamiki
+		\item Specyfikacja przypadków testowych
+	\end{itemize}
+
+\item Prototyp - stworzenie kodu i dokumentów:
+	\begin{itemize}
+ 		\item Prototyp klas
+		\item Opis prototypu
+	\end{itemize}
+
+\item Odbiór projektu - stworzenie następujących dokumentów:
+	\begin{itemize}
+ 		\item Plakat
+		\item Prezentacja
+	\end{itemize}
+
+\end{enumerate}
+
+\paragraph{} \textbf{Drugi etap projektu}
+
+\begin{enumerate}
+ \item Iteracja 1
+	\begin{itemize}
+ 		\item Aktualizacja dokumentacji
+		\item Implementacja
+		\item Testowanie 
+	\end{itemize}
+\item Iteracja 2
+	\begin{itemize}
+ 		\item Aktualizacja dokumentacji
+		\item Implementacja
+		\item Testowanie 
+	\end{itemize}
+\item Podsumownie
+	\begin{itemize}
+ 		\item Aktualizacja dokumentacji
+		\item Podsumowanie 
+	\end{itemize}
+
+\end{enumerate}
+
+
+
+
+%\clearpage
+%\phantomsection
+%\addcontentsline{toc}{section}{Literatura}
+%\bibliography{biblio}
+
+\end{document}
