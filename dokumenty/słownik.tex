@@ -1,4 +1,4 @@
-\documentclass[a4paper,10pt]{article}
+\documentclass[a4paper,10pt,twoside]{article}
 \usepackage{polski}
 \usepackage[utf8]{inputenc}
 \usepackage{array}
@@ -9,6 +9,12 @@
 
 %styl nagłowków
 \pagestyle{fancy}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.0pt}
+\fancyhf[ROH,LEH]{\includegraphics[height=13pt]{./elementyGraficzne/SOVA.png}}
+\fancyhf[REH,LOH]{\large\nouppercase\leftmark}        % \leftmark prints the current section
+\fancyhf[ROF,LEF]{\large\thepage}
+\fancyhf[REF,LOF,C]{}
 \parindent 2cm
 
 %opening
