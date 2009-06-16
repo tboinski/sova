@@ -34,11 +34,11 @@ Symbol projektu: & Opiekun projektu:   \tabularnewline
 \multicolumn{2}{l}{ } \tabularnewline %pusta linijka
 \hline 
 Nazwa Dokumentu: & Nr wersji:   \tabularnewline 
-Infrastruktura projektu & 0.0 \tabularnewline \hline
+Infrastruktura projektu & 1.0 \tabularnewline \hline
 Odpowiedzialny za dokument: & Data pierwszego sporządzenia:   \tabularnewline 
 Anna Jaworska  & 31.03.09 \tabularnewline \hline
 Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline 
-WEWNĘTRZNE & 31.03.09 \tabularnewline \hline
+WEWNĘTRZNE & 20.04.09 \tabularnewline \hline
 \end{tabular}
 \end{center}
 
@@ -47,6 +47,7 @@ WEWNĘTRZNE & 31.03.09 \tabularnewline \hline
 \multicolumn{5}{c}{\textbf{Historia dokumentu}} \tabularnewline \hline
 \textbf{Wersja} & \textbf{Opis modyfikacji} & \textbf{Rozdział/strona} & \textbf{Autor modyfikacji} & \textbf{Data} \tabularnewline \hline 
 0.0 & Stworzenie & wszystkie & Anna Jaworska & 31.03.09 \tabularnewline \hline
+1.0 & wWpisanie używanych narzędzi & wszystkie & Anna Jaworska & 20.04.09 \tabularnewline \hline
 & & & &\tabularnewline \hline
 \end{tabular}
  
@@ -63,6 +64,11 @@ WEWNĘTRZNE & 31.03.09 \tabularnewline \hline
 \begin{tabular}{|l|l|} \hline
 	Nazwa roli & Osoba(y) \tabularnewline \hline
 	Kierownik projektu & Piotr Kunowski \tabularnewline \hline
+	Specjalista ds. testów & Radosław Kleczkowski \tabularnewline \hline
+	Analityk ds. ontologii & Piotr Orłowski \tabularnewline \hline
+	Analityk ds. Prefuse & Piotr Kunowski \tabularnewline \hline
+	Analityk główny & Anna Jaworska \tabularnewline \hline
+	Programiści & cały zespół \tabularnewline \hline
 \end{tabular}
 \end{center}
 
@@ -71,6 +77,10 @@ WEWNĘTRZNE & 31.03.09 \tabularnewline \hline
 \section{Dokumentacja}
 
 \paragraph{} Dokumenty tworzone sa na podstawie następujących szablonów składownych na SVN:
+\begin{itemize}
+ \item szablon.tex
+\item notatka\_szablon.tex
+\end{itemize}
 
 
 %\section{Współdzielenie dokumentów i kodu}
@@ -79,14 +89,13 @@ WEWNĘTRZNE & 31.03.09 \tabularnewline \hline
 \subsection{Narzędzia programistyczne}
 \begin{itemize}
  \item Netbeans 6.5
-
+ 
 \end{itemize}
 \subsection{Biblioteki i środowisko}
 \begin{itemize}
-	\item JAVA ver 
-  	\item Prefuse ver
-	\item OWL API ver
-	\item 
+	\item JAVA ver 6
+  	\item Prefuse ver prefuse-beta20071021
+	\item OWL API ver 2.1.1
 \end{itemize}
 
 \subsection{Komunikacja w zespole}
@@ -104,10 +113,13 @@ WEWNĘTRZNE & 31.03.09 \tabularnewline \hline
 \end{itemize}
 
 
+\subsection{Inne używane programy}
 
-\clearpage
-\phantomsection
-\addcontentsline{toc}{section}{Literatura}
-\bibliography{biblio}
+\begin{description}
+ \item[Rysowanie notacji dla ontologii] Inkspace i Dia
+ \item[UML] Netbeans
+ \item[Ontologie] Programy używane jako wzorcowe zarówno w kwestii wizualizacji jak i implementacji: Protege, GrOWL.
+ \item[Harmonogramy] GanttProject
+\end{description}
 
 \end{document}
