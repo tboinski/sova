@@ -8,8 +8,8 @@
 \usepackage[bookmarks=true, pdftex]{hyperref}
 
 %styl nagłowków
-\pagestyle{fancy} 
-\parindent 2cm 
+\pagestyle{fancy}
+\parindent 2cm
 
 %opening
 \title{Słownik}
@@ -26,29 +26,30 @@
 %budowanie tabeli
 \begin{tabular}{|p{7cm}|p{7cm}|}
 \hline
-Symbol projektu: & Opiekun projektu:   \tabularnewline 
+Symbol projektu: & Opiekun projektu:   \tabularnewline
 3@KASK & mgr inż. Tomasz Boiński    \tabularnewline \hline
 \multicolumn{2}{|l|}{Nazwa Projektu: } \tabularnewline
-\multicolumn{2}{|l|}{Wizualizacja grafów za pomocą biblioteki Prefuse } \tabularnewline 
+\multicolumn{2}{|l|}{Wizualizacja grafów za pomocą biblioteki Prefuse } \tabularnewline
 \hline
 \multicolumn{2}{l}{ } \tabularnewline %pusta linijka
-\hline 
-Nazwa Dokumentu: & Nr wersji:   \tabularnewline 
-Słownik pojęć & 0.03 \tabularnewline \hline
-Odpowiedzialny za dokument: & Data pierwszego sporządzenia:   \tabularnewline 
+\hline
+Nazwa Dokumentu: & Nr wersji:   \tabularnewline
+Słownik pojęć & 0.04 \tabularnewline \hline
+Odpowiedzialny za dokument: & Data pierwszego sporządzenia:   \tabularnewline
 Piotr Orłowski & 31.03.09 \tabularnewline \hline
-Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline 
-WEWNĘTRZNE & 07.04.09 \tabularnewline \hline
+Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline
+WEWNĘTRZNE & 15.05.09 \tabularnewline \hline
 \end{tabular}
 \end{center}
 
 \begin{center}
 \begin{tabular}{|c|p{4cm}|c|c|c|}
 \multicolumn{5}{c}{\textbf{Historia dokumentu}} \tabularnewline \hline
-\textbf{Wersja} & \textbf{Opis modyfikacji} & \textbf{Rozdział/strona} & \textbf{Autor modyfikacji} & \textbf{Data} \tabularnewline \hline 
+\textbf{Wersja} & \textbf{Opis modyfikacji} & \textbf{Rozdział/strona} & \textbf{Autor modyfikacji} & \textbf{Data} \tabularnewline \hline
 1 & Stworzenie zarysu słownika & wszystkie & Anna Jaworska & 31.03.09 \tabularnewline \hline
 2 & Podstawowe pojęcia Semantic Web & Pojęcia ogólne & Piotr Orłowski & 31.03.09 \tabularnewline \hline
 3 & Licencje wolnego oprogramwania & Pojęcia ogólne & Piotr Orłowski & 07.04.09 \tabularnewline \hline
+4 & Uzupełnienie brakujących pojęć & wszystkie & Piotr Orłowski & 15.06.09 \tabularnewline \hline
 & & & &\tabularnewline \hline
 \end{tabular}
 \end{center}
@@ -58,43 +59,62 @@ WEWNĘTRZNE & 07.04.09 \tabularnewline \hline
 \newpage
 
 \section{Jak korzystać ze slownika}
-Z uwagi na przyjętą metodykę wytwarzania oprogramowania (RUP) ta część dokumentu zostanie rozwinięta później.
+Słownik został podzielony na dwie części:
+\begin{itemize}
+ \item pojęcia ogólne
+ \item pojęcia specyficzne dla projektu.
+\end{itemize}
+Pojęcia zostały podane w sposób alfabetyczny. Słownik ten będzie rozwijany na bieżąco razem z rozwijaniem całego projektu.
+
 
 \section{Pojęcia ogólne}
 \begin{description}
-	\item[WETI/ETI] Wydział Elektroniki, Telekomunikacji i Informatyki Politechniki Gdańskiej
-	\item[KASK] Katedra Architektury Systemów Komputerowych WETI
- 	\item[OCS] Ontology  Creation System - projekt realizowany w ramach grantu (tu id grantu) na KASK-u
-	\item[JAVA] Obiektowy język programowania; pojęcie używane czasem w sensie maszyny wirtualnej jezyka JAVA  
-	\item[Prefuse] Biblioteka języka JAVA, pozwalająca na estetyczna prezentacje danych, w szczególności grafów
-	\item[API] ang. Application Programming Interface, interfejs dla programów, zestaw poleceń, funkcji, metod, formatów i danych, które służą do wymiany informacji pomiędzy aplikacją i systemem operacyjnym oraz innymi programami lub sterownikami.
-	\item[W3C] World Wide Web Consorcium - organizacja odpowiedzialna za ustalanie standardów dla metajęzyków
-	\item[ontologia] dział filozofii starający się badać strukturę rzeczywistości i zajmujący się problematyką związaną z pojęciami bytu, istoty, istnienia i jego sposobów, przedmiotu i jego własności, przyczynowości, czasu, przestrzeni, konieczności i możliwości.
-	\item[SVN] SubVersioN - system kontroli wersji
-	\item[XML] ang. Extensible Markup Language, uniwersalny język formalny przeznaczony do reprezentowania różnych danych w ustrukturalizowany sposób
-	\item[RDF] Resource Description Framework, jest specyfikacją W3C stosowaną do modelowania metadanych w postaci wyrażeń zawierających predykaty, klasy i podmioty; wyrażenia te tworzą graf skierowany
-	\item[RDFS] RDF Schema, język reprezentacji wiedzy oparty na RDF 
-	\item[OWL] Web Ontology Language, jest to rozszerzenie RDFS
-	\item[Sieć Semantyczna] ang. Semantic Web, projekt, który ma umożliwić łatwiejsze i bardziej logiczne wyszukiwanie przez maszyny i programy(agenty) danych w sieci Internet; znaczenie zasobów informacyjnych opisywane jest tu przy pomocy ontologii; do standardów rozwijanych wraz z Semantic Web należą m.in. OWL, RDF oraz RDFS 
-	\item[metadane] są to dane opisujące inne dane, stosowane w celu ułatwienia korzystania z tych danych
 	\item[agent] (lm. agenty) jednostka (np. program), działającą w pewnym środowisku, zdolna do komunikowania się, monitorowania swego otoczenia i podejmowania autonomicznych decyzji, aby osiągnąć cele określone podczas jej projektowania lub działania.
+	\item[API] ang. Application Programming Interface, interfejs dla programów, zestaw poleceń, funkcji, metod, formatów i danych, które służą do wymiany informacji pomiędzy aplikacją i systemem operacyjnym oraz innymi programami lub sterownikami.
 	\item[aplikacja standalone] to aplikacja, która do uruchomienia nie wymaga innych programów
-	\item[GPL] GNU General Public License, jedna z licencji Wolnego Oprogramowania stworzona przez Richarda Stallmana i Ebena Moglena; zawiera zastrzeżenie, że wszystkie pochodne prace bazujące na kodzie wydanym na licencji GPL muszą być wydane na licencji GPL 
+
 	\item[BSD] Berkeley Software Distribution License, jedna z licencji zgodnych z zasadami Wolnego Oprogramowania stworzona na Uniwersytecie Kalifornijskim w Berkeley.
-	\item[debugowanie] znany także jako odpluskwianie, proces szukania i naprawiania błędów	w programach komputerowychza pomocą specjalnych narzędzi do teog przeznaczonych.
-	\item[strumień błędów]
+	\item[debugowanie] znany także jako odpluskwianie, proces szukania i naprawiania błędów	w programach komputerowych za pomocą specjalnych narzędzi do tego przeznaczonych.
+	\item[GPL] GNU General Public License, jedna z licencji Wolnego Oprogramowania stworzona przez Richarda Stallmana i Ebena Moglena; zawiera zastrzeżenie, że wszystkie pochodne prace bazujące na kodzie wydanym na licencji GPL muszą być wydane na licencji GPL.
+
+	\item[JAVA] Obiektowy język programowania; pojęcie używane czasem w sensie maszyny wirtualnej jezyka JAVA
+	\item[javadoc] - generator dokumentacji stworzony przez firmę Sun Microsystems; narzędzie to generuje dokumentację kodu źródłowego Javy na podstawie zamieszczonych w kodzie komentarzy javadoc(do ich tworzenia używa się specjalnych tagów, które pozwalają na prawidłową interpretację informacji tam zawartej).
+	\item[JVM] - Java Virtual Machine, maszyna wirtualna Javy, niezależny od platformy system uruchomieniowy dla programów napisanych w języku Java oraz innych (np. Jython) językach.
+
+	\item[kapsułkowanie] - znane również jako hermetyzacja, enkapsulacja (z ang. encapsulation), jedno z założeń paradygmatu programowania obiektowego. Polega ono na ukrywaniu pewnych danych składowych lub metod obiektów danej klasy tak, aby były one dostępne tylko metodom wewnętrznym danej klasy oraz, ewentualnie, wybranym innym obiektom (np. klas zaprzyjaźnionych)..
+	\item[KASK] Katedra Architektury Systemów Komputerowych WETI
+	\item[krotka] - pojęcie matematyczne oznaczające uporządkowany, skończony zbiór elementów; w informatyce często używane do określenia rekordu bazy danych. W przypadku prefuse odnosi się do pojedynczego rekordu w tabeli.
+
+	\item[metadane] są to dane opisujące inne dane, stosowane w celu ułatwienia korzystania z tych danych.
+	\item[OCS] Ontology  Creation System - projekt realizowany w ramach grantu (tu id grantu) na KASK-u.
+	\item[ontologia] dział filozofii starający się badać strukturę rzeczywistości i zajmujący się problematyką związaną z pojęciami bytu, istoty, istnienia i jego sposobów, przedmiotu i jego własności, przyczynowości, czasu, przestrzeni, konieczności i możliwości.
+
+	\item[OWL] Web Ontology Language, jest to rozszerzenie RDFS. Język do opisu ontologii stworzony przez W3C.
+	\item[pakiet] - tutaj jednostka organizacji klas w programowaniu obiektowym.
+	\item[Prefuse] Biblioteka języka JAVA, pozwalająca na estetyczna prezentacje danych, w szczególności grafów
+
+	\item[RDF] Resource Description Framework, jest specyfikacją W3C stosowaną do modelowania metadanych w postaci wyrażeń zawierających predykaty, klasy i podmioty; wyrażenia te tworzą graf skierowany.
+	\item[RDFS] RDF Schema, język reprezentacji wiedzy oparty na RDF.
+	\item[Sieć Semantyczna] ang. Semantic Web, projekt, który ma umożliwić łatwiejsze i bardziej logiczne wyszukiwanie przez maszyny i programy(agenty) danych w sieci Internet; znaczenie zasobów informacyjnych opisywane jest tu przy pomocy ontologii; do standardów rozwijanych wraz z Semantic Web należą m.in. OWL, RDF oraz RDFS
+
+	\item[SHOIN/OWL] - język do wyrażania logiki opisowej ontologii.
+	\item[strumień błędów] - specjalny strumień danych w programie, na który kierowane są informacje o błędach oraz ewentualnie przebiegu działania funkcji programu, w których istnieje ryzyko wystąpienia błędów.
+	\item[SVN] SubVersioN - system kontroli wersji.
+
+	\item[W3C] World Wide Web Consorcium - organizacja odpowiedzialna za ustalanie standardów dla metajęzyków.
+ 	\item[WETI/ETI] Wydział Elektroniki, Telekomunikacji i Informatyki Politechniki Gdańskiej
+	\item[XML] ang. Extensible Markup Language, uniwersalny język formalny przeznaczony do reprezentowania różnych danych w ustrukturalizowany sposób.
+
 \end{description}
 
 
 
 \section{Pojęcia specificzne dla projektu}
 \begin{description}
+ 	\item[kardynalność] tutaj występująca w języku OWL liczność elementu
+	\item[klasa anonimowa] tutaj klasa będąca wynikiem operacji (np. logicznej) na innych klasach bądź powstała przez wyliczenie instancji.
  	\item[portalSubsystem] część projektu OCS, pozwala na wizualizację online plików OWL
- 	\item[kardynalność] tutaj występująca w języku OWL liczność elementu 
 \end{description}
-
-
-
 \clearpage
 \phantomsection
 \addcontentsline{toc}{section}{Literatura}
