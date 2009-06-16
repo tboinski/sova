@@ -34,7 +34,7 @@ Symbol projektu: & Opiekun projektu:   \tabularnewline
 \multicolumn{2}{l}{ } \tabularnewline %pusta linijka
 \hline 
 Nazwa Dokumentu: & Nr wersji:   \tabularnewline 
-Analiza obiektowa & 0.0 \tabularnewline \hline
+Analiza obiektowa & 2.0 \tabularnewline \hline
 Odpowiedzialny za dokument: & Data pierwszego sporządzenia:   \tabularnewline 
 Piotr Kunowski & 23 maja 2009 \tabularnewline \hline
 Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline 
@@ -48,6 +48,8 @@ DLA KLIENTA & \today \tabularnewline \hline
 \multicolumn{5}{c}{\textbf{Historia dokumentu}} \tabularnewline \hline
 \textbf{Wersja} & \textbf{Opis modyfikacji} & \textbf{Rozdział/strona} & \textbf{Autor modyfikacji} & \textbf{Data} \tabularnewline \hline 
 1 & Stworzenie & wszystkie & Grupa projektowa & 23.05.09 \tabularnewline \hline
+1.1 & Dodano pakiet Utils & 1, 3 & Anna Jaworska & 2.06.09 \tabularnewline \hline
+2 & Dodano zaktualizowane diagramy oraz opisy klas & wszystkie & Grupa projektowa & 16.06.09 \tabularnewline \hline
 
 \end{longtable}
 \end{center}
@@ -60,7 +62,7 @@ DLA KLIENTA & \today \tabularnewline \hline
 \section{Pakiety}
 
 \subsection{Diagram}
- \scalebox{0.70}{\includegraphics{./modelowanie/OV_UML/PackageDiagram.png}}
+ \includegraphics[width=\linewidth]{./modelowanie/OV_UML/PackageDiagram.png}
 
 
 \subsection{Opis pakietów}
@@ -216,7 +218,7 @@ Priorytet: & średnio ważny \\ \hline
 
 \subsection{Diagram}
 
- \scalebox{0.12}{\includegraphics{./modelowanie/OV_UML/NodesClassDiagram.png}}
+ \includegraphics[width=\linewidth]{./modelowanie/OV_UML/NodesClassDiagram.png}
 
 \subsection{Opis klasy}
 
@@ -667,7 +669,7 @@ Priorytet: & ważne  \\ \hline
 
 \subsection{Diagram}
 
- \scalebox{0.26}{\includegraphics{./modelowanie/OV_UML/EdgeClassDiagram.png}}
+\includegraphics[width=\linewidth]{./modelowanie/OV_UML/EdgeClassDiagram.png}
 
 \subsection{Opis klasy}
 
@@ -870,7 +872,7 @@ Priorytet: & ważne  \\ \hline
 
 \subsection{Diagram}
 
- \scalebox{0.45}{\includegraphics{./modelowanie/OV_UML/VisualizationClassDiagram.png}}
+\includegraphics[width=\linewidth]{./modelowanie/OV_UML/VisualizationClassDiagram.png}
 
 \subsection{Opis klasy}
 
@@ -961,7 +963,7 @@ Priorytet: & ważne  \\ \hline
 
 \subsection{Diagram}
 
- \scalebox{0.6}{\includegraphics{./modelowanie/OV_UML/GraphClassDiagram.png}}
+\includegraphics[width=\linewidth]{./modelowanie/OV_UML/GraphClassDiagram.png}
 
 \subsection{Opis klasy}
 
@@ -1019,13 +1021,13 @@ Priorytet: & ważne  \\ \hline
 
 \subsection{Diagram}
 
- %\scalebox{0.26}{\includegraphics{./modelowanie/OV_UML/EdgeClassDiagram.png}}
+\includegraphics[width=0.5\linewidth]{./modelowanie/OV_UML/UtilsDiagram.png}
 
 \subsection{Opis klasy}
 
 \begin{center}
 
-\begin{longtable}{|m{3cm}|m{9cm}|} \hline
+\begin{tabular}{|m{3cm}|m{9cm}|} \hline
 
 CU001 & Debug \\ \hline
 Opis: & Klasa do użycia przy debugowaniu, zapewnia strumien z błędami zwracanymi przez bibliotekę. Klasa jest singletonem.\\ \hline
@@ -1044,9 +1046,9 @@ Metody: & \begin{itemize}
 Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
 Priorytet: & bardzo ważne  \\ \hline
 
-\multicolumn{2}{c}{} \\
- \hline
-\end{longtable}
+%\multicolumn{2}{c}{} \\
+% \hline
+\end{tabular}
 \end{center}
 
 %\clearpage
