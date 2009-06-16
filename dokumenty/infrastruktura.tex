@@ -1,15 +1,29 @@
-\documentclass[a4paper,10pt]{article}
+\documentclass[a4paper,10pt,twoside]{article}
 \usepackage{polski}
 \usepackage[utf8]{inputenc}
 \usepackage{array}
 %custom margins
-\usepackage[left=2.5cm, top=2.5cm, bottom=3cm, right=2cm, foot=2cm, head=0.5cm]{geometry}
-\usepackage{fancyhdr}
+\usepackage[left=3cm, top=2.5cm, bottom=3cm, right=2cm, foot=2cm, head=0.5cm]{geometry}
 \usepackage[bookmarks=true, pdftex]{hyperref}
+\usepackage{fancyhdr}
+\renewcommand{\headheight}{0.6in}
+\setlength{\headwidth}{\textwidth}
+\fancyhead[L]{}% empty left
+\fancyhead[R]{ % right
+   \includegraphics[height=0.53in]{./elementyGraficzne/SOVA.png}
+}
 
+
+
+
+%\fancyhead{} % Clear all header fields
+%\fancyhead[C]{\includegraphics{}}
+%\fancyfoot{} % Clear all footer fields  
 %styl nagłowków
-\pagestyle{fancy} 
-\parindent 2cm 
+\pagestyle{fancy}
+%\fancyhead[C]{\includegraphics[width=3cm]{picture.jpg}}
+
+%\parindent 2cm 
 
 %opening
 \title{Infrastruktura projektu}
@@ -57,7 +71,7 @@ WEWNĘTRZNE & 20.04.09 \tabularnewline \hline
 
 \newpage
 \tableofcontents
-\newpage
+
 
 \section{Organizacja zespołu projektu}
 \begin{center}
@@ -114,12 +128,11 @@ WEWNĘTRZNE & 20.04.09 \tabularnewline \hline
 
 
 \subsection{Inne używane programy}
-
-\begin{description}
- \item[Rysowanie notacji dla ontologii] Inkspace i Dia
- \item[UML] Netbeans
- \item[Ontologie] Programy używane jako wzorcowe zarówno w kwestii wizualizacji jak i implementacji: Protege, GrOWL.
- \item[Harmonogramy] GanttProject
-\end{description}
+%\begin{itemize}
+ %\item Rysowanie notacji dla ontologii  Inkspace i Dia
+ %\item Netbeans
+ %\item[Ontologie] Programy używane jako wzorcowe zarówno w kwestii wizualizacji jak i implementacji: Protege, GrOWL.
+% \item[Harmonogramy] GanttProject
+%\end{itemize}
 
 \end{document}
