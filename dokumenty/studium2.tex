@@ -41,7 +41,7 @@ WEWNĘTRZNE & 16.06.09 \tabularnewline \hline
 
 \end{center}
 
-
+\newpage
 
 
 \subsection{Założenia realizacji studium}
@@ -265,10 +265,13 @@ Biblioteka powinna obsługiwać te same formaty danych co OWL API (zgodne ze spe
 	\item nie ma w nim gwarancji rozstrzygalności dla wnioskowań
 	\end{itemize}
 \item[Full]
+ 
+\end{description}
 
 \paragraph{} Należy zwrócić uwagę, że specyfikacja OWL jest dobrze zdefiniowana (rekomendacja W3C\footnote{Frank van Harmelen Deborah L. McGuinness. Owl web ontology language overview. publikacja elektroniczna, luty 2004.\url{http://www.w3.org/TR/2004/REC-owl-features-20040210/}
 }) co sprawia, że zachodzi spójność pomiędzy jej elementami. Zaimplementowanie wersji bardziej rozwiniętej oznacza, że wymogi dla wersji niższej także zostaną spełnione.
-\end{description}
+
+
 
 
 	
@@ -285,7 +288,7 @@ Biblioteka powinna obsługiwać te same formaty danych co OWL API (zgodne ze spe
 
 \begin{description}
 \item[Prefuse]
- Prefuse jest elastycznym pakietem dostarczającym programiście narzędzia do przechowywania danych, manipulowania nimi oraz ich interaktywnej wizualizacji. Biblioteka jest rozwijana w całości w języku Java. Może być wykorzystana do budowania niezależnych aplikacji, wizualnych komponentów rozbudowanych aplikacji oraz tworzenia apletów.
+ jest elastycznym pakietem dostarczającym programiście narzędzia do przechowywania danych, manipulowania nimi oraz ich interaktywnej wizualizacji. Biblioteka jest rozwijana w całości w języku Java. Może być wykorzystana do budowania niezależnych aplikacji, wizualnych komponentów rozbudowanych aplikacji oraz tworzenia apletów.
 
 
 Podstawowe cechy i elementy:
@@ -304,7 +307,7 @@ Podstawowe cechy i elementy:
  \item[Piccolo]  
 
 
- Piccolo jest zastawem narzędzi używanych przy tworzeniu graficznych aplikacji. Często wykorzystywana do tworzenie interfejsów użytkownika. w których elementy są przybliżane i oddalane. Istnieją trzy wersje tej biblioteki: Piccolo.Java, Piccolo.NET oraz PocketPiccolo.NET. Posiada Licencje BSD.
+ jest zastawem narzędzi używanych przy tworzeniu graficznych aplikacji. Często wykorzystywana do tworzenie interfejsów użytkownika. w których elementy są przybliżane i oddalane. Istnieją trzy wersje tej biblioteki: Piccolo.Java, Piccolo.NET oraz PocketPiccolo.NET. Posiada Licencje BSD.
 \item[JUNG (Java Universal Network/Graph Framework)]
 
  Biblioteka przeznaczona do wizualizacji danych za pomocą grafów oraz sieci. Umożliwia wizualizację nie tylko grafów prostych, ale m.in. multigrafów, digrafów oraz grafów posiadających wagi i etykiety na wierzchołkach i krawędziach. Biblioteka posiada podstawowe algorytmy grafowe. Została napisana w całości w Javie i wydana na licencji BSD.
@@ -318,9 +321,12 @@ Podstawowe cechy i elementy:
 \subsection{Rekomendowany wariant}
 
 
-\paragraph{OWL} Po zapoznaniu się ze specyfikacją stworzoną przez W3C najbardziej sensownym wydaje się być wykorzystanie wersji DL języka OWL. Dodatkowo wersja ta była dotychczas wykorzystywana przez portalSubsystem. Grupa nie odrzuca możliwości zaimplementowania obsługi wersji OWL Full, która pod względem zawartych w niej elementów zasadniczo nie różni się od wersji DL. Na jej niekorzyść przemawia jednak argument w postaci tego, że umożliwia pewne niejasności w prezentacji (szczególnie pod względem rozróżniania typów).
+\paragraph{OWL:} 
+ Po zapoznaniu się ze specyfikacją stworzoną przez W3C najbardziej sensownym wydaje się być wykorzystanie wersji DL języka OWL. Dodatkowo wersja ta była dotychczas wykorzystywana przez portalSubsystem. Grupa nie odrzuca możliwości zaimplementowania obsługi wersji OWL Full, która pod względem zawartych w niej elementów zasadniczo nie różni się od wersji DL. Na jej niekorzyść przemawia jednak argument w postaci tego, że umożliwia pewne niejasności w prezentacji (szczególnie pod względem rozróżniania typów).
 
-\paragraph{Biblioteka }Po uważnym przejrzeniu bibliotek najbardziej użyteczne wydają się Prefuse oraz Piccolo. Ze względu na dostępność dużej ilości przykładowego kodu wykorzystującego Prefuse w portalSubsystem wykorzystana zostanie biblioteka Prefuse. Ponadto opinie wyrażone w pracy magisterskiej Andrzeja Jakowskiego silnie przemawiają na korzyść Prefuse.
+\paragraph{Biblioteka:}
+
+Po uważnym przejrzeniu bibliotek najbardziej użyteczne wydają się Prefuse oraz Piccolo. Ze względu na dostępność dużej ilości przykładowego kodu wykorzystującego Prefuse w portalSubsystem wykorzystana zostanie biblioteka Prefuse. Ponadto opinie wyrażone w pracy magisterskiej Andrzeja Jakowskiego silnie przemawiają na korzyść Prefuse.
 
 
 \subsection{Strategia i wstępny harmonogram}
@@ -335,7 +341,7 @@ Podstawowe cechy i elementy:
 
 \subsubsection{Harmonogram na I semestr}
 \begin{center}
- \scalebox{0.5}{\includegraphics{./elementyGraficzne/harmonogramy/sem1.png}}\end{center}
+ \scalebox{0.45}{\includegraphics{./elementyGraficzne/harmonogramy/sem1.png}}\end{center}
 \subsubsection{Harmonogram na II semestr}
 \begin{center}
  \scalebox{0.5}{\includegraphics{./elementyGraficzne/harmonogramy/sem2.png}}\end{center}
