@@ -9,12 +9,6 @@
 
 %styl nagłowków
 \pagestyle{fancy}
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0.0pt}
-\fancyhf[ROH,LEH]{\includegraphics[height=13pt]{./elementyGraficzne/SOVA.png}}
-\fancyhf[REH,LOH]{\large\nouppercase\leftmark}        % \leftmark prints the current section
-\fancyhf[ROF,LEF]{\large\thepage}
-\fancyhf[REF,LOF,C]{}
 \parindent 2cm
 
 %opening
@@ -22,10 +16,17 @@
 \author{3@KASK}
 
 \begin{document}
-\bibliographystyle{plain}
+
 
 
 \maketitle
+
+
+
+
+%opening
+
+
 
 
 \begin{center}
@@ -60,9 +61,7 @@ WEWNĘTRZNE & 15.05.09 \tabularnewline \hline
 \end{tabular}
 \end{center}
 
-\newpage
-\tableofcontents
-\newpage
+
 
 \section{Jak korzystać ze slownika}
 Słownik został podzielony na dwie części:
@@ -121,9 +120,8 @@ Pojęcia zostały podane w sposób alfabetyczny. Słownik ten będzie rozwijany 
 	\item[klasa anonimowa] tutaj klasa będąca wynikiem operacji (np. logicznej) na innych klasach bądź powstała przez wyliczenie instancji.
  	\item[portalSubsystem] część projektu OCS, pozwala na wizualizację online plików OWL
 \end{description}
-\clearpage
-\phantomsection
-\addcontentsline{toc}{section}{Literatura}
-%\bibliography{biblio}
+
+
+
 
 \end{document}
