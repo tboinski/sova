@@ -8,9 +8,9 @@ import java.awt.Graphics2D;
 // </editor-fold> 
 public class ThingNode extends Node {
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.77E2CCCF-F6A4-98FA-21F4-62F85E249D6F]
-    // </editor-fold> 
+   /** 
+    *
+    */ 
     public ThingNode () {
 	    super();
 	    setLabel("T");

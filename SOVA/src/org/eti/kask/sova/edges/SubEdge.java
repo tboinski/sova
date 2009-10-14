@@ -17,9 +17,9 @@ import prefuse.visual.VisualItem;
 // </editor-fold> 
 public class SubEdge extends Edge {
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.76EDB4C0-6484-66F9-90A7-09ED4FB6C778]
-    // </editor-fold> 
+   /** 
+    *
+    */ 
     public SubEdge () {
 	    
 	    setHasInvertedArrow(true);

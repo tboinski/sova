@@ -82,30 +82,30 @@ public abstract class Node {
 	    return getLabel();
     }
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-    // #[regen=yes,id=DCE.8BEC2D01-6712-8B52-F218-54CF9071E33B]
-    // </editor-fold>
+   /**
+    *
+    */
     /*public Annotation getAnnotation () {
         return null;
     }
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-    // #[regen=yes,id=DCE.F6219503-B98B-D945-EC48-0BF02D9365EB]
-    // </editor-fold>
-    public void setAnnotation (Annotation val) {
-    }
+   /**
+    *
+    */
+    /*public void setAnnotation (Annotation val) {
+    }*/
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-    // #[regen=yes,id=DCE.1D8B5B6E-ABF1-D4A3-7B30-C7FE1EC723F5]
-    // </editor-fold>
-    public Comment getComment () {
+   /**
+    *
+    */
+    /*public Comment getComment () {
         return null;
-    }
+    }*/
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-    // #[regen=yes,id=DCE.63D8B7B7-6963-2261-0666-A8C8F62FAB0A]
-    // </editor-fold>
-    public void setComment (Comment val) {
+   /**
+    *
+    */
+    /*public void setComment (Comment val) {
     }*/
 
 }

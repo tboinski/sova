@@ -26,20 +26,20 @@ import prefuse.visual.expression.InGroupPredicate;
 
 
 
-// <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.8EA72EAB-93D1-E28C-37EF-04248F715E57]
-// </editor-fold> 
+/**
+ * 
+ */
 public class OVDisplay extends Display {
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.60BB3D24-55C8-3947-A223-ECCCD5B32904]
-    // </editor-fold> 
+   /** 
+    *
+    */ 
     private Graph graph;
    // private Visualization visualization;
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.DB4FD1B1-0319-3FFE-BFBB-7279878EB829]
-    // </editor-fold> 
+   /** 
+    *
+    */ 
     public OVDisplay () {
 	super();
 	Visualization vis = new Visualization();
@@ -66,16 +66,16 @@ public class OVDisplay extends Display {
 
 
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.EB7212E7-00EC-CB47-1E51-232066FB0843]
-    // </editor-fold> 
+   /** 
+    *
+    */ 
     public Graph getGraph () {
         return graph;
     }
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.71E94C39-3C78-6321-602D-B20C8114ADD0]
-    // </editor-fold> 
+   /** 
+    *
+    */ 
     public void setGraph (Graph val) {
         this.graph = val;
     }
@@ -83,9 +83,9 @@ public class OVDisplay extends Display {
 
 
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.9EE67031-8AEC-4098-FA0E-A96B20AE4820]
-    // </editor-fold> 
+   /** 
+    *
+    */ 
     public void generateGraphFromOWl (OWLOntology ont) {
 
 	    this.setGraph(OWLtoGraphConverter.getInstance().OWLtoGraph(ont));

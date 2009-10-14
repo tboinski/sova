@@ -21,9 +21,9 @@ public class NodeRenderer extends prefuse.render.LabelRenderer {
 
     protected AffineTransform m_transform = new AffineTransform();
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.E8A800BD-5A4D-8CF5-FE74-468F7610D308]
-    // </editor-fold> 
+   /** 
+    *
+    */ 
     public NodeRenderer () {
     }
 
@@ -32,9 +32,9 @@ public class NodeRenderer extends prefuse.render.LabelRenderer {
     }
 
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.2DA8618F-638A-D098-4E85-CD255CE56311]
-    // </editor-fold> 
+   /** 
+    *
+    */ 
     public void render (Graphics2D g, VisualItem item) {
 
 	NodeItem ni = (NodeItem) item;

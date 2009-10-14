@@ -8,17 +8,17 @@ import java.awt.Graphics2D;
 // </editor-fold> 
 public class ClassNode extends Node {
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.5FDCDDDC-F239-D6F1-7C0F-BD6A2BF250BE]
-    // </editor-fold> 
+   /** 
+    *
+    */ 
     public ClassNode () {
 	    setFillColor(Color.CYAN);
     }
 
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.F7A01481-AE3A-2200-2E7A-5FB0733BD853]
-    // </editor-fold> 
+   /** 
+    *
+    */ 
     public void renderShape (Graphics2D g) {
     }
 
