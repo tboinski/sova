@@ -1,43 +1,26 @@
 package org.eti.kask.sova.edges;
 
 import java.awt.Color;
+import java.awt.Polygon;
 
-// <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.8F971B76-0E32-B22D-1558-4AF0C150DF7A]
-// </editor-fold> 
+/**
+ * Krawędź, łącząca klasy rozłączne.
+ */
 public class DisjointEdge extends Edge {
 
    /** 
     *
     */ 
     public DisjointEdge () {
+
+	    setHasArrow(true);
+	    setHasInvertedArrow(true);
+	    int[] xpoints = {-4, 0, 4, 0};
+	    int[] ypoints = {0, -12, 0, -2};
+	    arrowHead = new Polygon(xpoints, ypoints, 4);
+	    setArrowHeadColor(Color.BLACK);
     }
 
-   /** 
-    *
-    */
-    public Color getStrokeColor () {
-        return null;
-    }
-
-   /** 
-    *
-    */ 
-    public void setStrokeColor (Color val) {
-    }
-
-   /** 
-    *
-    */ 
-    public int getStrokeWidth () {
-        return 0;
-    }
-
-   /** 
-    *
-    */ 
-    public void setStrokeWidth (int val) {
-    }
 
 }
 

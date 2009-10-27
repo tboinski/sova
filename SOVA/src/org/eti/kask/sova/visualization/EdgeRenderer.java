@@ -12,22 +12,17 @@ import prefuse.util.ColorLib;
 import prefuse.visual.EdgeItem;
 import prefuse.visual.VisualItem;
 
-// <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.769FB976-1116-80D3-DB2B-962A92ACAA70]
-// </editor-fold> 
+/**
+ * Klasa odpowiadająca za właściwe wyświetlanie krawędzi.
+ */
 public class EdgeRenderer extends prefuse.render.EdgeRenderer
 {
 
-	// <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-	// #[regen=yes,id=DCE.8C9D0761-8895-EEEC-F2E0-DD75418D827D]
-	// </editor-fold>
 	public EdgeRenderer()
 	{
 	}
 
-	// <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-	// #[regen=yes,id=DCE.7A3AF910-9382-3BA5-8EBB-D4FDA1C41D2E]
-	// </editor-fold>
+
 	@Override
 	public void render(Graphics2D g, VisualItem item)
 	{
@@ -72,10 +67,10 @@ public class EdgeRenderer extends prefuse.render.EdgeRenderer
 			int i2 = GraphicsLib.intersectLineRectangle(start, end, r2,
 					m_isctPoints);
 			if (i2 > 0)
-				start = m_isctPoints[0];
+				end = m_isctPoints[0];
 
 			AffineTransform at2 = getArrowTrans(end, start, ourEdge.getStrokeWidth());
-			Shape arrowHead = at2.createTransformedShape(ourEdge.getArrowHead());
+			Shape arrowHead = at2.createTransformedShape(ourEdge.getInvArrowHead());
 
 			g.setPaint(ourEdge.getArrowHeadColor());
 			g.fill(arrowHead);

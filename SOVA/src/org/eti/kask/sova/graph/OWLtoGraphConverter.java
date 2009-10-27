@@ -8,6 +8,8 @@ import prefuse.data.Edge;
 import prefuse.data.Graph;
 import prefuse.data.Node;
 import org.eti.kask.sova.utils.Debug;
+import org.semanticweb.owl.model.OWLDisjointClassesAxiom;
+import org.semanticweb.owl.util.OWLAxiomVisitorAdapter;
 import prefuse.data.Table;
 
 
@@ -20,6 +22,7 @@ public class OWLtoGraphConverter
 	private static final OWLtoGraphConverter INSTANCE = new OWLtoGraphConverter();
 
 	private Table edges;
+	private Table nodes;
 
 	// Private constructor prevents instantiation from other classes
 	private OWLtoGraphConverter()
@@ -34,9 +37,7 @@ public class OWLtoGraphConverter
 		return INSTANCE;
 	}
 
-	// <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-	// #[regen=yes,id=DCE.4FCE5BE4-CCD1-8D03-913C-6F9B2FF8B14A]
-	// </editor-fold>
+	
 	/**
 	 * Zamienia ontologię na graf z biblioteki prefuse.
 	 * @param ontology Ontologia w formacie OWLOntology z OWL API.
@@ -46,6 +47,7 @@ public class OWLtoGraphConverter
 	{
 		// Tworzymy nowy graf
 		Graph graph = new Graph();
+		nodes = graph.getNodeTable();
 		graph.addColumn( "node", org.eti.kask.sova.nodes.Node.class );
 
 		// Dodajemy węzeł Thing
@@ -59,6 +61,7 @@ public class OWLtoGraphConverter
 		//edges.addColumn("DEFAULT_NODE_KEY", Integer.class);
 		edges.addColumn("edge", org.eti.kask.sova.edges.Edge.class);
 
+		// Wczytanie wszystkich klas i ich podklas
 		for (OWLClass cls : ontology.getReferencedClasses()) {
 			Debug.sendMessage( cls.toString() );
 
@@ -79,7 +82,10 @@ public class OWLtoGraphConverter
 				recursiveSubClassReader(n, cls, ontology);
 
 			}
+
 		}
+
+		disjointEdgeReader(ontology);
 
 		graph.setEdgeTable(edges);
 
@@ -87,7 +93,8 @@ public class OWLtoGraphConverter
 	}
 
 
-	public void recursiveSubClassReader(Node parent, OWLClass cls,OWLOntology ontology ){
+	public void recursiveSubClassReader(Node parent, OWLClass cls,OWLOntology ontology )
+	{
 
 		for (OWLDescription sub : cls.getSubClasses( ontology)) {
 			Node n = parent.getGraph().addNode();
@@ -107,6 +114,58 @@ public class OWLtoGraphConverter
 		}
 
 
+	}
+
+	/**
+	 * Zaznacza związki OWL Disjoint pomiędzy klasami z ontologii na grafie
+	 * w postaci krawędzi. <br/>
+	 * Wymaga zainicjalizowanych zmiennych "edges" oraz "nodes"!
+	 * @param ontology ontologia źródłowa
+	 */
+	protected void disjointEdgeReader(OWLOntology ontology)
+	{
+		
+		for (OWLClass cls : ontology.getReferencedClasses()) {
+			for (OWLDisjointClassesAxiom dca : ontology.getDisjointClassesAxioms(cls)) {
+				// Debug.sendMessage(dca.toString());
+				// format tekstu: "DisjointClasses( K1 K2 )"
+				String[] disjointClasses = dca.toString().split(" ");
+
+				// Wyszukanie wezlow w tablicy - nieoptymalne
+				// można utworzyć dodatkowe indeksy w celu przyspieszenia				
+				int c1RowNo = -1, c2RowNo = -1;
+				for (int i = 0; i < nodes.getRowCount(); i++ ) {
+
+					if (nodes.get(i, "node").toString().equals(disjointClasses[1])) {
+						c1RowNo = i;
+					}
+
+					if (nodes.get(i, "node").toString().equals(disjointClasses[2])) {
+						c2RowNo = i;
+					}
+
+					if (c1RowNo != -1 && c2RowNo != -1) break;
+				}
+
+				if (c1RowNo == -1 || c2RowNo == -1) {
+					Debug.sendMessage("Nie odnaleziono węzła " + disjointClasses[1] +"lub"+ disjointClasses[2]);
+					continue;
+				}
+
+				/* Ponieważ związki wczytane z ontologii są podwojone
+				 * (każdy związek pomiędzy 2 klasami występuje przy obu klasach),
+				 * potrzebny jest poniższy warunek, aby wyeliminować ten problem.
+				 */
+				if (c1RowNo < c2RowNo) {
+					int row = edges.addRow();
+					edges.set(row, "source", c1RowNo);
+					edges.set(row, "target", c2RowNo);
+					edges.set(row, "edge", new org.eti.kask.sova.edges.DisjointEdge());
+				}
+
+			}
+
+		}
 	}
 
 }

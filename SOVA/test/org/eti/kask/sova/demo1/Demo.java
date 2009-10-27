@@ -29,7 +29,7 @@ public class Demo
 		// We load an ontology from a physical URI - in this case we'll load the pizza
 		// ontology.
 		URI physicalURI = URI.create("file:/home/piotr/8semestr/pg/praktyka/repo/ocs_visualisation/onot-test.owl");
-		OVDisplay display;
+		OVDisplay display = null;
 		try {
 			// Now ask the manager to load the ontology
 			display = new OVDisplay(manager.loadOntologyFromPhysicalURI(physicalURI));
