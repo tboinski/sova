@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.Shape;
 import java.awt.geom.Point2D;
+import org.eti.kask.sova.options.EdgeColors;
 import prefuse.util.ColorLib;
 import prefuse.visual.VisualItem;
 
@@ -18,6 +19,7 @@ public class Edge
 	 *
 	 */
 	protected Color strokeColor;
+
 	/**
 	 *
 	 */
@@ -38,8 +40,19 @@ public class Edge
 	    hasInvertedArrow = false;
     }
 
+    /**
+     * @return domyślny kolor dla tej krawędzi
+     */
     public Color getStrokeColor () {
 	    return strokeColor;
+    }
+
+    /**
+     * @param colorScheme źródłowy schemat kolorów
+     * @return kolor dla tej krawędzi ustawiony w zadanym schemacie
+     */
+    public Color getStrokeColorFromScheme (EdgeColors colorScheme) {
+	    return colorScheme.getEdgeColor();
     }
 
 	/**

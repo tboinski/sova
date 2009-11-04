@@ -8,6 +8,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import org.eti.kask.sova.edges.Edge;
+import org.eti.kask.sova.options.EdgeColors;
 import prefuse.util.ColorLib;
 import prefuse.visual.EdgeItem;
 import prefuse.visual.VisualItem;
@@ -17,6 +18,8 @@ import prefuse.visual.VisualItem;
  */
 public class EdgeRenderer extends prefuse.render.EdgeRenderer
 {
+
+	protected EdgeColors colorScheme = new EdgeColors();
 
 	public EdgeRenderer()
 	{
@@ -57,7 +60,7 @@ public class EdgeRenderer extends prefuse.render.EdgeRenderer
 
 			g.setPaint(ourEdge.getArrowHeadColor());
 			g.fill(arrowHead);
-			g.setPaint(ourEdge.getStrokeColor());
+			g.setPaint(ourEdge.getStrokeColorFromScheme(colorScheme));
 			g.draw(arrowHead);
 		}
 
@@ -74,9 +77,30 @@ public class EdgeRenderer extends prefuse.render.EdgeRenderer
 
 			g.setPaint(ourEdge.getArrowHeadColor());
 			g.fill(arrowHead);
-			g.setPaint(ourEdge.getStrokeColor());
+			g.setPaint(ourEdge.getStrokeColorFromScheme(colorScheme));
 			g.draw(arrowHead);
 		}
 	}
+
+	/**
+	 * @return schemat kolorów dla krawędzi
+	 * @see EdgeColors
+	 */
+	public EdgeColors getColorScheme()
+	{
+		return colorScheme;
+	}
+
+	/**
+	 * Ustawia schemat kolorów dla krawędzi.
+	 * @param colorScheme schemat kolorów dla krawędzi
+	 * @see EdgeColors
+	 */
+	public void setColorScheme(EdgeColors colorScheme)
+	{
+		this.colorScheme = colorScheme;
+	}
+
+
 }
 

@@ -57,6 +57,9 @@ public class NodeColors {
     protected Color unionOfNodeColor;
 
     public NodeColors () {
+	    // kolory domyślne
+	    classNodeColor = Color.CYAN;
+	    individualNodeColor = Color.GRAY;
     }
 
     public Color getAllValuesFromNodeColor () {

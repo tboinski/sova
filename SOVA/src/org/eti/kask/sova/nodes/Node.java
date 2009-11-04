@@ -7,6 +7,7 @@ package org.eti.kask.sova.nodes;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import org.eti.kask.sova.options.NodeColors;
 
 /**
  *
@@ -25,9 +26,21 @@ public abstract class Node {
 		label = "no label!";
 	}
 
+	/**
+	 * @return domyślny kolor wypełnienia węzła
+	 */
 	public Color getFillColor()
 	{
 		return fillColor;
+	}
+
+	/**
+	 * @param colorScheme źródłowy schemat kolorów
+	 * @return kolor wypełnienia węzła z zadanego schematu
+	 */
+	public Color getFillColorFromScheme(NodeColors colorScheme)
+	{
+		return colorScheme.getClassNodeColor();
 	}
 
 	public void setFillColor(Color fillColor)

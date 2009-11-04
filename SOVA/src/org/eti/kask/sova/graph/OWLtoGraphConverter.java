@@ -9,6 +9,7 @@ import prefuse.data.Graph;
 import prefuse.data.Node;
 import org.eti.kask.sova.utils.Debug;
 import org.semanticweb.owl.model.OWLDisjointClassesAxiom;
+import org.semanticweb.owl.model.OWLIndividualAxiom;
 import org.semanticweb.owl.util.OWLAxiomVisitorAdapter;
 import prefuse.data.Table;
 
@@ -86,6 +87,7 @@ public class OWLtoGraphConverter
 		}
 
 		disjointEdgeReader(ontology);
+		//individualReader(ontology);
 
 		graph.setEdgeTable(edges);
 
@@ -114,6 +116,13 @@ public class OWLtoGraphConverter
 		}
 
 
+	}
+
+	public void individualReader(OWLOntology ontology) {
+
+		for (OWLIndividualAxiom oia : ontology.getIndividualAxioms()) {
+			Debug.sendMessage(oia.toString());
+		}
 	}
 
 	/**

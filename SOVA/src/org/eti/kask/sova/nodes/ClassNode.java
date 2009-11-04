@@ -1,26 +1,32 @@
 package org.eti.kask.sova.nodes;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
+import org.eti.kask.sova.options.NodeColors;
 
-// <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.4FEB68A2-049C-04BE-3D91-81A0C7D69ADD]
-// </editor-fold> 
-public class ClassNode extends Node {
+/**
+ * Reprezentuje węzły klas (OWL Class).
+ */
+public class ClassNode extends Node
+{
 
-   /** 
-    *
-    */ 
-    public ClassNode () {
-	    setFillColor(Color.CYAN);
-    }
+	/**
+	 *
+	 */
+	public ClassNode()
+	{
+		setFillColor(Color.CYAN);
+	}
 
+	/**
+	 * @param colorScheme źródłowy schemat kolorów
+	 * @return kolor wypełnienia węzła z zadanego schematu
+	 */
+	@Override
+	public Color getFillColorFromScheme(NodeColors colorScheme)
+	{
+		return colorScheme.getClassNodeColor();
+	}
 
-   /** 
-    *
-    */ 
-    public void renderShape (Graphics2D g) {
-    }
 
 }
 

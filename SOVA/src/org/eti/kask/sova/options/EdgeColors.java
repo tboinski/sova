@@ -28,6 +28,8 @@ public class EdgeColors {
     protected Color subEdgeColor;
  
     public EdgeColors () {
+	    // Ustawienia domyślne
+	    edgeColor = Color.BLACK;
     }
 
     public Color getDomainEdgeColor () {
