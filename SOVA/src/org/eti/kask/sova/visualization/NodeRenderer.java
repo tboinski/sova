@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.RectangularShape;
+import org.eti.kask.sova.nodes.ThingNode;
 import org.eti.kask.sova.options.NodeColors;
 import prefuse.Constants;
 import prefuse.util.ColorLib;
@@ -15,10 +16,9 @@ import prefuse.util.GraphicsLib;
 import prefuse.visual.NodeItem;
 import prefuse.visual.VisualItem;
 
-
-// <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.6A49478C-E5A8-3830-E8EF-3203E405C97B]
-// </editor-fold> 
+/**
+ * Klasa odpowiadająca za poprawne rysowanie węzłów.
+ */
 public class NodeRenderer extends prefuse.render.LabelRenderer
 {
 
@@ -35,7 +35,6 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 	public NodeRenderer(String SOVAnodeField)
 	{
 		super(SOVAnodeField);
-		
 	}
 
 	/**
@@ -54,6 +53,9 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 		item.setFillColor(ColorLib.color(SOVAnode.getFillColorFromScheme(colorScheme)));
 		item.setStrokeColor(ColorLib.color(Color.BLACK));
 		item.setTextColor(ColorLib.color(Color.BLACK));
+
+		if (SOVAnode.isRounded()) setRoundedCorner(8, 8);
+		else setRoundedCorner(0, 0);
 
 		RectangularShape shape = (RectangularShape) getShape(item);
 		if (shape == null) {

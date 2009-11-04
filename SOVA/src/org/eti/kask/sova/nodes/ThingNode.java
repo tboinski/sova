@@ -1,7 +1,7 @@
 package org.eti.kask.sova.nodes;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
+import org.eti.kask.sova.options.NodeColors;
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.62915D8C-1304-C852-C116-E41695A34198]
@@ -16,6 +16,14 @@ public class ThingNode extends Node {
 	    setLabel("T");
 	    setFillColor(Color.GREEN);
     }
+
+	@Override
+	public Color getFillColorFromScheme(NodeColors colorScheme)
+	{
+		return colorScheme.getThingNodeColor();
+	}
+
+
 
 
 }

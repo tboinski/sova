@@ -1,6 +1,7 @@
 package org.eti.kask.sova.options;
 
 import java.awt.Color;
+import prefuse.util.ColorLib;
 
 /**
  * Klasa przechowująca informacje o ustawieniach kolorów dla węzłów.
@@ -58,8 +59,10 @@ public class NodeColors {
 
     public NodeColors () {
 	    // kolory domyślne
-	    classNodeColor = Color.CYAN;
-	    individualNodeColor = Color.GRAY;
+	    classNodeColor = new Color(0, 182, 193);
+	    thingNodeColor = Color.GREEN;
+	    individualNodeColor = new Color(200, 194, 183);
+	    differentNodeColor = new Color(209, 174, 114);
     }
 
     public Color getAllValuesFromNodeColor () {

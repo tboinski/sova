@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.eti.kask.sova.nodes;
 
 import java.awt.Color;
@@ -13,13 +12,15 @@ import org.eti.kask.sova.options.NodeColors;
  *
  * @author infinity
  */
-public abstract class Node {
+public abstract class Node
+{
 
 	protected Color fillColor;
 	protected int strokeWitdh;
 	protected int height;
 	protected int witdh;
 	protected String label;
+	protected boolean rounded = true;
 
 	public Node()
 	{
@@ -88,37 +89,45 @@ public abstract class Node {
 		this.witdh = witdh;
 	}
 
-
-
 	@Override
-    public String toString() {
-	    return getLabel();
-    }
+	public String toString()
+	{
+		return getLabel();
+	}
 
-   /**
-    *
-    */
-    /*public Annotation getAnnotation () {
-        return null;
-    }
+	/**
+	 * True, when the node should have rounded corners.
+	 */
+	public boolean isRounded()
+	{
+		return rounded;
+	}
 
-   /**
-    *
-    */
-    /*public void setAnnotation (Annotation val) {
-    }*/
+	public void setRounded(boolean rounded)
+	{
+		this.rounded = rounded;
+	}
+	/**
+	 *
+	 */
+	/*public Annotation getAnnotation () {
+	return null;
+	}
 
-   /**
-    *
-    */
-    /*public Comment getComment () {
-        return null;
-    }*/
-
-   /**
-    *
-    */
-    /*public void setComment (Comment val) {
-    }*/
-
+	/**
+	 *
+	 */
+	/*public void setAnnotation (Annotation val) {
+	}*/
+	/**
+	 *
+	 */
+	/*public Comment getComment () {
+	return null;
+	}*/
+	/**
+	 *
+	 */
+	/*public void setComment (Comment val) {
+	}*/
 }

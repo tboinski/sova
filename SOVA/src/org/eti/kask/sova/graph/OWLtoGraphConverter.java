@@ -1,6 +1,7 @@
 
 package org.eti.kask.sova.graph;
 
+import java.util.Collections;
 import org.semanticweb.owl.model.OWLClass;
 import org.semanticweb.owl.model.OWLDescription;
 import org.semanticweb.owl.model.OWLOntology;
@@ -9,6 +10,7 @@ import prefuse.data.Graph;
 import prefuse.data.Node;
 import org.eti.kask.sova.utils.Debug;
 import org.semanticweb.owl.model.OWLDisjointClassesAxiom;
+import org.semanticweb.owl.model.OWLIndividual;
 import org.semanticweb.owl.model.OWLIndividualAxiom;
 import org.semanticweb.owl.util.OWLAxiomVisitorAdapter;
 import prefuse.data.Table;
@@ -87,7 +89,8 @@ public class OWLtoGraphConverter
 		}
 
 		disjointEdgeReader(ontology);
-		//individualReader(ontology);
+		individualReader(graph, ontology);
+		individualAxiomReader(graph, ontology);
 
 		graph.setEdgeTable(edges);
 
@@ -111,6 +114,8 @@ public class OWLtoGraphConverter
 			edges.set(row, "edge", new org.eti.kask.sova.edges.SubEdge() );
 
 			Debug.sendMessage("subclass "+ sub.toString() );
+
+			// Wczytuje potomków klasy
 			recursiveSubClassReader(n, sub.asOWLClass(), ontology );
 
 		}
@@ -118,10 +123,105 @@ public class OWLtoGraphConverter
 
 	}
 
-	public void individualReader(OWLOntology ontology) {
+	protected void individualReader(Graph graph, OWLOntology ontology) {
 
-		for (OWLIndividualAxiom oia : ontology.getIndividualAxioms()) {
-			Debug.sendMessage(oia.toString());
+		for (OWLIndividualAxiom ia : ontology.getIndividualAxioms()) {
+			Debug.sendMessage("IA: " + ia.toString());
+			String[] axiomParts = identifyAxiomString(ia.toString());
+
+			if (axiomParts[0].equals("ClassAssertion")) {
+			
+				String[] individualAxioms = axiomParts[1].split(" ");
+
+				//Wyszukuanie węzła klasy
+				int classRowNo;
+				for (classRowNo = 0; classRowNo < nodes.getRowCount(); classRowNo++ ) {
+
+					if (nodes.get(classRowNo, "node").toString().equals(individualAxioms[0])) {
+						break;
+					}
+
+				}
+
+				if (classRowNo >= nodes.getRowCount()) {
+					Debug.sendMessage("Nie odnaleziono węzła " + individualAxioms[0]);
+					continue;
+				}
+
+				//Dodanie węzła instancji do grafu
+				Node n = graph.addNode();
+				org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.IndividualNode();
+				node.setLabel(individualAxioms[1]);
+				n.set("node", node);
+
+				//Dodanie krawędzi łączącej instancję z klasą
+				int row = edges.addRow();
+				edges.set(row, "source", classRowNo);
+				edges.set(row, "target", n.getRow());
+				edges.set(row, "edge", new org.eti.kask.sova.edges.Edge());
+
+
+			}
+		}
+	}
+
+	protected void individualAxiomReader(Graph graph, OWLOntology ontology) {
+
+		for (OWLIndividualAxiom ia : ontology.getIndividualAxioms()) {
+			Debug.sendMessage("IA: " + ia.toString());
+			String[] axiomParts = identifyAxiomString(ia.toString());
+
+			if (axiomParts[0].equals("DifferentIndividuals")) {
+
+				String[] individuals = axiomParts[1].trim().split(" ");
+				int[] rowNo = new int[individuals.length];
+				//Oznaczenie zabezpieczające
+				for (int i = 0; i < rowNo.length; i++) rowNo[i] = -1;
+				/**
+				 * Wyszukanie węzłów instancji (OWL Individuals),
+				 * które mają być połączone związkiem różności
+				 * (OWL AllDifferent) w grafie.
+				 */
+				int found = 0;
+				for (int i = 0; found < individuals.length && i < nodes.getRowCount(); i++ ) {
+
+					for(int j = 0; j < individuals.length; j++) {
+
+						if (nodes.get(i, "node").toString().equals(individuals[j])) {
+							rowNo[j] = i;
+							found++;
+							break;
+						}
+					}
+				}
+
+				if (found < individuals.length) {
+					Debug.sendMessage("Nie znaleziono któregoś z węzłów: ");
+					for (int i = 0; i < individuals.length; i++)
+						Debug.sendMessage(individuals[i]);
+					break;
+				}
+
+				//Dodanie węzła różności do grafu
+				Node n = graph.addNode();
+				org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.DifferentNode();
+				node.setLabel("≠");
+				n.set("node", node);
+
+				//Połączenie węzła nierówności z instancjami
+				for (int i = 0; i < individuals.length; i++) {
+
+					if (rowNo[i] != -1) {
+
+						int row = edges.addRow();
+						edges.set(row, "source", n.getRow());
+						edges.set(row, "target", rowNo[i]);
+						edges.set(row, "edge", new org.eti.kask.sova.edges.Edge());
+					}
+				}
+
+
+			}
 		}
 	}
 
@@ -175,6 +275,20 @@ public class OWLtoGraphConverter
 			}
 
 		}
+	}
+
+	/**
+	 * Rozdziela nazwę związku (OWL Axiom) od nazw połączonych nim elementów
+	 * OWL. Zakłada String wejściowy w formacie "NazwaZwiązku(el1 el2 el3)"
+	 * @param axiomString an OWL API SomeAxiom.toString() value
+	 * @return Tablica dwuelementowa, gdzie <br/>
+	 * tablica[0] to String z nazwą związku oraz <br/>
+	 * tablica[1] to String zawierający elementy związku rozdzielone spacjami. 
+	 */
+	protected String[] identifyAxiomString(String axiomString) {
+		String[] axiomParts = axiomString.split("[()]");
+		//axiomParts[1] = axiomParts[1].substring(0, axiomParts[1].length() - 1);
+		return axiomParts;
 	}
 
 }

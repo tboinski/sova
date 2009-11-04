@@ -12,6 +12,7 @@ public class IndividualNode extends Node
 	public IndividualNode()
 	{
 		setFillColor(Color.GRAY);
+		setRounded(false);
 	}
 
 	/**
