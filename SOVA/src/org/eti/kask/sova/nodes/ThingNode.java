@@ -13,7 +13,7 @@ public class ThingNode extends Node {
     */ 
     public ThingNode () {
 	    super();
-	    setLabel("T");
+	    setLabel("TestowanieBardzoDlugiejEtykietyWezla");
 	    setFillColor(Color.GREEN);
     }
 

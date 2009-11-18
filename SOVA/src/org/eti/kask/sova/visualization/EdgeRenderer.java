@@ -23,6 +23,7 @@ public class EdgeRenderer extends prefuse.render.EdgeRenderer
 
 	public EdgeRenderer()
 	{
+		super();
 	}
 
 
@@ -44,8 +45,8 @@ public class EdgeRenderer extends prefuse.render.EdgeRenderer
 		
 		//ei.getVisualization().getAction("color");
 		Point2D start = null, end = null;
-		start = m_tmpPoints[0];
-		end = m_tmpPoints[1];
+		start = (Point2D)m_tmpPoints[0].clone();
+		end = (Point2D)m_tmpPoints[1].clone();
 
 		if (ourEdge.isHasArrow()) {
 			VisualItem item2 = (VisualItem) ei.getTargetItem();
@@ -67,10 +68,12 @@ public class EdgeRenderer extends prefuse.render.EdgeRenderer
 		if (ourEdge.isHasInvertedArrow()) {
 			VisualItem item2 = (VisualItem) ei.getSourceItem();
 			Rectangle2D r2 = item2.getBounds();
+			// Wykorzystanie tablicy M_tmpPoints uniemożliwia
+			// nadpisanie wartości obliczonych wcześniej
 			int i2 = GraphicsLib.intersectLineRectangle(start, end, r2,
-					m_isctPoints);
+					m_tmpPoints);
 			if (i2 > 0)
-				end = m_isctPoints[0];
+				start = m_tmpPoints[0];
 
 			AffineTransform at2 = getArrowTrans(end, start, ourEdge.getStrokeWidth());
 			Shape arrowHead = at2.createTransformedShape(ourEdge.getInvArrowHead());

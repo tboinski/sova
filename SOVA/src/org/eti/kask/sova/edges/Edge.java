@@ -86,9 +86,10 @@ public class Edge
 
 	public Polygon getInvArrowHead()
 	{
-		int[] ypoints = new int[arrowHead.npoints];
-		for (int i = 0; i < arrowHead.npoints; i++) ypoints[i] = arrowHead.ypoints[i] - 7;
-		return new Polygon(arrowHead.xpoints, ypoints, arrowHead.npoints);
+		/*int[] ypoints = new int[arrowHead.npoints];
+		for (int i = 0; i < arrowHead.npoints; i++) ypoints[i] = arrowHead.ypoints[i];
+		return new Polygon(arrowHead.xpoints, ypoints, arrowHead.npoints);*/
+		return arrowHead;
 	}
 
 	public void setArrowHead(Polygon arrowHead)
