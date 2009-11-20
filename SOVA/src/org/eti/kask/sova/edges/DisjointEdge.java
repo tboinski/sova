@@ -2,27 +2,36 @@ package org.eti.kask.sova.edges;
 
 import java.awt.Color;
 import java.awt.Polygon;
+import org.eti.kask.sova.options.ArrowShapes;
 import org.eti.kask.sova.options.EdgeColors;
 
 /**
  * Krawędź łącząca klasy rozłączne.
  */
-public class DisjointEdge extends Edge {
+public class DisjointEdge extends Edge
+{
 
-   /** 
-    *
-    */ 
-    public DisjointEdge () {
+	/**
+	 *
+	 */
+	public DisjointEdge()
+	{
 
+		setHasArrow(true);
+		setHasInvertedArrow(true);
+		setArrowHeadColor(Color.BLACK);
+	}
 
+	@Override
+	public Polygon getInvArrowHead()
+	{
+		return ArrowShapes.getInstance().getInversedDirectionArrow();
+	}
 
-	    setHasArrow(true);
-	    setHasInvertedArrow(true);
-	    int[] xpoints = {-4, 0, 4, 0};
-	    int[] ypoints = {0, -12, 0, -2};
-	    arrowHead = new Polygon(xpoints, ypoints, 4);
-	    setArrowHeadColor(Color.BLACK);
-    }
-
+	@Override
+	public Polygon getArrowHead()
+	{
+		return ArrowShapes.getInstance().getInversedDirectionArrow();
+	}
 }
 

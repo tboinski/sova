@@ -26,7 +26,6 @@ public class Edge
 	protected int strokeWidth;
 	protected boolean hasArrow;
 	protected boolean hasInvertedArrow;
-	protected Polygon arrowHead;
 	protected Color arrowHeadColor;
 
 
@@ -81,20 +80,12 @@ public class Edge
 
 	public Polygon getArrowHead()
 	{
-		return arrowHead;
+		return null;
 	}
 
 	public Polygon getInvArrowHead()
 	{
-		/*int[] ypoints = new int[arrowHead.npoints];
-		for (int i = 0; i < arrowHead.npoints; i++) ypoints[i] = arrowHead.ypoints[i];
-		return new Polygon(arrowHead.xpoints, ypoints, arrowHead.npoints);*/
-		return arrowHead;
-	}
-
-	public void setArrowHead(Polygon arrowHead)
-	{
-		this.arrowHead = arrowHead;
+		return null;
 	}
 
 	public boolean isHasArrow()

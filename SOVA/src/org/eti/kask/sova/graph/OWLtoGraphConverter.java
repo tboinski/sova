@@ -2,6 +2,7 @@
 package org.eti.kask.sova.graph;
 
 import java.util.Collections;
+import java.util.Set;
 import org.semanticweb.owl.model.OWLClass;
 import org.semanticweb.owl.model.OWLDescription;
 import org.semanticweb.owl.model.OWLOntology;
@@ -9,9 +10,13 @@ import prefuse.data.Edge;
 import prefuse.data.Graph;
 import prefuse.data.Node;
 import org.eti.kask.sova.utils.Debug;
+import org.semanticweb.owl.model.OWLAxiom;
 import org.semanticweb.owl.model.OWLDisjointClassesAxiom;
 import org.semanticweb.owl.model.OWLIndividual;
 import org.semanticweb.owl.model.OWLIndividualAxiom;
+import org.semanticweb.owl.model.OWLLabelAnnotation;
+import org.semanticweb.owl.model.OWLLogicalAxiom;
+import org.semanticweb.owl.model.OWLObjectPropertyAssertionAxiom;
 import org.semanticweb.owl.util.OWLAxiomVisitorAdapter;
 import prefuse.data.Table;
 
@@ -89,8 +94,14 @@ public class OWLtoGraphConverter
 		}
 
 		disjointEdgeReader(ontology);
-		individualReader(graph, ontology);
+		//individualReader(graph, ontology); - zastąpiony przez:
+		nodeReader(graph, ontology.getLogicalAxioms()); //lekko nadmiarowe ;/
 		individualAxiomReader(graph, ontology);
+		
+		//Tylko do testów
+		for (OWLAxiom a : ontology.getObjectPropertyAxioms()) {
+			System.out.println(a);
+		}
 
 		graph.setEdgeTable(edges);
 
@@ -125,9 +136,9 @@ public class OWLtoGraphConverter
 
 	protected void individualReader(Graph graph, OWLOntology ontology) {
 
-		for (OWLIndividualAxiom ia : ontology.getIndividualAxioms()) {
-			Debug.sendMessage("IA: " + ia.toString());
-			String[] axiomParts = identifyAxiomString(ia.toString());
+		for (OWLLogicalAxiom la : ontology.getIndividualAxioms()) {
+			Debug.sendMessage("IA: " + la.toString());
+			String[] axiomParts = identifyAxiomString(la.toString());
 
 			if (axiomParts[0].equals("ClassAssertion")) {
 			
@@ -278,10 +289,67 @@ public class OWLtoGraphConverter
 	}
 
 	/**
+	 * Próba zrobienia 1 funkcji wczytującej wszystkie wężły, spowodowana
+	 * sporą częścią powtarzającego się kodu...
+	 * @param graph
+	 * @param logicalAxiomSet
+	 */
+	protected void nodeReader(Graph graph, Set<OWLLogicalAxiom> logicalAxiomSet) {
+
+		for (OWLLogicalAxiom la : logicalAxiomSet) {
+			Debug.sendMessage("LA: " + la.toString());
+			String[] axiomParts = identifyAxiomString(la.toString());
+
+			if (axiomParts[0].equals("ClassAssertion")
+				/*|| axiomParts[0].equals("ClassAssertion")
+				 * itd.
+				 */) {
+
+				String[] individualAxioms = axiomParts[1].split(" ");
+
+				//Wyszukuanie węzła klasy
+				int classRowNo;
+				for (classRowNo = 0; classRowNo < nodes.getRowCount(); classRowNo++ ) {
+
+					if (nodes.get(classRowNo, "node").toString().equals(individualAxioms[0])) {
+						break;
+					}
+
+				}
+
+				if (classRowNo >= nodes.getRowCount()) {
+					Debug.sendMessage("Nie odnaleziono węzła " + individualAxioms[0]);
+					continue;
+				}
+
+				//Dodanie węzła instancji do grafu
+				Node n = graph.addNode();
+				org.eti.kask.sova.nodes.Node node = null;
+				org.eti.kask.sova.edges.Edge edge = null;
+				if (axiomParts[0].equals("ClassAssertion")) {
+					node = new org.eti.kask.sova.nodes.IndividualNode();
+					edge =  new org.eti.kask.sova.edges.Edge();
+				} /*else if ...*/
+				node.setLabel(individualAxioms[1]);
+				n.set("node", node);
+
+				//Dodanie krawędzi łączącej instancję z klasą
+				int row = edges.addRow();
+				edges.set(row, "source", classRowNo);
+				edges.set(row, "target", n.getRow());
+				edges.set(row, "edge", edge);
+
+
+			}
+		}
+	}
+
+
+	/**
 	 * Rozdziela nazwę związku (OWL Axiom) od nazw połączonych nim elementów
 	 * OWL. Zakłada String wejściowy w formacie "NazwaZwiązku(el1 el2 el3)"
 	 * @param axiomString an OWL API SomeAxiom.toString() value
-	 * @return Tablica dwuelementowa, gdzie <br/>
+	 * @return Tablica <b>dwuelementowa</b>, gdzie <br/>
 	 * tablica[0] to String z nazwą związku oraz <br/>
 	 * tablica[1] to String zawierający elementy związku rozdzielone spacjami. 
 	 */
