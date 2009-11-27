@@ -1,5 +1,6 @@
 package org.eti.kask.sova.visualization;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -11,6 +12,7 @@ import java.awt.geom.RectangularShape;
 import org.eti.kask.sova.nodes.ThingNode;
 import org.eti.kask.sova.options.NodeColors;
 import prefuse.Constants;
+import prefuse.render.ShapeRenderer;
 import prefuse.util.ColorLib;
 import prefuse.util.GraphicsLib;
 import prefuse.visual.NodeItem;
@@ -24,6 +26,7 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 
 	protected AffineTransform m_transform = new AffineTransform();
 	protected NodeColors colorScheme = new NodeColors();
+	protected ShapeRenderer shapeRenderer = new ShapeRenderer();
 
 	/**
 	 *
@@ -52,12 +55,28 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 		// Ustawienie kolorów wypełnienia, obramowania oraz tekstu węzła
 		item.setFillColor(ColorLib.color(SOVAnode.getFillColorFromScheme(colorScheme)));
 		item.setStrokeColor(ColorLib.color(Color.BLACK));
+		item.setStroke(new BasicStroke(SOVAnode.getStrokeWitdh()));
 		item.setTextColor(ColorLib.color(Color.BLACK));
 
 		if (SOVAnode.isRounded()) setRoundedCorner(8, 8);
 		else setRoundedCorner(0, 0);
 
-		RectangularShape shape = (RectangularShape) getShape(item);
+		//item.setShape(Constants.SHAPE_ELLIPSE); //nic nie daje
+		//shapeRenderer.setBounds(item); //nic nie daje
+		Shape shape =  getShape(item);
+
+		/* zmienia ksztalt w elipsę, ale niestety wystaje tekst
+		 int ellipseMargin = 0;
+
+		shape = shapeRenderer.ellipse(
+			shape.getBounds().x - ellipseMargin,
+			shape.getBounds().y - ellipseMargin,
+			shape.getBounds().width + ellipseMargin,
+			shape.getBounds().height + ellipseMargin
+			);
+
+		*/
+
 		if (shape == null) {
 			return;
 		}
@@ -79,8 +98,8 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 		double size = item.getSize();
 		boolean useInt = 1.5 > Math.max(g.getTransform().getScaleX(),
 			g.getTransform().getScaleY());
-		double x = shape.getMinX() + size * m_horizBorder;
-		double y = shape.getMinY() + size * m_vertBorder;
+		double x = shape.getBounds().getMinX() + size * m_horizBorder;
+		double y = shape.getBounds().getMinY() + size * m_vertBorder;
 
 		// render image
 		if (img != null) {
@@ -94,13 +113,13 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 					x += w + size * m_imageMargin;
 					break;
 				case Constants.RIGHT:
-					ix = shape.getMaxX() - size * m_horizBorder - w;
+					ix = shape.getBounds().getMaxX() - size * m_horizBorder - w;
 					break;
 				case Constants.TOP:
 					y += h + size * m_imageMargin;
 					break;
 				case Constants.BOTTOM:
-					iy = shape.getMaxY() - size * m_vertBorder - h;
+					iy = shape.getBounds().getMaxY() - size * m_vertBorder - h;
 					break;
 				default:
 					throw new IllegalStateException(
@@ -116,10 +135,10 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 						case Constants.TOP:
 							break;
 						case Constants.BOTTOM:
-							iy = shape.getMaxY() - size * m_vertBorder - h;
+							iy = shape.getBounds().getMaxY() - size * m_vertBorder - h;
 							break;
 						case Constants.CENTER:
-							iy = shape.getCenterY() - h / 2;
+							iy = shape.getBounds().getCenterY() - h / 2;
 							break;
 					}
 					break;
@@ -130,10 +149,10 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 						case Constants.LEFT:
 							break;
 						case Constants.RIGHT:
-							ix = shape.getMaxX() - size * m_horizBorder - w;
+							ix = shape.getBounds().getMaxX() - size * m_horizBorder - w;
 							break;
 						case Constants.CENTER:
-							ix = shape.getCenterX() - w / 2;
+							ix = shape.getBounds().getCenterX() - w / 2;
 							break;
 					}
 					break;
@@ -169,7 +188,7 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 			switch (m_imagePos) {
 				case Constants.TOP:
 				case Constants.BOTTOM:
-					tw = shape.getWidth() - 2 * size * m_horizBorder;
+					tw = shape.getBounds().getWidth() - 2 * size * m_horizBorder;
 					break;
 				default:
 					tw = m_textDim.width;
@@ -180,7 +199,7 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 			switch (m_imagePos) {
 				case Constants.LEFT:
 				case Constants.RIGHT:
-					th = shape.getHeight() - 2 * size * m_vertBorder;
+					th = shape.getBounds().getHeight() - 2 * size * m_vertBorder;
 					break;
 				default:
 					th = m_textDim.height;

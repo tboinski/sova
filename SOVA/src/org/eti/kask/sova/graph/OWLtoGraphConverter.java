@@ -99,9 +99,10 @@ public class OWLtoGraphConverter
 		individualAxiomReader(graph, ontology);
 		
 		//Tylko do testów
-		for (OWLAxiom a : ontology.getObjectPropertyAxioms()) {
+		/*for (OWLAxiom a : ontology.getAxioms()) {
 			System.out.println(a);
-		}
+		}*/
+
 
 		graph.setEdgeTable(edges);
 
@@ -247,7 +248,7 @@ public class OWLtoGraphConverter
 		
 		for (OWLClass cls : ontology.getReferencedClasses()) {
 			for (OWLDisjointClassesAxiom dca : ontology.getDisjointClassesAxioms(cls)) {
-				// Debug.sendMessage(dca.toString());
+				Debug.sendMessage(dca.toString());
 				// format tekstu: "DisjointClasses( K1 K2 )"
 				String[] disjointClasses = dca.toString().split(" ");
 
@@ -255,6 +256,11 @@ public class OWLtoGraphConverter
 				// można utworzyć dodatkowe indeksy w celu przyspieszenia				
 				int c1RowNo = -1, c2RowNo = -1;
 				for (int i = 0; i < nodes.getRowCount(); i++ ) {
+					
+					if (nodes.get(i, "node").toString() == null)  {
+						Debug.sendMessage("Node label is NULL: " + nodes.get(i, "node").getClass().getCanonicalName());
+						continue; //Pomija nienazwany węzeł
+					}
 
 					if (nodes.get(i, "node").toString().equals(disjointClasses[1])) {
 						c1RowNo = i;
@@ -355,7 +361,12 @@ public class OWLtoGraphConverter
 	 */
 	protected String[] identifyAxiomString(String axiomString) {
 		String[] axiomParts = axiomString.split("[()]");
-		//axiomParts[1] = axiomParts[1].substring(0, axiomParts[1].length() - 1);
+		if (axiomParts.length < 3) {
+			/*Debug.sendMessage("Nieznany format Aksjomatu: " + axiomString);
+			axiomParts = new String[3];
+			axiomParts[0] = axiomParts[1] = axiomParts[2] = "";
+			return axiomParts;*/
+		}
 		return axiomParts;
 	}
 

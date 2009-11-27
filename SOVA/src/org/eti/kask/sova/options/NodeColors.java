@@ -63,6 +63,11 @@ public class NodeColors {
 	    thingNodeColor = Color.GREEN;
 	    individualNodeColor = new Color(200, 194, 183);
 	    differentNodeColor = new Color(209, 174, 114);
+	    propertyNodeColor = new Color(146, 61, 255);
+	    someValuesFromNodeColor = new Color(203, 61, 255);
+	    allValuesFromNodeColor = new Color(159, 152, 255);
+	    dataTypeNodeColor = new Color(61, 255, 155);
+	    anonymousClassNodeColor = Color.YELLOW;
     }
 
     public Color getAllValuesFromNodeColor () {

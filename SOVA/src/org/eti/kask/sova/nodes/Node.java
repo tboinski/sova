@@ -5,18 +5,16 @@
 package org.eti.kask.sova.nodes;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
 import org.eti.kask.sova.options.NodeColors;
 
 /**
- *
- * @author infinity
+ * Klasa abstrakcyjna. Nadklasa wszystkich węzłów.
  */
 public abstract class Node
 {
 
 	protected Color fillColor;
-	protected int strokeWitdh;
+	protected float strokeWitdh;
 	protected int height;
 	protected int witdh;
 	protected String label;
@@ -25,6 +23,7 @@ public abstract class Node
 	public Node()
 	{
 		label = "no label!";
+		strokeWitdh = 1f; //domyślna grubość ramki węzła
 	}
 
 	/**
@@ -59,22 +58,34 @@ public abstract class Node
 		this.height = height;
 	}
 
+	/**
+	 * @return etykieta węzła
+	 */
 	public String getLabel()
 	{
 		return label;
 	}
 
+	/**
+	 * @param label etykieta węzła
+	 */
 	public void setLabel(String label)
 	{
 		this.label = label;
 	}
 
-	public int getStrokeWitdh()
+	/**
+	 * @return grubość obramowania węzła
+	 */
+	public float getStrokeWitdh()
 	{
 		return strokeWitdh;
 	}
 
-	public void setStrokeWitdh(int strokeWitdh)
+	/**
+	 * @param strokeWidth grubość obramowania węzła
+	 */
+	public void setStrokeWitdh(float strokeWitdh)
 	{
 		this.strokeWitdh = strokeWitdh;
 	}
@@ -89,6 +100,10 @@ public abstract class Node
 		this.witdh = witdh;
 	}
 
+	/**
+	 * @return etykieta węzła
+	 * @see Node#getLabel() 
+	 */
 	@Override
 	public String toString()
 	{
@@ -96,6 +111,7 @@ public abstract class Node
 	}
 
 	/**
+	 * True, gdy węzeł ma mieć zaokrąglone narożniki.
 	 * True, when the node should have rounded corners.
 	 */
 	public boolean isRounded()

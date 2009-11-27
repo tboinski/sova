@@ -124,20 +124,20 @@ public class OVDisplay extends Display
 			ColorLib.rgb(255, 180, 180), ColorLib.rgb(190, 190, 255)
 		};
 // map nominal data values to colors using our provided palette
-		DataColorAction fill = new DataColorAction("graph.nodes", "gender",
-			Constants.NOMINAL, VisualItem.FILLCOLOR, palette);
+		/*DataColorAction fill = new DataColorAction("graph.nodes", "gender",
+			Constants.NOMINAL, VisualItem.FILLCOLOR, palette);*/
 // use black for node text
-		ColorAction text = new ColorAction("graph.nodes",
-			VisualItem.TEXTCOLOR, ColorLib.gray(0));
+		/*ColorAction text = new ColorAction("graph.nodes",
+			VisualItem.TEXTCOLOR, ColorLib.gray(0));*/
 // use light grey for edges
-		ColorAction edges = new ColorAction("graph.edges",
-			VisualItem.STROKECOLOR, ColorLib.gray(1));
+		/*ColorAction edges = new ColorAction("graph.edges",
+			VisualItem.STROKECOLOR, ColorLib.gray(1));*/
 
 // create an action list containing all color assignments
-		ActionList color = new ActionList();
+		/*ActionList color = new ActionList();
 		color.add(fill);
 		color.add(text);
-		color.add(edges);
+		color.add(edges);*/
 
 // create an action list with an animated layout
 // the INFINITY parameter tells the action list to run indefinitely
@@ -146,7 +146,7 @@ public class OVDisplay extends Display
 		layout.add(new RepaintAction());
 
 // add the actions to the visualization
-		vis.putAction("color", color);
+		//vis.putAction("color", color);
 		vis.putAction("layout", layout);
 
 		vis.run("color");  // assign the colors
