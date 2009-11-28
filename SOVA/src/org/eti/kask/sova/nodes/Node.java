@@ -6,32 +6,23 @@ package org.eti.kask.sova.nodes;
 
 import java.awt.Color;
 import org.eti.kask.sova.options.NodeColors;
+import org.eti.kask.sova.options.NodeShapeType;
+import org.eti.kask.sova.options.NodeShapes;
 
 /**
  * Klasa abstrakcyjna. Nadklasa wszystkich węzłów.
  */
 public abstract class Node
 {
-
-	protected Color fillColor;
-	protected float strokeWitdh;
-	protected int height;
-	protected int witdh;
+	protected float strokeWitdh;	
 	protected String label;
 	protected boolean rounded = true;
+
 
 	public Node()
 	{
 		label = "no label!";
 		strokeWitdh = 1f; //domyślna grubość ramki węzła
-	}
-
-	/**
-	 * @return domyślny kolor wypełnienia węzła
-	 */
-	public Color getFillColor()
-	{
-		return fillColor;
 	}
 
 	/**
@@ -43,19 +34,13 @@ public abstract class Node
 		return colorScheme.getClassNodeColor();
 	}
 
-	public void setFillColor(Color fillColor)
+	/**
+	 * @param shapeScheme źródłowy schemat kształtów dla węzłów
+	 * @return rodzaj kształtu węzła z zadanego schematu
+	 */
+	public NodeShapeType getNodeShapeType(NodeShapes shapeScheme)
 	{
-		this.fillColor = fillColor;
-	}
-
-	public int getHeight()
-	{
-		return height;
-	}
-
-	public void setHeight(int height)
-	{
-		this.height = height;
+		return shapeScheme.getDefaultNodeShapeType();
 	}
 
 	/**
@@ -88,16 +73,6 @@ public abstract class Node
 	public void setStrokeWitdh(float strokeWitdh)
 	{
 		this.strokeWitdh = strokeWitdh;
-	}
-
-	public int getWitdh()
-	{
-		return witdh;
-	}
-
-	public void setWitdh(int witdh)
-	{
-		this.witdh = witdh;
 	}
 
 	/**
@@ -146,4 +121,6 @@ public abstract class Node
 	 */
 	/*public void setComment (Comment val) {
 	}*/
+
+
 }

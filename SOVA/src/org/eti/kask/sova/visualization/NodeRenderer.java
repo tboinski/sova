@@ -11,6 +11,8 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.RectangularShape;
 import org.eti.kask.sova.nodes.ThingNode;
 import org.eti.kask.sova.options.NodeColors;
+import org.eti.kask.sova.options.NodeShapes;
+import org.eti.kask.sova.utils.Debug;
 import prefuse.Constants;
 import prefuse.render.ShapeRenderer;
 import prefuse.util.ColorLib;
@@ -26,6 +28,7 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 
 	protected AffineTransform m_transform = new AffineTransform();
 	protected NodeColors colorScheme = new NodeColors();
+	protected NodeShapes shapeScheme = new NodeShapes();
 	protected ShapeRenderer shapeRenderer = new ShapeRenderer();
 
 	/**
@@ -58,29 +61,25 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 		item.setStroke(new BasicStroke(SOVAnode.getStrokeWitdh()));
 		item.setTextColor(ColorLib.color(Color.BLACK));
 
-		if (SOVAnode.isRounded()) setRoundedCorner(8, 8);
-		else setRoundedCorner(0, 0);
-
-		//item.setShape(Constants.SHAPE_ELLIPSE); //nic nie daje
-		//shapeRenderer.setBounds(item); //nic nie daje
-		Shape shape =  getShape(item);
-
-		/* zmienia ksztalt w elipsę, ale niestety wystaje tekst
-		 int ellipseMargin = 0;
-
-		shape = shapeRenderer.ellipse(
-			shape.getBounds().x - ellipseMargin,
-			shape.getBounds().y - ellipseMargin,
-			shape.getBounds().width + ellipseMargin,
-			shape.getBounds().height + ellipseMargin
-			);
-
-		*/
-
+		//Dopasowuje kształt węzła do schematu
+		Shape shape = getShape(item);
 		if (shape == null) {
+			Debug.sendMessage("Brak ształtu węzła {getShape(item)==NULL}!!");
 			return;
 		}
-
+		switch(SOVAnode.getNodeShapeType(shapeScheme)) {
+			case RECTANGLE: setRoundedCorner(0, 0);
+					shape = getShape(item);
+					break;
+			case ROUNDED_RECTANGLE: setRoundedCorner(8, 8);
+					shape = getShape(item);
+					break;
+			case CIRCLE: shape = changeShapeToCircle(shape);
+					break;
+			case ELLIPSE:
+					break;
+		}	
+		
 		// Wypełnienie węzła
 		int type = getRenderType(item);
 		if (type == RENDER_TYPE_FILL || type == RENDER_TYPE_DRAW_AND_FILL) {
@@ -219,13 +218,17 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 
 			// render each line of text
 			int lh = fm.getHeight(); // the line height
+
+			//wyśrodkowanie tekstu - można to zrobić lepiej... chyba
+			int xAxisTranslation = (int) ((shape.getBounds().width - tw - 2) / 2);
+
 			int start = 0, end = text.indexOf(m_delim);
 			for (; end >= 0; y += lh) {
-				drawString(g, fm, text.substring(start, end), useInt, x, y, tw);
+				drawString(g, fm, text.substring(start, end), useInt, x+xAxisTranslation, y, tw);
 				start = end + 1;
 				end = text.indexOf(m_delim, start);
 			}
-			drawString(g, fm, text.substring(start), useInt, x, y, tw);
+			drawString(g, fm, text.substring(start), useInt, x+xAxisTranslation, y, tw);
 		}
 
 		// draw border
@@ -261,6 +264,30 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 		} else {
 			g.drawString(text, (float) tx, (float) y);
 		}
+	}
+
+	/**
+	 * <p>Zamienia domyślny, prostokątny kształt węzła na koło.
+	 * Koło to ma średnicę równą szerokości lub wysokości węzła
+	 * (większa z wartości) i środek w tym samym punkcie.
+	 * </p><p>
+	 * Zmiana kształtu na koło nie jest zalecana dla węzłów
+	 * o długich etykietach.
+	 * </p>
+	 * @param rectangleShape prostokątny kształt
+	 * @return okrągły kształt
+	 */
+	public Shape changeShapeToCircle(Shape rectangleShape) {
+
+		int r = Math.max(rectangleShape.getBounds().width,
+			rectangleShape.getBounds().height) / 2 + 1;
+
+		return shapeRenderer.ellipse(
+			rectangleShape.getBounds().getCenterX() - r,
+			rectangleShape.getBounds().getCenterY() - r,
+			2*r,
+			2*r
+			);
 	}
 
 	/**

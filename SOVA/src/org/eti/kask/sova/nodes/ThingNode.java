@@ -2,20 +2,23 @@ package org.eti.kask.sova.nodes;
 
 import java.awt.Color;
 import org.eti.kask.sova.options.NodeColors;
+import org.eti.kask.sova.options.NodeShapeType;
+import org.eti.kask.sova.options.NodeShapes;
 
-// <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.62915D8C-1304-C852-C116-E41695A34198]
-// </editor-fold> 
-public class ThingNode extends Node {
+/**
+ * Klasa reprezentuje węzeł OWL Thing.
+ */
+public class ThingNode extends Node
+{
 
-   /** 
-    *
-    */ 
-    public ThingNode () {
-	    super();
-	    setLabel("TestowanieBardzoDlugiejEtykietyWezla");
-	    setFillColor(Color.GREEN);
-    }
+	/**
+	 * Ustawia etykietę tego węzła jako "T".
+	 */
+	public ThingNode()
+	{
+		super();
+		label = "T";
+	}
 
 	@Override
 	public Color getFillColorFromScheme(NodeColors colorScheme)
@@ -23,8 +26,14 @@ public class ThingNode extends Node {
 		return colorScheme.getThingNodeColor();
 	}
 
-
-
-
+	/**
+	 * @param shapeScheme źródłowy schemat kształtów dla węzłów
+	 * @return rodzaj kształtu węzła z zadanego schematu
+	 */
+	@Override
+	public NodeShapeType getNodeShapeType(NodeShapes shapeScheme)
+	{
+		return shapeScheme.getInformationNodeShapeType();
+	}
 }
 

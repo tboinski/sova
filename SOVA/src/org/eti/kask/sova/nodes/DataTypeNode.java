@@ -4,13 +4,14 @@ import java.awt.Color;
 import org.eti.kask.sova.options.NodeColors;
 
 /**
- *
+ * Klasa reprezentuje węzeł OWL DataType.
  */
 public class DataTypeNode extends Node
 {
 
 	public DataTypeNode()
 	{
+		super();
 	}
 
 	/**

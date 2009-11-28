@@ -12,6 +12,7 @@ public class IntersectionOfNode extends AnonymousClassNode
 	 */
 	public IntersectionOfNode()
 	{
+		super();
 		label = "∩";
 	}
 }

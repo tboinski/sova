@@ -2,17 +2,18 @@ package org.eti.kask.sova.nodes;
 
 import java.awt.Color;
 import org.eti.kask.sova.options.NodeColors;
+import org.eti.kask.sova.options.NodeShapeType;
+import org.eti.kask.sova.options.NodeShapes;
 
 /**
- * Reprezentuje węzły instancji klas (OWL Individual).
+ * Reprezentuje węzeł instancji klasy (OWL Individual).
  */
 public class IndividualNode extends Node
 {
-
+	
 	public IndividualNode()
 	{
-		setFillColor(Color.GRAY);
-		setRounded(false);
+		super();
 	}
 
 	/**
@@ -24,5 +25,17 @@ public class IndividualNode extends Node
 	{
 		return colorScheme.getIndividualNodeColor();
 	}
+
+	/**
+	 * @param shapeScheme źródłowy schemat kształtów dla węzłów
+	 * @return rodzaj kształtu węzła z zadanego schematu
+	 */
+	@Override
+	public NodeShapeType getNodeShapeType(NodeShapes shapeScheme)
+	{
+		return shapeScheme.getIndividualNodeShapeType();
+	}
+
+
 }
 

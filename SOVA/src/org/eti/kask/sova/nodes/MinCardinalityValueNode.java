@@ -1,104 +1,26 @@
 package org.eti.kask.sova.nodes;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
+import org.eti.kask.sova.options.NodeColors;
 
-// <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.D2111DBD-46EF-D5E9-FD2E-F8DC208CEFDC]
-// </editor-fold> 
-public class MinCardinalityValueNode extends CardinalityValueNode {
+/**
+ * Klasa reprezentuje wierzchołek ograniczenia kardynalności OWL MinCardinality.
+ */
+public class MinCardinalityValueNode extends CardinalityValueNode
+{
 
-   /** 
-    *
-    */ 
-    public MinCardinalityValueNode () {
-    }
+	public MinCardinalityValueNode()
+	{
+		super();
+	}
 
-   /** 
-    *
-    */ 
-    public Color getFillColor () {
-        return null;
-    }
-
-   /** 
-    *
-    */ 
-    public int getStrokeWidth () {
-        return 0;
-    }
-
-   /** 
-    *
-    */ 
-    public void setStrokeWidth (int val) {
-    }
-
-   /** 
-    *
-    */ 
-    public int getHeight () {
-        return 0;
-    }
-
-   /** 
-    *
-    */ 
-    public void setHeight (int val) {
-    }
-
-   /** 
-    *
-    */ 
-    public int getWidth () {
-        return 0;
-    }
-
-   /** 
-    *
-    */ 
-    public void setWidth (int val) {
-    }
-
-   /** 
-    *
-    */ 
-    public String getLabel () {
-        return null;
-    }
-
-   /** 
-    *
-    */ 
-    public void setLabel (String val) {
-    }
-
-   /*/**
-    *
-    */ 
-    /*public Annotation getAnnotation () {
-        return null;
-    }*/
-
-   /** 
-    *
-    */ 
-    /*public void setAnnotation (Annotation val) {
-    }*/
-
-   /** 
-    *
-    */ 
-    /*public Comment getComment () {
-        return null;
-    }*/
-
-   /** 
-    *
-    */ 
-    /*public void setComment (Comment val) {
-    }*/
-
-
+	/**
+	 * @param colorScheme źródłowy schemat kolorów
+	 * @return kolor wypełnienia węzła z zadanego schematu
+	 */
+	@Override
+	public Color getFillColorFromScheme(NodeColors colorScheme)
+	{
+		return colorScheme.getMinCardinalityValueNodeColor();
+	}
 }
-

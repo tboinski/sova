@@ -9,12 +9,9 @@ import org.eti.kask.sova.options.NodeColors;
 public class ClassNode extends Node
 {
 
-	/**
-	 *
-	 */
 	public ClassNode()
 	{
-		setFillColor(Color.CYAN);
+		super();
 	}
 
 	/**

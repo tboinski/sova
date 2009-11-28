@@ -3,17 +3,20 @@ package org.eti.kask.sova.nodes;
 import java.awt.Color;
 import org.eti.kask.sova.options.NodeColors;
 
-// <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.D091903B-11F9-0355-2479-7CF2D14C4B66]
-// </editor-fold> 
+/**
+ * Klasa reprezentuje wierzchołek oznaczający relację OWL SameAs
+ * pomiędzy wystąpieniami klas (OWL Individual).
+ */
 public class SameAsNode extends InformationNode
 {
 
 	/**
-	 *
+	 * Ustawia etykietę tego węzła na "=".
 	 */
 	public SameAsNode()
 	{
+		super();
+		label = "=";
 	}
 
 	@Override

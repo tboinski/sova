@@ -12,6 +12,7 @@ public class PropertyNode extends Node
 
 	public PropertyNode()
 	{
+		super();
 		setStrokeWitdh(2f);
 		setRounded(true);
 	}

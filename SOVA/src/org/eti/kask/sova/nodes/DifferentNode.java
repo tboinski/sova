@@ -4,13 +4,19 @@ import java.awt.Color;
 import org.eti.kask.sova.options.NodeColors;
 
 /**
- *
+ * Klasa reprezentuje węzeł oznaczający relację DifferentFrom
+ * lub AllDifferent pomiędzy wystąpieniami klas (OWL Individual).
  */
 public class DifferentNode extends InformationNode
 {
 
+	/**
+	 * Ustawia eykietę tego węzła na "≠".
+	 */
 	public DifferentNode()
 	{
+		super();
+		label = "≠";
 	}
 
 	@Override

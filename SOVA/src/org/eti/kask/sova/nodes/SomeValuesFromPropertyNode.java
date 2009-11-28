@@ -11,6 +11,7 @@ public class SomeValuesFromPropertyNode extends PropertyNode
 
 	public SomeValuesFromPropertyNode()
 	{
+		super();
 	}
 
 	/**

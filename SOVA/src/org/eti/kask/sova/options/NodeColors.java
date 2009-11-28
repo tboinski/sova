@@ -13,27 +13,17 @@ public class NodeColors {
 
     protected Color anonymousClassNodeColor;
 
-    protected Color cardinalityNodeColor;
-
     protected Color cardinalityValueNodeColor;
 
     protected Color classNodeColor;
-
-    protected Color complementOfNodeColor;
 
     protected Color dataTypeNodeColor;
 
     protected Color differentNodeColor;
 
-    protected Color functionalPropertyNodeColor;
-
     protected Color individualNodeColor;
 
     protected Color informationNodeColor;
-
-    protected Color intersectionOfNodeColor;
-
-    protected Color inverseFunctionalPropertyColor;
 
     protected Color maxCardinalityValueNodeColor;
 
@@ -49,25 +39,37 @@ public class NodeColors {
 
     protected Color someValuesFromNodeColor;
 
-    protected Color symmetricPropertyNodeColor;
-
     protected Color thingNodeColor;
-
-    protected Color transitivePropertyNodeColor;
-
-    protected Color unionOfNodeColor;
 
     public NodeColors () {
 	    // kolory domyślne
 	    classNodeColor = new Color(0, 182, 193);
 	    thingNodeColor = Color.GREEN;
+	    nothingNodeColor = Color.RED;
 	    individualNodeColor = new Color(200, 194, 183);
 	    differentNodeColor = new Color(209, 174, 114);
+	    sameAsNodeColor = differentNodeColor;
 	    propertyNodeColor = new Color(146, 61, 255);
 	    someValuesFromNodeColor = new Color(203, 61, 255);
 	    allValuesFromNodeColor = new Color(159, 152, 255);
 	    dataTypeNodeColor = new Color(61, 255, 155);
 	    anonymousClassNodeColor = Color.YELLOW;
+	    cardinalityValueNodeColor = new Color(255, 171, 0);
+	    minCardinalityValueNodeColor = new Color(162, 255, 0);
+	    maxCardinalityValueNodeColor = new Color(255, 73, 0);
+	    informationNodeColor = new Color(200, 113, 55);
+
+	    //niewykorzystywane kolory - usunięte
+	    /*transitivePropertyNodeColor = informationNodeColor;
+	    functionalPropertyNodeColor = informationNodeColor;
+	    inverseFunctionalPropertyColor = informationNodeColor;
+	    symmetricPropertyNodeColor = informationNodeColor;
+
+	    cardinalityNodeColor = anonymousClassNodeColor;
+	    complementOfNodeColor = anonymousClassNodeColor;
+	    unionOfNodeColor = anonymousClassNodeColor;
+	    intersectionOfNodeColor = anonymousClassNodeColor;*/
+
     }
 
     public Color getAllValuesFromNodeColor () {
@@ -86,14 +88,6 @@ public class NodeColors {
         this.anonymousClassNodeColor = val;
     }
 
-    public Color getCardinalityNodeColor () {
-        return cardinalityNodeColor;
-    }
-
-    public void setCardinalityNodeColor (Color val) {
-        this.cardinalityNodeColor = val;
-    }
-
     public Color getCardinalityValueNodeColor () {
         return cardinalityValueNodeColor;
     }
@@ -108,14 +102,6 @@ public class NodeColors {
 
     public void setClassNodeColor (Color val) {
         this.classNodeColor = val;
-    }
-
-    public Color getComplementOfNodeColor () {
-        return complementOfNodeColor;
-    }
-
-    public void setComplementOfNodeColor (Color val) {
-        this.complementOfNodeColor = val;
     }
 
     public Color getDataTypeNodeColor () {
@@ -134,14 +120,6 @@ public class NodeColors {
         this.differentNodeColor = val;
     }
 
-    public Color getFunctionalPropertyNodeColor () {
-        return functionalPropertyNodeColor;
-    }
-
-    public void setFunctionalPropertyNodeColor (Color val) {
-        this.functionalPropertyNodeColor = val;
-    }
-
     public Color getIndividualNodeColor () {
         return individualNodeColor;
     }
@@ -156,22 +134,6 @@ public class NodeColors {
 
     public void setInformationNodeColor (Color val) {
         this.informationNodeColor = val;
-    }
-
-    public Color getIntersectionOfNodeColor () {
-        return intersectionOfNodeColor;
-    }
-
-    public void setIntersectionOfNodeColor (Color val) {
-        this.intersectionOfNodeColor = val;
-    }
-
-    public Color getInverseFunctionalPropertyColor () {
-        return inverseFunctionalPropertyColor;
-    }
-
-    public void setInverseFunctionalPropertyColor (Color val) {
-        this.inverseFunctionalPropertyColor = val;
     }
 
     public Color getMaxCardinalityValueNodeColor () {
@@ -230,36 +192,12 @@ public class NodeColors {
         this.someValuesFromNodeColor = val;
     }
 
-    public Color getSymmetricPropertyNodeColor () {
-        return symmetricPropertyNodeColor;
-    }
-
-    public void setSymmetricPropertyNodeColor (Color val) {
-        this.symmetricPropertyNodeColor = val;
-    }
-
     public Color getThingNodeColor () {
         return thingNodeColor;
     }
 
     public void setThingNodeColor (Color val) {
         this.thingNodeColor = val;
-    }
-
-    public Color getTransitivePropertyNodeColor () {
-        return transitivePropertyNodeColor;
-    }
-
-    public void setTransitivePropertyNodeColor (Color val) {
-        this.transitivePropertyNodeColor = val;
-    }
-
-    public Color getUnionOfNodeColor () {
-        return unionOfNodeColor;
-    }
-
-    public void setUnionOfNodeColor (Color val) {
-        this.unionOfNodeColor = val;
     }
 
 }

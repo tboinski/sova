@@ -12,6 +12,7 @@ public class OneOfNode extends AnonymousClassNode
 	 */
 	public OneOfNode()
 	{
+		super();
 		label = "1";
 	}
 

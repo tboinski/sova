@@ -18,11 +18,11 @@ public class ArrowShapes {
 	protected Polygon circle;
 	protected Polygon diamond;
 	
-	private static ArrowShapes instance = null;
+	private static ArrowShapes INSTANCE = null;
 
 	public static ArrowShapes getInstance() {
-		if (instance == null) instance = new ArrowShapes();
-		return instance;
+		if (INSTANCE == null) INSTANCE = new ArrowShapes();
+		return INSTANCE;
 	}
 
 	/**

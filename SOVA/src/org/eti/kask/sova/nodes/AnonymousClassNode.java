@@ -11,6 +11,7 @@ public class AnonymousClassNode extends Node
 
 	public AnonymousClassNode()
 	{
+		super();
 		label = "A";
 	}
 

@@ -12,7 +12,17 @@ public class CardinalityNode extends AnonymousClassNode
 	 */
 	public CardinalityNode()
 	{
+		super();
 		label = "N";
+	}
+
+	/**
+	 * Klasy anonimowe nie posiadają konwencjonalnych etykiet.
+	 * Poniższa funkcja nie robi nic.
+	 */
+	@Override
+	public void setLabel(String label)
+	{
 	}
 
 }
