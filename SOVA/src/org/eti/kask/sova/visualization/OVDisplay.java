@@ -15,6 +15,7 @@ import prefuse.action.layout.graph.ForceDirectedLayout;
 import prefuse.activity.Activity;
 import prefuse.controls.DragControl;
 import prefuse.controls.PanControl;
+import prefuse.controls.WheelZoomControl;
 import prefuse.controls.ZoomControl;
 import prefuse.data.Graph;
 import prefuse.render.DefaultRendererFactory;
@@ -28,7 +29,8 @@ import prefuse.visual.expression.InGroupPredicate;
  */
 public class OVDisplay extends Display
 {
-
+    private static final String LAYOUT_ACTION = "layout";
+    private Visualization vis;
 	/**
 	 *
 	 */
@@ -41,7 +43,7 @@ public class OVDisplay extends Display
 	public OVDisplay()
 	{
 		super();
-		Visualization vis = new Visualization();
+		vis = new Visualization();
 		this.visualizationSettings(vis);
 		this.setVisualization(vis);
 		graph = new Graph();
@@ -50,19 +52,26 @@ public class OVDisplay extends Display
 		this.addControlListener(new DragControl()); // drag items around
 		this.addControlListener(new PanControl());  // pan with background left-drag
 		this.addControlListener(new ZoomControl()); // zoom with vertical right-drag
+        this.addControlListener(new WheelZoomControl());
 
 
 
 
 
 	}
+    /**
+     * funkcja włączająca samorozmieszczanie - grawitację obiektów
+     */
+    public void stopLayout(){
+         vis.cancel(LAYOUT_ACTION);
 
-	public OVDisplay(OWLOntology ont)
-	{
-		super();
-
-
-	}
+    }
+    /**
+     * funkcja wyłączająca samorozmieszczanie - grawitację obiektów
+     */
+    public void startLayout(){
+        vis.run(LAYOUT_ACTION);
+    }
 
 	/**
 	 *
@@ -87,30 +96,19 @@ public class OVDisplay extends Display
 	{
 
 		this.setGraph(OWLtoGraphConverter.getInstance().OWLtoGraph(ont));
-		Visualization vis = this.getVisualization();
+
 		vis.add("graph", this.getGraph());
-		this.visualizationSettings(vis);
+        this.startLayout();
+		
 	}
 
 	public void visualizationSettings(Visualization vis)
 	{
-		///////////
-		//to trzeba umiescic w kodzie gdzie indziej
-
-		//////////
-		//Visualization vis = this.getVisualization();
-
-
-
-// draw the "name" label for NodeItems
 		org.eti.kask.sova.nodes.ThingNode t = new ThingNode();
 		Debug.sendMessage(t.toString());
 		LabelRenderer r = (LabelRenderer) new NodeRenderer("node");
-		//r.setRoundedCorner(8, 8); // round the corners
 
-// create a new default renderer factory
-// return our name label renderer as the default for all non-EdgeItems
-// includes straight line edges for EdgeItems by default
+
 		EdgeRenderer er = new EdgeRenderer();
 		DefaultRendererFactory drf = new DefaultRendererFactory(r);
 		drf.add(new InGroupPredicate("graph.edges"), er);
@@ -147,10 +145,8 @@ public class OVDisplay extends Display
 
 // add the actions to the visualization
 		//vis.putAction("color", color);
-		vis.putAction("layout", layout);
-
+		vis.putAction(LAYOUT_ACTION, layout);
 		vis.run("color");  // assign the colors
-		vis.run("layout"); // start up the animated layout
-	//this.setVisualization(vis);
+
 	}
 }
