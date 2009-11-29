@@ -95,7 +95,7 @@ public class OVDisplay extends Display
 	public void generateGraphFromOWl(OWLOntology ont)
 	{
 
-		this.setGraph(OWLtoGraphConverter.getInstance().OWLtoGraph(ont));
+		this.setGraph(OWLtoGraphConverter.getInstance().OWLtoGraphExperimental(ont));
 
 		vis.add("graph", this.getGraph());
         this.startLayout();
@@ -105,7 +105,7 @@ public class OVDisplay extends Display
 	public void visualizationSettings(Visualization vis)
 	{
 		org.eti.kask.sova.nodes.ThingNode t = new ThingNode();
-		Debug.sendMessage(t.toString());
+		//Debug.sendMessage(t.toString());
 		LabelRenderer r = (LabelRenderer) new NodeRenderer("node");
 
 

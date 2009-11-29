@@ -1,7 +1,10 @@
 
 package org.eti.kask.sova.graph;
 
+
 import java.util.Collections;
+import java.util.Hashtable;
+import java.util.List;
 import java.util.Set;
 import org.semanticweb.owl.model.OWLClass;
 import org.semanticweb.owl.model.OWLDescription;
@@ -10,12 +13,15 @@ import prefuse.data.Edge;
 import prefuse.data.Graph;
 import prefuse.data.Node;
 import org.eti.kask.sova.utils.Debug;
+import org.semanticweb.owl.model.AxiomType;
 import org.semanticweb.owl.model.OWLAxiom;
 import org.semanticweb.owl.model.OWLDisjointClassesAxiom;
+import org.semanticweb.owl.model.OWLEntity;
 import org.semanticweb.owl.model.OWLIndividual;
 import org.semanticweb.owl.model.OWLIndividualAxiom;
 import org.semanticweb.owl.model.OWLLabelAnnotation;
 import org.semanticweb.owl.model.OWLLogicalAxiom;
+import org.semanticweb.owl.model.OWLObjectProperty;
 import org.semanticweb.owl.model.OWLObjectPropertyAssertionAxiom;
 import org.semanticweb.owl.util.OWLAxiomVisitorAdapter;
 import prefuse.data.Table;
@@ -45,7 +51,300 @@ public class OWLtoGraphConverter
 		return INSTANCE;
 	}
 
-	
+
+
+       /**
+        * Umieszcza w grafie wszystkie klasy nie-anonimowe zawarte w ontologii
+        * oraz krawędzie między węzłem thing i klasami będącymi jego subclasses.
+        * @param ontology
+        * @param graph
+        * @param thing
+        * @param classes
+        */
+        private void insertBaseClasses(OWLOntology ontology,  Graph graph, Node thing, Hashtable<String, Integer> classes ){
+
+                for(OWLClass cls : ontology.getReferencedClasses()){
+                    //dodajemy na sucho wszystkie klasy bez krawedzi
+                    //oprocz Thing
+                     if(!cls.isOWLThing()){
+                            Node n = graph.addNode();
+                            org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.ClassNode();
+                            node.setLabel(cls.toString());
+                            n.set("node", node);
+
+                            if( cls.getSuperClasses(ontology).isEmpty() == true ){ //thing jest superklasa
+                                int row = edges.addRow();
+				edges.set(row, "source", thing.getRow());
+				edges.set(row, "target", n.getRow());
+				edges.set(row, "edge", new org.eti.kask.sova.edges.SubEdge() );
+
+                            }
+
+
+                            classes.put( cls.toString(),n.getRow());
+                     }
+                }
+
+        }
+
+        /**
+         * Umieszcza w grafie wszystkie zdefiniowane w ontologii property
+         * @param ontology
+         * @param graph
+         * @param properties
+         */
+        private void insertBaseProperties(OWLOntology ontology,  Graph graph,  Hashtable<String, Integer> properties){
+             //dodajemy wszystkie definicje property
+                 for( OWLObjectProperty property :  ontology.getReferencedObjectProperties()  ){
+
+                            Node n = graph.addNode();
+                            org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.PropertyNode();
+                            node.setLabel(property.toString());
+                            n.set("node", node);
+                            properties.put( property.toString(),n.getRow());
+
+                 }
+
+
+        }
+
+        /**
+         * umieszcze w grafie węzły typu individual w grafie
+         * @param ontology
+         * @param graph
+         * @param individuals
+         */
+            private void insertBaseIndividuals(OWLOntology ontology,  Graph graph,  Hashtable<String, Integer> individuals){
+             //dodajemy wszystkie definicje individuals
+                 for( OWLIndividual individual :  ontology.getReferencedIndividuals()  ){
+
+                            Node n = graph.addNode();
+                            org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.IndividualNode();
+                            node.setLabel(individual.toString());
+                            n.set("node", node);
+                            individuals.put( individual.toString(),n.getRow());
+
+                 }
+        }
+
+
+        /**
+         * Umieszcza w grafie krawedzie zwiane z individualami
+         * @param ontology
+         * @param graph
+         * @param individuals
+         * @param classes
+         */
+         private void insertBasicEdgesForIndividuals(OWLOntology ontology,  Graph graph, Hashtable<String, Integer> individuals,Hashtable<String, Integer> classes ){
+
+             for( OWLIndividual individual :  ontology.getReferencedIndividuals()  ){
+                    Debug.sendMessage("Axiomy individuala : " +individual.toString());
+                     for(OWLAxiom axiom : ontology.getAxioms(individual)){ //przegladamy axiomy powiazane z dana klasa
+                       Debug.sendMessage(axiom.toString());
+                        if(axiom.getAxiomType() == AxiomType.CLASS_ASSERTION){ //individual jest instacja klasy
+
+                           Set<OWLEntity> entities =  axiom.getReferencedEntities();
+
+                           //TODO: sprawdzenie zachowania gdy przegladamy pare w axiomie roznego typu
+
+
+                           Object [] arr = entities.toArray();
+                           Debug.sendMessage("Subclass entity axiomu " + arr[0].toString());
+                           Debug.sendMessage("ma id w graph?: " + classes.get(arr[0].toString()) );
+                           Debug.sendMessage("ma id w graph?: " + individuals.get(arr[1].toString()) );
+                           if(classes.get(arr[0].toString()) != null  &&  individuals.get(arr[1].toString()) != null){ //klasa nie jest subklasa anonimowej encji
+                                    int row = edges.addRow();
+                                    edges.set(row, "source", individuals.get(arr[1].toString()));
+                                   edges.set(row, "target", classes.get(arr[0].toString()));
+                                    edges.set(row, "edge", new org.eti.kask.sova.edges.Edge() );
+                           } else if(individuals.get(arr[0].toString()) != null  &&  classes.get(arr[1].toString()) != null){
+                                int row = edges.addRow();
+                                    edges.set(row, "source", classes.get(arr[1].toString()));
+                                   edges.set(row, "target", individuals.get(arr[0].toString()));
+                                    edges.set(row, "edge", new org.eti.kask.sova.edges.Edge() );
+
+                        }
+
+                       } else if(axiom.getAxiomType() == AxiomType.DIFFERENT_INDIVIDUALS){
+                           //TODO: diffrent individuals
+
+                           
+                       }
+
+                    }
+             }
+
+
+       }
+
+        /**
+         * Umieszcza w grafie krawędzie łączące klasy typów : Subclass, disjoint, equivalent
+         * @param ontology
+         * @param graph
+         * @param classes
+         */
+        private void insertBasicEdgesForClasses(OWLOntology ontology,  Graph graph, Hashtable<String, Integer> classes){
+
+               //majac wszystkie klasy reprezentowane na grafie dodajemy krawedzie miedzy nimi wedlug podanych axiomow
+                 for(OWLClass cls : ontology.getReferencedClasses()){
+                   Debug.sendMessage("Axiomy klasy:" +cls.toString());
+                     for(OWLAxiom axiom : ontology.getAxioms(cls)){ //przegladamy axiomy powiazane z dana klasa
+                       Debug.sendMessage(axiom.toString());
+                       if(axiom.getAxiomType() == AxiomType.SUBCLASS){
+
+                           Set<OWLEntity> entities =  axiom.getReferencedEntities();
+                           Object [] arr = entities.toArray();
+                           Debug.sendMessage("Subclass entity axiomu " + arr[0].toString());
+                           Debug.sendMessage("ma id w graph?: " + classes.get(arr[0].toString()) );
+                           Debug.sendMessage("ma id w graph?: " + classes.get(arr[1].toString()) );
+                           if(classes.get(arr[0].toString()) != null  &&  classes.get(arr[1].toString()) != null){ //klasa nie jest subklasa anonimowej encji
+                                    int row = edges.addRow();
+                                    edges.set(row, "source", classes.get(arr[1].toString()));
+                                   edges.set(row, "target", classes.get(arr[0].toString()));
+                                    edges.set(row, "edge", new org.eti.kask.sova.edges.SubEdge() );
+                           }
+
+                       } else if(axiom.getAxiomType() == AxiomType.DISJOINT_CLASSES){
+
+                           Set<OWLEntity> entities =  axiom.getReferencedEntities();
+                           Object [] arr = entities.toArray();
+                           Debug.sendMessage("SDisjoint entity axiomu " + arr[0].toString());
+                           Debug.sendMessage("ma id w graph?: " + classes.get(arr[0].toString()) );
+                           Debug.sendMessage("ma id w graph?: " + classes.get(arr[1].toString()) );
+                           if(classes.get(arr[0].toString()) != null  &&  classes.get(arr[1].toString()) != null){ //klasa nie jest disjoint z anonimowa encja
+                                    int row = edges.addRow();
+                                    edges.set(row, "source", classes.get(arr[1].toString()));
+                                   edges.set(row, "target", classes.get(arr[0].toString()));
+                                    edges.set(row, "edge", new org.eti.kask.sova.edges.DisjointEdge() );
+                           }
+                       } else if (axiom.getAxiomType() == AxiomType.EQUIVALENT_CLASSES){
+                            Set<OWLEntity> entities =  axiom.getReferencedEntities();
+                           Object [] arr = entities.toArray();
+                           Debug.sendMessage("SDisjoint entity axiomu " + arr[0].toString());
+                           Debug.sendMessage("ma id w graph?: " + classes.get(arr[0].toString()) );
+                           Debug.sendMessage("ma id w graph?: " + classes.get(arr[1].toString()) );
+                           if(classes.get(arr[0].toString()) != null  &&  classes.get(arr[1].toString()) != null){ //klasa nie jest equivalent z anonimowa encja
+                                    int row = edges.addRow();
+                                    edges.set(row, "source", classes.get(arr[1].toString()));
+                                    edges.set(row, "target", classes.get(arr[0].toString()));
+                                    edges.set(row, "edge", new org.eti.kask.sova.edges.EquivalentEdge() );
+                           }
+
+
+                       }
+
+                     }
+
+                }
+
+
+
+        }
+
+        /**
+         * Umieszcza w grafie krawędzie łączące property i klasy typów : inverse property, range, domain
+         * @param ontology
+         * @param graph
+         * @param properties
+         * @param classes
+         */
+        private void insertBasicEdgesForProperties(OWLOntology ontology,  Graph graph,  Hashtable<String, Integer> properties, Hashtable<String, Integer> classes){
+
+             for( OWLObjectProperty property :  ontology.getReferencedObjectProperties()  ){
+                 Debug.sendMessage("Axiomy property:" +property.toString());
+                     for(OWLAxiom axiom : ontology.getAxioms(property)){ //przegladamy axiomy powiazane z dana klasa
+                       Debug.sendMessage(axiom.toString());
+                       if(axiom.getAxiomType() == AxiomType.INVERSE_OBJECT_PROPERTIES ){
+                           
+                            Set<OWLEntity> entities =  axiom.getReferencedEntities();
+                           Object [] arr = entities.toArray();
+                           Debug.sendMessage("inverse properties entity axiomu " + arr[0].toString());
+                           Debug.sendMessage("ma id w graph?: " + properties.get(arr[0].toString()) );
+                           Debug.sendMessage("ma id w graph?: " + properties.get(arr[1].toString()) );
+                           if(properties.get(arr[0].toString()) != null  &&  properties.get(arr[1].toString()) != null){ //klasa nie jest equivalent z anonimowa encja
+                                    int row = edges.addRow();
+                                    edges.set(row, "source", properties.get(arr[1].toString()));
+                                    edges.set(row, "target", properties.get(arr[0].toString()));
+                                    edges.set(row, "edge", new org.eti.kask.sova.edges.InverseOfEdge() );
+                           }
+                           
+                       }else if(axiom.getAxiomType() == AxiomType.OBJECT_PROPERTY_RANGE ){
+                           
+                            Set<OWLEntity> entities =  axiom.getReferencedEntities();
+                           Object [] arr = entities.toArray();
+                           Debug.sendMessage("inverse properties entity axiomu " + arr[0].toString());
+                           Debug.sendMessage("ma id w graph?: " + properties.get(arr[0].toString()) );
+                           Debug.sendMessage("ma id w graph?: " + classes.get(arr[1].toString()) );
+                           if(properties.get(arr[0].toString()) != null  &&  classes.get(arr[1].toString()) != null){ //klasa nie jest equivalent z anonimowa encja
+                                    int row = edges.addRow();
+                                    edges.set(row, "source", classes.get(arr[1].toString()));
+                                    edges.set(row, "target", properties.get(arr[0].toString()));
+                                    edges.set(row, "edge", new org.eti.kask.sova.edges.RangeEdge() );
+                           }
+
+                       }else if(axiom.getAxiomType() == AxiomType.OBJECT_PROPERTY_DOMAIN ){
+
+                            Set<OWLEntity> entities =  axiom.getReferencedEntities();
+                           Object [] arr = entities.toArray();
+                           Debug.sendMessage("inverse properties entity axiomu " + arr[0].toString());
+                           Debug.sendMessage("ma id w graph?: " + properties.get(arr[0].toString()) );
+                           Debug.sendMessage("ma id w graph?: " + classes.get(arr[1].toString()) );
+                           if(properties.get(arr[0].toString()) != null  &&  classes.get(arr[1].toString()) != null){ //klasa nie jest equivalent z anonimowa encja
+                                    int row = edges.addRow();
+                                    edges.set(row, "source", classes.get(arr[1].toString()));
+                                    edges.set(row, "target", properties.get(arr[0].toString()));
+                                    edges.set(row, "edge", new org.eti.kask.sova.edges.DomainEdge() );
+                           }
+                       }
+             }
+             }
+
+        }
+
+        /**
+         * Experymentalna metoda zamiany obiektu OWLOntology na obiekt graph biblioteki prefuse.
+         * Metoda wywoluje podrzedne metody wpisujace do grafu wezly i krawedzie
+         * @param ontology
+         * @return Graph - graf prefuse
+         */
+        public Graph OWLtoGraphExperimental(OWLOntology ontology){
+            Graph graph = new Graph();
+            nodes = graph.getNodeTable();
+	    graph.addColumn( "node", org.eti.kask.sova.nodes.Node.class );
+
+		// Dodajemy węzeł Thing
+		Node thing = graph.addNode();
+		org.eti.kask.sova.nodes.Node t = new org.eti.kask.sova.nodes.ThingNode();
+
+		thing.set( "node", t );
+
+		edges = graph.getEdgeTable();
+		edges.addColumn("edge", org.eti.kask.sova.edges.Edge.class);
+
+                Hashtable<String, Integer> classes = new Hashtable<String, Integer>();
+                Hashtable<String, Integer> properties = new Hashtable<String, Integer>();
+                Hashtable<String, Integer> individuals = new Hashtable<String, Integer>();
+                this.insertBaseClasses(ontology, graph, thing, classes);
+                this.insertBasicEdgesForClasses(ontology, graph, classes);
+                this.insertBaseProperties(ontology, graph, properties);
+              //  this.insertBasicEdgesForProperties(ontology, graph, properties, classes); //nie zaimplementowane graficznie, wiec nie uruchomione
+                this.insertBaseIndividuals(ontology, graph, individuals);
+                this.insertBasicEdgesForIndividuals(ontology, graph, individuals, classes);
+
+
+            return graph;
+        }
+
+
+
+
+
+
+
+
+
+
+
 	/**
 	 * Zamienia ontologię na graf z biblioteki prefuse.
 	 * @param ontology Ontologia w formacie OWLOntology z OWL API.
@@ -61,6 +360,7 @@ public class OWLtoGraphConverter
 		// Dodajemy węzeł Thing
 		Node thing = graph.addNode();
 		org.eti.kask.sova.nodes.Node t = new org.eti.kask.sova.nodes.ThingNode();
+
 		thing.set( "node", t );
 
 		edges = graph.getEdgeTable();		
@@ -71,14 +371,21 @@ public class OWLtoGraphConverter
 
 		// Wczytanie wszystkich klas i ich podklas
 		for (OWLClass cls : ontology.getReferencedClasses()) {
-			Debug.sendMessage( cls.toString() );
+			
+                   // Debug.sendMessage( "browse:" + cls.toString() );
+                      if(cls.isOWLThing()){   // napotkalismy na wezel Thing zdefiniowany bezposrednio
+                            //TODO: nadpisz thing z graphu thingiem z owl
+                            Debug.sendMessage("oto thing " + cls.toString());
+                            
 
-			if (cls.getSuperClasses(ontology).isEmpty() == true) { //Thing jest superklasa
+
+
+
+                        } else if (cls.isOWLClass() && cls.getSuperClasses(ontology).isEmpty() == true  ) { //Thing jest superklasa
 				Node n = graph.addNode();
 				org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.ClassNode();
 				node.setLabel(cls.toString());
 				n.set("node", node);
-
 				//graph.addEdge(thing, n);
 				int row = edges.addRow();
 				edges.set(row, "source", thing.getRow());
@@ -86,7 +393,7 @@ public class OWLtoGraphConverter
 				edges.set(row, "edge", new org.eti.kask.sova.edges.SubEdge() );
 
 
-				Debug.sendMessage( cls.toString() );
+				Debug.sendMessage("t to tata " + cls.toString() );
 				recursiveSubClassReader(n, cls, ontology);
 
 			}
@@ -94,7 +401,7 @@ public class OWLtoGraphConverter
 		}
 
 		disjointEdgeReader(ontology);
-		//individualReader(graph, ontology); - zastąpiony przez:
+	           //individualReader(graph, ontology); - zastąpiony przez:
 		nodeReader(graph, ontology.getLogicalAxioms()); //lekko nadmiarowe ;/
 		individualAxiomReader(graph, ontology);
 		
@@ -247,15 +554,18 @@ public class OWLtoGraphConverter
 	{
 		
 		for (OWLClass cls : ontology.getReferencedClasses()) {
-			for (OWLDisjointClassesAxiom dca : ontology.getDisjointClassesAxioms(cls)) {
+		if (cls.isAnonymous() == false) //dodane jako workaround
+                    for (OWLDisjointClassesAxiom dca : ontology.getDisjointClassesAxioms(cls)) {
 				Debug.sendMessage(dca.toString());
 				// format tekstu: "DisjointClasses( K1 K2 )"
+
+
 				String[] disjointClasses = dca.toString().split(" ");
 
 				// Wyszukanie wezlow w tablicy - nieoptymalne
 				// można utworzyć dodatkowe indeksy w celu przyspieszenia				
 				int c1RowNo = -1, c2RowNo = -1;
-				for (int i = 0; i < nodes.getRowCount(); i++ ) {
+				/*for (int i = 0; i < nodes.getRowCount(); i++ ) {
 					
 					if (nodes.get(i, "node").toString() == null)  {
 						Debug.sendMessage("Node label is NULL: " + nodes.get(i, "node").getClass().getCanonicalName());
@@ -271,10 +581,10 @@ public class OWLtoGraphConverter
 					}
 
 					if (c1RowNo != -1 && c2RowNo != -1) break;
-				}
+				}*/
 
 				if (c1RowNo == -1 || c2RowNo == -1) {
-					Debug.sendMessage("Nie odnaleziono węzła " + disjointClasses[1] +"lub"+ disjointClasses[2]);
+//					Debug.sendMessage("Nie odnaleziono węzła " + disjointClasses[1] +"lub"+ disjointClasses[2]);
 					continue;
 				}
 

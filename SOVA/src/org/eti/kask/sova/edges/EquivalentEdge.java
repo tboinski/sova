@@ -2,11 +2,12 @@ package org.eti.kask.sova.edges;
 
 import java.awt.Color;
 import java.awt.Polygon;
+import java.awt.Polygon;
 import org.eti.kask.sova.options.ArrowShapes;
 import org.eti.kask.sova.options.EdgeColors;
 
 /**
- * Klasa reprezentujÄ…ca krawÄ™dÅº oznaczajÄ…cÄ… rÃ³wnoznacznoÅ›Ä‡ (OWL Equivalent).
+ * Klasa reprezentuj¹ca krawêdŸ oznaczaj¹c¹ równoznacznoœæ (OWL Equivalent).
  */
 public class EquivalentEdge extends Edge
 {
@@ -31,13 +32,15 @@ public class EquivalentEdge extends Edge
 	}
 
 	/**
-	 * @param colorScheme ÅºrÃ³dÅ‚owy schemat kolorÃ³w
-	 * @return kolor krawÄ™dzi wraz z grotami z zadanego schematu
+	 * @param colorScheme Ÿród³owy schemat kolorów
+	 * @return kolor krawêdzi wraz z grotami z zadanego schematu
 	 */
 	@Override
 	public Color getStrokeColorFromScheme(EdgeColors colorScheme)
 	{
 		return colorScheme.getEquivalentEdgeColor();
 	}
+ 
+
 }
 

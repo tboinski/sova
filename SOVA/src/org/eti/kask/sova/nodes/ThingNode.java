@@ -6,13 +6,13 @@ import org.eti.kask.sova.options.NodeShapeType;
 import org.eti.kask.sova.options.NodeShapes;
 
 /**
- * Klasa reprezentuje wÄ™zeÅ‚ OWL Thing.
+ * Klasa reprezentuje wêze³ OWL Thing.
  */
 public class ThingNode extends Node
 {
 
 	/**
-	 * Ustawia etykietÄ™ tego wÄ™zÅ‚a jako "T".
+	 * Ustawia etykietê tego wêz³a jako "T".
 	 */
 	public ThingNode()
 	{
@@ -27,8 +27,8 @@ public class ThingNode extends Node
 	}
 
 	/**
-	 * @param shapeScheme ÅºrÃ³dÅ‚owy schemat ksztaÅ‚tÃ³w dla wÄ™zÅ‚Ã³w
-	 * @return rodzaj ksztaÅ‚tu wÄ™zÅ‚a z zadanego schematu
+	 * @param shapeScheme Ÿród³owy schemat kszta³tów dla wêz³ów
+	 * @return rodzaj kszta³tu wêz³a z zadanego schematu
 	 */
 	@Override
 	public NodeShapeType getNodeShapeType(NodeShapes shapeScheme)
