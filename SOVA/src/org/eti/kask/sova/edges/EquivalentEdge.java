@@ -1,43 +1,43 @@
 package org.eti.kask.sova.edges;
 
 import java.awt.Color;
+import java.awt.Polygon;
+import org.eti.kask.sova.options.ArrowShapes;
+import org.eti.kask.sova.options.EdgeColors;
 
-// <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.CE5EF372-5B54-6B12-02DE-DD20D12519C3]
-// </editor-fold> 
-public class EquivalentEdge extends Edge {
+/**
+ * Klasa reprezentująca krawędź oznaczającą równoznaczność (OWL Equivalent).
+ */
+public class EquivalentEdge extends Edge
+{
 
-   /** 
-    *
-    */ 
-    public EquivalentEdge () {
-    }
+	public EquivalentEdge()
+	{
+		super();
+		hasArrow = true;
+		hasInvertedArrow = true;
+	}
 
-   /** 
-    *
-    */ 
-    public Color getStrokeColor () {
-        return null;
-    }
+	@Override
+	public Polygon getInvArrowHead()
+	{
+		return ArrowShapes.getInstance().getDirectionArrow();
+	}
 
-   /** 
-    *
-    */ 
-    public void setStrokeColor (Color val) {
-    }
+	@Override
+	public Polygon getArrowHead()
+	{
+		return ArrowShapes.getInstance().getDirectionArrow();
+	}
 
-   /** 
-    *
-    */ 
-    public int getStrokeWidth () {
-        return 0;
-    }
-
-   /** 
-    *
-    */ 
-    public void setStrokeWidth (int val) {
-    }
-
+	/**
+	 * @param colorScheme źródłowy schemat kolorów
+	 * @return kolor krawędzi wraz z grotami z zadanego schematu
+	 */
+	@Override
+	public Color getStrokeColorFromScheme(EdgeColors colorScheme)
+	{
+		return colorScheme.getEquivalentEdgeColor();
+	}
 }
 

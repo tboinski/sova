@@ -1,43 +1,37 @@
 package org.eti.kask.sova.edges;
 
 import java.awt.Color;
+import java.awt.Polygon;
+import org.eti.kask.sova.options.ArrowShapes;
+import org.eti.kask.sova.options.EdgeColors;
 
-// <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.465F9CA9-AFD9-EE10-186E-2C8BDE09746C]
-// </editor-fold> 
-public class InverseOfEdge extends Edge {
+/**
+ * Klasa reprezentująca krawędź oznaczającą odwrotność (OWL InverseOf).
+ */
+public class InverseOfEdge extends Edge
+{
 
-   /** 
-    *
-    */ 
-    public InverseOfEdge () {
-    }
+	public InverseOfEdge()
+	{
+		super();
+		hasArrow = true;
+	}
 
-   /** 
-    *
-    */ 
-    public Color getStrokeColor () {
-        return null;
-    }
+	/**
+	 * @param colorScheme źródłowy schemat kolorów
+	 * @return kolor krawędzi wraz z grotami z zadanego schematu
+	 */
+	@Override
+	public Color getStrokeColorFromScheme(EdgeColors colorScheme)
+	{
+		return colorScheme.getInverseOfEdgeColor();
+	}
 
-   /** 
-    *
-    */ 
-    public void setStrokeColor (Color val) {
-    }
-
-   /** 
-    *
-    */ 
-    public int getStrokeWidth () {
-        return 0;
-    }
-
-   /** 
-    *
-    */ 
-    public void setStrokeWidth (int val) {
-    }
+	@Override
+	public Polygon getArrowHead()
+	{
+		return ArrowShapes.getInstance().getDirectionArrow();
+	}
 
 }
 

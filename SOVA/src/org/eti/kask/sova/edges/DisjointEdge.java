@@ -6,20 +6,16 @@ import org.eti.kask.sova.options.ArrowShapes;
 import org.eti.kask.sova.options.EdgeColors;
 
 /**
- * Krawędź łącząca klasy rozłączne.
+ * Klasa reprezentująca krawędź oznaczającą rozłączność klas (OWL Disjoint).
  */
 public class DisjointEdge extends Edge
 {
 
-	/**
-	 *
-	 */
 	public DisjointEdge()
 	{
-
-		setHasArrow(true);
-		setHasInvertedArrow(true);
-		setArrowHeadColor(Color.BLACK);
+		super();
+		hasArrow = true;
+		hasInvertedArrow = true;
 	}
 
 	@Override
@@ -32,6 +28,16 @@ public class DisjointEdge extends Edge
 	public Polygon getArrowHead()
 	{
 		return ArrowShapes.getInstance().getInversedDirectionArrow();
+	}
+
+	/**
+	 * @param colorScheme źródłowy schemat kolorów
+	 * @return kolor krawędzi wraz z grotami z zadanego schematu
+	 */
+	@Override
+	public Color getStrokeColorFromScheme(EdgeColors colorScheme)
+	{
+		return colorScheme.getDisjointEdgeColor();
 	}
 }
 

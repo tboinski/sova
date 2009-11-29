@@ -36,7 +36,7 @@ public class EdgeRenderer extends prefuse.render.EdgeRenderer
 
 		// rysowanie krawędzi
 		Shape shape = getShape(item);
-		item.setStrokeColor(ColorLib.color(ourEdge.getStrokeColor()));
+		item.setStrokeColor(ColorLib.color(ourEdge.getStrokeColorFromScheme(colorScheme)));
 		
 		if (shape != null) {
 			drawShape(g, item, shape);

@@ -1,43 +1,28 @@
 package org.eti.kask.sova.edges;
 
 import java.awt.Color;
+import org.eti.kask.sova.options.EdgeColors;
 
-// <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.068D7B79-7011-E070-F8EA-9DC15E987BF5]
-// </editor-fold> 
-public class FunctionalEdge extends Edge {
+/**
+ * Klasa reprezentująca krawędź łączącą wierzchołki InformationNode
+ * z OWL Property, którego dotyczy.
+ */
+public class FunctionalEdge extends Edge
+{
 
-   /** 
-    *
-    */ 
-    public FunctionalEdge () {
-    }
+	public FunctionalEdge()
+	{
+		super();
+	}
 
-   /** 
-    *
-    */ 
-    public Color getStrokeColor () {
-        return null;
-    }
-
-   /** 
-    *
-    */ 
-    public void setStrokeColor (Color val) {
-    }
-
-   /** 
-    *
-    */ 
-    public int getStrokeWidth () {
-        return 0;
-    }
-
-   /** 
-    *
-    */ 
-    public void setStrokeWidth (int val) {
-    }
-
+	/**
+	 * @param colorScheme źródłowy schemat kolorów
+	 * @return kolor krawędzi wraz z grotami z zadanego schematu
+	 */
+	@Override
+	public Color getStrokeColorFromScheme(EdgeColors colorScheme)
+	{
+		return colorScheme.getFunctionalEdgeColor();
+	}
 }
 

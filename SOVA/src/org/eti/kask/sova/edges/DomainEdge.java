@@ -1,44 +1,44 @@
 package org.eti.kask.sova.edges;
 
 import java.awt.Color;
+import java.awt.Polygon;
+import org.eti.kask.sova.options.ArrowShapes;
+import org.eti.kask.sova.options.EdgeColors;
 
 /**
- * 
+ * Klasa reprezentująca krawędź łączącą Property z klasą właściwości
+ * (OWL DomainOf).
  */
-public class DomainEdge extends Edge {
+public class DomainEdge extends Edge
+{
 
-   /** 
-    *
-    */ 
-    public DomainEdge () {
-    }
+	public DomainEdge()
+	{
+		super();
+		hasArrow = true;
+		hasInvertedArrow = true;
+	}
 
-   /** 
-    *
-    */ 
 	@Override
-    public Color getStrokeColor () {
-        return null;
-    }
+	public Polygon getInvArrowHead()
+	{
+		return ArrowShapes.getInstance().getDiamond();
+	}
 
-   /** 
-    *
-    */ 
-    public void setStrokeColor (Color val) {
-    }
+	@Override
+	public Polygon getArrowHead()
+	{
+		return ArrowShapes.getInstance().getDiamond();
+	}
 
-   /** 
-    *
-    */ 
-    public int getStrokeWidth () {
-        return 0;
-    }
-
-   /** 
-    *
-    */ 
-    public void setStrokeWidth (int val) {
-    }
-
+	/**
+	 * @param colorScheme źródłowy schemat kolorów
+	 * @return kolor krawędzi wraz z grotami z zadanego schematu
+	 */
+	@Override
+	public Color getStrokeColorFromScheme(EdgeColors colorScheme)
+	{
+		return colorScheme.getDomainEdgeColor();
+	}
 }
 

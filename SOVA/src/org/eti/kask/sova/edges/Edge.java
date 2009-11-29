@@ -34,7 +34,6 @@ public class Edge
      *
      */
     public Edge () {
-	    setStrokeColor(Color.BLACK);
 	    hasArrow = false;
 	    hasInvertedArrow = false;
     }

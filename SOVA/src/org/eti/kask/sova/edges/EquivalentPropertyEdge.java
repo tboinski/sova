@@ -1,43 +1,31 @@
 package org.eti.kask.sova.edges;
 
 import java.awt.Color;
+import org.eti.kask.sova.options.EdgeColors;
 
-// <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.AEF8B4BC-59DE-83CE-8F68-9871C9AD0482]
-// </editor-fold> 
-public class EquivalentPropertyEdge extends EquivalentEdge {
+/**
+ * Klasa reprezentująca krawędź oznaczającą równoznaczność OWL Property
+ * (OWL EquivalentProperty).
+ */
+public class EquivalentPropertyEdge extends EquivalentEdge
+{
 
-   /** 
-    *
-    */ 
-    public EquivalentPropertyEdge () {
-    }
+	public EquivalentPropertyEdge()
+	{
+		super();
+	}
 
-   /** 
-    *
-    */ 
-    public Color getStrokeColor () {
-        return null;
-    }
+	/**
+	 * @param colorScheme źródłowy schemat kolorów
+	 * @return kolor krawędzi wraz z grotami z zadanego schematu
+	 */
+	@Override
+	public Color getStrokeColorFromScheme(EdgeColors colorScheme)
+	{
+		return colorScheme.getEquivalentPropertyEdgeColor();
+	}
 
-   /** 
-    *
-    */ 
-    public void setStrokeColor (Color val) {
-    }
 
-   /** 
-    *
-    */ 
-    public int getStrokeWidth () {
-        return 0;
-    }
-
-   /** 
-    *
-    */ 
-    public void setStrokeWidth (int val) {
-    }
 
 }
 

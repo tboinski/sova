@@ -1,108 +1,136 @@
 package org.eti.kask.sova.options;
 
-
 import java.awt.Color;
 
 /**
  * Klasa przechowująca informacje o ustawieniach kolorów dla krawędzi.
  * @see org.eti.kask.sova.edges.Edge
  */
-public class EdgeColors {
+public class EdgeColors
+{
 
-    protected Color rangeEdgeColor;
+	protected Color rangeEdgeColor;
+	protected Color domainEdgeColor;
+	protected Color edgeColor;
+	protected Color equivalentEdgeColor;
+	protected Color disjointEdgeColor;
+	protected Color equivalentPropertyEdgeColor;
+	protected Color functionalEdgeColor;
+	protected Color inverseOfEdgeColor;
+	protected Color propertyEdgeColor;
+	protected Color subEdgeColor;
 
-    protected Color domainEdgeColor;
- 
-    protected Color edgeColor;
- 
-    protected Color equivalentEdgeColor;
+	public EdgeColors()
+	{
+		// Ustawienia domyślne
+		edgeColor = Color.BLACK;
+		domainEdgeColor = Color.BLACK;
+		rangeEdgeColor = Color.BLACK;
+		disjointEdgeColor = Color.BLACK;
+		equivalentEdgeColor = Color.BLACK;
+		equivalentPropertyEdgeColor = Color.GREEN;
+		functionalEdgeColor = new Color(200, 113, 55);
 
-    protected Color equivalentPropertyEdgeColor;
+	}
 
-    protected Color functionalEdgeColor;
+	public Color getDomainEdgeColor()
+	{
+		return domainEdgeColor;
+	}
 
-    protected Color inverseOfEdgeColor;
- 
-    protected Color propertyEdgeColor;
+	public void setDomainEdgeColor(Color val)
+	{
+		this.domainEdgeColor = val;
+	}
 
-    protected Color subEdgeColor;
- 
-    public EdgeColors () {
-	    // Ustawienia domyślne
-	    edgeColor = Color.BLACK;
-    }
+	public Color getEdgeColor()
+	{
+		return edgeColor;
+	}
 
-    public Color getDomainEdgeColor () {
-        return domainEdgeColor;
-    }
+	public void setEdgeColor(Color val)
+	{
+		this.edgeColor = val;
+	}
 
-    public void setDomainEdgeColor (Color val) {
-        this.domainEdgeColor = val;
-    }
+	public Color getEquivalentEdgeColor()
+	{
+		return equivalentEdgeColor;
+	}
 
-    public Color getEdgeColor () {
-        return edgeColor;
-    }
+	public void setEquivalentEdgeColor(Color val)
+	{
+		this.equivalentEdgeColor = val;
+	}
 
-    public void setEdgeColor (Color val) {
-        this.edgeColor = val;
-    }
+	public Color getDisjointEdgeColor()
+	{
+		return disjointEdgeColor;
+	}
 
-    public Color getEquivalentEdgeColor () {
-        return equivalentEdgeColor;
-    }
+	public void setDisjointEdgeColor(Color disjointEdgeColor)
+	{
+		this.disjointEdgeColor = disjointEdgeColor;
+	}
 
-    public void setEquivalentEdgeColor (Color val) {
-        this.equivalentEdgeColor = val;
-    }
+	public Color getEquivalentPropertyEdgeColor()
+	{
+		return equivalentPropertyEdgeColor;
+	}
 
-    public Color getEquivalentPropertyEdgeColor () {
-        return equivalentPropertyEdgeColor;
-    }
+	public void setEquivalentPropertyEdgeColor(Color val)
+	{
+		this.equivalentPropertyEdgeColor = val;
+	}
 
-    public void setEquivalentPropertyEdgeColor (Color val) {
-        this.equivalentPropertyEdgeColor = val;
-    }
+	public Color getFunctionalEdgeColor()
+	{
+		return functionalEdgeColor;
+	}
 
-    public Color getFunctionalEdgeColor () {
-        return functionalEdgeColor;
-    }
+	public void setFunctionalEdgeColor(Color val)
+	{
+		this.functionalEdgeColor = val;
+	}
 
-    public void setFunctionalEdgeColor (Color val) {
-        this.functionalEdgeColor = val;
-    }
+	public Color getInverseOfEdgeColor()
+	{
+		return inverseOfEdgeColor;
+	}
 
-    public Color getInverseOfEdgeColor () {
-        return inverseOfEdgeColor;
-    }
+	public void setInverseOfEdgeColor(Color val)
+	{
+		this.inverseOfEdgeColor = val;
+	}
 
-    public void setInverseOfEdgeColor (Color val) {
-        this.inverseOfEdgeColor = val;
-    }
+	public Color getPropertyEdgeColor()
+	{
+		return propertyEdgeColor;
+	}
 
-    public Color getPropertyEdgeColor () {
-        return propertyEdgeColor;
-    }
+	public void setPropertyEdgeColor(Color val)
+	{
+		this.propertyEdgeColor = val;
+	}
 
-    public void setPropertyEdgeColor (Color val) {
-        this.propertyEdgeColor = val;
-    }
+	public Color getRangeEdgeColor()
+	{
+		return rangeEdgeColor;
+	}
 
-    public Color getRangeEdgeColor () {
-        return rangeEdgeColor;
-    }
+	public void setRangeEdgeColor(Color val)
+	{
+		this.rangeEdgeColor = val;
+	}
 
-    public void setRangeEdgeColor (Color val) {
-        this.rangeEdgeColor = val;
-    }
+	public Color getSubEdgeColor()
+	{
+		return subEdgeColor;
+	}
 
-    public Color getSubEdgeColor () {
-        return subEdgeColor;
-    }
-
-    public void setSubEdgeColor (Color val) {
-        this.subEdgeColor = val;
-    }
-
+	public void setSubEdgeColor(Color val)
+	{
+		this.subEdgeColor = val;
+	}
 }
 
