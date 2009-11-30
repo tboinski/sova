@@ -6,7 +6,7 @@ import org.eti.kask.sova.options.ArrowShapes;
 import org.eti.kask.sova.options.EdgeColors;
 
 /**
- * Klasa reprezentuj¹ca krawêdŸ oznaczaj¹c¹ odwrotnoœæ (OWL InverseOf).
+ * Klasa reprezentujÄ…ca krawÄ™dÅº oznaczajÄ…cÄ… odwrotnoÅ›Ä‡ (OWL InverseOf).
  */
 public class InverseOfEdge extends Edge
 {
@@ -18,8 +18,8 @@ public class InverseOfEdge extends Edge
 	}
 
 	/**
-	 * @param colorScheme Ÿród³owy schemat kolorów
-	 * @return kolor krawêdzi wraz z grotami z zadanego schematu
+	 * @param colorScheme ÅºrÃ³dÅ‚owy schemat kolorÃ³w
+	 * @return kolor krawÄ™dzi wraz z grotami z zadanego schematu
 	 */
 	@Override
 	public Color getStrokeColorFromScheme(EdgeColors colorScheme)
