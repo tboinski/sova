@@ -22,13 +22,13 @@ public class DomainEdge extends Edge
 	@Override
 	public Polygon getInvArrowHead()
 	{
-		return ArrowShapes.getInstance().getDiamond();
+		return ArrowShapes.getInstance().getCircle();
 	}
 
 	@Override
 	public Polygon getArrowHead()
 	{
-		return ArrowShapes.getInstance().getDiamond();
+		return ArrowShapes.getInstance().getCircle();
 	}
 
 	/**

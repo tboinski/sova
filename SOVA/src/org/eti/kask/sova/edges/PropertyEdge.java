@@ -1,43 +1,36 @@
 package org.eti.kask.sova.edges;
 
 import java.awt.Color;
+import java.awt.Polygon;
+import org.eti.kask.sova.options.ArrowShapes;
+import org.eti.kask.sova.options.EdgeColors;
 
-// <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.0C150B19-6B77-E338-23BA-9CEAB589A17A]
-// </editor-fold> 
-public class PropertyEdge extends Edge {
+/**
+ * Klasa reprezentująca krawędź oznaczającą relację między Property a klasą.
+ */
+public class PropertyEdge extends Edge
+{
 
-   /** 
-    *
-    */ 
-    public PropertyEdge () {
-    }
+	public PropertyEdge()
+	{
+		super();
+		hasArrow = true;
+	}
 
-   /** 
-    *
-    */ 
-    public Color getStrokeColor () {
-        return null;
-    }
+	/**
+	 * @param colorScheme źródłowy schemat kolorów
+	 * @return kolor krawędzi wraz z grotami z zadanego schematu
+	 */
+	@Override
+	public Color getStrokeColorFromScheme(EdgeColors colorScheme)
+	{
+		return colorScheme.getPropertyEdgeColor();
+	}
 
-   /** 
-    *
-    */ 
-    public void setStrokeColor (Color val) {
-    }
-
-   /** 
-    *
-    */ 
-    public int getStrokeWidth () {
-        return 0;
-    }
-
-   /** 
-    *
-    */ 
-    public void setStrokeWidth (int val) {
-    }
-
+	@Override
+	public Polygon getArrowHead()
+	{
+		return ArrowShapes.getInstance().getDirectionArrow();
+	}
 }
 

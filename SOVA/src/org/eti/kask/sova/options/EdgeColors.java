@@ -24,11 +24,13 @@ public class EdgeColors
 	{
 		// Ustawienia domyślne
 		edgeColor = Color.BLACK;
+		propertyEdgeColor = Color.BLACK;
 		domainEdgeColor = Color.BLACK;
 		rangeEdgeColor = Color.BLACK;
 		disjointEdgeColor = Color.BLACK;
 		equivalentEdgeColor = Color.BLACK;
 		equivalentPropertyEdgeColor = Color.GREEN;
+		inverseOfEdgeColor = Color.RED;
 		functionalEdgeColor = new Color(200, 113, 55);
 
 	}
