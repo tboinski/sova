@@ -2,18 +2,19 @@ package org.eti.kask.sova.visualization;
 
 import org.eti.kask.sova.graph.OWLtoGraphConverter;
 import org.eti.kask.sova.nodes.ThingNode;
-import org.eti.kask.sova.utils.Debug;
 import org.semanticweb.owl.model.OWLOntology;
-import prefuse.Constants;
 import prefuse.Display;
 import prefuse.Visualization;
 import prefuse.action.ActionList;
 import prefuse.action.RepaintAction;
 import prefuse.action.assignment.ColorAction;
-import prefuse.action.assignment.DataColorAction;
+import prefuse.action.filter.GraphDistanceFilter;
+import prefuse.action.layout.Layout;
 import prefuse.action.layout.graph.ForceDirectedLayout;
+import prefuse.action.layout.graph.RadialTreeLayout;
 import prefuse.activity.Activity;
 import prefuse.controls.DragControl;
+import prefuse.controls.NeighborHighlightControl;
 import prefuse.controls.PanControl;
 import prefuse.controls.WheelZoomControl;
 import prefuse.controls.ZoomControl;
@@ -21,6 +22,7 @@ import prefuse.data.Graph;
 import prefuse.render.DefaultRendererFactory;
 import prefuse.render.LabelRenderer;
 import prefuse.util.ColorLib;
+import prefuse.util.force.ForceSimulator;
 import prefuse.visual.VisualItem;
 import prefuse.visual.expression.InGroupPredicate;
 
@@ -29,8 +31,32 @@ import prefuse.visual.expression.InGroupPredicate;
  */
 public class OVDisplay extends Display
 {
+    public static final int FORCE_DIRECTED_LAYOUT =  1;
+    private int  graphLayout = FORCE_DIRECTED_LAYOUT;
+    private static final String  GRAPH = "graph";
+    private ActionList layout = null;
+    public  ForceSimulator getForceSimulator(){
+       return  ((ForceDirectedLayout)layout.get(0)).getForceSimulator();
+
+    }
+    public Layout getGraphLayout() {
+
+        switch (graphLayout) {
+            case 1 : return new ForceDirectedLayout(GRAPH);
+        }
+
+        return new ForceDirectedLayout(GRAPH);
+    }
+    /**
+     * 
+     * @param graphLayout
+     */
+    public void setGraphLayout(int graphLayout) {
+        this.graphLayout = graphLayout;
+    }
     private static final String LAYOUT_ACTION = "layout";
     private Visualization vis;
+    private  GraphDistanceFilter filter;
 	/**
 	 *
 	 */
@@ -43,25 +69,31 @@ public class OVDisplay extends Display
 	public OVDisplay()
 	{
 		super();
+        graph = new Graph();
+      
 		vis = new Visualization();
 		this.visualizationSettings(vis);
 		this.setVisualization(vis);
-		graph = new Graph();
+		
 
 		//przykladowe defaultowe ustawienia
 		this.addControlListener(new DragControl()); // drag items around
 		this.addControlListener(new PanControl());  // pan with background left-drag
 		this.addControlListener(new ZoomControl()); // zoom with vertical right-drag
         this.addControlListener(new WheelZoomControl());
-
-
-
-
+        this.addControlListener(new NeighborHighlightControl());
 
 	}
+
     /**
      * funkcja włączająca samorozmieszczanie - grawitację obiektów
      */
+    public void setDistance(int distance){
+        filter.setDistance(distance);
+    }
+    public int getDistance(int distance){
+        return filter.getDistance();
+    }
     public void stopLayout(){
          vis.cancel(LAYOUT_ACTION);
 
@@ -101,52 +133,57 @@ public class OVDisplay extends Display
         this.startLayout();
 		
 	}
+    /**
+     * Ponowne wczytanie zmiennych wizualizacji
+     */
+    public void refreshVisualization(){
+       vis.reset();
+       this.visualizationSettings(vis);
+       this.setVisualization(vis);
+       this.repaint();
+
+    }
 
 	public void visualizationSettings(Visualization vis)
 	{
+        filter = new GraphDistanceFilter(GRAPH,12);
 		org.eti.kask.sova.nodes.ThingNode t = new ThingNode();
-		//Debug.sendMessage(t.toString());
 		LabelRenderer r = (LabelRenderer) new NodeRenderer("node");
-
-
 		EdgeRenderer er = new EdgeRenderer();
 		DefaultRendererFactory drf = new DefaultRendererFactory(r);
 		drf.add(new InGroupPredicate("graph.edges"), er);
-
-
 		vis.setRendererFactory(drf);
 
-// create our nominal color palette
-// pink for females, baby blue for males
-		int[] palette = new int[]{
-			ColorLib.rgb(255, 180, 180), ColorLib.rgb(190, 190, 255)
-		};
-// map nominal data values to colors using our provided palette
-		/*DataColorAction fill = new DataColorAction("graph.nodes", "gender",
-			Constants.NOMINAL, VisualItem.FILLCOLOR, palette);*/
-// use black for node text
-		/*ColorAction text = new ColorAction("graph.nodes",
-			VisualItem.TEXTCOLOR, ColorLib.gray(0));*/
-// use light grey for edges
-		/*ColorAction edges = new ColorAction("graph.edges",
-			VisualItem.STROKECOLOR, ColorLib.gray(1));*/
 
-// create an action list containing all color assignments
-		/*ActionList color = new ActionList();
-		color.add(fill);
-		color.add(text);
-		color.add(edges);*/
+        int hops = 30;
+        final GraphDistanceFilter filter = new GraphDistanceFilter("graph", hops);
+
+//        ColorAction fill = new ColorAction(nodes,
+//                VisualItem.FILLCOLOR, ColorLib.rgb(200,200,255));
+//        fill.add(VisualItem.FIXED, ColorLib.rgb(255,100,100));
+//        fill.add(VisualItem.HIGHLIGHT, ColorLib.rgb(255,200,125));
+
+        ActionList draw = new ActionList();
+        draw.add(filter);
+//        draw.add(fill);
+        draw.add(new ColorAction("node", VisualItem.STROKECOLOR, 0));
+        draw.add(new ColorAction("node", VisualItem.TEXTCOLOR, ColorLib.rgb(0,0,0)));
+        draw.add(new ColorAction("graph.edges", VisualItem.FILLCOLOR, ColorLib.gray(200)));
+        draw.add(new ColorAction("graph.edges", VisualItem.STROKECOLOR, ColorLib.gray(200)));
+
+
 
 // create an action list with an animated layout
 // the INFINITY parameter tells the action list to run indefinitely
-		ActionList layout = new ActionList(Activity.INFINITY);
+		layout = new ActionList(Activity.INFINITY);
+        //layout.add(filter);
 		layout.add(new ForceDirectedLayout("graph"));
 		layout.add(new RepaintAction());
 
 // add the actions to the visualization
-		//vis.putAction("color", color);
+        vis.putAction("draw", draw);
 		vis.putAction(LAYOUT_ACTION, layout);
-		vis.run("color");  // assign the colors
-
+        vis.runAfter("draw", "layout");
+        
 	}
 }

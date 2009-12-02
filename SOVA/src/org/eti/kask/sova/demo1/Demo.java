@@ -5,11 +5,26 @@
 package org.eti.kask.sova.demo1;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.JSplitPane;
+import javax.swing.JTextField;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import org.eti.kask.sova.utils.Debug;
 import org.eti.kask.sova.visualization.OVDisplay;
 import org.semanticweb.owl.apibinding.OWLManager;
@@ -19,6 +34,8 @@ import org.eti.kask.sova.demo1.Constants;
 import org.eti.kask.sova.utils.VisualizationProperties;
 import prefuse.controls.HoverActionControl;
 import prefuse.controls.NeighborHighlightControl;
+import prefuse.util.force.ForceSimulator;
+import prefuse.util.ui.JForcePanel;
 
 /**
  *
@@ -87,12 +104,59 @@ public class Demo
     
             }
             });
+
+
+
+        JPanel visValues = new JPanel();
+        visValues.setLayout(new BoxLayout(visValues, BoxLayout.Y_AXIS));
+        ForceSimulator fsim = display.getForceSimulator();
+        JForcePanel fpanel = new JForcePanel(fsim);
+        visValues.add(fpanel);
+            
+           
+            Box v1 = new Box(BoxLayout.Y_AXIS);
+            JButton but = new JButton("Wł/Wy Animację");
+            but.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent arg0) {
+                       if (doLayout){
+                              System.err.println("1 display stop!!!");
+                            display.stopLayout();
+
+                            doLayout=false;
+                        }else{
+                              System.err.println("1 display start");
+                            display.startLayout();
+
+                            doLayout = true;
+                        }
+
+           }
+        });
+            v1.add(but);
+            v1.setBorder(BorderFactory.createTitledBorder("Opcje Animacji"));
+
+            visValues.add(v1);
+                    // create a new JSplitPane to present the interface
+        JSplitPane split = new JSplitPane();
+        split.setLeftComponent(display);
+        split.setRightComponent(visValues);
+        split.setOneTouchExpandable(true);
+        split.setContinuousLayout(false);
+        split.setDividerLocation(700);
+        
+        
+        
+
+
+
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(display);
+		frame.add(split);
 		frame.pack();           // layout components in window
 		frame.setVisible(true); // show the window
 
 		
 
 	}
+   
 }
