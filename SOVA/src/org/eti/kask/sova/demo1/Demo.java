@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,112 +51,101 @@ public class Demo
 	public static void main(String[] args)
 	{
 
-
-		Debug.setStream(System.out);
-
-		display = new OVDisplay();
-		display.setSize(720, 500); // set display size
         
-		// zoom with vertical right-drag
-
-		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-		// We load an ontology from a physical URI - in this case we'll load the pizza
-		// ontology.
-
-		URI physicalURI = URI.create(Constants.ONTO_TEST_DIRECTORY);
-
-		try {
-			// Now ask the manager to load the ontology
-			display.generateGraphFromOWl(manager.loadOntologyFromPhysicalURI(physicalURI));
-		} catch (OWLOntologyCreationException ex) {
-			Logger.getLogger(Demo.class.getName()).log(Level.SEVERE, null, ex);
-		}
-
-
-        VisualizationProperties.instanceOf().loadProperties("/home/piotr29/STUDIA/OCS/visualization.properties");
-        System.out.println( VisualizationProperties.instanceOf().getProperty("node.name", "default string"));
-        display.setBackground(VisualizationProperties.instanceOf().getPropertyColor("node.color.cardinalityNodeColor", Color.WHITE));
-                        display.addControlListener(new NeighborHighlightControl("repaint"));
-               display.addControlListener(new HoverActionControl("repaint"));
+        try {
+            FileOutputStream out; // declare a file output object
+            PrintStream p; // declare a print stream object
+            // Create a new file output stream
+            // connected to "myfile.txt"
+            out = new FileOutputStream(Constants.DEBUG_FILE);
+            // Connect print stream to the output stream
+            p = new PrintStream(out);
+           
+           
+            Debug.setStream(p);
+            display = new OVDisplay();
+            display.setSize(720, 500); // set display size
+            // zoom with vertical right-drag
+            OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+            // We load an ontology from a physical URI - in this case we'll load the pizza
+            // ontology.
+            URI physicalURI = URI.create(Constants.ONTO_TEST_DIRECTORY);
+            try {
+                // Now ask the manager to load the ontology
+                display.generateGraphFromOWl(manager.loadOntologyFromPhysicalURI(physicalURI));
+            } catch (OWLOntologyCreationException ex) {
+                Logger.getLogger(Demo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            VisualizationProperties.instanceOf().loadProperties(Constants.PROPERTIES);
+            System.out.println(VisualizationProperties.instanceOf().getProperty("node.name", "default string"));
+            display.setBackground(VisualizationProperties.instanceOf().getPropertyColor("node.color.cardinalityNodeColor", Color.WHITE));
+            display.addControlListener(new NeighborHighlightControl("repaint"));
+            display.addControlListener(new HoverActionControl("repaint"));
 // create a new window to hold the visualization
-		JFrame frame = new JFrame("SOVA prefuse usage demo");
+            JFrame frame = new JFrame("SOVA prefuse usage demo");
 // ensure application exits when window is closed
-        display.addKeyListener(new java.awt.event.KeyListener() {
-                   
-            public void keyPressed(KeyEvent arg0) {
-                 if (arg0.getKeyChar()=='z'){
-                        if (doLayout){
-                              System.err.println("1 display stop!!!");
+            display.addKeyListener(new java.awt.event.KeyListener() {
+
+                public void keyPressed(KeyEvent arg0) {
+                    if (arg0.getKeyChar() == 'z') {
+                        if (doLayout) {
+                            System.err.println("1 display stop!!!");
                             display.stopLayout();
-
-                            doLayout=false;
-                        }else{
-                              System.err.println("1 display start");
+                            doLayout = false;
+                        } else {
+                            System.err.println("1 display start");
                             display.startLayout();
-
                             doLayout = true;
                         }
+                    }
                 }
-            }
 
-            public void keyReleased(KeyEvent arg0) {
+                public void keyReleased(KeyEvent arg0) {
+                }
 
-            }
-
-            public void keyTyped(KeyEvent arg0) {
-    
-            }
+                public void keyTyped(KeyEvent arg0) {
+                }
             });
-
-
-
-        JPanel visValues = new JPanel();
-        visValues.setLayout(new BoxLayout(visValues, BoxLayout.Y_AXIS));
-        ForceSimulator fsim = display.getForceSimulator();
-        JForcePanel fpanel = new JForcePanel(fsim);
-        visValues.add(fpanel);
-            
-           
+            JPanel visValues = new JPanel();
+            visValues.setLayout(new BoxLayout(visValues, BoxLayout.Y_AXIS));
+            ForceSimulator fsim = display.getForceSimulator();
+            JForcePanel fpanel = new JForcePanel(fsim);
+            visValues.add(fpanel);
             Box v1 = new Box(BoxLayout.Y_AXIS);
             JButton but = new JButton("Wł/Wy Animację");
             but.addActionListener(new ActionListener() {
 
-            public void actionPerformed(ActionEvent arg0) {
-                       if (doLayout){
-                              System.err.println("1 display stop!!!");
-                            display.stopLayout();
-
-                            doLayout=false;
-                        }else{
-                              System.err.println("1 display start");
-                            display.startLayout();
-
-                            doLayout = true;
-                        }
-
-           }
-        });
+                public void actionPerformed(ActionEvent arg0) {
+                    if (doLayout) {
+                        System.err.println("1 display stop!!!");
+                        display.stopLayout();
+                        doLayout = false;
+                    } else {
+                        System.err.println("1 display start");
+                        display.startLayout();
+                        doLayout = true;
+                    }
+                }
+            });
             v1.add(but);
             v1.setBorder(BorderFactory.createTitledBorder("Opcje Animacji"));
-
             visValues.add(v1);
-                    // create a new JSplitPane to present the interface
-        JSplitPane split = new JSplitPane();
-        split.setLeftComponent(display);
-        split.setRightComponent(visValues);
-        split.setOneTouchExpandable(true);
-        split.setContinuousLayout(false);
-        split.setDividerLocation(700);
-        
-        
-        
+            // create a new JSplitPane to present the interface
+            JSplitPane split = new JSplitPane();
+            split.setLeftComponent(display);
+            split.setRightComponent(visValues);
+            split.setOneTouchExpandable(true);
+            split.setContinuousLayout(false);
+            split.setDividerLocation(700);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.add(split);
+            frame.pack(); // layout components in window
+            frame.setVisible(true); // show the window
 
-
-
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(split);
-		frame.pack();           // layout components in window
-		frame.setVisible(true); // show the window
+             p.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Demo.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
 		
 

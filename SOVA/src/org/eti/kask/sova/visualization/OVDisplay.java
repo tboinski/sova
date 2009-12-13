@@ -127,7 +127,7 @@ public class OVDisplay extends Display
 	public void generateGraphFromOWl(OWLOntology ont)
 	{
 
-		this.setGraph(OWLtoGraphConverter.getInstance().OWLtoGraphExperimental(ont));
+		this.setGraph(OWLtoGraphConverter.getInstance().OWLtoGraph(ont));
 
 		vis.add("graph", this.getGraph());
         this.startLayout();
