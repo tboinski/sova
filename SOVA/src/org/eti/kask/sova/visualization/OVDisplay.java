@@ -1,189 +1,105 @@
 package org.eti.kask.sova.visualization;
 
 import org.eti.kask.sova.graph.OWLtoGraphConverter;
-import org.eti.kask.sova.nodes.ThingNode;
 import org.semanticweb.owl.model.OWLOntology;
 import prefuse.Display;
-import prefuse.Visualization;
-import prefuse.action.ActionList;
-import prefuse.action.RepaintAction;
-import prefuse.action.assignment.ColorAction;
-import prefuse.action.filter.GraphDistanceFilter;
-import prefuse.action.layout.Layout;
-import prefuse.action.layout.graph.ForceDirectedLayout;
-import prefuse.action.layout.graph.RadialTreeLayout;
-import prefuse.activity.Activity;
 import prefuse.controls.DragControl;
+import prefuse.controls.FocusControl;
 import prefuse.controls.NeighborHighlightControl;
 import prefuse.controls.PanControl;
 import prefuse.controls.WheelZoomControl;
 import prefuse.controls.ZoomControl;
 import prefuse.data.Graph;
-import prefuse.render.DefaultRendererFactory;
-import prefuse.render.LabelRenderer;
-import prefuse.util.ColorLib;
-import prefuse.util.force.ForceSimulator;
-import prefuse.visual.VisualItem;
-import prefuse.visual.expression.InGroupPredicate;
+import prefuse.visual.sort.TreeDepthItemSorter;
 
 /**
  * 
+ * @author piotr29
  */
-public class OVDisplay extends Display
-{
-    public static final int FORCE_DIRECTED_LAYOUT =  1;
-    private int  graphLayout = FORCE_DIRECTED_LAYOUT;
-    private static final String  GRAPH = "graph";
-    private ActionList layout = null;
-    public  ForceSimulator getForceSimulator(){
-       return  ((ForceDirectedLayout)layout.get(0)).getForceSimulator();
+public class OVDisplay extends Display {
 
-    }
-    public Layout getGraphLayout() {
+    public static final int FORCE_DIRECTED_LAYOUT = 1;
+    public static final int RADIAL_TREE_LAYOUT = 2;
+    private int graphLayout = FORCE_DIRECTED_LAYOUT;
+    private Graph graph = null;
+    private OVVisualization visualization;
+
+    private OVVisualization getGraphLayoutVis() {
 
         switch (graphLayout) {
-            case 1 : return new ForceDirectedLayout(GRAPH);
+            case 1:
+                return new ForceDirectedVis();
+            case 2:
+                return new RadialGraphVis();
         }
-
-        return new ForceDirectedLayout(GRAPH);
+        return new ForceDirectedVis();
     }
+
     /**
-     * 
+     * Ustawienie trybu wyświetlania
      * @param graphLayout
      */
     public void setGraphLayout(int graphLayout) {
         this.graphLayout = graphLayout;
     }
-    private static final String LAYOUT_ACTION = "layout";
-    private Visualization vis;
-    private  GraphDistanceFilter filter;
-	/**
-	 *
-	 */
-	private Graph graph;
-	// private Visualization visualization;
 
-	/**
-	 *
-	 */
-	public OVDisplay()
-	{
-		super();
+    public int getGraphLayout() {
+        return graphLayout;
+    }
+
+    @Override
+    public OVVisualization getVisualization() {
+        return visualization;
+    }
+
+    public Graph getGraph() {
+        return graph;
+    }
+
+    public void setGraph(Graph graph) {
+        this.graph = graph;
+    }
+
+    public OVDisplay() {
+        super();
         graph = new Graph();
-      
-		vis = new Visualization();
-		this.visualizationSettings(vis);
-		this.setVisualization(vis);
-		
-
-		//przykladowe defaultowe ustawienia
-		this.addControlListener(new DragControl()); // drag items around
-		this.addControlListener(new PanControl());  // pan with background left-drag
-		this.addControlListener(new ZoomControl()); // zoom with vertical right-drag
+        visualization = new ForceDirectedVis();
+        this.setItemSorter(new TreeDepthItemSorter());
+        this.addControlListener(new DragControl()); // drag items around
+        this.addControlListener(new PanControl());  // pan with background left-drag
+        this.addControlListener(new ZoomControl()); // zoom with vertical right-drag
         this.addControlListener(new WheelZoomControl());
         this.addControlListener(new NeighborHighlightControl());
+        this.addControlListener(new FocusControl(1, OVVisualization.LAYOUT_ACTION));
 
-	}
+    }
 
     /**
-     * funkcja włączająca samorozmieszczanie - grawitację obiektów
+     * metoda wizualizuje zadaną ontologię
+     * @param ont ontologia zapisana w OWLAPI
      */
-    public void setDistance(int distance){
-        filter.setDistance(distance);
-    }
-    public int getDistance(int distance){
-        return filter.getDistance();
-    }
-    public void stopLayout(){
-         vis.cancel(LAYOUT_ACTION);
+    public void generateGraphFromOWl(OWLOntology ont) {
+
+        this.setGraph(OWLtoGraphConverter.getInstance().OWLtoGraph(ont));
+        visualization = getGraphLayoutVis();
+        visualization.add("graph", this.getGraph());
+        visualization.setVisualizationSettings();
+        this.setVisualization(visualization);
+        visualization.startLayout();
 
     }
-    /**
-     * funkcja wyłączająca samorozmieszczanie - grawitację obiektów
-     */
-    public void startLayout(){
-        vis.run(LAYOUT_ACTION);
-    }
 
-	/**
-	 *
-	 */
-	public Graph getGraph()
-	{
-		return graph;
-	}
-
-	/**
-	 *
-	 */
-	public void setGraph(Graph val)
-	{
-		this.graph = val;
-	}
-
-	/**
-	 *
-	 */
-	public void generateGraphFromOWl(OWLOntology ont)
-	{
-
-		this.setGraph(OWLtoGraphConverter.getInstance().OWLtoGraph(ont));
-
-		vis.add("graph", this.getGraph());
-        this.startLayout();
-		
-	}
     /**
      * Ponowne wczytanie zmiennych wizualizacji
      */
-    public void refreshVisualization(){
-       vis.reset();
-       this.visualizationSettings(vis);
-       this.setVisualization(vis);
-       this.repaint();
+    public void refreshVisualization() {
+        visualization.reset();
+        visualization = getGraphLayoutVis();
+        visualization.add("graph", this.getGraph());
+        visualization.setVisualizationSettings();
+        this.setVisualization(visualization);
+        this.repaint();
+        this.getVisualization().startLayout();
 
     }
-
-	public void visualizationSettings(Visualization vis)
-	{
-        filter = new GraphDistanceFilter(GRAPH,12);
-		org.eti.kask.sova.nodes.ThingNode t = new ThingNode();
-		LabelRenderer r = (LabelRenderer) new NodeRenderer("node");
-		EdgeRenderer er = new EdgeRenderer();
-		DefaultRendererFactory drf = new DefaultRendererFactory(r);
-		drf.add(new InGroupPredicate("graph.edges"), er);
-		vis.setRendererFactory(drf);
-
-
-        int hops = 30;
-        final GraphDistanceFilter filter = new GraphDistanceFilter("graph", hops);
-
-//        ColorAction fill = new ColorAction(nodes,
-//                VisualItem.FILLCOLOR, ColorLib.rgb(200,200,255));
-//        fill.add(VisualItem.FIXED, ColorLib.rgb(255,100,100));
-//        fill.add(VisualItem.HIGHLIGHT, ColorLib.rgb(255,200,125));
-
-        ActionList draw = new ActionList();
-        draw.add(filter);
-//        draw.add(fill);
-        draw.add(new ColorAction("node", VisualItem.STROKECOLOR, 0));
-        draw.add(new ColorAction("node", VisualItem.TEXTCOLOR, ColorLib.rgb(0,0,0)));
-        draw.add(new ColorAction("graph.edges", VisualItem.FILLCOLOR, ColorLib.gray(200)));
-        draw.add(new ColorAction("graph.edges", VisualItem.STROKECOLOR, ColorLib.gray(200)));
-
-
-
-// create an action list with an animated layout
-// the INFINITY parameter tells the action list to run indefinitely
-		layout = new ActionList(Activity.INFINITY);
-        //layout.add(filter);
-		layout.add(new ForceDirectedLayout("graph"));
-		layout.add(new RepaintAction());
-
-// add the actions to the visualization
-        vis.putAction("draw", draw);
-		vis.putAction(LAYOUT_ACTION, layout);
-        vis.runAfter("draw", "layout");
-        
-	}
 }
