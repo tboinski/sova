@@ -1,13 +1,8 @@
 package org.eti.kask.sova.edges;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.Polygon;
-import java.awt.Shape;
-import java.awt.geom.Point2D;
 import org.eti.kask.sova.options.EdgeColors;
-import prefuse.util.ColorLib;
-import prefuse.visual.VisualItem;
 
 /**
  * Nadklasa dla wszystkich krawędzi, zwykła czarna krawędź.

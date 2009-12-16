@@ -19,6 +19,8 @@ public class EdgeColors
 	protected Color inverseOfEdgeColor;
 	protected Color propertyEdgeColor;
 	protected Color subEdgeColor;
+	protected Color inverseOfMutualEdgeColor;
+	protected Color operationEdgeColor;
 
 	public EdgeColors()
 	{
@@ -32,6 +34,8 @@ public class EdgeColors
 		equivalentPropertyEdgeColor = Color.GREEN;
 		inverseOfEdgeColor = Color.RED;
 		functionalEdgeColor = new Color(200, 113, 55);
+		inverseOfMutualEdgeColor = inverseOfEdgeColor;
+		operationEdgeColor = Color.BLACK;
 
 	}
 
@@ -134,5 +138,27 @@ public class EdgeColors
 	{
 		this.subEdgeColor = val;
 	}
+
+	public Color getInverseOfMutualEdgeColor()
+	{
+		return inverseOfMutualEdgeColor;
+	}
+
+	public void setInverseOfMutualEdgeColor(Color inverseOfMutualEdgeColor)
+	{
+		this.inverseOfMutualEdgeColor = inverseOfMutualEdgeColor;
+	}
+
+	public Color getOperationEdgeColor()
+	{
+		return operationEdgeColor;
+	}
+
+	public void setOperationEdgeColor(Color operationEdgeColor)
+	{
+		this.operationEdgeColor = operationEdgeColor;
+	}
+
+
 }
 
