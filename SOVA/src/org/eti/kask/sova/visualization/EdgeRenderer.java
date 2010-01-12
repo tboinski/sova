@@ -9,6 +9,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import org.eti.kask.sova.edges.Edge;
 import org.eti.kask.sova.options.EdgeColors;
+import org.eti.kask.sova.utils.VisualizationProperties;
 import prefuse.util.ColorLib;
 import prefuse.visual.EdgeItem;
 import prefuse.visual.VisualItem;
@@ -19,7 +20,7 @@ import prefuse.visual.VisualItem;
 public class EdgeRenderer extends prefuse.render.EdgeRenderer
 {
 
-	protected EdgeColors colorScheme = new EdgeColors();
+	protected EdgeColors colorScheme = new EdgeColors(VisualizationProperties.instanceOf());
 
 	public EdgeRenderer()
 	{

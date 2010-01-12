@@ -13,6 +13,7 @@ import org.eti.kask.sova.nodes.ThingNode;
 import org.eti.kask.sova.options.NodeColors;
 import org.eti.kask.sova.options.NodeShapes;
 import org.eti.kask.sova.utils.Debug;
+import org.eti.kask.sova.utils.VisualizationProperties;
 import prefuse.Constants;
 import prefuse.render.ShapeRenderer;
 import prefuse.util.ColorLib;
@@ -27,7 +28,7 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 {
 
 	protected AffineTransform m_transform = new AffineTransform();
-	protected NodeColors colorScheme = new NodeColors();
+	protected NodeColors colorScheme = new NodeColors(VisualizationProperties.instanceOf());
 	protected NodeShapes shapeScheme = new NodeShapes();
 	protected ShapeRenderer shapeRenderer = new ShapeRenderer();
 

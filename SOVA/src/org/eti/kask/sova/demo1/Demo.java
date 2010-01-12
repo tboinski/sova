@@ -62,6 +62,7 @@ public class Demo {
             Debug.setStream(p);
             display = new OVDisplay();
             display.setSize(720, 500); // set display size
+	    VisualizationProperties.instanceOf().loadProperties(Constants.PROPERTIES);
             // zoom with vertical right-drag
             OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
             // We load an ontology from a physical URI - in this case we'll load the pizza
@@ -73,7 +74,7 @@ public class Demo {
             } catch (OWLOntologyCreationException ex) {
                 Logger.getLogger(Demo.class.getName()).log(Level.SEVERE, null, ex);
             }
-            VisualizationProperties.instanceOf().loadProperties(Constants.PROPERTIES);
+            
             System.out.println(VisualizationProperties.instanceOf().getProperty("node.name", "default string"));
             display.setBackground(VisualizationProperties.instanceOf().getPropertyColor("node.color.cardinalityNodeColor", Color.WHITE));
             display.addControlListener(new NeighborHighlightControl("repaint"));

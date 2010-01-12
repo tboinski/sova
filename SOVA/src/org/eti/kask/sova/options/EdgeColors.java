@@ -1,6 +1,7 @@
 package org.eti.kask.sova.options;
 
 import java.awt.Color;
+import org.eti.kask.sova.utils.VisualizationProperties;
 
 /**
  * Klasa przechowująca informacje o ustawieniach kolorów dla krawędzi.
@@ -24,6 +25,35 @@ public class EdgeColors
 
 	public EdgeColors()
 	{
+		setDefaultColors();
+	}
+
+	public EdgeColors(VisualizationProperties colorProperties) {
+		setDefaultColors();
+		loadColors(colorProperties);
+	}
+
+	/**
+	 * Zmienia ustawienia kolorów na załadowane w VisualizationProperies.
+	 * Changes color setting to ones loaded in VisualizationProperies.
+	 */
+	public void loadColors(VisualizationProperties colorProperties) {
+		String prefix = "edge.color.";
+
+		edgeColor = colorProperties.getPropertyColor(prefix + "edgeColor", edgeColor);
+		propertyEdgeColor = colorProperties.getPropertyColor(prefix + "propertyEdgeColor", propertyEdgeColor);
+		domainEdgeColor = colorProperties.getPropertyColor(prefix + "domainEdgeColor", domainEdgeColor);
+		rangeEdgeColor = colorProperties.getPropertyColor(prefix + "rangeEdgeColor", rangeEdgeColor);
+		disjointEdgeColor = colorProperties.getPropertyColor(prefix + ".disjointEdgeColor", disjointEdgeColor);
+		equivalentEdgeColor = colorProperties.getPropertyColor(prefix + "equivalentEdgeColor", equivalentEdgeColor);
+		equivalentPropertyEdgeColor = colorProperties.getPropertyColor(prefix + "equivalentPropertyEdgeColor", equivalentPropertyEdgeColor);
+		functionalEdgeColor = colorProperties.getPropertyColor(prefix + "functionalEdgeColor", functionalEdgeColor);
+		inverseOfEdgeColor = colorProperties.getPropertyColor(prefix + "inverseOfEdgeColor", inverseOfEdgeColor);
+		inverseOfMutualEdgeColor = colorProperties.getPropertyColor(prefix + "inverseOfMutualEdgeColor", inverseOfEdgeColor);
+		operationEdgeColor = colorProperties.getPropertyColor(prefix + "operationEdgeColor", operationEdgeColor);
+	}
+
+	protected void setDefaultColors() {
 		// Ustawienia domyślne
 		edgeColor = Color.BLACK;
 		propertyEdgeColor = Color.BLACK;
@@ -36,7 +66,6 @@ public class EdgeColors
 		functionalEdgeColor = new Color(200, 113, 55);
 		inverseOfMutualEdgeColor = inverseOfEdgeColor;
 		operationEdgeColor = Color.BLACK;
-
 	}
 
 	public Color getDomainEdgeColor()
