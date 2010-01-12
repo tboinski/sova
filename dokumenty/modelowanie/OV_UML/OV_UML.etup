@@ -16,5 +16,6 @@
    <UML:Profile xmi.id="DCE.09872EE7-AC82-D774-F7DA-D7C1D862250D" name="Unnamed" isCloned="true" href="./OV_UML.etup#//*[@xmi.id=&apos;DCE.09872EE7-AC82-D774-F7DA-D7C1D862250D&apos;]" isDirty="false"><UML:Element.ownedElement>
 <UML:Stereotype xmi.id="DCE.94318DE0-AA6D-FD68-A8AC-1B52C29C47AA" name="abstract" owner="__uri_./OV_UML.etup#//*[@xmi.id=&apos;DCE.09872EE7-AC82-D774-F7DA-D7C1D862250D&apos;]" alias="Abstract"/>
 <UML:Stereotype xmi.id="DCE.C23DA142-64AA-D41E-A441-6B1260A70A57" name="abstract" owner="__uri_./OV_UML.etup#//*[@xmi.id=&apos;DCE.09872EE7-AC82-D774-F7DA-D7C1D862250D&apos;]"/>
-<UML:Stereotype xmi.id="DCE.0FC63685-C2D4-2490-23C5-E0A882008179" name="abstract" owner="__uri_./OV_UML.etup#//*[@xmi.id=&apos;DCE.09872EE7-AC82-D774-F7DA-D7C1D862250D&apos;]"/></UML:Element.ownedElement></UML:Profile></XMI.content>
+<UML:Stereotype xmi.id="DCE.0FC63685-C2D4-2490-23C5-E0A882008179" name="abstract" owner="__uri_./OV_UML.etup#//*[@xmi.id=&apos;DCE.09872EE7-AC82-D774-F7DA-D7C1D862250D&apos;]"/>
+<UML:Stereotype xmi.id="DCE.2EACD027-B400-5F49-26BD-EFBF8F459591" name="Singleton" owner="__uri_./OV_UML.etup#//*[@xmi.id=&apos;DCE.09872EE7-AC82-D774-F7DA-D7C1D862250D&apos;]"/></UML:Element.ownedElement></UML:Profile></XMI.content>
 </XMI>

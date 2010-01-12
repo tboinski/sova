@@ -34,7 +34,7 @@ Symbol projektu: & Opiekun projektu:   \tabularnewline
 \multicolumn{2}{l}{ } \tabularnewline %pusta linijka
 \hline 
 Nazwa Dokumentu: & Nr wersji:   \tabularnewline 
-Analiza obiektowa & 2.0 \tabularnewline \hline
+Analiza obiektowa & 2.1 \tabularnewline \hline
 Odpowiedzialny za dokument: & Data pierwszego sporządzenia:   \tabularnewline 
 Piotr Kunowski & 23 maja 2009 \tabularnewline \hline
 Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline 
@@ -50,6 +50,7 @@ DLA KLIENTA & \today \tabularnewline \hline
 1 & Stworzenie & wszystkie & Grupa projektowa & 23.05.09 \tabularnewline \hline
 1.1 & Dodano pakiet Utils & 1, 3 & Anna Jaworska & 2.06.09 \tabularnewline \hline
 2 & Dodano zaktualizowane diagramy oraz opisy klas & wszystkie & Grupa projektowa & 16.06.09 \tabularnewline \hline
+2.1 & Aktualizacja pakietu Options & 2 & Radosław Kleczkowski & 12.10.10 \tabularnewline \hline
 
 \end{longtable}
 \end{center}
@@ -132,9 +133,9 @@ Priorytet: & bardzo ważne \\ \hline
 
 \subsection{Diagram}
 
- \scalebox{0.50}{ \includegraphics{./modelowanie/OV_UML/OptionsClassDiagram.png}
+ \scalebox{0.3}{ \includegraphics{./modelowanie/OV_UML/OptionsClassDiagram.png}}
 
-}
+
 
 \subsection{Opis klasy}
 
@@ -209,9 +210,75 @@ Priorytet: & średnio ważny \\ \hline
 %\multicolumn{2}{c}{} \\
 % \hline
 
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CO003 & ArrowShapes \\ \hline
+Opis: & Singleton przechowujący kształty grotów dla strzałek.   \\ \hline
+Klasy nadrzędne: &     \\ \hline
+Atrybuty: & \begin{itemize}
+ \item directionArrow
+ \item inversedDirectionArrow
+ \item circle
+ \item diamond
+
+\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+% \item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF002 \\ \hline
+Priorytet: & średnio ważny \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CO004 & NodeShapes \\ \hline
+Opis: & Klasa przechowująca informacje o kształtach poszczególnych węzłów.   \\ \hline
+Klasy nadrzędne: &     \\ \hline
+Atrybuty: & \begin{itemize}
+ \item defaultNodeShapeType
+ \item anonymousNodeShapeType
+ \item individualNodeShapeType
+ \item informationNodeShapeType
+ \item cardinalityValueNodeShapeType
+ \item thingNodeShapeType
+ \item NodeShapeType nothingNodeShapeType
+
+\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+% \item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF002 \\ \hline
+Priorytet: & średnio ważny \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CO005 & NodeShapeType \\ \hline
+Opis: &  Enum - rodzaje kształtów dla węzłów grafu.   \\ \hline
+Klasy nadrzędne: &     \\ \hline
+Atrybuty: & \begin{itemize}
+ \item RECTANGLE
+ \item ROUNDED\_RECTANGLE
+ \item CIRCLE
+ \item ELLIPSE
+
+\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+% \item 
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF002 \\ \hline
+Priorytet: & średnio ważny \\ \hline
+
+
 \end{longtable}
-
-
 \end{center}
 
 \section{Pakiet nodes}
