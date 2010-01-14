@@ -9,10 +9,15 @@ import org.eti.kask.sova.options.NodeColors;
 public class AnonymousClassNode extends Node
 {
 
+        //identyfikator anonimowego komponentu
+        private int anonumousId;
+
+
 	public AnonymousClassNode()
 	{
 		super();
 		label = "A";
+                anonumousId=0;
 	}
 
 	/**
