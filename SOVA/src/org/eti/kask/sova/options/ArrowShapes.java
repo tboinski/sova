@@ -8,7 +8,7 @@ package org.eti.kask.sova.options;
 import java.awt.Polygon;
 
 /**
- * Singleton przechowujący kształty grotów dla krawędzi.
+ * Singleton przechowujący kształty grotów dla strzałek.
  * @author infinity
  */
 public class ArrowShapes {

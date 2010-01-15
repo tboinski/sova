@@ -16,8 +16,6 @@ public abstract class Node
 {
 	protected float strokeWitdh;	
 	protected String label;
-	protected boolean rounded = true;
-
 
 	public Node()
 	{
@@ -85,19 +83,7 @@ public abstract class Node
 		return getLabel();
 	}
 
-	/**
-	 * True, gdy węzeł ma mieć zaokrąglone narożniki.
-	 * True, when the node should have rounded corners.
-	 */
-	public boolean isRounded()
-	{
-		return rounded;
-	}
-
-	public void setRounded(boolean rounded)
-	{
-		this.rounded = rounded;
-	}
+	
 	/**
 	 *
 	 */

@@ -286,7 +286,7 @@ Priorytet: & średnio ważny \\ \hline
 \subsection{Diagram}
 
 \begin{center}
- \scalebox{0.36}{\includegraphics{./modelowanie/OV_UML/NodesClassDiagram.png}}\end{center}
+ \scalebox{0.29}{\includegraphics{./modelowanie/OV_UML/NodesClassDiagram.png}}\end{center}
 
 \subsection{Opis klasy}
 
@@ -301,17 +301,13 @@ Opis: & Klasa nadrzędna względem wszystkich klas obsługi wierzchołków. Zawi
 Klasy nadrzędne: &     \\ \hline
 Atrybuty: & \begin{itemize}
  \item strokeWidth
- \item height
- \item width
- \item annotation
- \item comment
-\item Color fillColor
-\item String label
+ \item label
 \end{itemize}
  \\ \hline
-Metody: &% \begin{itemize}
- %\item renderShape - metoda wizualizująca dany typ wierzchołka
-%\end{itemize}
+Metody: & \begin{itemize}
+ \item getFillColorFromScheme - zwraca kolor wypełnienia ustawiony dla tego węzła w zadanym schemacie
+ \item getNodeShapeType - zwraca kształt węzła
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF004, WF005, WF006, WF007, WI004 \\ \hline
 Priorytet: & bardzo ważne  \\ \hline
@@ -321,15 +317,16 @@ Priorytet: & bardzo ważne  \\ \hline
 
 CN002 & AllValuesFromPropertyNode \\ \hline
 Opis: & Klasa reprezentuje wierzchołek, będący OWL Property typu AllValuesFrom.    \\ \hline
-Klasy nadrzędne: & Node     \\ \hline
+Klasy nadrzędne: & CN001 (Node)     \\ \hline
 Atrybuty: & 
 %\begin{itemize}
  %\item 
 %\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+ \item getFillColorFromScheme
+ \item getNodeShapeType
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF004, WF006, WF007, WI004 \\ \hline
 Priorytet: & ważne \\ \hline
@@ -339,14 +336,14 @@ Priorytet: & ważne \\ \hline
 
 CN003 & AnonymousClassNode \\ \hline
 Opis: & Klasa reprezentuje wierzchołek klas anonimowych OWL.    \\ \hline
-Klasy nadrzędne: & Node     \\ \hline
-Atrybuty: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Klasy nadrzędne: & CN001 (Node)       \\ \hline
+Atrybuty: & \begin{itemize}
+ \item anonymousId
+\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+ \item getFillColorFromScheme
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF005, WI004 \\ \hline
 Priorytet: & ważne \\ \hline
@@ -356,7 +353,7 @@ Priorytet: & ważne \\ \hline
 
 CN004 & CardinalityNode \\ \hline
 Opis: & Klasa reprezentuje wierzchołek klas anonimowych OWL będących wynikiem ograniczenia kardynalności.    \\ \hline
-Klasy nadrzędne: & AnonymousNode     \\ \hline
+Klasy nadrzędne: & CN003 (AnonymousNode)     \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
@@ -373,14 +370,15 @@ Priorytet: & ważne  \\ \hline
 
 CN005 & CardinalityValueNode \\ \hline
 Opis: & Klasa reprezentuje wierzchołek z dokładnym ograniczeniem kardynalności (OWL Cardinality). \\ \hline
-Klasy nadrzędne: & Node     \\ \hline
+Klasy nadrzędne: & CN001 (Node)       \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+ \item getFillColorFromScheme
+ \item getNodeShapeType
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF007, WI004 \\ \hline
 Priorytet: & ważne  \\ \hline
@@ -390,14 +388,14 @@ Priorytet: & ważne  \\ \hline
 
 CN006 & ClassNode \\ \hline
 Opis: & Klasa reprezentuje wierzchołek OWL Class.    \\ \hline
-Klasy nadrzędne: & Node     \\ \hline
+Klasy nadrzędne: & CN001 (Node)       \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+ \item getFillColorFromScheme
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF004, WF005, WI004 \\ \hline
 Priorytet: & ważne  \\ \hline
@@ -407,7 +405,7 @@ Priorytet: & ważne  \\ \hline
 
 CN007 & ComplementOfNode \\ \hline
 Opis: & Klasa reprezentuje wierzchołek klas anonimowych OWL będących wynikiem dopełnienia (OWL ComplementOf).    \\ \hline
-Klasy nadrzędne: & Node     \\ \hline
+Klasy nadrzędne: & CN001 (Node)       \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
@@ -424,14 +422,14 @@ Priorytet: & ważne  \\ \hline
 
 CN008 & DataTypeNode \\ \hline
 Opis: & Klasa reprezentuje wierzchołek OWL DataType.    \\ \hline
-Klasy nadrzędne: & Node     \\ \hline
+Klasy nadrzędne: & CN001 (Node)       \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+ \item getFillColorFromScheme
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF004, WI04 \\ \hline
 Priorytet: & ważne  \\ \hline
@@ -441,14 +439,14 @@ Priorytet: & ważne  \\ \hline
 
 CN009 & DifferentNode \\ \hline
 Opis: & Klasa reprezentuje wierzchołek oznaczający relację DifferentFrom lub AllDifferent pomiędzy wystąpieniami klas (OWL Individual).    \\ \hline
-Klasy nadrzędne: & Node     \\ \hline
+Klasy nadrzędne: & CN001 (Node)       \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+ \item getFillColorFromScheme
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
 Priorytet: & ważne  \\ \hline
@@ -458,7 +456,7 @@ Priorytet: & ważne  \\ \hline
 
 CN010 & FunctionalPropertyNode \\ \hline
 Opis: & Klasa reprezentuje wierzchołek oznaczający, że dane OWL Property to FunctionalProperty.  \\ \hline
-Klasy nadrzędne: & InformationNode     \\ \hline
+Klasy nadrzędne: & CN010 (InformationNode)     \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
@@ -475,14 +473,15 @@ Priorytet: & ważne  \\ \hline
 
 CN011 & IndividualNode \\ \hline
 Opis: & Klasa reprezentuje wierzchołek instancji OWL Individual.  \\ \hline
-Klasy nadrzędne: & Node     \\ \hline
+Klasy nadrzędne: & CN001 (Node)       \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+ \item getFillColorFromScheme
+ \item getNodeShapeType
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF004, WI004 \\ \hline
 Priorytet: & ważne  \\ \hline
@@ -492,14 +491,15 @@ Priorytet: & ważne  \\ \hline
 
 CN012 & InformationNode \\ \hline
 Opis: & Klasa ta jest klasą nadrzędną, dla klas wierzchołków reprezentujących informacje o różnych właściwościach OWL Property.    \\ \hline
-Klasy nadrzędne: & Node     \\ \hline
+Klasy nadrzędne: & CN001 (Node)       \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+ \item getFillColorFromScheme
+ \item getNodeShapeType
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF010, WI004 \\ \hline
 Priorytet: & ważne  \\ \hline
@@ -509,7 +509,7 @@ Priorytet: & ważne  \\ \hline
 
 CN013 & IntersectionOfNode \\ \hline
 Opis: & Klasa reprezentuje wierzchołek klas anonimowych OWL będących wynikiem przecięcia (OWL IntersectionOf).    \\ \hline
-Klasy nadrzędne: & AnonymousNode     \\ \hline
+Klasy nadrzędne: & CN003 (AnonymousNode)     \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
@@ -524,9 +524,9 @@ Priorytet: & ważne  \\ \hline
 \multicolumn{2}{c}{} \\
  \hline
 
-CN014 & inverseFunciotnalPropertyNode \\ \hline
+CN014 & InverseFunciotnalPropertyNode \\ \hline
 Opis: & Klasa reprezentuje wierzchołek oznaczający, że dane OWL Property to InverseFunctionalProperty.    \\ \hline
-Klasy nadrzędne: & InformationNode     \\ \hline
+Klasy nadrzędne: & CN010 (InformationNode)     \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
@@ -543,14 +543,14 @@ Priorytet: & ważne  \\ \hline
 
 CN015 & MaxCardinalityValueNode \\ \hline
 Opis: & Klasa reprezentuje wierzchołek ograniczenia kardynalności OWL MaxCardinality.    \\ \hline
-Klasy nadrzędne: & CardinalityValueNode     \\ \hline
+Klasy nadrzędne: & CN005 (CardinalityValueNode)     \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+ \item getFillColorFromScheme
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF007, WI004 \\ \hline
 Priorytet: & ważne  \\ \hline
@@ -560,14 +560,14 @@ Priorytet: & ważne  \\ \hline
 
 CN016 & MinCardinalityValueNode \\ \hline
 Opis: & Klasa reprezentuje wierzchołek ograniczenia kardynalności OWL MinCardinality.    \\ \hline
-Klasy nadrzędne: & CardinalityValueNode     \\ \hline
+Klasy nadrzędne: & CN005 (CardinalityValueNode)     \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+ \item getFillColorFromScheme
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF007, WI004 \\ \hline
 Priorytet: & ważne  \\ \hline
@@ -577,14 +577,15 @@ Priorytet: & ważne  \\ \hline
 
 CN017 & NothingNode \\ \hline
 Opis: & Klasa reprezentuje wierzchołek OWL Nothing.    \\ \hline
-Klasy nadrzędne: & Node     \\ \hline
+Klasy nadrzędne: & CN001 (Node)       \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+ \item getFillColorFromScheme
+ \item getNodeShapeType
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF004, WF005, WI004 \\ \hline
 Priorytet: & ważne  \\ \hline
@@ -594,7 +595,7 @@ Priorytet: & ważne  \\ \hline
 
 CN018 & OneOfNode \\ \hline
 Opis: & Klasa reprezentuje wierzchołek klas anonimowych OWL reprezentujących 1 z klas określonego zbioru (wynik OWL OneOf).    \\ \hline
-Klasy nadrzędne: & AnonymousClassNode     \\ \hline
+Klasy nadrzędne: & CN003 (AnonymousClassNode)     \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
@@ -611,14 +612,14 @@ Priorytet: & ważne  \\ \hline
 
 CN019 & PropertyNode \\ \hline
 Opis: & Klasa reprezentuje wierzchołek OWL Property.    \\ \hline
-Klasy nadrzędne: & Node     \\ \hline
+Klasy nadrzędne: & CN001 (Node)       \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+ \item getFillColorFromScheme
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF004, WF007, WI004 \\ \hline
 Priorytet: & ważne  \\ \hline
@@ -628,14 +629,14 @@ Priorytet: & ważne  \\ \hline
 
 CN020 & SameAsNode \\ \hline
 Opis: & Klasa reprezentuje wierzchołek oznaczający relację OWL SameAs pomiędzy wystąpieniami klas (OWL Individual).    \\ \hline
-Klasy nadrzędne: & InformationNode     \\ \hline
+Klasy nadrzędne: & CN010 (InformationNode)     \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+ \item getFillColorFromScheme
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF005, WF006, WI004 \\ \hline
 Priorytet: & ważne  \\ \hline
@@ -645,14 +646,14 @@ Priorytet: & ważne  \\ \hline
 
 CN021 & SomeValuesFromPropertyNode \\ \hline
 Opis: & Klasa reprezentuje wierzchołek, będący OWL Property typu SomeValuesFrom. \\ \hline
-Klasy nadrzędne: & PropertyNode \\ \hline
+Klasy nadrzędne: & CN019 (PropertyNode) \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+ \item getFillColorFromScheme
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF005, WF006, WI004 \\ \hline
 Priorytet: & ważne  \\ \hline
@@ -662,7 +663,7 @@ Priorytet: & ważne  \\ \hline
 
 CN022 & SymmetricPropertNode \\ \hline
 Opis: & Klasa reprezentuje wierzchołek oznaczający, że dane OWL Property to SymmetricProperty.    \\ \hline
-Klasy nadrzędne: & InformationNode     \\ \hline
+Klasy nadrzędne: & CN010 (InformationNode)     \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
@@ -679,14 +680,15 @@ Priorytet: & ważne  \\ \hline
 
 CN023 & ThingNode \\ \hline
 Opis: & Klasa reprezentuje wierzchołek OWL Thing.    \\ \hline
-Klasy nadrzędne: & Node     \\ \hline
+Klasy nadrzędne: & CN001 (Node)       \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+ \item getFillColorFromScheme
+ \item getNodeShapeType
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF004, WF005, WI004 \\ \hline
 Priorytet: & ważne  \\ \hline
@@ -696,7 +698,7 @@ Priorytet: & ważne  \\ \hline
 
 CN024 & TreansitivePropertyNode \\ \hline
 Opis: & Klasa reprezentuje wierzchołek oznaczający, że dane OWL Property to TransitiveProperty.    \\ \hline
-Klasy nadrzędne: & InformationNode     \\ \hline
+Klasy nadrzędne: & CN010 (InformationNode)     \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
@@ -713,7 +715,7 @@ Priorytet: & ważne  \\ \hline
 
 CN025 & UnionOfNode \\ \hline
 Opis: & Klasa reprezentuje wierzchołek klas anonimowych OWL będących wynikiem unii (OWL UnionOf).    \\ \hline
-Klasy nadrzędne: & AnonymousNode     \\ \hline
+Klasy nadrzędne: & CN003 (AnonymousNode)     \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}

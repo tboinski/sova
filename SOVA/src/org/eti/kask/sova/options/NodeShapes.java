@@ -6,7 +6,7 @@
 package org.eti.kask.sova.options;
 
 /**
- *
+ * Klasa przechowująca informacje o kształtach poszczególnych węzłów.
  * @author infinity
  */
 public class NodeShapes {
