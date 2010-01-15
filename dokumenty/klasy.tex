@@ -34,7 +34,7 @@ Symbol projektu: & Opiekun projektu:   \tabularnewline
 \multicolumn{2}{l}{ } \tabularnewline %pusta linijka
 \hline 
 Nazwa Dokumentu: & Nr wersji:   \tabularnewline 
-Analiza obiektowa & 2.1 \tabularnewline \hline
+Analiza obiektowa & 2.2 \tabularnewline \hline
 Odpowiedzialny za dokument: & Data pierwszego sporządzenia:   \tabularnewline 
 Piotr Kunowski & 23 maja 2009 \tabularnewline \hline
 Przeznaczenie: & Data ostatniej aktualizacji:   \tabularnewline 
@@ -51,6 +51,7 @@ DLA KLIENTA & \today \tabularnewline \hline
 1.1 & Dodano pakiet Utils & 1, 3 & Anna Jaworska & 2.06.09 \tabularnewline \hline
 2 & Dodano zaktualizowane diagramy oraz opisy klas & wszystkie & Grupa projektowa & 16.06.09 \tabularnewline \hline
 2.1 & Aktualizacja pakietu Options & 2 & Radosław Kleczkowski & 12.10.10 \tabularnewline \hline
+2.2 & Aktualizacja pozostałych pakietów & 3, 4, 5, 6, 7 & Radosław Kleczkowski & 15.10.10 \tabularnewline \hline
 
 \end{longtable}
 \end{center}
@@ -286,7 +287,8 @@ Priorytet: & średnio ważny \\ \hline
 \subsection{Diagram}
 
 \begin{center}
- \scalebox{0.29}{\includegraphics{./modelowanie/OV_UML/NodesClassDiagram.png}}\end{center}
+\scalebox{0.57}{\includegraphics[width=\linewidth]{./modelowanie/OV_UML/NodesClassDiagram.png}}
+\end{center}
 
 \subsection{Opis klasy}
 
@@ -739,7 +741,7 @@ Priorytet: & ważne  \\ \hline
 
 \subsection{Diagram}
 
-\includegraphics[width=\linewidth]{./modelowanie/OV_UML/EdgeClassDiagram.png}
+\includegraphics[width=\linewidth]{./modelowanie/OV_UML/EdgeClassDiagram.png} 
 
 \subsection{Opis klasy}
 
@@ -751,27 +753,17 @@ CE001 & Edge \\ \hline
 Opis: &  Klasa reprezentująca prostą krawędź na grafie. Jest nadklasą dla pozostałych klas krawędzi.  \\ \hline
 Klasy nadrzędne: &     \\ \hline
 Atrybuty: & \begin{itemize}
-\item Color strokeColor
-\item  int strokeWidth 
-\item boolean hasArrow
-\item    boolean hasInvertedArrow
-  \item  Polygon arrowHead
-  \item Color arrowHeadColor
+	\item boolean hasArrow
+	\item boolean hasInvertedArrow
+	\item Color arrowHeadColor
+	\item Color strokeColor
+	\item int strokeWidth 
 \end{itemize}
  \\ \hline
 Metody: & \begin{itemize}
- \item    getStrokeColor () 
-\item setStrokeColor (Color val)
-  \item  getStrokeWidth () 
-\item setStrokeWidth (int val) 
-\item getArrowHead()
-\item setArrowHead(Polygon arrowHead)
-\item isHasArrow()
- \item setHasArrow(boolean hasArrow)
-  \item isHasInvertedArrow()
-\item setHasInvertedArrow(boolean hasInvertedArrow)
-\item getArrowHeadColor()
- \item setArrowHeadColor(Color arrowHeadColor)
+	\item getStrokeColorFromScheme 
+	\item getArrowHead
+	\item getInvArrowHead
 \end{itemize}
   \\ \hline
 Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
@@ -782,14 +774,16 @@ Priorytet: & bardzo ważne  \\ \hline
 
 CE002 & DisjointEdge \\ \hline
 Opis: & Klasa reprezentująca krawędź oznaczającą rozłączność klas (OWL Disjoint). \\ \hline
-Klasy nadrzędne: & Edge    \\ \hline
+Klasy nadrzędne: & CE001 (Edge)    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+	\item getStrokeColorFromScheme
+	\item getArrowHead
+	\item getInvArrowHead
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
 Priorytet: & ważne  \\ \hline
@@ -799,14 +793,16 @@ Priorytet: & ważne  \\ \hline
 
 CE003 & DomainEdge  \\ \hline
 Opis: & Klasa reprezentująca krawędź łączącą Property z klasą właściwości OWL DomainOf.   \\ \hline
-Klasy nadrzędne: & Edge \\ \hline
+Klasy nadrzędne: & CE001 (Edge) \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+	\item getStrokeColorFromScheme
+	\item getArrowHead
+	\item getInvArrowHead
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
 Priorytet: & ważne  \\ \hline
@@ -816,14 +812,16 @@ Priorytet: & ważne  \\ \hline
 
 CE004 & EquivalentEdge \\ \hline
 Opis: & Klasa reprezentująca krawędź oznaczającą równoznaczność (OWL Equivalent).    \\ \hline
-Klasy nadrzędne: & Edge    \\ \hline
+Klasy nadrzędne: & CE001 (Edge)    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+	\item getStrokeColorFromScheme 
+	\item getArrowHead
+	\item getInvArrowHead
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
 Priorytet: & ważne  \\ \hline
@@ -833,14 +831,14 @@ Priorytet: & ważne  \\ \hline
 
 CE005 & EquivalentPropertyEdge \\ \hline
 Opis: & Klasa reprezentująca krawędź oznaczającą równoznaczność OWL Property (OWL EquivalentProperty).    \\ \hline
-Klasy nadrzędne: & EquivalentEdge    \\ \hline
+Klasy nadrzędne: & CE004 (EquivalentEdge)    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+	\item getStrokeColorFromScheme
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
 Priorytet: & ważne  \\ \hline
@@ -850,14 +848,14 @@ Priorytet: & ważne  \\ \hline
 
 CE006 & FunctionaltEdge \\ \hline
 Opis: & Klasa reprezentująca krawędź łączącą wierzchołki InformationNode(CN012) z OWL Property, którego dotyczy.   \\ \hline
-Klasy nadrzędne: & Edge    \\ \hline
+Klasy nadrzędne: & CE001 (Edge)    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+	\item getStrokeColorFromScheme
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
 Priorytet: & ważne  \\ \hline
@@ -867,14 +865,16 @@ Priorytet: & ważne  \\ \hline
 
 CE007 & InverseOfEdge \\ \hline
 Opis: & Klasa reprezentująca krawędź oznaczającą odwrotność (OWL InverseOf).    \\ \hline
-Klasy nadrzędne: & Edge    \\ \hline
+Klasy nadrzędne: & CE001 (Edge)    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+	\item getStrokeColorFromScheme 
+	\item getArrowHead
+	\item getInvArrowHead
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
 Priorytet: & ważne  \\ \hline
@@ -884,14 +884,16 @@ Priorytet: & ważne  \\ \hline
 
 CE008 & PropertyEdge \\ \hline
 Opis: &  Klasa reprezentująca krawędź oznaczającą relację między Property a klasą.   \\ \hline
-Klasy nadrzędne: & Edge    \\ \hline
+Klasy nadrzędne: & CE001 (Edge)    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+	\item getStrokeColorFromScheme 
+	\item getArrowHead
+	\item getInvArrowHead
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
 Priorytet: & ważne  \\ \hline
@@ -901,14 +903,16 @@ Priorytet: & ważne  \\ \hline
 
 CE009 & RangeEdge \\ \hline
 Opis: & Klasa reprezentująca na grafie krawędź łączącą Property z klasą właściwości OWL Range.     \\ \hline
-Klasy nadrzędne: & Edge    \\ \hline
+Klasy nadrzędne: & CE001 (Edge)    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+	\item getStrokeColorFromScheme 
+	\item getArrowHead
+	\item getInvArrowHead
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
 Priorytet: & ważne  \\ \hline
@@ -918,17 +922,50 @@ Priorytet: & ważne  \\ \hline
 
 CE010 & SubEdge \\ \hline
 Opis: & Klasa reprezentująca krawędź związku OWL SubClass pomiędzy klasami.   \\ \hline
-Klasy nadrzędne: & Edge    \\ \hline
+Klasy nadrzędne: & CE001 (Edge)    \\ \hline
 Atrybuty: & %\begin{itemize}
  %\item 
 %\end{itemize}
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & \begin{itemize}
+	\item getInvArrowHead
+\end{itemize}
   \\ \hline
 Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
 Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CE011 & InverseOfMutualEdge \\ \hline
+Opis: & Klasa reprezentująca krawędź oznaczającą wzajemną odwrotność (OWL InverseOf) property. \\ \hline
+Klasy nadrzędne: & CE007 (InverseOfEdge)    \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & 
+  \\ \hline
+Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CE012 & OperationEdge \\ \hline
+Opis: & Krawędź do oznaczania powiązań operacji, w wyniku których powstają klasy anonimowe. \\ \hline
+Klasy nadrzędne: & CE001 (Edge)    \\ \hline
+Atrybuty: & %\begin{itemize}
+ %\item 
+%\end{itemize}
+ \\ \hline
+Metody: & \begin{itemize}
+	\item getArrowHead
+\end{itemize} 
+  \\ \hline
+Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
 
 %\multicolumn{2}{c}{} \\
 % \hline
@@ -959,7 +996,7 @@ Atrybuty: & %\begin{itemize}
 %\end{itemize}
  \\ \hline
 Metody: & \begin{itemize}
- \item render(Graphics2D g, VisualItem item) - metoda renderująca krawędź
+	\item render(Graphics2D g, VisualItem item) - metoda renderująca krawędź	
 \end{itemize}
   \\ \hline
 Realizowane wymagania: & WF001, WF008, WI004 \\ \hline
@@ -976,9 +1013,10 @@ Atrybuty: & %\begin{itemize}
 %\end{itemize}
  \\ \hline
 Metody: & \begin{itemize}
- \item render (Graphics2D g, VisualItem item) - metoda renderująca wierzchołek
-\item drawString(Graphics2D g, FontMetrics fm, String text,
+	\item drawString(Graphics2D g, FontMetrics fm, String text,
             boolean useInt, double x, double y, double w) - metoda wypisujaca na wierzchołku String
+	\item render (Graphics2D g, VisualItem item) - metoda renderująca wierzchołek
+	\item Shape changeShapeToCircle(Shape rectangleShape) - Zamienia domyślny, prostokątny kształt węzła na koło. Koło to ma średnicę równą szerokości lub wysokości węzła (większa z wartości) i środek w tym samym punkcie.
 \end{itemize}
   \\ \hline
 Realizowane wymagania: & WF001, WF008, WI004 \\ \hline
@@ -995,10 +1033,74 @@ Atrybuty: & \begin{itemize}
 \end{itemize}
  \\ \hline
 Metody: & \begin{itemize}
- \item getGraph() - zwarca graf z wyśiwetlanymi danymi
- \item setGraph(Graph graph) - nadpisuje obecny graf podanym
- \item generateGraphFromOWl(OWLOntology ont) - wpisuje do klasy obiekt Grpah wygenrowany na podstawie ontologii
-	 
+	\item generateGraphFromOWl(OWLOntology ont) - wpisuje do klasy obiekt Grpah wygenrowany na podstawie ontologii
+	\item refreshVisualization()
+\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF001, WF002, WF008, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+% \multicolumn{2}{c}{} \\
+%  \hline
+% 
+% CV004 & OVFilter \\ \hline
+% Opis: & Klasa zawierająca filtry służace do wyświetlania danych w różnych zakresach    \\ \hline
+% Klasy nadrzędne: &     \\ \hline
+% Atrybuty: & %\begin{itemize}
+%  %\item 
+% %\end{itemize}
+%  \\ \hline
+% Metody: & %\begin{itemize}
+%  %\item 
+% %\end{itemize}
+%   \\ \hline
+% Realizowane wymagania: & WF001, WF008, WI004 \\ \hline
+% Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CV005 & ForceDirectedVis \\ \hline
+Opis: &  Klasa wizualizujące grafy w oparciu o algorytm ForceDirected   \\ \hline
+Klasy nadrzędne: & CV007 (OVVisualization)   \\ \hline
+Atrybuty: & 
+ \\ \hline
+Metody: & 
+  \\ \hline
+Realizowane wymagania: & WF001, WF002, WF008, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CV006 & OVPredicate \\ \hline
+Opis: &  Klasa zawierająca predykaty filtrowania obiektów w wyswietlanych grafach \\ \hline
+Klasy nadrzędne: &  prefuse.data.expression.AbstractPredicate   \\ \hline
+Atrybuty: & \begin{itemize}
+	\item boolean disjointEdgeFilter
+	\item boolean subEdgeFilter
+\end{itemize}
+ \\ \hline
+Metody: & %\begin{itemize}
+	%\item generateGraphFromOWl(OWLOntology ont) - wpisuje do klasy obiekt Grpah wygenrowany na podstawie ontologii
+	%\item refreshVisualization()
+%\end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF001, WF002, WF008, WI004 \\ \hline
+Priorytet: & ważne  \\ \hline
+
+\multicolumn{2}{c}{} \\
+ \hline
+
+CV007 & OVVisualization \\ \hline
+Opis: &  Klasa obsługi wizualizacji. \\ \hline
+Klasy nadrzędne: &  prefuse.Visualization   \\ \hline
+Atrybuty: & 
+ \\ \hline
+Metody: & \begin{itemize}
+	\item refreshFilter()
+	\item startLayout()
+	\item stopLayout()
 \end{itemize}
   \\ \hline
 Realizowane wymagania: & WF001, WF002, WF008, WI004 \\ \hline
@@ -1007,19 +1109,19 @@ Priorytet: & ważne  \\ \hline
 \multicolumn{2}{c}{} \\
  \hline
 
-CV004 & OVFilter \\ \hline
-Opis: & Klasa zawierająca filtry służace do wyświetlania danych w różnych zakresach    \\ \hline
-Klasy nadrzędne: &     \\ \hline
-Atrybuty: & %\begin{itemize}
- %\item 
-%\end{itemize}
+CV008 & RadialGraphVis \\ \hline
+Opis: &  Klasa wizualizująca graf w oparciu o algorytm RadialGraph \\ \hline
+Klasy nadrzędne: &  CV007 (OVVisualization)   \\ \hline
+Atrybuty: & 
  \\ \hline
-Metody: & %\begin{itemize}
- %\item 
-%\end{itemize}
+Metody: & % \begin{itemize}
+% 	\item refreshFilter()
+% 	\item startLayout()
+% 	\item stopLayout()
+% \end{itemize}
   \\ \hline
-Realizowane wymagania: & WF001, WF008, WI004 \\ \hline
-Priorytet: & ważne  \\ \hline
+Realizowane wymagania: & WF001, WF002, WF008, WI004 \\ \hline
+Priorytet: & średnio ważne  \\ \hline
 
 %\multicolumn{2}{c}{} \\
 % \hline
@@ -1065,12 +1167,22 @@ CG002 & OWLtoGraphConverter \\ \hline
 Opis: & Klasa zawierająca metody pozwalające na przetwarzanie obiektów OWL API na obiekty prefuse. Klasa jest singletonem.\\ \hline
 Klasy nadrzędne: &     \\ \hline
 Atrybuty: & \begin{itemize}
- \item INSTANCE - instancja klasy GraphToOWLConverter 
+	\item INSTANCE - instancja klasy GraphToOWLConverter 
+	\item Table edges
+	\item Table nodes
 \end{itemize}
  \\ \hline
 Metody: & \begin{itemize}
 	\item getInstance() - zwraca instancję klasy
-	\item recursiveSubClassReader(Node parent, OWLClass cls,OWLOntology ontology ) - wczytuje do grafu OWL wszystkie klasy wraz z ich podklasami.
+	\item insertAnonymousNodesAndEdges(OWLOntology ontology,  Graph graph,  Hashtable properties, Hashtable classes, Hashtable individuals)
+	\item insertBaseClasses(OWLOntology ontology,  Graph graph, Node thing, Hashtable classes )
+	\item insertBaseProperties(OWLOntology ontology,  Graph graph,  Hashtable properties)
+	\item insertBaseIndividuals(OWLOntology ontology,  Graph graph,  Hashtable individuals)
+	\item insertBasicEdgesForIndividuals(OWLOntology ontology,  Graph graph, Hashtable individuals,Hashtable classes )
+	\item insertBasicEdgesForClasses(OWLOntology ontology,  Graph graph, Hashtable classes)
+	\item insertBasicEdgesForProperties(OWLOntology ontology,  Graph graph,  Hashtable properties, Hashtable classes)
+	
+	%\item recursiveSubClassReader(Node parent, OWLClass cls,OWLOntology ontology ) - wczytuje do grafu OWL wszystkie klasy wraz z ich podklasami.
  	\item OWLToGraph(OWLOntology ontology) -Zamienia ontologię w OWL API na graf z biblioteki prefuse.
 \end{itemize}
   \\ \hline
@@ -1091,7 +1203,7 @@ Priorytet: & ważne  \\ \hline
 
 \subsection{Diagram}
 
-\includegraphics[width=0.5\linewidth]{./modelowanie/OV_UML/UtilsDiagram.png}
+\includegraphics[width=\linewidth]{./modelowanie/OV_UML/UtilsDiagram.png}
 
 \subsection{Opis klasy}
 
@@ -1104,7 +1216,7 @@ Opis: & Klasa do użycia przy debugowaniu, zapewnia strumien z błędami zwracan
 Klasy nadrzędne: &     \\ \hline
 Atrybuty: & \begin{itemize}
  \item INSTANCE - instacja klasy Debug
- \item Debug - Strumień do którego wpisywane są informacje potrzebne do debugowania
+ \item debugStream - Strumień do którego wpisywane są informacje potrzebne do debugowania
 \end{itemize}
  \\ \hline
 Metody: & \begin{itemize}
@@ -1116,8 +1228,23 @@ Metody: & \begin{itemize}
 Realizowane wymagania: & WF006, WF007, WI004 \\ \hline
 Priorytet: & bardzo ważne  \\ \hline
 
-%\multicolumn{2}{c}{} \\
-% \hline
+\multicolumn{2}{c}{} \\
+ \hline
+ 
+CU002 & VisualizationProperties \\ \hline
+Opis: & Klasa odpowiada za wczytywanie ustawień kolorów dla węzłów oraz krawędzi z wybranego lub domyślnego. \\ \hline
+Klasy nadrzędne: &     \\ \hline
+Atrybuty: & \begin{itemize}
+ \item properties
+\end{itemize}
+ \\ \hline
+Metody: & \begin{itemize}
+ \item loadProperties
+ \end{itemize}
+  \\ \hline
+Realizowane wymagania: & WF002 \\ \hline
+Priorytet: & ważne  \\ \hline 
+ 
 \end{tabular}
 \end{center}
 
