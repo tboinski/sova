@@ -6,24 +6,16 @@ import java.util.Collections;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Set;
-import org.semanticweb.owl.model.OWLClass;
-import org.semanticweb.owl.model.OWLDescription;
-import org.semanticweb.owl.model.OWLOntology;
+import org.eti.kask.sova.nodes.SomeValuesFromPropertyNode;
 import prefuse.data.Edge;
 import prefuse.data.Graph;
 import prefuse.data.Node;
 import org.eti.kask.sova.utils.Debug;
-import org.semanticweb.owl.model.AxiomType;
-import org.semanticweb.owl.model.OWLAxiom;
-import org.semanticweb.owl.model.OWLDisjointClassesAxiom;
-import org.semanticweb.owl.model.OWLEntity;
-import org.semanticweb.owl.model.OWLIndividual;
-import org.semanticweb.owl.model.OWLIndividualAxiom;
-import org.semanticweb.owl.model.OWLLabelAnnotation;
-import org.semanticweb.owl.model.OWLLogicalAxiom;
-import org.semanticweb.owl.model.OWLObjectProperty;
-import org.semanticweb.owl.model.OWLObjectPropertyAssertionAxiom;
-import org.semanticweb.owl.util.OWLAxiomVisitorAdapter;
+
+import org.semanticweb.owl.model.*;
+
+
+import org.semanticweb.owl.util.OWLObjectDuplicator;
 import prefuse.data.Table;
 
 
@@ -34,20 +26,36 @@ public class OWLtoGraphConverter
 {
 
 	private static final OWLtoGraphConverter INSTANCE = new OWLtoGraphConverter();
+        Graph graph;
 
 	private Table edges;
 	private Table nodes;
-        Hashtable< Integer, OWLAxiom> anonymousNodes = new Hashtable<Integer, OWLAxiom>();
+       
+         Hashtable< Integer, OWLAxiom> anonymousNodes;
+        Hashtable<String, Integer> classes;
+        Hashtable<String, Integer> properties;
+        Hashtable<String, Integer> individuals;
 
-
+         Hashtable<String, Integer> dataProperties;
+	 Hashtable<String, Integer> anonyms;
+         Hashtable<String, Integer> someVal;
+         int defaultNumber;
 
 	// Private constructor prevents instantiation from other classes
 	private OWLtoGraphConverter()
 	{
+            Debug.sendMessage("OWLtoGraphConverter constructor call");
+            graph = new Graph();
+            nodes = graph.getNodeTable();
+            edges = graph.getEdgeTable();
+            anonymousNodes = new Hashtable<Integer, OWLAxiom>();
+            classes = new Hashtable<String, Integer>();
+            properties = new Hashtable<String, Integer>();
+            individuals = new Hashtable<String, Integer>();
+            anonyms = new Hashtable<String, Integer>();
+            anonyms.put("dummy", -100);
 	}
-	// <editor-fold defaultstate="collapsed" desc=" UML Marker ">
-	// #[regen=yes,id=DCE.12AC91E1-284B-9651-3544-3BC192F58A3B]
-	// </editor-fold>
+	
 
 	public static OWLtoGraphConverter getInstance()
 	{
@@ -81,8 +89,6 @@ public class OWLtoGraphConverter
 				edges.set(row, "target", n.getRow());
 				edges.set(row, "edge", new org.eti.kask.sova.edges.SubEdge() );
                             }
-
-
                             classes.put( cls.toString(),n.getRow());
                      }
                 }
@@ -98,7 +104,6 @@ public class OWLtoGraphConverter
         private void insertBaseProperties(OWLOntology ontology,  Graph graph,  Hashtable<String, Integer> properties){
              //dodajemy wszystkie definicje property
                  for( OWLObjectProperty property :  ontology.getReferencedObjectProperties()  ){
-
                             Node n = graph.addNode();
                             org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.PropertyNode();
                             node.setLabel(property.toString());
@@ -125,293 +130,320 @@ public class OWLtoGraphConverter
         }
 
 
-        /**
-         * Umieszcza w grafie krawedzie zwiane z individualami
-         * @param ontology
-         * @param graph
-         * @param individuals
-         * @param classes
-         */
-         private void insertBasicEdgesForIndividuals(OWLOntology ontology,  Graph graph, Hashtable<String, Integer> individuals,Hashtable<String, Integer> classes ){
+     
 
-             for( OWLIndividual individual :  ontology.getReferencedIndividuals()  ){
-                    Debug.sendMessage("Axiomy individuala : " +individual.toString());
-                     for(OWLAxiom axiom : ontology.getAxioms(individual)){ //przegladamy axiomy powiazane z dana klasa
-                       Debug.sendMessage(axiom.toString());
-                        if(axiom.getAxiomType() == AxiomType.CLASS_ASSERTION){ //individual jest instacja klasy
+           private int DescriptionHandler( OWLDescription description  ) throws Exception{
+		//ObjectSomeValueFrom
+		if (description instanceof OWLObjectSomeRestriction){
+			//dodaj anonimowe node  - uchwyt do niego powinien byc zwrocony
+			
+			if (anonyms.containsKey(description.toString())){
+                                    System.out.println("ZWROCONO JUZ ISTNIEJACY  anonym" + description.toString() );
+                                    return anonyms.get(description.toString());
+                                
+			}else{
+			//	anonyms.put(description.toString(), description.hashCode());
+				System.out.println("ANONYM NODE DLA " + description.toString() + "dodany" );
+                                Node anonymNode = graph.addNode();
+                                org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.AnonymousClassNode();
+                                anonymNode.set("node", node);
+                                anonyms.put(description.toString(), anonymNode.getRow());
+				//Tworzenie somenode
+                                Node someValNode = graph.addNode();
+				if (((OWLObjectSomeRestriction) description).getProperty() instanceof OWLObjectProperty){
+					//wstaw SomeNode i polacz
 
-                           Set<OWLEntity> entities =  axiom.getReferencedEntities();
+						//someVal.put(((OWLObjectSomeRestriction) description).getProperty().toString(), ((OWLObjectSomeRestriction) description).getProperty().hashCode());
+						System.out.println("SomeVal NODE DLA " + ((OWLObjectSomeRestriction) description).getProperty());
+                                                org.eti.kask.sova.nodes.Node sNode = new org.eti.kask.sova.nodes.SomeValuesFromPropertyNode();
+                                                sNode.setLabel(((OWLObjectSomeRestriction) description).getProperty().toString() );
+                                                someValNode.set("node", sNode);
 
-                           //TODO: sprawdzenie zachowania gdy przegladamy pare w axiomie roznego typu
 
+				}else{
+					//wywolaj rekurencyjnie i poznaj czym jest property
+					//probably will never enter here;
+					throw new Exception("Some values from somethign wired " + ((OWLObjectSomeRestriction) description).getProperty());
 
-                           Object [] arr = entities.toArray();
-                       //    Debug.sendMessage("Subclass entity axiomu " + arr[0].toString());
-                         //  Debug.sendMessage("ma id w graph?: " + classes.get(arr[0].toString()) );
-                        //   Debug.sendMessage("ma id w graph?: " + individuals.get(arr[1].toString()) );
-                           if(classes.get(arr[0].toString()) != null  &&  individuals.get(arr[1].toString()) != null){ //klasa nie jest subklasa anonimowej encji
-                                    int row = edges.addRow();
-                                    edges.set(row, "source", individuals.get(arr[1].toString()));
-                                   edges.set(row, "target", classes.get(arr[0].toString()));
-                                    edges.set(row, "edge", new org.eti.kask.sova.edges.Edge() );
-                           } else if(individuals.get(arr[0].toString()) != null  &&  classes.get(arr[1].toString()) != null){
+				}
+                                System.out.println("EDGE MIEDZY ANONYM I SOMEVAL " + someValNode.getRow() +" " +anonymNode.getRow() );
                                 int row = edges.addRow();
-                                    edges.set(row, "source", classes.get(arr[1].toString()));
-                                   edges.set(row, "target", individuals.get(arr[0].toString()));
-                                    edges.set(row, "edge", new org.eti.kask.sova.edges.Edge() );
+				edges.set(row, "source", anonymNode.getRow());
+				edges.set(row, "target", someValNode.getRow());
+				edges.set(row, "edge", new org.eti.kask.sova.edges.PropertyEdge());
+
+				//tworzenie wynikowego node
+                                int targetId=0;
+				if(((OWLObjectSomeRestriction) description).getFiller() instanceof OWLClass ){
+					//pobierz  drugie node z z klas
+					System.out.println("Some val from klass " +((OWLObjectSomeRestriction) description).getFiller() /* + " " + classes.get(((OWLObjectSomeRestriction) description).getFiller().toString() ) */ );
+                                        targetId = classes.get( ( (OWLClass)(((OWLObjectSomeRestriction) description).getFiller())).toString());
+				}else {
+					//to cos bardziej skomplikowanego niz klasa lzu individual
+					System.out.println("More complicated");
+        				targetId =DescriptionHandler(((OWLObjectSomeRestriction) description).getFiller());
+				}
+				//polacz edgami i ogolnie upenij sie za bangla
+                                int row2 = edges.addRow();
+                                edges.set(row2, "source",  someValNode.getRow());
+				edges.set(row2, "target", targetId);
+				edges.set(row2, "edge", new org.eti.kask.sova.edges.PropertyEdge());
+
+                                return anonymNode.getRow();
+                            }
+
+                }else if (description instanceof OWLObjectAllRestriction){
+
+                        if (anonyms.containsKey(description.toString())){
+                                    System.out.println("ZWROCONO JUZ ISTNIEJACY  anonym" + description.toString() );
+                                    return anonyms.get(description.toString());
+
+			}else{
+			//	anonyms.put(description.toString(), description.hashCode());
+				System.out.println("ANONYM NODE DLA " + description.toString() + "dodany" );
+                                Node anonymNode = graph.addNode();
+                                org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.AnonymousClassNode();
+                                anonymNode.set("node", node);
+                                anonyms.put(description.toString(), anonymNode.getRow());
+				//Tworzenie somenode
+                                Node allValNode = graph.addNode();
+				if (((OWLObjectAllRestriction) description).getProperty() instanceof OWLObjectProperty){
+					//wstaw SomeNode i polacz
+
+						//someVal.put(((OWLObjectSomeRestriction) description).getProperty().toString(), ((OWLObjectSomeRestriction) description).getProperty().hashCode());
+						System.out.println("SomeVal NODE DLA " + ((OWLObjectAllRestriction) description).getProperty());
+                                                org.eti.kask.sova.nodes.Node sNode = new org.eti.kask.sova.nodes.AllValuesFromPropertyNode();
+                                                sNode.setLabel(((OWLObjectAllRestriction) description).getProperty().toString() );
+                                                allValNode.set("node", sNode);
+
+
+				}else{
+					//wywolaj rekurencyjnie i poznaj czym jest property
+					//probably will never enter here;
+					throw new Exception("All values from somethign wired " + ((OWLObjectAllRestriction) description).getProperty());
+
+				}
+                                System.out.println("EDGE MIEDZY ANONYM I ALLVAL " + allValNode.getRow() +" " +anonymNode.getRow() );
+                                int row = edges.addRow();
+				edges.set(row, "source", anonymNode.getRow());
+				edges.set(row, "target", allValNode.getRow());
+				edges.set(row, "edge", new org.eti.kask.sova.edges.PropertyEdge());
+
+				//tworzenie wynikowego node
+                                int targetId=0;
+				if(((OWLObjectAllRestriction) description).getFiller() instanceof OWLClass ){
+					//pobierz  drugie node z z klas
+					System.out.println("ALl val from klass " +((OWLObjectAllRestriction) description).getFiller() /* + " " + classes.get(((OWLObjectSomeRestriction) description).getFiller().toString() ) */ );
+                                        targetId = classes.get( ( (OWLClass)(((OWLObjectAllRestriction) description).getFiller())).toString());
+				}else {
+					//to cos bardziej skomplikowanego niz klasa lzu individual
+					System.out.println("More complicated");
+        				targetId =DescriptionHandler(((OWLObjectAllRestriction) description).getFiller());
+				}
+				//polacz edgami i ogolnie upenij sie za bangla
+                                if(targetId!=-1){
+                                    int row2 = edges.addRow();
+                                    edges.set(row2, "source",  allValNode.getRow());
+                                    edges.set(row2, "target", targetId);
+                                    edges.set(row2, "edge", new org.eti.kask.sova.edges.PropertyEdge());
+
+                                    return anonymNode.getRow();
+                                }
+                            }
+
+		}else if (description instanceof OWLObjectValueRestriction){
+
+			System.out.println("HAS VALUE" +description );
+                        if (anonyms.containsKey(description.toString())){
+                                    System.out.println("ZWROCONO JUZ ISTNIEJACY  anonym" + description.toString() );
+                                    return anonyms.get(description.toString());
+
+			}else{
+                                System.out.println("ANONYM NODE DLA " + description.toString() + "dodany" );
+                                Node anonymNode = graph.addNode();
+                                org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.AnonymousClassNode();
+                                anonymNode.set("node", node);
+                                anonyms.put(description.toString(), anonymNode.getRow());
+				//Tworzenie somenode
+                                Node allValNode = graph.addNode();
+
+                                if (((OWLObjectValueRestriction) description).getProperty() instanceof OWLObjectProperty){
+				//wstaw has val Node i polacz
+
+					//someVal.put(((OWLObjectSomeRestriction) description).getProperty().toString(), ((OWLObjectSomeRestriction) description).getProperty().hashCode());
+					System.out.println("has Val NODE DLA " + ((OWLObjectValueRestriction) description).getProperty());
+                                        org.eti.kask.sova.nodes.Node sNode = new org.eti.kask.sova.nodes.AllValuesFromPropertyNode();
+                                        sNode.setLabel(((OWLObjectValueRestriction) description).getProperty().toString() );
+                                        allValNode.set("node", sNode);
+
+
+                                }else{
+				//wywolaj rekurencyjnie i poznaj czym jest property
+				//probably will never enter here;
+				throw new Exception("HAS values  somethign wired " + ((OWLObjectValueRestriction) description).getProperty());
+
+                                }
+                                System.out.println("EDGE MIEDZY ANONYM I ALLVAL " + allValNode.getRow() +" " +anonymNode.getRow() );
+                                int row = edges.addRow();
+				edges.set(row, "source", anonymNode.getRow());
+				edges.set(row, "target", allValNode.getRow());
+				edges.set(row, "edge", new org.eti.kask.sova.edges.PropertyEdge());
+
+
+                                  int row2 = edges.addRow();
+                                  edges.set(row2, "source",  allValNode.getRow());
+                                  edges.set(row2, "target", individuals.get(((OWLObjectValueRestriction) description).getValue().toString()));
+                                  edges.set(row2, "edge", new org.eti.kask.sova.edges.PropertyEdge());
+                                  System.out.println("has Val INDIVIDUAL " + ((OWLObjectValueRestriction) description).getValue());
+                                  return anonymNode.getRow();
+
+
+                      }
+		}else if (description instanceof OWLObjectIntersectionOf){
+
+			System.out.println("INTERSECTION " + ((OWLObjectIntersectionOf) description).toString());
+			//wstaw anonym dla tej intersekcji
+                           if (anonyms.containsKey(description.toString())){
+                                    System.out.println("ZWROCONO JUZ ISTNIEJACY  anonym" + description.toString() );
+                                    return anonyms.get(description.toString());
+
+			}else{
+                                System.out.println("ANONYM NODE DLA " + description.toString() + " dodany" );
+                                Node anonymNode = graph.addNode();
+                                org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.IntersectionOfNode();
+                                anonymNode.set("node", node);
+                                anonyms.put(description.toString(), anonymNode.getRow());
+			//podczep do niego skladowe
+                            for(OWLDescription d :((OWLObjectIntersectionOf) description).getOperands() ){
+				if(d instanceof OWLClass){
+					System.out.println("Skaldowa klasa intersekcji " + d.toString()   );
+                                        int clsNodeID = classes.get(d.toString());
+                                         int row = edges.addRow();
+                                        edges.set(row, "source", clsNodeID);
+                                        edges.set(row, "target",  anonymNode.getRow());
+                                        edges.set(row, "edge", new org.eti.kask.sova.edges.OperationEdge());
+
+
+				}else{
+					System.out.println("Skompikowa skladow INtersekcji" + d.toString());
+					int nodeID = DescriptionHandler(d);
+                                        int row = edges.addRow();
+                                        edges.set(row, "source", nodeID );
+                                        edges.set(row, "target", anonymNode.getRow());
+                                        edges.set(row, "edge", new org.eti.kask.sova.edges.OperationEdge());
+				}
+
+                            }
+
+                            return anonymNode.getRow();
+                        }
+		}else if(description instanceof OWLObjectUnionOf){
+
+			System.out.println("UNIA " + ((OWLObjectUnionOf) description).toString());
+
+                           if (anonyms.containsKey(description.toString())){
+                                    System.out.println("ZWROCONO JUZ ISTNIEJACY  anonym" + description.toString() );
+                                    return anonyms.get(description.toString());
+
+			}else{
+                            	//wstaw anonym dla tej unii
+                             System.out.println("ANONYM NODE DLA " + description.toString() + " dodany" );
+                                Node anonymNode = graph.addNode();
+                                org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.UnionOfNode();
+                                anonymNode.set("node", node);
+                                anonyms.put(description.toString(), anonymNode.getRow());
+			//podczep do niego skladowe
+			for(OWLDescription d :((OWLObjectUnionOf) description).getOperands() ){
+				if(d instanceof OWLClass){
+                                    System.out.println("Klasa w UNII" + d.toString());
+					int clsNodeID = classes.get(d.toString());
+                                         int row = edges.addRow();
+                                        edges.set(row, "source", clsNodeID);
+                                        edges.set(row, "target", anonymNode.getRow());
+                                        edges.set(row, "edge", new org.eti.kask.sova.edges.OperationEdge());
+				}else{
+					System.out.println("Skompikowa skladow UNII" + d.toString());
+					int nodeID = DescriptionHandler(d);
+                                        int row = edges.addRow();
+                                        edges.set(row, "source", nodeID);
+                                        edges.set(row, "target", anonymNode.getRow());
+                                        edges.set(row, "edge", new org.eti.kask.sova.edges.OperationEdge());
+				}
+
+			}
+                        return anonymNode.getRow();
+                        
+                        }
+		}else if(description instanceof OWLObjectComplementOf){
+                        System.out.println("KOMPLEMENTARNE " + ((OWLObjectComplementOf) description).toString());
+
+                           if (anonyms.containsKey(description.toString())){
+                                    System.out.println("ZWROCONO JUZ ISTNIEJACY  anonym" + description.toString() );
+                                    return anonyms.get(description.toString());
+
+			}else{
+
+                              System.out.println("ANONYM NODE DLA " + description.toString() + " dodany" );
+                                Node anonymNode = graph.addNode();
+                                org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.ComplementOfNode();
+                                anonymNode.set("node", node);
+                                anonyms.put(description.toString(), anonymNode.getRow());
+
+                            System.out.println("OPERAND " + ((OWLObjectComplementOf)description ).getOperand());
+                            int complID =0 ;
+
+                              if( ((OWLObjectComplementOf)description).getOperand() instanceof OWLClass){
+                                 complID = classes.get(((OWLObjectComplementOf)description).getOperand().toString());
+                              }else{
+                                complID = DescriptionHandler(((OWLObjectComplementOf)description).getOperand());
+                              }
+
+                             int row = edges.addRow();
+                             edges.set(row, "source", complID);
+                             edges.set(row, "target", anonymNode.getRow());
+                             edges.set(row, "edge", new org.eti.kask.sova.edges.OperationEdge());
+
+                             return anonymNode.getRow();
 
                         }
 
-                       } else if(axiom.getAxiomType() == AxiomType.DIFFERENT_INDIVIDUALS){
-                           //TODO: diffrent individuals
-                            Debug.sendMessage(axiom.toString() + " hash: " + axiom.hashCode() );
+                }else if (description instanceof OWLObjectOneOf){
+                        if (anonyms.containsKey(description.toString())){
+                                    System.out.println("ZWROCONO JUZ ISTNIEJACY  anonym" + description.toString() );
+                                    return anonyms.get(description.toString());
 
-                            anonymousNodes.put(axiom.hashCode(), axiom);
+			}else{
 
+                              System.out.println("ANONYM NODE DLA " + description.toString() + " dodany" );
+                                Node anonymNode = graph.addNode();
+                                org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.OneOfNode();
+                                anonymNode.set("node", node);
+                                anonyms.put(description.toString(), anonymNode.getRow());
+                                for ( OWLIndividual ind: ((OWLObjectOneOf)description).getIndividuals()){
+                                  int id = individuals.get(ind.toString());
+                                   int row = edges.addRow();
+				edges.set(row, "source", id);
+				edges.set(row, "target", anonymNode.getRow());
+				edges.set(row, "edge", new org.eti.kask.sova.edges.OperationEdge());
 
-                           
-                       }
+                              }
 
-                    }
-             }
+                             return anonymNode.getRow();
+                        }
+                }else if(description instanceof OWLObjectMinCardinalityRestriction){
+                    //((OWLObjectMinCardinalityRestriction) description).
 
+                }else if(description instanceof OWLObjectMaxCardinalityRestriction){
 
-       }
+                }else if(description instanceof OWLObjectExactCardinalityRestriction){
 
-        /**
-         * Umieszcza w grafie krawędzie łączące klasy typów : Subclass, disjoint, equivalent
-         * @param ontology
-         * @param graph
-         * @param classes
-         */
-        private void insertBasicEdgesForClasses(OWLOntology ontology,  Graph graph, Hashtable<String, Integer> classes){
-
-               //majac wszystkie klasy reprezentowane na grafie dodajemy krawedzie miedzy nimi wedlug podanych axiomow
-                 for(OWLClass cls : ontology.getReferencedClasses()){
-                   Debug.sendMessage("\n Axiomy klasy:" +cls.toString());
-                     for(OWLAxiom axiom : ontology.getAxioms(cls)){ //przegladamy axiomy powiazane z dana klasa
-                       Debug.sendMessage(axiom.toString());
-                       if(axiom.getAxiomType() == AxiomType.SUBCLASS){
-
-                           Set<OWLEntity> entities =  axiom.getReferencedEntities();
-                           Object [] arr = entities.toArray();
-                    //       Debug.sendMessage("Subclass entity axiomu " + arr[0].toString());
-                    //       Debug.sendMessage("ma id w graph?: " + classes.get(arr[0].toString()) );
-                    //       Debug.sendMessage("ma id w graph?: " + classes.get(arr[1].toString()) );
-                           if(classes.get(arr[0].toString()) != null  &&  classes.get(arr[1].toString()) != null){ //klasa nie jest subklasa anonimowej encji
-                                    int row = edges.addRow();
-                                    edges.set(row, "source", classes.get(arr[1].toString()));
-                                   edges.set(row, "target", classes.get(arr[0].toString()));
-                                    edges.set(row, "edge", new org.eti.kask.sova.edges.SubEdge() );
-                           }
-
-                       } else if(axiom.getAxiomType() == AxiomType.DISJOINT_CLASSES){
-
-                           Set<OWLEntity> entities =  axiom.getReferencedEntities();
-                           Object [] arr = entities.toArray();
-                      //     Debug.sendMessage("SDisjoint entity axiomu " + arr[0].toString());
-                      ///     Debug.sendMessage("ma id w graph?: " + classes.get(arr[0].toString()) );
-                      //     Debug.sendMessage("ma id w graph?: " + classes.get(arr[1].toString()) );
-                           if(classes.get(arr[0].toString()) != null  &&  classes.get(arr[1].toString()) != null){ //klasa nie jest disjoint z anonimowa encja
-                                    int row = edges.addRow();
-                                    edges.set(row, "source", classes.get(arr[1].toString()));
-                                   edges.set(row, "target", classes.get(arr[0].toString()));
-                                    edges.set(row, "edge", new org.eti.kask.sova.edges.DisjointEdge() );
-                           }
-                       } else if (axiom.getAxiomType() == AxiomType.EQUIVALENT_CLASSES){
-                            Set<OWLEntity> entities =  axiom.getReferencedEntities();
-                           Object [] arr = entities.toArray();
-                      //     Debug.sendMessage("SDisjoint entity axiomu " + arr[0].toString());
-                      //     Debug.sendMessage("ma id w graph?: " + classes.get(arr[0].toString()) );
-                      //     Debug.sendMessage("ma id w graph?: " + classes.get(arr[1].toString()) );
-                           if(classes.get(arr[0].toString()) != null  &&  classes.get(arr[1].toString()) != null){ //klasa nie jest equivalent z anonimowa encja
-                                    int row = edges.addRow();
-                                    edges.set(row, "source", classes.get(arr[1].toString()));
-                                    edges.set(row, "target", classes.get(arr[0].toString()));
-                                    edges.set(row, "edge", new org.eti.kask.sova.edges.EquivalentEdge() );
-                           }
+                }else {
+			System.out.println("DESCUNHANLED: " + description);
+		}
 
 
-                       }
-
-                     }
-
-                }
-
-
-
-        }
-
-        /**
-         * Umieszcza w grafie krawędzie łączące property i klasy typów : inverse property, range, domain
-         * @param ontology
-         * @param graph
-         * @param properties
-         * @param classes
-         */
-        private void insertBasicEdgesForProperties(OWLOntology ontology,  Graph graph,  Hashtable<String, Integer> properties, Hashtable<String, Integer> classes){
-
-             for( OWLObjectProperty property :  ontology.getReferencedObjectProperties()  ){
-                 Debug.sendMessage("Axiomy property:" +property.toString());
-                     for(OWLAxiom axiom : ontology.getAxioms(property)){ //przegladamy axiomy powiazane z dana klasa
-                       Debug.sendMessage(axiom.toString());
-                       if(axiom.getAxiomType() == AxiomType.INVERSE_OBJECT_PROPERTIES ){
-                           
-                            Set<OWLEntity> entities =  axiom.getReferencedEntities();
-                           Object [] arr = entities.toArray();
-                           Debug.sendMessage("inverse properties entity axiomu " + arr[0].toString());
-                           Debug.sendMessage("ma id w graph?: " + properties.get(arr[0].toString()) );
-                           Debug.sendMessage("ma id w graph?: " + properties.get(arr[1].toString()) );
-                           if(properties.get(arr[0].toString()) != null  &&  properties.get(arr[1].toString()) != null){ //klasa nie jest equivalent z anonimowa encja
-                                    int row = edges.addRow();
-                                    edges.set(row, "source", properties.get(arr[1].toString()));
-                                    edges.set(row, "target", properties.get(arr[0].toString()));
-                                    edges.set(row, "edge", new org.eti.kask.sova.edges.InverseOfEdge() );
-                           }
-                           
-                       }else if(axiom.getAxiomType() == AxiomType.SUB_OBJECT_PROPERTY ){
-
-                            Set<OWLEntity> entities =  axiom.getReferencedEntities();
-                           Object [] arr = entities.toArray();
-                           Debug.sendMessage("sub_property properties entity axiomu " + arr[0].toString());
-                           Debug.sendMessage("ma id w graph?: " + properties.get(arr[0].toString()) );
-                           Debug.sendMessage("ma id w graph?: " + properties.get(arr[1].toString()) );
-                           if(properties.get(arr[0].toString()) != null  &&  classes.get(arr[1].toString()) != null){ //klasa nie jest equivalent z anonimowa encja
-                                    int row = edges.addRow();
-                                    edges.set(row, "source", classes.get(arr[1].toString()));
-                                    edges.set(row, "target", properties.get(arr[0].toString()));
-                                    edges.set(row, "edge", new org.eti.kask.sova.edges.SubEdge() );
-                           }
-
-                       }else if(axiom.getAxiomType() == AxiomType.OBJECT_PROPERTY_RANGE ){
-                           
-                            Set<OWLEntity> entities =  axiom.getReferencedEntities();
-                           Object [] arr = entities.toArray();
-                           Debug.sendMessage("range properties entity axiomu " + arr[0].toString());
-                           Debug.sendMessage("ma id w graph?: " + properties.get(arr[0].toString()) );
-                           Debug.sendMessage("ma id w graph?: " + classes.get(arr[1].toString()) );
-                           if(properties.get(arr[0].toString()) != null  &&  classes.get(arr[1].toString()) != null){ //klasa nie jest equivalent z anonimowa encja
-                                    int row = edges.addRow();
-                                    edges.set(row, "source", classes.get(arr[1].toString()));
-                                    edges.set(row, "target", properties.get(arr[0].toString()));
-                                    edges.set(row, "edge", new org.eti.kask.sova.edges.RangeEdge() );
-                           }
-
-                       }else if(axiom.getAxiomType() == AxiomType.OBJECT_PROPERTY_DOMAIN ){
-
-                            Set<OWLEntity> entities =  axiom.getReferencedEntities();
-                           Object [] arr = entities.toArray();
-                           Debug.sendMessage("domain properties entity axiomu " + arr[0].toString());
-                           Debug.sendMessage("ma id w graph?: " + properties.get(arr[0].toString()) );
-                           Debug.sendMessage("ma id w graph?: " + classes.get(arr[1].toString()) );
-                           if(properties.get(arr[0].toString()) != null  &&  classes.get(arr[1].toString()) != null){ //klasa nie jest equivalent z anonimowa encja
-                                    int row = edges.addRow();
-                                    edges.set(row, "source", classes.get(arr[1].toString()));
-                                    edges.set(row, "target", properties.get(arr[0].toString()));
-                                    edges.set(row, "edge", new org.eti.kask.sova.edges.DomainEdge() );
-                           }
-                       }else if(axiom.getAxiomType() == AxiomType.TRANSITIVE_OBJECT_PROPERTY){
-                             Debug.sendMessage("transitive " + axiom.toString() + " hash: " + axiom.hashCode() );
-
-                            anonymousNodes.put(axiom.hashCode(), axiom);
-                       }else if(axiom.getAxiomType() == AxiomType.SYMMETRIC_OBJECT_PROPERTY){
-                             Debug.sendMessage("symmetric " + axiom.toString() + " hash: " + axiom.hashCode() );
-
-                            anonymousNodes.put(axiom.hashCode(), axiom);
-                       }else if(axiom.getAxiomType() == AxiomType.INVERSE_FUNCTIONAL_OBJECT_PROPERTY){
-                             Debug.sendMessage("inverse functional "+ axiom.toString() + " hash: " + axiom.hashCode() );
-
-                            anonymousNodes.put(axiom.hashCode(), axiom);
-                            
-                       }else if(axiom.getAxiomType() == AxiomType.FUNCTIONAL_OBJECT_PROPERTY){
-                             Debug.sendMessage("functional " + axiom.toString() + " hash: " + axiom.hashCode() );
-
-                            anonymousNodes.put(axiom.hashCode(), axiom);
-                       }
-
-
-             }
-             }
-
-        }
-
-        private void insertAnonymousNodesAndEdges(OWLOntology ontology,  Graph graph,  Hashtable<String, Integer> properties, Hashtable<String, Integer> classes, Hashtable<String, Integer> individuals){
-
-
-            for (OWLAxiom axiom : anonymousNodes.values()  ){
-                Debug.sendMessage(axiom.toString());
-                if(axiom.getAxiomType() == AxiomType.DIFFERENT_INDIVIDUALS ){
-                    Node anonymous = graph.addNode();
-                    org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.DifferentNode();
-                    anonymous.set( "node", node );
-                    Set<OWLEntity> entities =  axiom.getReferencedEntities();
-                    Object [] arr = entities.toArray();
-                    for(int i=0; i<arr.length; i++){
-                        int row = edges.addRow();
-                        edges.set(row, "source", anonymous.getRow());
-                        edges.set(row, "target", individuals.get(arr[i].toString()));
-                        edges.set(row, "edge", new org.eti.kask.sova.edges.Edge() );
-                    }
-
-                }else  if(axiom.getAxiomType() == AxiomType.TRANSITIVE_OBJECT_PROPERTY ){
-                    Node anonymous = graph.addNode();
-                    org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.TransitivePropertyNode();
-                    anonymous.set( "node", node );
-                    Set<OWLEntity> entities =  axiom.getReferencedEntities();
-                    Object [] arr = entities.toArray();
-
-                        int row = edges.addRow();
-                        edges.set(row, "source", anonymous.getRow());
-                        edges.set(row, "target", properties.get(arr[0].toString()));
-                        edges.set(row, "edge", new org.eti.kask.sova.edges.Edge() );
-
-
-                }else  if(axiom.getAxiomType() == AxiomType.SYMMETRIC_OBJECT_PROPERTY ){
-                    Node anonymous = graph.addNode();
-                    org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.SymmetricPropertyNode();
-                    anonymous.set( "node", node );
-                    Set<OWLEntity> entities =  axiom.getReferencedEntities();
-                    Object [] arr = entities.toArray();
-
-                        int row = edges.addRow();
-                        edges.set(row, "source", anonymous.getRow());
-                         edges.set(row, "target", properties.get(arr[0].toString()));
-                        edges.set(row, "edge", new org.eti.kask.sova.edges.Edge() );
-
-
-                }else  if(axiom.getAxiomType() == AxiomType.FUNCTIONAL_OBJECT_PROPERTY ){
-                    Node anonymous = graph.addNode();
-                    org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.FunctionalPropertyNode();
-                    anonymous.set( "node", node );
-                    Set<OWLEntity> entities =  axiom.getReferencedEntities();
-                    Object [] arr = entities.toArray();
-
-                        int row = edges.addRow();
-                        edges.set(row, "source", anonymous.getRow());
-                           edges.set(row, "target", properties.get(arr[0].toString()));
-                        edges.set(row, "edge", new org.eti.kask.sova.edges.Edge() );
-
-
-                }else  if(axiom.getAxiomType() == AxiomType.INVERSE_FUNCTIONAL_OBJECT_PROPERTY ){
-                    Node anonymous = graph.addNode();
-                    org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.InverseFunctionalPropertyNode();
-                    anonymous.set( "node", node );
-                    Set<OWLEntity> entities =  axiom.getReferencedEntities();
-                    Object [] arr = entities.toArray();
-
-                        int row = edges.addRow();
-                        edges.set(row, "source", anonymous.getRow());
-                           edges.set(row, "target", properties.get(arr[0].toString()));
-                        edges.set(row, "edge", new org.eti.kask.sova.edges.Edge() );
-
-
-                }
-
-
-            }
-
-
-        }
+                return defaultNumber;
+	}
 
         /**
          * Metoda zamiany obiektu OWLOntology na obiekt graph biblioteki prefuse.
@@ -419,35 +451,340 @@ public class OWLtoGraphConverter
          * @param ontology
          * @return Graph - graf prefuse
          */
-        public Graph OWLtoGraph(OWLOntology ontology){
-            Graph graph = new Graph();
-            nodes = graph.getNodeTable();
-	    graph.addColumn( "node", org.eti.kask.sova.nodes.Node.class );
+        public Graph OWLtoGraph(OWLOntology ontology) throws Exception{
+           
+	         graph.addColumn( "node", org.eti.kask.sova.nodes.Node.class );
 
 		// Dodajemy węzeł Thing
 		Node thing = graph.addNode();
 		org.eti.kask.sova.nodes.Node t = new org.eti.kask.sova.nodes.ThingNode();
 
 		thing.set( "node", t );
-
-		edges = graph.getEdgeTable();
+                defaultNumber = thing.getRow();
+                
 		edges.addColumn("edge", org.eti.kask.sova.edges.Edge.class);
 
                 for(OWLAxiom ax : ontology.getAxioms()){
                    Debug.sendMessage(ax.toString());
                 }
 
-                Hashtable<String, Integer> classes = new Hashtable<String, Integer>();
-                Hashtable<String, Integer> properties = new Hashtable<String, Integer>();
-                Hashtable<String, Integer> individuals = new Hashtable<String, Integer>();
+              
                 this.insertBaseClasses(ontology, graph, thing, classes);
-                this.insertBasicEdgesForClasses(ontology, graph, classes);
                 this.insertBaseProperties(ontology, graph, properties);
-                this.insertBasicEdgesForProperties(ontology, graph, properties, classes);
                 this.insertBaseIndividuals(ontology, graph, individuals);
-                this.insertBasicEdgesForIndividuals(ontology, graph, individuals, classes);
-                this.insertAnonymousNodesAndEdges(ontology, graph, properties, classes, individuals);
 
+
+               /*   Node n = graph.addNode();
+                            org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.ClassNode();
+                            node.setLabel(cls.toString());
+                            n.set("node", node);
+
+                            if( cls.getSuperClasses(ontology).isEmpty() == true ){ //thing jest superklasa
+                                int row = edges.addRow();
+				edges.set(row, "source", thing.getRow());
+				edges.set(row, "target", n.getRow());
+				edges.set(row, "edge", new org.eti.kask.sova.edges.SubEdge() );
+                            }*/
+	         for(OWLAxiom axiom : ontology.getAxioms()){
+
+             	  if (axiom instanceof OWLSubClassAxiom   ){
+              		System.out.println("OWLCLASSAXIOM : " + axiom.toString());
+              		   int subClassID = 0;
+                           int superClassID = 0;
+                         //budowanie edge
+              		  //uchwyty miedzy  edgem to ((OWLSubClassAxiom) axiom).getSubClass()   i(OWLSubClassAxiom) axiom).getSuperClass()
+              		   if (((OWLSubClassAxiom) axiom).getSubClass()  instanceof OWLClass ){
+              			   System.out.println("Subklasa:  " + ((OWLSubClassAxiom) axiom).getSubClass());
+                                   subClassID = classes.get(((OWLSubClassAxiom) axiom).getSubClass().toString());
+
+              			   //wez z hashtable uchwyt  subklasy
+              		   } else {
+
+              			   //pobierz z handlera uchwyt do wierzcholka
+              			   subClassID = DescriptionHandler(((OWLSubClassAxiom) axiom).getSubClass());
+              		   }
+
+              		   if(((OWLSubClassAxiom) axiom).getSuperClass() instanceof OWLClass && !((OWLSubClassAxiom) axiom).getSuperClass().isOWLThing()  ){
+              			   System.out.println("Superklasa: " + ((OWLSubClassAxiom) axiom).getSuperClass());
+              			   //wez z hashtable uchwyt taty
+                                   superClassID = classes.get(((OWLSubClassAxiom) axiom).getSuperClass().toString());
+              		   }else{
+
+              			   superClassID = DescriptionHandler(((OWLSubClassAxiom) axiom).getSuperClass());
+              		   }
+              		    //dodaj edge
+                           if(superClassID > 0 && subClassID > 0){
+                                int row = edges.addRow();
+				edges.set(row, "source", superClassID);
+				edges.set(row, "target", subClassID);
+				edges.set(row, "edge", new org.eti.kask.sova.edges.SubEdge());
+                           }
+                            
+
+
+              	 }else if (axiom instanceof OWLDisjointClassesAxiom){
+              		  //wstaw krawedz disjoint
+
+              		System.out.println("DISJOINT AXIOM: " +  ((OWLDisjointClassesAxiom) axiom).toString());
+                        int id1=0,  id2=0, i=0;
+              		for ( OWLDescription d: ((OWLDisjointClassesAxiom) axiom).getDescriptions() ){
+              			if (d instanceof OWLClass){
+              				//normalnie
+              				if(i==0){
+                                            id1= classes.get(d.toString());
+                                        }else{
+                                            id2=classes.get(d.toString());
+                                        }
+              			}else {
+                                    if(i==0){
+              				id1=DescriptionHandler(d);
+                                    }else{
+                                        id2=DescriptionHandler(d);
+                                    }
+              			}
+                                i++;
+              		}
+                           if(id1 > 0 && id2 > 0){
+                                int row = edges.addRow();
+				edges.set(row, "source", id1);
+				edges.set(row, "target", id2);
+				edges.set(row, "edge", new org.eti.kask.sova.edges.DisjointEdge());
+                           }
+
+
+              	    }else if(axiom instanceof OWLEquivalentClassesAxiom){
+
+              		System.out.println("EQUIV AXIOM: " +  ((OWLEquivalentClassesAxiom) axiom).toString());
+                        int id1=0, id2=0, i=0;
+              		for ( OWLDescription d: ((OWLEquivalentClassesAxiom) axiom).getDescriptions() ){
+              			if (d instanceof OWLClass){
+              				//normalnie
+                                     if(i==0){
+                                            id1= classes.get(d.toString());
+                                        }else{
+                                            id2=classes.get(d.toString());
+                                        }
+              				System.out.println("EQUIV skladowa klasa : " + d.toString() );
+              			}else {
+              				System.out.println("EQUIV skladowa skomplikowana : " + d.toString());
+              				 if(i==0){
+              				id1=DescriptionHandler(d);
+                                    }else{
+                                        id2=DescriptionHandler(d);
+                                    }
+
+              			}
+                                i++;
+              		}
+
+                           if(id1 > 0 && id2 > 0){
+                                int row = edges.addRow();
+				edges.set(row, "source", id1);
+				edges.set(row, "target", id2);
+				edges.set(row, "edge", new org.eti.kask.sova.edges.DisjointEdge());
+                           }
+
+              	  }else if (axiom instanceof OWLObjectPropertyRangeAxiom){
+
+                      int id1 = properties.get(((OWLObjectPropertyRangeAxiom)axiom).getProperty().toString());
+
+                      int id2=0;
+                      if(((OWLObjectPropertyRangeAxiom)axiom).getRange() instanceof OWLClass){
+                          id2 = classes.get(((OWLObjectPropertyRangeAxiom)axiom).getRange().toString());
+                      }else{
+                          id2 = DescriptionHandler(((OWLObjectPropertyRangeAxiom)axiom).getRange());
+                      }
+
+
+                       if(id1 > 0 && id2 > 0){
+                        int row = edges.addRow();
+				edges.set(row, "source", id1);
+				edges.set(row, "target", id2);
+				edges.set(row, "edge", new org.eti.kask.sova.edges.RangeEdge());
+                       }
+                  }else if(axiom instanceof OWLObjectPropertyDomainAxiom ){
+                     int id1 = properties.get(((OWLObjectPropertyDomainAxiom)axiom).getProperty().toString());
+
+                      int id2=0;
+                      if(((OWLObjectPropertyDomainAxiom)axiom).getDomain() instanceof OWLClass){
+                          id2 = classes.get(((OWLObjectPropertyDomainAxiom)axiom).getDomain().toString());
+                      }else{
+                          id2 = DescriptionHandler(((OWLObjectPropertyDomainAxiom)axiom).getDomain());
+                      }
+
+
+                       if(id1 > 0 && id2 > 0){
+                        int row = edges.addRow();
+				edges.set(row, "source", id1);
+				edges.set(row, "target", id2);
+				edges.set(row, "edge", new org.eti.kask.sova.edges.DomainEdge());
+                       }
+
+                  }else if (axiom instanceof OWLClassAssertionAxiom){
+                      int id1 = individuals.get(((OWLClassAssertionAxiom)axiom).getIndividual().toString());
+
+                      int id2 =0;
+                      if(!((OWLClassAssertionAxiom)axiom).getDescription().isOWLThing()){
+                        if(((OWLClassAssertionAxiom)axiom).getDescription() instanceof OWLClass){
+                              id2 = classes.get(((OWLClassAssertionAxiom)axiom).getDescription().toString());
+
+                        }else{
+                              id2 = DescriptionHandler(((OWLClassAssertionAxiom)axiom).getDescription());
+                        }
+                        if(id1 > 0 && id2 > 0){
+                            int row = edges.addRow();
+				edges.set(row, "source", id1);
+				edges.set(row, "target", id2);
+				edges.set(row, "edge", new org.eti.kask.sova.edges.Edge());
+                        }
+                      }
+
+                  }else if(axiom instanceof OWLDifferentIndividualsAxiom){
+
+                           System.out.println("DIFFRENT NODE " + axiom.toString() + " dodany" );
+                                Node anonymNode = graph.addNode();
+                                org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.DifferentNode();
+                                anonymNode.set("node", node);
+
+                              for ( OWLIndividual ind: ((OWLDifferentIndividualsAxiom)axiom).getIndividuals()){
+                                  int id = individuals.get(ind.toString());
+                                   int row = edges.addRow();
+				edges.set(row, "source", id);
+				edges.set(row, "target", anonymNode.getRow());
+				edges.set(row, "edge", new org.eti.kask.sova.edges.OperationEdge());
+
+                              }
+
+
+                  }else if( axiom  instanceof OWLSubPropertyAxiom){
+
+                      System.out.println("OWLPROPERTYAXIOM : " + axiom.toString());
+              		   int subClassID = 0;
+                           int superClassID = 0;
+                         //budowanie edge
+              		  //uchwyty miedzy  edgem to ((OWLSubPropertyAxiom) axiom).getSubClass()   i(OWLSubPropertyAxiom) axiom).getSuperClass()
+              		   if (((OWLSubPropertyAxiom) axiom).getSubProperty() instanceof OWLProperty ){
+              			   System.out.println("Subprop:  " + ((OWLSubPropertyAxiom) axiom).getSubProperty());
+                                   subClassID = properties.get(((OWLSubPropertyAxiom) axiom).getSubProperty().toString());
+
+              			   //wez z hashtable uchwyt  subklasy
+              		   }
+
+              		   if(((OWLSubPropertyAxiom) axiom).getSuperProperty() instanceof OWLProperty   ){
+              			   System.out.println("Superprop: " + ((OWLSubPropertyAxiom) axiom).getSuperProperty());
+              			   //wez z hashtable uchwyt taty
+                                   superClassID = properties.get(((OWLSubPropertyAxiom) axiom).getSuperProperty().toString());
+              		   }
+              		    //dodaj edge
+                           if(superClassID > 0 && subClassID > 0){
+                                int row = edges.addRow();
+				edges.set(row, "source", superClassID);
+				edges.set(row, "target", subClassID);
+				edges.set(row, "edge", new org.eti.kask.sova.edges.SubEdge());
+                           }
+
+
+
+                  }else if (axiom instanceof OWLInverseObjectPropertiesAxiom){
+                        int id1 = properties.get(((OWLInverseObjectPropertiesAxiom)axiom).getFirstProperty().toString() ) ;
+                        int id2 = properties.get(((OWLInverseObjectPropertiesAxiom)axiom).getSecondProperty().toString() );
+                         int row = edges.addRow();
+		         edges.set(row, "source", id1);
+		         edges.set(row, "target", id2);
+			 edges.set(row, "edge", new org.eti.kask.sova.edges.InverseOfEdge());
+
+
+                  
+                 }else if(axiom instanceof OWLEquivalentObjectPropertiesAxiom){
+                     int id1=0,id2=0, i=0;
+                     for(OWLPropertyExpression d :((OWLEquivalentObjectPropertiesAxiom)axiom).getProperties()){
+                         		//normalnie
+
+                                     if(i==0){
+                                            id1= properties.get(d.toString());
+                                        }else{
+                                            id2=properties.get(d.toString());
+                                        }
+
+              		       i++;
+                     }
+                     if(id1 > 0 && id2 > 0){
+                            int row = edges.addRow();
+				edges.set(row, "source", id1);
+				edges.set(row, "target", id2);
+				edges.set(row, "edge", new org.eti.kask.sova.edges.EquivalentPropertyEdge());
+                        }
+
+
+
+                 }else if ( axiom instanceof OWLFunctionalObjectPropertyAxiom ){
+                            System.out.println("FUNC OBJ PRO " + axiom.toString() + " dodany" );
+                                Node anonymNode = graph.addNode();
+                                org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.FunctionalPropertyNode();
+                                anonymNode.set("node", node);
+                             int id = properties.get( ((OWLFunctionalObjectPropertyAxiom)axiom).getProperty().toString()   );
+                                int row = edges.addRow();
+		         edges.set(row, "source", anonymNode.getRow());
+		         edges.set(row, "target", id);
+			 edges.set(row, "edge", new org.eti.kask.sova.edges.Edge());
+
+
+                  }else if ( axiom instanceof OWLInverseFunctionalObjectPropertyAxiom){
+                           System.out.println("FUNC INV OBJ PRO " + axiom.toString() + " dodany" );
+                                Node anonymNode = graph.addNode();
+                                org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.InverseFunctionalPropertyNode();
+                                anonymNode.set("node", node);
+                             int id = properties.get( ((OWLInverseFunctionalObjectPropertyAxiom)axiom).getProperty().toString()   );
+                                int row = edges.addRow();
+		         edges.set(row, "source", anonymNode.getRow());
+		         edges.set(row, "target", id);
+			 edges.set(row, "edge", new org.eti.kask.sova.edges.Edge());
+                  }else if (axiom instanceof OWLSymmetricObjectPropertyAxiom){
+                      System.out.println("FUNC sym OBJ PRO " + axiom.toString() + " dodany" );
+                                Node anonymNode = graph.addNode();
+                                org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.SymmetricPropertyNode();
+                                anonymNode.set("node", node);
+                             int id = properties.get( ((OWLSymmetricObjectPropertyAxiom)axiom).getProperty().toString()   );
+                                int row = edges.addRow();
+		         edges.set(row, "source", anonymNode.getRow());
+		         edges.set(row, "target", id);
+			 edges.set(row, "edge", new org.eti.kask.sova.edges.Edge());
+                  }else if (axiom instanceof OWLTransitiveObjectPropertyAxiom){
+                      System.out.println("FUNC sym OBJ PRO " + axiom.toString() + " dodany" );
+                                Node anonymNode = graph.addNode();
+                                org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.TransitivePropertyNode();
+                                anonymNode.set("node", node);
+                             int id = properties.get( ((OWLTransitiveObjectPropertyAxiom)axiom).getProperty().toString()   );
+                                int row = edges.addRow();
+		         edges.set(row, "source", anonymNode.getRow());
+		         edges.set(row, "target", id);
+			 edges.set(row, "edge", new org.eti.kask.sova.edges.Edge());
+                  }else if (axiom instanceof OWLSameIndividualsAxiom){
+
+                                System.out.println("SAME NODE " + axiom.toString() + " dodany" );
+                                Node anonymNode = graph.addNode();
+                                org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.SameAsNode();
+                                anonymNode.set("node", node);
+
+                              for ( OWLIndividual ind: ((OWLSameIndividualsAxiom)axiom).getIndividuals()){
+                                  int id = individuals.get(ind.toString());
+                                   int row = edges.addRow();
+				edges.set(row, "source", id);
+				edges.set(row, "target", anonymNode.getRow());
+				edges.set(row, "edge", new org.eti.kask.sova.edges.OperationEdge());
+
+                              }
+                  }else{
+                      if(axiom instanceof OWLEntityAnnotationAxiom){
+                        ;
+                      }else{
+              		System.out.println("OMITTED: " + axiom  );
+                      }
+              	  }
+              	  
+
+                 }
+                 
 
 
             return graph;

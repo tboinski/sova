@@ -54,9 +54,9 @@ public class Demo {
             PrintStream p; // declare a print stream object
             // Create a new file output stream
             // connected to "myfile.txt"
-            out = new FileOutputStream(Constants.DEBUG_FILE);
+            //out = new FileOutputStream();
             // Connect print stream to the output stream
-            p = new PrintStream(out);
+            p = new PrintStream(System.out);
 
 
             Debug.setStream(p);
@@ -208,7 +208,7 @@ public class Demo {
             frame.setVisible(true); // show the window
 
             p.close();
-        } catch (FileNotFoundException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(Demo.class.getName()).log(Level.SEVERE, null, ex);
         }
 

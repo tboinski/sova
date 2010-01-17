@@ -1,5 +1,7 @@
 package org.eti.kask.sova.visualization;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.eti.kask.sova.graph.OWLtoGraphConverter;
 import org.semanticweb.owl.model.OWLOntology;
 import prefuse.Display;
@@ -79,13 +81,16 @@ public class OVDisplay extends Display {
      * @param ont ontologia zapisana w OWLAPI
      */
     public void generateGraphFromOWl(OWLOntology ont) {
-
-        this.setGraph(OWLtoGraphConverter.getInstance().OWLtoGraph(ont));
-        visualization = getGraphLayoutVis();
-        visualization.add("graph", this.getGraph());
-        visualization.setVisualizationSettings();
-        this.setVisualization(visualization);
-        visualization.startLayout();
+        try {
+            this.setGraph(OWLtoGraphConverter.getInstance().OWLtoGraph(ont));
+            visualization = getGraphLayoutVis();
+            visualization.add("graph", this.getGraph());
+            visualization.setVisualizationSettings();
+            this.setVisualization(visualization);
+            visualization.startLayout();
+        } catch (Exception ex) {
+            Logger.getLogger(OVDisplay.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 

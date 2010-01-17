@@ -26,14 +26,6 @@ public class AllValuesFromPropertyNode extends PropertyNode
 		return colorScheme.getAllValuesFromNodeColor();
 	}
 
-	/**
-	 * @param shapeScheme źródłowy schemat kształtów dla węzłów
-	 * @return rodzaj kształtu węzła z zadanego schematu
-	 */
-	@Override
-	public NodeShapeType getNodeShapeType(NodeShapes shapeScheme)
-	{
-		return shapeScheme.getAnonymousNodeShapeType();
-	}
+	
 }
 
