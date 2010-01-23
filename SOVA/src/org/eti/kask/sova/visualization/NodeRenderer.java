@@ -77,7 +77,7 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 					break;
 			case CIRCLE: shape = changeShapeToCircle(shape);
 					break;
-			case ELLIPSE:
+			case ELLIPSE: shape = changeShapeToEllipse(shape);
 					break;
 		}	
 		
@@ -288,6 +288,33 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 			rectangleShape.getBounds().getCenterY() - r,
 			2*r,
 			2*r
+			);
+	}
+
+	/**
+	 * <p>Zamienia domyślny, prostokątny kształt węzła na elipsę.
+	 * Elipsa ta ma średnicę pionową równą wysokości węzła oraz średnicę
+	 * poziomą równą 1,5 jego szerokości i środek w tym samym punkcie.
+	 * </p><p>
+	 * Zmiana kształtu na elipsę nie jest zalecana dla węzłów
+	 * o długich etykietach.
+	 * </p>
+	 * @param rectangleShape prostokątny kształt
+	 * @return eliptyczny kształt
+	 */
+	public Shape changeShapeToEllipse(Shape rectangleShape) {
+
+		/*int r = Math.max(rectangleShape.getBounds().width,
+			rectangleShape.getBounds().height) / 2 + 1;*/
+
+		int rHeight = rectangleShape.getBounds().height / 2 + 1;
+		int rWidth = rectangleShape.getBounds().width / 2 + 1;
+
+		return shapeRenderer.ellipse(
+			rectangleShape.getBounds().getCenterX() - rWidth,
+			rectangleShape.getBounds().getCenterY() - rHeight,
+			3*rWidth,
+			2*rHeight
 			);
 	}
 
