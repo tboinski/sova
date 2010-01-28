@@ -23,5 +23,16 @@ public class SomeValuesFromPropertyNode extends PropertyNode
 	{
 		return colorScheme.getSomeValuesFromNodeColor();
 	}
+
+	/**
+	 * Przed właściwą etykietą tego węzła dołączany jest znak "∃:".
+	 * @param label etykieta węzła
+	 */
+	@Override
+	public void setLabel(String label)
+	{
+		this.label = "∃:" + label;
+	}
+
 }
 
