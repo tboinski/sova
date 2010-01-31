@@ -92,6 +92,34 @@
          style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
          transform="matrix(-0.8,0,0,-0.8,-10,0)" />
     </marker>
+    <inkscape:perspective
+       id="perspective2902"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2972"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2859"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2859-0"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -102,7 +130,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.70710678"
      inkscape:cx="596.55548"
-     inkscape:cy="422.70664"
+     inkscape:cy="352.97755"
      inkscape:current-layer="layer1"
      inkscape:document-units="px"
      showgrid="false"
@@ -260,23 +288,37 @@
          y="227.62869"
          id="tspan3495">someValuesFrom</tspan></text>
     <g
-       id="g5135"
-       inkscape:export-filename="/home/piotr/8semestr/pg/praktyka/repo/ocs_visualization/dokumenty/elementyGraficzne/drobne/hasProperty.png"
+       id="g3886"
+       inkscape:export-filename="/home/infinity/Projekty/svn/ocs_visualisation/dokumenty/elementyGraficzne/drobne/hasProperty3.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
       <path
-         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow1Lend);stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="M 406.37386,346.71172 L 563.6355,445.12054"
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/infinity/Projekty/svn/ocs_visualisation/dokumenty/elementyGraficzne/drobne/hasProperty3.png"
+         id="path3784"
+         d="M 485.07525,602.53701 746.70476,506.37049"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none" />
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/infinity/Projekty/svn/ocs_visualisation/dokumenty/elementyGraficzne/drobne/hasProperty3.png"
+         id="path2986"
+         d="M 490.73211,314.03745 C 739.63369,459.70144 733.97684,461.11566 733.97684,461.11566"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Lend)"
+         d="M 406.37386,346.71172 563.6355,445.12054"
          id="path12026"
          sodipodi:nodetypes="cc" />
       <path
-         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow1Lend);stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="M 346.1896,457.02037 L 353.5446,356.02508"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Lend)"
+         d="m 346.1896,457.02037 7.355,-100.99529"
          id="path12024"
          sodipodi:nodetypes="cc" />
       <path
-         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow1Lend);stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="M 143.39192,477.23341 L 306.02648,351.3684"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Lend)"
+         d="M 143.39192,477.23341 306.02648,351.3684"
          id="path11505" />
       <g
          id="g11481"
@@ -287,13 +329,13 @@
              id="g11485">
             <path
                id="path11487"
-               d="M 98.429098,257.11188 C 84.847978,257.11188 73.804098,275.83083 73.804098,298.89313 C 73.804098,321.95541 84.847968,340.67438 98.429098,340.67438 C 99.054618,340.67438 99.659018,340.62739 100.27285,340.54938 L 100.27285,340.64313 L 240.27285,340.64313 C 240.33443,340.64585 240.39866,340.64118 240.46035,340.64313 C 240.61507,340.64801 240.77369,340.67438 240.9291,340.67438 C 254.51022,340.67438 265.52327,321.95587 265.52327,298.8936 C 265.52327,275.83132 254.51023,257.11188 240.9291,257.11188 C 240.77369,257.11188 240.61507,257.13825 240.46035,257.14313 L 240.46035,257.11188 L 100.27285,257.11188 L 100.27285,257.23688 C 99.659018,257.15887 99.054608,257.11188 98.429098,257.11188 z"
-               style="opacity:1;fill:#00b6c1;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+               d="m 98.429098,257.11188 c -13.58112,0 -24.625,18.71895 -24.625,41.78125 0,23.06228 11.04387,41.78125 24.625,41.78125 0.62552,0 1.22992,-0.047 1.843752,-0.125 l 0,0.0937 140,0 c 0.0616,0.003 0.12581,-0.002 0.1875,0 0.15472,0.005 0.31334,0.0312 0.46875,0.0312 13.58112,0 24.59417,-18.71851 24.59417,-41.78078 0,-23.06228 -11.01304,-41.78172 -24.59417,-41.78172 -0.15541,0 -0.31403,0.0264 -0.46875,0.0312 l 0,-0.0312 -140.1875,0 0,0.125 c -0.613832,-0.078 -1.218242,-0.125 -1.843752,-0.125 z"
+               style="fill:#00b6c1;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
                sodipodi:nodetypes="csscccssssccccc" />
           </g>
           <text
              xml:space="preserve"
-             style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+             style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
              x="116.87051"
              y="313.80524"
              id="text11489"><tspan
@@ -312,13 +354,13 @@
              id="g11497">
             <path
                id="path11499"
-               d="M 98.429098,257.11188 C 84.847978,257.11188 73.804098,275.83083 73.804098,298.89313 C 73.804098,321.95541 84.847968,340.67438 98.429098,340.67438 C 99.054618,340.67438 99.659018,340.62739 100.27285,340.54938 L 100.27285,340.64313 L 240.27285,340.64313 C 240.33443,340.64585 240.39866,340.64118 240.46035,340.64313 C 240.61507,340.64801 240.77369,340.67438 240.9291,340.67438 C 254.51022,340.67438 265.52327,321.95587 265.52327,298.8936 C 265.52327,275.83132 254.51023,257.11188 240.9291,257.11188 C 240.77369,257.11188 240.61507,257.13825 240.46035,257.14313 L 240.46035,257.11188 L 100.27285,257.11188 L 100.27285,257.23688 C 99.659018,257.15887 99.054608,257.11188 98.429098,257.11188 z"
-               style="opacity:1;fill:#00b6c1;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+               d="m 98.429098,257.11188 c -13.58112,0 -24.625,18.71895 -24.625,41.78125 0,23.06228 11.04387,41.78125 24.625,41.78125 0.62552,0 1.22992,-0.047 1.843752,-0.125 l 0,0.0937 140,0 c 0.0616,0.003 0.12581,-0.002 0.1875,0 0.15472,0.005 0.31334,0.0312 0.46875,0.0312 13.58112,0 24.59417,-18.71851 24.59417,-41.78078 0,-23.06228 -11.01304,-41.78172 -24.59417,-41.78172 -0.15541,0 -0.31403,0.0264 -0.46875,0.0312 l 0,-0.0312 -140.1875,0 0,0.125 c -0.613832,-0.078 -1.218242,-0.125 -1.843752,-0.125 z"
+               style="fill:#00b6c1;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
                sodipodi:nodetypes="csscccssssccccc" />
           </g>
           <text
              xml:space="preserve"
-             style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+             style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
              x="116.87051"
              y="313.80524"
              id="text11501"><tspan
@@ -332,7 +374,7 @@
          transform="translate(-162.71236,405)"
          id="g2483">
         <rect
-           style="fill:#c8b7b7;fill-opacity:1;stroke:#000000;stroke-width:2.05539799;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           style="fill:#c8b7b7;fill-opacity:1;stroke:#000000;stroke-width:2.05539799;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
            id="rect3224"
            width="203.43761"
            height="84.810997"
@@ -340,7 +382,7 @@
            y="45.594505" />
         <text
            xml:space="preserve"
-           style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+           style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
            x="412.19284"
            y="102.9121"
            id="text3235"><tspan
@@ -349,36 +391,6 @@
              x="412.19284"
              y="102.9121">Individual</tspan></text>
       </g>
-      <g
-         transform="translate(-284.25693,-22.627417)"
-         id="g5129">
-        <g
-           style="fill:#cb3dff;fill-opacity:1"
-           transform="matrix(1.4854957,0,0,1,387.18986,25.043811)"
-           id="g2470">
-          <path
-             sodipodi:nodetypes="csscccssssccccc"
-             style="opacity:1;fill:#cb3dff;fill-opacity:1;stroke:#000000;stroke-width:4.92283821;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-             d="M 98.429098,257.11188 C 84.847978,257.11188 73.804098,275.83083 73.804098,298.89313 C 73.804098,321.95541 84.847968,340.67438 98.429098,340.67438 C 99.054618,340.67438 99.659018,340.62739 100.27285,340.54938 L 100.27285,340.64313 L 240.27285,340.64313 C 240.33443,340.64585 240.39866,340.64118 240.46035,340.64313 C 240.61507,340.64801 240.77369,340.67438 240.9291,340.67438 C 254.51022,340.67438 265.52327,321.95587 265.52327,298.8936 C 265.52327,275.83132 254.51023,257.11188 240.9291,257.11188 C 240.77369,257.11188 240.61507,257.13825 240.46035,257.14313 L 240.46035,257.11188 L 100.27285,257.11188 L 100.27285,257.23688 C 99.659018,257.15887 99.054608,257.11188 98.429098,257.11188 z"
-             id="path2472" />
-        </g>
-        <text
-           id="text2474"
-           y="338.84906"
-           x="521.61511"
-           style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
-           xml:space="preserve"><tspan
-             y="338.84906"
-             x="521.61511"
-             id="tspan2476"
-             sodipodi:role="line">hasProperty</tspan></text>
-      </g>
-    </g>
-    <g
-       id="g3023"
-       inkscape:export-filename="/home/infinity/Projekty/svn/ocs_visualisation/dokumenty/elementyGraficzne/drobne/hasProperty2.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
       <path
          style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Lend)"
          d="m 399.78511,646.10614 112.00681,53.15399"
@@ -415,30 +427,6 @@
         </g>
       </g>
       <g
-         transform="translate(-290.84568,276.767)"
-         id="g5129-4">
-        <g
-           style="fill:#cb3dff;fill-opacity:1"
-           transform="matrix(1.4854957,0,0,1,387.18986,25.043811)"
-           id="g2470-7">
-          <path
-             sodipodi:nodetypes="csscccssssccccc"
-             style="fill:#cb3dff;fill-opacity:1;stroke:#000000;stroke-width:4.92283821;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-             d="m 98.429098,257.11188 c -13.58112,0 -24.625,18.71895 -24.625,41.78125 0,23.06228 11.04387,41.78125 24.625,41.78125 0.62552,0 1.22992,-0.047 1.843752,-0.125 l 0,0.0937 140,0 c 0.0616,0.003 0.12581,-0.002 0.1875,0 0.15472,0.005 0.31334,0.0312 0.46875,0.0312 13.58112,0 24.59417,-18.71851 24.59417,-41.78078 0,-23.06228 -11.01304,-41.78172 -24.59417,-41.78172 -0.15541,0 -0.31403,0.0264 -0.46875,0.0312 l 0,-0.0312 -140.1875,0 0,0.125 c -0.613832,-0.078 -1.218242,-0.125 -1.843752,-0.125 z"
-             id="path2472-4" />
-        </g>
-        <text
-           id="text2474-4"
-           y="338.84906"
-           x="521.61511"
-           style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-           xml:space="preserve"><tspan
-             y="338.84906"
-             x="521.61511"
-             id="tspan2476-3"
-             sodipodi:role="line">hasProperty</tspan></text>
-      </g>
-      <g
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/infinity/Projekty/svn/ocs_visualisation/dokumenty/elementyGraficzne/drobne/anonymousClass.png"
@@ -465,6 +453,93 @@
              id="tspan10606-3"
              x="869.38568"
              y="434.2016">A</tspan></text>
+      </g>
+      <g
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/infinity/Projekty/svn/ocs_visualisation/dokumenty/elementyGraficzne/drobne/hasProperty3.png"
+         id="g3469-6"
+         transform="translate(666.74134,273.74312)">
+        <g
+           style="fill:#923dff;fill-opacity:1"
+           transform="matrix(1.4854957,0,0,1,-49.03467,-88.89313)"
+           id="g3471-3">
+          <path
+             sodipodi:nodetypes="csscccssssccccc"
+             style="fill:#923dff;fill-opacity:1;stroke:#000000;stroke-width:4.92283821;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             d="m 98.429098,257.11188 c -13.58112,0 -24.625,18.71895 -24.625,41.78125 0,23.06228 11.04387,41.78125 24.625,41.78125 0.62552,0 1.22992,-0.047 1.843752,-0.125 l 0,0.0937 140,0 c 0.0616,0.003 0.12581,-0.002 0.1875,0 0.15472,0.005 0.31334,0.0312 0.46875,0.0312 13.58112,0 24.59417,-18.71851 24.59417,-41.78078 0,-23.06228 -11.01304,-41.78172 -24.59417,-41.78172 -0.15541,0 -0.31403,0.0264 -0.46875,0.0312 l 0,-0.0312 -140.1875,0 0,0.125 c -0.613832,-0.078 -1.218242,-0.125 -1.843752,-0.125 z"
+             id="path3473-2" />
+        </g>
+        <text
+           id="text3475-0"
+           y="224.91211"
+           x="85.390625"
+           style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+           xml:space="preserve"><tspan
+             y="224.91211"
+             x="85.390625"
+             id="tspan3477-6"
+             sodipodi:role="line">hasProperty</tspan></text>
+      </g>
+      <g
+         id="g2845"
+         transform="translate(-257.02903,10.399004)">
+        <g
+           style="fill:#cb3dff;fill-opacity:1"
+           transform="matrix(1.7624267,0,0,1,321.46211,-7.98256)"
+           id="g2470-2"
+           inkscape:export-filename="/home/infinity/Projekty/svn/ocs_visualisation/dokumenty/elementyGraficzne/drobne/someValuesFrom.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90">
+          <path
+             sodipodi:nodetypes="csscccssssccccc"
+             style="fill:#cb3dff;fill-opacity:1;stroke:#000000;stroke-width:4.92283821;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             d="m 98.429098,257.11188 c -13.58112,0 -24.625,18.71895 -24.625,41.78125 0,23.06228 11.04387,41.78125 24.625,41.78125 0.62552,0 1.22992,-0.047 1.843752,-0.125 l 0,0.0937 140,0 c 0.0616,0.003 0.12581,-0.002 0.1875,0 0.15472,0.005 0.31334,0.0312 0.46875,0.0312 13.58112,0 24.59417,-18.71851 24.59417,-41.78078 0,-23.06228 -11.01304,-41.78172 -24.59417,-41.78172 -0.15541,0 -0.31403,0.0264 -0.46875,0.0312 l 0,-0.0312 -140.1875,0 0,0.125 c -0.613832,-0.078 -1.218242,-0.125 -1.843752,-0.125 z"
+             id="path2472-6" />
+        </g>
+        <text
+           id="text2474-1"
+           y="305.82269"
+           x="475.76675"
+           style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+           xml:space="preserve"
+           inkscape:export-filename="/home/infinity/Projekty/svn/ocs_visualisation/dokumenty/elementyGraficzne/drobne/someValuesFrom.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90"><tspan
+             y="305.82269"
+             x="475.76675"
+             sodipodi:role="line"
+             id="tspan2831">∃:hasProperty</tspan></text>
+      </g>
+      <g
+         id="g2845-6"
+         transform="translate(-292.38437,305.96964)">
+        <g
+           style="fill:#cb3dff;fill-opacity:1"
+           transform="matrix(1.7624267,0,0,1,321.46211,-7.98256)"
+           id="g2470"
+           inkscape:export-filename="/home/infinity/Projekty/svn/ocs_visualisation/dokumenty/elementyGraficzne/drobne/someValuesFrom.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90">
+          <path
+             sodipodi:nodetypes="csscccssssccccc"
+             style="fill:#cb3dff;fill-opacity:1;stroke:#000000;stroke-width:4.92283821;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             d="m 98.429098,257.11188 c -13.58112,0 -24.625,18.71895 -24.625,41.78125 0,23.06228 11.04387,41.78125 24.625,41.78125 0.62552,0 1.22992,-0.047 1.843752,-0.125 l 0,0.0937 140,0 c 0.0616,0.003 0.12581,-0.002 0.1875,0 0.15472,0.005 0.31334,0.0312 0.46875,0.0312 13.58112,0 24.59417,-18.71851 24.59417,-41.78078 0,-23.06228 -11.01304,-41.78172 -24.59417,-41.78172 -0.15541,0 -0.31403,0.0264 -0.46875,0.0312 l 0,-0.0312 -140.1875,0 0,0.125 c -0.613832,-0.078 -1.218242,-0.125 -1.843752,-0.125 z"
+             id="path2472" />
+        </g>
+        <text
+           id="text2474"
+           y="305.82269"
+           x="475.76675"
+           style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+           xml:space="preserve"
+           inkscape:export-filename="/home/infinity/Projekty/svn/ocs_visualisation/dokumenty/elementyGraficzne/drobne/someValuesFrom.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90"><tspan
+             y="305.82269"
+             x="475.76675"
+             sodipodi:role="line"
+             id="tspan2831-1">∃:hasProperty</tspan></text>
       </g>
     </g>
   </g>
