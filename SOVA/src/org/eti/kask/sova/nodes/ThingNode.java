@@ -33,7 +33,7 @@ public class ThingNode extends Node
 	@Override
 	public NodeShapeType getNodeShapeType(NodeShapes shapeScheme)
 	{
-		return shapeScheme.getInformationNodeShapeType();
+		return shapeScheme.getThingNodeShapeType();
 	}
 }
 
