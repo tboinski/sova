@@ -16,8 +16,9 @@ import prefuse.data.Graph;
 import prefuse.visual.sort.TreeDepthItemSorter;
 
 /**
- * 
- * @author piotr29
+ * Display wizualizowanej ontologii. Pozwala na generowanie graficznej
+ * reprezentacji ontologii na podstawie podanego obiektu ontologii.
+ * @author Piotr Kunowski
  */
 public class OVDisplay extends Display {
 

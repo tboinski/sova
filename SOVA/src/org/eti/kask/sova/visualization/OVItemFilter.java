@@ -9,7 +9,8 @@ import prefuse.visual.VisualItem;
 import prefuse.visual.tuple.TableEdgeItem;
 
 /**
- *
+ * Klasa filtrująca wyswietlane elementy ontologii. Pozwala na włączania
+ * i wyłączanie wizualizacji elementu.
  * @author Piotr Kunowski
  */
 public class OVItemFilter extends GroupAction {
