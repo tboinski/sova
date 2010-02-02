@@ -939,7 +939,7 @@ public class OWLtoGraphConverter
                                    int row = edges.addRow();
 				edges.set(row, "source", id);
 				edges.set(row, "target", anonymNode.getRow());
-				edges.set(row, "edge", new org.eti.kask.sova.edges.OperationEdge());
+				edges.set(row, "edge", new org.eti.kask.sova.edges.Edge());
 
                               }
                   }else{
