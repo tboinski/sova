@@ -196,7 +196,7 @@
         <owl:intersectionOf rdf:parseType="Collection">
           <owl:Restriction>
           	 <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-            >7</owl:maxCardinality>
+            >123</owl:maxCardinality>
             <owl:onProperty>
               <owl:ObjectProperty rdf:about="#hasTopping"/>
             </owl:onProperty>

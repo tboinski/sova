@@ -44,13 +44,14 @@ public class EdgeColors
 		propertyEdgeColor = colorProperties.getPropertyColor(prefix + "propertyEdgeColor", propertyEdgeColor);
 		domainEdgeColor = colorProperties.getPropertyColor(prefix + "domainEdgeColor", domainEdgeColor);
 		rangeEdgeColor = colorProperties.getPropertyColor(prefix + "rangeEdgeColor", rangeEdgeColor);
-		disjointEdgeColor = colorProperties.getPropertyColor(prefix + ".disjointEdgeColor", disjointEdgeColor);
+		disjointEdgeColor = colorProperties.getPropertyColor(prefix + "disjointEdgeColor", disjointEdgeColor);
 		equivalentEdgeColor = colorProperties.getPropertyColor(prefix + "equivalentEdgeColor", equivalentEdgeColor);
 		equivalentPropertyEdgeColor = colorProperties.getPropertyColor(prefix + "equivalentPropertyEdgeColor", equivalentPropertyEdgeColor);
 		functionalEdgeColor = colorProperties.getPropertyColor(prefix + "functionalEdgeColor", functionalEdgeColor);
 		inverseOfEdgeColor = colorProperties.getPropertyColor(prefix + "inverseOfEdgeColor", inverseOfEdgeColor);
 		inverseOfMutualEdgeColor = colorProperties.getPropertyColor(prefix + "inverseOfMutualEdgeColor", inverseOfEdgeColor);
 		operationEdgeColor = colorProperties.getPropertyColor(prefix + "operationEdgeColor", operationEdgeColor);
+		subEdgeColor = colorProperties.getPropertyColor(prefix + "subEdgeColor", operationEdgeColor);
 	}
 
 	protected void setDefaultColors() {
@@ -66,6 +67,7 @@ public class EdgeColors
 		functionalEdgeColor = new Color(200, 113, 55);
 		inverseOfMutualEdgeColor = inverseOfEdgeColor;
 		operationEdgeColor = Color.BLACK;
+		subEdgeColor = Color.BLACK;
 	}
 
 	public Color getDomainEdgeColor()
