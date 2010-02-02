@@ -19,9 +19,12 @@ import org.semanticweb.owl.model.*;
 import prefuse.data.Table;
 
 
-// <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.7A3733DC-8F75-9D47-51C1-30AEC658BD96]
-// </editor-fold> 
+
+/**
+ * Konwerter obiektu OWLOntology na obiekt Graph wykorzystywany przez Prefuse.
+ * Klasa jest singletonem.
+ * @author Anna Jaworska
+ */
 public class OWLtoGraphConverter
 {
 
@@ -747,8 +750,7 @@ public class OWLtoGraphConverter
                                 int row = edges.addRow();
 				edges.set(row, "source", id1);
 				edges.set(row, "target", id2);
-				edges.set(row, "edge", new org.eti.kask.sova.edges.DisjointEdge());
-                           }
+				edges.set(row, "edge", new org.eti.kask.sova.edges.EquivalentEdge());                           }
 
               	  }else if (axiom instanceof OWLObjectPropertyRangeAxiom){
 

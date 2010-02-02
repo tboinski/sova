@@ -1,0 +1,218 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns="http://www.co-ode.org/ontologies/pizza/2005/05/16/pizza.owl#"
+    xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xml:base="http://www.co-ode.org/ontologies/pizza/2005/05/16/pizza.owl">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="http://protege.stanford.edu/plugins/owl/protege"/>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >version 1.2</owl:versionInfo>
+    <rdfs:comment xml:lang="en">A "final stage" that contains all constructs required for the various versions of the Pizza Tutorial run by Manchester</rdfs:comment>
+    <protege:defaultLanguage rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >en</protege:defaultLanguage>
+  </owl:Ontology>
+  
+   <owl:Class rdf:ID="TomatoTopping">
+    
+	  <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="Mild"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:ID="hasSpiciness"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+	  <rdfs:subClassOf>
+      <owl:Class rdf:ID="PizzaTopping"/>
+    </rdfs:subClassOf>
+	
+	 </owl:Class>
+	 
+	 
+
+  <owl:Class rdf:ID="PizzaTopping">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="DomainConcept"/>
+    </rdfs:subClassOf>
+  
+    <owl:disjointWith>
+      <owl:Class rdf:ID="PizzaBase"/>
+    </owl:disjointWith>
+  
+    <owl:disjointWith>
+      <owl:Class rdf:ID="Pizza"/>
+    </owl:disjointWith>
+  </owl:Class>
+  
+  <owl:Class rdf:about="#American">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#NamedPizza"/>
+    </rdfs:subClassOf>
+    
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hasTopping"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#MozzarellaTopping">
+			   <rdfs:subClassOf>
+					<owl:Class rdf:ID="PizzaTopping"/>
+				</rdfs:subClassOf>
+			  </owl:Class>
+              <owl:Class rdf:ID="PeperoniSausageTopping">
+			  <rdfs:subClassOf>
+					<owl:Class rdf:ID="PizzaTopping"/>
+				</rdfs:subClassOf>
+			  </owl:Class>
+              <owl:Class rdf:about="#TomatoTopping">
+			  <rdfs:subClassOf>
+					<owl:Class rdf:ID="PizzaTopping"/>
+				</rdfs:subClassOf>
+			  </owl:Class>
+            </owl:unionOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#TomatoTopping"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hasTopping"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+   
+  </owl:Class>
+  
+  
+  
+    <owl:Class rdf:ID="Country">
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <Country rdf:ID="America"/>
+              <Country rdf:ID="England"/>
+			  <Country rdf:ID="USA"/>
+              <Country rdf:ID="France"/>
+              <Country rdf:ID="Germany"/>
+              <Country rdf:about="#Italy"/>
+            </owl:oneOf>
+          </owl:Class>
+          <owl:Class rdf:about="#DomainConcept"/>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <rdfs:label xml:lang="pt">Pais</rdfs:label>
+    <rdfs:comment xml:lang="en">A class that is equivalent to the set of individuals that are described in the enumeration - ie Countries can only be either America, England, France, Germany or Italy and nothing else. Note that these individuals have been asserted to be allDifferent from each other.</rdfs:comment>
+  </owl:Class>
+   <owl:AllDifferent>
+    <owl:distinctMembers rdf:parseType="Collection">
+      <Country rdf:about="#America">
+	
+
+	  </Country>
+      <Country rdf:about="#England"/>
+      <Country rdf:about="#France"/>
+      <Country rdf:about="#Germany"/>
+      <Country rdf:about="#Italy"/>
+    </owl:distinctMembers>
+  </owl:AllDifferent>
+ 
+  <rdf:Description rdf:about="#America">
+  <owl:sameAs rdf:resource="#USA"/>
+</rdf:Description>
+
+
+  <owl:Class rdf:ID="NonVegetarianPizza">
+    <owl:disjointWith>
+      <owl:Class rdf:ID="VegetarianPizza"/>
+    </owl:disjointWith>
+    <rdfs:label xml:lang="pt">PizzaNaoVegetariana</rdfs:label>
+    <rdfs:comment xml:lang="en">Any Pizza that is not a VegetarianPizza</rdfs:comment>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class>
+            <owl:complementOf>
+              <owl:Class rdf:about="#VegetarianPizza"/>
+            </owl:complementOf>
+          </owl:Class>
+          <owl:Class rdf:about="#Pizza"/>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+ <owl:ObjectProperty rdf:about="#isToppingOf">
+    <rdfs:subPropertyOf rdf:resource="#isIngredientOf"/>
+    <rdfs:domain rdf:resource="#PizzaTopping"/>
+    <owl:inverseOf rdf:resource="#hasTopping"/>
+    <rdfs:range rdf:resource="#Pizza"/>
+  </owl:ObjectProperty>
+
+  
+  <owl:ObjectProperty rdf:ID="hasTopping">
+  <owl:equivalentProperty rdf:resource="#hasIngredient"/>
+	
+  
+</owl:ObjectProperty>
+
+  
+  
+  
+  
+ <owl:Class rdf:ID="InterestingPizza">
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >3</owl:minCardinality>
+			
+            <owl:onProperty>
+              <owl:ObjectProperty rdf:about="#hasTopping"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Class rdf:about="#Pizza"/>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+
+	 <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+          	 <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >7</owl:maxCardinality>
+            <owl:onProperty>
+              <owl:ObjectProperty rdf:about="#hasTopping"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Class rdf:about="#Pizza"/>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+	
+
+
+	
+    <rdfs:comment xml:lang="en">Any pizza that has at least 3 toppings. Note that this is a cardinality constraint on the hasTopping property and NOT a qualified cardinality constraint (QCR). A QCR would specify from which class the members in this relationship must be. eg has at least 3 toppings from PizzaTopping. This is currently not supported in OWL.</rdfs:comment>
+    <rdfs:label xml:lang="pt">PizzaInteressante</rdfs:label>
+  </owl:Class>
+  
+  
+  	
+  </rdf:RDF>
