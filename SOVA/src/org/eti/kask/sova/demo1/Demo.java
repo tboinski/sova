@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.net.URI;
@@ -29,14 +28,9 @@ import org.semanticweb.owl.apibinding.OWLManager;
 import org.semanticweb.owl.model.OWLOntologyCreationException;
 import org.semanticweb.owl.model.OWLOntologyManager;
 import org.eti.kask.sova.utils.VisualizationProperties;
-import org.eti.kask.sova.visualization.OVVisualization;
-import prefuse.action.Action;
-import prefuse.action.ActionList;
-import prefuse.action.layout.graph.ForceDirectedLayout;
+import org.eti.kask.sova.visualization.ForceDirectedVis;
 import prefuse.controls.HoverActionControl;
 import prefuse.controls.NeighborHighlightControl;
-import prefuse.util.force.ForceSimulator;
-import prefuse.util.ui.JForcePanel;
 
 /**
  *
@@ -46,7 +40,6 @@ public class Demo {
 
     public static boolean doLayout = true;
     public static OVDisplay display;
-
     public static void main(String[] args) {
 
         try {
@@ -105,11 +98,10 @@ public class Demo {
             JPanel visValues = new JPanel();
             visValues.setLayout(new BoxLayout(visValues, BoxLayout.Y_AXIS));
             if (display.getGraphLayout() == OVDisplay.FORCE_DIRECTED_LAYOUT) {
-                Action action = display.getVisualization().getAction(OVVisualization.LAYOUT_ACTION);
-                ForceSimulator fsim = ((ForceDirectedLayout) ((ActionList) action).get(0)).getForceSimulator();
-                JForcePanel fpanel = new JForcePanel(fsim);
-                visValues.add(fpanel);
+                visValues.add(((ForceDirectedVis)display.getVisualization()).getControlPanel());
             }
+            
+            visValues.add(display.getVisualization().getDistanceControlPanel());
             JPanel buttonPanel = new JPanel(new GridLayout(2, 1));
             buttonPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Rodzaje wizualizacji"));
 
@@ -121,6 +113,7 @@ public class Demo {
                     display.setGraphLayout(OVDisplay.FORCE_DIRECTED_LAYOUT);
                     display.refreshVisualization();
                     display.repaint();
+
                 }
             });
             JRadioButton radialTreeRadial = new JRadioButton("RadialTreeLayout", false);
@@ -148,10 +141,10 @@ public class Demo {
 
                 public void itemStateChanged(ItemEvent arg0) {
                     if (ItemEvent.SELECTED == arg0.getStateChange()) {
-                        display.getVisualization().getFilterOVPredicate().setSubEdgeFilter(true);
+                        display.getVisualization().getItemVisualizationFilter().setSubEdgeFilter(true);
                         display.getVisualization().refreshFilter();
                     } else {
-                        display.getVisualization().getFilterOVPredicate().setSubEdgeFilter(false);
+                        display.getVisualization().getItemVisualizationFilter().setSubEdgeFilter(false);
                         display.getVisualization().refreshFilter();
                     }
                 }
@@ -164,11 +157,11 @@ public class Demo {
 
                 public void itemStateChanged(ItemEvent arg0) {
                     if (ItemEvent.SELECTED == arg0.getStateChange()) {
-                        display.getVisualization().getFilterOVPredicate().setDisjointEdgeFilter(true);
+                        display.getVisualization().getItemVisualizationFilter().setDisjointEdgeFilter(true);
                         display.getVisualization().refreshFilter();
                         display.repaint();
                     } else {
-                        display.getVisualization().getFilterOVPredicate().setDisjointEdgeFilter(false);
+                        display.getVisualization().getItemVisualizationFilter().setDisjointEdgeFilter(false);
                         display.getVisualization().refreshFilter();
                         display.repaint();
                     }

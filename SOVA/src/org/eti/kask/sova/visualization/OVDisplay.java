@@ -11,6 +11,7 @@ import prefuse.controls.NeighborHighlightControl;
 import prefuse.controls.PanControl;
 import prefuse.controls.WheelZoomControl;
 import prefuse.controls.ZoomControl;
+import prefuse.controls.ZoomToFitControl;
 import prefuse.data.Graph;
 import prefuse.visual.sort.TreeDepthItemSorter;
 
@@ -72,7 +73,11 @@ public class OVDisplay extends Display {
         this.addControlListener(new ZoomControl()); // zoom with vertical right-drag
         this.addControlListener(new WheelZoomControl());
         this.addControlListener(new NeighborHighlightControl());
-        this.addControlListener(new FocusControl(1, OVVisualization.LAYOUT_ACTION));
+        //this.addControlListener(new FocusControl(1, OVVisualization.LAYOUT_ACTION));
+        this.addControlListener(new FocusControl(1));
+        this.addControlListener(new ZoomToFitControl());
+
+
 
     }
 
@@ -102,9 +107,11 @@ public class OVDisplay extends Display {
         visualization = getGraphLayoutVis();
         visualization.add("graph", this.getGraph());
         visualization.setVisualizationSettings();
+        visualization.repaint();
         this.setVisualization(visualization);
         this.repaint();
-        this.getVisualization().startLayout();
+        //this.getVisualization().startDistanceFilter();
+//        this.getVisualization().startLayout();
 
     }
 }

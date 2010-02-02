@@ -71,6 +71,7 @@ public class RadialGraphVis extends OVVisualization {
         public TreeRootAction(String graphGroup, Visualization vis) {
             super(graphGroup);
             m_vis = vis;
+
         }
 
         public void run(double frac) {

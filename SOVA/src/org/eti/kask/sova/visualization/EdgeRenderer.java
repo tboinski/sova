@@ -1,6 +1,5 @@
 package org.eti.kask.sova.visualization;
 
-import java.awt.Color;
 import prefuse.util.GraphicsLib;
 import java.awt.Graphics2D;
 import java.awt.Shape;

@@ -11,8 +11,8 @@ import prefuse.visual.EdgeItem;
  */
 public class OVPredicate extends AbstractPredicate {
 
-    private String NODE = "node";
-    private String EDGE = "edge";
+    public static final String NODE = "node";
+    public static final  String EDGE = "edge";
     private boolean subEdgeFilter = false;
     private boolean disjointEdgeFilter = false;
 
