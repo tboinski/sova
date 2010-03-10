@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
-import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.net.URI;
 import java.util.logging.Level;
@@ -43,7 +42,6 @@ public class Demo {
     public static void main(String[] args) {
 
         try {
-            FileOutputStream out; // declare a file output object
             PrintStream p; // declare a print stream object
             // Create a new file output stream
             // connected to "myfile.txt"
