@@ -63,7 +63,7 @@ public class OVPredicate extends AbstractPredicate {
             if (isDisjointEdgeFilter() && (o instanceof org.eti.kask.sova.edges.DisjointEdge)) {
                 return false;
             }
-            if (isSubEdgeFilter() && (o instanceof org.eti.kask.sova.edges.SubEdge)) {
+            if (isSubEdgeFilter() && (o instanceof org.eti.kask.sova.edges.SubClassEdge)) {
                 return false;
             }
             return true;

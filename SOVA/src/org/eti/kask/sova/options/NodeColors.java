@@ -2,7 +2,6 @@ package org.eti.kask.sova.options;
 
 import java.awt.Color;
 import org.eti.kask.sova.utils.VisualizationProperties;
-import prefuse.util.ColorLib;
 
 /**
  * Klasa przechowująca informacje o ustawieniach kolorów dla węzłów.

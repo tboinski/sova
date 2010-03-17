@@ -67,7 +67,6 @@ public class OVDisplay extends Display {
     public OVDisplay() {
         super();
         graph = new Graph();
-        visualization = new ForceDirectedVis();
         this.setItemSorter(new TreeDepthItemSorter());
         this.addControlListener(new DragControl()); // drag items around
         this.addControlListener(new PanControl());  // pan with background left-drag
@@ -78,8 +77,6 @@ public class OVDisplay extends Display {
         this.addControlListener(new FocusControl(1));
         this.addControlListener(new ZoomToFitControl());
 
-
-
     }
 
     /**
@@ -87,7 +84,7 @@ public class OVDisplay extends Display {
      * @param ont ontologia zapisana w OWLAPI
      */
     public void generateGraphFromOWl(OWLOntology ont) {
-        try {
+        try {       	
             this.setGraph(OWLtoGraphConverter.getInstance().OWLtoGraph(ont));
             visualization = getGraphLayoutVis();
             visualization.add("graph", this.getGraph());

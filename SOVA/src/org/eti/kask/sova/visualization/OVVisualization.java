@@ -22,7 +22,7 @@ import prefuse.visual.expression.InGroupPredicate;
 
 /**
  * Klasa obsługi wizualizacji.
- * @author piotr29
+ * @author Piotr Kunowski
  */
 abstract public class OVVisualization extends Visualization {
 
@@ -84,6 +84,14 @@ abstract public class OVVisualization extends Visualization {
   //  TupleSet focusGroup = this.getGroup(Visualization.FOCUS_ITEMS);
     }
     protected void setDistanceFilter() {
+		// ustawienie podswietlonej klasy
+//		VisualGraph visualGraph = (VisualGraph)this.getSourceData(GRAPH);
+//		if(visualGraph.getNodeCount() > 0) {
+//			VisualItem currentClass = (VisualItem) visualGraph.getNode(0);
+//			this.getGroup(Visualization.FOCUS_ITEMS).setTuple(currentClass);
+//			currentClass.setFixed(true);
+//		}
+
         ActionList filterDistance = new ActionList();
         TupleSet focusGroup = this.getGroup(Visualization.FOCUS_ITEMS);
         focusGroup.addTupleSetListener(new TupleSetListener() {
@@ -105,7 +113,7 @@ abstract public class OVVisualization extends Visualization {
             }
         });
         itemVisualizationFilter = new OVItemFilter();
-        filterDist = new GraphDistanceFilter(GRAPH, 1);
+        filterDist = new GraphDistanceFilter(GRAPH, FilterOptions.distance);
         filterDistance.add(filterDist);
         filterDistance.add(itemVisualizationFilter);
         this.putAction(FILTER_DISTANCE, filterDistance);

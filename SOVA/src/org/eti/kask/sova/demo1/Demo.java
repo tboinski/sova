@@ -1,14 +1,11 @@
 package org.eti.kask.sova.demo1;
 
-import java.awt.Checkbox;
+
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
-import java.io.PrintStream;
 import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,11 +14,12 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSplitPane;
-import org.eti.kask.sova.utils.Debug;
+import org.eti.kask.sova.visualization.FilterOptions;
 import org.eti.kask.sova.visualization.OVDisplay;
 import org.semanticweb.owl.apibinding.OWLManager;
 import org.semanticweb.owl.model.OWLOntologyCreationException;
@@ -36,28 +34,47 @@ import prefuse.controls.NeighborHighlightControl;
  * @author infinity
  */
 public class Demo {
+	private static final String CHECKBOX_SUBCLASS_COMMAND = "checkbox_subclass";
+	private static final String CHECKBOX_CLASS_COMMAND = "checkbox_class";
+	private static final String CHECKBOX_DISJOINT_CLASS_COMMAND = "checkbox_disjoint_class";
+	private static final String CHECKBOX_EQUIVALENT_CLASS_COMMAND = "checkbox_equvalent_class";
+	private static final String CHECKBOX_CARDINALITY_COMMAND = "checkbox_cardinality_class";
+	private static final String CHECKBOX_UNIONOF_COMMAND = "checkbox_unionof_class";
+	private static final String CHECKBOX_COMPLEMENT_COMMAND = "checkbox_complement_class";
+	private static final String CHECKBOX_INTERSECTION_COMMAND = "checkbox_intersection_class";
+	
+	private static final String CHECKBOX_INDYVIDUAL_COMMAND = "checkbox_indywidual_node";
+	private static final String CHECKBOX_INSTANCEOF_COMMAND = "checkbox_instanceof";
+	private static final String CHECKBOX_DIFFERENT_COMMAND = "checkbox_different";
+	private static final String CHECKBOX_SAMEAS_COMMAND = "chechbox_sameas";
+	private static final String CHECKBOX_ONEOF_COMMAND = "checkbox_oneof";
+	private static final String CHECKBOX_PROPERTY_COMMAND = "checkbox_property";
+	private static final String CHECKBOX_SUBPROPERTY_COMMAND = "checkbox_subproperty_edge";
+	private static final String CHECKBOX_EQUIVALENT_COMMAND = "checkbox_equivalent_property";
+	private static final String CHECKBOX_INVERSEOFPROPERTY_COMMAND = "checkbox_inverseof_property";
+	private static final String CHECKBOX_FUNCTIONALPROPERTY_COMMAND = "checkbox_functionalproperty";
+	private static final String CHECKBOX_INVERSFUNCTIONALPROPERTY_COMMAND = "checkbox_inversfunctionalproperty";
+	private static final String CHECKBOX_SYMMETRICPROPERTY_COMMAND = "checkbox_symetricproperty";
+	private static final String CHECKBOX_TRANSITIVEPROPERTY_COMMAND = "checkbox_transitiveproperty";	
+	private static final String CHECKBOX_INSTANCEPROPERTY_COMMAND = "checkbox_instanceproperty";
+	private static final String CHECKBOX_DOMAIN_COMMAND = "checkbox_domain";
+	private static final String CHECKBOX_RANGE_COMMAND = "checkbox_drange";
+	
+    public  boolean doLayout = true;
+    public  OVDisplay display;
+    private JCheckBox chClass = null, chSubClass=null,
+    chDisjointEdge=null,chCardinalityNode=null,chUnionOf=null,chIntersecionOf=null,chComplementOf=null,chEquivalent=null;
+    private JCheckBox chIndywidual=null,chInstanceOf=null, chDifferent=null, chsameas=null, choneof=null; 
+    private JCheckBox chproperty=null,chInstanceProperty=null,chInverseOfProperty=null, chDomain=null, chRange=null, chSubProperty=null,
+    	chEquivalentProperty=null,chFunctionalProperty=null, chInversFunctionalProperty=null, chSymmetricProperty=null, chTransitiveProperty=null;
+    public  void startVisualization() {
 
-    public static boolean doLayout = true;
-    public static OVDisplay display;
-    public static void main(String[] args) {
-
-        try {
-            PrintStream p; // declare a print stream object
-            // Create a new file output stream
-            // connected to "myfile.txt"
-            //out = new FileOutputStream();
-            // Connect print stream to the output stream
-            p = new PrintStream(System.out);
-
-
-            Debug.setStream(p);
+        
             display = new OVDisplay();
             display.setSize(720, 500); // set display size
 	    VisualizationProperties.instanceOf().loadProperties(Constants.PROPERTIES);
             // zoom with vertical right-drag
             OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-            // We load an ontology from a physical URI - in this case we'll load the pizza
-            // ontology.
             URI physicalURI = URI.create(Constants.ONTO_TEST_DIRECTORY);
             try {
                 // Now ask the manager to load the ontology
@@ -131,44 +148,164 @@ public class Demo {
             buttonPanel.add(radialTreeRadial);
             buttonPanel.setSize(200, 200);
             visValues.add(buttonPanel);
-
-            JPanel checkboxPanel = new JPanel(new GridLayout(2, 1));
+            CheckBoxListener checkboxListener = new CheckBoxListener();
+            JPanel checkboxPanel = new JPanel(new GridLayout(10, 1));
             checkboxPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Filtry"));
-            Checkbox chSubClass = new Checkbox("Wyłącz krawędzie SubEdge");
-            chSubClass.addItemListener(new ItemListener() {
+            
+            chClass = new JCheckBox("Klasy");
+            chClass.setActionCommand(CHECKBOX_CLASS_COMMAND);
+            chClass.setSelected(true);
+            chClass.addActionListener(checkboxListener);	
+            checkboxPanel.add(chClass);
 
-                public void itemStateChanged(ItemEvent arg0) {
-                    if (ItemEvent.SELECTED == arg0.getStateChange()) {
-                        display.getVisualization().getItemVisualizationFilter().setSubEdgeFilter(true);
-                        display.getVisualization().refreshFilter();
-                    } else {
-                        display.getVisualization().getItemVisualizationFilter().setSubEdgeFilter(false);
-                        display.getVisualization().refreshFilter();
-                    }
-                }
-            });
+            chSubClass = new JCheckBox("krawędzie SubEdge");
+            chSubClass.setActionCommand(CHECKBOX_SUBCLASS_COMMAND);
+            chSubClass.setSelected(true);
+            chSubClass.addActionListener(checkboxListener);	
             checkboxPanel.add(chSubClass);
 
 
-            Checkbox chDisjointEdge = new Checkbox("Wyłącz krawędzie DisjointEdge");
-            chDisjointEdge.addItemListener(new ItemListener() {
-
-                public void itemStateChanged(ItemEvent arg0) {
-                    if (ItemEvent.SELECTED == arg0.getStateChange()) {
-                        display.getVisualization().getItemVisualizationFilter().setDisjointEdgeFilter(true);
-                        display.getVisualization().refreshFilter();
-                        display.repaint();
-                    } else {
-                        display.getVisualization().getItemVisualizationFilter().setDisjointEdgeFilter(false);
-                        display.getVisualization().refreshFilter();
-                        display.repaint();
-                    }
-                }
-            });
+            chDisjointEdge = new JCheckBox("DisjointEdge");
+            chDisjointEdge.setActionCommand(CHECKBOX_DISJOINT_CLASS_COMMAND);
+            chDisjointEdge.addActionListener(checkboxListener);
+            chDisjointEdge.setSelected(true);
             checkboxPanel.add(chDisjointEdge);
+            
+            chEquivalent = new JCheckBox("EquivalentEdge");
+            chEquivalent.setActionCommand(CHECKBOX_EQUIVALENT_CLASS_COMMAND);
+            chEquivalent.addActionListener(checkboxListener);
+            chEquivalent.setSelected(true);
+            checkboxPanel.add(chEquivalent);
 
+            chCardinalityNode = new JCheckBox("Kardynalność");
+            chCardinalityNode.setActionCommand(CHECKBOX_CARDINALITY_COMMAND);
+            chCardinalityNode.addActionListener(checkboxListener);
+            chCardinalityNode.setSelected(true);
+            checkboxPanel.add(chCardinalityNode);
+            
+            chUnionOf = new JCheckBox("UnionOf");
+            chUnionOf.setActionCommand(CHECKBOX_UNIONOF_COMMAND);
+            chUnionOf.addActionListener(checkboxListener);
+            chUnionOf.setSelected(true);
+            checkboxPanel.add(chUnionOf);
+            
+            chIntersecionOf = new JCheckBox("IntersecionOf");
+            chIntersecionOf.setActionCommand(CHECKBOX_INTERSECTION_COMMAND);
+            chIntersecionOf.addActionListener(checkboxListener);
+            chIntersecionOf.setSelected(true);
+            checkboxPanel.add(chIntersecionOf);            
+            
+            chComplementOf = new JCheckBox("Complement");
+            chComplementOf.setActionCommand(CHECKBOX_COMPLEMENT_COMMAND);
+            chComplementOf.addActionListener(checkboxListener);
+            chComplementOf.setSelected(true);
+            checkboxPanel.add(chComplementOf);
+            
+            
+            chIndywidual = new JCheckBox("Individual");
+            chIndywidual.setActionCommand(CHECKBOX_INDYVIDUAL_COMMAND);
+            chIndywidual.addActionListener(checkboxListener);
+            chIndywidual.setSelected(true);
+            checkboxPanel.add(chIndywidual);
+            
+            chInstanceOf = new JCheckBox("InstanceOf");
+            chInstanceOf.setActionCommand(CHECKBOX_INSTANCEOF_COMMAND);
+            chInstanceOf.addActionListener(checkboxListener);
+            chInstanceOf.setSelected(true);
+            checkboxPanel.add(chInstanceOf);
+            
+            chDifferent = new JCheckBox("different");
+            chDifferent.setActionCommand(CHECKBOX_DIFFERENT_COMMAND);
+            chDifferent.addActionListener(checkboxListener);
+            chDifferent.setSelected(true);
+            checkboxPanel.add(chDifferent);
+            
+            chsameas = new JCheckBox("sameAs");
+            chsameas.setActionCommand(CHECKBOX_SAMEAS_COMMAND);
+            chsameas.addActionListener(checkboxListener);
+            chsameas.setSelected(true);
+            checkboxPanel.add(chsameas);
+            
+            choneof = new JCheckBox("oneOf");
+            choneof.setActionCommand(CHECKBOX_ONEOF_COMMAND);
+            choneof.addActionListener(checkboxListener);
+            choneof.setSelected(true);
+            checkboxPanel.add(choneof);
             visValues.add(checkboxPanel);
 
+            //property
+            
+            chproperty = new JCheckBox("Property");
+            chproperty.setActionCommand(CHECKBOX_PROPERTY_COMMAND);
+            chproperty.addActionListener(checkboxListener);
+            chproperty.setSelected(true);
+            checkboxPanel.add(chproperty);
+            visValues.add(checkboxPanel);
+            
+            chSubProperty = new JCheckBox("subProperty");
+            chSubProperty.setActionCommand(CHECKBOX_SUBPROPERTY_COMMAND);
+            chSubProperty.addActionListener(checkboxListener);
+            chSubProperty.setSelected(true);
+            checkboxPanel.add(chSubProperty);
+            visValues.add(checkboxPanel);
+            
+            chEquivalentProperty = new JCheckBox("equivalentProperty");
+            chEquivalentProperty.setActionCommand(CHECKBOX_EQUIVALENT_COMMAND);
+            chEquivalentProperty.addActionListener(checkboxListener);
+            chEquivalentProperty.setSelected(true);
+            checkboxPanel.add(chEquivalentProperty);
+            visValues.add(checkboxPanel);
+            
+            chFunctionalProperty = new JCheckBox("functionalProperty");
+            chFunctionalProperty.setActionCommand(CHECKBOX_FUNCTIONALPROPERTY_COMMAND);
+            chFunctionalProperty.addActionListener(checkboxListener);
+            chFunctionalProperty.setSelected(true);
+            checkboxPanel.add(chFunctionalProperty);
+            visValues.add(checkboxPanel);
+            
+            chInversFunctionalProperty = new JCheckBox("inversFunctionalProperty");
+            chInversFunctionalProperty.setActionCommand(CHECKBOX_INVERSFUNCTIONALPROPERTY_COMMAND);
+            chInversFunctionalProperty.addActionListener(checkboxListener);
+            chInversFunctionalProperty.setSelected(true);
+            checkboxPanel.add(chInversFunctionalProperty);
+            visValues.add(checkboxPanel);
+            
+            chSymmetricProperty = new JCheckBox("symmetricProperty");
+            chSymmetricProperty.setActionCommand(CHECKBOX_SYMMETRICPROPERTY_COMMAND);
+            chSymmetricProperty.addActionListener(checkboxListener);
+            chSymmetricProperty.setSelected(true);
+            checkboxPanel.add(chSymmetricProperty);
+            visValues.add(checkboxPanel);
+            
+            chTransitiveProperty = new JCheckBox("transitiveProperty");
+            chTransitiveProperty.setActionCommand(CHECKBOX_TRANSITIVEPROPERTY_COMMAND);
+            chTransitiveProperty.addActionListener(checkboxListener);
+            chTransitiveProperty.setSelected(true);
+            checkboxPanel.add(chTransitiveProperty);
+            visValues.add(checkboxPanel);
+            
+            chInstanceProperty = new JCheckBox("instancePropertyEdge");
+            chInstanceProperty.setActionCommand(CHECKBOX_INSTANCEPROPERTY_COMMAND);
+            chInstanceProperty.addActionListener(checkboxListener);
+            chInstanceProperty.setSelected(true);
+            checkboxPanel.add(chInstanceProperty);
+            visValues.add(checkboxPanel);
+            
+            chDomain = new JCheckBox("domain");
+            chDomain.setActionCommand(CHECKBOX_DOMAIN_COMMAND);
+            chDomain.addActionListener(checkboxListener);
+            chDomain.setSelected(true);
+            checkboxPanel.add(chDomain);
+            visValues.add(checkboxPanel);
+            
+            chRange = new JCheckBox("range");
+            chRange.setActionCommand(CHECKBOX_RANGE_COMMAND);
+            chRange.addActionListener(checkboxListener);
+            chRange.setSelected(true);
+            checkboxPanel.add(chRange);
+            visValues.add(checkboxPanel);
+            
+            
             Box v1 = new Box(BoxLayout.Y_AXIS);
             JButton but = new JButton("Wł/Wy Animację");
             but.addActionListener(new ActionListener() {
@@ -198,11 +335,233 @@ public class Demo {
             frame.pack(); // layout components in window
             frame.setVisible(true); // show the window
 
-            p.close();
-        } catch (Exception ex) {
-            Logger.getLogger(Demo.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
 
+    }
+    class CheckBoxListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			if (e.getActionCommand().equals(CHECKBOX_CLASS_COMMAND)){
+				if (chClass.isSelected()){
+					FilterOptions.classFilter = true;
+					chSubClass.setEnabled(true);
+					chDisjointEdge.setEnabled(true);
+					chUnionOf.setEnabled(true);
+					chIntersecionOf.setEnabled(true);
+					chCardinalityNode.setEnabled(true);
+					chComplementOf.setEnabled(true);
+					chEquivalent.setEnabled(true);
+					
+				}else{
+					FilterOptions.classFilter = false;
+					chSubClass.setEnabled(false);
+					chDisjointEdge.setEnabled(false);
+					chUnionOf.setEnabled(false);
+					chIntersecionOf.setEnabled(false);
+					chCardinalityNode.setEnabled(false);
+					chComplementOf.setEnabled(false);
+					chEquivalent.setEnabled(false);
+				}
+			}else
+			if (e.getActionCommand().equals(CHECKBOX_SUBCLASS_COMMAND)){
+				if (chSubClass.isSelected()){
+					FilterOptions.subClassEdge = true;
+					
+				}else{
+					FilterOptions.subClassEdge = false;
+				}
+			}else
+			if (e.getActionCommand().equals(CHECKBOX_DISJOINT_CLASS_COMMAND)){
+				if (chDisjointEdge.isSelected()){
+					FilterOptions.disjointClassEdge = true;
+				}else{
+					FilterOptions.disjointClassEdge = false;
+				}
+			}else
+			if (e.getActionCommand().equals(CHECKBOX_UNIONOF_COMMAND)){
+				if (chUnionOf.isSelected()){
+						FilterOptions.unionOf = true;
+				}else{
+						FilterOptions.unionOf = false;
+				}
+			}else
+			if (e.getActionCommand().equals(CHECKBOX_INTERSECTION_COMMAND)){
+				if (chIntersecionOf.isSelected()){
+						FilterOptions.intersectionOf = true;
+				}else{
+						FilterOptions.intersectionOf = false;
+				}
+			}else
+			if (e.getActionCommand().equals(CHECKBOX_EQUIVALENT_CLASS_COMMAND)){
+			if (chEquivalent.isSelected()){
+					FilterOptions.equivalentClassEdge = true;
+			}else{
+				FilterOptions.equivalentClassEdge = false;
+			}
+			}else
+				if (e.getActionCommand().equals(CHECKBOX_COMPLEMENT_COMMAND)){
+					if (chComplementOf.isSelected()){
+							FilterOptions.complementOf = true;
+					}else{
+						FilterOptions.complementOf = false;
+					}
+				}else
+			if (e.getActionCommand().equals(CHECKBOX_CARDINALITY_COMMAND)){
+				if (chCardinalityNode.isSelected()){
+					FilterOptions.cardinality = true;
+				}else{
+					FilterOptions.cardinality = false;
+				}
+			}else
+			if (e.getActionCommand().equals(CHECKBOX_INDYVIDUAL_COMMAND)){
+				if (chIndywidual.isSelected()){
+					FilterOptions.individual = true;
+					chInstanceOf.setEnabled(true);
+					chDifferent.setEnabled(true);
+					chsameas.setEnabled(true);
+					choneof.setEnabled(true);
+				}else{
+					FilterOptions.individual = false;
+					chInstanceOf.setEnabled(false);
+					chDifferent.setEnabled(false);
+					chsameas.setEnabled(false);
+					choneof.setEnabled(false);
+				}
+			}else
+			if (e.getActionCommand().equals(CHECKBOX_INSTANCEOF_COMMAND)){
+				if (chInstanceOf.isSelected()){
+					FilterOptions.instanceOfEdge = true;
+				}else{
+					FilterOptions.instanceOfEdge = false;
+				}
+			}else
+			if (e.getActionCommand().equals(CHECKBOX_DIFFERENT_COMMAND)){
+				if (chDifferent.isSelected()){
+					FilterOptions.different = true;
+				}else{
+					FilterOptions.different = false;
+				}
+			}else
+			if (e.getActionCommand().equals(CHECKBOX_SAMEAS_COMMAND)){
+				if (chsameas.isSelected()){
+					FilterOptions.sameAs = true;
+				}else{
+					FilterOptions.sameAs = false;
+				}
+			}else
+			if (e.getActionCommand().equals(CHECKBOX_ONEOF_COMMAND)){
+				if (choneof.isSelected()){
+					FilterOptions.oneOf = true;
+				}else{
+					FilterOptions.oneOf = false;
+
+				}
+			}else//property
+			if (e.getActionCommand().equals(CHECKBOX_PROPERTY_COMMAND)){
+				if (chproperty.isSelected()){
+					FilterOptions.property = true;
+					chSubProperty.setEnabled(true);
+					chEquivalentProperty.setEnabled(true);
+					chFunctionalProperty.setEnabled(true);
+					chInversFunctionalProperty.setEnabled(true);
+					chSymmetricProperty.setEnabled(true);
+					chTransitiveProperty.setEnabled(true);
+					chInstanceProperty.setEnabled(true);
+					chDomain.setEnabled(true);
+					chRange.setEnabled(true);
+					chInverseOfProperty.setEnabled(true);
+					
+				}else{
+					FilterOptions.property = false;
+					chSubProperty.setEnabled(false);
+					chEquivalentProperty.setEnabled(false);
+					chFunctionalProperty.setEnabled(false);
+					chInversFunctionalProperty.setEnabled(false);
+					chSymmetricProperty.setEnabled(false);
+					chTransitiveProperty.setEnabled(false);
+					chInstanceProperty.setEnabled(false);
+					chDomain.setEnabled(false);
+					chRange.setEnabled(false);
+					chInverseOfProperty.setEnabled(false);
+				}
+			}else
+			if (e.getActionCommand().equals(CHECKBOX_SUBPROPERTY_COMMAND)){
+				if (chSubProperty.isSelected()){
+					FilterOptions.subPropertyEdge = true;
+				}else{
+					FilterOptions.subPropertyEdge = false;
+				}
+			}else
+			if (e.getActionCommand().equals(CHECKBOX_EQUIVALENT_COMMAND)){
+				if (chEquivalentProperty.isSelected()){
+					FilterOptions.equivalentPropertyEdge = true;
+				}else{
+					FilterOptions.equivalentPropertyEdge = false;
+				}
+			}else
+			if (e.getActionCommand().equals(CHECKBOX_INVERSEOFPROPERTY_COMMAND)){
+				if (chInverseOfProperty.isSelected()){
+					FilterOptions.inverseOfProperty = true;
+				}else{
+					FilterOptions.inverseOfProperty = false;
+				}
+			}else	
+			if (e.getActionCommand().equals(CHECKBOX_FUNCTIONALPROPERTY_COMMAND)){
+				if (chFunctionalProperty.isSelected()){
+					FilterOptions.functionalProperty = true;
+				}else{
+					FilterOptions.functionalProperty = false;
+				}
+
+			}else
+			if (e.getActionCommand().equals(CHECKBOX_INVERSFUNCTIONALPROPERTY_COMMAND)){
+				if (chInversFunctionalProperty.isSelected()){
+					FilterOptions.inverseFunctionalProperty = true;
+				}else{
+					FilterOptions.inverseFunctionalProperty = false;
+				}
+			}else
+			if (e.getActionCommand().equals(CHECKBOX_SYMMETRICPROPERTY_COMMAND)){
+				if (chSymmetricProperty.isSelected()){
+					FilterOptions.symmetricProperty = true;
+				}else{
+					FilterOptions.symmetricProperty = false;
+				}
+			}else
+			if (e.getActionCommand().equals(CHECKBOX_TRANSITIVEPROPERTY_COMMAND)){
+				if (chTransitiveProperty.isSelected()){
+					FilterOptions.transitiveProperty = true;
+				}else{
+					FilterOptions.transitiveProperty = false;
+				}
+			}else
+			if (e.getActionCommand().equals(CHECKBOX_INSTANCEPROPERTY_COMMAND)){
+				if (chInstanceProperty.isSelected()){
+					FilterOptions.instanceProperty = true;
+				}else{
+					FilterOptions.instanceProperty = false;
+				}
+			}else
+			if (e.getActionCommand().equals(CHECKBOX_DOMAIN_COMMAND)){
+				if (chDomain.isSelected()){
+					FilterOptions.domain = true;
+				}else{
+					FilterOptions.domain = false;
+				}
+			}else
+			if (e.getActionCommand().equals(CHECKBOX_RANGE_COMMAND)){
+				if (chRange.isSelected()){
+					FilterOptions.range = true;
+				}else{
+					FilterOptions.range = false;
+				}
+			}
+			
+	
+			display.getVisualization().refreshFilter();			
+		}
+    	
     }
 }
