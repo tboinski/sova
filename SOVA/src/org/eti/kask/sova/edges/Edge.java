@@ -112,14 +112,6 @@ public class Edge
 		this.arrowHeadColor = arrowHeadColor;
 	}
 
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.7F2F96F8-B319-8EE3-7EDB-3C2A09BB1022]
-    // </editor-fold> 
-    /*public void renderShape (Graphics2D g, VisualItem item, Point2D start, Point2D end) {
-
-
-
-    }*/
 
 
 

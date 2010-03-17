@@ -8,10 +8,10 @@ import org.eti.kask.sova.options.EdgeColors;
 /**
  *  Klasa reprezentująca krawędź związku OWL SubClass pomiędzy klasami.
  */
-public class SubEdge extends Edge
+public class SubClassEdge extends Edge
 {
 
-	public SubEdge()
+	public SubClassEdge()
 	{
 		super();
 		hasInvertedArrow = true;
@@ -32,7 +32,7 @@ public class SubEdge extends Edge
 	@Override
 	public Color getStrokeColorFromScheme(EdgeColors colorScheme)
 	{
-		return colorScheme.getSubEdgeColor();
+		return colorScheme.getSubClassEdgeColor();
 	}
 }
 
