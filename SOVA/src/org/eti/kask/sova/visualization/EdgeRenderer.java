@@ -7,6 +7,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import org.eti.kask.sova.edges.Edge;
+import org.eti.kask.sova.graph.Constants;
 import org.eti.kask.sova.options.EdgeColors;
 import org.eti.kask.sova.utils.VisualizationProperties;
 import prefuse.util.ColorLib;
@@ -32,7 +33,7 @@ public class EdgeRenderer extends prefuse.render.EdgeRenderer
 	{
 		EdgeItem ei = (EdgeItem) item;
 		int edgeRowNumber = ei.getRow();
-		Edge ourEdge = (Edge) ei.getGraph().getEdgeTable().get(edgeRowNumber, "edge");
+		Edge ourEdge = (Edge) ei.getGraph().getEdgeTable().get(edgeRowNumber,Constants.GRAPH_EDGES);
 
 		// rysowanie krawędzi
 		Shape shape = getShape(item);

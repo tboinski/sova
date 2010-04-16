@@ -19,7 +19,7 @@ public class AnonymousClassNode extends Node
 	{
 		super();
 		label = "A";
-                anonumousId=0;
+        anonumousId=0;
 	}
 
 	/**

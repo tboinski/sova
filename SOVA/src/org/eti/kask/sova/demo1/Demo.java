@@ -1,7 +1,6 @@
 package org.eti.kask.sova.demo1;
 
 
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,15 +18,24 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSplitPane;
+
+import org.coode.owl.functionalrenderer.OWLFunctionalSyntaxOntologyStorer;
+import org.coode.owl.rdf.rdfxml.RDFXMLOntologyStorer;
+import org.coode.owlapi.owlxml.renderer.OWLXMLOntologyStorer;
 import org.eti.kask.sova.visualization.FilterOptions;
 import org.eti.kask.sova.visualization.OVDisplay;
 import org.semanticweb.owl.apibinding.OWLManager;
 import org.semanticweb.owl.model.OWLOntologyCreationException;
 import org.semanticweb.owl.model.OWLOntologyManager;
+import org.semanticweb.owl.util.NonMappingOntologyURIMapper;
 import org.eti.kask.sova.utils.VisualizationProperties;
 import org.eti.kask.sova.visualization.ForceDirectedVis;
-import prefuse.controls.HoverActionControl;
-import prefuse.controls.NeighborHighlightControl;
+
+import uk.ac.manchester.cs.owl.EmptyInMemOWLOntologyFactory;
+import uk.ac.manchester.cs.owl.OWLDataFactoryImpl;
+import uk.ac.manchester.cs.owl.OWLOntologyManagerImpl;
+import uk.ac.manchester.cs.owl.ParsableOWLOntologyFactory;
+import uk.ac.manchester.cs.owl.mansyntaxrenderer.ManchesterOWLSyntaxOntologyStorer;
 
 /**
  *
@@ -71,22 +79,21 @@ public class Demo {
 
         
             display = new OVDisplay();
-            display.setSize(720, 500); // set display size
 	    VisualizationProperties.instanceOf().loadProperties(Constants.PROPERTIES);
             // zoom with vertical right-drag
             OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+                
             URI physicalURI = URI.create(Constants.ONTO_TEST_DIRECTORY);
             try {
                 // Now ask the manager to load the ontology
+            	
                 display.generateGraphFromOWl(manager.loadOntologyFromPhysicalURI(physicalURI));
+//              display.generateTreeFromOWl(manager.loadOntologyFromPhysicalURI(physicalURI));
             } catch (OWLOntologyCreationException ex) {
                 Logger.getLogger(Demo.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            System.out.println(VisualizationProperties.instanceOf().getProperty("node.name", "default string"));
-            display.setBackground(VisualizationProperties.instanceOf().getPropertyColor("node.color.cardinalityNodeColor", Color.WHITE));
-            display.addControlListener(new NeighborHighlightControl("repaint"));
-            display.addControlListener(new HoverActionControl("repaint"));
+
             // create a new window to hold the visualization
             JFrame frame = new JFrame("SOVA prefuse usage demo");
             // ensure application exits when window is closed
@@ -112,40 +119,40 @@ public class Demo {
             });
             JPanel visValues = new JPanel();
             visValues.setLayout(new BoxLayout(visValues, BoxLayout.Y_AXIS));
-            if (display.getGraphLayout() == OVDisplay.FORCE_DIRECTED_LAYOUT) {
-                visValues.add(((ForceDirectedVis)display.getVisualization()).getControlPanel());
-            }
+//            if (display.getGraphLayout() == OVDisplay.FORCE_DIRECTED_LAYOUT) {
+//                  visValues.add(((ForceDirectedVis)display.getVisualization()).getControlPanel());
+//            }
             
-            visValues.add(display.getVisualization().getDistanceControlPanel());
+//            visValues.add(display.getVisualization().getDistanceControlPanel());
             JPanel buttonPanel = new JPanel(new GridLayout(2, 1));
             buttonPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Rodzaje wizualizacji"));
 
+//
+//            JRadioButton forceDirectedRadial = new JRadioButton("ForceDirectedLayout", true);
+//            forceDirectedRadial.addActionListener(new ActionListener() {
+//
+//                public void actionPerformed(ActionEvent arg0) {
+//                    display.setGraphLayout(OVDisplay.FORCE_DIRECTED_LAYOUT);
+//                    display.refreshVisualization();
+//                    display.repaint();
+//
+//                }
+//            });
+//            JRadioButton radialTreeRadial = new JRadioButton("RadialTreeLayout", false);
+//            radialTreeRadial.addActionListener(new ActionListener() {
+//
+//                public void actionPerformed(ActionEvent arg0) {
+//                    display.setGraphLayout(OVDisplay.RADIAL_TREE_LAYOUT);
+//                    display.refreshVisualization();
+//                    display.repaint();
+//                }
+//            });
+//            ButtonGroup radialGroup = new ButtonGroup();
+//            radialGroup.add(forceDirectedRadial);
+//            radialGroup.add(radialTreeRadial);
+//            buttonPanel.add(forceDirectedRadial);
 
-            JRadioButton forceDirectedRadial = new JRadioButton("ForceDirectedLayout", true);
-            forceDirectedRadial.addActionListener(new ActionListener() {
-
-                public void actionPerformed(ActionEvent arg0) {
-                    display.setGraphLayout(OVDisplay.FORCE_DIRECTED_LAYOUT);
-                    display.refreshVisualization();
-                    display.repaint();
-
-                }
-            });
-            JRadioButton radialTreeRadial = new JRadioButton("RadialTreeLayout", false);
-            radialTreeRadial.addActionListener(new ActionListener() {
-
-                public void actionPerformed(ActionEvent arg0) {
-                    display.setGraphLayout(OVDisplay.RADIAL_TREE_LAYOUT);
-                    display.refreshVisualization();
-                    display.repaint();
-                }
-            });
-            ButtonGroup radialGroup = new ButtonGroup();
-            radialGroup.add(forceDirectedRadial);
-            radialGroup.add(radialTreeRadial);
-            buttonPanel.add(forceDirectedRadial);
-
-            buttonPanel.add(radialTreeRadial);
+//            buttonPanel.add(radialTreeRadial);
             buttonPanel.setSize(200, 200);
             visValues.add(buttonPanel);
             CheckBoxListener checkboxListener = new CheckBoxListener();
@@ -275,6 +282,13 @@ public class Demo {
             chSymmetricProperty.addActionListener(checkboxListener);
             chSymmetricProperty.setSelected(true);
             checkboxPanel.add(chSymmetricProperty);
+            visValues.add(checkboxPanel);
+            
+            chInverseOfProperty = new JCheckBox("InversOfProperty");
+            chInverseOfProperty.setActionCommand(CHECKBOX_INVERSEOFPROPERTY_COMMAND);
+            chInverseOfProperty.addActionListener(checkboxListener);
+            chInverseOfProperty.setSelected(true);
+            checkboxPanel.add(chInverseOfProperty);
             visValues.add(checkboxPanel);
             
             chTransitiveProperty = new JCheckBox("transitiveProperty");

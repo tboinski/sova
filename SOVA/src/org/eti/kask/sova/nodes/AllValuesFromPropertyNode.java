@@ -2,8 +2,6 @@ package org.eti.kask.sova.nodes;
 
 import java.awt.Color;
 import org.eti.kask.sova.options.NodeColors;
-import org.eti.kask.sova.options.NodeShapeType;
-import org.eti.kask.sova.options.NodeShapes;
 
 /**
  * Klasa reprezentuje węzeł Property typu AllValuesFrom.

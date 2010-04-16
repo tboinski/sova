@@ -21,7 +21,6 @@ public class OWLtoGraphConverter {
 	Graph graph;
 
 	private Table edges;
-	private Table nodes;
 
 	Hashtable<String, Integer> classes;
 	Hashtable<String, Integer> properties;
@@ -36,7 +35,6 @@ public class OWLtoGraphConverter {
 	private OWLtoGraphConverter() {
 		Debug.sendMessage("OWLtoGraphConverter constructor call");
 		graph = new Graph();
-		nodes = graph.getNodeTable();
 		edges = graph.getEdgeTable();
 		classes = new Hashtable<String, Integer>();
 		properties = new Hashtable<String, Integer>();
@@ -48,7 +46,7 @@ public class OWLtoGraphConverter {
 	public static OWLtoGraphConverter getInstance() {
 		return INSTANCE;
 	}
-
+	
 	/**
 	 * Umieszcza w grafie wszystkie klasy nie-anonimowe zawarte w ontologii oraz
 	 * krawędzie między węzłem thing i klasami będącymi jego subclasses.
@@ -76,6 +74,7 @@ public class OWLtoGraphConverter {
 					edges.set(row, "edge",new org.eti.kask.sova.edges.SubClassEdge());
 				}
 				classes.put(cls.toString(), n.getRow());
+				
 			}
 		}
 
@@ -716,7 +715,7 @@ public class OWLtoGraphConverter {
 		 * "edge", new org.eti.kask.sova.edges.SubEdge() ); }
 		 */
 		for (OWLAxiom axiom : ontology.getAxioms()) {
-
+		
 			if (axiom instanceof OWLSubClassAxiom) {
 				// System.out.println("OWLCLASSAXIOM : " + axiom.toString());
 				int subClassID = 0;

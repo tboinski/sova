@@ -65,6 +65,8 @@ abstract public class OVVisualization extends Visualization {
         DefaultRendererFactory drf = new DefaultRendererFactory(r);
         drf.add(new InGroupPredicate("graph.edges"), er);
         this.setRendererFactory(drf);
+        // ustawienie krawędzi jako nieaktywne 
+    	this.setValue("graph.edges", null, VisualItem.INTERACTIVE, Boolean.FALSE);
     }
 
     /**
@@ -80,9 +82,6 @@ abstract public class OVVisualization extends Visualization {
 
         this.putAction(FILTER_ACTION, filter);
     }
-    protected void restartTupleSetListeners(String gruop){
-  //  TupleSet focusGroup = this.getGroup(Visualization.FOCUS_ITEMS);
-    }
     protected void setDistanceFilter() {
 		// ustawienie podswietlonej klasy
 //		VisualGraph visualGraph = (VisualGraph)this.getSourceData(GRAPH);
@@ -91,7 +90,7 @@ abstract public class OVVisualization extends Visualization {
 //			this.getGroup(Visualization.FOCUS_ITEMS).setTuple(currentClass);
 //			currentClass.setFixed(true);
 //		}
-
+    	if (!FilterOptions.distanceFilter) return;
         ActionList filterDistance = new ActionList();
         TupleSet focusGroup = this.getGroup(Visualization.FOCUS_ITEMS);
         focusGroup.addTupleSetListener(new TupleSetListener() {
@@ -153,7 +152,6 @@ abstract public class OVVisualization extends Visualization {
         filterDist.run();
         itemVisualizationFilter.run();
         this.run(FILTER_ACTION);
-       
         this.repaint();
     }
 
@@ -191,7 +189,7 @@ abstract public class OVVisualization extends Visualization {
      * @return panel ustawuień
      */
     public JPanel getDistanceControlPanel(){
-        final JValueSlider slider = new JValueSlider("Distance", 1, 15, 1);
+        final JValueSlider slider = new JValueSlider("Distance", 1, 15, FilterOptions.distance);
         slider.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                setDistance(slider.getValue().intValue());

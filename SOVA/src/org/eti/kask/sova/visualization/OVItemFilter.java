@@ -3,6 +3,7 @@ package org.eti.kask.sova.visualization;
 
 import java.util.Iterator;
 import org.eti.kask.sova.edges.Edge;
+import org.eti.kask.sova.graph.Constants;
 import prefuse.action.GroupAction;
 import prefuse.data.Node;
 import prefuse.visual.EdgeItem;
@@ -28,7 +29,7 @@ public class OVItemFilter extends GroupAction {
             boolean isVisualItemVisible = item.isVisible();
             if(isVisualItemVisible) {
                 if ((item instanceof Edge) || (item instanceof EdgeItem) || (item instanceof  TableEdgeItem)) {//krawędzie
-                    Object o = ((VisualItem)item).get(OVPredicate.EDGE);
+                    Object o = ((VisualItem)item).get(Constants.GRAPH_EDGES);
                     if ( (o instanceof org.eti.kask.sova.edges.DisjointEdge)&&(!FilterOptions.classFilter || !FilterOptions.disjointClassEdge )) {
                         ((VisualItem)item).setVisible(false);
                     }else
@@ -65,7 +66,7 @@ public class OVItemFilter extends GroupAction {
                     }
 
                 }else{//wierzchołki
-                    Object o = ((VisualItem)item).get(OVPredicate.NODE);
+                    Object o = ((VisualItem)item).get(Constants.GRAPH_NODES);
                     //Class node
                     if ( (o instanceof org.eti.kask.sova.nodes.ClassNode || o instanceof org.eti.kask.sova.nodes.ThingNode 
                     		|| o instanceof org.eti.kask.sova.nodes.NothingNode || o instanceof org.eti.kask.sova.nodes.AnonymousClassNode 

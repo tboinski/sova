@@ -10,7 +10,7 @@ import prefuse.util.ui.JForcePanel;
 
 /**
  * Klasa wizualizujące grafy w oparciu o algorytm ForceDirected
- * @author piotr29
+ * @author Piotr Kunowski
  */
 public class ForceDirectedVis extends OVVisualization {
 
@@ -23,7 +23,7 @@ public class ForceDirectedVis extends OVVisualization {
         ForceDirectedLayout graphLayout =  new ForceDirectedLayout(GRAPH);
         ActionList layout = new ActionList(Activity.INFINITY);
         //ustawienie długości krawędzi 
-        graphLayout.getForceSimulator().getForces()[2].setParameter(1, 160F);
+        graphLayout.getForceSimulator().getForces()[2].setParameter(1, 100F);
         layout.add(graphLayout);
         layout.add(new RepaintAction());
         this.putAction(LAYOUT_ACTION, layout);

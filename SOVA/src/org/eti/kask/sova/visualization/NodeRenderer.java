@@ -2,14 +2,11 @@ package org.eti.kask.sova.visualization;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.RectangularShape;
-import org.eti.kask.sova.nodes.ThingNode;
 import org.eti.kask.sova.options.NodeColors;
 import org.eti.kask.sova.options.NodeShapes;
 import org.eti.kask.sova.utils.Debug;
@@ -18,7 +15,6 @@ import prefuse.Constants;
 import prefuse.render.ShapeRenderer;
 import prefuse.util.ColorLib;
 import prefuse.util.GraphicsLib;
-import prefuse.visual.NodeItem;
 import prefuse.visual.VisualItem;
 
 /**
@@ -37,6 +33,7 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 	 */
 	public NodeRenderer()
 	{
+		super();
 	}
 
 	public NodeRenderer(String SOVAnodeField)
@@ -50,12 +47,7 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 	@Override
 	public void render(Graphics2D g, VisualItem item)
 	{
-		
-
-		NodeItem ni = (NodeItem) item;
-		int nodeRowNumber = ni.getRow();
-		org.eti.kask.sova.nodes.Node SOVAnode = (org.eti.kask.sova.nodes.Node) ni.getGraph().getNodeTable().get(nodeRowNumber, "node");
-
+		org.eti.kask.sova.nodes.Node SOVAnode = (org.eti.kask.sova.nodes.Node)item.get(org.eti.kask.sova.graph.Constants.GRAPH_NODES);
 		// Ustawienie kolorów wypełnienia, obramowania oraz tekstu węzła
 		item.setFillColor(ColorLib.color(SOVAnode.getFillColorFromScheme(colorScheme)));
 		item.setStrokeColor(ColorLib.color(Color.BLACK));
