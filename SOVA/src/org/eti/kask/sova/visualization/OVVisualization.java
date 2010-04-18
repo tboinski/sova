@@ -33,6 +33,7 @@ abstract public class OVVisualization extends Visualization {
     protected static final String FILTER_DISTANCE ="distance_filter";
     protected GraphDistanceFilter filterDist = null;
     private OVItemFilter itemVisualizationFilter = null;
+    protected boolean gravitation = true;
 
 
 
@@ -51,8 +52,7 @@ abstract public class OVVisualization extends Visualization {
      */
     public void setVisualizationSettings() {
         setVisualizationRender();
-        setVisualizationFilter();
-//        setDistanceFilter();
+//        setVisualizationFilter();
         setVisualizationLayout();
     }
 
@@ -69,19 +69,7 @@ abstract public class OVVisualization extends Visualization {
     	this.setValue("graph.edges", null, VisualItem.INTERACTIVE, Boolean.FALSE);
     }
 
-    /**
-     * dodanie filtrów wizualizacji. 
-     */
-    protected void setVisualizationFilter() {
-        ActionList filter = new ActionList();
-//        filterOVPredicate = new OVPredicate();
-//        VisibilityFilter nodeDegreeFilter = new VisibilityFilter(/*this,"graph.edges",*/ filterOVPredicate);
-//        itemVisualizationFilter = new OVItemFilter();
-//
-//        filter.add(itemVisualizationFilter);
 
-        this.putAction(FILTER_ACTION, filter);
-    }
     protected void setDistanceFilter() {
 		// ustawienie podswietlonej klasy
 //		VisualGraph visualGraph = (VisualGraph)this.getSourceData(GRAPH);
@@ -108,6 +96,9 @@ abstract public class OVVisualization extends Visualization {
                 }
              
                 run(FILTER_DISTANCE);
+                if (!gravitation){
+                	refreshFilter();
+                }
 
             }
         });
@@ -167,6 +158,7 @@ abstract public class OVVisualization extends Visualization {
      * funkcja wyłączająca samorozmieszczanie - grawitację obiektów
      */
     public void stopLayout() {
+    	gravitation = false;
         this.cancel(LAYOUT_ACTION);
 
     }
@@ -175,6 +167,7 @@ abstract public class OVVisualization extends Visualization {
      * funkcja włączająca samorozmieszczanie - grawitację obiektów
      */
     public void startLayout() {
+    	gravitation = true;
         this.run(LAYOUT_ACTION);
     }
 
