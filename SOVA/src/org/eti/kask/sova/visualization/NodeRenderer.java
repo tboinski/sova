@@ -53,7 +53,9 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 		item.setStrokeColor(ColorLib.color(Color.BLACK));
 		item.setStroke(new BasicStroke(SOVAnode.getStrokeWitdh()));
 		item.setTextColor(ColorLib.color(Color.BLACK));
-
+		if (item.isHighlighted()){
+			item.setFillColor(ColorLib.color(Color.WHITE));
+		}
 		//Dopasowuje kształt węzła do schematu
 		Shape shape = getShape(item);
 		if (shape == null) {
@@ -72,7 +74,6 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 			case ELLIPSE: shape = changeShapeToEllipse(shape);
 					break;
 		}	
-		
 		// Wypełnienie węzła
 		int type = getRenderType(item);
 		if (type == RENDER_TYPE_FILL || type == RENDER_TYPE_DRAW_AND_FILL) {
@@ -92,7 +93,7 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 			g.getTransform().getScaleY());
 		double x = shape.getBounds().getMinX() + size * m_horizBorder;
 		double y = shape.getBounds().getMinY() + size * m_vertBorder;
-
+		
 		// render image
 		if (img != null) {
 			double w = size * img.getWidth(null);
@@ -223,7 +224,9 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 			}
 			drawString(g, fm, text.substring(start), useInt, x+xAxisTranslation, y, tw);
 		}
-
+		if (item.isFixed()){
+			item.setStroke(new BasicStroke(3));
+		}
 		// draw border
 		if (type == RENDER_TYPE_DRAW || type == RENDER_TYPE_DRAW_AND_FILL) {
 			GraphicsLib.paint(g, item, shape, getStroke(item), RENDER_TYPE_DRAW);

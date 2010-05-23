@@ -10,6 +10,7 @@ import prefuse.Display;
 import prefuse.Visualization;
 import prefuse.controls.DragControl;
 import prefuse.controls.FocusControl;
+import prefuse.controls.HoverActionControl;
 import prefuse.controls.NeighborHighlightControl;
 import prefuse.controls.PanControl;
 import prefuse.controls.WheelZoomControl;
@@ -32,19 +33,49 @@ public class OVDisplay extends Display {
     public static final int RADIAL_TREE_LAYOUT = 2;
     private int graphLayout = FORCE_DIRECTED_LAYOUT;
     private Graph graph = null;
-    private OVVisualization visualization;
+    private OVVisualization visualizationForceDirected = null;
+    private OVVisualization visualizationRadialGraph = null;
 
     private OVVisualization getGraphLayoutVis() {
 
         switch (graphLayout) {
-            case 1:
-                return new ForceDirectedVis();
+            case 1: 
+            	if (visualizationForceDirected==null){
+            		initForceDirectedVis();
+            	}
+                return visualizationForceDirected;
             case 2:
-                return new RadialGraphVis();
+            	if (visualizationRadialGraph==null){
+            		initRadialGraphVis();
+            	}
+                return visualizationRadialGraph;
         }
-        return new ForceDirectedVis();
+    	if (visualizationForceDirected==null){
+    		initForceDirectedVis();
+    	}
+        return visualizationForceDirected;
     }
+    private void initForceDirectedVis(){
+    	visualizationForceDirected = new ForceDirectedVis();
+    	visualizationForceDirected = getGraphLayoutVis();
+        VisualGraph visualGraph =  visualizationForceDirected.addGraph(Constants.GRAPH, this.getGraph());
+        visualizationForceDirected.setVisualizationSettings();
+		// ustawienie podswietlonej klasy 
+		if(visualGraph.getNodeCount() > 0) {
+			VisualItem currentClass = (VisualItem) visualGraph.getNode(0);
+			visualizationForceDirected.getGroup(Visualization.FOCUS_ITEMS).setTuple(currentClass);
+			currentClass.setFixed(true);
+		}
+		
+    }
+    
+	private void initRadialGraphVis() {
+		visualizationRadialGraph = new RadialGraphVis();
+		visualizationRadialGraph = getGraphLayoutVis();
+		visualizationRadialGraph.addGraph( Constants.GRAPH, this.getGraph());
+		visualizationRadialGraph.setVisualizationSettings();
 
+	}
     /**
      * Ustawienie trybu wyświetlania
      * @param graphLayout
@@ -59,7 +90,7 @@ public class OVDisplay extends Display {
 
     @Override
     public OVVisualization getVisualization() {
-        return visualization;
+        return getGraphLayoutVis();
     }
 
     public Graph getGraph() {
@@ -83,10 +114,10 @@ public class OVDisplay extends Display {
         this.addControlListener(new ZoomControl()); // zoom with vertical right-drag
         this.addControlListener(new WheelZoomControl());
         this.addControlListener(new NeighborHighlightControl());
-        //this.addControlListener(new FocusControl(1, OVVisualization.LAYOUT_ACTION));
-        this.addControlListener(new FocusControl(1));
         this.addControlListener(new ZoomToFitControl());
-
+		addControlListener(new FocusControl(1, RadialGraphVis.FILTERS));
+		addControlListener(new HoverActionControl(OVVisualization.REPAINT_ACTION));
+       
     }
 
     /**
@@ -96,17 +127,10 @@ public class OVDisplay extends Display {
     public void generateGraphFromOWl(OWLOntology ont) {
         try {       	
             this.setGraph(OWLtoGraphConverter.getInstance().OWLtoGraph(ont));
-            visualization = getGraphLayoutVis();
-            VisualGraph visualGraph =  visualization.addGraph(Constants.GRAPH, this.getGraph());
-            visualization.setVisualizationSettings();
-            this.setVisualization(visualization);
-    		// ustawienie podswietlonej klasy 
-    		if(visualGraph.getNodeCount() > 0) {
-    			VisualItem currentClass = (VisualItem) visualGraph.getNode(0);
-    			visualization.getGroup(Visualization.FOCUS_ITEMS).setTuple(currentClass);
-    			currentClass.setFixed(true);
-    		}
-            visualization.startLayout();
+            OVVisualization vis = getGraphLayoutVis();
+            this.setVisualization(vis);
+            vis.startLayout();           
+
         } catch (Exception ex) {
             Logger.getLogger(OVDisplay.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -121,45 +145,35 @@ public class OVDisplay extends Display {
     public void generateTreeFromOWl(OWLOntology ont) {
         try {       	
            // this.setGraph(OWLtoGraphConverter.getInstance().OWLtoGraph(ont));
-            visualization = new OVNodeLinkTreeLayout();
-             visualization.add(Constants.TREE, OWLtoHierarchyTreeConverter.getInstance().OWLtoTree(ont));
+            visualizationForceDirected = new OVNodeLinkTreeLayout();
+             visualizationForceDirected.add(Constants.TREE, OWLtoHierarchyTreeConverter.getInstance().OWLtoTree(ont));
             
-            visualization.setVisualizationSettings();
-            this.setVisualization(visualization);
+            visualizationForceDirected.setVisualizationSettings();
+            this.setVisualization(visualizationForceDirected);
             setSize(700,600);
             setItemSorter(new TreeDepthItemSorter());
             addControlListener(new ZoomToFitControl());
             addControlListener(new ZoomControl());
             addControlListener(new WheelZoomControl());
             addControlListener(new PanControl());
-            addControlListener(new FocusControl(1, "filter"));
-            
-    		// ustawienie podswietlonej klasy 
-//    		if(visualGraph.getNodeCount() > 0) {
-//    			VisualItem currentClass = (VisualItem) visualGraph.getNode(0);
-//    			visualization.getGroup(Visualization.FOCUS_ITEMS).setTuple(currentClass);
-//    			currentClass.setFixed(true);
-//    		}
-          //  visualization.startLayout();
         } catch (Exception ex) {
             Logger.getLogger(OVDisplay.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-    /**
-     * Ponowne wczytanie zmiennych wizualizacji
-     */
-    public void refreshVisualization() {
-        visualization.reset();
-        visualization = getGraphLayoutVis();
-        visualization.add("graph", this.getGraph());
-        visualization.setVisualizationSettings();
-        visualization.repaint();
-        this.setVisualization(visualization);
-        this.repaint();
 
+    /**
+     * Zmiana algorytmu wizualizacji
+     * @param visLayout
+     */
+    public void changeVisualizationLayout(int visLayout){
+        this.setGraphLayout(visLayout);
+    	this.removeAll();
+        this.setVisualization(getGraphLayoutVis());
+        this.repaint();
+        this.getVisualization().refreshFilter();
     }
-    
+
     
     
 }

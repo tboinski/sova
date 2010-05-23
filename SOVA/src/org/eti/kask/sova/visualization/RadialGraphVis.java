@@ -1,6 +1,9 @@
 package org.eti.kask.sova.visualization;
 
 import java.util.Iterator;
+
+import org.eti.kask.sova.graph.Constants;
+
 import prefuse.Visualization;
 import prefuse.action.ActionList;
 import prefuse.action.GroupAction;
@@ -14,54 +17,101 @@ import prefuse.action.layout.graph.RadialTreeLayout;
 import prefuse.activity.SlowInSlowOutPacer;
 import prefuse.data.Graph;
 import prefuse.data.Node;
+import prefuse.data.Tuple;
+import prefuse.data.event.TupleSetListener;
+import prefuse.data.tuple.DefaultTupleSet;
 import prefuse.data.tuple.TupleSet;
 
 /**
  * klasa wizualizująca graf w oparciu o algorytm RadialGraph
- * @author piotr29
+ * @author Piotr Kunowski
  */
 public class RadialGraphVis extends OVVisualization {
-
+    private static final String tree = Constants.GRAPH;
+    private static final String treeNodes = Constants.GRAPH_NODES;
+    private static final String linear = "linear";
     @Override
     void setVisualizationLayout() {
-        // repaint
-        ActionList repaint = new ActionList();
-        //   repaint.add(recolor);
-        repaint.add(new RepaintAction());
-        this.putAction("repaint", repaint);
+     
 
-        // animate paint change
-        ActionList animatePaint = new ActionList(400);
-        animatePaint.add(new ColorAnimator("node"));
-        animatePaint.add(new RepaintAction());
-        this.putAction("animatePaint", animatePaint);
-
+        addRepaintAction();
+        
         // create the tree layout action
-        RadialTreeLayout treeLayout = new RadialTreeLayout(GRAPH);
+        RadialTreeLayout treeLayout = new RadialTreeLayout(tree);
+        //treeLayout.setAngularBounds(-Math.PI/2, Math.PI);
         this.putAction("treeLayout", treeLayout);
-
-        CollapsedSubtreeLayout subLayout = new CollapsedSubtreeLayout(GRAPH);
+        
+        CollapsedSubtreeLayout subLayout = new CollapsedSubtreeLayout(tree);
         this.putAction("subLayout", subLayout);
-
+        
         // create the filtering and layout
-        ActionList filterLayout = new ActionList();
-        filterLayout.add(new TreeRootAction(GRAPH, this));
-        filterLayout.add(treeLayout);
-        filterLayout.add(subLayout);
-        this.putAction(LAYOUT_ACTION, filterLayout);
-
+        ActionList filter = new ActionList();
+        filter.add(new TreeRootAction(tree,this));
+        filter.add(treeLayout);
+        filter.add(subLayout);
+        if(itemVisualizationFilter==null) initItemVisualizationFilter();
+        filter.add(itemVisualizationFilter);
+        
+        this.putAction(FILTERS, filter);
+        
         // animated transition
         ActionList animate = new ActionList(1250);
         animate.setPacingFunction(new SlowInSlowOutPacer());
         animate.add(new QualityControlAnimator());
-        animate.add(new VisibilityAnimator(GRAPH));
-        animate.add(new PolarLocationAnimator("node", "linear"));
-        animate.add(new ColorAnimator("node"));
+        animate.add(new VisibilityAnimator(tree));
+        animate.add(new PolarLocationAnimator(treeNodes, linear));
+        animate.add(new ColorAnimator(treeNodes));
         animate.add(new RepaintAction());
         this.putAction("animate", animate);
-        this.alwaysRunAfter("layout", "animate");
+        this.alwaysRunAfter(FILTERS, "animate");
+        
+        // filter graph and perform layout
+        this.run(FILTERS);
+        
+        // maintain a set of items that should be interpolated linearly
+        // this isn't absolutely necessary, but makes the animations nicer
+        // the PolarLocationAnimator should read this set and act accordingly
+        this.addFocusGroup(linear, new DefaultTupleSet());
+        this.getGroup(Visualization.FOCUS_ITEMS).addTupleSetListener(
+            new TupleSetListener() {
+                public void tupleSetChanged(TupleSet t, Tuple[] add, Tuple[] rem) {
+                    TupleSet linearInterp = getGroup(linear);
+                    if ( add.length < 1 ) return;
+                    linearInterp.clear();
+                    for ( Node n = (Node)add[0]; n!=null; n=n.getParent() )
+                        linearInterp.addTuple(n);
+                }
+            }
+        );
+ 
+    }
+    
+    /** inicjalizacja filtru elementów  - zmienna itemVisualizationFilter
+     * 
+     */
+    protected void initItemVisualizationFilter(){
+    	super.initItemVisualizationFilter();
+    	itemVisualizationFilter.setRememberOldState(false);
+    }
+    /**
+     * funkcja wyłączająca samorozmieszczanie - grawitację obiektów
+     */
+    public void stopLayout() {
+    	gravitation = false;
+    	this.cancel("animate");
+        this.cancel(LAYOUT_ACTION);
+
     }
 
+    /**
+     * funkcja włączająca samorozmieszczanie - grawitację obiektów
+     */
+    public void startLayout() {
+    	gravitation = true;
+        this.run(FILTERS);
+    	
+    }
+    
     /**
      * Switch the root of the tree by requesting a new spanning tree
      * at the desired root

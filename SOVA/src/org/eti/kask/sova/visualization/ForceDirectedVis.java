@@ -27,12 +27,12 @@ public class ForceDirectedVis extends OVVisualization {
         layout.add(graphLayout);
         layout.add(new RepaintAction());
         this.putAction(LAYOUT_ACTION, layout);
-
+        addRepaintAction();
 
     }
     /**
-     * Zwraca panel ustawień wizualizacji.
-     * @return
+     * 
+     * @return Panel ustawień wizualizacji
      */
     public JPanel getControlPanel(){
         prefuse.action.Action action = this.getAction(OVVisualization.LAYOUT_ACTION);
@@ -45,7 +45,7 @@ public class ForceDirectedVis extends OVVisualization {
     @Override
     public void setVisualizationSettings() {
         super.setVisualizationSettings();
-        this.setDistanceFilter();
+        this.addFilters();
 
     }
 }

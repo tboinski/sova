@@ -18,8 +18,25 @@ import prefuse.visual.tuple.TableEdgeItem;
  * @see {@link FilterOptions}  
  */
 public class OVItemFilter extends GroupAction {
+	private boolean rememberOldState = true;
+	
 
-    @Override
+    public boolean isRememberOldState() {
+		return rememberOldState;
+	}
+
+    /**
+     * Wartość rememberOldState (domyślnie true) pozwala na zapamiętanie wcześniejszych 
+     * filtrów. W tym przypadku odfiltrowanie elementy nie są uwzględiane przy sprawdzaniu.
+     * Wartość wymagana przy filtrze na odległość. 
+     * @param rememberOldState
+     */
+	public void setRememberOldState(boolean rememberOldState) {
+		this.rememberOldState = rememberOldState;
+	}
+
+
+	@Override
     public void run(double frac) {
 
 
@@ -27,7 +44,7 @@ public class OVItemFilter extends GroupAction {
         while ( items.hasNext() ) {
             VisualItem item = (VisualItem)items.next();
             boolean isVisualItemVisible = item.isVisible();
-            if(isVisualItemVisible) {
+            if(isVisualItemVisible || !rememberOldState) {
                 if ((item instanceof Edge) || (item instanceof EdgeItem) || (item instanceof  TableEdgeItem)) {//krawędzie
                     Object o = ((VisualItem)item).get(Constants.GRAPH_EDGES);
                     if ( (o instanceof org.eti.kask.sova.edges.DisjointEdge)&&(!FilterOptions.classFilter || !FilterOptions.disjointClassEdge )) {

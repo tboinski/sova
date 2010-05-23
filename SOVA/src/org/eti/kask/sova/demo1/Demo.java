@@ -19,23 +19,15 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSplitPane;
 
-import org.coode.owl.functionalrenderer.OWLFunctionalSyntaxOntologyStorer;
-import org.coode.owl.rdf.rdfxml.RDFXMLOntologyStorer;
-import org.coode.owlapi.owlxml.renderer.OWLXMLOntologyStorer;
 import org.eti.kask.sova.visualization.FilterOptions;
 import org.eti.kask.sova.visualization.OVDisplay;
 import org.semanticweb.owl.apibinding.OWLManager;
+import org.semanticweb.owl.model.OWLOntology;
 import org.semanticweb.owl.model.OWLOntologyCreationException;
 import org.semanticweb.owl.model.OWLOntologyManager;
-import org.semanticweb.owl.util.NonMappingOntologyURIMapper;
 import org.eti.kask.sova.utils.VisualizationProperties;
 import org.eti.kask.sova.visualization.ForceDirectedVis;
 
-import uk.ac.manchester.cs.owl.EmptyInMemOWLOntologyFactory;
-import uk.ac.manchester.cs.owl.OWLDataFactoryImpl;
-import uk.ac.manchester.cs.owl.OWLOntologyManagerImpl;
-import uk.ac.manchester.cs.owl.ParsableOWLOntologyFactory;
-import uk.ac.manchester.cs.owl.mansyntaxrenderer.ManchesterOWLSyntaxOntologyStorer;
 
 /**
  *
@@ -70,6 +62,7 @@ public class Demo {
 	
     public  boolean doLayout = true;
     public  OVDisplay display;
+    private OWLOntology ontology = null;
     private JCheckBox chClass = null, chSubClass=null,
     chDisjointEdge=null,chCardinalityNode=null,chUnionOf=null,chIntersecionOf=null,chComplementOf=null,chEquivalent=null;
     private JCheckBox chIndywidual=null,chInstanceOf=null, chDifferent=null, chsameas=null, choneof=null; 
@@ -86,8 +79,8 @@ public class Demo {
             URI physicalURI = URI.create(Constants.ONTO_TEST_DIRECTORY);
             try {
                 // Now ask the manager to load the ontology
-            	
-                display.generateGraphFromOWl(manager.loadOntologyFromPhysicalURI(physicalURI));
+            	ontology = manager.loadOntologyFromPhysicalURI(physicalURI);
+                display.generateGraphFromOWl(ontology);
 //              display.generateTreeFromOWl(manager.loadOntologyFromPhysicalURI(physicalURI));
             } catch (OWLOntologyCreationException ex) {
                 Logger.getLogger(Demo.class.getName()).log(Level.SEVERE, null, ex);
@@ -119,40 +112,53 @@ public class Demo {
             });
             JPanel visValues = new JPanel();
             visValues.setLayout(new BoxLayout(visValues, BoxLayout.Y_AXIS));
-//            if (display.getGraphLayout() == OVDisplay.FORCE_DIRECTED_LAYOUT) {
-//                  visValues.add(((ForceDirectedVis)display.getVisualization()).getControlPanel());
-//            }
+            if (display.getGraphLayout() == OVDisplay.FORCE_DIRECTED_LAYOUT) {
+                  visValues.add(((ForceDirectedVis)display.getVisualization()).getControlPanel());
+            }
             
-//            visValues.add(display.getVisualization().getDistanceControlPanel());
+            visValues.add(display.getVisualization().getDistanceControlPanel());
             JPanel buttonPanel = new JPanel(new GridLayout(2, 1));
             buttonPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Rodzaje wizualizacji"));
 
-//
-//            JRadioButton forceDirectedRadial = new JRadioButton("ForceDirectedLayout", true);
-//            forceDirectedRadial.addActionListener(new ActionListener() {
-//
-//                public void actionPerformed(ActionEvent arg0) {
+
+            JRadioButton forceDirectedRadial = new JRadioButton("ForceDirectedLayout", true);
+            forceDirectedRadial.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent arg0) {
 //                    display.setGraphLayout(OVDisplay.FORCE_DIRECTED_LAYOUT);
 //                    display.refreshVisualization();
 //                    display.repaint();
-//
-//                }
-//            });
-//            JRadioButton radialTreeRadial = new JRadioButton("RadialTreeLayout", false);
-//            radialTreeRadial.addActionListener(new ActionListener() {
-//
-//                public void actionPerformed(ActionEvent arg0) {
-//                    display.setGraphLayout(OVDisplay.RADIAL_TREE_LAYOUT);
+//                    display.setGraphLayout(OVDisplay.FORCE_DIRECTED_LAYOUT);
 //                    display.refreshVisualization();
 //                    display.repaint();
-//                }
-//            });
-//            ButtonGroup radialGroup = new ButtonGroup();
-//            radialGroup.add(forceDirectedRadial);
-//            radialGroup.add(radialTreeRadial);
-//            buttonPanel.add(forceDirectedRadial);
+                	display.changeVisualizationLayout(OVDisplay.FORCE_DIRECTED_LAYOUT);
 
-//            buttonPanel.add(radialTreeRadial);
+
+                }
+            });
+            JRadioButton radialTreeRadial = new JRadioButton("RadialTreeLayout", false);
+            radialTreeRadial.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent arg0) {
+//                    display.setGraphLayout(OVDisplay.RADIAL_TREE_LAYOUT);
+//                    display.getVisualization().removeDistanceFilter();
+//                    display.refreshVisualization();
+//                    display.getVisualization().startLayout();
+//                    display.repaint();
+//                	display.reset();
+//                	display.removeAll();
+//                	display.setGraphLayout(OVDisplay.RADIAL_TREE_LAYOUT);
+//                	display.generateGraphFromOWl(ontology);
+                	display.changeVisualizationLayout(OVDisplay.RADIAL_TREE_LAYOUT);
+          
+                }
+            });
+            ButtonGroup radialGroup = new ButtonGroup();
+            radialGroup.add(forceDirectedRadial);
+            radialGroup.add(radialTreeRadial);
+            buttonPanel.add(forceDirectedRadial);
+
+            buttonPanel.add(radialTreeRadial);
             buttonPanel.setSize(200, 200);
             visValues.add(buttonPanel);
             CheckBoxListener checkboxListener = new CheckBoxListener();
@@ -318,9 +324,18 @@ public class Demo {
             chRange.setSelected(true);
             checkboxPanel.add(chRange);
             visValues.add(checkboxPanel);
-            
+            // create a search panel for the tree map
+//            SearchQueryBinding sq = new SearchQueryBinding(
+//                 (Table)display.getVisualization().getGroup(org.eti.kask.sova.graph.Constants.GRAPH_NODES), "node",
+//                 (SearchTupleSet)display.getVisualization().getGroup(Visualization.SEARCH_ITEMS));
+//            
+//            JSearchPanel search = sq.createSearchPanel();
+//            search.setShowResultCount(true);
+//            search.setBorder(BorderFactory.createEmptyBorder(5,5,4,0));
+//            search.setFont(FontLib.getFont("Tahoma", Font.PLAIN, 11));
             
             Box v1 = new Box(BoxLayout.Y_AXIS);
+//            v1.add(search);
             JButton but = new JButton("Wł/Wy Animację");
             but.addActionListener(new ActionListener() {
 
