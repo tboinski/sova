@@ -54,6 +54,16 @@
 		<mkdir dir="${classes}/lib" />
 		<copy file="${prefuse.lib}" todir="${classes}/lib" />
 		<copy file="${sova.lib}" todir="${classes}/lib" />
+		<copy todir="${classes}/lib/pellet">
+		  <fileset dir="${lib}/pellet">
+		    <include name="**/*.jar"/>
+		  </fileset>
+		</copy>
+		<copy todir="${classes}/lib/pellet/xsdlib">
+		  <fileset dir="${lib}/pellet/xsdlib">
+		    <include name="**/*.jar"/>
+		  </fileset>
+		</copy>
 		<jar jarfile="${build}/${plugin}.jar" basedir="${classes}" manifest="./META-INF/MANIFEST.MF" />
 	</target>
 

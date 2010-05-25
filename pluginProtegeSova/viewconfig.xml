@@ -7,7 +7,7 @@
             </Component>
         </CNode>
         <CNode>
-            <Component label="PG ETI SOVA">
+            <Component label="PG ETI SOVA - Visualization">
                 <Property id="pluginId" value="org.pg.eti.kask.ont.pluginSova.pluginSova"/>
             </Component>
         </CNode>

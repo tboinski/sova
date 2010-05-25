@@ -7,7 +7,7 @@ Bundle-Description: SOVA Visiualizatio
 Bundle-Vendor: ETI Group
 Bundle-DocURL: http://www.eti.pg.gda.pl
 Update-Url: http://www.eti.pg.gda.pl
-Bundle-ClassPath: .,lib/SOVA.jar,lib/prefuse.jar
+Bundle-ClassPath: .,lib/SOVA.jar,lib/prefuse.jar,lib/pellet/aterm-java-1.6.jar,lib/pellet/commons-logging-1.1.jar,lib/pellet/pellet.jar,lib/pellet/xsdlib/relaxngDatatype.jar,lib/pellet/xsdlib/xsdlib.jar
 Import-Package: org.osgi.framework
 Bundle-Version: 0.1.2
 Bundle-Activator: org.protege.editor.core.plugin.DefaultPluginActivator

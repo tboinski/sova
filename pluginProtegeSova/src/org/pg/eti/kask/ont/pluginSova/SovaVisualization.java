@@ -14,14 +14,18 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import org.eti.kask.sova.visualization.FilterOptions;
 import org.eti.kask.sova.visualization.OVDisplay;
 import org.protege.editor.owl.ui.view.AbstractOWLViewComponent;
 
 import prefuse.util.ColorLib;
+import prefuse.util.ui.JValueSlider;
 
 
-public class pluginSova extends AbstractOWLViewComponent {
+public class SovaVisualization extends AbstractOWLViewComponent {
 	private static final String CHECKBOX_SUBCLASS_COMMAND = "checkbox_subclass";
 	private static final String CHECKBOX_CLASS_COMMAND = "checkbox_class";
 	private static final String CHECKBOX_DISJOINT_CLASS_COMMAND = "checkbox_disjoint_class";
@@ -59,24 +63,18 @@ public class pluginSova extends AbstractOWLViewComponent {
     private  JPanel leftPanel = null, rightPanel = null, visValues= null;
     @Override
     protected void disposeOWLView() {
-    	System.out.println("DisposeOWLView - SOVA");
-    	//this.remove(leftPanel);
-    	//this.remove(rightPanel);
-    	display.stopEditing();
-       
+    	display.removeDisplayVis();
     }
 
     @Override
     protected void initialiseOWLView() throws Exception {
-    	System.out.println("InitializaOWLView - SOVA");
-     //   setLayout(new BorderLayout());
     	if (display == null){
     		display = new OVDisplay();
     		display.setSize(800, 600);
     	
-    		display.generateGraphFromOWl(getOWLModelManager().getActiveOntology());
+    		
         }
-    	
+    	display.generateGraphFromOWl(getOWLModelManager().getActiveOntology());
         
         if (visValues== null){
         	initVisValuesPanel();
@@ -117,7 +115,28 @@ public class pluginSova extends AbstractOWLViewComponent {
     	visValues = new JPanel();
         visValues.setLayout(new BoxLayout(visValues, BoxLayout.Y_AXIS));
         
-        visValues.add(display.getVisualization().getDistanceControlPanel());
+        final JValueSlider slider = new JValueSlider("Distance", 1, 15,
+				FilterOptions.distance);
+		slider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				display.getVisualization().setDistance( slider.getValue().intValue());
+				display.getVisualization().refreshFilter();
+			}
+		});
+		slider.setBackground(Color.WHITE);
+		slider.setPreferredSize(new Dimension(200, 30));
+		slider.setMaximumSize(new Dimension(220, 30));
+
+		Box cf = new Box(BoxLayout.Y_AXIS);
+		cf.add(slider);
+		cf.setBorder(BorderFactory.createTitledBorder("Connectivity Filter"));
+		JPanel panelDist = new JPanel();
+		panelDist.add(cf);
+		panelDist.setPreferredSize(new Dimension(220, 60));
+		panelDist.setMaximumSize(new Dimension(250, 60));
+
+        visValues.add(panelDist);
+        
         JPanel buttonPanel = new JPanel(new GridLayout(2, 1));
         buttonPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Rodzaje wizualizacji"));
 
