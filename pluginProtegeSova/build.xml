@@ -1,0 +1,68 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<project name="SOVA Visualization" default="jar" basedir=".">
+
+	<property name = "protege.home" location="C:\\Program Files (x86)\\Protege_4.0.2"/>
+	<property name = "protege.common"    location="${protege.home}/bundles"/>
+	<property name = "protege.plugins"   location="${protege.home}/plugins"/>
+
+	<property name="plugin" value="org.pg.eti.kask.ont.pluginSova" />
+	<property name="pluginPath" value="org/pg/eti/kask/ont/pluginSova" />
+	<property name="build" location="./build" />
+	<property name="classes" location="${build}/classes" />
+	<property name="lib" location="./lib" />
+	<property name="src" location="./src" />
+	<property name="propertiesFile" location="${src}/${pluginPath}" />
+	<property name="protege.editor.lib" location="${lib}/org.protege.editor.owl.jar" />
+	<property name="protege.core.lib" location="${lib}/org.protege.editor.core.application.jar" />
+	<property name="owlapi.lib" location="${lib}/org.semanticweb.owl.owlapi.jar" />
+	<property name="sova.lib" location="${lib}/SOVA.jar" />
+	<property name="prefuse.lib" location="${lib}/prefuse.jar" />
+
+
+	<target name="init">
+		<!-- Utworzenie katalogu build w którym będą umieszczane skompilowane pliki. -->
+		<mkdir dir="${build}" />
+		<mkdir dir="${classes}" />
+		<path id="project.classpath">
+			<pathelement location="${protege.editor.lib}" />
+			<pathelement location="${protege.core.lib}" />
+			<pathelement location="${owlapi.lib}" />
+			<pathelement location="${prefuse.lib}" />
+			<pathelement location="${ocs.sova.lib}" />
+			<fileset dir="${lib}" />
+		</path>
+
+	</target>
+
+	<target name="clean" description="remove intermediate files">
+		<delete dir="${build}">
+		</delete>
+	</target>
+
+	<target name="compile" depends="init">
+		<description>
+	    Kompilacja pluginu
+		</description>
+		<javac destdir="${classes}" srcdir="${src}" deprecation="on">
+			<classpath refid="project.classpath" />
+		</javac>
+	</target>
+
+	<target name="jar" depends="compile">
+		<copy file="plugin.xml" todir="${classes}" />
+		<copy file="viewconfig.xml" todir="${classes}" />
+		<mkdir dir="${classes}/lib" />
+		<copy file="${prefuse.lib}" todir="${classes}/lib" />
+		<copy file="${sova.lib}" todir="${classes}/lib" />
+		<jar jarfile="${build}/${plugin}.jar" basedir="${classes}" manifest="./META-INF/MANIFEST.MF" />
+	</target>
+
+	   <target name = "install" depends = "jar">
+
+	   	
+	     <copy file="${build}/${plugin}.jar" 
+	           todir = "${protege.plugins}"
+	           overwrite = "true"/>
+	   </target>
+
+</project>
