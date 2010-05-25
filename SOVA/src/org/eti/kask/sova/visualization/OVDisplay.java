@@ -35,7 +35,7 @@ public class OVDisplay extends Display {
     private Graph graph = null;
     private OVVisualization visualizationForceDirected = null;
     private OVVisualization visualizationRadialGraph = null;
-
+    private OVVisualization visualizationTree = null;
     private OVVisualization getGraphLayoutVis() {
 
         switch (graphLayout) {
@@ -125,8 +125,9 @@ public class OVDisplay extends Display {
      * @param ont ontologia zapisana w OWLAPI
      */
     public void generateGraphFromOWl(OWLOntology ont) {
-        try {       	
-            this.setGraph(OWLtoGraphConverter.getInstance().OWLtoGraph(ont));
+        try {
+        	OWLtoGraphConverter con = new OWLtoGraphConverter();
+            this.setGraph(con.OWLtoGraph(ont));
             OVVisualization vis = getGraphLayoutVis();
             this.setVisualization(vis);
             vis.startLayout();           
@@ -145,17 +146,13 @@ public class OVDisplay extends Display {
     public void generateTreeFromOWl(OWLOntology ont) {
         try {       	
            // this.setGraph(OWLtoGraphConverter.getInstance().OWLtoGraph(ont));
-            visualizationForceDirected = new OVNodeLinkTreeLayout();
-             visualizationForceDirected.add(Constants.TREE, OWLtoHierarchyTreeConverter.getInstance().OWLtoTree(ont));
-            
-            visualizationForceDirected.setVisualizationSettings();
-            this.setVisualization(visualizationForceDirected);
+        	visualizationTree = new OVNodeLinkTreeLayout();
+            OWLtoHierarchyTreeConverter con = new OWLtoHierarchyTreeConverter();
+            visualizationTree.add(Constants.TREE, con.OWLtoTree(ont));
+            visualizationTree.setVisualizationSettings();
+            this.setVisualization(visualizationTree);
             setSize(700,600);
             setItemSorter(new TreeDepthItemSorter());
-            addControlListener(new ZoomToFitControl());
-            addControlListener(new ZoomControl());
-            addControlListener(new WheelZoomControl());
-            addControlListener(new PanControl());
         } catch (Exception ex) {
             Logger.getLogger(OVDisplay.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -172,6 +169,29 @@ public class OVDisplay extends Display {
         this.setVisualization(getGraphLayoutVis());
         this.repaint();
         this.getVisualization().refreshFilter();
+    }
+    public void removeDisplayVis(){
+    	try{
+    		if (visualizationForceDirected != null){
+    			visualizationForceDirected.reset();
+    		}
+    		visualizationForceDirected=null;
+    		if(visualizationRadialGraph !=null){
+    			visualizationRadialGraph.reset();
+    		}
+    		visualizationRadialGraph=null;
+    		if(visualizationTree !=null){
+    			visualizationTree.reset();
+    		}
+    		visualizationTree=null;
+    		graph.clear();
+    		graph.clearSpanningTree();
+    		graph.removeAllGraphModelListeners();
+    		graph.removeAllSets();
+    		graph = new Graph();
+    	}catch (Exception e){
+    		
+    	}
     }
 
     

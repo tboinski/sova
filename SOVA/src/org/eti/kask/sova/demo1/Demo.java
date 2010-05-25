@@ -1,6 +1,8 @@
 package org.eti.kask.sova.demo1;
 
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +20,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSplitPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import org.eti.kask.sova.visualization.FilterOptions;
 import org.eti.kask.sova.visualization.OVDisplay;
@@ -27,6 +31,8 @@ import org.semanticweb.owl.model.OWLOntologyCreationException;
 import org.semanticweb.owl.model.OWLOntologyManager;
 import org.eti.kask.sova.utils.VisualizationProperties;
 import org.eti.kask.sova.visualization.ForceDirectedVis;
+
+import prefuse.util.ui.JValueSlider;
 
 
 /**
@@ -116,7 +122,33 @@ public class Demo {
                   visValues.add(((ForceDirectedVis)display.getVisualization()).getControlPanel());
             }
             
-            visValues.add(display.getVisualization().getDistanceControlPanel());
+            
+            /*
+             * Panel ustawianie dystansu w grafie
+             * 
+             */
+        
+			final JValueSlider slider = new JValueSlider("Distance", 1, 15,
+					FilterOptions.distance);
+			slider.addChangeListener(new ChangeListener() {
+				public void stateChanged(ChangeEvent e) {
+					display.getVisualization().setDistance( slider.getValue().intValue());
+					display.getVisualization().refreshFilter();
+				}
+			});
+			slider.setBackground(Color.WHITE);
+			slider.setPreferredSize(new Dimension(200, 30));
+			slider.setMaximumSize(new Dimension(220, 30));
+	
+			Box cf = new Box(BoxLayout.Y_AXIS);
+			cf.add(slider);
+			cf.setBorder(BorderFactory.createTitledBorder("Connectivity Filter"));
+			JPanel panelDist = new JPanel();
+			panelDist.add(cf);
+			panelDist.setPreferredSize(new Dimension(220, 60));
+			panelDist.setMaximumSize(new Dimension(250, 60));
+
+            visValues.add(panelDist);
             JPanel buttonPanel = new JPanel(new GridLayout(2, 1));
             buttonPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Rodzaje wizualizacji"));
 
@@ -125,12 +157,6 @@ public class Demo {
             forceDirectedRadial.addActionListener(new ActionListener() {
 
                 public void actionPerformed(ActionEvent arg0) {
-//                    display.setGraphLayout(OVDisplay.FORCE_DIRECTED_LAYOUT);
-//                    display.refreshVisualization();
-//                    display.repaint();
-//                    display.setGraphLayout(OVDisplay.FORCE_DIRECTED_LAYOUT);
-//                    display.refreshVisualization();
-//                    display.repaint();
                 	display.changeVisualizationLayout(OVDisplay.FORCE_DIRECTED_LAYOUT);
 
 
@@ -140,15 +166,6 @@ public class Demo {
             radialTreeRadial.addActionListener(new ActionListener() {
 
                 public void actionPerformed(ActionEvent arg0) {
-//                    display.setGraphLayout(OVDisplay.RADIAL_TREE_LAYOUT);
-//                    display.getVisualization().removeDistanceFilter();
-//                    display.refreshVisualization();
-//                    display.getVisualization().startLayout();
-//                    display.repaint();
-//                	display.reset();
-//                	display.removeAll();
-//                	display.setGraphLayout(OVDisplay.RADIAL_TREE_LAYOUT);
-//                	display.generateGraphFromOWl(ontology);
                 	display.changeVisualizationLayout(OVDisplay.RADIAL_TREE_LAYOUT);
           
                 }
@@ -334,7 +351,7 @@ public class Demo {
 //            search.setBorder(BorderFactory.createEmptyBorder(5,5,4,0));
 //            search.setFont(FontLib.getFont("Tahoma", Font.PLAIN, 11));
             
-            Box v1 = new Box(BoxLayout.Y_AXIS);
+            Box v1 = new Box(BoxLayout.X_AXIS);
 //            v1.add(search);
             JButton but = new JButton("Wł/Wy Animację");
             but.addActionListener(new ActionListener() {
@@ -350,6 +367,15 @@ public class Demo {
                 }
             });
             v1.add(but);
+            JButton but2 = new JButton("Reset");
+            but2.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent arg0) {
+                   display.removeDisplayVis();
+                   display.generateGraphFromOWl(ontology); 
+                }
+            });
+            v1.add(but2);
             v1.setBorder(BorderFactory.createTitledBorder("Opcje Animacji"));
             visValues.add(v1);
             // create a new JSplitPane to present the interface

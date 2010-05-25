@@ -242,35 +242,7 @@ abstract public class OVVisualization extends Visualization {
     public void startFilters() {
         this.run(FILTERS);
     }
-    /**
-     * Panel ustawianie dystansu w grafie
-     * @return panel ustawuień
-     */
-    public JPanel getDistanceControlPanel(){
-        final JValueSlider slider = new JValueSlider("Distance", 1, 15, FilterOptions.distance);
-        slider.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
-               setDistance(slider.getValue().intValue());
-               refreshFilter();
-
-            }
-        });
-        slider.setBackground(Color.WHITE);
-        slider.setPreferredSize(new Dimension(290,30));
-        slider.setMaximumSize(new Dimension(290,30));
-
-        Box cf = new Box(BoxLayout.Y_AXIS);
-        cf.add(slider);
-        cf.setBorder(BorderFactory.createTitledBorder("Connectivity Filter"));
-        JPanel panel = new JPanel();
-        panel.add(cf);
-        panel.setBackground(Color.WHITE);
-        panel.setPreferredSize(new Dimension(310,60));
-        panel.setMaximumSize(new Dimension(310,60));
-        return panel;
-    }
-    
-    
+      
     /**
      * Set node fill colors
      */

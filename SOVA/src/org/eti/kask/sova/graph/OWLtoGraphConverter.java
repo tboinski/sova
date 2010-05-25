@@ -1,6 +1,9 @@
 package org.eti.kask.sova.graph;
 
 import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Set;
+
 import prefuse.data.Graph;
 import prefuse.data.Node;
 import org.eti.kask.sova.utils.Debug;
@@ -17,7 +20,7 @@ import prefuse.data.Table;
  */
 public class OWLtoGraphConverter {
 
-	private static final OWLtoGraphConverter INSTANCE = new OWLtoGraphConverter();
+//	private static final OWLtoGraphConverter INSTANCE = new OWLtoGraphConverter();
 	Graph graph;
 
 	private Table edges;
@@ -27,26 +30,72 @@ public class OWLtoGraphConverter {
 	Hashtable<String, Integer> individuals;
 
 	Hashtable<String, Integer> dataProperties;
+	Hashtable<String, Integer> dataTypes;
 	Hashtable<String, Integer> anonyms;
 	Node thing;
 	int defaultNumber;
 
 	// Private constructor prevents instantiation from other classes
-	private OWLtoGraphConverter() {
+	public OWLtoGraphConverter() {
 		Debug.sendMessage("OWLtoGraphConverter constructor call");
 		graph = new Graph();
 		edges = graph.getEdgeTable();
 		classes = new Hashtable<String, Integer>();
 		properties = new Hashtable<String, Integer>();
+		dataProperties = new Hashtable<String, Integer>();
+		dataTypes = new Hashtable<String, Integer>();
 		individuals = new Hashtable<String, Integer>();
 		anonyms = new Hashtable<String, Integer>();
 		anonyms.put("dummy", -100);
 	}
 
-	public static OWLtoGraphConverter getInstance() {
-		return INSTANCE;
+//	public static OWLtoGraphConverter getInstance() {
+//		return INSTANCE;
+//	}
+//	
+	private void insertDataType(OWLOntology ontology, Graph graph) {
+		for (OWLDataProperty prop: ontology.getReferencedDataProperties()){
+			
+			System.out.println("DATATYPE :  "+prop.toString());
+			Set<OWLDataRange> s = prop.getRanges(ontology);
+			Iterator<OWLDataRange> it = s.iterator();
+			int dataPropertyRowNr = 0;
+			if (!dataProperties.containsKey(prop.toString())){
+				Node dataProperty = graph.addNode();
+				org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.PropertyNode();
+				node.setLabel(prop.toString());
+				dataProperty.set("node", node);
+				dataPropertyRowNr = dataProperty.getRow();
+				dataProperties.put(prop.toString(),dataPropertyRowNr);
+			}else{
+				dataPropertyRowNr = dataProperties.get(prop.toString());
+			}
+			
+			while(it.hasNext()){
+				OWLDataRange r = it.next();
+				if (r.isDataType()){
+					int dataTypeRowNr = 0;
+					if (!dataTypes.containsKey(r.toString())){
+						Node dataType = graph.addNode();
+						org.eti.kask.sova.nodes.Node node = new org.eti.kask.sova.nodes.DataTypeNode();
+						node.setLabel(r.toString());
+						dataType.set("node", node);
+						dataTypeRowNr = dataType.getRow();
+						dataTypes.put(r.toString(),dataTypeRowNr);
+					}else{
+						dataTypeRowNr = dataTypes.get(r.toString());
+					}
+					int row = edges.addRow();
+					edges.set(row, "source", dataPropertyRowNr);
+					edges.set(row, "target", dataTypeRowNr);
+					edges.set(row, "edge",	new org.eti.kask.sova.edges.RangeEdge());
+					
+
+				}
+			}
+		}
+		
 	}
-	
 	/**
 	 * Umieszcza w grafie wszystkie klasy nie-anonimowe zawarte w ontologii oraz
 	 * krawędzie między węzłem thing i klasami będącymi jego subclasses.
@@ -703,7 +752,7 @@ public class OWLtoGraphConverter {
 		this.insertBaseClasses(ontology, graph);
 		this.insertBaseProperties(ontology, graph);
 		this.insertBaseIndividuals(ontology, graph);
-
+		this.insertDataType(ontology, graph);
 		/*
 		 * Node n = graph.addNode(); org.eti.kask.sova.nodes.Node node = new
 		 * org.eti.kask.sova.nodes.ClassNode(); node.setLabel(cls.toString());
@@ -1022,7 +1071,16 @@ public class OWLtoGraphConverter {
 					edges.set(row, "edge", new org.eti.kask.sova.edges.Edge());
 
 				}
-			} else {
+			} else{
+				if (axiom instanceof OWLDataPropertyAssertionAxiom) {
+					System.out.println("DATA PROPERTY: "+axiom.toString());
+//					OWLDataProperty dp = (OWLDataProperty)axiom;
+					OWLDataPropertyAssertionAxiom a = (OWLDataPropertyAssertionAxiom)axiom;
+				 Set<?> s = 	a.getProperty().getRanges(ontology);
+				 
+				System.out.println(	a.getAxiomType().toString());
+				}
+				
 				System.out.println("OMITTED: " + axiom);
 			}
 

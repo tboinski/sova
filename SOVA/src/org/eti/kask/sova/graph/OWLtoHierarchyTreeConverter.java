@@ -25,7 +25,6 @@ import prefuse.data.Tree;
  * 
  */
 public class OWLtoHierarchyTreeConverter {
-	private static OWLtoHierarchyTreeConverter instance =null;
 	
 	//rerefencje do obiektow OWL API
 	private OWLOntology ontology;
@@ -36,20 +35,10 @@ public class OWLtoHierarchyTreeConverter {
 	//wykorzystane klasy podczas budowania drzewa
 	private Set<String> usedClasses; 
 	
-	private OWLtoHierarchyTreeConverter(){
+	public OWLtoHierarchyTreeConverter(){
 		
 	}
 	
-	/**
-	 * 
-	 * @return statyczną instancję klasy OWLtoHierarchyTree
-	 */
-	public static OWLtoHierarchyTreeConverter getInstance() {
-		if (instance == null ){
-			instance = new OWLtoHierarchyTreeConverter();
-		}
-		return instance;
-	}
 	
 	public Tree OWLtoTree(OWLOntology ontology){
 		
