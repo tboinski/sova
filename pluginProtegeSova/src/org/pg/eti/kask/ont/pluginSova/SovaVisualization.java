@@ -332,7 +332,7 @@ public class SovaVisualization extends AbstractOWLViewComponent {
         visValues.add(checkboxPanel);
         
         
-      Box v1 = new Box(BoxLayout.Y_AXIS);
+      Box v1 = new Box(BoxLayout.X_AXIS);
       JButton but = new JButton("Wł/Wy Animację");
       but.addActionListener(new ActionListener() {
 
@@ -347,6 +347,17 @@ public class SovaVisualization extends AbstractOWLViewComponent {
           }
       });
       v1.add(but);
+      JButton but2 = new JButton("Reset");
+      but2.addActionListener(new ActionListener() {
+
+          public void actionPerformed(ActionEvent arg0) {
+             display.removeDisplayVis();
+             display.generateGraphFromOWl(getOWLModelManager().getActiveOntology()); 
+          }
+      });
+      v1.add(but2);
+      
+      
       v1.setBorder(BorderFactory.createTitledBorder("Opcje Animacji"));
       visValues.add(v1);
     }
