@@ -24,7 +24,6 @@ import prefuse.data.Tuple;
 import prefuse.data.event.TupleSetListener;
 import prefuse.data.search.PrefixSearchTupleSet;
 import prefuse.data.tuple.TupleSet;
-import prefuse.render.AbstractShapeRenderer;
 import prefuse.render.DefaultRendererFactory;
 import prefuse.render.EdgeRenderer;
 import prefuse.render.LabelRenderer;
@@ -111,7 +110,7 @@ public class OVNodeLinkTreeLayout extends OVVisualization{
         filter.add(textColor);
         filter.add(nodeColor);
         filter.add(edgeColor);
-        this.putAction("filter", filter);
+        this.putAction(FILTERS, filter);
         
         // animated transition
         ActionList animate = new ActionList(1000);
@@ -123,7 +122,7 @@ public class OVNodeLinkTreeLayout extends OVVisualization{
         animate.add(new ColorAnimator(treeNodes));
         animate.add(new RepaintAction());
         this.putAction("animate", animate);
-        this.alwaysRunAfter("filter", "animate");
+        this.alwaysRunAfter(FILTERS, "animate");
         
         // create animator for orientation changes
         ActionList orient = new ActionList(2000);
@@ -133,7 +132,7 @@ public class OVNodeLinkTreeLayout extends OVVisualization{
         orient.add(new LocationAnimator(treeNodes));
         orient.add(new RepaintAction());
         this.putAction("orient", orient);
-        this.run("filter");
+        this.run(FILTERS);
         
         TupleSet search = new PrefixSearchTupleSet(); 
         this.addFocusGroup(Visualization.SEARCH_ITEMS, search);
