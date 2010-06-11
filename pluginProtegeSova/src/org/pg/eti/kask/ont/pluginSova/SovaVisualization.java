@@ -63,6 +63,7 @@ public class SovaVisualization extends AbstractOWLViewComponent {
     private JCheckBox chproperty=null,chInstanceProperty=null,chInverseOfProperty=null, chDomain=null, chRange=null, chSubProperty=null,
     	chEquivalentProperty=null,chFunctionalProperty=null, chInversFunctionalProperty=null, chSymmetricProperty=null, chTransitiveProperty=null;
     private JFrame optionFrame=null;
+    private boolean isOptionFrameShow = false;
     private  JPanel leftPanel = null, rightPanel = null, visValues= null;
     @Override
     protected void disposeOWLView() {
@@ -130,7 +131,13 @@ public class SovaVisualization extends AbstractOWLViewComponent {
 				if (optionFrame == null) {
 					initOptionFrame();
 				}
-				optionFrame.setVisible(true);
+				if (!isOptionFrameShow){
+					optionFrame.setVisible(true);
+					isOptionFrameShow = true;
+				}else{
+					optionFrame.setVisible(false);
+					isOptionFrameShow = false;
+				}
 			}
 		});
 		options.setSize(100, 80);
@@ -374,7 +381,7 @@ public class SovaVisualization extends AbstractOWLViewComponent {
         
      
     }
-    class CheckBoxListener implements ActionListener{
+    private class CheckBoxListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -600,7 +607,6 @@ public class SovaVisualization extends AbstractOWLViewComponent {
 		}
     	
     }
-    
     public class Options extends JFrame {
     	private static final int DEFAULT_WIDTH = 300;
     	private static final int DEFAULT_HEIGHT = 600;	
@@ -622,6 +628,7 @@ public class SovaVisualization extends AbstractOWLViewComponent {
 
                 public void actionPerformed(ActionEvent arg0) {
                 	setVisible(false);
+                	isOptionFrameShow = false;
                 }
             });
     		this.add(exitButt,BorderLayout.SOUTH);
