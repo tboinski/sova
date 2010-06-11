@@ -1,17 +1,20 @@
 package org.pg.eti.kask.ont.pluginSova;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.event.ChangeEvent;
@@ -21,7 +24,6 @@ import org.eti.kask.sova.visualization.FilterOptions;
 import org.eti.kask.sova.visualization.OVDisplay;
 import org.protege.editor.owl.ui.view.AbstractOWLViewComponent;
 
-import prefuse.util.ColorLib;
 import prefuse.util.ui.JValueSlider;
 
 
@@ -34,7 +36,6 @@ public class SovaVisualization extends AbstractOWLViewComponent {
 	private static final String CHECKBOX_UNIONOF_COMMAND = "checkbox_unionof_class";
 	private static final String CHECKBOX_COMPLEMENT_COMMAND = "checkbox_complement_class";
 	private static final String CHECKBOX_INTERSECTION_COMMAND = "checkbox_intersection_class";
-	
 	private static final String CHECKBOX_INDYVIDUAL_COMMAND = "checkbox_indywidual_node";
 	private static final String CHECKBOX_INSTANCEOF_COMMAND = "checkbox_instanceof";
 	private static final String CHECKBOX_DIFFERENT_COMMAND = "checkbox_different";
@@ -53,13 +54,15 @@ public class SovaVisualization extends AbstractOWLViewComponent {
 	private static final String CHECKBOX_RANGE_COMMAND = "checkbox_drange";
 	private static final long serialVersionUID = -4515710047558710080L;
     private  OVDisplay display;
+
     public  boolean doLayout = true;
+    private JButton options = null;
     private JCheckBox chClass = null, chSubClass=null,
     chDisjointEdge=null,chCardinalityNode=null,chUnionOf=null,chIntersecionOf=null,chComplementOf=null,chEquivalent=null;
     private JCheckBox chIndywidual=null,chInstanceOf=null, chDifferent=null, chsameas=null, choneof=null; 
     private JCheckBox chproperty=null,chInstanceProperty=null,chInverseOfProperty=null, chDomain=null, chRange=null, chSubProperty=null,
     	chEquivalentProperty=null,chFunctionalProperty=null, chInversFunctionalProperty=null, chSymmetricProperty=null, chTransitiveProperty=null;
-    
+    private JFrame optionFrame=null;
     private  JPanel leftPanel = null, rightPanel = null, visValues= null;
     @Override
     protected void disposeOWLView() {
@@ -71,41 +74,83 @@ public class SovaVisualization extends AbstractOWLViewComponent {
     	if (display == null){
     		display = new OVDisplay();
     		display.setSize(800, 600);
-    	
-    		
         }
     	display.generateGraphFromOWl(getOWLModelManager().getActiveOntology());
-        
-        if (visValues== null){
-        	initVisValuesPanel();
-        }
-        
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        
         if (leftPanel == null){
         	initLeftPanel();
         	this.add(leftPanel);
-        	
         }
         if (rightPanel==null){
         	initRightPanel();
         	this.add(rightPanel);
-        
         }
-
     }
-    private void initRightPanel(){
+
+	private void initRightPanel() {
 		rightPanel = new JPanel();
-		rightPanel.add(visValues);
-		rightPanel.setPreferredSize(new Dimension(300, Integer.MAX_VALUE));
-		rightPanel.setMaximumSize(new Dimension(320, Integer.MAX_VALUE));
-		rightPanel.setMinimumSize(new Dimension(240, Integer.MAX_VALUE));
-		rightPanel.setBorder(BorderFactory.createLineBorder(new Color(ColorLib.gray(200),true)));
+		rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+		ImagePanel icon = new ImagePanel(new ImageIcon(getClass().getResource(
+				"/img/SOVA.png")).getImage());
+		rightPanel.add(icon);
+		JPanel buttonPanel = new JPanel(new GridLayout(8, 1));
+		JButton but = new JButton("Play/Stop");
+		but.setToolTipText("Play or stop animation");
+		but.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (doLayout) {
+					display.getVisualization().stopLayout();
+					doLayout = false;
+				} else {
+					display.getVisualization().startLayout();
+					doLayout = true;
+				}
+			}
+		});
+		but.setSize(100, 80);
+		buttonPanel.add(but);
+		JButton but2 = new JButton("Reset");
+		but2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				display.removeDisplayVis();
+				display.generateGraphFromOWl(getOWLModelManager()
+						.getActiveOntology());
+				doLayout = true;
+			}
+		});
+		but2.setSize(100, 80);
+		but2.setToolTipText("Reload ontology");
+		buttonPanel.add(but2);
 
-    }
+		options = new JButton("Options");
+		options.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {
+				if (optionFrame == null) {
+					initOptionFrame();
+				}
+				optionFrame.setVisible(true);
+			}
+		});
+		options.setSize(100, 80);
+		buttonPanel.add(options);
+		rightPanel.add(buttonPanel);
+		rightPanel.setPreferredSize(new Dimension(120, Integer.MAX_VALUE));
+		rightPanel.setMaximumSize(new Dimension(140, Integer.MAX_VALUE));
+		rightPanel.setMinimumSize(new Dimension(100, Integer.MAX_VALUE));
+	}
     private void initLeftPanel(){
         leftPanel = new JPanel();
 		leftPanel.add(display);
 		leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+    }
+    private void initOptionFrame(){
+		optionFrame = new Options();
+		Point location = options.getLocationOnScreen();
+		location.x -= optionFrame.getSize().width;
+		location.y -= 250;
+		optionFrame.setLocation(location);
     }
     private void  initVisValuesPanel(){ 
     	visValues = new JPanel();
@@ -121,23 +166,22 @@ public class SovaVisualization extends AbstractOWLViewComponent {
 			}
 		});
 		slider.setBackground(Color.WHITE);
-		slider.setPreferredSize(new Dimension(200, 30));
-		slider.setMaximumSize(new Dimension(220, 30));
+//		slider.setPreferredSize(new Dimension(250, 30));
+//		slider.setMaximumSize(new Dimension(250, 30));
 
 		Box cf = new Box(BoxLayout.Y_AXIS);
+		cf.setSize(new Dimension(300, 70));
 		cf.add(slider);
 		cf.setBorder(BorderFactory.createTitledBorder("Connectivity Filter"));
 		JPanel panelDist = new JPanel();
 		panelDist.add(cf);
-		panelDist.setSize(new Dimension(240, 60));
-		panelDist.setMaximumSize(new Dimension(250, 60));
+//		panelDist.setSize(new Dimension(300, 60));
 
         visValues.add(panelDist);
         
         JPanel buttonPanel = new JPanel(new GridLayout(2, 1));
         buttonPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Visualization types"));
-        buttonPanel.setSize(new Dimension(240, 80));
-        buttonPanel.setMaximumSize(new Dimension(250, 80));
+//        buttonPanel.setSize(new Dimension(300, 80));
         JRadioButton forceDirectedRadial = new JRadioButton("ForceDirectedLayout", true);
         forceDirectedRadial.addActionListener(new ActionListener() {
 
@@ -161,7 +205,6 @@ public class SovaVisualization extends AbstractOWLViewComponent {
         buttonPanel.add(forceDirectedRadial);
 
         buttonPanel.add(radialTreeRadial);
-        buttonPanel.setMaximumSize(new Dimension(200, 100));
         visValues.add(buttonPanel);
         
         CheckBoxListener checkboxListener = new CheckBoxListener();
@@ -329,36 +372,7 @@ public class SovaVisualization extends AbstractOWLViewComponent {
         visValues.add(checkboxPanel);
         
         
-      Box v1 = new Box(BoxLayout.X_AXIS);
-      JButton but = new JButton("Play/Stop");
-      but.setToolTipText("Play or stop animation");
-      but.addActionListener(new ActionListener() {
-
-          public void actionPerformed(ActionEvent arg0) {
-              if (doLayout) {
-                  display.getVisualization().stopLayout();
-                  doLayout = false;
-              } else {
-                  display.getVisualization().startLayout();
-                  doLayout = true;
-              }
-          }
-      });
-      v1.add(but);
-      JButton but2 = new JButton("Reset");
-      but2.addActionListener(new ActionListener() {
-
-          public void actionPerformed(ActionEvent arg0) {
-             display.removeDisplayVis();
-             display.generateGraphFromOWl(getOWLModelManager().getActiveOntology()); 
-          }
-      });
-      but2.setToolTipText("Reload ontology");
-      v1.add(but2);
-      
-      
-      v1.setBorder(BorderFactory.createTitledBorder("Actions"));
-      visValues.add(v1);
+     
     }
     class CheckBoxListener implements ActionListener{
 
@@ -586,5 +600,35 @@ public class SovaVisualization extends AbstractOWLViewComponent {
 		}
     	
     }
+    
+    public class Options extends JFrame {
+    	private static final int DEFAULT_WIDTH = 300;
+    	private static final int DEFAULT_HEIGHT = 600;	
+    	private JButton exitButt;
+    	
+    	public Options(){
+    		setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+    		setResizable(false);
+    		setUndecorated(true);
+//    		setLayout(new GridLayout(10, 1) );
+
+            if (visValues== null){
+            	initVisValuesPanel();
+            }
+            this.add(visValues);
+    		exitButt = new JButton("Exit");
+    		exitButt.setSize(80,40);
+    		exitButt.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent arg0) {
+                	setVisible(false);
+                }
+            });
+    		this.add(exitButt,BorderLayout.SOUTH);
+    	}
+    	
+
+    	
+    } 
 
 }
