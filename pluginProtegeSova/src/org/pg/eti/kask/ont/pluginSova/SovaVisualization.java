@@ -92,10 +92,6 @@ public class SovaVisualization extends AbstractOWLViewComponent {
         
         }
 
-		
-        
-
-
     }
     private void initRightPanel(){
 		rightPanel = new JPanel();
@@ -115,6 +111,7 @@ public class SovaVisualization extends AbstractOWLViewComponent {
     	visValues = new JPanel();
         visValues.setLayout(new BoxLayout(visValues, BoxLayout.Y_AXIS));
         
+        
         final JValueSlider slider = new JValueSlider("Distance", 1, 15,
 				FilterOptions.distance);
 		slider.addChangeListener(new ChangeListener() {
@@ -132,15 +129,15 @@ public class SovaVisualization extends AbstractOWLViewComponent {
 		cf.setBorder(BorderFactory.createTitledBorder("Connectivity Filter"));
 		JPanel panelDist = new JPanel();
 		panelDist.add(cf);
-		panelDist.setPreferredSize(new Dimension(220, 60));
+		panelDist.setSize(new Dimension(240, 60));
 		panelDist.setMaximumSize(new Dimension(250, 60));
 
         visValues.add(panelDist);
         
         JPanel buttonPanel = new JPanel(new GridLayout(2, 1));
-        buttonPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Rodzaje wizualizacji"));
-
-
+        buttonPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Visualization types"));
+        buttonPanel.setSize(new Dimension(240, 80));
+        buttonPanel.setMaximumSize(new Dimension(250, 80));
         JRadioButton forceDirectedRadial = new JRadioButton("ForceDirectedLayout", true);
         forceDirectedRadial.addActionListener(new ActionListener() {
 
@@ -169,34 +166,34 @@ public class SovaVisualization extends AbstractOWLViewComponent {
         
         CheckBoxListener checkboxListener = new CheckBoxListener();
         JPanel checkboxPanel = new JPanel(new GridLayout(15, 2));
-        checkboxPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Filtry"));
+        checkboxPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Filter"));
         
-        chClass = new JCheckBox("Klasy");
+        chClass = new JCheckBox("Class");
         chClass.setActionCommand(CHECKBOX_CLASS_COMMAND);
         chClass.setSelected(true);
         chClass.addActionListener(checkboxListener);	
         checkboxPanel.add(chClass);
 
-        chSubClass = new JCheckBox("krawędzie SubEdge");
+        chSubClass = new JCheckBox("SubClass edge");
         chSubClass.setActionCommand(CHECKBOX_SUBCLASS_COMMAND);
         chSubClass.setSelected(true);
         chSubClass.addActionListener(checkboxListener);	
         checkboxPanel.add(chSubClass);
 
 
-        chDisjointEdge = new JCheckBox("DisjointEdge");
+        chDisjointEdge = new JCheckBox("DisjointWith edge");
         chDisjointEdge.setActionCommand(CHECKBOX_DISJOINT_CLASS_COMMAND);
         chDisjointEdge.addActionListener(checkboxListener);
         chDisjointEdge.setSelected(true);
         checkboxPanel.add(chDisjointEdge);
         
-        chEquivalent = new JCheckBox("EquivalentEdge");
+        chEquivalent = new JCheckBox("EquivalentClass edge");
         chEquivalent.setActionCommand(CHECKBOX_EQUIVALENT_CLASS_COMMAND);
         chEquivalent.addActionListener(checkboxListener);
         chEquivalent.setSelected(true);
         checkboxPanel.add(chEquivalent);
 
-        chCardinalityNode = new JCheckBox("Kardynalność");
+        chCardinalityNode = new JCheckBox("Cardinality");
         chCardinalityNode.setActionCommand(CHECKBOX_CARDINALITY_COMMAND);
         chCardinalityNode.addActionListener(checkboxListener);
         chCardinalityNode.setSelected(true);
@@ -214,7 +211,7 @@ public class SovaVisualization extends AbstractOWLViewComponent {
         chIntersecionOf.setSelected(true);
         checkboxPanel.add(chIntersecionOf);            
         
-        chComplementOf = new JCheckBox("Complement");
+        chComplementOf = new JCheckBox("ComplementOf");
         chComplementOf.setActionCommand(CHECKBOX_COMPLEMENT_COMMAND);
         chComplementOf.addActionListener(checkboxListener);
         chComplementOf.setSelected(true);
@@ -227,25 +224,25 @@ public class SovaVisualization extends AbstractOWLViewComponent {
         chIndywidual.setSelected(true);
         checkboxPanel.add(chIndywidual);
         
-        chInstanceOf = new JCheckBox("InstanceOf");
+        chInstanceOf = new JCheckBox("InstanceOf edge");
         chInstanceOf.setActionCommand(CHECKBOX_INSTANCEOF_COMMAND);
         chInstanceOf.addActionListener(checkboxListener);
         chInstanceOf.setSelected(true);
         checkboxPanel.add(chInstanceOf);
         
-        chDifferent = new JCheckBox("different");
+        chDifferent = new JCheckBox("Different");
         chDifferent.setActionCommand(CHECKBOX_DIFFERENT_COMMAND);
         chDifferent.addActionListener(checkboxListener);
         chDifferent.setSelected(true);
         checkboxPanel.add(chDifferent);
         
-        chsameas = new JCheckBox("sameAs");
+        chsameas = new JCheckBox("SameAs");
         chsameas.setActionCommand(CHECKBOX_SAMEAS_COMMAND);
         chsameas.addActionListener(checkboxListener);
         chsameas.setSelected(true);
         checkboxPanel.add(chsameas);
         
-        choneof = new JCheckBox("oneOf");
+        choneof = new JCheckBox("OneOf");
         choneof.setActionCommand(CHECKBOX_ONEOF_COMMAND);
         choneof.addActionListener(checkboxListener);
         choneof.setSelected(true);
@@ -261,70 +258,70 @@ public class SovaVisualization extends AbstractOWLViewComponent {
         checkboxPanel.add(chproperty);
         visValues.add(checkboxPanel);
         
-        chSubProperty = new JCheckBox("subProperty");
+        chSubProperty = new JCheckBox("SubProperty edge");
         chSubProperty.setActionCommand(CHECKBOX_SUBPROPERTY_COMMAND);
         chSubProperty.addActionListener(checkboxListener);
         chSubProperty.setSelected(true);
         checkboxPanel.add(chSubProperty);
         visValues.add(checkboxPanel);
         
-        chEquivalentProperty = new JCheckBox("equivalentProperty");
+        chEquivalentProperty = new JCheckBox("EquivalentProperty edge");
         chEquivalentProperty.setActionCommand(CHECKBOX_EQUIVALENT_COMMAND);
         chEquivalentProperty.addActionListener(checkboxListener);
         chEquivalentProperty.setSelected(true);
         checkboxPanel.add(chEquivalentProperty);
         visValues.add(checkboxPanel);
         
-        chFunctionalProperty = new JCheckBox("functionalProperty");
+        chFunctionalProperty = new JCheckBox("FunctionalProperty");
         chFunctionalProperty.setActionCommand(CHECKBOX_FUNCTIONALPROPERTY_COMMAND);
         chFunctionalProperty.addActionListener(checkboxListener);
         chFunctionalProperty.setSelected(true);
         checkboxPanel.add(chFunctionalProperty);
         visValues.add(checkboxPanel);
         
-        chInversFunctionalProperty = new JCheckBox("inversFunctionalProperty");
+        chInversFunctionalProperty = new JCheckBox("InversFunctionalProperty");
         chInversFunctionalProperty.setActionCommand(CHECKBOX_INVERSFUNCTIONALPROPERTY_COMMAND);
         chInversFunctionalProperty.addActionListener(checkboxListener);
         chInversFunctionalProperty.setSelected(true);
         checkboxPanel.add(chInversFunctionalProperty);
         visValues.add(checkboxPanel);
         
-        chSymmetricProperty = new JCheckBox("symmetricProperty");
+        chSymmetricProperty = new JCheckBox("SymmetricProperty");
         chSymmetricProperty.setActionCommand(CHECKBOX_SYMMETRICPROPERTY_COMMAND);
         chSymmetricProperty.addActionListener(checkboxListener);
         chSymmetricProperty.setSelected(true);
         checkboxPanel.add(chSymmetricProperty);
         visValues.add(checkboxPanel);
         
-        chInverseOfProperty = new JCheckBox("InversOfProperty");
-        chInverseOfProperty.setActionCommand(CHECKBOX_INVERSEOFPROPERTY_COMMAND);
-        chInverseOfProperty.addActionListener(checkboxListener);
-        chInverseOfProperty.setSelected(true);
-        checkboxPanel.add(chInverseOfProperty);
-        visValues.add(checkboxPanel);
-        
-        chTransitiveProperty = new JCheckBox("transitiveProperty");
+        chTransitiveProperty = new JCheckBox("TransitiveProperty");
         chTransitiveProperty.setActionCommand(CHECKBOX_TRANSITIVEPROPERTY_COMMAND);
         chTransitiveProperty.addActionListener(checkboxListener);
         chTransitiveProperty.setSelected(true);
         checkboxPanel.add(chTransitiveProperty);
         visValues.add(checkboxPanel);
         
-        chInstanceProperty = new JCheckBox("instancePropertyEdge");
+        chInverseOfProperty = new JCheckBox("InversOf");
+        chInverseOfProperty.setActionCommand(CHECKBOX_INVERSEOFPROPERTY_COMMAND);
+        chInverseOfProperty.addActionListener(checkboxListener);
+        chInverseOfProperty.setSelected(true);
+        checkboxPanel.add(chInverseOfProperty);
+        visValues.add(checkboxPanel);
+        
+        chInstanceProperty = new JCheckBox("InstanceProperty Edge");
         chInstanceProperty.setActionCommand(CHECKBOX_INSTANCEPROPERTY_COMMAND);
         chInstanceProperty.addActionListener(checkboxListener);
         chInstanceProperty.setSelected(true);
         checkboxPanel.add(chInstanceProperty);
         visValues.add(checkboxPanel);
         
-        chDomain = new JCheckBox("domain");
+        chDomain = new JCheckBox("Domain");
         chDomain.setActionCommand(CHECKBOX_DOMAIN_COMMAND);
         chDomain.addActionListener(checkboxListener);
         chDomain.setSelected(true);
         checkboxPanel.add(chDomain);
         visValues.add(checkboxPanel);
         
-        chRange = new JCheckBox("range");
+        chRange = new JCheckBox("Range");
         chRange.setActionCommand(CHECKBOX_RANGE_COMMAND);
         chRange.addActionListener(checkboxListener);
         chRange.setSelected(true);
@@ -333,7 +330,8 @@ public class SovaVisualization extends AbstractOWLViewComponent {
         
         
       Box v1 = new Box(BoxLayout.X_AXIS);
-      JButton but = new JButton("Wł/Wy Animację");
+      JButton but = new JButton("Play/Stop");
+      but.setToolTipText("Play or stop animation");
       but.addActionListener(new ActionListener() {
 
           public void actionPerformed(ActionEvent arg0) {
@@ -355,10 +353,11 @@ public class SovaVisualization extends AbstractOWLViewComponent {
              display.generateGraphFromOWl(getOWLModelManager().getActiveOntology()); 
           }
       });
+      but2.setToolTipText("Reload ontology");
       v1.add(but2);
       
       
-      v1.setBorder(BorderFactory.createTitledBorder("Opcje Animacji"));
+      v1.setBorder(BorderFactory.createTitledBorder("Actions"));
       visValues.add(v1);
     }
     class CheckBoxListener implements ActionListener{
