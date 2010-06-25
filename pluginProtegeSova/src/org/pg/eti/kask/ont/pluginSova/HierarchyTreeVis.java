@@ -2,7 +2,7 @@ package org.pg.eti.kask.ont.pluginSova;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import org.eti.kask.sova.visualization.OVDisplay;
+import org.pg.eti.kask.sova.visualization.OVDisplay;
 import org.protege.editor.owl.ui.view.AbstractOWLViewComponent;
 
 public class HierarchyTreeVis extends AbstractOWLViewComponent {

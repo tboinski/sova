@@ -20,8 +20,8 @@ import javax.swing.JRadioButton;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.eti.kask.sova.visualization.FilterOptions;
-import org.eti.kask.sova.visualization.OVDisplay;
+import org.pg.eti.kask.sova.visualization.FilterOptions;
+import org.pg.eti.kask.sova.visualization.OVDisplay;
 import org.protege.editor.owl.ui.view.AbstractOWLViewComponent;
 
 import prefuse.util.ui.JValueSlider;
