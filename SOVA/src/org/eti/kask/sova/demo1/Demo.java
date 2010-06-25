@@ -4,6 +4,7 @@ package org.eti.kask.sova.demo1;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -68,6 +69,7 @@ public class Demo {
 	
     public  boolean doLayout = true;
     public  OVDisplay display;
+    private  JButton options =null;
     private OWLOntology ontology = null;
     private JCheckBox chClass = null, chSubClass=null,
     chDisjointEdge=null,chCardinalityNode=null,chUnionOf=null,chIntersecionOf=null,chComplementOf=null,chEquivalent=null;
@@ -87,7 +89,7 @@ public class Demo {
                 // Now ask the manager to load the ontology
             	ontology = manager.loadOntologyFromPhysicalURI(physicalURI);
                 display.generateGraphFromOWl(ontology);
-//              display.generateTreeFromOWl(manager.loadOntologyFromPhysicalURI(physicalURI));
+//              display.generateTreeFromOWl(ontology);
             } catch (OWLOntologyCreationException ex) {
                 Logger.getLogger(Demo.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -121,7 +123,6 @@ public class Demo {
             if (display.getGraphLayout() == OVDisplay.FORCE_DIRECTED_LAYOUT) {
                   visValues.add(((ForceDirectedVis)display.getVisualization()).getControlPanel());
             }
-            
             
             /*
              * Panel ustawianie dystansu w grafie
@@ -162,6 +163,15 @@ public class Demo {
 
                 }
             });
+            JRadioButton fruchtermanReingoldRadial = new JRadioButton("FruchtermanReingoldLayout", false);
+            fruchtermanReingoldRadial.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent arg0) {
+                	display.changeVisualizationLayout(OVDisplay.FRUCHTERMAN_REINGOLD_LAYOUT);
+
+
+                }
+            });
             JRadioButton radialTreeRadial = new JRadioButton("RadialTreeLayout", false);
             radialTreeRadial.addActionListener(new ActionListener() {
 
@@ -172,10 +182,13 @@ public class Demo {
             });
             ButtonGroup radialGroup = new ButtonGroup();
             radialGroup.add(forceDirectedRadial);
+            radialGroup.add(fruchtermanReingoldRadial);
             radialGroup.add(radialTreeRadial);
+            
             buttonPanel.add(forceDirectedRadial);
-
+            buttonPanel.add(fruchtermanReingoldRadial);
             buttonPanel.add(radialTreeRadial);
+            
             buttonPanel.setSize(200, 200);
             visValues.add(buttonPanel);
             CheckBoxListener checkboxListener = new CheckBoxListener();
@@ -376,6 +389,19 @@ public class Demo {
                 }
             });
             v1.add(but2);
+            options = new JButton("opcje");
+            options.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent arg0) {
+                	JFrame okno = new Options();
+                	Point location = options.getLocationOnScreen();
+                	location.x-=okno.getSize().width;
+                	location.y-=okno.getSize().height/2;
+                	okno.setLocation(location);
+                	okno.setVisible(true);
+                }
+            });
+            v1.add(options);
             v1.setBorder(BorderFactory.createTitledBorder("Opcje Animacji"));
             visValues.add(v1);
             // create a new JSplitPane to present the interface
@@ -423,7 +449,6 @@ public class Demo {
 			if (e.getActionCommand().equals(CHECKBOX_SUBCLASS_COMMAND)){
 				if (chSubClass.isSelected()){
 					FilterOptions.subClassEdge = true;
-					
 				}else{
 					FilterOptions.subClassEdge = false;
 				}
