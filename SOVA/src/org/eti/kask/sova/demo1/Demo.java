@@ -69,7 +69,6 @@ public class Demo {
 	
     public  boolean doLayout = true;
     public  OVDisplay display;
-    private  JButton options =null;
     private OWLOntology ontology = null;
     private JCheckBox chClass = null, chSubClass=null,
     chDisjointEdge=null,chCardinalityNode=null,chUnionOf=null,chIntersecionOf=null,chComplementOf=null,chEquivalent=null;
@@ -389,19 +388,7 @@ public class Demo {
                 }
             });
             v1.add(but2);
-            options = new JButton("opcje");
-            options.addActionListener(new ActionListener() {
 
-                public void actionPerformed(ActionEvent arg0) {
-                	JFrame okno = new Options();
-                	Point location = options.getLocationOnScreen();
-                	location.x-=okno.getSize().width;
-                	location.y-=okno.getSize().height/2;
-                	okno.setLocation(location);
-                	okno.setVisible(true);
-                }
-            });
-            v1.add(options);
             v1.setBorder(BorderFactory.createTitledBorder("Opcje Animacji"));
             visValues.add(v1);
             // create a new JSplitPane to present the interface
