@@ -18,12 +18,12 @@ public class ForceDirectedVis extends OVVisualization {
      * ustawienie vizualizacji
      */
     @Override
-    void setVisualizationLayout() {
+    public void setVisualizationLayout() {
 
         ForceDirectedLayout graphLayout =  new ForceDirectedLayout(GRAPH);
         ActionList layout = new ActionList(Activity.INFINITY);
         //ustawienie długości krawędzi 
-        graphLayout.getForceSimulator().getForces()[2].setParameter(1, 100F);
+        graphLayout.getForceSimulator().getForces()[2].setParameter(1, 150F);
         layout.add(graphLayout);
         layout.add(new RepaintAction());
         this.putAction(LAYOUT_ACTION, layout);

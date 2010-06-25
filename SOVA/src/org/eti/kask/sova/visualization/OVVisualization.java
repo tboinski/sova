@@ -199,7 +199,7 @@ abstract public class OVVisualization extends Visualization {
     /**
      * 
      */
-    abstract void setVisualizationLayout();
+    public abstract void setVisualizationLayout();
 
     /** odswieżenie filtrów, funkcja powinna byc wywołana po zmianach w predykacie
      * filtrów. Lub innych zmianach związanych z filtrami.

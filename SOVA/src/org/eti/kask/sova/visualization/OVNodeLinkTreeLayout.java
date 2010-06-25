@@ -52,7 +52,7 @@ public class OVNodeLinkTreeLayout extends OVVisualization{
     private int m_orientation = prefuse.Constants.ORIENT_LEFT_RIGHT;
     
 	@Override
-	void setVisualizationLayout() {
+	public void setVisualizationLayout() {
 
         m_nodeRenderer =  (LabelRenderer) new NodeRenderer(Constants.TREE_NODES);
         m_nodeRenderer.setHorizontalAlignment(prefuse.Constants.LEFT);

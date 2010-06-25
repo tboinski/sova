@@ -1,5 +1,6 @@
 package org.eti.kask.sova.visualization;
 
+import java.awt.Point;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.eti.kask.sova.graph.Constants;
@@ -31,11 +32,14 @@ public class OVDisplay extends Display {
 
 	public static final int FORCE_DIRECTED_LAYOUT = 1;
     public static final int RADIAL_TREE_LAYOUT = 2;
+    public static final int FRUCHTERMAN_REINGOLD_LAYOUT = 3;
     private int graphLayout = FORCE_DIRECTED_LAYOUT;
     private Graph graph = null;
     private OVVisualization visualizationForceDirected = null;
     private OVVisualization visualizationRadialGraph = null;
+    private OVVisualization visualizationFruchtermanReingold = null;
     private OVVisualization visualizationTree = null;
+    private boolean canPan = true;
     private OVVisualization getGraphLayoutVis() {
 
         switch (graphLayout) {
@@ -49,15 +53,29 @@ public class OVDisplay extends Display {
             		initRadialGraphVis();
             	}
                 return visualizationRadialGraph;
+            case 3:
+            	if (visualizationFruchtermanReingold==null){
+            		initFruchtermanReingoldVis();
+            	}
+                return visualizationFruchtermanReingold;
         }
     	if (visualizationForceDirected==null){
     		initForceDirectedVis();
     	}
         return visualizationForceDirected;
     }
+    private void  initFruchtermanReingoldVis(){
+    	visualizationFruchtermanReingold = new FruchtermanReingoldVis();
+    	VisualGraph visualGraph =  visualizationFruchtermanReingold.addGraph( Constants.GRAPH, this.getGraph());
+    	visualizationFruchtermanReingold.setVisualizationSettings();
+		if(visualGraph.getNodeCount() > 0) {
+			VisualItem currentClass = (VisualItem) visualGraph.getNode(0);
+			visualizationFruchtermanReingold.getGroup(Visualization.FOCUS_ITEMS).setTuple(currentClass);
+			currentClass.setFixed(true);
+		}
+    }
     private void initForceDirectedVis(){
     	visualizationForceDirected = new ForceDirectedVis();
-    	visualizationForceDirected = getGraphLayoutVis();
         VisualGraph visualGraph =  visualizationForceDirected.addGraph(Constants.GRAPH, this.getGraph());
         visualizationForceDirected.setVisualizationSettings();
 		// ustawienie podswietlonej klasy 
@@ -66,12 +84,16 @@ public class OVDisplay extends Display {
 			visualizationForceDirected.getGroup(Visualization.FOCUS_ITEMS).setTuple(currentClass);
 			currentClass.setFixed(true);
 		}
+		if (canPan){
+			pan(350, 350);
+			canPan = false;
+		}
 		
     }
     
 	private void initRadialGraphVis() {
 		visualizationRadialGraph = new RadialGraphVis();
-		visualizationRadialGraph = getGraphLayoutVis();
+//		visualizationRadialGraph = getGraphLayoutVis();
 		visualizationRadialGraph.addGraph( Constants.GRAPH, this.getGraph());
 		visualizationRadialGraph.setVisualizationSettings();
 

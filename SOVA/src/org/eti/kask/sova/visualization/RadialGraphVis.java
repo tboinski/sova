@@ -31,7 +31,7 @@ public class RadialGraphVis extends OVVisualization {
     private static final String treeNodes = Constants.GRAPH_NODES;
     private static final String linear = "linear";
     @Override
-    void setVisualizationLayout() {
+    public void setVisualizationLayout() {
      
 
         addRepaintAction();
