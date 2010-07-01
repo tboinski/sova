@@ -55,22 +55,10 @@
 		<copy file="${prefuse.lib}" todir="${classes}/lib" />
 		<copy file="${sova.lib}" todir="${classes}/lib" />
 		<copy file="./img/SOVA.png" todir="${classes}/img" />
-		<copy todir="${classes}/lib/pellet">
-		  <fileset dir="${lib}/pellet">
-		    <include name="**/*.jar"/>
-		  </fileset>
-		</copy>
-		<copy todir="${classes}/lib/pellet/xsdlib">
-		  <fileset dir="${lib}/pellet/xsdlib">
-		    <include name="**/*.jar"/>
-		  </fileset>
-		</copy>
 		<jar jarfile="${build}/${plugin}.jar" basedir="${classes}" manifest="./META-INF/MANIFEST.MF" />
 	</target>
 
 	   <target name = "install" depends = "jar">
-
-	   	
 	     <copy file="${build}/${plugin}.jar" 
 	           todir = "${protege.plugins}"
 	           overwrite = "true"/>
