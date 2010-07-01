@@ -2,6 +2,7 @@ package org.pg.eti.kask.sova.graph;
 
 import java.util.HashSet;
 import java.util.Set;
+import org.pg.eti.kask.sova.utils.ReasonerLoader;
 import org.semanticweb.owl.apibinding.OWLManager;
 import org.semanticweb.owl.inference.OWLReasoner;
 import org.semanticweb.owl.inference.OWLReasonerAdapter;
@@ -25,6 +26,8 @@ import prefuse.data.Tree;
  * 
  */
 public class OWLtoHierarchyTreeConverter {
+	//nazwa klasy Reasonera.
+	private static final String REASONER_CLASS_NAME = "org.mindswap.pellet.owlapi.Reasoner";
 	
 	//rerefencje do obiektow OWL API
 	private OWLOntology ontology;
@@ -38,7 +41,6 @@ public class OWLtoHierarchyTreeConverter {
 	public OWLtoHierarchyTreeConverter(){
 		
 	}
-	
 	
 	public Tree OWLtoTree(OWLOntology ontology){
 		
@@ -140,8 +142,7 @@ public class OWLtoHierarchyTreeConverter {
 	 * Metoda inicjalizuja mechanizm wnioskujacy.
 	 */
 	private void initializeReasoner() {
-		this.reasoner = new org.mindswap.pellet.owlapi.Reasoner(ontologyManager);
-
+		this.reasoner = ReasonerLoader.getInstance().getReasoner();
 	}
 	
 }
