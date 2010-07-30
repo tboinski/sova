@@ -9,7 +9,7 @@ Bundle-DocURL: http://www.eti.pg.gda.pl
 Update-Url: http://www.eti.pg.gda.pl
 Bundle-ClassPath: .,lib/SOVA.jar,lib/prefuse.jar
 Import-Package: org.osgi.framework
-Bundle-Version: 0.1.2
+Bundle-Version: 0.5.0
 Bundle-Activator: org.protege.editor.core.plugin.DefaultPluginActivator
 Require-Bundle: org.eclipse.equinox.registry,
  org.eclipse.equinox.common,
