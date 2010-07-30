@@ -119,9 +119,9 @@ public class Demo {
             });
             JPanel visValues = new JPanel();
             visValues.setLayout(new BoxLayout(visValues, BoxLayout.Y_AXIS));
-            if (display.getGraphLayout() == OVDisplay.FORCE_DIRECTED_LAYOUT) {
-                  visValues.add(((ForceDirectedVis)display.getVisualization()).getControlPanel());
-            }
+//            if (display.getGraphLayout() == OVDisplay.FORCE_DIRECTED_LAYOUT) {
+//                  visValues.add(((ForceDirectedVis)display.getVisualization()).getControlPanel());
+//            }
             
             /*
              * Panel ustawianie dystansu w grafie
@@ -129,7 +129,7 @@ public class Demo {
              */
         
 			final JValueSlider slider = new JValueSlider("Distance", 1, 15,
-					FilterOptions.distance);
+					FilterOptions.getDistance());
 			slider.addChangeListener(new ChangeListener() {
 				public void stateChanged(ChangeEvent e) {
 					display.getVisualization().setDistance( slider.getValue().intValue());
@@ -413,7 +413,7 @@ public class Demo {
 			
 			if (e.getActionCommand().equals(CHECKBOX_CLASS_COMMAND)){
 				if (chClass.isSelected()){
-					FilterOptions.classFilter = true;
+					FilterOptions.setClassFilter( true);
 					chSubClass.setEnabled(true);
 					chDisjointEdge.setEnabled(true);
 					chUnionOf.setEnabled(true);
@@ -423,7 +423,7 @@ public class Demo {
 					chEquivalent.setEnabled(true);
 					
 				}else{
-					FilterOptions.classFilter = false;
+					FilterOptions.setClassFilter( false);
 					chSubClass.setEnabled(false);
 					chDisjointEdge.setEnabled(false);
 					chUnionOf.setEnabled(false);
@@ -435,62 +435,62 @@ public class Demo {
 			}else
 			if (e.getActionCommand().equals(CHECKBOX_SUBCLASS_COMMAND)){
 				if (chSubClass.isSelected()){
-					FilterOptions.subClassEdge = true;
+					FilterOptions.setSubClassEdge( true );
 				}else{
-					FilterOptions.subClassEdge = false;
+					FilterOptions.setSubClassEdge(false);
 				}
 			}else
 			if (e.getActionCommand().equals(CHECKBOX_DISJOINT_CLASS_COMMAND)){
 				if (chDisjointEdge.isSelected()){
-					FilterOptions.disjointClassEdge = true;
+					FilterOptions.setDisjointClassEdge(true);
 				}else{
-					FilterOptions.disjointClassEdge = false;
+					FilterOptions.setDisjointClassEdge( false );
 				}
 			}else
 			if (e.getActionCommand().equals(CHECKBOX_UNIONOF_COMMAND)){
 				if (chUnionOf.isSelected()){
-						FilterOptions.unionOf = true;
+						FilterOptions.setUnionOf( true);
 				}else{
-						FilterOptions.unionOf = false;
+						FilterOptions.setUnionOf(false);
 				}
 			}else
 			if (e.getActionCommand().equals(CHECKBOX_INTERSECTION_COMMAND)){
 				if (chIntersecionOf.isSelected()){
-						FilterOptions.intersectionOf = true;
+						FilterOptions.setIntersectionOf(true);
 				}else{
-						FilterOptions.intersectionOf = false;
+						FilterOptions.setIntersectionOf(false);
 				}
 			}else
 			if (e.getActionCommand().equals(CHECKBOX_EQUIVALENT_CLASS_COMMAND)){
 			if (chEquivalent.isSelected()){
-					FilterOptions.equivalentClassEdge = true;
+					FilterOptions.setEquivalentClassEdge(true);
 			}else{
-				FilterOptions.equivalentClassEdge = false;
+				FilterOptions.setEquivalentClassEdge( false);
 			}
 			}else
 				if (e.getActionCommand().equals(CHECKBOX_COMPLEMENT_COMMAND)){
 					if (chComplementOf.isSelected()){
-							FilterOptions.complementOf = true;
+							FilterOptions.setComplementOf(true);
 					}else{
-						FilterOptions.complementOf = false;
+						FilterOptions.setComplementOf(false);
 					}
 				}else
 			if (e.getActionCommand().equals(CHECKBOX_CARDINALITY_COMMAND)){
 				if (chCardinalityNode.isSelected()){
-					FilterOptions.cardinality = true;
+					FilterOptions.setCardinality(true);
 				}else{
-					FilterOptions.cardinality = false;
+					FilterOptions.setCardinality(false);
 				}
 			}else
 			if (e.getActionCommand().equals(CHECKBOX_INDYVIDUAL_COMMAND)){
 				if (chIndywidual.isSelected()){
-					FilterOptions.individual = true;
+					FilterOptions.setIndividual(true);
 					chInstanceOf.setEnabled(true);
 					chDifferent.setEnabled(true);
 					chsameas.setEnabled(true);
 					choneof.setEnabled(true);
 				}else{
-					FilterOptions.individual = false;
+					FilterOptions.setIndividual(false);
 					chInstanceOf.setEnabled(false);
 					chDifferent.setEnabled(false);
 					chsameas.setEnabled(false);
@@ -499,36 +499,36 @@ public class Demo {
 			}else
 			if (e.getActionCommand().equals(CHECKBOX_INSTANCEOF_COMMAND)){
 				if (chInstanceOf.isSelected()){
-					FilterOptions.instanceOfEdge = true;
+					FilterOptions.setInstanceOfEdge(true);
 				}else{
-					FilterOptions.instanceOfEdge = false;
+					FilterOptions.setInstanceOfEdge(false);
 				}
 			}else
 			if (e.getActionCommand().equals(CHECKBOX_DIFFERENT_COMMAND)){
 				if (chDifferent.isSelected()){
-					FilterOptions.different = true;
+					FilterOptions.setDifferent(true);
 				}else{
-					FilterOptions.different = false;
+					FilterOptions.setDifferent(false);
 				}
 			}else
 			if (e.getActionCommand().equals(CHECKBOX_SAMEAS_COMMAND)){
 				if (chsameas.isSelected()){
-					FilterOptions.sameAs = true;
+					FilterOptions.setSameAs(true);
 				}else{
-					FilterOptions.sameAs = false;
+					FilterOptions.setSameAs(false);
 				}
 			}else
 			if (e.getActionCommand().equals(CHECKBOX_ONEOF_COMMAND)){
 				if (choneof.isSelected()){
-					FilterOptions.oneOf = true;
+					FilterOptions.setOneOf(true);
 				}else{
-					FilterOptions.oneOf = false;
+					FilterOptions.setOneOf(false);
 
 				}
 			}else//property
 			if (e.getActionCommand().equals(CHECKBOX_PROPERTY_COMMAND)){
 				if (chproperty.isSelected()){
-					FilterOptions.property = true;
+					FilterOptions.setProperty(true);
 					chSubProperty.setEnabled(true);
 					chEquivalentProperty.setEnabled(true);
 					chFunctionalProperty.setEnabled(true);
@@ -541,7 +541,7 @@ public class Demo {
 					chInverseOfProperty.setEnabled(true);
 					
 				}else{
-					FilterOptions.property = false;
+					FilterOptions.setProperty(false);
 					chSubProperty.setEnabled(false);
 					chEquivalentProperty.setEnabled(false);
 					chFunctionalProperty.setEnabled(false);
@@ -556,73 +556,73 @@ public class Demo {
 			}else
 			if (e.getActionCommand().equals(CHECKBOX_SUBPROPERTY_COMMAND)){
 				if (chSubProperty.isSelected()){
-					FilterOptions.subPropertyEdge = true;
+					FilterOptions.setSubPropertyEdge(true);
 				}else{
-					FilterOptions.subPropertyEdge = false;
+					FilterOptions.setSubPropertyEdge(false);
 				}
 			}else
 			if (e.getActionCommand().equals(CHECKBOX_EQUIVALENT_COMMAND)){
 				if (chEquivalentProperty.isSelected()){
-					FilterOptions.equivalentPropertyEdge = true;
+					FilterOptions.setEquivalentPropertyEdge(true);
 				}else{
-					FilterOptions.equivalentPropertyEdge = false;
+					FilterOptions.setEquivalentPropertyEdge(false);
 				}
 			}else
 			if (e.getActionCommand().equals(CHECKBOX_INVERSEOFPROPERTY_COMMAND)){
 				if (chInverseOfProperty.isSelected()){
-					FilterOptions.inverseOfProperty = true;
+					FilterOptions.setInverseOfProperty(true);
 				}else{
-					FilterOptions.inverseOfProperty = false;
+					FilterOptions.setInverseOfProperty(false);
 				}
 			}else	
 			if (e.getActionCommand().equals(CHECKBOX_FUNCTIONALPROPERTY_COMMAND)){
 				if (chFunctionalProperty.isSelected()){
-					FilterOptions.functionalProperty = true;
+					FilterOptions.setFunctionalProperty(true);
 				}else{
-					FilterOptions.functionalProperty = false;
+					FilterOptions.setFunctionalProperty(false);
 				}
 
 			}else
 			if (e.getActionCommand().equals(CHECKBOX_INVERSFUNCTIONALPROPERTY_COMMAND)){
 				if (chInversFunctionalProperty.isSelected()){
-					FilterOptions.inverseFunctionalProperty = true;
+					FilterOptions.setInverseFunctionalProperty(true);
 				}else{
-					FilterOptions.inverseFunctionalProperty = false;
+					FilterOptions.setInverseFunctionalProperty(false);
 				}
 			}else
 			if (e.getActionCommand().equals(CHECKBOX_SYMMETRICPROPERTY_COMMAND)){
 				if (chSymmetricProperty.isSelected()){
-					FilterOptions.symmetricProperty = true;
+					FilterOptions.setSymmetricProperty(true);
 				}else{
-					FilterOptions.symmetricProperty = false;
+					FilterOptions.setSymmetricProperty(false);
 				}
 			}else
 			if (e.getActionCommand().equals(CHECKBOX_TRANSITIVEPROPERTY_COMMAND)){
 				if (chTransitiveProperty.isSelected()){
-					FilterOptions.transitiveProperty = true;
+					FilterOptions.setTransitiveProperty(true);
 				}else{
-					FilterOptions.transitiveProperty = false;
+					FilterOptions.setTransitiveProperty(false);
 				}
 			}else
 			if (e.getActionCommand().equals(CHECKBOX_INSTANCEPROPERTY_COMMAND)){
 				if (chInstanceProperty.isSelected()){
-					FilterOptions.instanceProperty = true;
+					FilterOptions.setInstanceProperty(true);
 				}else{
-					FilterOptions.instanceProperty = false;
+					FilterOptions.setInstanceProperty(false);
 				}
 			}else
 			if (e.getActionCommand().equals(CHECKBOX_DOMAIN_COMMAND)){
 				if (chDomain.isSelected()){
-					FilterOptions.domain = true;
+					FilterOptions.setDomain(true);
 				}else{
-					FilterOptions.domain = false;
+					FilterOptions.setDomain(false);
 				}
 			}else
 			if (e.getActionCommand().equals(CHECKBOX_RANGE_COMMAND)){
 				if (chRange.isSelected()){
-					FilterOptions.range = true;
+					FilterOptions.setRange(true);
 				}else{
-					FilterOptions.range = false;
+					FilterOptions.setRange(false);
 				}
 			}
 			

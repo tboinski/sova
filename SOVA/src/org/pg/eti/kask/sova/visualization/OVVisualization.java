@@ -108,7 +108,7 @@ abstract public class OVVisualization extends Visualization {
               }
           });
          
-          filterDist = new GraphDistanceFilter(GRAPH, FilterOptions.distance);	
+          filterDist = new GraphDistanceFilter(GRAPH, FilterOptions.getDistance());	
     }
     /**
      * ustawia renderery dla krawędzi i wierzchołków dla wizualizacji
@@ -155,7 +155,7 @@ abstract public class OVVisualization extends Visualization {
     
     protected void addFilters() {
 		ActionList filtersItmDist = new ActionList();
-    	if (!FilterOptions.distanceFilter) return;
+    	if (!FilterOptions.isDistanceFilter()) return;
     	
     	if (itemVisualizationFilter == null) initItemVisualizationFilter();
         if (filterDist==null) initFilterDist();

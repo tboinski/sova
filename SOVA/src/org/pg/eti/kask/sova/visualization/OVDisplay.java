@@ -1,6 +1,5 @@
 package org.pg.eti.kask.sova.visualization;
 
-import java.awt.Point;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -126,10 +125,12 @@ public class OVDisplay extends Display {
 
     public OVDisplay() {
         super();
+        //włączenie pełnego odświeżania
+        this.setDamageRedraw(false);
         this.setSize(1500, 1500);
         this.setHighQuality(true);
-        PaintListener m_debug  = new DebugStatsPainter();
-        addPaintListener(m_debug);
+//        PaintListener m_debug  = new DebugStatsPainter();
+//        addPaintListener(m_debug);
         graph = new Graph();
 //        this.setItemSorter(new TreeDepthItemSorter());
         this.addControlListener(new DragControl()); // drag items around
@@ -174,12 +175,10 @@ public class OVDisplay extends Display {
             visualizationTree.add(Constants.TREE, con.OWLtoTree(ont));
             visualizationTree.setVisualizationSettings();
             this.setVisualization(visualizationTree);
-            setSize(700,600);
             setItemSorter(new TreeDepthItemSorter());
         } catch (Exception ex) {
             Logger.getLogger(OVDisplay.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     /**
