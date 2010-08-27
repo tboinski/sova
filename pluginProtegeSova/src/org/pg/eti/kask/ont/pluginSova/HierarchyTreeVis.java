@@ -17,6 +17,8 @@ import org.protege.editor.owl.ui.view.AbstractOWLViewComponent;
 public class HierarchyTreeVis extends AbstractOWLViewComponent {
     private  JPanel leftPanel = null, rightPanel = null;
 	private  OVDisplay display;
+	private JButton but3 = null;
+	private boolean showFullTree = true;
 	@Override
 	protected void disposeOWLView() {
 		display.removeDisplayVis();	
@@ -59,13 +61,31 @@ public class HierarchyTreeVis extends AbstractOWLViewComponent {
 				display.removeDisplayVis();
 				ReasonerLoader.getInstance().setReasoner(getOWLModelManager().getReasoner());
 				display.generateTreeFromOWl(getOWLModelManager().getActiveOntology());
-				
+				but3.setText("Show Full Tree");
+				showFullTree = true;
 			}
 		});
 		but2.setSize(100, 80);
 		but2.setToolTipText("Reload ontology");
 		buttonPanel.add(but2);
 
+		
+		but3 = new JButton("Show Full Tree");
+		but3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (showFullTree){
+					display.showFullTree();
+					but3.setText("Hide Full Tree");
+					showFullTree = false;
+				}else{
+					display.hideFullTree();
+					but3.setText("Show Full Tree");
+					showFullTree = true;				
+				}
+			}
+		});
+		buttonPanel.add(but3);
+		
 		rightPanel.add(buttonPanel);
 		rightPanel.setPreferredSize(new Dimension(120, Integer.MAX_VALUE));
 		rightPanel.setMaximumSize(new Dimension(140, Integer.MAX_VALUE));

@@ -9,6 +9,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
 import org.pg.eti.kask.sova.visualization.OVDisplay;
 import org.protege.editor.owl.ui.view.AbstractOWLViewComponent;
 
@@ -24,6 +25,7 @@ public class SovaVisualization extends AbstractOWLViewComponent {
     private Options optionFrame=null;
     private boolean isOptionFrameShow = false;
     private  JPanel leftPanel = null, rightPanel = null;
+    private AnnotationPanel annotation;
     @Override
     protected void disposeOWLView() {
     	display.removeDisplayVis();
@@ -32,10 +34,13 @@ public class SovaVisualization extends AbstractOWLViewComponent {
     @Override
     protected void initialiseOWLView() throws Exception {
     	if (display == null){
-    		display = new OVDisplay();
+    		display = new OVDisplay(getOWLModelManager().getActiveOntology());
+    		annotation = new AnnotationPanel();
+    		display.addAnnotationComponent(annotation);
     		display.setSize(800, 600);
         }
-    	display.generateGraphFromOWl(getOWLModelManager().getActiveOntology());
+		display.setOntology(getOWLModelManager().getActiveOntology());
+    	display.generateGraphFromOWl();
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         
         if (leftPanel == null){
@@ -54,7 +59,7 @@ public class SovaVisualization extends AbstractOWLViewComponent {
 		ImagePanel icon = new ImagePanel(new ImageIcon(getClass().getResource(
 				"/img/SOVA.png")).getImage());
 		rightPanel.add(icon);
-		JPanel buttonPanel = new JPanel(new GridLayout(8, 1));
+		JPanel buttonPanel = new JPanel(new GridLayout(4, 1));
 		JButton but = new JButton("Play/Stop");
 		but.setToolTipText("Play or stop animation");
 		but.addActionListener(new ActionListener() {
@@ -102,9 +107,10 @@ public class SovaVisualization extends AbstractOWLViewComponent {
 		options.setSize(100, 80);
 		buttonPanel.add(options);
 		rightPanel.add(buttonPanel);
-		rightPanel.setPreferredSize(new Dimension(120, Integer.MAX_VALUE));
-		rightPanel.setMaximumSize(new Dimension(140, Integer.MAX_VALUE));
-		rightPanel.setMinimumSize(new Dimension(100, Integer.MAX_VALUE));
+		rightPanel.add(annotation);
+		rightPanel.setPreferredSize(new Dimension(180, Integer.MAX_VALUE));
+		rightPanel.setMaximumSize(new Dimension(190, Integer.MAX_VALUE));
+		rightPanel.setMinimumSize(new Dimension(170, Integer.MAX_VALUE));
 	}
     private void initLeftPanel(){
         leftPanel = new JPanel();
