@@ -38,8 +38,11 @@ public class ReasonerLoader {
 	 * biblioteki pellet.
 	 * 
 	 * @return
+	 * @throws NoSuchMethodException 
+	 * @throws ClassNotFoundException 
+	 * @throws SecurityException 
 	 */
-	public OWLReasoner getReasoner() {
+	public OWLReasoner getReasoner() throws SecurityException, ClassNotFoundException, NoSuchMethodException {
 		if (reasoner==null) initializeReasoner();
 		
 		return reasoner;
@@ -53,20 +56,20 @@ public class ReasonerLoader {
 	}
 	/**
 	 * Metoda inicjalizuja mechanizm wnioskujacy.
+	 * @throws ClassNotFoundException 
+	 * @throws NoSuchMethodException 
+	 * @throws SecurityException 
 	 */
-	private void initializeReasoner() {
+	private void initializeReasoner() throws ClassNotFoundException, SecurityException, NoSuchMethodException {
 		
 		try {
 			Class<?> reasonerClass = Class.forName(REASONER_CLASS_NAME);
 			Constructor<?> con = reasonerClass.getConstructor(OWLOntologyManager.class);
 			reasoner = (OWLReasoner)con.newInstance(OWLManager.createOWLOntologyManager());
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
+
+
+
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (InstantiationException e) {

@@ -1,12 +1,16 @@
 package org.pg.eti.kask.sova.visualization;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import org.pg.eti.kask.sova.graph.Constants;
 import org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
 import org.pg.eti.kask.sova.graph.OWLtoHierarchyTreeConverter;
+import org.pg.eti.kask.sova.visualization.annotation.AnnotationComponent;
+import org.pg.eti.kask.sova.visualization.annotation.AnnotationListener;
 import org.semanticweb.owl.model.OWLOntology;
+import org.semanticweb.owl.model.OWLOntologyManager;
 import prefuse.Display;
 import prefuse.Visualization;
 import prefuse.controls.DragControl;
@@ -40,6 +44,7 @@ public class OVDisplay extends Display {
     private OVVisualization visualizationFruchtermanReingold = null;
     private OVVisualization visualizationTree = null;
     private boolean canPan = true;
+    private OWLOntology ontology = null;
     private OVVisualization getGraphLayoutVis() {
 
         switch (graphLayout) {
@@ -122,15 +127,25 @@ public class OVDisplay extends Display {
     public void setGraph(Graph graph) {
         this.graph = graph;
     }
-
+    
+    public synchronized OWLOntology getOntology() {
+		return ontology;
+	}
+	public synchronized void setOntology(OWLOntology ontology) {
+		this.ontology = ontology;
+	}
+	public OVDisplay(OWLOntology ontology){
+    	this();
+    	this.ontology = ontology;
+    }
     public OVDisplay() {
         super();
         //włączenie pełnego odświeżania
         this.setDamageRedraw(false);
         this.setSize(1500, 1500);
         this.setHighQuality(true);
-//        PaintListener m_debug  = new DebugStatsPainter();
-//        addPaintListener(m_debug);
+        PaintListener m_debug  = new DebugStatsPainter();
+        addPaintListener(m_debug);
         graph = new Graph();
 //        this.setItemSorter(new TreeDepthItemSorter());
         this.addControlListener(new DragControl()); // drag items around
@@ -141,44 +156,73 @@ public class OVDisplay extends Display {
         this.addControlListener(new ZoomToFitControl());
 		addControlListener(new FocusControl(1, RadialGraphVis.FILTERS));
 		addControlListener(new HoverActionControl(OVVisualization.REPAINT_ACTION));
-       
     }
-
+    /**
+     * Dodaje komponent nasłuchujący na zmiany zaznaczonego wierzchołka 
+     * @param component
+     * @param manager
+     */
+    public void addAnnotationComponent(AnnotationComponent component, OWLOntologyManager manager){
+    	this.addControlListener(new AnnotationListener(component, manager, ontology));
+    }
+    
     /**
      * metoda wizualizuje zadaną ontologię
      * @param ont ontologia zapisana w OWLAPI
      */
     public void generateGraphFromOWl(OWLOntology ont) {
+    	setOntology(ont);
+    	generateGraphFromOWl();
+    }
+    /**
+     * metoda wizualizuje zadaną ontologię
+     */
+    public void generateGraphFromOWl() {
         try {
+        	System.out.println();
+        	Date data1 , data2 ;
+        	data1 = Calendar.getInstance().getTime();
         	OWLtoGraphConverter con = new OWLtoGraphConverter();
-            this.setGraph(con.OWLtoGraph(ont));
+            this.setGraph(con.OWLtoGraph(getOntology()));
+//            setGraphLayout(RADIAL_TREE_LAYOUT);
             OVVisualization vis = getGraphLayoutVis();
             this.setVisualization(vis);
             vis.startLayout();           
-
+            data2 = Calendar.getInstance().getTime();
+            System.out.println(data1.toString());
+            System.out.println(data2.toString());
+            long x = data2.getTime()- data1.getTime();
+            System.out.println("razem "+x+" milis");
         } catch (Exception ex) {
             Logger.getLogger(OVDisplay.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
+    /**
+     * metoda generuje drzewo wnioskowania dla zadanej obiektu owl
+     */
+    public void generateTreeFromOWl() {
+        try {       	
+            // this.setGraph(OWLtoGraphConverter.getInstance().OWLtoGraph(ont));
+         	visualizationTree = new OVNodeLinkTreeLayout();
+             OWLtoHierarchyTreeConverter con = new OWLtoHierarchyTreeConverter();
+             visualizationTree.add(Constants.TREE, con.OWLtoTree(getOntology()));
+             visualizationTree.setVisualizationSettings();
+             this.setVisualization(visualizationTree);
+             setItemSorter(new TreeDepthItemSorter());
+         } catch (Exception ex) {
+             Logger.getLogger(OVDisplay.class.getName()).log(Level.SEVERE, null, ex);
+         }	
+    }
     
     /**
      * metoda generuje drzewo wnioskowania dla zadanej obiektu owl
      * @param ont ontologia zapisana w OWLAPI
      */
     public void generateTreeFromOWl(OWLOntology ont) {
-        try {       	
-           // this.setGraph(OWLtoGraphConverter.getInstance().OWLtoGraph(ont));
-        	visualizationTree = new OVNodeLinkTreeLayout();
-            OWLtoHierarchyTreeConverter con = new OWLtoHierarchyTreeConverter();
-            visualizationTree.add(Constants.TREE, con.OWLtoTree(ont));
-            visualizationTree.setVisualizationSettings();
-            this.setVisualization(visualizationTree);
-            setItemSorter(new TreeDepthItemSorter());
-        } catch (Exception ex) {
-            Logger.getLogger(OVDisplay.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    	setOntology(ont);
+    	generateTreeFromOWl();
     }
 
     /**
@@ -213,6 +257,24 @@ public class OVDisplay extends Display {
     		graph = new Graph();
     	}catch (Exception e){
     		
+    	}
+    }
+    /**
+     * Wyświetla całe drzewo wywnioskowanej hierarchii 
+     */
+    public void showFullTree(){
+    	if (visualizationTree!= null){
+    		visualizationTree.setDistance(100);
+    		visualizationTree.refreshFilter();
+    	}
+    }
+    /**
+     * Ukrywa drzewo wywnioskowanej hierarchii do podstawowej postaci 
+     */
+    public void hideFullTree(){
+    	if (visualizationTree!= null){
+    		visualizationTree.setDistance(3);
+    		visualizationTree.refreshFilter();
     	}
     }
 

@@ -38,19 +38,29 @@ import prefuse.visual.expression.InGroupPredicate;
  *
  */
 public class OVNodeLinkTreeLayout extends OVVisualization{
-	private static final String ANIMATE_PAINT_ACTION = "animatePaint";
-	private static final String ANIMATE_ACTION = "animate";
-	private static final String TEXTCOLOR_ACTION = "textcolor_action";
+	private int distance =3;
 	
-	
-    private static final String tree = "tree";
-    private static final String treeNodes = "tree.nodes";
-    private static final String treeEdges = "tree.edges";
+    private static final String TREE = "tree";
+    private static final String TREE_NODES = "tree.nodes";
+    private static final String TREE_EDGES = "tree.edges";
     
     private LabelRenderer m_nodeRenderer;
     private EdgeRenderer m_edgeRenderer;
     private int m_orientation = prefuse.Constants.ORIENT_LEFT_RIGHT;
-    
+    private FisheyeTreeFilter fishTreeFilter = null;
+    private FisheyeTreeFilter getFishTreeFilter(){
+    	if (fishTreeFilter== null){
+    		fishTreeFilter = new FisheyeTreeFilter(TREE, distance);
+    	}
+    	return fishTreeFilter;
+    }
+    /**
+     * ustawia wilekość wyświetlanego drzewa. 
+     */
+    public void setDistance(int distance){
+    	this.distance = distance;
+    	getFishTreeFilter().setDistance(distance);
+    }
 	@Override
 	public void setVisualizationLayout() {
 
@@ -60,16 +70,16 @@ public class OVNodeLinkTreeLayout extends OVVisualization{
         m_edgeRenderer = new EdgeRenderer(prefuse.Constants.EDGE_TYPE_CURVE);
         
         DefaultRendererFactory rf = new DefaultRendererFactory(m_nodeRenderer);
-        rf.add(new InGroupPredicate(treeEdges), m_edgeRenderer);
+        rf.add(new InGroupPredicate(TREE_EDGES), m_edgeRenderer);
         this.setRendererFactory(rf);
                
         // colors
-        ItemAction nodeColor = new NodeColorAction(treeNodes);
-        ItemAction textColor = new ColorAction(treeNodes,
+        ItemAction nodeColor = new NodeColorAction(TREE_NODES);
+        ItemAction textColor = new ColorAction(TREE_NODES,
                 VisualItem.TEXTCOLOR, ColorLib.rgb(0,0,0));
         this.putAction("textColor", textColor);
         
-        ItemAction edgeColor = new ColorAction(treeEdges,
+        ItemAction edgeColor = new ColorAction(TREE_EDGES,
                 VisualItem.STROKECOLOR, ColorLib.rgb(200,200,200));
         
         // quick repaint
@@ -85,26 +95,27 @@ public class OVNodeLinkTreeLayout extends OVVisualization{
         
         // animate paint change
         ActionList animatePaint = new ActionList(400);
-        animatePaint.add(new ColorAnimator(treeNodes));
+        animatePaint.add(new ColorAnimator(TREE_NODES));
         animatePaint.add(new RepaintAction());
         this.putAction("animatePaint", animatePaint);
         
         // create the tree layout action
-        NodeLinkTreeLayout treeLayout = new NodeLinkTreeLayout(tree,
+        NodeLinkTreeLayout treeLayout = new NodeLinkTreeLayout(TREE,
                 m_orientation, 50, 0, 8);
         treeLayout.setLayoutAnchor(new Point2D.Double(25,300));
         this.putAction("treeLayout", treeLayout);
         
         CollapsedSubtreeLayout subLayout = 
-            new CollapsedSubtreeLayout(tree, m_orientation);
+            new CollapsedSubtreeLayout(TREE, m_orientation);
         this.putAction("subLayout", subLayout);
         
         AutoPanAction autoPan = new AutoPanAction();
         
         // create the filtering and layout
         ActionList filter = new ActionList();
-        filter.add(new FisheyeTreeFilter(tree, 2));
-        filter.add(new FontAction(treeNodes, FontLib.getFont("Tahoma", 16)));
+        fishTreeFilter = new FisheyeTreeFilter(TREE, distance);
+        filter.add(fishTreeFilter);
+        filter.add(new FontAction(TREE_NODES, FontLib.getFont("Tahoma", 12)));
         filter.add(treeLayout);
         filter.add(subLayout);
         filter.add(textColor);
@@ -117,9 +128,9 @@ public class OVNodeLinkTreeLayout extends OVVisualization{
         animate.setPacingFunction(new SlowInSlowOutPacer());
         animate.add(autoPan);
         animate.add(new QualityControlAnimator());
-        animate.add(new VisibilityAnimator(tree));
-        animate.add(new LocationAnimator(treeNodes));
-        animate.add(new ColorAnimator(treeNodes));
+        animate.add(new VisibilityAnimator(TREE));
+        animate.add(new LocationAnimator(TREE_NODES));
+        animate.add(new ColorAnimator(TREE_NODES));
         animate.add(new RepaintAction());
         this.putAction("animate", animate);
         this.alwaysRunAfter(FILTERS, "animate");
@@ -129,7 +140,7 @@ public class OVNodeLinkTreeLayout extends OVVisualization{
         orient.setPacingFunction(new SlowInSlowOutPacer());
         orient.add(autoPan);
         orient.add(new QualityControlAnimator());
-        orient.add(new LocationAnimator(treeNodes));
+        orient.add(new LocationAnimator(TREE_NODES));
         orient.add(new RepaintAction());
         this.putAction("orient", orient);
         this.run(FILTERS);
@@ -146,7 +157,11 @@ public class OVNodeLinkTreeLayout extends OVVisualization{
     
 
 	}
-	
+	@Override
+	public void refreshFilter() {
+		this.run(FILTERS);
+		this.repaint();
+	}
     public static class NodeColorAction extends ColorAction {
         
         public NodeColorAction(String group) {

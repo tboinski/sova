@@ -1,16 +1,6 @@
 package org.pg.eti.kask.sova.visualization;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
 import org.pg.eti.kask.sova.graph.Constants;
-
 import prefuse.Visualization;
 import prefuse.action.ActionList;
 import prefuse.action.ItemAction;
@@ -27,7 +17,6 @@ import prefuse.render.DefaultRendererFactory;
 import prefuse.render.LabelRenderer;
 import prefuse.util.ColorLib;
 import prefuse.util.FontLib;
-import prefuse.util.ui.JValueSlider;
 import prefuse.visual.VisualItem;
 import prefuse.visual.expression.InGroupPredicate;
 

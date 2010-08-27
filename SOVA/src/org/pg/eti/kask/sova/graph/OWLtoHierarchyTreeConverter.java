@@ -53,9 +53,18 @@ public class OWLtoHierarchyTreeConverter {
 		tree.addColumn(Constants.TREE_NODES, org.pg.eti.kask.sova.nodes.Node.class);
 		
 		//inicjalizacja reasonera
-		initializeReasoner();
+		try {
+			initializeReasoner();
+			buildTree();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		}
 		
-		buildTree();
+		
 		return tree;
 	}
 
@@ -140,8 +149,11 @@ public class OWLtoHierarchyTreeConverter {
 
 	/**
 	 * Metoda inicjalizuja mechanizm wnioskujacy.
+	 * @throws NoSuchMethodException 
+	 * @throws ClassNotFoundException 
+	 * @throws SecurityException 
 	 */
-	private void initializeReasoner() {
+	private void initializeReasoner() throws SecurityException, ClassNotFoundException, NoSuchMethodException {
 		this.reasoner = ReasonerLoader.getInstance().getReasoner();
 	}
 	

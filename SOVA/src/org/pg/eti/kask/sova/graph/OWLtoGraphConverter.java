@@ -1,5 +1,6 @@
 package org.pg.eti.kask.sova.graph;
 
+import java.net.URI;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Set;
@@ -22,7 +23,7 @@ public class OWLtoGraphConverter {
 
 //	private static final OWLtoGraphConverter INSTANCE = new OWLtoGraphConverter();
 	Graph graph;
-
+	public static final String URI_COLUMN = "URI";
 	private Table edges;
 
 	Hashtable<String, Integer> classes;
@@ -65,6 +66,7 @@ public class OWLtoGraphConverter {
 				org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.PropertyNode();
 				node.setLabel(prop.toString());
 				dataProperty.set("node", node);
+				dataProperty.set(URI_COLUMN, prop.getURI());
 				dataPropertyRowNr = dataProperty.getRow();
 				dataProperties.put(prop.toString(),dataPropertyRowNr);
 			}else{
@@ -113,7 +115,7 @@ public class OWLtoGraphConverter {
 				org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.ClassNode();
 				node.setLabel(cls.toString());
 				n.set("node", node);
-
+				n.set(URI_COLUMN, cls.getURI());
 				if (cls.getSuperClasses(ontology).isEmpty() == true) { // thing
 					// jest
 					// superklasa
@@ -144,6 +146,7 @@ public class OWLtoGraphConverter {
 			org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.PropertyNode();
 			node.setLabel(property.toString());
 			n.set("node", node);
+			n.set(URI_COLUMN, property.getURI());
 			properties.put(property.toString(), n.getRow());
 		}
 	}
@@ -162,6 +165,7 @@ public class OWLtoGraphConverter {
 			org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.IndividualNode();
 			node.setLabel(individual.toString());
 			n.set("node", node);
+			n.set(URI_COLUMN, individual.getURI());
 			individuals.put(individual.toString(), n.getRow());
 		}
 	}
@@ -726,7 +730,10 @@ public class OWLtoGraphConverter {
 
 		return defaultNumber;
 	}
-
+	private void initializeGraphColumns(){
+		graph.addColumn("node", org.pg.eti.kask.sova.nodes.Node.class);
+		graph.addColumn(URI_COLUMN, URI.class);
+	}
 	/**
 	 * Metoda zamiany obiektu OWLOntology na obiekt graph biblioteki prefuse.
 	 * Metoda wywoluje podrzedne metody wpisujace do grafu wezly i krawedzie
@@ -736,7 +743,7 @@ public class OWLtoGraphConverter {
 	 */
 	public Graph OWLtoGraph(OWLOntology ontology) throws Exception {
 
-		graph.addColumn("node", org.pg.eti.kask.sova.nodes.Node.class);
+		initializeGraphColumns();
 
 		// Dodajemy węzeł Thing
 		thing = graph.addNode();
