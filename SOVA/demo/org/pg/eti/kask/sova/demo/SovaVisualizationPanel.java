@@ -22,19 +22,17 @@ public class SovaVisualizationPanel extends JPanel {
 	private JPanel leftPanel = null, rightPanel = null;
 	private AnnotationPanel annotation;
 	private OWLOntology ontology = null;
-	private OWLOntologyManager manager = null;
 
 	protected void disposeOWLView() {
 		display.removeDisplayVis();
 	}
 
-	public SovaVisualizationPanel(OWLOntology onto, OWLOntologyManager manager) {
+	public SovaVisualizationPanel(OWLOntology onto) {
 		this.ontology = onto;
-		this.manager = manager;
 		annotation = new AnnotationPanel();
 		display = new OVDisplay(ontology);
 		display.setSize(800, 600);
-		display.addAnnotationComponent(annotation, this.manager);
+		display.addAnnotationComponent(annotation);
 		display.generateGraphFromOWl();
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		initLeftPanel();

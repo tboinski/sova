@@ -30,14 +30,12 @@ public class main {
 			// przekazanie komunikatów klasy debugiera na system.out
             Debug.setStream(p);
             OWLOntology ontology = null;
-            OWLOntologyManager manager = null;
             // wczytanie propertiesów -klasa singleton 
             VisualizationProperties.instanceOf().loadProperties(Constants.PROPERTIES);
-            manager = OWLManager.createOWLOntologyManager();
                 
             URI physicalURI = URI.create(Constants.ONTO_TEST_DIRECTORY);
             try {// wczytanie ontologi z pliku 
-            	ontology = manager.loadOntologyFromPhysicalURI(physicalURI);
+            	ontology = OWLManager.createOWLOntologyManager().loadOntologyFromPhysicalURI(physicalURI);
             	
             } catch (OWLOntologyCreationException ex) {
                 Logger.getLogger(OWLOntologyManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -45,7 +43,7 @@ public class main {
             }
             
             JFrame frame = new JFrame("SOVA - Simple Ontology Visualization API 2010 ");
-            SovaVisualizationPanel panel = new SovaVisualizationPanel(ontology, manager);
+            SovaVisualizationPanel panel = new SovaVisualizationPanel(ontology);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.add(panel);
             frame.setSize(frame.getMaximumSize());

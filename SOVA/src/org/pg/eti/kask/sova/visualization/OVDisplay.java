@@ -162,8 +162,8 @@ public class OVDisplay extends Display {
      * @param component
      * @param manager
      */
-    public void addAnnotationComponent(AnnotationComponent component, OWLOntologyManager manager){
-    	this.addControlListener(new AnnotationListener(component, manager, ontology));
+    public void addAnnotationComponent(AnnotationComponent component ){
+    	this.addControlListener(new AnnotationListener(component, ontology));
     }
     
     /**

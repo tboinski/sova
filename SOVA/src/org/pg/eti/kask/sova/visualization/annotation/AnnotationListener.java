@@ -4,6 +4,7 @@ import java.awt.event.MouseEvent;
 import java.net.URI;
 import java.util.Set;
 import org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
+import org.semanticweb.owl.apibinding.OWLManager;
 import org.semanticweb.owl.model.OWLAxiom;
 import org.semanticweb.owl.model.OWLClass;
 import org.semanticweb.owl.model.OWLCommentAnnotation;
@@ -22,10 +23,11 @@ public class AnnotationListener extends ControlAdapter {
 	private AnnotationComponent descriptComponent=null;
 	private OWLOntologyManager manager=null;
 	private OWLOntology ontology = null;
-	public AnnotationListener(AnnotationComponent component, OWLOntologyManager manager, OWLOntology ontology){
+	public AnnotationListener(AnnotationComponent component, OWLOntology ontology){
 		this.descriptComponent = component;
-		this.manager = manager;
 		this.ontology = ontology;
+		this.manager = OWLManager.createOWLOntologyManager();
+		
 	}
 	
 	
