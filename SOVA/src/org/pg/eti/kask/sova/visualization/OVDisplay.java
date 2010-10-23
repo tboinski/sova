@@ -1,7 +1,5 @@
 package org.pg.eti.kask.sova.visualization;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.pg.eti.kask.sova.graph.Constants;
@@ -10,7 +8,6 @@ import org.pg.eti.kask.sova.graph.OWLtoHierarchyTreeConverter;
 import org.pg.eti.kask.sova.visualization.annotation.AnnotationComponent;
 import org.pg.eti.kask.sova.visualization.annotation.AnnotationListener;
 import org.semanticweb.owl.model.OWLOntology;
-import org.semanticweb.owl.model.OWLOntologyManager;
 import prefuse.Display;
 import prefuse.Visualization;
 import prefuse.controls.DragControl;
@@ -22,8 +19,6 @@ import prefuse.controls.WheelZoomControl;
 import prefuse.controls.ZoomControl;
 import prefuse.controls.ZoomToFitControl;
 import prefuse.data.Graph;
-import prefuse.util.display.DebugStatsPainter;
-import prefuse.util.display.PaintListener;
 import prefuse.visual.VisualGraph;
 import prefuse.visual.VisualItem;
 import prefuse.visual.sort.TreeDepthItemSorter;
@@ -144,8 +139,8 @@ public class OVDisplay extends Display {
         this.setDamageRedraw(false);
         this.setSize(1500, 1500);
         this.setHighQuality(true);
-        PaintListener m_debug  = new DebugStatsPainter();
-        addPaintListener(m_debug);
+//        PaintListener m_debug  = new DebugStatsPainter();
+//        addPaintListener(m_debug);
         graph = new Graph();
 //        this.setItemSorter(new TreeDepthItemSorter());
         this.addControlListener(new DragControl()); // drag items around
@@ -179,20 +174,11 @@ public class OVDisplay extends Display {
      */
     public void generateGraphFromOWl() {
         try {
-        	System.out.println();
-        	Date data1 , data2 ;
-        	data1 = Calendar.getInstance().getTime();
         	OWLtoGraphConverter con = new OWLtoGraphConverter();
             this.setGraph(con.OWLtoGraph(getOntology()));
-//            setGraphLayout(RADIAL_TREE_LAYOUT);
             OVVisualization vis = getGraphLayoutVis();
             this.setVisualization(vis);
             vis.startLayout();           
-            data2 = Calendar.getInstance().getTime();
-            System.out.println(data1.toString());
-            System.out.println(data2.toString());
-            long x = data2.getTime()- data1.getTime();
-            System.out.println("razem "+x+" milis");
         } catch (Exception ex) {
             Logger.getLogger(OVDisplay.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -273,7 +259,7 @@ public class OVDisplay extends Display {
      */
     public void hideFullTree(){
     	if (visualizationTree!= null){
-    		visualizationTree.setDistance(3);
+    		visualizationTree.setDistance(2);
     		visualizationTree.refreshFilter();
     	}
     }

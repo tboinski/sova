@@ -37,7 +37,7 @@ public class AnnotationListener extends ControlAdapter {
      */
 	@Override
     public void itemClicked(VisualItem item, MouseEvent e) {
-    	Object o = item.get(OWLtoGraphConverter.URI_COLUMN);
+    	Object o = item.get(OWLtoGraphConverter.COLUMN_URI);
     	descriptComponent.setNameText("");
     	descriptComponent.setLabelText("");
     	descriptComponent.setCommentText("");

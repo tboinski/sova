@@ -38,7 +38,7 @@ import prefuse.visual.expression.InGroupPredicate;
  *
  */
 public class OVNodeLinkTreeLayout extends OVVisualization{
-	private int distance =3;
+	private int distance =2;
 	
     private static final String TREE = "tree";
     private static final String TREE_NODES = "tree.nodes";
@@ -66,13 +66,24 @@ public class OVNodeLinkTreeLayout extends OVVisualization{
 
         m_nodeRenderer =  (LabelRenderer) new NodeRenderer(Constants.TREE_NODES);
         m_nodeRenderer.setHorizontalAlignment(prefuse.Constants.LEFT);
-
         m_edgeRenderer = new EdgeRenderer(prefuse.Constants.EDGE_TYPE_CURVE);
+        
+        m_edgeRenderer.setHorizontalAlignment1(prefuse.Constants.RIGHT);
+        m_edgeRenderer.setHorizontalAlignment2(prefuse.Constants.LEFT);
+		m_edgeRenderer.setVerticalAlignment1(prefuse.Constants.CENTER);
+		m_edgeRenderer.setVerticalAlignment2(prefuse.Constants.CENTER);
+        
         
         DefaultRendererFactory rf = new DefaultRendererFactory(m_nodeRenderer);
         rf.add(new InGroupPredicate(TREE_EDGES), m_edgeRenderer);
         this.setRendererFactory(rf);
-               
+        
+        
+
+        
+		// krawedzie nie sa interaktywne
+		this.setValue(Constants.TREE_EDGES, null, VisualItem.INTERACTIVE, Boolean.FALSE);
+      
         // colors
         ItemAction nodeColor = new NodeColorAction(TREE_NODES);
         ItemAction textColor = new ColorAction(TREE_NODES,
@@ -101,7 +112,7 @@ public class OVNodeLinkTreeLayout extends OVVisualization{
         
         // create the tree layout action
         NodeLinkTreeLayout treeLayout = new NodeLinkTreeLayout(TREE,
-                m_orientation, 50, 0, 8);
+                m_orientation, 50, 3, 8);
         treeLayout.setLayoutAnchor(new Point2D.Double(25,300));
         this.putAction("treeLayout", treeLayout);
         

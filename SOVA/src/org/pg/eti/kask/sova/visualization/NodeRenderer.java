@@ -61,7 +61,7 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 		//Dopasowuje kształt węzła do schematu
 		Shape shape = getShape(item);
 		if (shape == null) {
-			Debug.sendMessage("Brak ształtu węzła {getShape(item)==NULL}!!");
+			Debug.sendMessage("Brak kształtu węzła {getShape(item)==NULL}!!");
 			return;
 		}
 		switch(SOVAnode.getNodeShapeType(shapeScheme)) {
