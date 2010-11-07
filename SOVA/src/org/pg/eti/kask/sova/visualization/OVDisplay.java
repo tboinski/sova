@@ -1,12 +1,21 @@
 package org.pg.eti.kask.sova.visualization;
 
+import java.awt.Font;
+import java.beans.PropertyChangeListener;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+
 import org.pg.eti.kask.sova.graph.Constants;
 import org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
 import org.pg.eti.kask.sova.graph.OWLtoHierarchyTreeConverter;
 import org.pg.eti.kask.sova.visualization.annotation.AnnotationComponent;
 import org.pg.eti.kask.sova.visualization.annotation.AnnotationListener;
+import org.pg.eti.kask.sova.visualization.annotation.URIInfoComponent;
+import org.pg.eti.kask.sova.visualization.annotation.URIInfoListener;
 import org.semanticweb.owl.model.OWLOntology;
 import prefuse.Display;
 import prefuse.Visualization;
@@ -19,6 +28,18 @@ import prefuse.controls.WheelZoomControl;
 import prefuse.controls.ZoomControl;
 import prefuse.controls.ZoomToFitControl;
 import prefuse.data.Graph;
+import prefuse.data.Schema;
+import prefuse.data.Table;
+import prefuse.data.Tuple;
+import prefuse.data.event.TupleSetListener;
+import prefuse.data.expression.Expression;
+import prefuse.data.expression.Predicate;
+import prefuse.data.query.SearchQueryBinding;
+import prefuse.data.search.SearchTupleSet;
+import prefuse.data.tuple.TupleSet;
+import prefuse.data.util.Sort;
+import prefuse.util.FontLib;
+import prefuse.util.ui.JSearchPanel;
 import prefuse.visual.VisualGraph;
 import prefuse.visual.VisualItem;
 import prefuse.visual.sort.TreeDepthItemSorter;
@@ -160,7 +181,13 @@ public class OVDisplay extends Display {
     public void addAnnotationComponent(AnnotationComponent component ){
     	this.addControlListener(new AnnotationListener(component, ontology));
     }
-    
+    /**
+     * Dodaje komponent nasłuchujący na zmiany wskazanego wierzchołka  
+     * @param component
+     */
+    public void addURIInfoComponent(URIInfoComponent component){
+    	this.addControlListener(new URIInfoListener(component));
+    }
     /**
      * metoda wizualizuje zadaną ontologię
      * @param ont ontologia zapisana w OWLAPI
@@ -178,7 +205,8 @@ public class OVDisplay extends Display {
             this.setGraph(con.OWLtoGraph(getOntology()));
             OVVisualization vis = getGraphLayoutVis();
             this.setVisualization(vis);
-            vis.startLayout();           
+            vis.startLayout(); 
+            addJSearch();
         } catch (Exception ex) {
             Logger.getLogger(OVDisplay.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -263,7 +291,23 @@ public class OVDisplay extends Display {
     		visualizationTree.refreshFilter();
     	}
     }
-
+    private JPanel jSearch = null;
+    public JPanel getSearchPanel(){
+    	if (jSearch == null){
+    		jSearch = new JPanel();
+    	}
+    	return jSearch;
+    }
+    private void addJSearch(){
+    	 SearchQueryBinding sq = new SearchQueryBinding(
+	             (Table)getVisualization().getGroup("graph.nodes"), "node.name",
+	             (SearchTupleSet)getVisualization().getGroup(Visualization.SEARCH_ITEMS));
+	        JSearchPanel search =  sq.createSearchPanel();
+	        search.setShowResultCount(true);
+	        search.setBorder(BorderFactory.createEmptyBorder(5,5,4,0));
+	        search.setFont(FontLib.getFont("Tahoma", Font.PLAIN, 11));
+	        jSearch = (JPanel)search;
+    }
     
     
 }

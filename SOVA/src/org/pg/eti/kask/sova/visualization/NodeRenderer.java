@@ -14,6 +14,7 @@ import org.pg.eti.kask.sova.utils.Debug;
 import org.pg.eti.kask.sova.utils.VisualizationProperties;
 
 import prefuse.Constants;
+import prefuse.Visualization;
 import prefuse.render.ShapeRenderer;
 import prefuse.util.ColorLib;
 import prefuse.util.GraphicsLib;
@@ -57,6 +58,10 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 		item.setTextColor(ColorLib.color(Color.BLACK));
 		if (item.isHighlighted()){
 			item.setFillColor(ColorLib.color(Color.WHITE));
+		}
+		if (item.isInGroup(Visualization.SEARCH_ITEMS)){
+			item.setFillColor(ColorLib.color(Color.RED));
+			item.setTextColor(ColorLib.color(Color.WHITE));
 		}
 		//Dopasowuje kształt węzła do schematu
 		Shape shape = getShape(item);

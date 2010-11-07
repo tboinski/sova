@@ -1,39 +1,56 @@
 package org.pg.eti.kask.sova.demo;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 import org.pg.eti.kask.sova.visualization.OVDisplay;
 import org.semanticweb.owl.model.OWLOntology;
 import org.semanticweb.owl.model.OWLOntologyManager;
+
+import prefuse.Visualization;
+import prefuse.data.Table;
+import prefuse.data.query.SearchQueryBinding;
+import prefuse.data.search.SearchTupleSet;
+import prefuse.util.FontLib;
+import prefuse.util.ui.JSearchPanel;
 
 public class SovaVisualizationPanel extends JPanel {
 	private static final long serialVersionUID = -4515710047558710080L;
 	private OVDisplay display;
 	private Options optionFrame = null;
 	public boolean doLayout = true;
-	private JButton options = null;
+	private JButton options = null; 
 	private JPanel leftPanel = null, rightPanel = null;
 	private AnnotationPanel annotation;
 	private OWLOntology ontology = null;
-
+	private URITextField uriInfo = null;
 	protected void disposeOWLView() {
 		display.removeDisplayVis();
 	}
 
 	public SovaVisualizationPanel(OWLOntology onto) {
 		this.ontology = onto;
+		
 		annotation = new AnnotationPanel();
+		uriInfo = new URITextField();
 		display = new OVDisplay(ontology);
 		display.setSize(800, 600);
 		display.addAnnotationComponent(annotation);
+		display.addURIInfoComponent(uriInfo);
 		display.generateGraphFromOWl();
+		
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		initLeftPanel();
 		this.add(leftPanel);
@@ -106,8 +123,30 @@ public class SovaVisualizationPanel extends JPanel {
 	 */
 	private void initLeftPanel() {
 		leftPanel = new JPanel();
-		leftPanel.add(display);
 		leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+		leftPanel.add(display);
+		JPanel stopka = new JPanel();
+		stopka.setLayout(new BoxLayout(stopka, BoxLayout.X_AXIS));
+		stopka.setSize(Integer.MAX_VALUE, 20);
+		stopka.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
+		stopka.setMinimumSize(new Dimension(Integer.MAX_VALUE, 20));
+		stopka.setBackground(Color.WHITE);
+		
+		
+//		JPanel searchPanel = new JPanel(new GridLayout(1, 10));
+//		searchPanel.setSize(stopka.getSize().width/2, stopka.getSize().height);
+//		JTextField searchText = new JTextField(10);
+//		searchPanel.add(searchText);
+//		JButton bSearch = new JButton("Search");
+//		
+//		searchPanel.add(bSearch);
+//		stopka.add(searchPanel);
+//		uriInfo.setSize(stopka.getSize().width/2, stopka.getSize().height);
+
+		        
+		stopka.add(uriInfo);
+		stopka.add(display.getSearchPanel());
+		leftPanel.add(stopka);
 	}
 
 	private void initOptionFrame() {

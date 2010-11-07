@@ -1,5 +1,10 @@
 package org.pg.eti.kask.sova.visualization.annotation;
-
+/**
+ * Interfejs zawiera metody, które musi posiadać formatka wyświetlająca 
+ * informacje o zaznaczonym wierzchołku 
+ * @author Piotr Kunowski
+ *
+ */
 public interface AnnotationComponent {
 	/**
 	 * ustawienie nazwy elementu

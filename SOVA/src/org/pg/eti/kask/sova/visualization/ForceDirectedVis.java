@@ -28,6 +28,7 @@ public class ForceDirectedVis extends OVVisualization {
         layout.add(new RepaintAction());
         this.putAction(LAYOUT_ACTION, layout);
         addRepaintAction();
+        addSearch();
 
     }
     /**

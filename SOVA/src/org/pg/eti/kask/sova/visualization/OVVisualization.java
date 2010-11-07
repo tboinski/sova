@@ -115,16 +115,14 @@ abstract public class OVVisualization extends Visualization {
 
 
     protected void addSearch(){
-        ItemAction nodeColor = new NodeColorAction(Constants.GRAPH_NODES);
-        ItemAction textColor = new TextColorAction(Constants.GRAPH_EDGES);
+        ItemAction nodeColor = new NodeColorAction("graph.nodes");
+        ItemAction textColor = new TextColorAction("graph.nodes");
         this.putAction("textColor", textColor);
         
-        ItemAction edgeColor = new ColorAction(Constants.GRAPH_EDGES,
-                VisualItem.STROKECOLOR, ColorLib.rgb(200,200,200));
         
-        FontAction fonts = new FontAction(Constants.GRAPH_NODES, 
+        FontAction fonts = new FontAction("graph.nodes", 
                 FontLib.getFont("Tahoma", 10));
-        fonts.add("ingroup('_focus_')", FontLib.getFont("Tahoma", 11));
+        fonts.add("ingroup('_search_')", FontLib.getFont("Tahoma", 20));
         
         // recolor
         ActionList recolor = new ActionList();

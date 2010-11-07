@@ -1,11 +1,16 @@
 package org.pg.eti.kask.sova.demo;
 
+import java.awt.Dimension;
 import java.io.PrintStream;
 import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import org.pg.eti.kask.sova.utils.Debug;
 import org.pg.eti.kask.sova.utils.VisualizationProperties;
@@ -45,7 +50,11 @@ public class main {
             JFrame frame = new JFrame("SOVA - Simple Ontology Visualization API 2010 ");
             SovaVisualizationPanel panel = new SovaVisualizationPanel(ontology);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            JPanel mainPanel = new JPanel();
+            mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+            mainPanel.add(panel);
             frame.add(panel);
+            
             frame.setSize(frame.getMaximumSize());
             frame.setVisible(true); // show the window
 
