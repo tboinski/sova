@@ -78,17 +78,17 @@ public class AnnotationPanel extends JPanel implements AnnotationComponent{
 //		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	}
 	
-	@Override
+
 	public void setCommentText(String coment) {
 		this.comment.setText(coment);
 	}
 
-	@Override
+
 	public void setLabelText(String label) {
 		this.label.setText(label);
 	}
 
-	@Override
+
 	public void setNameText(String name) {
 		this.name.setText(name);
 		repaint();

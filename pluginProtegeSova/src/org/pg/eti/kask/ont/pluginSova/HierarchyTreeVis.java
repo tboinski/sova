@@ -1,13 +1,21 @@
 package org.pg.eti.kask.ont.pluginSova;
 
 import java.awt.Dimension;
+import java.awt.FileDialog;
+import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FilenameFilter;
+import java.io.IOException;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.pg.eti.kask.sova.utils.ReasonerLoader;
@@ -45,6 +53,11 @@ public class HierarchyTreeVis extends AbstractOWLViewComponent {
         	this.add(rightPanel);
         }
     	
+        if (!getOWLModelManager().getReasoner().toString().toLowerCase().contains("pellet")){
+        	String message = "To use this method of visualization you need to install Pellet " +
+        			"and choose Pellet in reasoner menu."; 
+        	JOptionPane.showMessageDialog(this, message);
+        }
     	
 	}
 	
@@ -85,7 +98,54 @@ public class HierarchyTreeVis extends AbstractOWLViewComponent {
 			}
 		});
 		buttonPanel.add(but3);
+		JButton saveImage = new JButton("Save Image");
+		saveImage.addActionListener(new ActionListener() {
+
 		
+			public void actionPerformed(ActionEvent e) {
+				File f = new File("");
+			    FileDialog fd = new FileDialog(new Frame(), "Save",    FileDialog.SAVE);
+			    fd.setFilenameFilter(new FilenameFilter() {
+				
+					public boolean accept(File dir, String name) {
+						if (name.toUpperCase().endsWith(".PNG") ||
+								name.toUpperCase().endsWith(".JPG")){
+							return true;
+						}
+						return false;
+					}
+				});
+			    fd.setLocation(50, 50);
+			    fd.setVisible(true);
+			    String sFile = fd.getDirectory()+fd.getFile();
+
+				String format = "png";
+				
+				if (sFile.toUpperCase().endsWith(".PNG") ||
+						sFile.toUpperCase().endsWith(".JPG")){
+					format = sFile.substring(sFile.length()-3, sFile.length());
+				}else{
+					sFile += '.'+format; 
+				}
+				
+				File file = new File(sFile) ;
+				
+				FileOutputStream os;
+				try {
+
+					os = new FileOutputStream(file);
+					display.saveImage(os, format.toUpperCase(), 5);
+					os.close();
+					//zapis do pliku
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+
+			}
+		});
+		buttonPanel.add(saveImage);
 		rightPanel.add(buttonPanel);
 		rightPanel.setPreferredSize(new Dimension(120, Integer.MAX_VALUE));
 		rightPanel.setMaximumSize(new Dimension(140, Integer.MAX_VALUE));

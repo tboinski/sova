@@ -324,7 +324,7 @@ public class Options extends JFrame {
 
 	private class CheckBoxListener implements ActionListener {
 
-		@Override
+	
 		public void actionPerformed(ActionEvent e) {
 
 			if (e.getActionCommand().equals(CHECKBOX_CLASS_COMMAND)) {
