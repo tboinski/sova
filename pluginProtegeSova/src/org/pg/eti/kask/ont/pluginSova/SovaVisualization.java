@@ -144,6 +144,8 @@ public class SovaVisualization extends AbstractOWLViewComponent {
 				});
 			    fd.setLocation(50, 50);
 			    fd.setVisible(true);
+			    if (fd.getDirectory()==null || fd.getFile()==null )
+			    	return;
 			    String sFile = fd.getDirectory()+fd.getFile();
 
 				String format = "png";
