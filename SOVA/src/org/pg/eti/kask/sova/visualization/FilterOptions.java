@@ -31,7 +31,8 @@ public class FilterOptions {
 	private static boolean instanceProperty = true;
 	private static boolean inverseOfProperty = true;
 	private static boolean domain = true;
-	private static boolean range = true;	
+	private static boolean range = true;
+	private static boolean anonymouse = true;
 	private static boolean distanceFilter = true;
 	private static int distance = 10;
 	
@@ -609,6 +610,26 @@ public class FilterOptions {
 	 */
 	public static synchronized void setDistance(int distance) {
 		FilterOptions.distance = distance;
+	}
+	/**
+	 * filtr wizualizacji klasy anonimowe oznaczone symbolem A.
+	 * <ul>
+	 * <li> <b>false</b> - filtr wyłączony - element nie jest wizualizowany 
+	 * <li> <b>true</b> -  filtr włączony - element jest wizualizowany
+	 * </ul>
+	 */
+	public static synchronized boolean isAnonymouse() {
+		return anonymouse;
+	}
+	/**
+	 * filtr wizualizacji klasy anonimowe oznaczone symbolem A.
+	 * <ul>
+	 * <li> <b>false</b> - filtr wyłączony - element nie jest wizualizowany 
+	 * <li> <b>true</b> -  filtr włączony - element jest wizualizowany
+	 * </ul>
+	 */
+	public static synchronized void setAnonymouse(boolean anonymouse) {
+		FilterOptions.anonymouse = anonymouse;
 	}
 	
 }

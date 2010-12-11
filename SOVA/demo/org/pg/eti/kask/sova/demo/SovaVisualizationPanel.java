@@ -2,11 +2,18 @@ package org.pg.eti.kask.sova.demo;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FileDialog;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FilenameFilter;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -112,6 +119,56 @@ public class SovaVisualizationPanel extends JPanel {
 		});
 		options.setSize(100, 80);
 		buttonPanel.add(options);
+		JButton saveImage = new JButton("Save Image");
+		saveImage.addActionListener(new ActionListener() {
+
+		
+			public void actionPerformed(ActionEvent e) {
+				File f = new File("");
+			    FileDialog fd = new FileDialog(new Frame(), "Save",    FileDialog.SAVE);
+			    fd.setFilenameFilter(new FilenameFilter() {
+				
+					public boolean accept(File dir, String name) {
+						if (name.toUpperCase().endsWith(".PNG") ||
+								name.toUpperCase().endsWith(".JPG")){
+							return true;
+						}
+						return false;
+					}
+				});
+			    fd.setLocation(50, 50);
+			    fd.setVisible(true);
+			    if (fd.getDirectory()==null || fd.getFile()==null )
+			    	return;
+			    String sFile = fd.getDirectory()+fd.getFile();
+			    
+				String format = "png";
+				
+				if (sFile.toUpperCase().endsWith(".PNG") ||
+						sFile.toUpperCase().endsWith(".JPG")){
+					format = sFile.substring(sFile.length()-3, sFile.length());
+				}else{
+					sFile += '.'+format; 
+				}
+				
+				File file = new File(sFile) ;
+				
+				FileOutputStream os;
+				try {
+
+					os = new FileOutputStream(file);
+					display.saveImage(os, format.toUpperCase(), 5);
+					os.close();
+					//zapis do pliku
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+
+			}
+		});
+		buttonPanel.add(saveImage);
 		rightPanel.add(buttonPanel);
 		rightPanel.add(annotation);
 		rightPanel.setPreferredSize(new Dimension(180, Integer.MAX_VALUE));

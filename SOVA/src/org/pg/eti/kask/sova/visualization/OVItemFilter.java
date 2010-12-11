@@ -88,8 +88,8 @@ public class OVItemFilter extends GroupAction {
                     Object o = ((VisualItem)item).get(Constants.GRAPH_NODES);
                     //Class node
                     if ( (o instanceof org.pg.eti.kask.sova.nodes.ClassNode || o instanceof org.pg.eti.kask.sova.nodes.ThingNode 
-                    		|| o instanceof org.pg.eti.kask.sova.nodes.NothingNode || o instanceof org.pg.eti.kask.sova.nodes.AnonymousClassNode 
-                    		|| o instanceof org.pg.eti.kask.sova.nodes.CardinalityNode ) &&(!FilterOptions.isClassFilter())) {
+                    		|| o instanceof org.pg.eti.kask.sova.nodes.NothingNode
+                    		) &&(!FilterOptions.isClassFilter())) {
                         ((VisualItem)item).setVisible(false);
                         //usunięcie kwawędzi powiązanej z wierzchołkiem
                         Node n = ((Node)item);
@@ -107,6 +107,18 @@ public class OVItemFilter extends GroupAction {
                         while (egdesToRemove.hasNext()){
                         	((VisualItem)egdesToRemove.next()).setVisible(false); 	
                         }
+                        
+                    }else // class - anonymouse 
+                        if ( 
+                        		(o.getClass() == org.pg.eti.kask.sova.nodes.AnonymousClassNode.class)
+                        		&&(!FilterOptions.isClassFilter() || !FilterOptions.isAnonymouse())) {
+                            ((VisualItem)item).setVisible(false);
+                            //usunięcie kwawędzi powiązanej z wierzchołkiem
+                            Node n = ((Node)item);
+                            Iterator egdesToRemove = n.edges();
+                            while (egdesToRemove.hasNext()){
+                            	((VisualItem)egdesToRemove.next()).setVisible(false); 	
+                            }    
                     }else // Class -  intersectionOf
                     if ( (o instanceof org.pg.eti.kask.sova.nodes.IntersectionOfNode)
                     		&&(!FilterOptions.isClassFilter() || !FilterOptions.isIntersectionOf() )) {
@@ -128,7 +140,8 @@ public class OVItemFilter extends GroupAction {
                         	((VisualItem)egdesToRemove.next()).setVisible(false); 	
                         }
                     }else    // Cardinality               	
-                    if ( ( o instanceof org.pg.eti.kask.sova.nodes.CardinalityValueNode)
+                    if ( ( o instanceof org.pg.eti.kask.sova.nodes.CardinalityValueNode
+                    		|| o instanceof org.pg.eti.kask.sova.nodes.CardinalityNode)
                     		&&(!FilterOptions.isClassFilter() || !FilterOptions.isCardinality())) {
                         ((VisualItem)item).setVisible(false);
                         //usunięcie kwawędzi powiązanej z wierzchołkiem

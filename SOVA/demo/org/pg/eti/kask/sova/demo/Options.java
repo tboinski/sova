@@ -32,6 +32,7 @@ public class Options extends JFrame {
 
 	private static final String CHECKBOX_SUBCLASS_COMMAND = "checkbox_subclass";
 	private static final String CHECKBOX_CLASS_COMMAND = "checkbox_class";
+	private static final String CHECKBOX_ANONYMOUSE_COMMAND = "checkbox_anonymouse";
 	private static final String CHECKBOX_DISJOINT_CLASS_COMMAND = "checkbox_disjoint_class";
 	private static final String CHECKBOX_EQUIVALENT_CLASS_COMMAND = "checkbox_equvalent_class";
 	private static final String CHECKBOX_CARDINALITY_COMMAND = "checkbox_cardinality_class";
@@ -62,7 +63,7 @@ public class Options extends JFrame {
 	private JButton options = null;
 	private JCheckBox chClass = null, chSubClass = null, chDisjointEdge = null,
 			chCardinalityNode = null, chUnionOf = null, chIntersecionOf = null,
-			chComplementOf = null, chEquivalent = null;
+			chComplementOf = null, chEquivalent = null, chAnonymouse=null;
 	private JCheckBox chIndywidual = null, chInstanceOf = null,
 			chDifferent = null, chsameas = null, choneof = null;
 	private JCheckBox chproperty = null, chInstanceProperty = null,
@@ -162,11 +163,18 @@ public class Options extends JFrame {
 				.createEtchedBorder(), "Filter"));
 
 		chClass = new JCheckBox("Class");
+		chClass.setToolTipText("Enable/Disable owl:class element");
 		chClass.setActionCommand(CHECKBOX_CLASS_COMMAND);
 		chClass.setSelected(true);
 		chClass.addActionListener(checkboxListener);
 		checkboxPanel.add(chClass);
-
+		
+		chAnonymouse = new JCheckBox("Anonymouse");
+		chAnonymouse.setActionCommand(CHECKBOX_ANONYMOUSE_COMMAND);
+		chAnonymouse.setSelected(true);
+		chAnonymouse.addActionListener(checkboxListener);
+		checkboxPanel.add(chAnonymouse);	
+		
 		chSubClass = new JCheckBox("SubClass edge");
 		chSubClass.setActionCommand(CHECKBOX_SUBCLASS_COMMAND);
 		chSubClass.setSelected(true);
@@ -341,7 +349,7 @@ public class Options extends JFrame {
 					chCardinalityNode.setEnabled(true);
 					chComplementOf.setEnabled(true);
 					chEquivalent.setEnabled(true);
-
+					FilterOptions.setAnonymouse(true);
 				} else {
 					FilterOptions.setClassFilter(false);
 					chSubClass.setEnabled(false);
@@ -351,8 +359,16 @@ public class Options extends JFrame {
 					chCardinalityNode.setEnabled(false);
 					chComplementOf.setEnabled(false);
 					chEquivalent.setEnabled(false);
+					FilterOptions.setAnonymouse(false);
 				}
-			} else if (e.getActionCommand().equals(CHECKBOX_SUBCLASS_COMMAND)) {
+			} else if (e.getActionCommand().equals(CHECKBOX_ANONYMOUSE_COMMAND)) {
+				if (chAnonymouse.isSelected()) {
+					FilterOptions.setAnonymouse(true);
+				} else {
+					FilterOptions.setAnonymouse(false);
+				}
+			}
+			else if (e.getActionCommand().equals(CHECKBOX_SUBCLASS_COMMAND)) {
 				if (chSubClass.isSelected()) {
 					FilterOptions.setSubClassEdge(true);
 				} else {
