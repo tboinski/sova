@@ -1,0 +1,79 @@
+% ------------------------------------------------------------------------
+% STRONA TYTU£OWA
+% ------------------------------------------------------------------------
+
+\def\uczelnia#1{\gdef\@uczelnia{#1}}
+\def\instytut#1{\gdef\@instytut{#1}}
+\def\miasto#1{\gdef\@miasto{#1}}
+\def\miesiac#1{\gdef\@miesiac{#1}}
+\def\rok#1{\gdef\@rok{#1}}
+\def\promotor#1{\gdef\@promotor{#1}}
+\def\praca#1{\gdef\@praca{#1}}
+
+% -----------------------------------------
+\newif\ifdraft@mode             \draft@modefalse
+% -----------------------------------------
+
+\def\draft{
+    \draft@modetrue
+}
+
+\def\stronatytulowa{
+
+    \newcommand*{\tmpthesisDraftKomunikat}{
+        \begin{array}{c}
+            \\
+            \mbox{\Large UWAGA -- TO JEST DRAFT}\\
+            \\
+            \mbox{\large Wydruk z \today}\\
+            \\
+        \end{array}
+    }
+
+    \vskip0.5in
+
+    \begin{center}
+        \hyphenpenalty=10000\Large\expandafter{\@uczelnia}
+    \end{center}
+
+    \begin{center}
+        \large\@instytut
+    \end{center}
+    \vskip0.5in
+
+    \begin{center}
+        \hyphenpenalty=10000\Large\expandafter{\@praca}
+    \end{center}
+    \vskip0.5in
+
+    \begin{center}
+        \hyphenpenalty=10000\Large\expandafter{\@author}
+    \end{center}
+    \vskip0.5in
+
+    \begin{center}
+        \hyphenpenalty=10000\Large\sffamily\expandafter{\textbf{\@title}}
+    \end{center}
+    \vskip0.5in
+
+    \ifdraft@mode
+      \begin{center}\framebox{$\tmpthesisDraftKomunikat$}\end{center}
+    \fi
+
+    \vskip0.5in
+    \begin{flushright}
+        \begin{tabular}{c}
+        \@praca \\
+        wykonana pod kierunkiem \\
+        \@promotor \\
+        \end{tabular}
+    \end{flushright}
+
+    \vfill
+
+    \begin{flushleft}
+        \rm \@miasto, \@miesiac, \@rok
+    \end{flushleft}
+    \newpage
+
+}

@@ -1,0 +1,213 @@
+\chapter{Podsumowanie}
+
+Podstawowym celem pracy było stworzenie modułu wizualizującego ontologie zapisane w języku OWL.  Cel ten został osiągnięty dzięki dobrze wykonanemu projektowi 
+architektury systemu oraz gruntownej analizie rekomendacji W3C dotyczących ontologii i języka OWL.  Efektem pracy jest biblioteka SOVA, nowy moduł wizualizacji 
+w~edytorze OCS oraz plugin do aplikacji \protege. 
+% Biblioteka pozwala na wizualizację ontologii i może zostać wykorzystana w dowolnym projekcie informatycznym. 
+\par
+Wdrożenie rozwiązania w systemie OCS znacznie zwiększyło jego atrakcyjność. W tabeli \ref{t:porownanie2} jeszcze raz przedstawiono wyniki przeprowadzonego porównania 
+aplikacji pozwalających na wizualizację ontologii. Tabela została rozszerzona o testy dla edytora OCS z nowym modułem wizualizacji SOVA. Możemy zauważyć, że ocena 
+wizualizacji dla OCS wzrosła z 0.34 do 0.83. Co klasyfikuje go na pierwszym miejscu. 
+\par 
+Bardzo dobrym pomysłem okazało się  stworzenie pluginu do edytora \protege. Wydany na licencji LGPL plugin, został umieszczony i opisany na stronie \textit{http://protegewiki.stanford.edu/wiki/SOVA}.
+Ciągle pobierane ze strony projektu rozwiązanie dobrze promuje uczelnię oraz katedralny system OCS. 
+\par
+Prace nad stworzeniem rozwiązania do wizualizacji ontologii trwały dziewięć miesięcy. W tym czasie powstało ok. 8 tysięcy linii kodu. 
+Bardzo trudnym elementem okazała się realizacja zadań zgodnie z zaplanowanym harmonogramem. Nie wszystkie elementy pracy zostały zrealizowane w wyznaczonym terminie, 
+a całość prac wydłużyła się o miesiąc. Przyczyną opóźnień m.in. jest słaba dokumentacja bibliotek OWL API i Prefuse.  
+\par
+Ograniczenia czasowe spowodowały, iż nie udało się zrealizować wszystkich wymagań i założeń pracy. Nie zostały wykonane następujące elementy:
+\begin{enumerate}
+ \item Brak wizualizacji DataType, co zostało wykryte podczas testowania aplikacji.
+ \item Brak opcji wyszukiwania elementów ontologii na grafie. 
+\end{enumerate}
+
+Poza elementami, które nie zostały zrealizowane podczas pracy, autor zauważa możliwości dalszego rozwoju oraz rozszerzenia aplikacji o~następujące funkcje:
+\begin{enumerate}
+ \item Zmiana biblioteki OWLAPI na najnowszą wersję 3.0. Zmiana powinna być dokonana zarówno w bibliotece SOVA, jak i w kodzie OCS.
+ \item W module wizualizacji OCS oraz pluginie dodanie możliwość edycji ontologii z poziomu wizualizacji. Biblioteka SOVA daje możliwość podpięcia dodatkowej obsługi 
+zdarzeń, dzięki temu możemy np. na zdarzenia kliknięcia prawym przyciskiem myszy na element ontologii, wywołać dodatkowe okno lub nemu. 
+ \item Zwiększenie przejrzystość wizualizacji poprzez dynamiczny dobór optymalnych ustawień wizualizacji (np. długość krawędzi) w zależności od liczby obrazowanych 
+elementów wczytanej ontologii.
+\end{enumerate}
+
+
+\newpage
+
+
+\begin{longtable}{|m{6cm}|m{1.6cm}|m{1.6cm}|m{1.6cm}|m{1.6cm}|m{1.6cm}|}
+\caption{Porównanie rozwiązań do wizualizacji ontologii}
+\label{t:porownanie2}
+ \\
+\hline
+
+
+ Kryterium  &  OntoVis  &  Jambalaya &  Growl & OCS & OCS + SOVA \\ \hline
+
+ \multicolumn{6}{|c|}{{\bf Kompletność wizualizacji} (max 30 punktów)}  \\ \hline
+Sposób wizualizacji klas	&  2  &  2  &  2  & 2 & 2 \\ \hline
+Sposób wizualizacji bytów	&  2  &  2  &  2  & 0 & 2 \\ \hline
+Wizualizacja klas ananimowych	&  0  &  0  &  2  & 0 & 2 \\ \hline
+Wizualizacja relacji		&  4  &  3  &  10 & 2 & 11 \\ \hline
+Wizualizacja właściwości	&  2  &  2  &  2  & 0 & 2 \\ \hline
+Wizualizacja związków odnoszącymi
+	   się do właściwościami&  0  &  0  &  4 & 0 & 7 \\ \hline
+Wizualizacja pozostałych 
+	  elementów ontologii   &  0  &  3  &  1 &  0 & 4 \\ \hline
+{\bf Łącznie dla kategorii}	&{\bf 0,33 }   &{\bf 0,4  }   & {\bf 0,77 }  & {\bf 0,13 } & {\bf 1,00}\\ \hline %max 30 punktów
+ \multicolumn{6}{|c|}{{\bf Przejrzystość wizualizacji} (max 8 punktów)}\\ \hline
+Czytelność ontologii		& 3  &  4 &  1 &  2 & 3 \\ \hline
+Dostępność filtrów		& 2  &  3 &  0 &  0 & 3 \\ \hline
+{\bf Łącznie dla kategorii}	&{\bf 0,625 }   &{\bf 0,875 }   & {\bf 0,125 }  & {\bf 0,25 } & {\bf 0,75} \\ \hline %max 8 punktów
+ \multicolumn{6}{|c|}{{\bf Sposoby wizualizacji} (max 4 punkty)} \\ \hline
+Liczba sposobów wizualizacji		&  0 &  3 &  1 & 1 & 2  \\ \hline
+Wizualizacja wywnioskowanej hierarchii	&  0 &  0 &  0 & 1 & 1 \\ \hline
+{\bf Łącznie dla kategorii}	&{\bf 0 }   &{\bf 0,75 }   & {\bf 0,25 }  & {\bf 0,5 } & {\bf 0,75} \\ \hline %max 4 punkty
+ \multicolumn{6}{|c|}{{\bf Użyteczność} (max 11 punktów)}\\ \hline
+Użyteczność			&  4 &  5 &  5 & 5 & 5 \\ \hline
+Dostępność pomocy		&  2 &  2 &  2 & 0 & 1 \\ \hline
+Licencja			&  2 &  1 &  2 & 2 & 2 \\ \hline
+{\bf Łącznie dla kategorii}	&{\bf 0,73 }   &{\bf 0,73 }   & {\bf 0,82 }  & {\bf 0,64 } & {\bf 0,73} \\ \hline %max 11 punktów
+{\bf Ocena rozwiązania}		&{\bf 0,42 }   &{\bf 0,66 }   & {\bf 0,5}  & {\bf 0,34 }  & {\bf 0,83} \\ \hline
+\end{longtable}
+
+
+
+% \begin{table}[t]
+% \caption{Porównanie rozwiązań do wizualizacji ontologii}
+% \label{t:porownanie}
+% 
+% \begin{longtable}{|m{6cm}|m{2cm}|}\hline
+% 
+%  Kryterium  &  OCS z modułem SOVA\\ \hline
+% 
+%  \multicolumn{2}{|c|}{{\bf Kompletność wizualizacji} (max 30 punktów)}  \\ \hline
+% Sposób wizualizacji klas	&  2   \\ \hline
+% Sposób wizualizacji bytów	&  2  \\ \hline
+% Wizualizacja klas ananimowych	&  2  \\ \hline
+% Wizualizacja relacji		&  11 \\ \hline
+% Wizualizacja właściwości	&  2 \\ \hline
+% Wizualizacja związków odnoszącymi
+% 	   się do właściwościami&  7 \\ \hline
+% Wizualizacja pozostałych 
+% 	  elementów ontologii   &  4 \\ \hline
+% {\bf Łącznie dla kategorii}	&{\bf 1,00} \\ \hline %max 30 punktów
+%  \multicolumn{2}{|c|}{{\bf Przejrzystość wizualizacji} (max 8 punktów)}\\ \hline
+% Czytelność ontologii		& 3  \\ \hline
+% Dostępność filtrów		& 3 \\ \hline
+% {\bf Łącznie dla kategorii}	&{\bf 0,75 }  \\ \hline %max 8 punktów
+%  \multicolumn{2}{|c|}{{\bf Sposoby wizualizacji} (max 4 punkty)} \\ \hline
+% Liczba sposobów wizualizacji		&  2 \\ \hline
+% Wizualizacja wywnioskowanej hierarchii	&  1 \\ \hline
+% {\bf Łącznie dla kategorii}	&{\bf 0,75 }  \\ \hline %max 4 punkty
+%  \multicolumn{2}{|c|}{{\bf Użyteczność} (max 11 punktów)}\\ \hline
+% Użyteczność			&  5 \\ \hline
+% Dostępność pomocy		&  1 \\ \hline
+% Licencja			&  2 \\ \hline
+% {\bf Łącznie dla kategorii}	&{\bf 0,73 }   \\ \hline %max 11 punktów
+% {\bf Ocena rozwiązania}		&{\bf 0,83 } \\ \hline
+% \end{longtable}
+% 
+% \end{table}
+
+
+
+
+% \begin{enumerate}
+%  \item{\bf Kompletność wizualizacji}
+% 
+%   \begin{itemize}
+%    \item[-]{\bf Sposób wizualizacji klas}
+% 
+%   \nopagebreak  
+% Główny widok wizualizacji obrazuje ontologię jak graf. Klasy na tym grafie są wyróżnione kolorem i kształtem wierzchołka, każda z nich posiada identyfikującą ją nazwę. 
+% 2~punkty.
+% 
+%    \item[-]{\bf Sposób wizualizacji bytów}
+% 
+%   \nopagebreak 
+% Byty są wierzchołkami grafu, które zostały wyróżnione szarym kolorem oraz prostokątnym kształtem. Każdy wierzchołek zawiera nazwę. 
+% 
+% 
+%    \item[-]{\bf Wizualizacja klas ananimowych}
+% 
+%   \nopagebreak 
+% Aplikacja umożliwia wizualizowanie klas anonimowych. Klasy te na grafie zostały oznaczone żółtym kółkiem z odpowiednim symbolem (np. symbol sumy zbiorów lub 
+% iloczynu zbiorów). Taki forma zapisu klas anonimowych jest czytelna dla użytkownika. 2~punkty.
+% 
+% 
+%    \item[-]{\bf Wizualizacja relacji}
+% 
+%   \nopagebreak 
+% SOVA pozwala na wizualizację wszystkich zdefiniowanych w języku OWL DL relacji. Dlatego rozwiązanie w tej kategorii uzyskuje maksymalną notę - 11~punktów.
+% 
+%  \item[-]{\bf Wizualizacja właściwości} 
+% 
+%   \nopagebreak
+% 
+% 
+%  \item[-]{\bf Wizualizacja związków odnoszącymi się do właściwościami} 
+% 
+%   \nopagebreak
+% Brak wizualizacji. 0~punktów
+%  \item[-]{\bf Wizualizacja pozostałych elementów ontologii} 
+% 
+%   \nopagebreak
+% Brak wizualizacji. 0~punktów
+%   \end{itemize}
+% 
+% \item{\bf Przejrzystość wizualizacji}
+% \begin{itemize}
+%  \item[-]{\bf Czytelność ontologii} 
+% 
+%   \nopagebreak
+% Pomimo wizualizacji tylko klas wizualizacja dla dużej ontologii okazała się nieczytelna, klasy się nakładały. 2~punkty.
+% 
+% 
+%  \item[-]{\bf Dostępność filtrów} 
+% 
+%   \nopagebreak
+% Brak. 0~punktów. 
+% 
+% \end{itemize}
+% 
+% \item{\bf Sposoby wizualizacji}
+% \begin{itemize}
+%  \item[-]{\bf Liczba sposobów wizualizacji } 
+% 
+%   \nopagebreak
+% OCS umożliwia 2 sposoby wizualizacji: ogólny oraz wywnioskowaną hierarchię . Aplikacja uzyskuje 1~punkt.
+%  
+% 
+%  \item[-]{\bf  Wizualizacja wywnioskowanej hierarchii } 
+% 
+%   \nopagebreak
+% OCS daje możliwość oglądanie wywnioskowanej hierarchii klas i~bytów. 1~punkt.
+% 
+% \end{itemize}
+% 
+% 
+% \item{\bf Użyteczność}
+% \begin{itemize}
+%  \item[-]{\bf Użyteczność  } 
+%   Aplikacja jest intuicyjna i prosta~w obsłudze. Posiada bardzo prosty, nierozbudowany interfejs. Jednym mankamentem, podobnie jak w~Growl, może 
+% być brak opcji wyszukiwania. 
+% Łącznie aplikacja uzyskuje 5~punktów.
+%   \nopagebreak
+% 
+% 
+%  \item[-]{\bf Dostępność pomocy  } 
+% 
+%   \nopagebreak
+% OCS co prawda posiada stronę internetową, ale nie zawiera ona żądnych informacji związanych z~instalacją i~obsługą edytora. 0~punkty.
+% 
+% 
+% 
+%  \item[-]{\bf Licencja  } 
+% 
+%   \nopagebreak
+% OCS posiada licencje LGPL i~tym samym uzyskuje 2~punkty.
+% \end{itemize}
+% 
+% 
+% \end{enumerate}

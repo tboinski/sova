@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<project name="SOVA" default="jar" basedir=".">
+
+	<property name="jar.dir" value="${basedir}/build" />
+	<property name="build" location="./build" />
+	<property name="classes" location="${build}/classes" />
+	<property name="lib" location="./lib" />
+	<property name="src" location="./src" />
+	<property name="jar.name" value="SOVA.jar" />
+	<property name="dir.javadoc" value="./doc"/>
+	<property name="prefuse.lib" location="${lib}/owlapi-bin.jar" />
+	<property name="owlapi.lib" location="${lib}/prefuse.jar" />
+	<target name="init">
+		<mkdir dir="${build}" />
+		<mkdir dir="${classes}" />
+		<path id="project.classpath">
+					<pathelement location="${lib}/pellet/*.jar" />
+					<pathelement location="${lib}/pellet/xsdlib/*.jarq" />
+					<pathelement location="${owlapi.lib}" />
+					<pathelement location="${prefuse.lib}" />
+					<fileset dir="${lib}" />
+				</path>
+	</target>
+	<target name="compile" depends="init">
+		<echo message="Kompiluje ${ant.project.name}" />
+		<javac destdir="${classes}" srcdir="${src}" deprecation="on">
+			<classpath refid="project.classpath" />
+		</javac>
+
+	</target>
+
+	<target name="jar" depends="compile" description="create a Jar file for the application">
+		<jar jarfile="${build}/${jar.name}" basedir="${classes}" />
+	</target>
+	<target name="javadoc">
+	    <javadoc
+	        excludepackagenames="org.pg.eti.kask.sova"
+	          access="public"
+	           destdir="${dir.javadoc}"
+	           author="true"
+	           version="true"
+	    	   charset="UTF-8"
+	           use="true"
+	           windowtitle="org.pg.eti.kask.sova">
+
+	        <fileset dir="${src}" defaultexcludes="yes">
+	            <include name="**/*.java"/>
+	        </fileset>
+	    </javadoc>
+	</target>
+
+</project>

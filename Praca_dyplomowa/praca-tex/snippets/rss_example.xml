@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+	<channel>
+		<title>Tytul pewnego kanalu</title>
+		<link>http://example.com/</link>
+		<description>Opis kanalu</description>
+		<language>pl</language>
+		<copyright>Copyright 2007 Piotr Adamski</copyright>
+		<lastBuildDate>Wed, 17 Sep 2007 11:00:00 GMT</lastBuildDate>
+		<docs>http://feedvalidator.org/docs/rss2.html</docs>
+		<managingEditor>piotr@example.com</managingEditor>
+		<webMaster>piotr@example.com</webMaster>
+		<ttl>40</ttl>
+		<item>
+			<description>Krotki opis lub tresc wpisu</description>
+			<pubDate>Wed, 17 Sep 2007 11:00:00 GMT</pubDate>
+			<guid>http://example.com/2007/10/17</guid>
+		</item>
+	</channel>
+</rss>

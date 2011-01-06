@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <VSNode splits="0.2 0.8">
+        <CNode>
+            <Component label="Asserted class hierarchy">
+                <Property id="pluginId" value="org.protege.editor.owl.OWLAssertedClassHierarchy"/>
+            </Component>
+        </CNode>
+        <CNode>
+            <Component label="PG ETI SOVA - Visualization">
+                <Property id="pluginId" value="org.pg.eti.kask.ont.pluginSova.pluginSova"/>
+            </Component>
+            <Component label="PG ETI SOVA - Hierarchy Tree Vis">
+                <Property id="pluginId" value="org.pg.eti.kask.ont.pluginSova.pluginSovaTree"/>
+            </Component>
+        </CNode>
+    </VSNode>
+</layout>

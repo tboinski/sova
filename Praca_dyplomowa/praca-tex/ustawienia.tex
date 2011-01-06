@@ -1,0 +1,148 @@
+% ------------------------------------------------------------------------
+%   Kropki po numerach sekcji, podsekcji, itd.
+%   Np. 1.2. Tytuł podrozdziału
+% ------------------------------------------------------------------------
+\makeatletter
+    \def\numberline#1{\hb@xt@\@tempdima{#1.\hfil}}                      %kropki w spisie treści
+    \renewcommand*\@seccntformat[1]{\csname the#1\endcsname.\enspace}   %kropki w treści dokumentu
+\makeatother
+
+% ------------------------------------------------------------------------
+%   Numeracja równań, rysunków i tabel
+%   Np.: (1.2), gdzie:
+%   1 - numer rozdzialu, 2 - numer równania, rysunku, tabeli
+%   Uwaga ogólna: o otoczeniu figure ma byæ najpierw \caption{}, potem \label{}, inaczej odnośnik nie działa!
+% ------------------------------------------------------------------------
+\makeatletter
+
+% stara wersja, gdzie : 1 - numer sekcji, 2 - numer równania, rysunku, tabeli
+   % \@addtoreset{equation}{section} %resetuje licznik po rozpoczęciu nowej sekcji
+    %\renewcommand{\theequation}{{\thesection}.\@arabic\c@equation} %dodaje kropkę
+    \@addtoreset{equation}{chapter} %resetuje licznik po rozpoczęciu nowej sekcji
+    \renewcommand{\theequation}{{\thechapter}.\@arabic\c@equation} %dodaje kropkę
+
+% stara wersja, gdzie : 1 - numer sekcji, 2 - numer równania, rysunku, tabeli
+%    \@addtoreset{figure}{section}
+%    \renewcommand{\thefigure}{{\thesection}.\@arabic\c@figure}
+
+    \@addtoreset{figure}{chapter}
+    \renewcommand{\thefigure}{{\thechapter}.\@arabic\c@figure}
+
+% stara wersja, gdzie : 1 - numer sekcji, 2 - numer równania, rysunku, tabeli
+%    \@addtoreset{table}{section}
+%    \renewcommand{\thetable}{{\thesection}.\@arabic\c@table}
+
+    \@addtoreset{table}{chapter}
+    \renewcommand{\thetable}{{\thechapter}.\@arabic\c@table}
+
+% stara wersja, gdzie : 1 - numer sekcji, 2 - numer równania, rysunku, tabeli
+%    \@addtoreset{lstlisting}{section}
+%    \renewcommand{\thelstlisting}{\thesection .\arabic{lstlisting}}
+
+    \@addtoreset{lstlisting}{chapter}
+ 
+%   \renewcommand{\thelstlisting}{\thechapter .\arabic{lstlisting}}
+
+
+\makeatother
+
+% Tablica
+% ------------------------------------------------------------------------
+\newenvironment{tablica}[3]
+{
+    \begin{table}[!tb]
+    \centering
+    \caption[#1]{#2}
+    \vskip 9pt
+    #3
+}{
+    \end{table}
+}
+
+%
+%OBRAZEK
+%
+
+\newcommand{\insertimage}[3]
+{
+	\begin{figure}[ht]
+		\begin{center}
+			\includegraphics[width=\textwidth]{#1}
+		\end{center}
+		\caption{#2}
+		\label{#3}
+	\end{figure}
+}
+
+
+\newcommand{\insertscaledimage}[4]
+{
+	\begin{figure}[ht]
+		\begin{center}
+			\includegraphics[scale=#1]{#2}
+		\end{center}
+		\caption{#3}
+		\label{#4}
+	\end{figure}
+}
+
+
+% ------------------------------------------------------------------------
+% Definicje
+% ------------------------------------------------------------------------
+\def\nonumsection#1{%
+    \section*{#1}%
+    \addcontentsline{toc}{section}{#1}%
+    }
+\def\nonumsubsection#1{%
+    \subsection*{#1}%
+    \addcontentsline{toc}{subsection}{#1}%
+    }
+\reversemarginpar %umieszcza notki po lewej stronie, czyli tam gdzie jest więcej miejsca
+\def\notka#1{%
+    \marginpar{\footnotesize{#1}}%
+    }
+\def\mathcal#1{%
+    \mathscr{#1}%
+    }
+\newcommand{\atp}{ATP/EMTP} % Inaczej: \def\atp{ATP/EMTP}
+\newcommand{\myemptypage}{ \newpage  \thispagestyle{empty}~\newpage}
+
+%-------------------------------------------------------------------------
+% listingi
+%-------------------------------------------------------------------------
+\lstdefinestyle{praca}{basicstyle=\scriptsize, keywordstyle=\color{black}\bfseries, 
+	numbers=left, stepnumber=5, numberstyle=\tiny, numbersep=6pt,
+	extendedchars=true}
+\lstset{style=praca}
+
+% ------------------------------------------------------------------------
+% Inne
+% ------------------------------------------------------------------------
+\frenchspacing          
+\setlength{\parskip}{3pt}           %odstęp pomiędzy akapitami
+% \linespread{1.25}                    %odstęp pomiędzy liniami (interlinia)
+\setcounter{tocdepth}{3}            
+\setcounter{secnumdepth}{3}         
+\titleformat{\paragraph}[hang]      %wygląd nagłówków
+{\normalfont\sffamily\bfseries}{\theparagraph}{1em}{}
+
+
+
+\author{Piotr Kunowski}
+\title{Wizualizacja ontologii zapisanych w języku OWL}
+%ze strona_tytulowa.sty
+\uczelnia{Politechnika Gdańska}
+\instytut{Katedra Architektury Systemów Komputerowych}
+\praca{Praca dyplomowa}
+\promotor{dr inż. Piotr Szpryngier}
+\miasto{GDAŃSK}
+\miesiac{czerwiec}
+\rok{2010}
+
+  %polskie podpisy
+  \renewcommand{\figurename}{Rys.}
+  \renewcommand{\tablename}{Tab.}
+  
+    %bibliografia
+%   \bibliographystyle{plain}

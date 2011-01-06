@@ -1,0 +1,70 @@
+\documentclass[a4paper,twoside, openright,12pt]{report} %
+
+\input{pakiety.tex}
+\input{ustawienia.tex}
+\widowpenalty=10000
+\clubpenalty=10000 
+\begin{document}
+\def\protege{Prot\'{e}g\'{e}}
+\def\proteges{Prot\'{e}g\'{e}\space}
+  \pagenumbering{roman}
+
+  % strona tytulowa
+  \thispagestyle{empty}
+ 
+%  \stronatytulowa
+  \input{front.tex}
+\clearpage
+ \myemptypage
+
+  %oswiadczenie
+ % \input{oswiadczenie.tex}
+  
+  %\myemptypage
+  
+  % Abstract
+  %\input{abstract.tex}
+  % \input{wstep.tex}
+ %\newpage
+%  \myemptypage
+ %spis tresci
+  \tableofcontents
+
+%S\myemptypage
+
+  %treść pracy
+  \newcounter{licznikStron}
+  \setcounter{licznikStron}{\value{page}}
+  \pagenumbering{arabic}
+  \setcounter{page}{\value{licznikStron}}
+
+
+
+
+
+ \input{ontologie.tex}
+  \input{rozdzial2.tex}
+  \input{system.tex}
+%   \input{analiza_systemu.tex}
+%   \input{projekt_systemu.tex}
+  \input{implementacja.tex}
+  \input{testowanie.tex}
+  \input{porownanie_sova.tex}
+
+%   \begin{flushleft}
+%   \bibliographystyle{plain}
+%   	\bibliography{praca}
+%   \end{flushleft}
+\input{bibliografia.tex}
+  
+%  \myemptypage
+  \begin{appendix}
+	\appendix
+	\input{dodatekA.tex}
+	\input{dodatekB.tex}
+	  \input{plyta.tex}
+% 	\input{wizualizacja-symbole.tex}
+  \end{appendix}
+%   \newpage
+%   \listoffigures
+\end{document}

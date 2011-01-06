@@ -1,0 +1,224 @@
+\chapter{Elementy implementacji}
+\section{Wstęp}
+Rozdział ten jest poświęcony szczegółom implementacyjnym tworzonej biblioteki SOVA.
+Na początku zostaną przedstawione, poprzez opisanie i pokazanie ich architektur, dwie biblioteki użyte w projekcie OWL API oraz Prefuse.
+
+ %Na wstępnie zostaną przedstawione dwie użyte w projekcie biblioteki OWL API oraz Prefuse. Każda z~nich zostanie opisana oraz pokazana zostanie jej architektura. 
+\par 
+W kolejnej części pokazany zostanie sposób połączenia bibliotek z aplikacją SOVA. Zostanie zaprezentowana architektura  nowej biblioteki oraz opisane zostaną algorytmy
+ konwersji obiektów ontologii na wymagane do wizualizacji struktury.
+\par Ostatnią część rozdziału poświęcono wdrożeniu biblioteki SOVA do konkretnych rozwiązań. Jednym z nich jest plugin do aplikacji \protege. 
+
+\section{Biblioteka OWL API}
+Podstawowym założeniem projektu jest to, że formatem wejściowym dla biblioteki wizualizującej ontologie będą obiekty OWL API, a dokładnie obiekt OWLOntology. 
+OWL API jest biblioteką napisaną w javie, pozwalającą na obsługę ontologii zapisanych w języku OWL. Umożliwia tworzenie, manipulowanie oraz zapisywanie obiektów OWL.
+O jej użyteczności może świadczyć fakt wdrożenia jej w \protege~4.
+\par Najważniejszym obiektem biblioteki OWL API jest OWLOntologyManager. Dostarcza on metody  pozwalające m.in. na tworzenie, wczytanie i zapisanie ontologii. Przechowuje również zbiór 
+ontologii zapisywanych w obiektach OWLOntology. Dla wszystkich ontologii przypisanych danemu managerowi zmiany w ontologii stosowane są również do tego managera. 
+Sposób zarządzania ontologią w OWL API został przedstawiony na rysunku~\ref{fig:imp:owlapi}
+
+\insertimage{images/implementacja/OWLAPIclass.png}{Diagram UML pokazujący związki pomiędzy obiektami biblioteki OWL API }{fig:imp:owlapi}
+
+\section{Biblioteka Prefuse}
+Głównym celem tej pracy jest wizualizacja ontologii. Musi być ona przejrzysta, a zarazem atrakcyjna dla użytkownika. Jednym z rozwiązań ułatwiających spełnienie tego wymagania 
+jest używana w OCS biblioteka Prefuse. 
+Prefuse jest pakietem, który dostarcza szybkich i nieskomplikowanych narzędzi do pobierania danych, manipulacji nimi oraz ich interaktywnej wizualizacji. 
+W jego skład wchodzi:
+
+\begin{itemize}
+ \item {\bf prefuse.data} zawierający klasy przeznaczone do tworzenia struktur danych, zapisu i ich odczytu. Podstawową strukturą danych jest krotka. 
+Wszystkie pozostałe struktury, np. tabele, składają się z krotek. Jednymi z bardziej rozbudowanych struktur są drzewa i grafy. Użytkownik może również 
+definiować swoje struktury, aby w łatwy sposób edytować dane w swoim rozwiązaniu. 
+\item{ \bf prefuse action} celem tego modułu jest obliczenie parametrów wizualizacji. Parametrami tymi mogą być m.in. rozmieszczenie elementów grafu, jak i~również 
+nadanie kolorów. Wierzchołkowi można nadać kolor wypełnienia oraz kolor, na który ma zmienić się wypełnienie wierzchołka, w~efekcie wywołania akcji, np.~wskazanie elementu. 
+\item{ \bf prefuse.visual } zawiera klasy przechowujące obiekty bezpośrednio związanie z wizualizacją. 
+
+\item{ \bf prefuse.controls} w skład tego pakietu wchodzą klasy związanie z interaktywną wizualizacją danych,  m.in. klasy  i metody pozwalające na zmianę rozmiaru
+elementów wizualizacji w reakcji na ruch myszą lub też klasy wywołujące odpowiednie akacje po najechaniu bądź zaznaczeniu elementu myszą. 
+
+
+\end{itemize}
+
+
+\insertimage{images/implementacja/prefuse.png}{Architektura logiczna biblioteki Prefuse }{fig:imp:prefuse}
+
+Proces wizualizacji danych z wykorzystaniem biblioteki Prefuse został przedstawiany na rysunku\space \ref{fig:imp:prefuse}. 
+
+Kolejnymi etapami wizualizacją są:
+
+\begin{itemize}
+ \item {\bf Abstract Data } \\
+  Wizualizacja zaczyna się od mapowania danych na struktury dostępne w bibliotece, np. grafy. Biblioteka posiada klasy wejścia/wyjścia pozwalające, m.in. na wczytanie 
+danych bezpośrednio z bazy danych lub pliku XML. 
+\item {\bf Filtering} \\
+  Filtrowanie jest procesem mapowania danych na obiekty przygotowane do wizualizacji (VisualItem). Obiekty te, poza źródłowymi danymi, przechowują informacje 
+o~położeniu elementu, jego kolorze i rozmiarze, a filtrowane VisualItem tworzą struktury danych. Często struktury te są odwzorowaniem struktur z Abstract Data, 
+jednak ze względu na ich elastyczność mogą ulec różnego rodzaju przekształceniom. Wprowadzenie filtrów może być rozumiane jako próba implementacji wzorca MVC. 
+W konsekwencji czego dane z tymi samymi filtrami mogą być wizualizowane na różne sposoby.   
+\par Obiekty VisualItem są tworzone i przechowywane w specjalnym rejestrze ItemRegistry, który zawiera wszystkie stany i~wartości dla danej wizualizacji. Rejestr
+ ten poprzez mechanizm buforowania danych zapewnia skalowalność rozwiązania. 
+\item {\bf Action}\\
+Akcje uaktualniają obiekty VisualItem w rejestrze ItemRegistry. Mechanizm ten odpowiada za pobieranie danych, nadawanie im ustawień wizualizacji, wyrównania, 
+przypisywaniu  kolorów oraz interpolacji.  
+\item{\bf Rendering and Display}\\
+ Obiekty VisualItem są obrazowane z wykorzystaniem obiektów renderujących. Wyróżnić można rendery  wizualizujące, m.in. wierzchołki, krawędzie lub tekst. Prezentacja 
+renderowanych elementów odbywa się na specjalnym obiekcie Display. Display jest rozszerzeniem obiektu komponentu Javy z pakietu Swing, przyjmuje on wszystkie 
+akcje pochodzące od użytkownika. 
+
+\end{itemize}
+
+
+\section{Integracja z OWL API i Prefuse}
+Biblioteka Prefuse \cite{prefuse}\cite{prefuse_sdj}, pomimo jej bogatej funkcjonalności, nie spełnia wszystkich wymagań tworzonego rozwiązania. Jednak jej architektura pozwoliła w łatwy 
+sposób dostosować ją do wymagań tworzonej biblioteki. Proces wizualizacji danych w bibliotece SOVA został przedstawiony na rysunku \ref{fig:imp:sova}. 
+
+\insertimage{images/implementacja/sova.png}{Architektura logiczna biblioteki SOVA }{fig:imp:sova}
+
+Poniżej przedstawiono kroki wizualizacji, opisano sposób wykorzystania elementów biblioteki Prefuse oraz wymagane rozszerzenia biblioteki graficznej
+
+
+\begin{itemize}
+ \item{\bf Converting} 
+Pierwszym krokiem wizualizacji ontologii jest przekształcenie podanego obiektu OWL API na struktury danych biblioteki Prefuse. Każdy sposób wizualizacji (pełna wizualizacja oraz
+wywnioskowana hierarchia) posiada inny algorytm konwersji ontologii na struktury biblioteki Prefuse.  Algorytm (zaprezentowany na listingu nr \ref{lst:code:algorytm}) konwertuje
+obiekt OWLOntology na struktury typu graf i~jest używany przy pełnej wizualizacji. Działanie algorytmu zostało szczegółowo opisane w p.~\ref{konwersja}. W~przypadku
+wywnioskowanej hierarchii klas i~bytów ontologia jest przekształcana na strukturę drzewiastą. Przekształcenie to jednak nie polega na zwykłym przeglądaniu ontologii 
+i~przepisywaniu jej na odpowiednią strukturę danych. Wymagane jest użycie biblioteki wnioskującej Pellet. Rekurencyjny sposób budowy drzewa hierarchii  został opisany 
+w~p.~\ref{konwersja-tree}.
+
+
+
+
+ \item {\bf Abstract Data } \\
+Dane przechowywane są w dwóch strukturach danych: graf i drzewo. Podstawową strukturą wykorzystywaną podczas wizualizacji jest graf. Posiada on zbiór wierzchołków 
+i~zbiór krawędzi. Struktura ta jest wykorzystywana w podstawowym sposobie wizualizacji nazywanym również pełną wizualizacją, zaś struktura drzewa przy 
+przechowywaniu wywnioskowanej hierarchii klas i~bytów. 
+
+\item {\bf Filtering} \\
+ Aplikacja korzysta z dostarczonego w bibliotece graficznej filtru na odległość. Filtr ten pozwala na obrazowanie wierzchołków oddalonych o nie więcej niż zadana
+liczna kroków. Filtrowanie zostało rozszerzone o filtr umożliwiający ukrywanie zadanych elementów ontologii. Filtr sprawdza jakie opcje wizualizacji zostały
+ ustawione w statycznej klasie  FilterOptions i na podstawie tych danych nadaje odpowiednie wartości obiektom VisualItem.
+\item {\bf Action}\\
+W rozwiązaniu można wyróżnić dwa rodzaje akcji: jedne związane ze zmianą położenia elementów wizualizacji, drugie odpowiedzialne za statyczne zmiany. Akcje związane 
+z dynamiką wizualizacji mogą być zatrzymane  - w ten sposób wizualizacja staje się nieruchoma.  
+
+\item{\bf Rendering and Display}\\
+Ze względu na specyfikę obrazowanych elementów konieczne było stworzenie własnych klas renderujących. Klasy biblioteki Prefuse pozwalają tylko na rysowanie
+wierzchołków o~kształcie prostokąta lub prostokąta z zaokrąglonymi rogami i prostych krawędzi lub krawędzi w kształcie strzałki. Właśnie dlatego powstała klasa obrazująca 
+wierzchołki o~różnych kształtach i~kolorach oraz klasa pozwalająca na obrazowanie krawędzi posiadających różne groty oraz kolory. Wszystkie obiekty obrazowane są 
+na obiekcie OVDisplay. Klasa rozszerzająca prefuse'owy Display posiada metody pozwalające użytkownikowi w łatwy sposób zobrazować zadaną ontologię. Obiektowi 
+OVDisplay przypisane zostały metody obsługi akcji na prawy i lewy przycisk myszy. 
+
+\end{itemize}
+\section{Konwersja obiektu OWLOntology na struktury danych biblioteki Prefuse}
+\subsection{Pełna wizualizacja}
+\label{konwersja}
+Kluczowym elementem wizualizacji jest pobranie z~ontologii potrzebnych do wizualizacji elementów. Elementy, w~szczególności klasy anonimowe występują w~różnych
+ aksjomatach. Dlatego ważne jest, aby nie dublować tych samych elementów w wizualizacji. Algorytm (listing nr \ref{lst:code:algorytm}) zapewnia konwersję bazowych,
+jak i anonimowych elementów \cite{nasz}. 
+
+\lstset{language=PASCAL, caption={Algorytm konwertowanie obiektu OWLOntology na obiekty kontenerowe biblioteki Prefuse},stepnumber=1 , captionpos=b,
+label={lst:code:algorytm}}
+\lstinputlisting{code/algorytm.java}
+
+
+Algorytm zakłada inicjalne dodanie do wizualizacji wszystkich wierzchołków klas, właściwości oraz bytów zdefiniowanych w ontologii i następnie wstawianie łączących
+ je relacji i~dodatkowych wierzchołków anonimowych oraz definiujących użycie właściwości (Some/all values from i hasValue). Po wstawieniu wierzchołków(2) przeglądana
+ jest lista aksjomatów(3). Wśród nich wyróżnić można kilka przypadków. Dla  aksjomatów definiujących właściwości (4): functional, inverseFunctional, symmetric 
+i~transitive w grafie umieszczane są odpowiednie anonimowe wierzchołki (5) i~krawędzie łączące je ze stosowanym włąściwościami (6). Związki pomiędzy właściwościami takie jak 
+inverseProperty, equivalent properties i~subproperty są również umieszczane zgodnie z~definicją ze specyfikacji wizualizacji. Podobnie postępuje się z~aksjomatami 
+definiującymi związki między bytami (8-11) (diffrent, allDiffrent i same).
+\par
+W przypadku aksjomatów uwzględniających klasy (12) algorytm musi uwzględnić fakt, że w~każdym przypadku klasa może być zdefiniowana poprzez bardziej skomplikowany
+ opis (description) (13-15). Do takich aksjomatów należą te prezentujące związki pomiędzy klasami : equivalentClasses, subclass,  disjoint classses.
+  Ponadto zależności takie mogą wystąpić w przypadku definicji poprzez klasę range i~domain dla property oraz w definicjach typu classAsserction, określających 
+klasę, do jakiej należy dany byt. Oczywiście jeśli jedna z tych zależności dotyczy samej, jawnie zdefiniowanej klasy, w grafie umieszcza się stosowna 
+krawędź łączącą klasę z innych wierzchołkiem (16). 
+\par
+Opisy takie tworzone są poprzez różne klasy anonimowe  zdefiniowane w wizualizacji. W przypadku opisów reprezentującym relację hasValue, someValuesFrom 
+i~allValuesFrom (23) (has Value jest relację allValuesFrom, jeśli  wierzchołkiem wynikowym jest byt, nie klasa)  najpierw umieszczana jest w grafie klasa anonimowa.
+ Jeśli aksjomat uwzględnia definicją kardynalności, to klasa ta zamieniana jest na symbol kardynalności (28) (N) wraz z odpowiednim wierzchołkiem 
+z~ograniczeniem liczbowym. Następnie do grafu wstawiana jest krawędź i~stosowny wierzchołek reprezentujący użycie właściwości, krawędź łącząca to „użycie” 
+z~definicją i krawędź z~grotem do wartości zdefiniowanej przez aksjomat. Jako że wartością ta może być zarówno individual jaki i~klasa lub jej opis (description),
+ należy w~przypadku opisu raz jeszcze dokonać stosowanej analizy (algorytm zachowuje się tu rekurencyjnie). Dla description opisujących zbiory klas lub ich opisów:
+ unionOf, intersectionOf, complementOf (28) należy dla każdej składowej zbioru (29) umieścić w grafie odpowiednią krawędź i, o ile klasa jest zdefiniowana opisem,
+ przeprowadzić jego analizę, także rekurencyjnie. Jednym z typów opisu może być także klasa zdefiniowana przez aksjomat oneOf – w grafie umieszcza się stosowny 
+wierzchołek anonimowy i powiązania z bytami.
+\par
+Wszystkie te zasady stosuje się analogicznie dla typów danych (datatypes), gdzie zasady odnoszące się do klas obowiązują również dla typów danych. 
+Większość ontologii nie definiuje jawnie, że klasa jest podklasą Thing, dlatego, aby zapewnić spójność grafu, dla klas nieposiadających zdefiniowanej
+ nadklasy zakłada się, że jest nią Thing i umieszcza się stosowne krawędzie subclass (19-20). Jest to jedyne odstępstwo od zasady wizualizacji dokładnie tego, 
+co zostało podane w ontologii, jakie algorytm musi poczynić. Dzięki temu grafy ontologii wizualizowane przy pomocy tego algorytmu można czytać niemal dokładnie 
+tak samo jak samą ontologię zapisaną za pomocą języka OWL.
+
+\subsection{Wywnioskowana hierarchia klas i bytów}
+\label{konwersja-tree}
+
+Wywnioskowana hierarchia klas i bytów prezentowana jest jak drzewo. Aby zobrazować ontologię w taki sposób, jest wymagany mechanizm wnioskowania (ang. reasoner).
+W tym celu w projekcie został użyty pellet. Pellet \cite{pellet} jest otwartą biblioteką napisaną w javie, posiadającą mechanizmy wnioskowania. Obsługuje ona
+zarówno OWL API, jak i bibliotekę Jena. Pellet jest pierwszą biblioteką wnioskującą, która w pełni obsługuje język OWL~DL oraz częściowo obsługuje OWL~Full. Twórcy 
+ontologii dążą do zapisania jej w języku OWL~DL, jednak duża liczba restrykcji, jakie nakłada ten dialekt powoduje, że w rezultacie uzyskują ontologię zapisaną w OWL~Full. 
+Pellet posiada szereg heurystyk pozwalających na wykrywanie i przekształcanie ontologii z OWL~Full na OWL~DL. 
+ Użycie pelleta jest doskonałym sposobem na sprawdzenie spójności i poprawności ontologii. Pozwala on na znalezienie błędu niespójności ontologii poprzez znalezienie 
+aksjomatu,  który wprowadza ten błąd lub relacji dla niespójnych pojęć. 
+\par
+Na listingu \ref{lst:code:algorytm2} przedstawiono kod użyty do tworzenia drzewa wywnioskowanej hierarchii klas i bytów. Metoda buildTree() inicjuje reasoner 
+(mechanizm wnioskujący pelleta) ontologią, którą będziemy klasyfikować(4). Korzeniem drzewa jest zawsze klasa Thing, która jest przekazywana jako parametr 
+do rekurencyjnej metody budowania drzewa(6). Algorytm sprawdza wierzchołek przekazany jako parametr funkcji i jeśli jest on bytem, dodaje go do drzewa (55-59). Jeśli
+ wierzchołek  jest klasą, to po dodaniu go do drzewa (26-36)  mechanizm wnioskujący wyszukuje wszystkie podklasy analizowanego wierzchołka (40-43)
+oraz wszystkie instancje tej klasy - byty (47-49). Wywołuje na nich rekurencyjne budowanie drzewa. 
+
+
+
+\lstset{language=JAVA, caption={Algorytm budowy wywnioskowanej hierarchii klas i bytów},stepnumber=1 ,  captionpos=b,
+label={lst:code:algorytm2}}
+\lstinputlisting{code/algorytm2.java}
+
+\par 
+Algorytm budujący drzewo wywnioskowanej hierarchii klas i bytów mechanizmu wnioskowania używa do wyszukania bytów powiązanych z danym elementem oraz wszystkich 
+jego podklas. Podklasy te mogą niejawnie zdefiniowane. 
+
+\section {Plik właściwości}
+
+Zaproponowane przez autora kolory wierzchołków i krawędzi wizualizacji zostały dobrane w taki sposób, aby wizualizacja była czytelna i~``miła dla oka''.
+Niektórzy użytkownicy mogą posiadać inną percepcję wzrokową niż autor. Dlatego należy dać możliwość ustawienia przez użytkownika własnej palety
+ kolorów. Aby zmienić kolory wizualizacji należy dostarczyć plik konfiguracyjny z własnymi ustawieniami kolorów. Plik ten składa się z~kluczy przypisanych 
+zadanym elementom wizualizacji oraz wartości nowo nadanego koloru. Kompletny spis dopuszczanych wartości (kluczy) został opisany w dodatku B. 
+\par Przykładowy wpis w~pliku właściwości wygląda następująco:
+\begin{quote}
+  \verb+ node.color.thingNodeColor=#00FF00+
+\end{quote}
+W powyższym przykładzie jest ustawiany kolor dla wierzchołka thing. Kolor zapisywany jest jako RGB reprezentowany szesnastkowo. 
+
+\section{Plugin wizualizujący ontologie do \protege}
+Plugin do \proteges powstał, aby ``osadzić`` bibliotekę SOVA w wymagającym środowisku. Ponieważ \proteges jest bardzo popularnym edytorem ontologii, to powstały 
+i~upubliczniony plugin trafi do specjalistów zajmujących się ontologiami na co dzień i to oni będą mogli wyrazić opinie na temat tego rozwiązania. Rozwiązanie zostało
+upowszechnione i opisane na stronach wiki należących od autorów \protege. Obecnie wydany na licencji LGPL plugin w wersji 0.6.0 można odnaleźć pod adresem:
+ http://protegewiki.stanford.edu/wiki/SOVA.
+
+ 
+\par Wykorzystanie w~najnowszej wersji \proteges biblioteki OWL API znacznie ułatwiło jego integrację z powstałą biblioteką wizualizującą ontologie. Napisanie
+  pluginu pozwoliło również na sprawdzenie, czy API powstałej biblioteki posiada wszystkie wymagane funkcje oraz czy rozwiązanie może być łatwo modyfikowalne
+ w używającym go środowisku.  Czyli zostało sprawdzone spełnienie jednego z wymagań stawianych bibliotece. 
+
+Plugin w wersji binarnej został spakowany do pliku jar. Plik ten, poza kodem biblioteki, załącza  użytą bibliotekę prefuse oraz 3 pliki konfiguracyjne: plugin.xml, 
+viewconfig.xml  oraz MANIFEST.MF. Biblioteka OWL API nie jest załączona do pluginu, ponieważ posiada już ją edytor \protege. 
+
+\proteges 4.0 umożliwia dodanie kilku typów pluginów. Najczęściej używanym jest ViewComponent - implementuje on interfejs View, który pozwala na umieszczenie okna 
+pluginu w dowolnej z zakładek. Sama zakładka też jest rodzajem pluginu - WorkspaceTab. Implementacja pluginu będącego zakładką nie wymaga tworzenia dodatkowych 
+klas, jeśli plugin nie wymaga konfiguracji rozmieszczenia i wyrównania okien znajdujących się w zakładce. W przeciwnym razie jest wymagana klasa obsługi wyrównań 
+oraz plik viewconfig.xml zawierający informacje o rozmieszczeniu okienek. 
+
+Stworzony plugin, wizualizujący ontologię z wykorzystaniem biblioteki SOVA, zawiera 2 typy pluginów: ViewComponent oraz WorkspaceTab. Rodzaje użytych pluginów i ich opis 
+zostały zawarte w pliku konfiguracyjnym plugin.xml, który został  przedstawiony na listingu nr \ref{lst:code:pluginxml}. Plugin zakładkowy (WorkspaceTab) (17-24) wyświetla 
+2 rodzaje wizualizacji (zwykłą (2-8) i wywnioskowaną hierarchię(9-15)), które są pluginami typu ViewComponent i są umieszczone w nim jako 2 zakładki. Sposób rozmieszczenia 
+elementów zakładki został skonfigurowany w pliku viewconfig.xml. 
+
+\lstset{language=xml, caption={Zawartość pliku konfiguracyjnego plugin.xml},stepnumber=1 ,  captionpos=b,
+label={lst:code:pluginxml}}
+\lstinputlisting{code/plugin.xml}
+
+
+
+
+ 

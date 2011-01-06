@@ -1,0 +1,396 @@
+
+\chapter{Przegląd dostępnych rozwiązań do wizualizacji ontologii}
+\section{Wstęp}
+
+\section{Sposoby wizualizacji ontologii}
+Budowanie ontologii nie jest łatwą pracą. Nawet w~niewielkich rozwiązaniach wymaga często analizy dużej liczny elementów. 
+Aby poprawnie tworzyć ontologie wymagana jest ich wizualizacja. Upraszcza ona postrzeganie całego rozwiązania oraz konkretnych jego części.
+ Umożliwia również łatwą ocenę i poprawę błędów. 
+\newline
+Istnieje kilka podejść do graficznej prezentacji ontologii. Większość 
+z nich opiera się na modelu 2D. Istnieją również rozwiązania 3D np.: OntoSphere \cite{VisOnto} \cite{OntoSphere}. W tym przypadku klasy zostały odzwierciedlone
+ jako sfery (kule), a ich podklasy znajdują się, w trójwymiarowym drzewie przypominającym stożek, pod nimi. Klasy są połączone trójwymiarową krawędzią 
+o~odpowiednim kolorze i kształcie grotu. 
+\section{Elementy wizualizacji}
+Najczęściej ontologie są wizualizowane są za~pomocą grafu, w~którym wierzchołki 
+oznaczają elementy ontologii, a~krawędzie odzwierciedlają związki pomiędzy tymi elementami. Jednak podczas wizualizacji ontologii o~dużej liczbie 
+elementów taki sposób obrazowania może być nieprzejrzysty i~nieczytelny. Dlatego należy zwrócić uwagę na następujące elementy:
+\begin{enumerate}
+\item{\bf Sposób całościowej wizualizacji}
+
+\nopagebreak
+
+Dobra aplikacja do wizualizacji ontologii powinna wyświetlić wszystkie jej elementy. Użytkownik powinien mieć możliwość podglądu całej edytowanej
+ontologii, jak i również wybranej jej części. Aby wizualizacja była przejrzysta i czytelna musi posiadać możliwość ukrycia wizualizacji niektórych elementów. 
+Np.: wyłączenie rysowania związków danego typu.
+\item{\bf Sposób wizualizacji klas i~bytów}
+
+\nopagebreak
+
+Klasy oraz ich instancji są najważniejszymi elementami ontologii, dlatego poprawne ich wizualizowanie jest konieczne. Zły sposób obrazowania tych elementów 
+może zniechęcić użytkownika do korzystania z rozwiązania. Wizualizacja powinna pokazywać wszystkie klasy lub tylko wybrane przez użytkownika. 
+Każda klasa powinna zawierać przynajmniej nazwę, zapisaną w~zrozumiały sposób. Klasy mogą być obrazowane jako wierzchołki grafu. Powinny one jednoznacznie
+ wyróżniać się od instancji klas. Np.: poprzez kolor lub kształt wierzchołka. To podejście może się jednak nie sprawdzić przy wizualizacji ontologi o~znacznej
+liczbie elementów. W tym przypadku może istnieć wiele połączonych klas z wybranym węzłem, obrazowanie takiej sytuacji na grafie może okazać się nieczytelne. 
+Alternatywnym rozwiązaniem jest wyświetlenie wszystkich powiązanych klas z zadanym elementem w oddzielnym oknie aplikacji.   
+
+\item{\bf Wizualizacja taksonomii}
+
+\nopagebreak
+
+Klasy tworzą hierarchię (taksonomię) klas, poprzez relację nadklasa - podklasa (związek isa). Prezentacja taksonomii mam kluczowe znaczenia dla
+ zrozumienia relacji dziedziczenia pomiędzy klasami. Wizualizacja powinna dać możliwość całościowego bądź częściowego przeglądu hierarchii dziedziczenia.
+
+\item{\bf Sposób wizualizacji relacji}
+
+\nopagebreak
+
+Relacje występujące pomiędzy elementami najczęściej obrazowane są jako związek łączący te elementy. Różne typy relacji można wyróżnić poprzez nadanie 
+etykiety krawędzi łączącej, poprzez zmianę koloru lub kształtu linii. Ważne jest, aby można było opcjonalnie wyłączyć wizualizację zadanych typów
+ relacji. 
+
+\item{\bf Wizualizacja właściwości}
+
+\nopagebreak
+
+Ontologie byłyby bardzo ubogie, gdyby nie posiadały właściwości. Właściwości pozwalają na zdefiniowanie ogólnych informacji dotyczących zarówno
+ klas jak i~instancji klas. Właściwości powinny być zaznaczone na grafie wizualizacji bądź w oddzielnym oknie do tego przeznaczonym. 
+
+\item{\bf Wyszukiwanie}
+
+\nopagebreak
+
+Podczas wizualizacji dużej ontologi możemy napotkać na problem szybkiego wyszukania interesującego nas elementu. Dlatego aplikacji wizualizacji powinna 
+dać możliwość szukania elementów w grafie ontologii.    
+
+\end{enumerate}
+
+
+\section{Przedstawienie wybranych rozwiązań do wizualizacji ontologii}
+Na rynku dostępnych jest wiele programów do tworzenia i~edycji ontologii. Większość z~nich ułatwia budowanie ontologii poprzez ich graficzną reprezentację.
+ Niektóre rozwiązanie, takie jak rozwijany na~Uniwersytecie Stanforda edytor \protege , poprzez pluginy dostarczają kilku sposobów wizualizacji. Inne poza
+ogólnym mechanizmem wizualizacji posiadają dodatkowy do prezentacji drzewa wywnioskowanej hierarchii klas i bytów.
+
+\begin{enumerate}
+
+ \item{\bf OntoViz}
+
+  \nopagebreak 
+ 
+ OntoViz \cite{OntoViz} jest najczęściej używany pluginem \proteges do wizualizacji ontologii. Wykorzystuje on bibliotekę GraphViz do 
+tworzenia prostych grafów 2D (\figurename \space \ref{fig:viz:ontoviz} ). Na grafie klasy są reprezentowane jako prostokąty zawierające informację o
+nazwie klasy jak i dodatkowe informacje o relacjach i właściwościach klasy. Istnieje możliwość okrojenia i ukrycia części wyświetlanych komponentów przez 
+panel konfiguracyjny po prawej stronie. Instancje klas zostały wyróżnione od klas innym kolorem. 
+
+
+\insertimage{images/wizualizacja/ontoviz.png}{Przykład wizualizacji ontologii za pomocą OntoViz}{fig:viz:ontoviz}
+
+ \item{\bf Jambalaya}
+
+  \nopagebreak 
+ Jambalaya \cite{Jambalaya} \cite{JambalayaProtege} jest pluginem do \proteges rozwijanym na Uniwersytecie Wiktorii (Kanada). Opiera się na graficznym zestawie
+ narzędzi Piccolo do tworzenia interaktywnych grafów 2D. Jambalaya charakteryzuje się kilkoma rodzajami widoku. 
+
+ \item{\bf Growl}
+
+  \nopagebreak 
+
+ \item{\bf OCS}
+
+  \nopagebreak 
+
+  OCS (ang. ONTOLOGY CREATION SYSTEM) jest systemem do tworzenia i edycji ontologii rozwijanym na Wydziale Elektroniki, Telekomunikacji i Informatyki Politechniki
+ Gdańskiej. Edytor ontologi posiada 2 sposoby wizualizacji ontologii. Pierwszym jest hierarchia klas i bytów, drugi zaś to ogólny obraz ontologii. System wizualizuje
+ tylko podstawowe elementy ontologii, przedstawia tylko klasy, instancje i podstawowe relacji pomiędzy nimi. 
+ 
+\end{enumerate}
+
+
+\section{Opis metody porównania}
+\subsection*{Sposób wyznaczenia oceny rozwiązań}
+Porównanie rozwiązań do wizualizacji ontologi będzie podzielone na kilka kategorii. Każda z kategorii będzie posiadała zestaw zagadnień lub pytań. 
+Odpowiedzi na pytania pozwolą wyznaczyć ocenę dla zadanej kategorii. Każde z zagadnień, poza treścią, posiada również opis badanej cechy, liczbę 
+punktów, które mogą być przyznane za pytanie oraz sposób przydzielania punktów. Ocena dla danej kategorii będzie liczbą zmiennoprzecinkową 
+z~przedziału $ <0,1> $  i~będzie ona wyznaczana na podstawie wzoru:
+\begin{equation}
+   {P_{K}} =\frac{\sum_{k=1}^N  {p_{u}(i)}}{\sum_{k=1}^N  {P_{max}(i)}} 
+\end{equation}
+gdzie: \\
+$ N $ -- liczba pytań w kategorii \newline
+$ P_{K} $ -- liczba punktów uzyskanych w~danej kategorii, wartość ta będzie z~przedziału $ <0,1> $,\newline
+$ p_{u}(i) $ -- liczna punktów uzyskanych w i-tym pytaniu \\
+$ P_{max}(i) $ -- maksymalna liczba punktów możliwa do uzyskania na i-te pytanie. \\
+
+
+Całkowita ocena będzie również liczną rzeczywistą z przedziału $ <1,0> $, gdzie $1$ jest najlepszą notą do zdobycia. Ocena rozwiązania będzie średnią 
+ważoną ocen zdobytych dla poszczególnych kategorii. Wagi kategorii zostaną podane poniżej, wraz z~ich opisem. 
+
+\subsection*{Opis kategorii}
+
+\begin{enumerate}
+ \item{\bf Kompletność wizualizacji} 
+
+  \nopagebreak  
+Wiele rozwiązań obrazujących ontologie wyświetla tylko podstawowe informacje o~klasach i~związkach pomiędzy nimi. Aby ułatwić pracę nad ontologiami 
+wizualizacja musi być kompletna, wszystkie jej elementy muszą być przedstawione na grafie lub w dodatkowych oknach aplikacji.  Kryterium to pozwoli
+ocenić kompletności wizualizacji. 
+  \nopagebreak 
+
+{\bf Waga} : 5
+
+ \item{\bf Przejrzystość wizualizacji} 
+
+  \nopagebreak                  
+Kolejnym kryterium jest przejrzystość wizualizacji. Aby wizualizacja była zrozumiała musi być czytelna, szczególnie gdy wczytamy dużą ontologię. 
+Kryterium to m.in. odpowie na pytanie czy aplikacja posiada opcję filtrowania danych, wyświetlania tylko zadanych elementów i~związków.  
+  \nopagebreak 
+
+{\bf Waga} : 5
+
+ \item{\bf Sposoby wizualizacji} 
+
+  \nopagebreak                  
+  Ontologia może być przedstawiona na drzewie bądź grafie, jej elementy mogą być rozmieszczone w~różnych odległościach. Kryterium to sprawdzi,
+czy poza podstawową wizualizacją rozwiązania posiadają różne algorytmy i sposoby obrazowania danych. Ocenione zostanie również, czy wizualizacja 
+opiera się o~dane jawnie pobrane z ontologii, czy może jest wywnioskowaną hierarchią klas i~bytów.   
+  \nopagebreak 
+
+{\bf Waga} : 5
+
+
+ \item{\bf Użyteczność} 
+
+  \nopagebreak                  
+  Kryterium to pozwoli ocenić czy dane rozwiązanie jest ``przyjazne'' dla użytkownika. 
+  \nopagebreak 
+
+{\bf Waga} : 5
+
+\end{enumerate}
+
+
+
+
+\subsection*{Kryteria oceny dla kategorii kompletność}
+
+Poniżej znajduje się lista kryteriów, które pozwolą na ocenę kompletności wizualizacji. Kryteria zostały wyróżnione i~pogrupowane na podstawie
+elementów składowych ontologii. 
+
+\begin{longtable}{|m{3cm}|m{10cm}|}\hline
+Kryterium:                   &  \bf{Sposób wizualizacji klas}\\ \hline
+Opis kryterium:              & Klasy są najważniejszymi elementami ontologii. I wizualizacja powinna być powinna zawierać przynajmniej nazwę klasy. 
+                               Klasy poprzez kolor lub kształt powinny wyróżniać się na tle innych elementów ontologii.\\ \hline
+Liczna punktów do uzyskania: & 2 \\ \hline
+Sposób oceny:                &  1 punkt za wizualizację i jednoznaczne oznaczenie klas, \newline
+                                1 punkt za wyróżnienie klas od innych elementów ontologii.\\ \hline
+
+\end{longtable}
+
+
+
+\begin{longtable}{|m{3cm}|m{10cm}|}\hline
+Kryterium:                   & \bf{Sposób wizualizacji bytów}\\ \hline
+Opis kryterium:              & Byty, będące instancjami klas powinny odróżniać od klas, np.~poprzez kolor lub kształt wierzchołka. 
+                               Każdy z nich powinien identyfikować się nazwą.  \\ \hline
+Liczna punktów do uzyskania: & 2\\ \hline
+Sposób oceny:                &  1 punkt za wizualizację i odpowiednie oznaczenie bytów,  \newline
+                                1 punkt za wyróżnienie bytów od innych elementów np. klas.\\ \hline
+
+\end{longtable}
+
+
+
+
+\begin{longtable}{|m{3cm}|m{10cm}|}\hline
+Kryterium:                   & \bf{ Sposób wizualizacji klas anonimowych }\\ \hline
+Opis kryterium:              &  Klasy anonimowe są rezultatem relacji innych klas. Klasą anonimową może być np.~suma dwóch klas. 
+				Elementy te nie posiadają nazwy, dlatego wizualizacja powinna pokazać z~jakiej relacji i~z~jakich klas one powstały.     \\ \hline
+Liczna punktów do uzyskania: &  2  \\ \hline
+Sposób oceny:                &  1 punkt za wizualizację klas anonimowych,  \newline 
+                                1 punkt za przejrzyste ukazanie relacji i
+				klas, których owa klasa jest rezultatem
+                                 \\ \hline
+                               
+\end{longtable}
+
+
+
+\begin{longtable}{|m{3cm}|m{10cm}|}\hline
+Kryterium:                   & \bf{ Wizualizacja relacji dotyczących klasami i bytami }\\ \hline
+Opis kryterium:              &  Kryterium pozwoli ocenić stopień pokrycia związków pomiędzy klasami i bytami  \\ \hline
+Liczna punktów do uzyskania: &  11   \\ \hline
+Sposób oceny:                &  1  punkt za wizualizację związku ``subclass'' ,\newline
+                                1  punkt za wizualizację związku ``instanceOf'', \newline	      
+                                1  punkt za wizualizację związku ``equivalentClass'',\newline
+                                1  punkt za wizualizację związku ``disjointWith'',\newline
+                                1  punkt za wizualizację związku ``differentFrom'',\newline
+                                1  punkt za wizualizację związku ``allDifferent'',\newline
+                                1  punkt za wizualizację związku ``sameAs'',\newline
+                                1  punkt za wizualizację związku ``oneOf'',\newline
+                                1  punkt za wizualizację związku ``unionOf'',\newline
+                                1  punkt za wizualizację związku ``intersectionOf'',\newline
+                                1  punkt za wizualizację związku ``complementOf''
+
+  \\ \hline
+\end{longtable}
+
+\begin{longtable}{|m{3cm}|m{10cm}|}\hline
+Kryterium:                   & \bf{ Wizualizacja właściwości }\\ \hline
+Opis kryterium:              &  Właściwości pozwalają na zdefiniowanie ogólnych informacji dotyczących zarówno klas jak i instancji klas. \\ \hline
+Liczna punktów do uzyskania: &  2   \\ \hline
+Sposób oceny:                &     1  punkt za wizualizację DataTypeProperty ,\newline
+                                   1  punkt za wizualizację ObjectProperty, \
+			      \\ \hline
+\end{longtable}
+
+\begin{longtable}{|m{3cm}|m{10cm}|}\hline
+Kryterium:                   & \bf{ Wizualizacja związków odnoszącymi się do właściwościami }\\ \hline
+Opis kryterium:              &    Kryterium pozwoli ocenić stopień pokrycia związków dotyczących właściwości  \\ \hline
+Liczna punktów do uzyskania: &  7   \\ \hline
+Sposób oceny:                &  1  punkt za wizualizację związku ``subProperty'' ,\newline
+                                1  punkt za wizualizację związku ``equivalentProperty'', \newline	      
+                                1  punkt za wizualizację związku ``functionalProperty'',\newline
+                                1  punkt za wizualizację związku ``inversFunctionalProperty'',\newline
+                                1  punkt za wizualizację związku ``symmetricProperty'',\newline
+                                1  punkt za wizualizację związku ``transitiveProperty'',\newline
+                                1  punkt za wizualizację związku ``inverseOf(property)'',
+ \\ \hline
+\end{longtable}
+
+
+
+\begin{longtable}{|m{3cm}|m{10cm}|}\hline
+Kryterium:                   & \bf{ Wizualizacja pozostałych elementów ontologii }\\ \hline
+Opis kryterium:              &  Kryterium pozwoli ocenić stopień pokrycia pozostałych elementów ontologii, takich jak np. kardynalność.  \\ \hline
+Liczna punktów do uzyskania: &   4  \\ \hline
+Sposób oceny:                &  1  punkt za wizualizację  ``sameValuesFrom/allValuesForm'' ,\newline
+                                1  punkt za wizualizację   ``Cardinality'', \newline	      
+                                1 punkt za wizualizację  ``Domain'',\newline
+                                1 punkt za wizualizację  ``Range'',\newline 
+  \\ \hline
+\end{longtable}
+
+
+\subsection*{Kryteria oceny dla kategorii przejrzystość wizualizacji}
+Poniżej znajduje się lista kryteriów i pytań, które pozwolą na ocenę czytelności i zrozumiałości wizualizacji. 
+
+
+\begin{longtable}{|m{3cm}|m{10cm}|}\hline
+Kryterium:                   & \bf{ Czytelność ontologii }\\ \hline
+Opis kryterium:              &  Kryterium oceni jakość wizualizacji dużej liczącej ponad 100 klas ontologii. Wizualizacja powinna dać możliwość 
+                                wyświetlenia całej ontologii.  Oceniony zostanie sposób rozłożenia 
+                                 danych. Należy sprawdzić, czy elementy nie nachodzą na siebie i czy nie zakrywają innych elementów ontologii. 
+                                \\ \hline
+Liczna punktów do uzyskania: &  5   \\ \hline
+Sposób oceny:                &  0-3 punktów za ogólną czytelność dużej ontologii.\newline
+                                0-2 punktów za nienachodzenie na siebie elementów. \\ \hline
+\end{longtable}
+
+\begin{longtable}{|m{3cm}|m{10cm}|}\hline
+Kryterium:                   & \bf{ Dostępność filtrów }\\ \hline
+Opis kryterium:              &  Wprowadzenie możliwości wizualizacji tylko wybranych typów elementów ontologii znacznie ułatwia pracę z tą ontologią.
+                                Dlatego wizualizacja powinna dać możliwość filtrowania danych. Kryterium to sprawdzi jakie filtry posiadają wybrane 
+                                rozwiązania i w jakim stopniu filtry pokrywają ilość wyświetlanych elementów.\\ \hline
+Liczna punktów do uzyskania: &  3   \\ \hline
+Sposób oceny:                &  0-3 punkty za ilość filtrów.    \\ \hline
+\end{longtable}
+
+\begin{longtable}{|m{3cm}|m{10cm}|}\hline
+Kryterium:                   & \bf{ Skalowalność rozwiązania }\\ \hline
+Opis kryterium:              & Kryterium skalowalności rozwiązań pozwoli ocenić jak zmienia się jakość wizualizacji wraz ze wzrostem.  \\ \hline
+Liczna punktów do uzyskania: &     \\ \hline
+Sposób oceny:                &     \\ \hline
+\end{longtable}
+
+
+\subsection*{Kryteria oceny dla kategorii sposoby wizualizacji}
+Poniżej znajduje się lista kryteriów które pozwolą ocenić różnorodność sposobów wizualizacji zaproponowanych w testowanych rozwiązaniach. 
+
+
+\begin{longtable}{|m{3cm}|m{10cm}|}\hline
+Kryterium:                   & \bf{ Liczba sposobów wizualizacji }\\ \hline
+Opis kryterium:              &  Kryterium sprawdzi ile różnych sposobów rozmieszczenia danych i wizualizacji znajduje się w danym rozwiązaniu. 
+                               \\ \hline
+Liczna punktów do uzyskania: &  3   \\ \hline
+Sposób oceny:                &  0  punktów jeśli rozwiązanie posiada tylko jeden sposób wizualizacji \newline	
+                                1  punkt jeśli wizualizacja posiada 2 różne sposoby obrazowania danych \newline
+                                2  punkty dla 2-3 różnych sposobów wizualizacji \newline
+                                3 punkty jeśli rozwiązanie pozwala na wizualizację za pomocą więcej niż 3 różnych algorytmów obrazowania danych\\ \hline
+\end{longtable}
+
+\begin{longtable}{|m{3cm}|m{10cm}|}\hline
+Kryterium:                   & \bf{ Wizualizacja wywnioskowanej hierarchii  }\\ \hline
+Opis kryterium:              &  Wywnioskowana hierarchia bytów i klas pozwala na łatwiejsze zrozumienie ontologii. Może być też przydatna przy kontroli 
+                                jakości ontologii, np. przy sprawdzaniu spójności ontologii.     \\ \hline
+Liczna punktów do uzyskania: &  1   \\ \hline
+Sposób oceny:                &  1 punkt jeśli rozwiązanie umożliwia wizualizację hierarchii wygenerowanej przez narzędzie wnioskujące   \\ \hline
+\end{longtable}
+
+
+\subsection*{Kryteria oceny dla kategorii użyteczność}
+Poniżej znajduje się lista kryteriów które pozwolą ocenić użyteczność rozwiązań. 
+
+\begin{longtable}{|m{3cm}|m{10cm}|}\hline
+Kryterium:                   & \bf{ Użyteczność  }\\ \hline
+Opis kryterium:              &   Oceniona zostanie intuicyjność  łatwość  korzystania i rozwiązania. \\ \hline
+Liczna punktów do uzyskania: &   6  \\ \hline
+Sposób oceny:                &  0-2 punktów za łatwość instalacji \newline
+                                0-3 punktów za intuicyjność interfejsu \newline
+                                1 punkt za możliwość wyszukiwania  \\ \hline
+\end{longtable}
+
+
+\begin{longtable}{|m{3cm}|m{10cm}|}\hline
+Kryterium:                   & \bf{ Dostępność pomocy }\\ \hline
+Opis kryterium:              &  Pozwala określić stopień dostępności pomocy dla rozwiązania   \\ \hline
+Liczna punktów do uzyskania: &  3   \\ \hline
+Sposób oceny:                &  1 punkt za stronę z pomocą \newline
+                                1 punkt za samouczek lub instrukcja użytkowania  \newline
+                                1 punkt za dostępność forów  związanych z rozwiązaniem . \\ \hline
+\end{longtable}
+
+\begin{longtable}{|m{3cm}|m{10cm}|}\hline
+Kryterium:                   & \bf{ Licencja }\\ \hline
+Opis kryterium:              &   Zostanie tutaj sprawdzona licencja, na której zostało wydane oprogramowanie.    \\ \hline
+Liczna punktów do uzyskania: &   2  \\ \hline
+Sposób oceny:                &   1 punkt jeśli oprogramowanie jest na darmowej licencji\newline
+                                 1 punkt jeśli posiada otwarty kod. \\ \hline
+\end{longtable}
+
+
+
+Kryteria porównawcze
+\begin{enumerate}
+ \item prezentacja całościowa
+  \begin{itemize}
+   \item prezentacja całości
+  \item możliwość filtrów
+  \item filtr na odległość
+  \item możliwość wyszukiwania
+  \item różne typy wizualizacji
+  
+  
+  \end{itemize}
+ \item dodatkowe metody wizualizacji
+   \begin{itemize}
+    \item dodatkowe sposoby wizualizacji
+    \item wizualizacja wywnioskowanej hierarchii
+  \end{itemize}
+
+\item wizualizacja elementów
+  \begin{itemize}
+    \item Klasy nazwane
+    \item Klasy anonimowe
+    \item (Byty)Instancje
+    \item Relacje
+    \item Właściwości (ObjectProperty, DataTypeProperty)
+
+  \end{itemize}
+\item skalowalność
+\item licencja
+
+
+
+\end{enumerate}
+
+

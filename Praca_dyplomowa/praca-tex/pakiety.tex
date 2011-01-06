@@ -1,0 +1,31 @@
+%język polski
+\usepackage[utf8]{inputenc}	%kodowanie
+\usepackage[OT4]{polski}	%polskie zasady łamania słów i przenoszenia wyrazów
+
+%obsługa pdf
+\usepackage[pdftex,usenames,dvipsnames]{color}	%obsługa kolorów
+%\usepackage[pdftex,draft=false,pdfpagelabels=false,pdfstartview=FitH,pdfstartpage=1,bookmarks=false,pdfauthor={Piotr Kunowski},pdftitle={Praca Dyplomowa},pdfsubject={...},pdfkeywords={...},unicode=true]{hyperref}   %pagebackref=true pokazuje w spisie literatury numery stron, na których są odwołania do danej pozycji w bibliografi ..
+
+%bibliografia
+% \usepackage{packages/hypernat}	%łączy natbib z hyperref !!! wszystkie trzy muszą być definiowane w takiej jak teraz kolejności
+
+%style
+\usepackage{extsizes}	%wiecej rozmiarów czcionek
+\usepackage[a4paper,left=3.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage[sf,bf,outermarks]{titlesec}	%wygląd tytułów rozdziałów (arial bold, oddzielna linia dla nagłówków \paragraph)
+\usepackage{tocloft}	%format spisu treści
+\usepackage{array}	%ładniejsze tabelki
+\usepackage[format=hang,labelsep=period,labelfont={bf,small},textfont=small]{caption}	%formatuje podpisy pod rysunkami i tabelami, format=hang powoduje, że kolejne linie podpisu będą wcięte aż do odległości nazwy podpisu np. "Rysunek 1."
+\usepackage{floatflt}	%ładne opływanie obrazków tekstem
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{multirow}
+%listingi
+\usepackage{listings}
+\usepackage{mathrsfs}
+\usepackage[mathcal]{eucal}
+%inne
+\usepackage{packages/strona_tytulowa}
+\usepackage{longtable}
+
+\usepackage{indentfirst}

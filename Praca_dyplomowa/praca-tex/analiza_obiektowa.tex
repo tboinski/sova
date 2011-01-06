@@ -1,0 +1,25 @@
+\documentclass[a4papert,12pt]{report} %,twoside, openrigh
+
+\input{pakiety.tex}
+\input{ustawienia.tex}
+\widowpenalty=10000
+\clubpenalty=10000 
+\begin{document}
+\def\protege{Prot\'{e}g\'{e}}
+\def\proteges{Prot\'{e}g\'{e}\space}
+  \pagenumbering{roman}
+
+  %treść pracy
+  \newcounter{licznikStron}
+  \setcounter{licznikStron}{\value{page}}
+  \pagenumbering{arabic}
+  \setcounter{page}{\value{licznikStron}}
+
+
+
+
+
+  \input{klasy.tex}
+
+
+\end{document}

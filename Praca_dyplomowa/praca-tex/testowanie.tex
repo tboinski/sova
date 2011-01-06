@@ -1,0 +1,192 @@
+\chapter{Testy aplikacji}
+\vspace*{1 cm}
+\section{Wstęp}
+W ostatnim etapie pracy zostaną przeprowadzone testy aplikacji. Testy zostaną przeprowadzone dla następujących cech:
+\begin{enumerate}
+ \item Funkcjonalność/Functionality – dopasowanie systemu do potrzeb funkcjonalnych, stopień pokrycia wymaganych funkcji, łatwość orientowania się w~sposobie działania 
+systemu, łatwość sprawdzenia poprawności działania systemu,
+ \item Wydajność/Performance – zbiór cech związanych z osiągami systemu (szybkość działania systemu, szybkość komunikacji z~użytkownikiem, odporność systemu 
+na zmiany środowiska),
+ \item Wiarygodność/Dependability - stopień zaufania do systemu, niezawodność, stopień tolerancji błędów, bezpieczeństwo, stopień kontroli dostępu do systemu,
+ zdolność do wykrywania i~identyfikacji błędów w systemie,
+ \item Użyteczność/Usability - wysiłek, który musi być włożony w~nauczenie się programu, w~jego użycie, przygotowanie danych wejściowych i~interpretację danych
+ wyjściowych.
+ 
+\end{enumerate}
+
+\section{Testy funkcjonalne}
+Testy funkcjonalne pozwalają na sprawdzenie zgodności oprogramowania z~dokumentem specyfikacji wymagań. Sprawdzają realizację poszczególnych funkcji oprogramowania. 
+Ten typ testów jest testem czarnej skrzynki. Osoba testująca nie analizuje kodu, czy architektury oprogramowania, interesują ją tylko dostarczona funkcjonalność  
+testowanej aplikacji. 
+\par 
+Poniżej przedstawiono testy funkcjonalne biblioteki SOVA. Testy zostały podzielone na dwie kategorie (zależne do użytkownika systemu): wymagania funkcjonalne
+ związane z wizualizacją oraz wymagania funkcjonalne stawiana przez programistę używającego biblioteki. Dla każdej kategorii stworzono zestaw przypadków 
+testowych. W tabeli \ref{t:funk:api} oraz \ref{t:funk:wiz} zamieszczono tematykę każdego z przypadków i wyniki lub odpowiedzi na pytania zawarte w przypadkach testowych. 
+
+\subsection{Testy funkcjonalne API dla programisty}
+
+Przypadki testowe tej części dotyczą funkcji wymaganych przez programistów implementujących bibliotekę SOVA w swoich rozwiązaniach. Zostały ona przeprowadzone 
+podczas implementacji pluginu do \proteges oraz wdrożenia do systemu OCS. 
+
+\begin{longtable}{|m{7cm}|m{7cm}|} 
+\caption{Przeprowadzone testy API programistycznego}
+\label{t:funk:api} \\
+\hline
+\bf{Opis testu} 	&  \bf{Wynik} \\ \hline
+
+Pełna wizualizacja ontologii. Test polega na napisaniu kodu pozwalającego na wizualizację obiektu OWL.
+& 
+Test zakończony powodzeniem. Napisany krótki kod pozwolił na obrazowanie zadanego obiektu OWLOntology. 
+\\ \hline
+
+
+Wizualizacja wywnioskowanej hierarchii klas i bytów. Test polega na napisaniu kodu pozwalającego na wizualizację taksonomii.
+& 
+Test zakończony powodzeniem. Napisany krótki kod pozwolił obrazować ontologię w oczekiwany sposób. 
+\\ \hline
+
+Intuicyjne API biblioteki pozwalające na szybką wizualizację ontologii.
+
+& Dzięki zachowaniu norm nazewnictwa w języku Java, API biblioteki jest intuicyjne. Aby dokonać wizualizacji ontologi w tworzonym przez programistę środowisku, należy
+stworzyć tylko obiekt OVDisplay i wywołać na nim metodę generateGraphFromOWL lub generateTreeFromOWL dla wywnioskowanej hierarchii. 
+\\ \hline
+
+Zapis informacji z strumienia błędów do pliku.
+& Test zakończony powodzeniem. Wszystkie komunikaty debugiera pojawiły się w pliku. 
+\\ \hline
+
+
+Zmiana koloru wizualizowanych elementów poprzez użycie pliku properties  
+& Test zakończony powodzeniem. Zostały wczytane wszystkie kolory zawarte w pliku properties. 
+\\ \hline
+
+
+
+\end{longtable}
+
+\subsection{Testy funkcjonalne związane z wizualizacją}
+
+Testy związane z wizualizacją zostały przeprowadzone przy użyciu edytora \proteges 4.0.1 oraz napisanego pluginu do wizualizacji SOVA. Przeprowadzone 
+testy pozwoliły sprawdzić poprawności funkcji wizualizujących biblioteki SOVA zawartych w specyfikacji wymagań funkcjonalnych. 
+
+
+\begin{longtable}{|m{7cm}|m{7cm}|} 
+\caption{Przeprowadzone testy funkcjonalne}
+\label{t:funk:wiz} \\
+\hline
+\bf{Opis testu} 	&  \bf{Wynik} \\ \hline
+
+Zmiana trybu wizualizacji na RadialTree. 
+& Test zakończony powodzeniem 
+\\ \hline
+
+Ustawienie odległości od zaznaczonego wierzchołka na 1. 
+& Test zakończony powodzeniem. Zostały wyświetlone elementy oddalone o 1 od zaznaczonego.
+\\ \hline
+
+Wyłączenie wizualizacji klas i elementów bezpośrednio powiązanych z klasami. 
+& Test zakończony powodzeniem. Klasy i związki pomiędzy nimi nie pojawiły się na wizualizacji.
+\\ \hline
+
+
+Wyłączenie wizualizacji bytów i elementów bezpośrednio powiązanych z nimi. 
+& Test zakończony powodzeniem. Byty i związki pomiędzy nimi nie pojawiły się na wizualizacji.
+\\ \hline
+
+
+Wyłączenie wizualizacji właściwości i elementów bezpośrednio powiązanych z właściwościami. 
+& Test zakończony powodzeniem. Właściwości i związki pomiędzy nimi nie pojawiły się na wizualizacji.
+\\ \hline
+
+\end{longtable}
+\section{Testy wydajnościowe}
+Wizualizacja ontologii jest skomplikowanym procesem. Algorytm przedstawiony w poprzednim rozdziale przegląda ontologię kilkukrotnie, wyszukując elementy 
+zapisane w~aksjomatach. Następnie elementy te są  rozmieszczane w strukturach danych, filtrowane i przekazywane algorytmowi rozmieszczenia danych. Algorytm 
+RadialTreeLayout, rozmieszczający dane, posiada złożoność obliczeniową $O(N\log N)$ oraz $O(E) $, gdzie N to liczba wierzchołków, E to liczba krawędzi. Złożoność obliczeniowa całego procesu
+ wizualizacji może być duża. Dlatego należy wykonać testy wydajnościowe, aby upewnić się, że aplikacja jest skalowalna i~potrafi wizualizować duże ontologie w~przystępnym 
+czasie. 
+
+Testy zostały przeprowadzone dla 6 ontologii posiadających różne liczby elementów. Ontologie te zostały opisane w tabeli \ref{t:ontologie} . Tabela ta przedstawia 
+nazwę ontologii, 
+objętość pliku owl, z którego została wczytana. Liczbę wizualizowanych elementów ontologi, czyli liczbę wierzchołków i~krawędzi użytą podczas obrazowania ontologii przy 
+użyciu zaprojektowanych elementów graficznych. Ostatnia kolumna tabeli przedstawia czas wizualizowania ontologii, potrzebny na przetworzenie zadanego obiektu
+ wejściowego OWLOntology na odpowiednie struktury danych, nadanie wartości koloru i kształtu  elementom, rozmieszczenie ich algorytmem RadialTree i~narysowanie grafu na 
+obiekcie display. Czas wczytania ontologii nie jest liczony, ponieważ biblioteka jako dane wejściowe otrzymuje wczytany już obiekt owl. Obiekt ten może pochodzić nie tylko z~pliku, ale 
+np. z~bazy danych. 
+
+
+\begin{longtable}{|m{4cm}|m{3cm}|m{3cm}|m{3cm}|} 
+\caption{Pliki ontologii użyte podczas testowania}
+\label{t:ontologie} \\
+\hline
+\bf{Nazwa ontologii} 	&  \bf{Rozmiar pliku [KB]} & \bf{Liczba \newline elementów} & \bf{Czas [ms]} \\ \hline
+
+Pizza2.owl & 7,24 & 122 & 170\\ \hline
+Pizza.owl & 121 & 1 398 & 203 \\ \hline
+securityontology.owl & 517 & 4 883 & 353 \\ \hline
+CL.owl & 1 171 & 9 093 & 900 \\ \hline
+FBsp.owl& 3 159 & 23 917 & 1 947 \\ \hline
+interpro2go.owl& 9 121 & 55 640 &  6 013\\ \hline
+\end{longtable}
+
+Na wykresie (Rys. \ref{fig:viz:czas}) został przedstawiony czas wizualizacji ontologi w zależności od liczby wizualizowanych elementów. Z wykresu możemy odczytać, że 
+czas ten zależy liniowo od liczby wizualizowanych elementów. Liczba wizualizowanych elementów nie jest równa liczbie elementów zawartych w pliku ontologii, ponieważ niektóre
+aksjomaty obrazowane są za pomocą kilku elementów graficznych. Np. związek sameAs łączy dwa byty, używając trzech elementów wizualizacji: dwóch linii i jednego wierzchołka. 
+Należy jednak zauważyć, że liczba elementów potrzebna do zobrazowanie danego aksjomatu jest stała, więc liczba elementów i~liczna wizualizowanych elementów zależą
+ od siebie w~sposób stały. Powyższe analiza udowadnia, że czas potrzebny na wizualizację zależy liniowo od liczby elementów zawartych w ontologii. 
+\insertimage{images/wykresy/wyk_czas.png}{Czas wizualizacji ontologi}{fig:viz:czas}
+
+\section{Testy wiarygodności}
+Ten rodzaj testów pozwolił sprawdzić kompletność i poprawność wizualizacji.  Testowanie pozwoliło wykryć  czy wszystkie elementy ontologi są poprawnie wizualizowane. 
+\par 
+Podczas testowania zostały wczytane ontologie o niewielkiej liczbie elementów. Dla każdej z nich została sprawdzona poprawność wizualizacje poprzez porównanie obrazu 
+ontologii z jej zapisem w pliku *.owl. Poniżej opisane zostały testy oraz przedstawiono ich wyniki.
+
+\subsection*{Test 1 - ontologia win}
+W teście została użyta mała ontologia posiadająca kilka klas i bytów. Między klasami występowały relacje m.in. subClass, disjointClass oraz oneOf. Ontologia została 
+poprawnie zobrazowana. Żaden z elementów nie zostało pominięty, nie pojawiła się tez żadna informacja w logu. Wynik testu jest pozytywny. 
+
+\subsection*{Test 2 - zmodyfikowana ontologia pizzy}
+Ontologia pizzy posiada większość elementów zdefiniowanych w języku OWL DL: klasy, właściwości, byty, klasy anonimowe, kardynalność oraz rożnego rodzaju relacje i związki. 
+Ontologia zostało poprawnie zobrazowana, wszystkie elementy pojawiły się na ekranie. W logu pojawiła się informacja o pominięciu kilku adnotacji dotyczących aksjomatów. 
+Adnotacje te nie mają wpływu na wygląd wizualizacji, są tylko dodatkowymi informacjami. Wynik testu został uznany za pozytywny. 
+
+\subsection*{Test 3 - ontologia bezpieczeństwa}
+Ontologia bezpieczeństwa posiada wszystkie elementy języka OWL DL. Wizualizacja tej ontologii nie zawiera, zdefiniowanych w pliku *.owl, elementów DataType. Informacja 
+ta pojawiła się w logu. Ponieważ elementy DataType nie są bardzo istotne przy wizualizacji, a w logu pojawiła się odpowiednia informacja, wynik testu jest pozytywny. 
+
+
+
+\section{Testy użyteczności}
+Testy użyteczności zostały przeprowadzone z pomocą dwóch użytkowników posiadających ogólną wiedzę o ontologiach i znających  język OWL. 
+Do testów został użyty edytor OCS z opcją wizualizacji SOVA. Każdy użytkownik miał już styczność z tą aplikacją i potrafił ją obsługiwać. Podczas testu testerzy 
+dostali arkusz z pytaniami, które pozwalają ocenić intuicyjność interfejsu oraz jakość wizualizacji dla dwóch, różniących się rozmiarem ontologii. Wyniki testu oraz
+pytanie skierowane do testerów zostały zaprezentowane w tabeli \ref{t:testy:uzytkownika}.  
+
+
+
+\begin{longtable}{|m{9cm}|m{2cm}|m{2cm}|} 
+\caption{Wyniki testów użyteczności}
+\label{t:testy:uzytkownika} \\
+\hline
+
+Pytanie  & Tester 1 &  Tester 2 \\ \hline
+Oceń intuicyjność interfejsu pełnej wizualizacji w skali 0-5. &  4 & 5 \\ \hline
+Oceń intuicyjność interfejsy wywnioskowanej hierarchii w skali 0-5.& 5  & 5  \\ \hline
+Oceń intuicyjność opcji filtrowania w skali 0-5.& 4,5 & 4 \\ \hline
+Oceń dobór kolorów w skali 0-5.& 4 &  4 \\ \hline
+Oceń czytelność i przejrzystość pełnej wizualizacji dla ontologii pizza2.owl w skali 0-5.& 4 & 5 \\ \hline
+Oceń czytelność i przejrzystość pełnej wizualizacji dla ontologii pizza.owl w skali 0-5.& 3 & 3 \\ \hline
+Oceń czytelność wizualizacji wywnioskowanej hierarchii dla ontologii pizza.owl w skali 0-5.& 5 & 5 \\ \hline
+
+\end{longtable}
+
+\section{Podsumowanie testów}
+Testy pokazały, że w aplikacji poprawnie zostały zaimplementowane podstawowe funkcje. Bardzo dobrze wypadły testy wydajnościowe, podczas których udowodniono liniową 
+złożoność obliczeniową względem liczby elementów ontologii. Przychylną opinię uzyskał interfejs aplikacji, który został pozytywnie oceniony przez użytkowników. 
+Martwić może fakt nieobrazowania wszystkich elementów ontologii. Testy wykazały, iż element DataType nie jest wizualizowany, czyli nie zostało spełnione jedno z wymagań
+odnoszące się do kompletności wizualizacji. Na szczęście informacja o braku wizualizacji tego elementu pojawiła się w logu. Niską notę uzyskała również czytelność 
+i~przejrzystość wizualizacji dużych ontologii. 
+ 
+
+

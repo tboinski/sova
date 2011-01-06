@@ -1,0 +1,27 @@
+<plugin>
+	<extension id="pluginSova"
+			point="org.protege.editor.core.application.ViewComponent">
+  		<label value="PG ETI SOVA - Visualization"/>
+  		<class value="org.pg.eti.kask.ont.pluginSova.SovaVisualization"/>
+  		<headerColor value="@org.protege.classcolor"/>
+  		<category value="@org.protege.classcategory"/>
+  	</extension>
+ 	<extension id="pluginSovaTree"
+			point="org.protege.editor.core.application.ViewComponent">
+  		<label value="PG ETI SOVA - Hierarchy Tree Vis"/>
+  		<class value="org.pg.eti.kask.ont.pluginSova.HierarchyTreeVis"/>
+  		<headerColor value="@org.protege.classcolor"/>
+  		<category value="@org.protege.classcategory"/>
+  	</extension>
+  	 	
+  	<extension id="pluginSovaTab"
+              point="org.protege.editor.core.application.WorkspaceTab">
+  		<label value="PG ETI SOVA"/>
+  		<class value="org.pg.eti.kask.ont.pluginSova.pluginSovaTab"/>
+        	<index value="X"/>
+       	 	<editorKitId value="OWLEditorKit"/>
+        	<defaultViewConfigFileName value="viewconfig.xml"/>
+   	</extension>
+  	
+</plugin>
+

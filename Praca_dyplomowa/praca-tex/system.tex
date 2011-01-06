@@ -1,0 +1,278 @@
+\chapter{Analiza i projekt systemu}
+\section{Wstęp}
+W tej części pracy przedstawiona zostanie analiza systemowa i  projekt techniczny tworzonej aplikacji do wizualizacji ontologii. Część prac projektowych oraz implementacyjnych 
+została wykonana w czteroosobowym zespole w ramach projektu grupowego.  Cele, wymagania i założenia zostały przedyskutowana z opiekunem pracy oraz innymi pracownikami 
+Katedry Architektury Systemów Komputerowych. W ramach tych dyskusji ustalono, że tworzona aplikacja zostanie wydana jako biblioteka, którą programiści będą mogli 
+wdrożyć w swoich rozwiązaniach. 
+\par
+W pierwszej części tego rozdziału zaprezentowane zostaną cele i wymagania stawiane tworzonej aplikacji. Następnie przedstawione zostaną aspekty techniczne dotyczące 
+bibliotek pomocniczych, które zostaną wykorzystane w rozwiązaniu. Na podstawie tej wiedzy zastanie przeprowadzona analiza SWOT oraz określony zostanie harmonogram prac. 
+W ostatniej części rozdziału zostanie zaprezentowany diagram pakietów. Każdy z pakietów zostanie krótko omówiony. Ze względy na zbyt dużą liczbę klas nie zostanie tutaj 
+zaprezentowana pełna analiza obiektowa, która została przeprowadzona podczas realizacji projektu.
+  
+\section{Cele systemu}
+Głównym celem systemu jest stworzenie biblioteki pozwalającej na wizualizację ontologii zapisanych w języku OWL. Istnieje zapotrzebowanie na bibliotekę, która 
+tłumaczyłaby OWL bezpośrednio na elementy graficzne.  Programiści aplikacji związanych z ontologiami korzystając z gotowej biblioteki do wizualizacja, 
+będą mogli więcej czasu poświęcić innym zagadnieniom tworzonej przez nich aplikacji.  Aby przetestować rozwiązanie zostanie ono wdrożone do 
+rozwijanego przez Katedrę Architektury Systemów Komputerowych systemu OCS \cite{jankowski, boinski}. Na podstawie przeprowadzonych testów wiadomo, że moduł wizualizujący 
+ontologię w systemie OCS wymaga modernizacji i rozbudowy funkcjonalności. Biblioteka wizualizująca ontologie ułatwi i przyspieszy zakończenie projektu OCS. Pozwoli 
+również na zwiększenie atrakcyjności portalu OCS i przyciągnie użytkowników. 
+\par
+Zostanie również stworzony plugin do aplikacji \protege, dzięki niemu bibliotek trafi do większego grona użytkowników. Ponieważ autorzy \proteges dokonali zmian w architekturze 
+ich edytora, wcześniej stworzone pluginy przestały działać w nowej wersji aplikacji. Dlatego istnieje zapotrzebowanie na plugin wizualizujący, który pozwoli na zwiększenie 
+efektywności tworzenia ontologii. 
+\section{Użytkownicy systemu}
+Ze względu na specyfikę projektu można wyróżnić dwa rodzaje użytkowników: programistę i twórcę ontologii. 
+\begin{enumerate}
+ \item {\bf Programista} jest użytkownikiem, który wykorzystuje stworzoną bibliotekę w swoim rozwiązaniu. Użytkownik ten będzie wymagał od biblioteki łatwości użycia, 
+intuicyjności oraz dobrej dokumentacji. Programista jest użytkownikiem, który może nie znać języka OWL. Jego zadaniem jest stworzenie aplikacji, która pozwoli m.in.
+ obrazować ontologie. 
+ \item {\bf Twórca ontologii} jest użytkownikiem, który zajmuję się tworzeniem i edycją ontologii. Będzie on korzystał z systemu OCS lub pluginu do \protege. 
+Twórca ontologii najczęściej jest specjalistą w dziedzinie ontologii oraz dobrze zna zagadnienia związane z językiem OWL. 
+\end{enumerate}
+
+\section{Wymagane funkcje systemu}
+Poniżej zostały przedstawione najważniejsze wymagania stawiane tworzonej bibliotece. Na liście znalazły się m.in. wymagania funkcjonalne i wymagania jakościowe.
+
+\begin{enumerate}
+ \item Biblioteka powinna udostępniać kilka trybów prezentacji grafów (np. w~formie drzewa, w~formie gwiazdy i~innych). 
+ \item Biblioteka powinna dać możliwość wizualizacji wywnioskowanej hierarchii klas i~bytów. 
+ \item  Domyślne parametry w trybach wizualizacji (takie jak długość krawędzi grafu, automatyczne układanie) powinny zostać dobrane w~taki sposób,
+ by obraz był przejrzysty, stabilny i~czytelny.
+
+\item Rozróżnianie podstawowych symboli. Class, Individual, Property powinny mieć wyróżniające je symbole. 
+\item Rozróżnianie szczególnych typów Class. Klasa anonimowa, datatype, Thing i~Nothing powinny być łatwo rozpoznawalne. 
+\item Rozróżnianie związków między klasami (Class), bytami (Individual) oraz właściwościami (Property). Różne symbole dla equivalentClass, disjointWith, 
+subClassOf, sameAs, differentFrom, allDifferent, oneOf, unionOf, intersectionOf,  complementOf, subProperty, equivalentProperty, hasProperty.
+\item Rozróżnianie ograniczeń predykatów (Restrictions). Wyróżnić należy kardynalność (cardinality), domeny (domains) predykatów, inverseOf, właściwości predykatów 
+(transitive, symmetric, functional, inverseFunctional).
+\item Powinna istnieć możliwość wyszukiwania elementów ontologii na wyświetlanym grafie. Elementy spełniające kryterium wyszukiwania powinny zostać wyróżnione.
+\item Każdy z obrazowanych elementów powinien mieć możliwość zmiany jego koloru, tak aby użytkownik mógł dostosować wizualizację do swoich potrzeb. 
+\item  Wszystkie wizualizowane elementy powinny pochodzić z ontologii otrzymanej na wejściu programu. Program nie powinien dodawać własnych elementów (np. wywnioskowanych). 
+Wyjątkowo dla klas, które nie mają zdefiniowanych nadklas zostanie utworzony związek z klasą Thing. 
+\item Biblioteka będzie udostępniać strumień danych, w którym znajdą się komunikaty o błędach. Strumień ten będzie mógł zostać wykorzystany przez użytkownika.
+\item Jeżeli biblioteka nie wizualizuje danej funkcji OWL API, informacja o tym powinna znaleźć się w strumieniu błędów.
+\end{enumerate}
+
+
+
+\section{Nazwa i logo tworzonej biblioteki}
+
+Po chwili burzliwych przemyśleń w obrębie zespołu postanowiono, iż biblioteka będzie posiadać nazwę: SOVA, z ang. Simple Ontology Visualization API (co można przetłumaczyć 
+na polski jako: proste API do wizualizacji ontologii). Fonetyczna wymowa nazwy biblioteki oznacza ptaka - sowę. Sowa w języku angielskim to owl, co oczywiście kojarzy się 
+z~językiem OWL i~tu koło znaczeń się zamyka. 
+\par Jako logo biblioteki wybrano właśnie sowę. Logo zostało zaprezentowane na rysunku \ref{fig:sova}. Rysunek został pobrany z portalu Clker.com [www.clker.com], gdzie został 
+upubliczniony na licencji: creative common public domain license. Licencja umożliwia darmowe kopiowanie, modyfikowanie i upublicznianie pobranej grafiki.
+
+  \insertscaledimage{0.3}{images/SOVA.png}{Logo tworzonej biblioteki}{fig:sova}
+
+
+\section{Wybór technologii}
+
+Tworzona aplikacja zostanie napisana w Javie 1.6. O wyborze języka zadecydował fakt, iż zarówno OCS, jak i \proteges są napisane w tym języku. 
+\subsection{Wybór biblioteki graficznej}
+Napisanie całego kodu pozwalającego na wizualizację byłoby czasochłonne i wymagało dużego nakładu pracy. Dlatego aplikacja będzie się opierać na istniejącym już rozwiązaniu, 
+ pozwalającym na obrazowania danych za pomocą grafów. W sieci można odnaleźć dużo takich rozwiązań. Jednak użyta biblioteka obrazująca grafy musi być nieodpłatna i~najlepiej 
+posiadać otwarty kod. Poniżej przedstawiono najciekawsze rozwiązania, które były brane pod uwagę przy wyborze biblioteki. 
+
+\begin{description}
+\item[Prefuse \cite{prefuse,prefuse_sdj}]
+ jest elastycznym pakietem dostarczającym programiście narzędzia do przechowywania danych, manipulowania nimi oraz ich interaktywnej wizualizacji. Biblioteka jest 
+rozwijana w całości w języku Java. Może być wykorzystana do budowania niezależnych aplikacji, wizualnych komponentów rozbudowanych aplikacji oraz tworzenia apletów.
+
+\pagebreak[3]
+Podstawowe cechy i elementy biblioteki Prefuse:
+\nopagebreak[4]
+\begin{itemize}
+\item różne algorytmy i metody wizualizacji danych m.in.: ForceDirectedLayout, RadialTreeLayout, NodeLinkTreeLayout, SquarifiedTreeMapLayout,
+\item dynamiczne rozmieszczanie i animacje,
+\item transformacje, przekształcenia geometryczne oraz przybliżanie/oddalanie obrazu,
+\item podstawowym elementem struktury danych jest krotka,
+\item krotki mogą być tworzone bezpośrednio w~aplikacji lub na~podstawie zewnętrznych danych,
+\item wbudowany język zapytań do filtrowania danych,
+\item tworzenie struktur danych na podstawie zewnętrznych plików (CSV, XML) oraz bazy danych,
+\item klasy wspomagające synchronizację danych pomiędzy tabelami Prefuse, a~bazą danych,
+\item Prefuse posiada licencję BSD.
+\end{itemize}
+
+ \item[Piccolo]  
+ jest zastawem narzędzi używanych przy tworzeniu graficznych aplikacji, często wykorzystywanym do tworzenie interfejsów użytkownika, w których elementy 
+są przybliżane i~oddalane. Istnieją trzy wersje tej biblioteki: Piccolo.Java, Piccolo.NET oraz PocketPiccolo.NET. Posiada Licencje BSD.
+
+\item[JUNG (Java Universal Network/Graph Framework)]
+ Biblioteka przeznaczona do wizualizacji danych za pomocą grafów oraz sieci. Umożliwia wizualizację nie tylko grafów prostych, ale m.in. multigrafów, 
+digrafów oraz grafów posiadających wagi i etykiety na wierzchołkach i krawędziach. Biblioteka posiada podstawowe algorytmy grafowe. Została napisana w~całości w~Javie 
+i~wydana na licencji BSD.
+\item[JGraph]
+
+ Napisana w pełni w Javie biblioteka do wizualizacji grafów kompatybilna ze Swingiem. Posiada wiele ciekawych opcji wizualizacji zarówno wierzchołków,
+ jak i~krawędzi grafów. Poza algorytmami wizualizacji w jej skład wchodzą podstawowe algorytmy grafowe. Została wydana na licencji LGPL.
+\end{description}
+
+Po uważnym przejrzeniu bibliotek, najbardziej użyteczne wydają się Prefuse oraz Piccolo. Ze względu na dostępność dużej liczby przykładowego kodu wykorzystującego Prefuse 
+w~edytorze OCS, wykorzystana zostanie biblioteka Prefuse. Ponadto opinie wyrażone w pracy magisterskiej Andrzeja Jakowskiego\cite{jankowski} silnie przemawiają 
+na korzyść Prefuse.
+
+
+\subsection{Format danych wejściowych}
+Celem aplikacji jest wizualizowanie ontologii zapisanych w języku OWL. Za język danych, które mają zostać zobrazowane, przyjęto OWL DL, który jest wykorzystywany w~systemie OCS. 
+ Nie oznacza to jednak, że pozostałe dialekty nie będą obsługiwane, jednak w OWL Full możemy napotkać na pewne niejasności (szczególnie pod względem rozróżniania typów).
+\par 
+W celu wczytania ontologii z pliku, zostanie wykorzystana biblioteka OWL API \cite{owlapi,owlapi1}. Ontologie, zapisane jako obiekty OWL API, będą danymi wejściowymi dla biblioteki SOVA. 
+Co oznacza, że dla biblioteki wizualizującej ontologie nie jest istotne źródło danych (plik, baza danych). Aby zachować kompatybilność z systemem OCS zostanie użyta biblioteka 
+OWL API w wersji 2.1.1. 
+
+\section{Planowanie projektu}
+Planowanie jest częścią projektu, którego zadaniem jest osiągnięcie celu projektu z uwzględnieniem jego ograniczeń. Poniżej zostanie przedstawiony harmonogram prac oraz
+ analiza SWOT, które pozwolą lepiej zaplanować i zrozumieć tworzony projekt.
+
+\subsection{Harmonogram projektu}
+ \insertscaledimage{0.55}{images/projekt/harmonogram_tabela.png}{Harmonogram projektu}{projekt:harmonogram2}
+Napisanie pracy dyplomowej wiąże się z napisaniem projektu informatycznego (aplikacji) oraz formalnym opisem pracy w postaci tego dokumentu. 
+Na rysunkach \ref{projekt:harmonogram2} i~\ref{projekt:harmonogram}  przedstawiony został harmonogram, w którym uwzględniono prace związane z formalnym opisem projektu,
+ jak i jego implementacją. 
+
+
+
+
+\subsection{Analiza SWOT}
+
+W tabeli \ref{t:swot} przedstawiono analizę SWOT przeprowadzona dla tworzonego projektu. Pozwoliła  ona na wyróżnienie słabych  i~mocnych stron projektu 
+oraz dała możliwość poznania szans, dzięki którym projekt może zakończyć się powodzeniem, i~zagrożeń, które mogą spowodować, iż projekt nie zostanie zaakceptowany 
+przez rynek i~użytkowników. 
+
+
+\begin{longtable}{|m{7cm}|m{7cm}|} 
+\caption{Analiza SWOT}
+\label{t:swot} \\
+\hline
+\bf{Mocne strony} 	&  \bf{Słabe strony}  \\ 
+\begin{enumerate}
+\item Dobra znajomość języka Java wśród członków zespołu.
+ \item Znajomość zagadnień związanych z ontologiami.
+ \item Współpraca z pracownikami Katedry Architektury Systemów Komputerowych.
+\end{enumerate}
+ & 
+\begin{enumerate}
+ \item Brak doświadczenia w pracy z biblioteką Prefuse.
+ \item Brak doświadczenia w pracy z biblioteką OWL API.
+ \item Problem z uzyskaniem zgody Politechniki Gdańskiej na upublicznienie aplikacji.
+\end{enumerate}
+\\ \hline
+\bf{Szanse} 	&  \bf{Zagrożenia}  \\ 
+\begin{enumerate}
+ \item Wzrost zainteresowania sieciami semantycznymi i ontologiami.
+ \item Brak dobrych rozwiązań do wizualizacji ontologii, co sprawia, że istnieje zapotrzebowanie na bibliotekę do wizualizacji ontologii.
+\end{enumerate}
+ & 
+\begin{enumerate}
+ \item Zmniejszenie zainteresowania językiem OWL na korzyść OWL 2.
+ \item Wprowadzenie nowego, lepszego sposobu zapisu wiedzy.
+ \item Konkurencja ze strony istniejących rozwiązań, które umożliwiają wizualizacje ontologii. 
+%  \item 
+\end{enumerate}
+\\ \hline
+\end{longtable}
+
+
+\section{Projekt Wizualizacji}
+
+Specyfikacja języka OWL pozwala na dużą dowolność definiowania ograniczeń czy opisów elementów ontologii. Dlatego wizualizacja powinna 
+odzwierciedlać elementy ontologii w sposób opisany przez autora w~języku OWL. Ważne jest, aby graficzna reprezentacja ontologii 
+była jednoznaczna i~zarazem łatwa do zrozumienia. Chcąc spełnić te kryteria należy zdefiniować sposób obrazowania każdego z~elementów języka OWL~DL.
+Źle zaprojektowana wizualizacja może być przyczyną niepowodzenia projektu. 
+\par Najważniejszymi elementami ontologii są klasy, właściwości, typy danych oraz bytu. Trzy pierwsze elementy biorą udział w podobnych związkach, dlatego
+ będą obrazowane w postaci zaokrąglonego prostokąta o~kolorze zależnym od rodzaju elementu. Reprezentacją bytów, aby wyróżnić je od pozostałych 
+elementów, będzie prostokąt. Byty będę posiadały też inny kolor niż pozostałe elementy. (\figurename \space \ref{fig:viz:projekt1}).
+
+\insertimage{images/projekt_wiz/wiz_elementy_1.png}{Symbole reprezentujące klasę (a), właściwość (b), typ danych (c) oraz byt (d)}{fig:viz:projekt1}
+
+\par
+Największym wyzwaniem wizualizacji jest zrozumiałe przedstawienie klas anonimowych. Zaproponowano symbole przedstawiające złożone relacje, 
+w postaci kółek z wpisanymi w nie znaczącymi symbolami. Przykładowe symbole zaprezentowano na \figurename \space \ref{fig:viz:projekt2}. Wykorzystano symbolikę matematyczną  
+w~przypadku intersekcji, komplementarności, unii oraz kardynalności. Matematyczną symbolikę otrzymały także relacje zachodzące 
+pomiędzy bytami  - „sameAs” i~„allDifferent”, przy czym symbol relacji „sameAs” jest  nadmiarowy, aby zachować spójność wizualizacji
+ (relacja ta jest przeciwna do differentFrom/allDifferent). Kardynalność również reprezentowana jest za pomocą anonimowego wierzchołka, 
+przy czym dodatkowy wierzchołek z~ograniczeniem liczby jest wyróżniony kolorem w~zależności od typu ograniczenia (min, max, equal)
+
+\insertimage{images/projekt_wiz/wiz_elementy_2.png}{Przykładowe symbole reprezentujące klasę anonimową (a), intersekcję (b), kardynalność typu max i min (c), 
+relację sameAss (d) oraz relację allDifferent (e)}{fig:viz:projekt2}
+\par
+
+
+Zaprezentowanie relacji „allValuesFrom” i~ „someValuesFrom”  odbywa się poprzez wprowadzenie klasy anonimowej reprezentującej wynik podanego
+ ograniczenia (\figurename \space \ref{fig:viz:projekt3}). Jest ona połączona z~symbolem właściwości, przy czym nazwa właściwości, występująca w~aksjomacie, 
+ poprzedzona jest kwantyfikatorem
+ ogólnym dla  „allValuesFrom” oraz szczególnym dla „someValuesFrom”. Następnie strzałka wskazuje klasę (warto zwrócić uwagę, że może to być także 
+dowolnie złożona klasa anonimowa), określającą przeciwdziedzinę przedstawionej relacji. Dodatkowo użyty wierzchołek property połączony jest 
+z~wierzchołkiem przedstawiającym jego definicję.
+
+ \insertscaledimage{0.35}{images/projekt_wiz/wiz_elementy_3.png}{Reprezentacja relacji someValuesFrom oraz allValuesFrom}{fig:viz:projekt3}
+
+Różne proste relacje reprezentowane są przez strzałki o~różnych grotach. Relację „SubClass” i~„SubProperty” prezentuje zaczerpnięta ze specyfikacji 
+UML - strzałka o~pustym grocie.  Krawędzie reprezentujące związki „equivalent” i~„disjoint” mają odwrotne groty, które podkreślają odwrotność tych relacji.
+
+\insertimage{images/projekt_wiz/wiz_elementy_4.png}{ Przykładowe symbole reprezentujące relacje proste: rdfs:subclassOf (a), instanceOf (b), owl:equivalentClass (c), owl:disjointWith (d), rdfs:domain (e) oraz rdfs:range (f)}{fig:viz:projekt4}
+
+ W~przypadku definicji właściwości (Property), inwersja jest wyróżniona kolorem czerwonym i~oznaczana dwojako, ze względu na asymetryczność tej relacji. Z~kolei 
+równoważność właściwości odróżniona jest od równoważności klas kolorem. Zastosowane zostały dodatkowe rodzaje grotów, umożliwiające łatwe rozróżnienie 
+range i~domain dla property. Do oznaczenia konkretnych property wykorzystane zostały tradycyjne strzałki, które wskazują kierunek czytania  aksjomatu.
+ Aksjomaty, które tworzą kolejne klasy anonimowe, są czytelne dzięki specjalnemu grotowi, który (podobnie jak przy właściwościach) był konieczny, aby wskazać 
+kierunek ich czytania. Tam, gdzie nie jest to potrzebne, krawędzie nie posiadają grotów, co zwiększa czytelność wizualizacji. Przykładowe relacje 
+zaprezentowano na \figurename \space \ref{fig:viz:projekt4}.
+
+\section{Analiza obiektowa}
+
+\subsection{Diagram klas i pakietów}
+\insertimage{images/projekt/PackageDiagram.png}{Diagram pakietów}{fig:viz:package}
+Na rysunku \figurename \space \ref{fig:viz:package} przedstawiono diagram pakietów i relacje zachodzące pomiędzy nimi. Wyróżniono sześć głównych
+ pakietów, które zostaną opisane niżej.  Klasy zostały umieszczone w odpowiednich pakietach zgodnie z zachowaniem wzorca MVC (ang. Model View Controller).
+Do nazw pakietów został dodany przedrostek "org.pg.eti.kask.sova". \\
+\pagebreak[3]
+\noindent 
+{\bf Symbol pakietu :} P001 \newline
+{\bf Nazwa pakietu :} options \newline
+{\bf Opis :}  Pakiet zawierający klasy z polami opisującymi różne (modyfikowalne) ustawienia wizualizacji takie jak: kolory, grubość linii itp.  \newline
+
+\noindent 
+{\bf Symbol pakietu :} P002 \newline
+{\bf Nazwa pakietu :} nodes \newline
+{\bf Opis :} Pakiet z klasami odpowiedzialnymi za wizualizację i przechowywanie danych o wierzchołkach. Każdy rodzaj wierzchołka jest odzwierciedlany przez inną klasę \newline
+
+\noindent 
+{\bf Symbol pakietu :} P003 \newline
+{\bf Nazwa pakietu :} edges \newline
+{\bf Opis :} Pakiet z klasami odpowiedzialnymi za wizualizację i przechowywanie danych o krawędziach. Każdy typ krawędzie jest instancją innej klasy. \newline
+
+\noindent 
+{\bf Symbol pakietu :} P004 \newline
+{\bf Nazwa pakietu :} visualization \newline
+{\bf Opis :} Zawiera klasy obsługi wizualizacji m.in. klasę zwracającą display, klasy różnych trybów wizualizacji oraz klasy filtrów. Jest najważniejszym pakietem 
+w~aplikacji.  \newline
+\newline
+\noindent 
+{\bf Symbol pakietu :} P005 \newline
+{\bf Nazwa pakietu :} graph \newline
+{\bf Opis :} Pakiet zawiera klasy konwertujące obiekty OWL API na odpowiednie struktury danych, które pozwalają na wizualizację. \newline
+\newline
+\noindent 
+{\bf Symbol pakietu :} P006 \newline
+{\bf Nazwa pakietu :} utils \newline
+{\bf Opis :}  Pakiet zawiera klasy pomocnicze i dodatkowa narzędzia pozwalające m.in. na wczytanie pliku właściwości czy dostarczenie narzędzi debugiera.  \newline
+
+
+
+\subsection{Zalecenie tworzenia biblioteki}
+Nie istnieją żadne formalne zalecenia dotyczące tworzenia bibliotek JAVA. Są jednak pewne zalecenia co do stosowanych praktyk \cite{biblioteka_standard}:
+\begin{enumerate}
+\item \textbf{Hermetyzacja kodu.} Publiczne powinny być jedynie te klasy i~metody, które są istotne dla użytkownika i~z~których będzie on~bezpośrednio korzystał.
+\item \textbf{Możliwość debugowania.} Użytkownik powinien mieć możliwość debugowania kodu biblioteki, bez konieczności znajomości każdego jej szczegółu.
+\item  \textbf{Przejrzystość.} Kod biblioteki powinien być odpowiednio udokumentowany za pomocą javadoc. W~szczególności, bardzo dokładnie należy opisać klasy oraz metody publiczne.
+\item \textbf{Łatwość użycia.} Biblioteka powinna zawierać klasy, pokazujące przykłady wykorzystania jej klas i~metod.
+\item \textbf{ Rozszerzalność.} Struktura wewnętrzna biblioteki powinna być odpowiednio podzielona na klasy (wykorzystując klasy abstrakcyjne i~interfejsy). Dzięki temu użytkownik będzie miał możliwość stworzenia własnych klas, rozszerzających funkcjonalność biblioteki.
+\item \textbf{Uniwersalność.} Biblioteka powinna mieć jasno określony problem, który rozwiązuje. Wyniki powinny być podane użytkownikowi w~wygodny dla niego sposób (lub na kilka sposobów), 
+który będzie umożliwiał wykorzystanie biblioteki w~różnych aplikacjach. Innymi słowy, biblioteka powinna udostępniać łatwy i~przejrzysty dla użytkownika interfejs.
+\end{enumerate}
+
+
+ \insertscaledimage{0.55}{images/projekt/harmonogram.png}{Harmonogram projektu}{projekt:harmonogram}

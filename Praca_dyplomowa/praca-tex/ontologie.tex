@@ -1,0 +1,392 @@
+\chapter{Wstęp}
+\section{Motywacje}
+% W tym rozdziale zostaną przedstawione zagadania teoretyczne związane z ontologiami. Podana zostanie definicja ontologii, jej zastosowanie oraz sposoby zapisu. 
+% Zostaną opisane różne sposoby reprezentacji wiedzy, m.in. logika opisowa, język RDF oraz OWL. Każdy sposób reprezentacji wiedzy zostanie krótko opisany oraz, 
+% dla lepszego zrozumienia, zobrazowany przykładem. 
+
+Szybki rozwój techniki komputerowej spowodował, że dyski komputerów na całym świecie przechowują ogromną liczbę danych. Internet jest wszechstronną składnicą informacji. Obecnie
+nie mamy problemu z brakiem wiedzy, ale z jej efektywnym wyszukiwaniem. Wiedza w Internecie jest w znacznym stopniu ukierunkowana na człowieka. Składowane dokumenty często nie posiadają 
+kontekstu, są zapisane w postaci zrozumiałej tylko dla nas, np. graficznie. Komputery nie potrafią przetwarzać tych dokumentów. Konieczne jest więc tworzenie autonomicznych 
+systemów klasyfikacji pojęć. Podkreślany jest też fakt, iż najlepszym sposobem przechowywania wiedzy są systemy zapisujące wiedzę w sposób zrozumiały zarówno dla człowieka, jak i~dla
+komputera.   
+\par
+Jednym z rozwiązań, spełniających powyższe założenie, jest zaproponowana przez Bernersa Lee sieć semantyczna, w której dane powiązane są ze sobą znaczeniowo. Sieci semantyczne 
+definiowane są jako rozszerzenie istniejących sieci, posiadających dobrze zdefiniowane informacje. Właściwa informacja została rozszerzona o~znacznik semantyczny (kontekst), 
+który maszyny mogą w łatwy sposób przetwarzać. Ponieważ znacznik semantyczny ma być rozumiany przez maszyny, musi posiadać formalnie zdefiniowany zapis. W3Cache Consortium
+ zaproponowało ontologię, czyli w wielkim uproszczeniu reprezentację wiedzy poprzez zdefiniowanie zbioru pojęć i~relacji pomiędzy nimi.
+\par 
+Ontologie bardzo szybko zyskały uznanie wśród inżynierów i badaczy z zakresu bezpieczeństwa i medycyny. Jednak okazało się, że ich budowa nie jest łatwym zadaniem. 
+Nawet dla niewielkich rozwiązań liczba elementów ontologii jest bardzo duża. Na rynku wraz z zainteresowaniem ontologiami pojawiły się narzędzia służące do ich tworzenia,
+ edycji i zapisu. Autorzy edytorów ontologii, chcąc ułatwić pracę nad ontologiami, nieustannie ulepszają swoje rozwiązania. Aby móc sprawnie konstruować 
+poprawne ontologie, konieczna jest ich wizualizacja, która znacznie ułatwia percepcję całego rozwiązania oraz umożliwia jego prawidłową ocenę. 
+
+\subsection{Zakres prac}
+Celem tej pracy było stworzenie aplikacji pozwalającej na wizualizację ontologii zapisanych w języku OWL. W ramach pracy zostały wykonane:
+\begin{enumerate}
+ \item {\bf Projekt wizualizacji} - każdemu elementowi  zdefiniowanemu  w rekomendacji OWL DL został przypisany symbol graficzny. 
+ \item {\bf Projekt systemu} - została zaproponowana architektura aplikacji oraz dokonano wyboru pomocniczych bibliotek.
+ \item {\bf Integracja z OCS} - biblioteka została wdrożona do systemu OCS.
+ \item {\bf Plugin do \protege} - po zapoznaniu się z API aplikacji \protege, powstał plugin wizualizujący. 
+\end{enumerate}
+ Efektem pracy są:
+\begin{enumerate}
+ \item {\bf Biblioteka SOVA}, która pozwalana na wizualizację dostarczonych obiektów OWL API. Może zostać wykorzystana w dowolnym rozwiązaniu informatycznym. Posiada 
+dobry i intuicyjny interfejs oraz dokumentację w javadocu.
+ \item {\bf Moduł wizualizacje OCS} jest rozszerzeniem edytora OCS o nowe możliwość wizualizacji, które dostarcza biblioteka SOVA. 
+ \item {\bf Plugin do \protege} pozwolił na pokazanie możliwość biblioteki SOVA w zewnętrznym rozwiązaniu oraz dostarczenie nowych opcji wizualizacji dla \protege.
+
+Powyższe rozwiązania będą przydatne dla inżynierów ontologów, ułatwią im pracę nad ontologiami oraz pozwolą na łatwiejsze wykrywanie błędów.  
+\end{enumerate}
+\section{Ontologie}
+\subsection*{Definicja ontologii}
+Jako pierwszy definicję ontologii w 1993 roku podał T. Gruber \cite{gruber}. Określił on ontologię jako {\it specyfikację konceptualizacji}, czyli reprezentację pewnego wycinka wiedzy leżącego 
+w~zasięgu zainteresowania inżynierów. Zastosowanie ontologi w różnych dziedzinach i~różnych społecznościach spowodowało powstanie wielu jej definicji. W~sieciach 
+semantycznych przyjęto poniższą definicję \cite{knowledge}: 
+\begin{quote}
+\textit{{\bf ontologia} jest formalną, jawną specyfikacją wspólnej konceptualizacji}
+\end{quote}
+%  dziedziny badań. 
+Aby w~pełni zrozumieć definicję, wymagane jest wyjaśnienie użytych w~niej słów:
+
+\begin{itemize}
+ \item {\bf formalna} 
+
+Ontologia jest wyrażona  w~języku reprezentacji wiedzy posiadającym formalną semantykę. Gwarantuje to, że ontologia może być przetwarzana przez maszyny i~jednoznacznie 
+interpretowana.
+
+\item {\bf jawna}
+
+Rodzaje użytych konceptów i~ograniczenia i~ich używanie są jawnie wyspecyfikowane. Niewyspecyfikowane elementy, pomimo iż są zrozumiałe dla człowieka, mogą nie być zrozumiałe 
+dla przetwarzającej je maszyny. 
+
+\item {\bf wspólna }
+
+Ontologia obejmuję wiedzą ogólnie uznaną, nie wiedzę prywatną jednostki.  Aby wiedza zawarta w ontologii nie była 
+subiektywnym spojrzeniem na jakieś zjawisko, często przy budowie ontologii bierze udział kilka osób.
+
+\item {\bf konceptualizacja }
+
+Ontologie określają wiedzę w sposób koncepcyjny, poprzez symbole reprezentujące koncepcje i~relacje między nimi. Ponadto konceptualizacja ontologii pozwana na opis danej wiedzy
+w~sposób ogólny, a~nie tylko szczegółowy na poziomie konkretnych bytów. 
+
+%   \item {\bf dziedzina badań }
+% 
+% Ontologie obejmują pewną dziedzinę nauki. Im dziedzina jest bardziej ograniczona, tym bardziej inżynierowie mogą szczegółowo opisywać dane zjawisko. Przy badaniu szerszej dziedziny 
+% można użyć kilku ontologii o~różnych domenach badań. 
+ 
+\end{itemize}
+
+\par
+ Ontologie możemy klasyfikować wedle dwóch wymiarów \cite{knowledge}: poziomu szczegółowości lub poziomu zależności od zadania lub punktu widzenia. W pierwszym 
+przypadku możemy mieć szczegółowo opisane ontologie oraz ontologie skierowane na możliwości wnioskowania, które charakteryzują się mniejszą szczegółowością. Drugi 
+wymiar klasyfikacji pozwala wyróżnić: ontologię wysokiego poziomu, ontologię określającą dziedzinę, ontologię określającą zadanie oraz ontologię zastosowaną. 
+
+
+\begin{itemize}
+  \item \textit{Ontologia wysokiego poziomu }określa podstawową, ogólną, niezależną  od dziedziny wiedzę, np. opisują przestrzeń, czas, materię, wydarzenie  itp.
+  \item \textit{Ontologia określająca dziedzinę lub zadanie }jest ontologią opisującą daną dziedzinę (np.: samochody, leki) lub zadania i działalności (np.: diagnozowanie, sprzedaż). 
+Rozszerza ona pojęcia zdefiniowane w ontologii wysokiego poziomu o ich specyfikę w danej dziedzinie lub działalności. 
+  \item \textit{Ontologia zastosowana} przeważnie bazuje na ontologii określającej dziedzinę i~ontologii określającej zadanie. Często zdarza się tak, że np. konkretna ontologia 
+dziedziny może być wykorzystywana z różnymi ontologiami określającymi zadania, np. ontologia samochodowych części zamiennych może być wykorzystana razem  z ontologią
+ procesu składania nowego samochodu, jak i z ontologią diagnozowania samochodu.
+\end{itemize}
+
+Klasyfikacja ontologii oraz zależności pomiędzy kolejnymi jej grupami zostały przedstawione na rys. \ref{fig:klasyfikacja}.
+\insertscaledimage{0.4}{images/teoria/klasyfikacja.png}{Klasyfikacja ontologii \cite{knowledge}}{fig:klasyfikacja}
+
+\section{Zastosowania ontologii}
+
+Ontologie szybko zyskały uznanie inżynierów wiedzy oraz badaczy rożnych dziedzin nauki. Poniżej opisano kilka przykładowych ontologii z różnych dziedzin, aby pokazać 
+różnorodność branży, w których używa się takiego zapisu wiedzy. Na poniższe przykłady zwrócili również uwagę autorzy książki \cite{ebook2}:
+
+\subsubsection*{Przykład 1 - The Gene Ontology Project (http://www.geneontology.org/)}
+
+Zadaniem projektu jest stworzenie słownika pojęć związanych z genetyką dla każdego organizmu. Budowana ontologia składa się z trzech dziedzin: budowa komórki 
+(opisuje elementy występujące w komórce oraz jej otoczenie pozakomórkowe), funkcje molekularne (opis aktywności genów na poziomie molekularnym, np.: procesy wiązania 
+lub katalizy) oraz procesy biologiczne (czynności oraz zestawy wydarzeń na poziomie molekularnym opisane od początku do końca). Ontologa ta jest często aktualizowana 
+i~dynamicznie rozwijana. Można ją pobrać ze strony domowej w~różnych formatach. 
+
+
+\subsubsection*{Przykład 2 - The Object-Oriented Software Design Ontology(ODOL)}
+Ontologia opisuje wzorce projektowe w programowaniu obiektowym. Posiada zbiór pojęć i ich relacji dotyczących programowania obiektowego. Ontologia nie jest zależna 
+od żadnego z języków programowania. Projekt jest próbą przeniesienia wzorców projektowych, które najczęściej są zapisane w nieformalnym języku opisowym lub jako diagramy
+UML, na język ontologii. W tym przypadku językiem ontologii jest OWL i właśnie w formacie *.owl możemy pobrać ontologię ze strony projektu. 
+
+
+\subsubsection*{Przykład 3 - The Friend Of A Friend Ontology (FOAF)} 
+Obecnie jedna z najbardziej popularnych ontologii. Ułatwia wymianę informacji o osobach, ich zdjęciach, blogach itp. pomiędzy witrynami sieci web. Powstała przy 
+projekcie FOAF, który zakłada stworzenie sieci gromadzącej strony użytkowników (tzw. sieci społecznej). Strony w tej sieci, dzięki użytej ontologii, mogą być przetwarzane
+przez komputer. 
+
+\section{Reprezentacja wiedzy}
+\subsection*{Ramki Minsky'ego}
+Za jedną z pierwszych ontologicznych metod reprezentacji wiedzy uważa się ramki zaproponowane przez M. Minsky'ego w 1975 roku. Rozwiązanie to opisuje ontologię przy użyciu 
+następujących elementów\cite{goczyla}:
+\begin{itemize}
+\item { \bf klasy } - pojęcia (koncepty),
+\item { \bf klatki } - własności klas opisujące ich cechy i atrybuty (właściwości, ang. slot). Możemy wyróżnić dwa rodzaje klatek: własne (prywatne własności danej ramki) 
+oraz szablonowe (służą do tworzenia innych ramek, będących wystąpieniami tych pierwszych), 
+\item { \bf fasety } - własności klatek (np. ograniczenia nałożone na klatki),
+\item { \bf dodatkowe } -  ograniczenia wyrażone w~języku logiki.
+\end{itemize}
+Wedle Minsky'ego elementy otaczającego nas świata możemy opisać za pomocą ramek. Najważniejszymi ramkami są klasy. Klasy posiadają klatki, które mogą być  ograniczone przez fasety.
+ Klatki też są ramkami. Każda z klas może posiadać klatki własne i~szablonowe. Klasy mogą dziedziczyć od siebie klatki własne, jak i~szablonowe, tworząc hierarchię klas. W~przypadku 
+wystąpień danej klasy klatki szablonowe stają się klatkami własnymi. Gdy wystąpienie danej klasy ma klatki szablonowe, to klasę tę nazywamy metaklasą. Jeśli zaś klasa 
+nie ma klatek szablonowych, ani nie może posiadać swoich wystąpień, nazywamy ją obiektem. Przykładowa ontologia zapisana w formie ramek została przedstawiona na rys.~\ref{fig:ramki}.
+
+\insertscaledimage{0.4}{images/teoria/ramki.png}{Przykładowa ontologia zapisana w formie ramek}{fig:ramki}
+
+Okazało się jednak, że ramki mają kilka wad. Przede wszystkim są zbyt ogólne,  nie posiadają ścisłej, formalnej definicji, co sprawiała, że mogą doprowadzić do niejednoznaczności.
+ Wprowadzenie metaklas prowadzi nawet do nierozstrzygalności pewnych problemów wnioskowania. 
+
+\subsection*{Logika opisowa}
+
+Innym językiem reprezentacji wiedzy jest, rozwijana już blisko 30 lat, logika opisowa (ang. Description Logic, DL). Logika opisowa to nie tylko formalny język opisu wiedzy, 
+ale cała rodzina języków przeznaczonych do opisu ontologii, cechujących się różnym stopniem ekspresji oraz możliwości wnioskowania. DL jest formalizmem, opartym na rachunku predykatów 
+pierwszego rzędu, przez co wnioskowanie tak zapisanej wiedzy jest w pełni rozstrzygalne. 
+
+
+Logika opisowa opiera się na prostych i~zarazem ogólnych założeniach \cite{goczyla,goczyla2}:
+
+\begin{itemize}
+ \item  istnieje pewne {\it uniwersum}, które chcemy opisać w~formie ontologii (dziedzina zainteresowań),
+  \item elementy uniwersum nazywane są osobnikami i są wystąpieniami konceptów,
+\item elementy ontologii powiązane są binarnymi relacjami. 
+\end{itemize}
+
+\insertscaledimage{0.4}{images/teoria/AboxTbox.png}{System zarządzania wiedzą z ontologią DL \cite{goczyla2}}{fig:atBox}
+
+Na podstawie powyższych założeń ontologie wyrażone w języku logiki opisowej składają się z dwóch części: TBox (ang. terminological box) i ABox (ang. assertional box).
+TBox jest zbiorem konceptów, relacji zachodzących pomiędzy nimi oraz zbiorem aksjomatów, które nakładają ograniczenia na koncepty i~ich relacje. ABox zawiera wystąpienia 
+pojęć (konceptów) i~ról (relacji). Na rysunku \ref{fig:atBox} przedstawiono ogólny model reprezentacji wiedzy w DL. 
+
+
+
+Pomimo licznej rodziny języków logiki opisowej istnieją wspólne elementy, które posiada każdy z tych języków:
+\begin{itemize}
+ \item   pojęcia (koncepty) atomowe  - koncept uniwersalny  $ \top $, który przedstawia naszą dziedzinę zainteresowań oraz koncept pusty $ \bot $, który nie 
+posiada żadnych wystąpień,
+\item role atomowe,
+\item konstruktory do tworzenia bardziej złożonych konceptów i ról. 
+
+
+\end{itemize}
+\pagebreak[3]
+\begin{longtable}{|m{3cm}|m{9cm}|} 
+\caption{Konstruktory języka ALC \cite{goczyla,goczyla2}}
+\label{t:alc} \\
+\hline
+\bf{Konstruktor} &  \bf{Znaczenie}  \\ \hline
+$ \neg C$ & Negacja konceptu \\ \hline
+$ C \sqcap D$ & Cześć wspólna konceptów \\ \hline
+$ C \sqcup D $ & Suma konceptów \\ \hline
+$ \exists R.C $ & Kwantyfikacja egzystencjalna  - zbiór osobników powiązanych przynajmniej raz relacją R z osobnikami z~konceptu C. \\ \hline
+$\forall R.C $ &Kwantyfikacja ogólna - zbiór osobników, dla których wszystkie powiązania relacją R odnoszą się do osobników z konceptu C.  \\ \hline
+\end{longtable}
+
+W celu dokładniejszego zrozumienia logiki opisowej w tabeli \ref{t:ontology}  została przedstawiona ontologia opisująca rodzinę. Jako język dla zaprezentowanej ontologii wybrano 
+dość prosty, ale pozwalający na definiowanie nietrywialnych ontologii język   $ ALC $. Konstruktory tego języka zostały przedstawione w tabeli \ref{t:alc}.
+
+\begin{longtable}{|m{7cm}|m{5cm}|} 
+\caption{Przykładowa ontologia DL \cite{goczyla2}}
+\label{t:ontology} \\
+\hline
+\bf{TBox} &  \bf{ABox}  \\ \hline
+Mężczyzna $ \sqsubseteq $ Osoba & Mężczyzna(Karol) \\ 
+Kobieta $ \equiv $ Osoba $\sqcap \neg$ Mężczyzna & Kobieta(Anna) \\ 
+Rodzic $\equiv$ Osoba $\sqcap \exists$ maDziecko.$\top$ & Kobieta(Joanna) \\ 
+Ojciec $\equiv$ Mężczyzna $\sqcap$ Rodzic & maDziecko(Anna, Karol)  \\ 
+Matka $\equiv$ Kobieta $\sqcap$ Rodzic  & maDziecko(Anna,Joanna)   \\ 
+& maDziecko(Anna,Maria) \\ \hline
+\end{longtable}   
+
+Ontologia rodziny (tabela \ref{t:ontology}) zawiera koncepty: Osoba, Mężczyzna, Kobieta, Rodzic, Matka, Ojciec oraz jedną role: maDziecko. TBox przedstawionej ontologii zawiera
+następujące typy aksjomatów: aksjomat zawierania (oznaczony symbolem $ \sqsubseteq$) oraz aksjomat równoważności (oznaczony symbolem $\equiv$). Pierwszy aksjomat, będący
+aksjomatem zawierania, mówi nam, że Mężczyzna jest Osobą. Kolejny przedstawia Kobietę jako Osobę nie będącą Mężczyzną. Następny mówi o tym, że rodzic to osoba, która ma choć jedno
+dziecko. Ostanie dwa aksjomaty definiują Ojca i Matkę jak Rodzica będącego odpowiednio Mężczyzną i Kobietą. 
+ABox przedstawionej ontologii zawiera informacje o osobach: Karolu, Annie, Joannie i Marii. Wiemy, że Karol jest mężczyzną, a Anna i Joanna to kobiety. Anna ma troje dzieci:
+Karola, Joanne i Marię. Płeć Marii nie jest nam znana. 
+
+
+\subsection*{RDF}
+RDF (ang. Resource Description Framework) jest językiem do opisu zasobów w sieci WWW. Powstał w 1999 roku jak rekomendacja W3C.
+Język ten opiera się na ``trójkowym'' modelu danych. Wiedza zapisywana jest za pomocą trójek (triples), które posiadają następujące elementy:
+
+
+\begin{verbatim}
+  podmiot - predykat - obiekt  
+  podmiot - orzeczenie - dopełnienie  
+  obiekt - właściwość - wartość
+\end{verbatim}
+
+ Każda trójka może zostać przedstawiona na grafie skierowanym (Rys. \ref{fig:trojka}). 
+
+\insertscaledimage{0.3}{images/teoria/trojka.png}{Graf przedstawiający trójkę RDF}{fig:trojka}
+
+
+Dowolny dokument RDF może być przedstawiony za pomocą grafu skierowanego, w którym krawędzie jak i niektóre węzły posiadają URI, czyli ich jednoznaczny identyfikator. 
+W~grafie mogą wystąpić węzły puste, które są pomocniczymi węzłami służącymi do opisu wielowartościowych zależności. Węzły puste nie posiadają URI.
+Podstawowy model zawiera poniższe obiekty\cite{jedruch}:
+
+\begin{itemize}
+ \item \textit{Zasoby} są to  dokumenty, części dokumentów, elementy i przedmioty świata rzeczywistego oraz zasoby abstrakcyjne. Na grafie zasoby opisywane
+ są przez węzły identyfikowane przez URI.
+\item \textit{Właściwości} są zasobami, które opisują właściwości innych zasobów. Na grafie są przedstawiane jako krawędzie skierowane opisane własnym URI. 
+\item \textit{Wyrażenia} są klasycznymi trójkami składającymi się z zasobów, właściwości oraz wartości właściwości. Element trójki będący dopełnieniem może być pewnym zasobem
+lub wartością literalną. Wartość literalna na grafie jest znaczona jako węzeł oznaczony tą wartością.  
+\end{itemize}
+
+Na rysunku \ref{fig:rdf} został zaprezentowany przykładowy graf RDF, który jest prezentacją pliku RDF/XML przedstawionego na listingu  \ref{lst:teory:rdf}
+
+\lstset{language=xml, caption={Listing dokumentu RDF opisującego Erica Millera \cite{RDFprimer}}, stepnumber=0,  captionpos=b, label={lst:teory:rdf}}
+\lstinputlisting{code/rdf.rdf}
+
+
+\insertscaledimage{0.6}{images/teoria/rdf.png}{Graf RDF opisujący Erica Millera \cite{RDFprimer}}{fig:rdf}
+
+
+
+Bardzo ważne jest, aby istniała możliwość definiowania typów własnych. Np. typ osoba, który może przechowywać informacje o nazwisku, adresie danej osoby czy jej numerze
+telefonu. Do tego celu służy RDF Schema.  
+
+\subsection*{OWL}
+
+\insertscaledimage{0.55}{images/teoria/owl-tree.png}{Drzewo genealogiczne rodziny języków OWL \cite{jankowski}}{fig:owl:tree}
+
+Użycie języków RDF i RDF Schema pozawala na tworzenie rozbudowanych ontologii, jednak posiadają one pewne ograniczenia. Nie możemy np. zdefiniować liczby wystąpień danego
+obiektu. A więc nie będziemy mogli zapisać informacji o tym, że kwartet smyczkowy składa się dokładnie z 4 muzyków. 
+\par
+Powstało jeszcze kilka innych języków opisu ontologii. Jednymi z bardziej dojrzałych są opierające się na wcześniejszych rozwiązaniach języki: DAML i OIL. 
+Język DAML powstał w ramach badań prowadzonych przez wojskową agencję rządową w USA w roku 2000. OIL jest językiem, który powstał przy wsparciu Unii Europejskiej. Pozwala on 
+na definiowanie ontologii, jednak nie posiada wsparcia dla XML.  W roku 2003 wyłonił się język będący połączeniem tych dwóch języków: DAML+OIL. Na podstawie tego  
+ostatniego języka W3C stworzyła język OWL (ang. Web Ontology Language). Na rysunku \ref{fig:owl:tree} przedstawiono historię rozwoju języków zapisu ontologii.
+
+Język OWL stał się standardem zapisu ontologii w sieciach semantycznych. Częściowo bazuje on na trójkach RDF. Semantyka języka OWL opiera się na logice opisowej,
+a dokładnie na dialekcie SHIOQ(D), który rozszerza konstruktory ALC o np.: ograniczenia liczebności (kardynalność), role przechodnie, symetryczne czy odwrotne. 
+
+ 
+W celu dostosowania języka OWL do wymogów każdego z użytkowników, posiada on 3 dialekty \cite{owl_rek,owl_rek1}:
+\begin{itemize}
+ \item {\bf OWL Lite} 
+został stworzony z myślą o użytkownikach, którzy chcą zbudować hierarchię i nadać jej niewielkie ograniczenia. OWL Lite pozwala na nadanie kardynalności 0 lub 1. 
+Dialekt ten nie dopuszcza konstrukcji posiadających złożone opisy klas oraz wymaga separacji typów.  
+  \item {\bf OWL DL}
+jest dialektem  o dużej sile ekspresji. 
+W szczególności nałożona w nim nacisk na możliwości wnioskowania. OWL~DL może być mapowany na logikę opisową SHOIN, przez co mamy pewność, że czas obliczeń wnioskowania 
+jest skończony. Dialekt ten posiada bardzo dużo ograniczeń, np. ograniczenie rozdzielności  typów. 
+ 
+
+  \item {\bf OWL Full}
+jest najbardziej rozbudowanym dialektem, w porównaniu do pozostałych dostarczą największej siły ekspresji. Jednak poprzez mniejszą liczbę ograniczeń, w szczególności 
+dotyczących właściwości przechodnich, jest językiem nierozstrzygalnym. Co oznacza, iż nie mamy pewności, że wnioskowanie zakończy się w skończonym czasie. 
+\end{itemize}
+
+
+Każdy z powyżej opisanych języków jest rozszerzeniem swojego poprzednika. Zachodzi niżej opisana kompatybilność pomiędzy dialektami. 
+\begin{itemize}
+ \item  Każda poprawna ontologia OWL Lite jest poprawną ontologią OWL~DL,
+ \item  Każda poprawna ontologia OWL~DL jest poprawną ontologią OWL Full,
+ \item  Każdy poprawny wniosek w OWL Lite jest poprawnym wnioskiem w OWL~DL,
+ \item  Każdy poprawny wniosek w OWL~DL jest poprawnym wnioskiem w OWL Full.
+\end{itemize}
+
+
+A oto przykład ontologii rodziny zapisany w języku OWL\cite{jankowski}: 
+
+\subsubsection*{Mężczyzna to osoba nie będąca kobietą}
+\begin{verbatim}
+<owl:Class rdf:ID="Mezczyzna">
+  <rdfs:subClassOf rdf:resource="#Osoba" />
+  <owl:disjointWith rdf:resource="#Kobieta" />
+</owl:Class>
+\end{verbatim}
+
+\subsubsection*{Rodzic to taka Osoba, która ma przynajmniej jedno dziecko}
+\begin{verbatim}
+ <!-- definicja klasy rodzic jako klasy rownowaznej
+do klasy anonimowej, ktorej wystapienia podlegaja
+ograniczeniu liczebnosciowemu (tutaj przynajmniej
+1 dziecko) zwiazanemu z wlasciwoscia maDziecko -->
+<owl:Class rdf:ID="Rodzic">
+  <owl:equivalentClass>
+  <!-- klasa rownowazna jest klasa anonimowa o ponizszej
+   definicji -->
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <owl:Restriction>
+           <owl:onProperty rdf:resource="#maDziecko">
+           <owl:minCardinality
+                rdf:datatype="http://www.w3.org/2001/XMLSchema#int">
+                1
+           </owl:minCardinality>
+         </owl:Restriction>
+         <owl:Class rdf:ID="Osoba"/>
+       </owl:intersectionOf>
+     </owl:Class>
+   </owl:equivalentClass>
+</owl:Class>
+<!-- definicja wlasciwosci maDziecko,
+ktorej dziedzina i zakresem jest klasa osoba,
+wlasciwosc maDziecko jest wlasciwoscia odwrotna
+w stosunku do wlasciwosci maRodzica -->
+<owl:ObjectProperty rdf:about="#maDziecko">
+   <rdfs:domain rdf:resource="#Osoba"/>
+   <rdfs:range rdf:resource="#Osoba"/>
+   <owl:inverseOf rdf:resource="#maRodzica" />
+</owl:ObjectProperty>
+<!-- definicja wlasciwosci maRodzica -->
+<owl:ObjectProperty rdf:about="#maRodzica">
+   <!-- zdefiniowanie dziedziny i zakresu wlasciwosci,
+     dla objectProperty dziedzina i zakres sa opisami klas -->
+   <rdfs:domain rdf:resource="#Osoba"/>
+   <rdfs:range rdf:resource="#Osoba"/>
+   <owl:inverseOf rdf:resource="#maDziecko"/>
+</owl:ObjectProperty>
+
+\end{verbatim}
+
+
+\subsubsection*{Ojciec to Mężczyzna, będący Rodzicem}
+\begin{verbatim}
+<!-- definicja klasy ojciec jako klasy rownowaznej
+do przeciecia (czesci wspolnej) klas rodzic
+i mezczyzna -->
+<owl:Class rdf:ID="Ojciec">
+  <owl:equivalentClass>
+     <owl:Class>
+       <owl:intersectionOf rdf:parseType="Collection">
+         <owl:Class rdf:about="#Rodzic"/>
+         <owl:Class rdf:about="#Mezczyzna"/>
+       </owl:intersectionOf>
+     </owl:Class>
+   </owl:equivalentClass>
+</owl:Class>
+\end{verbatim}
+
+
+
+\subsubsection*{Dziecko to Osoba, która ma dwoje Rodziców}
+\begin{verbatim}
+<owl:Class rdf:about="#Dziecko">
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <owl:Restriction>
+          <owl:onProperty>
+            <owl:ObjectProperty rdf:ID="maRodzica"/>
+          </owl:onProperty>
+          <owl:cardinality
+              rdf:datatype="http://www.w3.org/2001/XMLSchema#int">
+              2
+          </owl:cardinality>
+        </owl:Restriction>
+        <owl:Class rdf:about="#Osoba"/>
+      </owl:intersectionOf>
+     </owl:Class>
+   </owl:equivalentClass>
+</owl:Class>
+\end{verbatim}
+  
+Język OWL jest obecnie najlepszym sposobem zapisu ontologii, o czym może świadczyć jego popularność wśród inżynierów ontologów. Chociaż umożliwia on zapisanie dowolnej informacji, 
+w październiku 2009 W3C zaproponowało jego ulepszoną wersję OWL2 \cite{OWL2}. Jednak ze względu na wcześniejsze prace grupy projektowej oraz ustalenia z opiekunem projektu, 
+w tej pracy zostanie użyty język OWL. 
