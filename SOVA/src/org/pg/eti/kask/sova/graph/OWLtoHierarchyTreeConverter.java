@@ -3,17 +3,22 @@ package org.pg.eti.kask.sova.graph;
 import java.util.HashSet;
 import java.util.Set;
 import org.pg.eti.kask.sova.utils.ReasonerLoader;
-import org.semanticweb.owl.apibinding.OWLManager;
-import org.semanticweb.owl.inference.OWLReasoner;
-import org.semanticweb.owl.inference.OWLReasonerAdapter;
-import org.semanticweb.owl.inference.OWLReasonerException;
-import org.semanticweb.owl.model.OWLClass;
-import org.semanticweb.owl.model.OWLDataFactory;
-import org.semanticweb.owl.model.OWLEntity;
-import org.semanticweb.owl.model.OWLIndividual;
-import org.semanticweb.owl.model.OWLOntology;
-import org.semanticweb.owl.model.OWLOntologyManager;
-import org.semanticweb.owl.model.UnknownOWLOntologyException;
+import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLDataFactory;
+import org.semanticweb.owlapi.model.OWLEntity;
+import org.semanticweb.owlapi.model.OWLException;
+import org.semanticweb.owlapi.model.OWLIndividual;
+import org.semanticweb.owlapi.model.OWLNamedIndividual;
+import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.model.UnknownOWLOntologyException;
+import org.semanticweb.owlapi.reasoner.ConsoleProgressMonitor;
+import org.semanticweb.owlapi.reasoner.NodeSet;
+import org.semanticweb.owlapi.reasoner.OWLReasoner;
+import org.semanticweb.owlapi.reasoner.OWLReasonerConfiguration;
+import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
+import org.semanticweb.owlapi.reasoner.SimpleConfiguration;
 
 import prefuse.data.Node;
 import prefuse.data.Tree;
@@ -26,135 +31,131 @@ import prefuse.data.Tree;
  * 
  */
 public class OWLtoHierarchyTreeConverter {
-	//nazwa klasy Reasonera.
-	private static final String REASONER_CLASS_NAME = "org.mindswap.pellet.owlapi.Reasoner";
-	
-	//rerefencje do obiektow OWL API
-	private OWLOntology ontology;
-	private OWLOntologyManager ontologyManager;
-	private OWLDataFactory dataFactory;
-	private OWLReasoner reasoner;
-	private Tree tree;
-	//wykorzystane klasy podczas budowania drzewa
-	private Set<String> usedClasses; 
-	
-	public OWLtoHierarchyTreeConverter(){
-		
-	}
-	
-	public Tree OWLtoTree(OWLOntology ontology){
-		
-		this.ontology = ontology;
-		this.ontologyManager = OWLManager.createOWLOntologyManager();
-		this.dataFactory = ontologyManager.getOWLDataFactory();
-		
-		this.usedClasses = new HashSet<String>();
-		tree=new Tree();
-		tree.addColumn(Constants.TREE_NODES, org.pg.eti.kask.sova.nodes.Node.class);
-		
-		//inicjalizacja reasonera
-		try {
-			initializeReasoner();
-			buildTree();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		}
-		
-		
-		return tree;
-	}
+    //nazwa klasy Reasonera.
 
-	
-	/**
-	 * Zbudowanie drzewa poczynajac od elementu najwyzej stojacego w hierarchi -
-	 * klasy OWLThing.
-	 */
-	private void buildTree() {
-		try {
-			reasoner
-					.loadOntologies(ontologyManager.getImportsClosure(ontology));
-			OWLClass thingClass = dataFactory.getOWLThing();
-			buildTree(null, thingClass);
-			reasoner.clearOntologies();
-		} catch (UnknownOWLOntologyException e) {
-			e.printStackTrace();
-		} catch (OWLReasonerException e) {
-			e.printStackTrace();
-		}
-	}
+    private static final String REASONER_CLASS_NAME = "org.mindswap.pellet.owlapi.Reasoner";
+    //rerefencje do obiektow OWL API
+    private OWLOntology ontology;
+    private OWLOntologyManager ontologyManager;
+    private OWLDataFactory dataFactory;
+    private OWLReasoner reasoner;
+    private Tree tree;
+    //wykorzystane klasy podczas budowania drzewa
+    private Set<String> usedClasses;
 
-	/**
-	 * Metoda rekurencyjnie rozbudowujaca drzewo.
-	 * 
-	 * @param parentNode aktualnie przetwarzany wezel
-	 * @param currentEntity  aktualnie przetwarzany obiekt OWL API (albo OWLClass, albo  OWLIndividual)
-	 * @throws OWLReasonerException wyjatek z reasonera
-	 */
-	private void buildTree(Node parentNode, OWLEntity currentEntity)
-			throws OWLReasonerException {
-		Node currentNode = null;
+    public OWLtoHierarchyTreeConverter() {
+    }
 
-		if (currentEntity instanceof OWLClass) {
-			OWLClass currentClass = (OWLClass) currentEntity;
+    public Tree OWLtoTree(OWLOntology ontology) {
 
-			if (reasoner.isSatisfiable(currentClass)) {
-				if (parentNode == null) {
-					currentNode = tree.addRoot();
-				} else {
-					currentNode = tree.addChild(parentNode);
-				}
-				usedClasses.add(currentClass.getURI().toString());
-				org.pg.eti.kask.sova.nodes.Node node =null;
-				
-				if (currentClass.isOWLThing()){
-					node = new org.pg.eti.kask.sova.nodes.ThingNode();
-					node.setLabel("T");
+        this.ontology = ontology;
+        this.ontologyManager = OWLManager.createOWLOntologyManager();
+        this.dataFactory = ontologyManager.getOWLDataFactory();
 
-				}else{
-					node = new org.pg.eti.kask.sova.nodes.ClassNode();
-					node.setLabel(currentClass.toString());
-				}
-				currentNode.set(Constants.TREE_NODES, node);
+        this.usedClasses = new HashSet<String>();
+        tree = new Tree();
+        tree.addColumn(Constants.TREE_NODES, org.pg.eti.kask.sova.nodes.Node.class);
 
-				Set<OWLClass> subClasses = OWLReasonerAdapter
-						.flattenSetOfSets(reasoner.getSubClasses(currentClass));
+        //inicjalizacja reasonera
+        try {
+            initializeReasoner();
+            buildTree();
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
 
-				for (OWLClass child : subClasses) {
-					buildTree(currentNode, child);
-				}
 
-				Set<OWLIndividual> individuals = reasoner.getIndividuals(
-						currentClass, true);
+        return tree;
+    }
 
-				for (OWLIndividual ind : individuals) {
-					buildTree(currentNode, ind);
-				}
+    /**
+     * Zbudowanie drzewa poczynajac od elementu najwyzej stojacego w hierarchi -
+     * klasy OWLThing.
+     */
+    private void buildTree() {
+        try {
+//            reasoner.loadOntologies(ontologyManager.getImportsClosure(ontology));
+            OWLClass thingClass = dataFactory.getOWLThing();
+            buildTree(null, thingClass);
+//            reasoner.clearOntologies();
+        } catch (UnknownOWLOntologyException e) {
+            e.printStackTrace();
+        } catch (OWLException/*OWLReasonerException*/ e) {
+            e.printStackTrace();
+        }
+    }
 
-			}
-		} else if (currentEntity instanceof OWLIndividual) {
-			OWLIndividual currentIndividual = (OWLIndividual) currentEntity;
+    /**
+     * Metoda rekurencyjnie rozbudowujaca drzewo.
+     *
+     * @param parentNode aktualnie przetwarzany wezel
+     * @param currentEntity  aktualnie przetwarzany obiekt OWL API (albo OWLClass, albo  OWLIndividual)
+     * @throws OWLReasonerException wyjatek z reasonera
+     */
+    private void buildTree(Node parentNode, OWLEntity currentEntity)
+            throws OWLException/*OWLReasonerException*/ {
+        Node currentNode = null;
 
-			if (!currentIndividual.isAnonymous()) {
-				currentNode = tree.addChild(parentNode);
-				org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.IndividualNode();
-				node.setLabel(currentIndividual.toString());
-				currentNode.set(Constants.TREE_NODES, node);
-			}
-		}
-	}
+        if (currentEntity instanceof OWLClass) {
+            OWLClass currentClass = (OWLClass) currentEntity;
 
-	/**
-	 * Metoda inicjalizuja mechanizm wnioskujacy.
-	 * @throws NoSuchMethodException 
-	 * @throws ClassNotFoundException 
-	 * @throws SecurityException 
-	 */
-	private void initializeReasoner() throws SecurityException, ClassNotFoundException, NoSuchMethodException {
-		this.reasoner = ReasonerLoader.getInstance().getReasoner();
-	}
-	
+            if (reasoner.isSatisfiable(currentClass)) {
+                if (parentNode == null) {
+                    currentNode = tree.addRoot();
+                } else {
+                    currentNode = tree.addChild(parentNode);
+                }
+                usedClasses.add(currentClass.getIRI().toString());
+                //tu zmienilem
+                org.pg.eti.kask.sova.nodes.Node node = null;
+
+                if (currentClass.isOWLThing()) {
+                    node = new org.pg.eti.kask.sova.nodes.ThingNode();
+                    node.setLabel("T");
+
+                } else {
+                    node = new org.pg.eti.kask.sova.nodes.ClassNode();
+                    node.setLabel(currentClass.getIRI().toString());
+                }
+                currentNode.set(Constants.TREE_NODES, node);
+
+                Set<OWLClass> subClasses = (reasoner.getSubClasses(currentClass, true)).getFlattened();
+
+                for (OWLClass child : subClasses) {
+                    buildTree(currentNode, child);
+                }
+
+                Set<OWLNamedIndividual> individuals = reasoner.getInstances(currentClass, true).getFlattened();
+
+                for (OWLNamedIndividual ind : individuals) {
+                    buildTree(currentNode, ind);
+                }
+
+            }
+        } else if (currentEntity instanceof OWLIndividual) {
+            OWLIndividual currentIndividual = (OWLIndividual) currentEntity;
+
+            if (!currentIndividual.isAnonymous()) {
+                currentNode = tree.addChild(parentNode);
+                org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.IndividualNode();
+                node.setLabel(currentIndividual.asOWLNamedIndividual().getIRI().toString());
+                //tu zmieniłem
+                currentNode.set(Constants.TREE_NODES, node);
+            }
+        }
+    }
+
+    /**
+     * Metoda inicjalizuja mechanizm wnioskujacy.
+     * @throws NoSuchMethodException
+     * @throws ClassNotFoundException
+     * @throws SecurityException
+     */
+    private void initializeReasoner() throws SecurityException, ClassNotFoundException, NoSuchMethodException {
+        this.reasoner = ReasonerLoader.getInstance().getReasoner(ontology);
+    }
 }

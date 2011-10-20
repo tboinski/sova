@@ -1,6 +1,6 @@
 package org.pg.eti.kask.sova.graph;
 
-import org.semanticweb.owl.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntology;
 
 
 /**

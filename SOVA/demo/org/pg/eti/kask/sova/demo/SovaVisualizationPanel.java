@@ -23,8 +23,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import org.pg.eti.kask.sova.visualization.OVDisplay;
-import org.semanticweb.owl.model.OWLOntology;
-import org.semanticweb.owl.model.OWLOntologyManager;
+import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import prefuse.Visualization;
 import prefuse.data.Table;

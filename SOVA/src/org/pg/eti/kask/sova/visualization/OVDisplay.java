@@ -1,8 +1,6 @@
 package org.pg.eti.kask.sova.visualization;
 
 import java.awt.Font;
-import java.beans.PropertyChangeListener;
-import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,7 +14,7 @@ import org.pg.eti.kask.sova.visualization.annotation.AnnotationComponent;
 import org.pg.eti.kask.sova.visualization.annotation.AnnotationListener;
 import org.pg.eti.kask.sova.visualization.annotation.URIInfoComponent;
 import org.pg.eti.kask.sova.visualization.annotation.URIInfoListener;
-import org.semanticweb.owl.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntology;
 import prefuse.Display;
 import prefuse.Visualization;
 import prefuse.controls.DragControl;
@@ -28,16 +26,9 @@ import prefuse.controls.WheelZoomControl;
 import prefuse.controls.ZoomControl;
 import prefuse.controls.ZoomToFitControl;
 import prefuse.data.Graph;
-import prefuse.data.Schema;
 import prefuse.data.Table;
-import prefuse.data.Tuple;
-import prefuse.data.event.TupleSetListener;
-import prefuse.data.expression.Expression;
-import prefuse.data.expression.Predicate;
 import prefuse.data.query.SearchQueryBinding;
 import prefuse.data.search.SearchTupleSet;
-import prefuse.data.tuple.TupleSet;
-import prefuse.data.util.Sort;
 import prefuse.util.FontLib;
 import prefuse.util.ui.JSearchPanel;
 import prefuse.visual.VisualGraph;

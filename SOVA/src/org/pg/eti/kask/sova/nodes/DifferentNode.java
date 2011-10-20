@@ -25,7 +25,6 @@ public class DifferentNode extends InformationNode
 	{
 		return colorScheme.getDifferentNodeColor();
 	}
-	
-	
-}
 
+
+}

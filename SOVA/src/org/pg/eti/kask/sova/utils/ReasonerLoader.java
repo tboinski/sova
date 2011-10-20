@@ -1,86 +1,115 @@
 package org.pg.eti.kask.sova.utils;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
+import org.semanticweb.HermiT.Reasoner;
 
-import org.semanticweb.owl.apibinding.OWLManager;
-import org.semanticweb.owl.inference.OWLReasoner;
-import org.semanticweb.owl.model.OWLOntologyManager;
-import org.semanticweb.owl.model.UnknownOWLOntologyException;
+import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.reasoner.OWLReasoner;
+import org.semanticweb.owlapi.reasoner.ConsoleProgressMonitor;
+import org.semanticweb.owlapi.reasoner.OWLReasonerConfiguration;
+import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
+import org.semanticweb.owlapi.reasoner.SimpleConfiguration;
 
 /**
  * Klasa przechowująca i ładująca reasoner wykorzystywany w wywnioskowanej
  * hierarchii. Domyślnym reasonerem jest org.mindswap.pellet.owlapi.Reasoner,
  * jednak należy pamiętać o załączeniu bibliotek pellet.
  * 
+ * Tymczasowy reasoner to HermiT, pozostałe są niezgodne z OWL API 3.2.3
+ *
  * @author Piotr Kunowski
  * 
  */
 public class ReasonerLoader {
-	//nazwa klasy Reasonera.
-	private static final String REASONER_CLASS_NAME = "org.mindswap.pellet.owlapi.Reasoner";
-	
-	private static ReasonerLoader INSTANCE = null;
-	private static OWLReasoner reasoner=null;
-	private ReasonerLoader(){}
-	/**
-	 * @return statyczna instancja klasy ReasonerLoader.
-	 */
-	public static ReasonerLoader getInstance() {
-		if (INSTANCE==null) INSTANCE = new ReasonerLoader();
-		return INSTANCE;
-	}
+    //nazwa klasy Reasonera.
 
-	/**
-	 * Metoda pobiera reasoner, jeśli nie został on załowdowany przez
-	 * użytkownika wcześnije to zwracany jest
-	 * org.mindswap.pellet.owlapi.Reasoner. Należy pamiętać o załączeniu
-	 * biblioteki pellet.
-	 * 
-	 * @return
-	 * @throws NoSuchMethodException 
-	 * @throws ClassNotFoundException 
-	 * @throws SecurityException 
-	 */
-	public OWLReasoner getReasoner() throws SecurityException, ClassNotFoundException, NoSuchMethodException {
-		if (reasoner==null) initializeReasoner();
-		
-		return reasoner;
-	}
-	/**
-	 * metoda ustawia reasoner
-	 * @param reasoner
-	 */
-	public void setReasoner(OWLReasoner reasoner) {
-		ReasonerLoader.reasoner = reasoner;
-	}
-	/**
-	 * Metoda inicjalizuja mechanizm wnioskujacy.
-	 * @throws ClassNotFoundException 
-	 * @throws NoSuchMethodException 
-	 * @throws SecurityException 
-	 */
-	private void initializeReasoner() throws ClassNotFoundException, SecurityException, NoSuchMethodException {
-		
-		try {
-			Class<?> reasonerClass = Class.forName(REASONER_CLASS_NAME);
-			Constructor<?> con = reasonerClass.getConstructor(OWLOntologyManager.class);
-			reasoner = (OWLReasoner)con.newInstance(OWLManager.createOWLOntologyManager());
-			
+//    private static final String REASONER_CLASS_NAME = "org.mindswap.pellet.owlapi.Reasoner";
+    private static ReasonerLoader INSTANCE = null;
+    private static OWLReasoner reasoner = null;
+
+    private ReasonerLoader() {
+    }
+
+    /**
+     * @return statyczna instancja klasy ReasonerLoader.
+     */
+    public static ReasonerLoader getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new ReasonerLoader();
+        }
+        return INSTANCE;
+    }
+
+    /**
+     * Metoda pobiera reasoner, jeśli nie został on załowdowany przez
+     * użytkownika wcześnije to zwracany jest
+     * org.mindswap.pellet.owlapi.Reasoner. Należy pamiętać o załączeniu
+     * biblioteki pellet.
+     *
+     * @return
+     * @throws NoSuchMethodException
+     * @throws ClassNotFoundException
+     * @throws SecurityException
+     */
+    public OWLReasoner getReasoner(OWLOntology ont) throws SecurityException, ClassNotFoundException, NoSuchMethodException {
+        if (reasoner == null) {
+            initializeReasoner(ont);
+        }
+
+        return reasoner;
+    }
+
+    /**
+     * metoda ustawia reasoner
+     * @param reasoner
+     */
+    public void setReasoner(OWLReasoner reasoner) {
+        ReasonerLoader.reasoner = reasoner;
+    }
+
+    /**
+     * Metoda inicjalizuja mechanizm wnioskujacy.
+     * @throws ClassNotFoundException
+     * @throws NoSuchMethodException
+     * @throws SecurityException
+     */
+    private void initializeReasoner(OWLOntology ont) throws ClassNotFoundException, SecurityException, NoSuchMethodException {
+//
+//        try {
+//
+//            // Create a console progress monitor. This will print the reasoner progress out to the console.
+////            ReasonerProgressMonitor progressMonitor = new ConsoleProgressMonitor();
+////            OWLReasonerConfiguration config = new SimpleConfiguration(progressMonitor);
+//            // Create a reasoner that will reason over our ontology and its imports closure. Pass in the configuration.
+//            Class<?> reasonerClass = Class.forName(REASONER_CLASS_NAME);
+////            Constructor<?> con = reasonerClass.getConstructor(OWLOntologyManager.class);
+////            reasoner = (OWLReasoner) con.newInstance(OWLManager.createOWLOntologyManager());
+//            Constructor<?> con = reasonerClass.getConstructor(OWLOntology.class);
+//            reasoner = (OWLReasoner) con.newInstance(ont);
+//
+//
+//
+//
+//        } catch (IllegalArgumentException e) {
+//            e.printStackTrace();
+//        } catch (InstantiationException e) {
+//            e.printStackTrace();
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        } catch (InvocationTargetException e) {
+//            e.printStackTrace();
+//        } catch (UnknownOWLOntologyException e) {
+//            e.printStackTrace();
+//        }
+        OWLReasonerFactory reasonerFactory = new Reasoner.ReasonerFactory();
+        // Create a console progress monitor. This will print the reasoner progress out to the console.
+        ConsoleProgressMonitor progressMonitor = new ConsoleProgressMonitor();
+        // Specify the progress monitor via a configuration. We could also specify other setup parameters in
 
 
+        // the configuration, and different reasoners may accept their own defined parameters this way.
+        OWLReasonerConfiguration config = new SimpleConfiguration(progressMonitor);
+        // Create a reasoner that will reason over our ontology and its imports closure. Pass in the configuration.
 
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		} catch (UnknownOWLOntologyException e) {
-			e.printStackTrace();
-		} 
-	}
-	
+        reasoner = reasonerFactory.createReasoner(ont, config);
+    }
 }

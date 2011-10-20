@@ -16,4 +16,3 @@ public class IntersectionOfNode extends AnonymousClassNode
 		label = "∩";
 	}
 }
-

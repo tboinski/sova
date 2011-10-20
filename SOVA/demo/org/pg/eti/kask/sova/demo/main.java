@@ -14,10 +14,11 @@ import javax.swing.JTextField;
 
 import org.pg.eti.kask.sova.utils.Debug;
 import org.pg.eti.kask.sova.utils.VisualizationProperties;
-import org.semanticweb.owl.apibinding.OWLManager;
-import org.semanticweb.owl.model.OWLOntology;
-import org.semanticweb.owl.model.OWLOntologyCreationException;
-import org.semanticweb.owl.model.OWLOntologyManager;
+import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.OWLOntologyManager;
 /**
  * Klasa main
  * @author Piotr Kunowski
@@ -38,9 +39,9 @@ public class main {
             // wczytanie propertiesów -klasa singleton 
             VisualizationProperties.instanceOf().loadProperties(Constants.PROPERTIES);
                 
-            URI physicalURI = URI.create(Constants.ONTO_TEST_DIRECTORY);
+            IRI physicalURI = IRI.create(Constants.ONTO_TEST_DIRECTORY);
             try {// wczytanie ontologi z pliku 
-            	ontology = OWLManager.createOWLOntologyManager().loadOntologyFromPhysicalURI(physicalURI);
+            	ontology = OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(physicalURI);
             	
             } catch (OWLOntologyCreationException ex) {
                 Logger.getLogger(OWLOntologyManager.class.getName()).log(Level.SEVERE, null, ex);

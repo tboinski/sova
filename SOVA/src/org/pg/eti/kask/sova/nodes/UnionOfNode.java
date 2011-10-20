@@ -16,4 +16,3 @@ public class UnionOfNode extends AnonymousClassNode
 		label = "∪";
 	}
 }
-

@@ -10,10 +10,11 @@ import javax.swing.JPanel;
 
 import org.pg.eti.kask.sova.utils.Debug;
 import org.pg.eti.kask.sova.utils.VisualizationProperties;
-import org.semanticweb.owl.apibinding.OWLManager;
-import org.semanticweb.owl.model.OWLOntology;
-import org.semanticweb.owl.model.OWLOntologyCreationException;
-import org.semanticweb.owl.model.OWLOntologyManager;
+import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 public class main_hierarchy {
 
@@ -29,9 +30,9 @@ public class main_hierarchy {
             VisualizationProperties.instanceOf().loadProperties(Constants.PROPERTIES);
             manager = OWLManager.createOWLOntologyManager();
                 
-            URI physicalURI = URI.create(Constants.ONTO_TEST_DIRECTORY);
+            IRI physicalURI = IRI.create(Constants.ONTO_TEST_DIRECTORY);
             try {// wczytanie ontologi z pliku 
-            	ontology = manager.loadOntologyFromPhysicalURI(physicalURI);
+            	ontology = manager.loadOntologyFromOntologyDocument(physicalURI);
             	
             } catch (OWLOntologyCreationException ex) {
                 Logger.getLogger(OWLOntologyManager.class.getName()).log(Level.SEVERE, null, ex);

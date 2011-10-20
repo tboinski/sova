@@ -9,7 +9,7 @@ import prefuse.data.Graph;
 import prefuse.data.Node;
 
 import org.pg.eti.kask.sova.utils.Debug;
-import org.semanticweb.owl.model.*;
+import org.semanticweb.owlapi.model.*;
 
 import prefuse.data.Table;
 
@@ -57,7 +57,7 @@ public class OWLtoGraphConverter {
 //	}
 //	
 	private void insertDataType(OWLOntology ontology, Graph graph) {
-		for (OWLDataProperty prop: ontology.getReferencedDataProperties()){
+		for (OWLDataProperty prop: ontology.getDataPropertiesInSignature()){
 			
 			System.out.println("DATATYPE :  "+prop.toString());
 			Set<OWLDataRange> s = prop.getRanges(ontology);
@@ -66,9 +66,9 @@ public class OWLtoGraphConverter {
 			if (!dataProperties.containsKey(prop.toString())){
 				Node dataProperty = graph.addNode();
 				org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.PropertyNode();
-				node.setLabel(prop.toString());
+				node.setLabel(prop.getIRI().toString());
 				dataProperty.set(COLUMN_NODE, node);
-				dataProperty.set(COLUMN_URI, prop.getURI());
+				dataProperty.set(COLUMN_URI, prop.getIRI().toURI());
 				dataPropertyRowNr = dataProperty.getRow();
 				dataProperties.put(prop.toString(),dataPropertyRowNr);
 			}else{
@@ -77,7 +77,7 @@ public class OWLtoGraphConverter {
 			
 			while(it.hasNext()){
 				OWLDataRange r = it.next();
-				if (r.isDataType()){
+				if (r.isDatatype()){
 					int dataTypeRowNr = 0;
 					if (!dataTypes.containsKey(r.toString())){
 						Node dataType = graph.addNode();
@@ -109,16 +109,16 @@ public class OWLtoGraphConverter {
 	 */
 	private void insertBaseClasses(OWLOntology ontology, Graph graph) {
 
-		for (OWLClass cls : ontology.getReferencedClasses()) {
+		for (OWLClass cls : ontology.getClassesInSignature()) {
 			// dodajemy na sucho wszystkie klasy bez krawedzi
 			// oprocz Thing
 			if (!cls.isOWLThing()) {
 				Node n = graph.addNode();
 				org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.ClassNode();
-				node.setLabel(cls.toString());
+				node.setLabel(cls.getIRI().toString());
 				n.set(COLUMN_NODE, node);
-				n.set(COLUMN_URI, cls.getURI());
-				n.set(COLUMN_NAME_NODE, cls.toString());
+				n.set(COLUMN_URI, cls.getIRI().toURI());
+				n.set(COLUMN_NAME_NODE, cls.getIRI().toString());
 				//n.set(COLUMN_NAME_NODE, cls.toString());
 				if (cls.getSuperClasses(ontology).isEmpty() == true) { // thing
 					// jest
@@ -128,7 +128,7 @@ public class OWLtoGraphConverter {
 					edges.set(row, "target", n.getRow());
 					edges.set(row, "edge",new org.pg.eti.kask.sova.edges.SubClassEdge());
 				}
-				classes.put(cls.getURI().toString(), n.getRow());
+				classes.put(cls.getIRI().toURI().toString(), n.getRow());
 				
 			}
 		}
@@ -145,13 +145,13 @@ public class OWLtoGraphConverter {
 	private void insertBaseProperties(OWLOntology ontology, Graph graph) {
 		// dodajemy wszystkie definicje property
 		for (OWLObjectProperty property : ontology
-				.getReferencedObjectProperties()) {
+				.getObjectPropertiesInSignature()) {
 			Node n = graph.addNode();
 			org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.PropertyNode();
-			node.setLabel(property.toString());
+			node.setLabel(property.getIRI().toString());
 			n.set(COLUMN_NODE, node);
-			n.set(COLUMN_URI, property.getURI());
-			n.set(COLUMN_NAME_NODE, property.toString());
+			n.set(COLUMN_URI, property.getIRI().toURI());
+			n.set(COLUMN_NAME_NODE, property.getIRI().toString());
 			properties.put(property.toString(), n.getRow());
 		}
 	}
@@ -165,28 +165,28 @@ public class OWLtoGraphConverter {
 	 */
 	private void insertBaseIndividuals(OWLOntology ontology, Graph graph) {
 		// dodajemy wszystkie definicje individuals
-		for (OWLIndividual individual : ontology.getReferencedIndividuals()) {
+		for (OWLNamedIndividual individual : ontology.getIndividualsInSignature()) {
 			Node n = graph.addNode();
 			org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.IndividualNode();
-			node.setLabel(individual.toString());
+			node.setLabel(individual.getIRI().toString());
 			n.set(COLUMN_NODE, node);
-			n.set(COLUMN_URI, individual.getURI());
-			n.set(COLUMN_NAME_NODE, individual.toString());
-			individuals.put(individual.getURI().toString(), n.getRow());
+			n.set(COLUMN_URI, individual.getIRI().toURI());
+			n.set(COLUMN_NAME_NODE, individual.getIRI().toString());
+			individuals.put(individual.getIRI().toURI().toString(), n.getRow());
 		}
 	}
 
 	/**
 	 * Metoda umieszcza w grafie krawędzi i/lub wierzchołki odpowiadające danemu
-	 * obiektowi OWLDescription
+	 * obiektowi OWLClassExpression
 	 * 
 	 * @param description
 	 * @return
 	 * @throws Exception
 	 */
-	private int DescriptionHandler(OWLDescription description) throws Exception {
+	private int DescriptionHandler(OWLClassExpression description) throws Exception {
 		// ObjectSomeValueFrom
-		if (description instanceof OWLObjectSomeRestriction) {
+		if (description instanceof OWLObjectSomeValuesFrom) {
 			// dodaj anonimowe node - uchwyt do niego powinien byc zwrocony
 
 			if (anonyms.containsKey(description.toString())) {
@@ -204,23 +204,24 @@ public class OWLtoGraphConverter {
 				anonyms.put(description.toString(), anonymNode.getRow());
 				// Tworzenie somenode
 				Node someValNode = graph.addNode();
-				if (((OWLObjectSomeRestriction) description).getProperty() instanceof OWLObjectProperty) {
+				if (((OWLObjectSomeValuesFrom) description).getProperty() instanceof OWLObjectProperty) {
 					// wstaw SomeNode i polacz
 
-					// someVal.put(((OWLObjectSomeRestriction)
+					// someVal.put(((OWLObjectSomeValuesFrom)
 					// description).getProperty().toString(),
-					// ((OWLObjectSomeRestriction)
+					// ((OWLObjectSomeValuesFrom)
 					// description).getProperty().hashCode());
 					// System.out.println("SomeVal NODE DLA " +
-					// ((OWLObjectSomeRestriction) description).getProperty());
+					// ((OWLObjectSomeValuesFrom) description).getProperty());
 					org.pg.eti.kask.sova.nodes.Node sNode = new org.pg.eti.kask.sova.nodes.SomeValuesFromPropertyNode();
-					sNode.setLabel(((OWLObjectSomeRestriction) description)
-							.getProperty().toString());
+					sNode.setLabel(((OWLObjectSomeValuesFrom) description)
+							.getProperty().asOWLObjectProperty().getIRI().toString());
+                                        //tutaj zmieniłem
 					someValNode.set(COLUMN_NODE, sNode);
 
 					// dodanie krawedzi laczacej node SomeValuesFrom z definicja
 					// property
-					int definitionID = properties.get(((OWLObjectSomeRestriction) description)
+					int definitionID = properties.get(((OWLObjectSomeValuesFrom) description)
 									.getProperty().toString());
 					int someRow = edges.addRow();
 					edges.set(someRow, "source", definitionID);
@@ -230,7 +231,7 @@ public class OWLtoGraphConverter {
 					// wywolaj rekurencyjnie i poznaj czym jest property
 					// probably will never enter here;
 					throw new Exception("Some values from somethign wired "
-							+ ((OWLObjectSomeRestriction) description)
+							+ ((OWLObjectSomeValuesFrom) description)
 									.getProperty());
 
 				}
@@ -243,18 +244,18 @@ public class OWLtoGraphConverter {
 
 				// tworzenie wynikowego node
 				int targetId = 0;
-				if (((OWLObjectSomeRestriction) description).getFiller() instanceof OWLClass) {
+				if (((OWLObjectSomeValuesFrom) description).getFiller() instanceof OWLClass) {
 					// pobierz drugie node z z klas
 					// System.out.println("Some val from klass "
-					// +((OWLObjectSomeRestriction) description).getFiller() /*
-					// + " " + classes.get(((OWLObjectSomeRestriction)
+					// +((OWLObjectSomeValuesFrom) description).getFiller() /*
+					// + " " + classes.get(((OWLObjectSomeValuesFrom)
 					// description).getFiller().toString() ) */ );
-					targetId = classes.get(((OWLClass) (((OWLObjectSomeRestriction) description)
-									.getFiller())).getURI().toString());
+					targetId = classes.get(((OWLClass) (((OWLObjectSomeValuesFrom) description)
+									.getFiller())).getIRI().toURI().toString());
 				} else {
 					// to cos bardziej skomplikowanego niz klasa lzu individual
 					// System.out.println("More complicated");
-					targetId = DescriptionHandler(((OWLObjectSomeRestriction) description)
+					targetId = DescriptionHandler(((OWLObjectSomeValuesFrom) description)
 							.getFiller());
 				}
 				// polacz edgami i ogolnie upenij sie za bangla
@@ -266,7 +267,7 @@ public class OWLtoGraphConverter {
 				return anonymNode.getRow();
 			}
 
-		} else if (description instanceof OWLObjectAllRestriction) {
+		} else if (description instanceof OWLObjectAllValuesFrom) {
 
 			if (anonyms.containsKey(description.toString())) {
 				// System.out.println("ZWROCONO JUZ ISTNIEJACY  anonym" +
@@ -283,22 +284,23 @@ public class OWLtoGraphConverter {
 				anonyms.put(description.toString(), anonymNode.getRow());
 				// Tworzenie somenode
 				Node allValNode = graph.addNode();
-				if (((OWLObjectAllRestriction) description).getProperty() instanceof OWLObjectProperty) {
+				if (((OWLObjectAllValuesFrom) description).getProperty() instanceof OWLObjectProperty) {
 					// wstaw SomeNode i polacz
 
-					// someVal.put(((OWLObjectSomeRestriction)
+					// someVal.put(((OWLObjectSomeValuesFrom)
 					// description).getProperty().toString(),
-					// ((OWLObjectSomeRestriction)
+					// ((OWLObjectSomeValuesFrom)
 					// description).getProperty().hashCode());
 					// System.out.println("SomeVal NODE DLA " +
-					// ((OWLObjectAllRestriction) description).getProperty());
+					// ((OWLObjectAllValuesFrom) description).getProperty());
 					org.pg.eti.kask.sova.nodes.Node sNode = new org.pg.eti.kask.sova.nodes.AllValuesFromPropertyNode();
-					sNode.setLabel(((OWLObjectAllRestriction) description)
-							.getProperty().toString());
+					sNode.setLabel(((OWLObjectAllValuesFrom) description)
+							.getProperty().asOWLObjectProperty().getIRI().toString());
+                                        //tu zmieniłem
 					allValNode.set(COLUMN_NODE, sNode);
 
 					int definitionID = properties
-							.get(((OWLObjectAllRestriction) description)
+							.get(((OWLObjectAllValuesFrom) description)
 									.getProperty().toString());
 					int someRow = edges.addRow();
 					edges.set(someRow, "source", definitionID);
@@ -309,7 +311,7 @@ public class OWLtoGraphConverter {
 					// wywolaj rekurencyjnie i poznaj czym jest property
 					// probably will never enter here;
 					throw new Exception("All values from somethign wired "
-							+ ((OWLObjectAllRestriction) description).getProperty());
+							+ ((OWLObjectAllValuesFrom) description).getProperty());
 
 				}
 				// System.out.println("EDGE MIEDZY ANONYM I ALLVAL " +
@@ -321,18 +323,18 @@ public class OWLtoGraphConverter {
 
 				// tworzenie wynikowego node
 				int targetId = 0;
-				if (((OWLObjectAllRestriction) description).getFiller() instanceof OWLClass) {
+				if (((OWLObjectAllValuesFrom) description).getFiller() instanceof OWLClass) {
 					// pobierz drugie node z z klas
 					// System.out.println("ALl val from klass "
-					// +((OWLObjectAllRestriction) description).getFiller() /* +
-					// " " + classes.get(((OWLObjectSomeRestriction)
+					// +((OWLObjectAllValuesFrom) description).getFiller() /* +
+					// " " + classes.get(((OWLObjectSomeValuesFrom)
 					// description).getFiller().toString() ) */ );
-					targetId = classes.get(((OWLClass) (((OWLObjectAllRestriction) description)
-									.getFiller())).getURI().toString());
+					targetId = classes.get(((OWLClass) (((OWLObjectAllValuesFrom) description)
+									.getFiller())).getIRI().toURI().toString());
 				} else {
 					// to cos bardziej skomplikowanego niz klasa lzu individual
 					// System.out.println("More complicated");
-					targetId = DescriptionHandler(((OWLObjectAllRestriction) description).getFiller());
+					targetId = DescriptionHandler(((OWLObjectAllValuesFrom) description).getFiller());
 				}
 				// polacz edgami i ogolnie upenij sie za bangla
 				if (targetId != -1) {
@@ -345,7 +347,7 @@ public class OWLtoGraphConverter {
 				}
 			}
 
-		} else if (description instanceof OWLObjectValueRestriction) {
+		} else if (description instanceof OWLObjectHasValue ) {
 
 			// System.out.println("HAS VALUE" +description );
 			if (anonyms.containsKey(description.toString())) {
@@ -363,21 +365,23 @@ public class OWLtoGraphConverter {
 				// Tworzenie somenode
 				Node allValNode = graph.addNode();
 
-				if (((OWLObjectValueRestriction) description).getProperty() instanceof OWLObjectProperty) {
+				if (((OWLObjectHasValue ) description).getProperty() instanceof OWLObjectProperty) {
 					// wstaw has val Node i polacz
 
-					// someVal.put(((OWLObjectSomeRestriction)
+					// someVal.put(((OWLObjectSomeValuesFrom)
 					// description).getProperty().toString(),
-					// ((OWLObjectSomeRestriction)
+					// ((OWLObjectSomeValuesFrom)
 					// description).getProperty().hashCode());
 					// System.out.println("has Val NODE DLA " +
-					// ((OWLObjectValueRestriction) description).getProperty());
+					// ((OWLObjectHasValue ) description).getProperty());
 					org.pg.eti.kask.sova.nodes.Node sNode = new org.pg.eti.kask.sova.nodes.AllValuesFromPropertyNode();
-					sNode.setLabel(((OWLObjectValueRestriction) description).getProperty().toString());
+					sNode.setLabel(((OWLObjectHasValue ) description).getProperty().asOWLObjectProperty().getIRI().toString());
+                                        //tutaj zmieniłem
 					allValNode.set(COLUMN_NODE, sNode);
 
-					int definitionID = properties.get(((OWLObjectValueRestriction) description)
-									.getProperty().toString());
+					int definitionID = properties.get(((OWLObjectHasValue ) description)
+									.getProperty().asOWLObjectProperty().getIRI().toString());
+                                        //tu zmieniłem
 					int someRow = edges.addRow();
 					edges.set(someRow, "source", definitionID);
 					edges.set(someRow, "target", allValNode.getRow());
@@ -387,7 +391,7 @@ public class OWLtoGraphConverter {
 					// wywolaj rekurencyjnie i poznaj czym jest property
 					// probably will never enter here;
 					throw new Exception("HAS values  somethign wired "
-							+ ((OWLObjectValueRestriction) description).getProperty());
+							+ ((OWLObjectHasValue ) description).getProperty());
 
 				}
 				// System.out.println("EDGE MIEDZY ANONYM I ALLVAL " +
@@ -401,12 +405,12 @@ public class OWLtoGraphConverter {
 				int row2 = edges.addRow();
 				edges.set(row2, "source", allValNode.getRow());
 				edges.set(row2, "target", individuals
-						.get(((OWLObjectValueRestriction) description)
-								.getValue().getURI().toString()));
+						.get(((OWLObjectHasValue ) description)
+								.getValue().asOWLNamedIndividual().getIRI().toURI().toString()));
 				edges.set(row2, "edge",
 						new org.pg.eti.kask.sova.edges.PropertyEdge());
 				// System.out.println("has Val INDIVIDUAL " +
-				// ((OWLObjectValueRestriction) description).getValue());
+				// ((OWLObjectHasValue ) description).getValue());
 				return anonymNode.getRow();
 
 			}
@@ -428,12 +432,12 @@ public class OWLtoGraphConverter {
 				anonymNode.set(COLUMN_NODE, node);
 				anonyms.put(description.toString(), anonymNode.getRow());
 				// podczep do niego skladowe
-				for (OWLDescription d : ((OWLObjectIntersectionOf) description)
+				for (OWLClassExpression d : ((OWLObjectIntersectionOf) description)
 						.getOperands()) {
 					if (d instanceof OWLClass) {
 						// System.out.println("Skaldowa klasa intersekcji " +
 						// d.toString() );
-						int clsNodeID = classes.get(((OWLClass) d).getURI().toString());
+						int clsNodeID = classes.get(((OWLClass) d).getIRI().toURI().toString());
 						int row = edges.addRow();
 						edges.set(row, "source", clsNodeID);
 						edges.set(row, "target", anonymNode.getRow());
@@ -472,11 +476,11 @@ public class OWLtoGraphConverter {
 				anonymNode.set(COLUMN_NODE, node);
 				anonyms.put(description.toString(), anonymNode.getRow());
 				// podczep do niego skladowe
-				for (OWLDescription d : ((OWLObjectUnionOf) description)
+				for (OWLClassExpression d : ((OWLObjectUnionOf) description)
 						.getOperands()) {
 					if (d instanceof OWLClass) {
 						// System.out.println("Klasa w UNII" + d.toString());
-						int clsNodeID = classes.get(((OWLClass) d).getURI().toString());
+						int clsNodeID = classes.get(((OWLClass) d).getIRI().toURI().toString());
 						int row = edges.addRow();
 						edges.set(row, "source", clsNodeID);
 						edges.set(row, "target", anonymNode.getRow());
@@ -520,7 +524,7 @@ public class OWLtoGraphConverter {
 
 				if (((OWLObjectComplementOf) description).getOperand() instanceof OWLClass) {
 					complID = classes.get(((OWLObjectComplementOf) description)
-							.getOperand().asOWLClass().getURI().toString());
+							.getOperand().asOWLClass().getIRI().toURI().toString());
 				} else {
 					complID = DescriptionHandler(((OWLObjectComplementOf) description)
 							.getOperand());
@@ -551,7 +555,7 @@ public class OWLtoGraphConverter {
 				anonyms.put(description.toString(), anonymNode.getRow());
 				for (OWLIndividual ind : ((OWLObjectOneOf) description)
 						.getIndividuals()) {
-					int id = individuals.get(ind.getURI().toString());
+					int id = individuals.get(ind.asOWLNamedIndividual().getIRI().toURI().toString());
 					int row = edges.addRow();
 					edges.set(row, "source", id);
 					edges.set(row, "target", anonymNode.getRow());
@@ -561,7 +565,7 @@ public class OWLtoGraphConverter {
 
 				return anonymNode.getRow();
 			}
-		} else if (description instanceof OWLObjectMinCardinalityRestriction) {
+		} else if (description instanceof OWLObjectMinCardinality) {
 			if (anonyms.containsKey(description.toString())) {
 				// System.out.println("ZWROCONO JUZ ISTNIEJACY  anonym" +
 				// description.toString() );
@@ -574,27 +578,27 @@ public class OWLtoGraphConverter {
 				anonyms.put(description.toString(), anonymNode.getRow());
 
 				int propertyLink = 0;
-				if (((OWLObjectMinCardinalityRestriction) description)
+				if (((OWLObjectMinCardinality) description)
 						.getProperty() instanceof OWLProperty) {
-					propertyLink = properties.get(((OWLObjectMinCardinalityRestriction) description)
+					propertyLink = properties.get(((OWLObjectMinCardinality) description)
 									.getProperty().toString());
 				} else {
 					throw new Exception("Cardinality went wrong");
 				}
 
 				int classLink = 0;
-				if (((OWLObjectMinCardinalityRestriction) description)
+				if (((OWLObjectMinCardinality) description)
 						.getFiller() instanceof OWLClass) {
-					classLink = classes.get(((OWLObjectMinCardinalityRestriction) description)
-									.getFiller().asOWLClass().getURI().toString());
+					classLink = classes.get(((OWLObjectMinCardinality) description)
+									.getFiller().asOWLClass().getIRI().toURI().toString());
 				} else {
-					classLink = DescriptionHandler(((OWLObjectMinCardinalityRestriction) description)
+					classLink = DescriptionHandler(((OWLObjectMinCardinality) description)
 							.getFiller());
 				}
 
 				Node numberNode = graph.addNode();
 				org.pg.eti.kask.sova.nodes.Node node2 = new org.pg.eti.kask.sova.nodes.MinCardinalityValueNode();
-				node2.setLabel(Integer.toString(((OWLObjectMinCardinalityRestriction) description)
+				node2.setLabel(Integer.toString(((OWLObjectMinCardinality) description)
 										.getCardinality()));
 
 				numberNode.set(COLUMN_NODE, node2);
@@ -618,7 +622,7 @@ public class OWLtoGraphConverter {
 
 				return anonymNode.getRow();
 			}
-		} else if (description instanceof OWLObjectMaxCardinalityRestriction) {
+		} else if (description instanceof OWLObjectMaxCardinality) {
 			if (anonyms.containsKey(description.toString())) {
 				// System.out.println("ZWROCONO JUZ ISTNIEJACY  anonym" +
 				// description.toString() );
@@ -631,27 +635,27 @@ public class OWLtoGraphConverter {
 				anonyms.put(description.toString(), anonymNode.getRow());
 
 				int propertyLink = 0;
-				if (((OWLObjectMaxCardinalityRestriction) description)
+				if (((OWLObjectMaxCardinality) description)
 						.getProperty() instanceof OWLProperty) {
-					propertyLink = properties.get(((OWLObjectMaxCardinalityRestriction) description)
+					propertyLink = properties.get(((OWLObjectMaxCardinality) description)
 									.getProperty().toString());
 				} else {
 					throw new Exception("Cardinality went wrong");
 				}
 
 				int classLink = 0;
-				if (((OWLObjectMaxCardinalityRestriction) description)
+				if (((OWLObjectMaxCardinality) description)
 						.getFiller() instanceof OWLClass) {
-					classLink = classes.get(((OWLObjectMaxCardinalityRestriction) description)
-									.getFiller().asOWLClass().getURI().toString());
+					classLink = classes.get(((OWLObjectMaxCardinality) description)
+									.getFiller().asOWLClass().getIRI().toURI().toString());
 				} else {
-					classLink = DescriptionHandler(((OWLObjectMaxCardinalityRestriction) description)
+					classLink = DescriptionHandler(((OWLObjectMaxCardinality) description)
 							.getFiller());
 				}
 
 				Node numberNode = graph.addNode();
 				org.pg.eti.kask.sova.nodes.Node node2 = new org.pg.eti.kask.sova.nodes.MaxCardinalityValueNode();
-				node2.setLabel(Integer.toString(((OWLObjectMaxCardinalityRestriction) description)
+				node2.setLabel(Integer.toString(((OWLObjectMaxCardinality) description)
 										.getCardinality()));
 
 				numberNode.set(COLUMN_NODE, node2);
@@ -675,7 +679,7 @@ public class OWLtoGraphConverter {
 
 				return anonymNode.getRow();
 			}
-		} else if (description instanceof OWLObjectExactCardinalityRestriction) {
+		} else if (description instanceof OWLObjectExactCardinality) {
 			if (anonyms.containsKey(description.toString())) {
 				// System.out.println("ZWROCONO JUZ ISTNIEJACY  anonym" +
 				// description.toString() );
@@ -688,25 +692,25 @@ public class OWLtoGraphConverter {
 				anonyms.put(description.toString(), anonymNode.getRow());
 
 				int propertyLink = 0;
-				if (((OWLObjectExactCardinalityRestriction) description)
+				if (((OWLObjectExactCardinality) description)
 						.getProperty() instanceof OWLProperty) {
-					propertyLink = properties.get(((OWLObjectExactCardinalityRestriction) description)
+					propertyLink = properties.get(((OWLObjectExactCardinality) description)
 									.getProperty().toString());
 				} else {
 					throw new Exception("Cardinality went wrong");
 				}
 
 				int classLink = 0;
-				if (((OWLObjectExactCardinalityRestriction) description)
+				if (((OWLObjectExactCardinality) description)
 						.getFiller() instanceof OWLClass) {
-					classLink = classes.get(((OWLObjectExactCardinalityRestriction) description).getFiller().asOWLClass().getURI().toString());
+					classLink = classes.get(((OWLObjectExactCardinality) description).getFiller().asOWLClass().getIRI().toURI().toString());
 				} else {
-					classLink = DescriptionHandler(((OWLObjectExactCardinalityRestriction) description).getFiller());
+					classLink = DescriptionHandler(((OWLObjectExactCardinality) description).getFiller());
 				}
 
 				Node numberNode = graph.addNode();
 				org.pg.eti.kask.sova.nodes.Node node2 = new org.pg.eti.kask.sova.nodes.CardinalityValueNode();
-				node2.setLabel(Integer.toString(((OWLObjectExactCardinalityRestriction) description).getCardinality()));
+				node2.setLabel(Integer.toString(((OWLObjectExactCardinality) description).getCardinality()));
 
 				numberNode.set(COLUMN_NODE, node2);
 				anonyms.put(description.toString(), anonymNode.getRow());
@@ -744,16 +748,16 @@ public class OWLtoGraphConverter {
 	
 	private int insertThingClass(OWLOntology ontology, Graph graph){
 		boolean isThing = false;
-		for(OWLClass cls : ontology.getReferencedClasses()){
+		for(OWLClass cls : ontology.getClassesInSignature()){
 			if(cls.isOWLThing()){
 				// Dodajemy węzeł Thing z ontologi 
 				Node thing = graph.addNode();
 				org.pg.eti.kask.sova.nodes.Node t = new org.pg.eti.kask.sova.nodes.ThingNode();
 				thing.set(COLUMN_NODE, t);
-				thing.set(COLUMN_URI, cls.getURI());
+				thing.set(COLUMN_URI, cls.getIRI().toURI());
 				thing.set(COLUMN_NAME_NODE, cls.toString());
 				thingNumber = thing.getRow();
-				classes.put(cls.getURI().toString(), thingNumber);	
+				classes.put(cls.getIRI().toURI().toString(), thingNumber);
 				isThing = true;
 			}
 		}
@@ -798,36 +802,36 @@ public class OWLtoGraphConverter {
 		 */
 		for (OWLAxiom axiom : ontology.getAxioms()) {
 		
-			if (axiom instanceof OWLSubClassAxiom) {
+			if (axiom instanceof OWLSubClassOfAxiom) {
 				// System.out.println("OWLCLASSAXIOM : " + axiom.toString());
 				int subClassID = -1;
 				int superClassID = -1;
 				// budowanie edge
-				// uchwyty miedzy edgem to ((OWLSubClassAxiom)
-				// axiom).getSubClass() i(OWLSubClassAxiom)
+				// uchwyty miedzy edgem to ((OWLSubClassOfAxiom)
+				// axiom).getSubClass() i(OWLSubClassOfAxiom)
 				// axiom).getSuperClass()
-				if (((OWLSubClassAxiom) axiom).getSubClass() instanceof OWLClass) {
-					// System.out.println("Subklasa:  " + ((OWLSubClassAxiom)
+				if (((OWLSubClassOfAxiom) axiom).getSubClass() instanceof OWLClass) {
+					// System.out.println("Subklasa:  " + ((OWLSubClassOfAxiom)
 					// axiom).getSubClass());
-					subClassID = classes.get(((OWLSubClassAxiom) axiom).getSubClass().asOWLClass().getURI().toString());
+					subClassID = classes.get(((OWLSubClassOfAxiom) axiom).getSubClass().asOWLClass().getIRI().toURI().toString());
 
 					// wez z hashtable uchwyt subklasy
 				} else {
 
 					// pobierz z handlera uchwyt do wierzcholka
-					subClassID = DescriptionHandler(((OWLSubClassAxiom) axiom).getSubClass());
+					subClassID = DescriptionHandler(((OWLSubClassOfAxiom) axiom).getSubClass());
 				}
 
-				if (((OWLSubClassAxiom) axiom).getSuperClass() instanceof OWLClass 
-					/* &&!((OWLSubClassAxiom ) axiom).getSuperClass().isOWLThing()*/) {
-					// System.out.println("Superklasa: " + ((OWLSubClassAxiom)
+				if (((OWLSubClassOfAxiom) axiom).getSuperClass() instanceof OWLClass
+					/* &&!((OWLSubClassOfAxiom ) axiom).getSuperClass().isOWLThing()*/) {
+					// System.out.println("Superklasa: " + ((OWLSubClassOfAxiom)
 					// axiom).getSuperClass());
 					// wez z hashtable uchwyt taty
-					superClassID = classes.get(((OWLClass)((OWLSubClassAxiom) axiom)
-							.getSuperClass()).getURI().toString());
+					superClassID = classes.get(((OWLClass)((OWLSubClassOfAxiom) axiom)
+							.getSuperClass()).getIRI().toURI().toString());
 				} else {
 
-					superClassID = DescriptionHandler(((OWLSubClassAxiom) axiom)
+					superClassID = DescriptionHandler(((OWLSubClassOfAxiom) axiom)
 							.getSuperClass());
 				}
 				// dodaj edge
@@ -845,14 +849,14 @@ public class OWLtoGraphConverter {
 				// System.out.println("DISJOINT AXIOM: " +
 				// ((OWLDisjointClassesAxiom) axiom).toString());
 				int id1 = -1, id2 = -1, i = 0;
-				for (OWLDescription d : ((OWLDisjointClassesAxiom) axiom)
-						.getDescriptions()) {
+				for (OWLClassExpression d : ((OWLDisjointClassesAxiom) axiom)
+						.getClassExpressions()) {
 					if (d instanceof OWLClass) {
 						// normalnie
 						if (i == 0) {
-							id1 = classes.get(d.asOWLClass().getURI().toString());
+							id1 = classes.get(d.asOWLClass().getIRI().toURI().toString());
 						} else {
-							id2 = classes.get(d.asOWLClass().getURI().toString());
+							id2 = classes.get(d.asOWLClass().getIRI().toURI().toString());
 						}
 					} else {
 						if (i == 0) {
@@ -875,14 +879,14 @@ public class OWLtoGraphConverter {
 				// System.out.println("EQUIV AXIOM: " +
 				// ((OWLEquivalentClassesAxiom) axiom).toString());
 				int id1 = -1, id2 = -1, i = 0;
-				for (OWLDescription d : ((OWLEquivalentClassesAxiom) axiom)
-						.getDescriptions()) {
+				for (OWLClassExpression d : ((OWLEquivalentClassesAxiom) axiom)
+						.getClassExpressions()) {
 					if (d instanceof OWLClass) {
 						// normalnie
 						if (i == 0) {
-							id1 = classes.get(((OWLClass)d).getURI().toString());
+							id1 = classes.get(((OWLClass)d).getIRI().toURI().toString());
 						} else {
-							id2 = classes.get(((OWLClass)d).getURI().toString());
+							id2 = classes.get(((OWLClass)d).getIRI().toURI().toString());
 						}
 						// System.out.println("EQUIV skladowa klasa : " +
 						// d.toString() );
@@ -912,7 +916,7 @@ public class OWLtoGraphConverter {
 				int id2 = -1;
 				if (((OWLObjectPropertyRangeAxiom) axiom).getRange() instanceof OWLClass) {
 					id2 = classes.get(((OWLObjectPropertyRangeAxiom) axiom)
-							.getRange().asOWLClass().getURI().toString());
+							.getRange().asOWLClass().getIRI().toURI().toString());
 				} else {
 					id2 = DescriptionHandler(((OWLObjectPropertyRangeAxiom) axiom).getRange());
 				}
@@ -930,7 +934,7 @@ public class OWLtoGraphConverter {
 				int id2 = -1;
 				if (((OWLObjectPropertyDomainAxiom) axiom).getDomain() instanceof OWLClass) {
 					id2 = classes.get(((OWLObjectPropertyDomainAxiom) axiom)
-							.getDomain().asOWLClass().getURI().toString());
+							.getDomain().asOWLClass().getIRI().toURI().toString());
 				} else {
 					id2 = DescriptionHandler(((OWLObjectPropertyDomainAxiom) axiom)
 							.getDomain());
@@ -945,17 +949,17 @@ public class OWLtoGraphConverter {
 
 			} else if (axiom instanceof OWLClassAssertionAxiom) {
 				int id1 = individuals.get(((OWLClassAssertionAxiom) axiom)
-						.getIndividual().getURI().toString());
+						.getIndividual().asOWLNamedIndividual().getIRI().toURI().toString());
 
 				int id2 = -1;
 				// if(!((OWLClassAssertionAxiom)axiom).getDescription().isOWLThing()){
-				if (((OWLClassAssertionAxiom) axiom).getDescription() instanceof OWLClass) {
+				if (((OWLClassAssertionAxiom) axiom).getClassExpression() instanceof OWLClass) {
 					id2 = classes.get(((OWLClassAssertionAxiom) axiom)
-							.getDescription().asOWLClass().getURI().toString());
+							.getClassExpression().asOWLClass().getIRI().toURI().toString());
 
 				} else {
 					id2 = DescriptionHandler(((OWLClassAssertionAxiom) axiom)
-							.getDescription());
+							.getClassExpression());
 				}
 				if (id1 >= 0 && id2 >= 0) {
 					int row = edges.addRow();
@@ -974,7 +978,7 @@ public class OWLtoGraphConverter {
 				anonymNode.set(COLUMN_NODE, node);
 
 				for (OWLIndividual ind : ((OWLDifferentIndividualsAxiom) axiom).getIndividuals()) {
-					int id = individuals.get(ind.getURI().toString());
+					int id = individuals.get(ind.asOWLNamedIndividual().getIRI().toURI().toString());
 					int row = edges.addRow();
 					edges.set(row, "source", id);
 					edges.set(row, "target", anonymNode.getRow());
@@ -1090,15 +1094,15 @@ public class OWLtoGraphConverter {
 				edges.set(row, "source", anonymNode.getRow());
 				edges.set(row, "target", id);
 				edges.set(row, "edge", new org.pg.eti.kask.sova.edges.Edge());
-			} else if (axiom instanceof OWLSameIndividualsAxiom) {
+			} else if (axiom instanceof OWLSameIndividualAxiom) {
 
 				// System.out.println("SAME NODE " + axiom.toString() +
 				// " dodany" );
 				Node anonymNode = graph.addNode();
 				org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.SameAsNode();
 				anonymNode.set(COLUMN_NODE, node);
-				for (OWLIndividual ind : ((OWLSameIndividualsAxiom) axiom).getIndividuals()) {
-					int id = individuals.get(ind.getURI().toString());
+				for (OWLIndividual ind : ((OWLSameIndividualAxiom) axiom).getIndividuals()) {
+					int id = individuals.get(ind.asOWLNamedIndividual().getIRI().toURI().toString());
 					int row = edges.addRow();
 					edges.set(row, "source", id);
 					edges.set(row, "target", anonymNode.getRow());

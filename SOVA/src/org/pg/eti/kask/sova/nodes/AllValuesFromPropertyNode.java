@@ -35,6 +35,5 @@ public class AllValuesFromPropertyNode extends PropertyNode
 		this.label = "∀:" + label;
 	}
 
-	
-}
 
+}

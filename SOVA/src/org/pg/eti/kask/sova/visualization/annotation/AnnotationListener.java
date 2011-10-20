@@ -4,14 +4,13 @@ import java.awt.event.MouseEvent;
 import java.net.URI;
 import java.util.Set;
 import org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
-import org.semanticweb.owl.apibinding.OWLManager;
-import org.semanticweb.owl.model.OWLAxiom;
-import org.semanticweb.owl.model.OWLClass;
-import org.semanticweb.owl.model.OWLCommentAnnotation;
-import org.semanticweb.owl.model.OWLEntityAnnotationAxiom;
-import org.semanticweb.owl.model.OWLLabelAnnotation;
-import org.semanticweb.owl.model.OWLOntology;
-import org.semanticweb.owl.model.OWLOntologyManager;
+import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
+import org.semanticweb.owlapi.model.OWLAxiom;
+import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyManager;
 import prefuse.controls.ControlAdapter;
 import prefuse.visual.VisualItem;
 /**
@@ -42,16 +41,17 @@ public class AnnotationListener extends ControlAdapter {
     	descriptComponent.setLabelText("");
     	descriptComponent.setCommentText("");
     	if (o!=null){
-    		OWLClass currentClass = manager.getOWLDataFactory().getOWLClass((URI)o);
-			descriptComponent.setNameText(currentClass.getURI().getFragment());
+    		OWLClass currentClass = manager.getOWLDataFactory().getOWLClass(IRI.create((URI)o));
+			descriptComponent.setNameText(currentClass.getIRI().getFragment());
 			Set<OWLAxiom> refAxioms = ontology.getReferencingAxioms(currentClass);
 			for(OWLAxiom axiom : refAxioms) {
-				if(axiom instanceof OWLEntityAnnotationAxiom ) {
-					if(((OWLEntityAnnotationAxiom)axiom).getAnnotation() instanceof OWLLabelAnnotation) {
-						descriptComponent.setLabelText(((OWLEntityAnnotationAxiom)axiom).getAnnotation().getAnnotationValueAsConstant().getLiteral());
-					} else if(((OWLEntityAnnotationAxiom)axiom).getAnnotation() instanceof OWLCommentAnnotation) {
-						descriptComponent.setCommentText(((OWLEntityAnnotationAxiom)axiom).getAnnotation().getAnnotationValueAsConstant().getLiteral());
-					}
+				if(axiom instanceof OWLAnnotationAssertionAxiom ) {
+//					if(((OWLAnnotationAssertionAxiom)axiom).getAnnotation() instanceof OWLLabelAnnotation) {
+//						descriptComponent.setLabelText(((OWLAnnotationAssertionAxiom)axiom).getAnnotation().getAnnotationValueAsConstant().getLiteral());
+//					} else if(((OWLAnnotationAssertionAxiom)axiom).getAnnotation() instanceof OWLCommentAnnotation) {
+//						descriptComponent.setCommentText(((OWLAnnotationAssertionAxiom)axiom).getAnnotation().getAnnotationValueAsConstant().getLiteral());
+//					}
+                                    descriptComponent.setCommentText(((OWLAnnotationAssertionAxiom)axiom).getAnnotation().getValue().toString() /*getAnnotationValueAsConstant().getLiteral()*/);
 				}
 			}
     	}

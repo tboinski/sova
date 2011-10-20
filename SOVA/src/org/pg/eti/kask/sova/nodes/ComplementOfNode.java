@@ -15,4 +15,3 @@ public class ComplementOfNode extends AnonymousClassNode
 		label = "¬";
 	}
 }
-
