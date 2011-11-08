@@ -71,9 +71,9 @@ public class HierarchyTreeVis extends AbstractOWLViewComponent {
         	this.add(rightPanel);
         }
     	
-        if (!getOWLModelManager().getReasoner().toString().toLowerCase().contains("pellet")){
-        	String message = "To use this method of visualization you need to install Pellet " +
-        			"and choose Pellet in reasoner menu."; 
+        if (!getOWLModelManager().getReasoner().toString().toLowerCase().contains("hermit")){
+        	String message = "To use this method of visualization you need to install HermiT " +
+        			"and choose it in reasoner menu.";
         	JOptionPane.showMessageDialog(this, message);
         }
     	
