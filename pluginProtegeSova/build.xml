@@ -1,7 +1,7 @@
 <?xml version = "1.0" encoding = "utf-8"?>
 <project name="SOVA Visualization" default="jar" basedir=".">
 
-	<property name = "protege.home" location="C:\\Program Files (x86)\\Protege_4.0.2"/>
+	<property name = "protege.home" location="/home/boing/tools/Ontologie/Protege_4.1_rc5"/>
 	<property name = "protege.common"    location="${protege.home}/bundles"/>
 	<property name = "protege.plugins"   location="${protege.home}/plugins"/>
 
@@ -20,7 +20,7 @@
 
 
 	<target name="init">
-		<!-- Utworzenie katalogu build w którym będą umieszczane skompilowane pliki. -->
+		<!-- Utworzenie katalogu build w ktorym beda umieszczane skompilowane pliki. -->
 		<mkdir dir="${build}" />
 		<mkdir dir="${classes}" />
 		<path id="project.classpath">

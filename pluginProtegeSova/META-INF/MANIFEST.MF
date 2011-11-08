@@ -8,8 +8,25 @@ Bundle-Vendor: ETI Group
 Bundle-DocURL: http://www.eti.pg.gda.pl
 Update-Url: http://www.eti.pg.gda.pl
 Bundle-ClassPath: .,lib/SOVA.jar,lib/prefuse.jar
-Import-Package: org.osgi.framework
-Bundle-Version: 0.7.5
+Import-Package: org.osgi.framework,
+ javax.swing,
+ javax.swing.border,
+ javax.swing.colorchooser,
+ javax.swing.event,
+ javax.swing.filechooser,
+ javax.swing.plaf,
+ javax.swing.plaf.basic,
+ javax.swing.plaf.metal,
+ javax.swing.plaf.multi,
+ javax.swing.plaf.synth,
+ javax.swing.table,
+ javax.swing.text,
+ javax.swing.text.html,
+ javax.swing.text.html.parser,
+ javax.swing.text.rtf,
+ javax.swing.tree,
+ javax.swing.undo
+Bundle-Version: 0.7.6
 Bundle-Activator: org.protege.editor.core.plugin.DefaultPluginActivator
 Require-Bundle: org.eclipse.equinox.registry,
  org.eclipse.equinox.common,
