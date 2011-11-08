@@ -1,3 +1,22 @@
+/*
+ *
+ * Copyright (c) 2010 Gda?sk University of Technology
+ * Copyright (c) 2010 Kunowski Piotr
+ *
+ * This file is part of OCS.  OCS is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with
+ * this program; If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
 package org.pg.eti.kask.ont.pluginSova;
 
 import org.protege.editor.core.ui.workspace.WorkspaceViewsTab;
@@ -9,7 +28,7 @@ import org.protege.editor.core.ui.view.ViewComponentPlugin;
 import org.protege.editor.owl.OWLEditorKit;
 import org.protege.editor.owl.model.OWLModelManager;
 import org.protege.editor.owl.ui.view.AbstractOWLSelectionViewComponent;
-import org.semanticweb.owl.model.*;
+import org.semanticweb.owlapi.model.*;
 
 import javax.swing.*;
 import java.util.HashSet;
@@ -116,8 +135,16 @@ public class pluginSovaTab extends WorkspaceViewsTab {
         }
 
 
-        public void visit(OWLDataType owlDataType) {
+        public void visit(OWLDatatype owlDataType) {
             nav = ProtegeProperties.getInstance().getProperty(ProtegeProperties.DATATYPE_VIEW_CATEGORY);
+        }
+
+        public void visit(OWLNamedIndividual owlni) {
+            nav = ProtegeProperties.getInstance().getProperty(ProtegeProperties.INDIVIDUAL_VIEW_CATEGORY);
+        }
+
+        public void visit(OWLAnnotationProperty owlap) {
+            nav = ProtegeProperties.getInstance().getProperty(ProtegeProperties.ANNOTATION_PROPERTY_VIEW_CATEGORY);
         }
     }
 }
