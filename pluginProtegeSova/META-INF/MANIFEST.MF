@@ -26,7 +26,7 @@ Import-Package: org.osgi.framework,
  javax.swing.text.rtf,
  javax.swing.tree,
  javax.swing.undo,
- javax.swing.imageio
+ javax.imageio
 Bundle-Version: 0.7.6
 Bundle-Activator: org.protege.editor.core.plugin.DefaultPluginActivator
 Require-Bundle: org.eclipse.equinox.registry,
