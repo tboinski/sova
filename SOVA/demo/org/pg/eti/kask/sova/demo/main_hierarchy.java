@@ -23,7 +23,6 @@
 package org.pg.eti.kask.sova.demo;
 
 import java.io.PrintStream;
-import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -52,9 +51,9 @@ public class main_hierarchy {
             VisualizationProperties.instanceOf().loadProperties(Constants.PROPERTIES);
             manager = OWLManager.createOWLOntologyManager();
                 
-            IRI physicalURI = IRI.create(Constants.ONTO_TEST_DIRECTORY);
+            IRI physicalIRI = IRI.create(Constants.ONTO_TEST_DIRECTORY);
             try {// wczytanie ontologi z pliku 
-            	ontology = manager.loadOntologyFromOntologyDocument(physicalURI);
+            	ontology = manager.loadOntologyFromOntologyDocument(physicalIRI);
             	
             } catch (OWLOntologyCreationException ex) {
                 Logger.getLogger(OWLOntologyManager.class.getName()).log(Level.SEVERE, null, ex);

@@ -22,17 +22,13 @@
 
 package org.pg.eti.kask.sova.demo;
 
-import java.awt.Dimension;
 import java.io.PrintStream;
-import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import org.pg.eti.kask.sova.utils.Debug;
 import org.pg.eti.kask.sova.utils.VisualizationProperties;
@@ -61,9 +57,9 @@ public class main {
             // wczytanie propertiesów -klasa singleton 
             VisualizationProperties.instanceOf().loadProperties(Constants.PROPERTIES);
                 
-            IRI physicalURI = IRI.create(Constants.ONTO_TEST_DIRECTORY);
+            IRI physicalIRI = IRI.create(Constants.ONTO_TEST_DIRECTORY);
             try {// wczytanie ontologi z pliku 
-            	ontology = OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(physicalURI);
+            	ontology = OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(physicalIRI);
             	
             } catch (OWLOntologyCreationException ex) {
                 Logger.getLogger(OWLOntologyManager.class.getName()).log(Level.SEVERE, null, ex);

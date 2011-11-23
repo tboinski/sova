@@ -34,8 +34,8 @@ import org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
 import org.pg.eti.kask.sova.graph.OWLtoHierarchyTreeConverter;
 import org.pg.eti.kask.sova.visualization.annotation.AnnotationComponent;
 import org.pg.eti.kask.sova.visualization.annotation.AnnotationListener;
-import org.pg.eti.kask.sova.visualization.annotation.URIInfoComponent;
-import org.pg.eti.kask.sova.visualization.annotation.URIInfoListener;
+import org.pg.eti.kask.sova.visualization.annotation.IRIInfoComponent;
+import org.pg.eti.kask.sova.visualization.annotation.IRIInfoListener;
 import org.semanticweb.owlapi.model.OWLOntology;
 import prefuse.Display;
 import prefuse.Visualization;
@@ -198,8 +198,8 @@ public class OVDisplay extends Display {
      * Dodaje komponent nasłuchujący na zmiany wskazanego wierzchołka  
      * @param component
      */
-    public void addURIInfoComponent(URIInfoComponent component){
-    	this.addControlListener(new URIInfoListener(component));
+    public void addIRIInfoComponent(IRIInfoComponent component){
+    	this.addControlListener(new IRIInfoListener(component));
     }
     /**
      * metoda wizualizuje zadaną ontologię

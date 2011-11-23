@@ -20,17 +20,29 @@
  *
  */
 
-/**
- * 
- */
-package org.pg.eti.kask.sova.visualization.annotation;
+package org.pg.eti.kask.sova.demo;
 
-/**
- * Interfejs zawiera metody, które musi posiadać klasa formatki 
- * wyświetlającej URI najechanego elementu. 
- * @author Piotr Kunowski
- *
- */
-public interface URIInfoComponent {
-	public void setURIInfo(String uri);
+import java.awt.Color;
+import java.awt.Dimension;
+
+import javax.swing.JTextField;
+
+import org.pg.eti.kask.sova.visualization.annotation.IRIInfoComponent;
+
+public class IRITextField extends JTextField implements IRIInfoComponent {
+
+	{	/* blok inicjujacy */
+		this.setSize(new Dimension(500,20));
+		this.setMaximumSize(new Dimension(500,20));
+		this.setMinimumSize(new Dimension(500,20));
+		this.setColumns(50);
+		this.setEditable(false);
+		this.setBackground(Color.WHITE);
+	}
+	@Override
+	public void setIRIInfo(String iri) {
+		this.setText(iri);
+
+	}
+
 }

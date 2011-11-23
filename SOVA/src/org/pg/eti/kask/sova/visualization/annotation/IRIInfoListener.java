@@ -23,37 +23,37 @@
 package org.pg.eti.kask.sova.visualization.annotation;
 
 import java.awt.event.MouseEvent;
-import java.net.URI;
 
 import org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
+import org.semanticweb.owlapi.model.IRI;
 import prefuse.controls.ControlAdapter;
 import prefuse.visual.VisualItem;
 /**
- * Klasa listenera ustawia URI wskazanego elementu w zadanym komponencie
+ * Klasa listenera ustawia IRI wskazanego elementu w zadanym komponencie
  * @author Piotr Kunowski
  *
  */
-public class URIInfoListener extends ControlAdapter {
-	private URIInfoComponent uriInof;
-	public URIInfoListener(URIInfoComponent component){
-		this.uriInof = component;
+public class IRIInfoListener extends ControlAdapter {
+	private IRIInfoComponent iriInof;
+	public IRIInfoListener(IRIInfoComponent component){
+		this.iriInof = component;
 	}
 	
 	/**
-	 * Metoda po najechaniu na elemnet ustawia jego uri w uriInfo
+	 * Metoda po najechaniu na elemnet ustawia jego IRI w iriInfo
 	 */
 	@Override
 	public void itemMoved(VisualItem arg0, MouseEvent arg1) {
-		Object o = arg0.get(OWLtoGraphConverter.COLUMN_URI);
+		Object o = arg0.get(OWLtoGraphConverter.COLUMN_IRI);
 		if (o==null){
-			uriInof.setURIInfo("");
+			iriInof.setIRIInfo("");
 		}else{
-			uriInof.setURIInfo(((URI)o).toString());
+			iriInof.setIRIInfo(((IRI)o).toString());
 		}
 	}
 	@Override
 	public void itemExited(VisualItem arg0, MouseEvent arg1) {
-		uriInof.setURIInfo("");
+		iriInof.setIRIInfo("");
 	}
 
 }

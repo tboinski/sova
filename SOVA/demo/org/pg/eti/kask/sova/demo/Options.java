@@ -77,6 +77,7 @@ public class Options extends JFrame {
 	private static final String CHECKBOX_INSTANCEPROPERTY_COMMAND = "checkbox_instanceproperty";
 	private static final String CHECKBOX_DOMAIN_COMMAND = "checkbox_domain";
 	private static final String CHECKBOX_RANGE_COMMAND = "checkbox_drange";
+	private static final String CHECKBOX_SHOW_IRI = "checkbox_showiri";
 	private static final int DEFAULT_WIDTH = 300;
 	private static final int DEFAULT_HEIGHT = 600;
 	private JButton exitButt;
@@ -93,6 +94,7 @@ public class Options extends JFrame {
 			chSubProperty = null, chEquivalentProperty = null,
 			chFunctionalProperty = null, chInversFunctionalProperty = null,
 			chSymmetricProperty = null, chTransitiveProperty = null;
+        private JCheckBox chShowIRI = null;
 	private JPanel visValues = null;
 	private boolean isOptionFrameShow = false;
 
@@ -354,6 +356,13 @@ public class Options extends JFrame {
 		checkboxPanel.add(chRange);
 		visValues.add(checkboxPanel);
 
+                //show IRI
+		chShowIRI = new JCheckBox("Show full URI");
+		chShowIRI.setActionCommand(CHECKBOX_SHOW_IRI);
+		chShowIRI.addActionListener(checkboxListener);
+		chShowIRI.setSelected(false);
+		checkboxPanel.add(chShowIRI);
+		visValues.add(checkboxPanel);
 	}
 
 	private class CheckBoxListener implements ActionListener {
@@ -570,6 +579,12 @@ public class Options extends JFrame {
 					FilterOptions.setRange(true);
 				} else {
 					FilterOptions.setRange(false);
+				}
+			} else if (e.getActionCommand().equals(CHECKBOX_SHOW_IRI)) {
+				if (chShowIRI.isSelected()) {
+					FilterOptions.setShowIRI(true);
+				} else {
+					FilterOptions.setShowIRI(false);
 				}
 			}
 			display.getVisualization().refreshFilter();

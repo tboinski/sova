@@ -131,7 +131,7 @@ public class OWLtoHierarchyTreeConverter {
                 } else {
                     currentNode = tree.addChild(parentNode);
                 }
-                usedClasses.add(currentClass.getIRI().toString());
+                usedClasses.add(currentClass.getIRI().getFragment());
                 //tu zmienilem
                 org.pg.eti.kask.sova.nodes.Node node = null;
 
@@ -141,7 +141,7 @@ public class OWLtoHierarchyTreeConverter {
 
                 } else {
                     node = new org.pg.eti.kask.sova.nodes.ClassNode();
-                    node.setLabel(currentClass.getIRI().toString());
+                    node.setLabel(currentClass.getIRI().getFragment());
                 }
                 currentNode.set(Constants.TREE_NODES, node);
 
@@ -164,7 +164,7 @@ public class OWLtoHierarchyTreeConverter {
             if (!currentIndividual.isAnonymous()) {
                 currentNode = tree.addChild(parentNode);
                 org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.IndividualNode();
-                node.setLabel(currentIndividual.asOWLNamedIndividual().getIRI().toString());
+                node.setLabel(currentIndividual.asOWLNamedIndividual().getIRI().getFragment());
                 //tu zmieniłem
                 currentNode.set(Constants.TREE_NODES, node);
             }

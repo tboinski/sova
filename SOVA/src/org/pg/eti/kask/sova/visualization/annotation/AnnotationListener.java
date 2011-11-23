@@ -58,12 +58,12 @@ public class AnnotationListener extends ControlAdapter {
      */
 	@Override
     public void itemClicked(VisualItem item, MouseEvent e) {
-    	Object o = item.get(OWLtoGraphConverter.COLUMN_URI);
+    	Object o = item.get(OWLtoGraphConverter.COLUMN_IRI);
     	descriptComponent.setNameText("");
     	descriptComponent.setLabelText("");
     	descriptComponent.setCommentText("");
     	if (o!=null){
-    		OWLClass currentClass = manager.getOWLDataFactory().getOWLClass(IRI.create((URI)o));
+    		OWLClass currentClass = manager.getOWLDataFactory().getOWLClass(IRI.create(((IRI)o).toURI()));
 			descriptComponent.setNameText(currentClass.getIRI().getFragment());
 			Set<OWLAxiom> refAxioms = ontology.getReferencingAxioms(currentClass);
 			for(OWLAxiom axiom : refAxioms) {

@@ -33,8 +33,8 @@ import org.semanticweb.owlapi.reasoner.SimpleConfiguration;
 
 /**
  * Klasa przechowująca i ładująca reasoner wykorzystywany w wywnioskowanej
- * hierarchii. Domyślnym reasonerem jest org.mindswap.pellet.owlapi.Reasoner,
- * jednak należy pamiętać o załączeniu bibliotek pellet.
+ * hierarchii. Domyślnym reasonerem jest org.semanticweb.HermiT.Reasoner,
+ * jednak należy pamiętać o załączeniu bibliotek hermi.
  * 
  * Tymczasowy reasoner to HermiT, pozostałe są niezgodne z OWL API 3.2.3
  *
@@ -64,8 +64,8 @@ public class ReasonerLoader {
     /**
      * Metoda pobiera reasoner, jeśli nie został on załowdowany przez
      * użytkownika wcześnije to zwracany jest
-     * org.mindswap.pellet.owlapi.Reasoner. Należy pamiętać o załączeniu
-     * biblioteki pellet.
+     * org.semanticweb.HermiT.Reasoner. Należy pamiętać o załączeniu
+     * biblioteki hermit.
      *
      * @return
      * @throws NoSuchMethodException

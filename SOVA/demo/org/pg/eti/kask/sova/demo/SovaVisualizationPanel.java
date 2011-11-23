@@ -64,7 +64,7 @@ public class SovaVisualizationPanel extends JPanel {
 	private JPanel leftPanel = null, rightPanel = null;
 	private AnnotationPanel annotation;
 	private OWLOntology ontology = null;
-	private URITextField uriInfo = null;
+	private IRITextField iriInfo = null;
 	protected void disposeOWLView() {
 		display.removeDisplayVis();
 	}
@@ -73,11 +73,11 @@ public class SovaVisualizationPanel extends JPanel {
 		this.ontology = onto;
 		
 		annotation = new AnnotationPanel();
-		uriInfo = new URITextField();
+		iriInfo = new IRITextField();
 		display = new OVDisplay(ontology);
 		display.setSize(800, 600);
 		display.addAnnotationComponent(annotation);
-		display.addURIInfoComponent(uriInfo);
+		display.addIRIInfoComponent(iriInfo);
 		display.generateGraphFromOWl();
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -220,10 +220,10 @@ public class SovaVisualizationPanel extends JPanel {
 //		
 //		searchPanel.add(bSearch);
 //		stopka.add(searchPanel);
-//		uriInfo.setSize(stopka.getSize().width/2, stopka.getSize().height);
+//		iriInfo.setSize(stopka.getSize().width/2, stopka.getSize().height);
 
 		        
-		stopka.add(uriInfo);
+		stopka.add(iriInfo);
 		stopka.add(display.getSearchPanel());
 		leftPanel.add(stopka);
 	}
