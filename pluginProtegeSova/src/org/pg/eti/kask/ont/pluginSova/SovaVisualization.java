@@ -54,7 +54,7 @@ public class SovaVisualization extends AbstractOWLViewComponent {
     private boolean isOptionFrameShow = false;
     private  JPanel leftPanel = null, rightPanel = null;
     private AnnotationPanel annotation;
-	private URITextField uriInfo = null;
+	private IRITextField uriInfo = null;
     @Override
     protected void disposeOWLView() {
     	display.removeDisplayVis();
@@ -71,8 +71,8 @@ public class SovaVisualization extends AbstractOWLViewComponent {
     		display = new OVDisplay(getOWLModelManager().getActiveOntology());
     		annotation = new AnnotationPanel();
     		display.addAnnotationComponent(annotation);
-    		uriInfo = new URITextField();
-    		display.addURIInfoComponent(uriInfo);
+    		uriInfo = new IRITextField();
+    		display.addIRIInfoComponent(uriInfo);
     		display.setSize(800, 600);
         }
 		display.setOntology(getOWLModelManager().getActiveOntology());

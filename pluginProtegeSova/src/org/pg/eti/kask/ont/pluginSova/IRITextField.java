@@ -23,9 +23,9 @@ import java.awt.Dimension;
 
 import javax.swing.JTextField;
 
-import org.pg.eti.kask.sova.visualization.annotation.URIInfoComponent;
+import org.pg.eti.kask.sova.visualization.annotation.IRIInfoComponent;
 
-public class URITextField extends JTextField implements URIInfoComponent {
+public class IRITextField extends JTextField implements IRIInfoComponent {
 
 	{	/* blok inicjujacy */
 		this.setSize(new Dimension(500,20));
@@ -36,8 +36,8 @@ public class URITextField extends JTextField implements URIInfoComponent {
 		this.setBackground(Color.WHITE);
 	}
 
-	public void setURIInfo(String uri) {
-		this.setText(uri);
+	public void setIRIInfo(String iri) {
+		this.setText(iri);
 
 	}
 
