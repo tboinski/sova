@@ -197,8 +197,13 @@ public class OWLtoGraphConverter {
         for (OWLAnonymousIndividual individual : ontology.getReferencedAnonymousIndividuals()) {
             Node n = graph.addNode();
             org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.IndividualNode();
-            String [] split = individual.getID().getID().split("#");
-            node.setLabel("Anonymous: " + split[1]);
+            try {
+                String[] split = individual.getID().getID().split("#");
+                node.setLabel("Anonymous: " + split[1]);
+            } catch (Exception e) {
+                node.setLabel(individual.getID().getID());
+            }
+
             n.set(COLUMN_NODE, node);
             n.set(COLUMN_IRI, IRI.create(individual.getID().getID()));
             n.set(COLUMN_NAME_NODE, individual.getID().getID());
@@ -322,10 +327,14 @@ public class OWLtoGraphConverter {
                 OWLObjectPropertyExpression prop = ((OWLObjectAllValuesFrom) description).getProperty();
                 if (prop.isAnonymous()) {
                     //TODO: write it in a better form!
-                    String [] split = prop.toString().split("[(#>]");
-                    sNode.setLabel(split[0] + " ( " + split [2] + " " + split[3]);
+                    try {
+                        String[] split = prop.toString().split("[(#>]");
+                        sNode.setLabel(split[0] + " ( " + split[2] + " " + split[3]);
+                    } catch (Exception e) {
+                        sNode.setLabel(prop.toString());
+                    }
                 } else {
-                    sNode.setLabel(prop   .asOWLObjectProperty().getIRI().getFragment());
+                    sNode.setLabel(prop.asOWLObjectProperty().getIRI().getFragment());
                 }
                 //tu zmieniłem
                 allValNode.set(COLUMN_NODE, sNode);
