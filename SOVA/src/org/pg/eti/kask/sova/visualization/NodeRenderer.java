@@ -24,6 +24,7 @@ package org.pg.eti.kask.sova.visualization;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -198,7 +199,7 @@ public class NodeRenderer extends prefuse.render.LabelRenderer
 		 * modyfikować kształt/rozmiar węzła.
 		 */
 		//m_font = new Font("Arial", Font.BOLD, 20);
-		
+		m_font = new Font("DejaVu Serif", Font.PLAIN, 9);
 
 		if (text != null && ColorLib.alpha(textColor) > 0) {
 			g.setPaint(ColorLib.getColor(textColor));

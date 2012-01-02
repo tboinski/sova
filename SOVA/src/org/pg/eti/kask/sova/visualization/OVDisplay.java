@@ -21,9 +21,15 @@
  */
 package org.pg.eti.kask.sova.visualization;
 
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.FileOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -335,5 +341,24 @@ public class OVDisplay extends Display {
         search.setBorder(BorderFactory.createEmptyBorder(5, 5, 4, 0));
         search.setFont(FontLib.getFont("Tahoma", Font.PLAIN, 11));
         jSearch = (JPanel) search;
+    }
+
+    public void saveFullImage(FileOutputStream os, double scale) {
+        try {
+            Rectangle2D bounds = this.getVisualization().getBounds(Constants.GRAPH);
+            // Adding some margins here
+            double width = bounds.getWidth()*scale + 100;
+            double height = bounds.getHeight()*scale + 100;
+            Display display = new Display(this.getVisualization());
+
+            display.zoom(m_tmpPoint, scale);
+            display.pan(-bounds.getX()*scale + 50, -bounds.getY()*scale + 50);
+            BufferedImage img = new BufferedImage((int) width, (int) height, BufferedImage.TYPE_INT_RGB);
+            Graphics2D g = (Graphics2D) img.getGraphics();
+            display.paintDisplay(g, new Dimension((int) width, (int) height));
+            ImageIO.write(img, "png", os);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }
