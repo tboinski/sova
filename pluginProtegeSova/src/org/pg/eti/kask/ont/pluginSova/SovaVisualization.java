@@ -201,64 +201,64 @@ public class SovaVisualization extends AbstractOWLViewComponent {
         });
         buttonPanel.add(saveImage);
 
-        JButton saveFullImage = new JButton("Save Full Image");
-        saveFullImage.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                display.getVisualization().stopLayout();
-                File f = new File("");
-                FileDialog fd = new FileDialog(new Frame(), "Save Full Image", FileDialog.SAVE);
-                fd.setFilenameFilter(new FilenameFilter() {
-
-                    public boolean accept(File dir, String name) {
-                        if (name.toUpperCase().endsWith(".PNG")
-                                || name.toUpperCase().endsWith(".JPG")) {
-                            return true;
-                        }
-                        return false;
-                    }
-                });
-                fd.setLocation(50, 50);
-                fd.setVisible(true);
-                if (fd.getDirectory() == null || fd.getFile() == null) {
-                    if (doLayout) {
-                        display.getVisualization().startLayout();
-                    }
-                    return;
-                }
-                String sFile = fd.getDirectory() + fd.getFile();
-
-                String format = "png";
-
-                if (sFile.toUpperCase().endsWith(".PNG")
-                        || sFile.toUpperCase().endsWith(".JPG")) {
-                    format = sFile.substring(sFile.length() - 3, sFile.length());
-                } else {
-                    sFile += '.' + format;
-                }
-
-                File file = new File(sFile);
-
-                FileOutputStream os;
-                try {
-
-                    os = new FileOutputStream(file);
-                    display.saveFullImage(os, 5.0);
-                    os.close();
-                    //zapis do pliku
-                } catch (FileNotFoundException e1) {
-                    e1.printStackTrace();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                } finally {
-                    if (doLayout) {
-                        display.getVisualization().startLayout();
-                    }
-                }
-
-            }
-        });
-        buttonPanel.add(saveFullImage);
+//        JButton saveFullImage = new JButton("Save Full Image");
+//        saveFullImage.addActionListener(new ActionListener() {
+//
+//            public void actionPerformed(ActionEvent e) {
+//                display.getVisualization().stopLayout();
+//                File f = new File("");
+//                FileDialog fd = new FileDialog(new Frame(), "Save Full Image", FileDialog.SAVE);
+//                fd.setFilenameFilter(new FilenameFilter() {
+//
+//                    public boolean accept(File dir, String name) {
+//                        if (name.toUpperCase().endsWith(".PNG")
+//                                || name.toUpperCase().endsWith(".JPG")) {
+//                            return true;
+//                        }
+//                        return false;
+//                    }
+//                });
+//                fd.setLocation(50, 50);
+//                fd.setVisible(true);
+//                if (fd.getDirectory() == null || fd.getFile() == null) {
+//                    if (doLayout) {
+//                        display.getVisualization().startLayout();
+//                    }
+//                    return;
+//                }
+//                String sFile = fd.getDirectory() + fd.getFile();
+//
+//                String format = "png";
+//
+//                if (sFile.toUpperCase().endsWith(".PNG")
+//                        || sFile.toUpperCase().endsWith(".JPG")) {
+//                    format = sFile.substring(sFile.length() - 3, sFile.length());
+//                } else {
+//                    sFile += '.' + format;
+//                }
+//
+//                File file = new File(sFile);
+//
+//                FileOutputStream os;
+//                try {
+//
+//                    os = new FileOutputStream(file);
+//                    display.saveFullImage(os, 5.0);
+//                    os.close();
+//                    //zapis do pliku
+//                } catch (FileNotFoundException e1) {
+//                    e1.printStackTrace();
+//                } catch (IOException e1) {
+//                    e1.printStackTrace();
+//                } finally {
+//                    if (doLayout) {
+//                        display.getVisualization().startLayout();
+//                    }
+//                }
+//
+//            }
+//        });
+//        buttonPanel.add(saveFullImage);
 
         rightPanel.add(buttonPanel);
         rightPanel.add(annotation);
