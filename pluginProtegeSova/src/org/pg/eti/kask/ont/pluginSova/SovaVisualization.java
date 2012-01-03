@@ -141,10 +141,12 @@ public class SovaVisualization extends AbstractOWLViewComponent {
         });
         options.setSize(100, 80);
         buttonPanel.add(options);
+
         JButton saveImage = new JButton("Save Image");
         saveImage.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
+                display.getVisualization().stopLayout();
                 File f = new File("");
                 FileDialog fd = new FileDialog(new Frame(), "Save", FileDialog.SAVE);
                 fd.setFilenameFilter(new FilenameFilter() {
@@ -160,6 +162,9 @@ public class SovaVisualization extends AbstractOWLViewComponent {
                 fd.setLocation(50, 50);
                 fd.setVisible(true);
                 if (fd.getDirectory() == null || fd.getFile() == null) {
+                    if (doLayout) {
+                        display.getVisualization().startLayout();
+                    }
                     return;
                 }
                 String sFile = fd.getDirectory() + fd.getFile();
@@ -186,17 +191,23 @@ public class SovaVisualization extends AbstractOWLViewComponent {
                     e1.printStackTrace();
                 } catch (IOException e1) {
                     e1.printStackTrace();
+                } finally {
+                    if (doLayout) {
+                        display.getVisualization().startLayout();
+                    }
                 }
 
             }
         });
         buttonPanel.add(saveImage);
+
         JButton saveFullImage = new JButton("Save Full Image");
         saveFullImage.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
+                display.getVisualization().stopLayout();
                 File f = new File("");
-                FileDialog fd = new FileDialog(new Frame(), "Save", FileDialog.SAVE);
+                FileDialog fd = new FileDialog(new Frame(), "Save Full Image", FileDialog.SAVE);
                 fd.setFilenameFilter(new FilenameFilter() {
 
                     public boolean accept(File dir, String name) {
@@ -210,6 +221,9 @@ public class SovaVisualization extends AbstractOWLViewComponent {
                 fd.setLocation(50, 50);
                 fd.setVisible(true);
                 if (fd.getDirectory() == null || fd.getFile() == null) {
+                    if (doLayout) {
+                        display.getVisualization().startLayout();
+                    }
                     return;
                 }
                 String sFile = fd.getDirectory() + fd.getFile();
@@ -236,11 +250,16 @@ public class SovaVisualization extends AbstractOWLViewComponent {
                     e1.printStackTrace();
                 } catch (IOException e1) {
                     e1.printStackTrace();
+                } finally {
+                    if (doLayout) {
+                        display.getVisualization().startLayout();
+                    }
                 }
 
             }
         });
         buttonPanel.add(saveFullImage);
+
         rightPanel.add(buttonPanel);
         rightPanel.add(annotation);
         rightPanel.setPreferredSize(new Dimension(180, Integer.MAX_VALUE));
