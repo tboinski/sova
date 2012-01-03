@@ -43,7 +43,6 @@ import javax.swing.JPanel;
 import org.pg.eti.kask.sova.visualization.OVDisplay;
 import org.semanticweb.owlapi.model.OWLOntology;
 
-
 public class SovaVisualizationPanel extends JPanel {
 
     private static final long serialVersionUID = -4515710047558710080L;
@@ -139,6 +138,7 @@ public class SovaVisualizationPanel extends JPanel {
         saveImage.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
+                display.getVisualization().stopLayout();
                 File f = new File("");
                 FileDialog fd = new FileDialog(new Frame(), "Save", FileDialog.SAVE);
                 fd.setFilenameFilter(new FilenameFilter() {
@@ -154,6 +154,9 @@ public class SovaVisualizationPanel extends JPanel {
                 fd.setLocation(50, 50);
                 fd.setVisible(true);
                 if (fd.getDirectory() == null || fd.getFile() == null) {
+                    if (doLayout) {
+                        display.getVisualization().startLayout();
+                    }
                     return;
                 }
                 String sFile = fd.getDirectory() + fd.getFile();
@@ -180,6 +183,10 @@ public class SovaVisualizationPanel extends JPanel {
                     e1.printStackTrace();
                 } catch (IOException e1) {
                     e1.printStackTrace();
+                } finally {
+                    if (doLayout) {
+                        display.getVisualization().startLayout();
+                    }
                 }
 
             }
@@ -190,8 +197,9 @@ public class SovaVisualizationPanel extends JPanel {
         saveFullImage.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
+                display.getVisualization().stopLayout();
                 File f = new File("");
-                FileDialog fd = new FileDialog(new Frame(), "Save", FileDialog.SAVE);
+                FileDialog fd = new FileDialog(new Frame(), "Save Full Image", FileDialog.SAVE);
                 fd.setFilenameFilter(new FilenameFilter() {
 
                     public boolean accept(File dir, String name) {
@@ -205,6 +213,9 @@ public class SovaVisualizationPanel extends JPanel {
                 fd.setLocation(50, 50);
                 fd.setVisible(true);
                 if (fd.getDirectory() == null || fd.getFile() == null) {
+                    if (doLayout) {
+                        display.getVisualization().startLayout();
+                    }
                     return;
                 }
                 String sFile = fd.getDirectory() + fd.getFile();
@@ -231,6 +242,10 @@ public class SovaVisualizationPanel extends JPanel {
                     e1.printStackTrace();
                 } catch (IOException e1) {
                     e1.printStackTrace();
+                } finally {
+                    if (doLayout) {
+                        display.getVisualization().startLayout();
+                    }
                 }
 
             }
