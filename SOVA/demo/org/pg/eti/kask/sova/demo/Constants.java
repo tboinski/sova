@@ -28,7 +28,7 @@ package org.pg.eti.kask.sova.demo;
 public class Constants {
 //     public static final String ONTO_TEST_DIRECTORY = "file:/home/kunos/Ontologie/pizza.owl";
 //    public static final String ONTO_TEST_DIRECTORY = "file:/home/kunos/Ontologie/pizza.owl";
-    public static final String ONTO_TEST_DIRECTORY = "file:/home/boing/ontologies/risk_ENISA.owl";
+    public static final String ONTO_TEST_DIRECTORY = "file:/home/boing/ontologies/ontC.owl";//risk_ENISA.owl";
 //    public static final String ONTO_TEST_DIRECTORY = "file:/home/boing/ontologies/moduły/moduł_podstawowy/RiskCoreConcepts.owl";
 
     public static final String DEBUG_FILE = "myfile.log";
