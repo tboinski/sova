@@ -76,7 +76,7 @@ public class OWLtoGraphConverter {
 //	}
 //	
     private void insertDataType(OWLOntology ontology, Graph graph) {
-        for (OWLDataProperty prop : ontology.getDataPropertiesInSignature()) {
+        for (OWLDataProperty prop : ontology.getDataPropertiesInSignature(true)) {
 
             System.out.println("DATATYPE :  " + prop.toString());
             Set<OWLDataRange> s = prop.getRanges(ontology);
@@ -129,7 +129,7 @@ public class OWLtoGraphConverter {
      */
     private void insertBaseClasses(OWLOntology ontology, Graph graph) {
 
-        for (OWLClass cls : ontology.getClassesInSignature()) {
+        for (OWLClass cls : ontology.getClassesInSignature(true)) {
             // dodajemy na sucho wszystkie klasy bez krawedzi
             // oprocz Thing
             if (!cls.isOWLThing()) {
@@ -164,7 +164,7 @@ public class OWLtoGraphConverter {
      */
     private void insertBaseProperties(OWLOntology ontology, Graph graph) {
         // dodajemy wszystkie definicje property
-        for (OWLObjectProperty property : ontology.getObjectPropertiesInSignature()) {
+        for (OWLObjectProperty property : ontology.getObjectPropertiesInSignature(true)) {
             Node n = graph.addNode();
             org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.PropertyNode();
             node.setLabel(property.getIRI().getFragment());
@@ -184,7 +184,7 @@ public class OWLtoGraphConverter {
      */
     private void insertBaseIndividuals(OWLOntology ontology, Graph graph) {
         // dodajemy wszystkie definicje individuals
-        for (OWLNamedIndividual individual : ontology.getIndividualsInSignature()) {
+        for (OWLNamedIndividual individual : ontology.getIndividualsInSignature(true)) {
             Node n = graph.addNode();
             org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.IndividualNode();
             node.setLabel(individual.getIRI().getFragment());
@@ -999,26 +999,53 @@ public class OWLtoGraphConverter {
                     edges.set(row, "edge", new org.pg.eti.kask.sova.edges.Edge());
                 }
 
-            } else if (axiom instanceof OWLSubPropertyAxiom) {
-                // System.out.println("OWLPROPERTYAXIOM : " + axiom.toString());
+            } else if (axiom instanceof OWLSubObjectPropertyOfAxiom) {
+//                System.out.println("OWLOBJPROPERTYAXIOM : " + axiom.toString());
                 int subClassID = -1;
                 int superClassID = -1;
                 // budowanie edge
                 // uchwyty miedzy edgem to ((OWLSubPropertyAxiom)
                 // axiom).getSubClass() i(OWLSubPropertyAxiom)
                 // axiom).getSuperClass()
-                if (((OWLSubPropertyAxiom) axiom).getSubProperty() instanceof OWLProperty) {
-                    // System.out.println("Subprop:  " + ((OWLSubPropertyAxiom)
-                    // axiom).getSubProperty());
-                    subClassID = properties.get(((OWLSubPropertyAxiom) axiom).getSubProperty().toString());
+                if (((OWLSubObjectPropertyOfAxiom) axiom).getSubProperty() instanceof OWLProperty) {
+                    System.out.println("Subprop:  " + ((OWLSubObjectPropertyOfAxiom) axiom).getSubProperty().toString());
+                    subClassID = properties.get(((OWLSubObjectPropertyOfAxiom) axiom).getSubProperty().toString());
                     // wez z hashtable uchwyt subklasy
                 }
 
-                if (((OWLSubPropertyAxiom) axiom).getSuperProperty() instanceof OWLProperty) {
+                if (((OWLSubObjectPropertyOfAxiom) axiom).getSuperProperty() instanceof OWLProperty) {
                     // System.out.println("Superprop: " + ((OWLSubPropertyAxiom)
                     // axiom).getSuperProperty());
                     // wez z hashtable uchwyt taty
-                    superClassID = properties.get(((OWLSubPropertyAxiom) axiom).getSuperProperty().toString());
+                    superClassID = properties.get(((OWLSubObjectPropertyOfAxiom) axiom).getSuperProperty().toString());
+                }
+                // dodaj edge
+                if (superClassID >= 0 && subClassID >= 0) {
+                    int row = edges.addRow();
+                    edges.set(row, "source", superClassID);
+                    edges.set(row, "target", subClassID);
+                    edges.set(row, "edge", new org.pg.eti.kask.sova.edges.SubPropertyEdge());
+                }
+
+            } else if (axiom instanceof OWLSubDataPropertyOfAxiom) {
+//                System.out.println("OWLOBJPROPERTYAXIOM : " + axiom.toString());
+                int subClassID = -1;
+                int superClassID = -1;
+                // budowanie edge
+                // uchwyty miedzy edgem to ((OWLSubPropertyAxiom)
+                // axiom).getSubClass() i(OWLSubPropertyAxiom)
+                // axiom).getSuperClass()
+                if (((OWLSubDataPropertyOfAxiom) axiom).getSubProperty() instanceof OWLProperty) {
+                    System.out.println("Subprop:  " + ((OWLSubDataPropertyOfAxiom) axiom).getSubProperty().toString());
+                    subClassID = dataProperties.get(((OWLSubDataPropertyOfAxiom) axiom).getSubProperty().toString());
+                    // wez z hashtable uchwyt subklasy
+                }
+
+                if (((OWLSubDataPropertyOfAxiom) axiom).getSuperProperty() instanceof OWLProperty) {
+                    // System.out.println("Superprop: " + ((OWLSubPropertyAxiom)
+                    // axiom).getSuperProperty());
+                    // wez z hashtable uchwyt taty
+                    superClassID = dataProperties.get(((OWLSubDataPropertyOfAxiom) axiom).getSuperProperty().toString());
                 }
                 // dodaj edge
                 if (superClassID >= 0 && subClassID >= 0) {
