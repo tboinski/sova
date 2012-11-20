@@ -1,4 +1,4 @@
-/*
+ /*
  *
  * Copyright (c) 2010 Gdańsk University of Technology
  * Copyright (c) 2010 Kunowski Piotr
