@@ -27,13 +27,13 @@ import java.awt.Color;
 import org.pg.eti.kask.sova.options.NodeColors;
 
 /**
- * Klasa reprezentuje węzeł Property, do którego są dołączane związki
+ * Klasa reprezentuje węzeł ObjectProperty, do którego są dołączane związki
  * określające jego zakres (Domain oraz Range) oraz cechy (np. transitive).
  */
-public class PropertyNode extends Node
+public class ObjectPropertyNode extends Node
 {
 
-	public PropertyNode()
+	public ObjectPropertyNode()
 	{
 		super();
 		//setStrokeWitdh(2f);
@@ -47,7 +47,7 @@ public class PropertyNode extends Node
 	@Override
 	public Color getFillColorFromScheme(NodeColors colorScheme)
 	{
-		return colorScheme.getPropertyNodeColor();
+		return colorScheme.getObjectPropertyNodeColor();
 	}
 }
 

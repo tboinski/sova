@@ -36,7 +36,7 @@ import prefuse.data.Table;
 /**
  * Konwerter obiektu OWLOntology na obiekt Graph wykorzystywany przez Prefuse.
  * Klasa jest singletonem.
- * 
+ *
  * @author Anna Jaworska
  * @author Piotr Kunowski
  */
@@ -78,16 +78,17 @@ public class OWLtoGraphConverter {
     private void insertDataType(OWLOntology ontology, Graph graph) {
         for (OWLDataProperty prop : ontology.getDataPropertiesInSignature(true)) {
 
-            System.out.println("DATATYPE :  " + prop.toString());
+//            System.out.println("DATATYPE :  " + prop.toString());
             Set<OWLDataRange> s = prop.getRanges(ontology);
             Iterator<OWLDataRange> it = s.iterator();
             int dataPropertyRowNr = 0;
             if (!dataProperties.containsKey(prop.toString())) {
                 Node dataProperty = graph.addNode();
-                org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.PropertyNode();
+                org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.DataPropertyNode();
                 node.setLabel(prop.getIRI().getFragment());
                 dataProperty.set(COLUMN_NODE, node);
                 dataProperty.set(COLUMN_IRI, prop.getIRI());
+                dataProperty.set(COLUMN_NAME_NODE, prop.getIRI().getFragment());
                 dataPropertyRowNr = dataProperty.getRow();
                 dataProperties.put(prop.toString(), dataPropertyRowNr);
             } else {
@@ -103,6 +104,10 @@ public class OWLtoGraphConverter {
                         org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.DataTypeNode();
                         node.setLabel(r.toString());
                         dataType.set(COLUMN_NODE, node);
+                        if (r.isDatatype()) {
+                            dataType.set(COLUMN_IRI, r.asOWLDatatype().getIRI());
+                            dataType.set(COLUMN_NAME_NODE, r.asOWLDatatype().getIRI().getFragment());
+                        }
                         dataTypeRowNr = dataType.getRow();
                         dataTypes.put(r.toString(), dataTypeRowNr);
                     } else {
@@ -112,7 +117,6 @@ public class OWLtoGraphConverter {
                     edges.set(row, "source", dataPropertyRowNr);
                     edges.set(row, "target", dataTypeRowNr);
                     edges.set(row, "edge", new org.pg.eti.kask.sova.edges.RangeEdge());
-
 
                 }
             }
@@ -162,11 +166,11 @@ public class OWLtoGraphConverter {
      * @param graph
      * @param properties
      */
-    private void insertBaseProperties(OWLOntology ontology, Graph graph) {
+    private void insertObjectProperties(OWLOntology ontology, Graph graph) {
         // dodajemy wszystkie definicje property
         for (OWLObjectProperty property : ontology.getObjectPropertiesInSignature(true)) {
             Node n = graph.addNode();
-            org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.PropertyNode();
+            org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.ObjectPropertyNode();
             node.setLabel(property.getIRI().getFragment());
             n.set(COLUMN_NODE, node);
             n.set(COLUMN_IRI, property.getIRI());
@@ -316,7 +320,6 @@ public class OWLtoGraphConverter {
                 Node allValNode = graph.addNode();
 
                 // wstaw SomeNode i polacz
-
                 // someVal.put(((OWLObjectSomeValuesFrom)
                 // description).getProperty().toString(),
                 // ((OWLObjectSomeValuesFrom)
@@ -352,7 +355,6 @@ public class OWLtoGraphConverter {
                 edges.set(someRow, "source", definitionID);
                 edges.set(someRow, "target", allValNode.getRow());
                 edges.set(someRow, "edge", new org.pg.eti.kask.sova.edges.InstancePropertyEdge());
-
 
                 // System.out.println("EDGE MIEDZY ANONYM I ALLVAL " +
                 // allValNode.getRow() +" " +anonymNode.getRow() );
@@ -496,7 +498,6 @@ public class OWLtoGraphConverter {
 
             // System.out.println("UNIA " + ((OWLObjectUnionOf)
             // description).toString());
-
             if (anonyms.containsKey(description.toString())) {
                 // System.out.println("ZWROCONO JUZ ISTNIEJACY  anonym" +
                 // description.toString() );
@@ -802,10 +803,9 @@ public class OWLtoGraphConverter {
 
         initializeGraphColumns();
 
-
         defaultNumber = this.insertThingClass(ontology, graph);
         this.insertBaseClasses(ontology, graph);
-        this.insertBaseProperties(ontology, graph);
+        this.insertObjectProperties(ontology, graph);
         this.insertBaseIndividuals(ontology, graph);
         this.insertDataType(ontology, graph);
         /*
@@ -954,6 +954,22 @@ public class OWLtoGraphConverter {
                     edges.set(row, "target", id2);
                     edges.set(row, "edge", new org.pg.eti.kask.sova.edges.DomainEdge());
                 }
+            } else if (axiom instanceof OWLDataPropertyDomainAxiom) {
+                int id1 = dataProperties.get(((OWLDataPropertyDomainAxiom) axiom).getProperty().toString());
+
+                int id2 = -1;
+                if (((OWLDataPropertyDomainAxiom) axiom).getDomain() instanceof OWLClass) {
+                    id2 = classes.get(((OWLDataPropertyDomainAxiom) axiom).getDomain().asOWLClass().getIRI().getFragment());
+                } else {
+                    id2 = DescriptionHandler(((OWLDataPropertyDomainAxiom) axiom).getDomain());
+                }
+
+                if (id1 >= 0 && id2 >= 0) {
+                    int row = edges.addRow();
+                    edges.set(row, "source", id1);
+                    edges.set(row, "target", id2);
+                    edges.set(row, "edge", new org.pg.eti.kask.sova.edges.DomainEdge());
+                }
 
             } else if (axiom instanceof OWLClassAssertionAxiom) {
                 int id1 = -1;
@@ -1008,7 +1024,7 @@ public class OWLtoGraphConverter {
                 // axiom).getSubClass() i(OWLSubPropertyAxiom)
                 // axiom).getSuperClass()
                 if (((OWLSubObjectPropertyOfAxiom) axiom).getSubProperty() instanceof OWLProperty) {
-                    System.out.println("Subprop:  " + ((OWLSubObjectPropertyOfAxiom) axiom).getSubProperty().toString());
+//                    System.out.println("Subprop:  " + ((OWLSubObjectPropertyOfAxiom) axiom).getSubProperty().toString());
                     subClassID = properties.get(((OWLSubObjectPropertyOfAxiom) axiom).getSubProperty().toString());
                     // wez z hashtable uchwyt subklasy
                 }
@@ -1036,7 +1052,7 @@ public class OWLtoGraphConverter {
                 // axiom).getSubClass() i(OWLSubPropertyAxiom)
                 // axiom).getSuperClass()
                 if (((OWLSubDataPropertyOfAxiom) axiom).getSubProperty() instanceof OWLProperty) {
-                    System.out.println("Subprop:  " + ((OWLSubDataPropertyOfAxiom) axiom).getSubProperty().toString());
+//                    System.out.println("Subprop:  " + ((OWLSubDataPropertyOfAxiom) axiom).getSubProperty().toString());
                     subClassID = dataProperties.get(((OWLSubDataPropertyOfAxiom) axiom).getSubProperty().toString());
                     // wez z hashtable uchwyt subklasy
                 }
@@ -1142,17 +1158,34 @@ public class OWLtoGraphConverter {
                     edges.set(row, "edge", new org.pg.eti.kask.sova.edges.Edge());
 
                 }
+//            } else if (axiom instanceof OWLDataPropertyAssertionAxiom) {
+//                System.out.println("DATA PROPERTY: " + axiom.toString());
+////					OWLDataProperty dp = (OWLDataProperty)axiom;
+//                OWLDataPropertyAssertionAxiom a = (OWLDataPropertyAssertionAxiom) axiom;
+//                Set<?> s = a.getProperty().getRanges(ontology);
+
+                //System.out.println(	a.getAxiomType().toString());
+            } else if (axiom instanceof OWLFunctionalDataPropertyAxiom) {
+                // System.out.println("FUNC OBJ PRO " + axiom.toString() +
+                // " dodany" );
+                Node anonymNode = graph.addNode();
+                org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.FunctionalPropertyNode();
+                anonymNode.set(COLUMN_NODE, node);
+                int id = dataProperties.get(((OWLFunctionalDataPropertyAxiom) axiom).getProperty().toString());
+                int row = edges.addRow();
+                edges.set(row, "source", anonymNode.getRow());
+                edges.set(row, "target", id);
+                edges.set(row, "edge", new org.pg.eti.kask.sova.edges.Edge());
+
+            } else if ((axiom instanceof OWLDeclarationAxiom)
+                    || (axiom instanceof OWLDataPropertyRangeAxiom)
+                    || (axiom instanceof OWLAnnotationAssertionAxiom)
+                    || (axiom instanceof OWLSubAnnotationPropertyOfAxiom)
+                    || (axiom instanceof OWLAnnotationPropertyDomainAxiom)) {
+                //System.out.println("Ommited on purpose, not displayed or handled in other way");
             } else {
-                if (axiom instanceof OWLDataPropertyAssertionAxiom) {
-                    System.out.println("DATA PROPERTY: " + axiom.toString());
-//					OWLDataProperty dp = (OWLDataProperty)axiom;
-                    OWLDataPropertyAssertionAxiom a = (OWLDataPropertyAssertionAxiom) axiom;
-                    Set<?> s = a.getProperty().getRanges(ontology);
 
-                    //System.out.println(	a.getAxiomType().toString());
-                }
-
-                System.out.println("OMITTED: " + axiom);
+                System.out.println("UnhandledAxiom: " + axiom + ", please report!");
             }
 
         }

@@ -19,7 +19,6 @@
  * this program; If not, see <http://www.gnu.org/licenses/>.
  *
  */
-
 package org.pg.eti.kask.sova.options;
 
 import java.awt.Color;
@@ -28,252 +27,242 @@ import org.pg.eti.kask.sova.utils.VisualizationProperties;
 
 /**
  * Klasa przechowująca informacje o ustawieniach kolorów dla węzłów.
+ *
  * @see org.pg.eti.kask.sova.nodes.Node
  */
-public class NodeColors
-{
+public class NodeColors {
 
-	protected Color allValuesFromNodeColor;
-	protected Color anonymousClassNodeColor;
-	protected Color cardinalityValueNodeColor;
-	protected Color classNodeColor;
-	protected Color dataTypeNodeColor;
-	protected Color differentNodeColor;
-	protected Color individualNodeColor;
-	protected Color informationNodeColor;
-	protected Color maxCardinalityValueNodeColor;
-	protected Color minCardinalityValueNodeColor;
-	protected Color nothingNodeColor;
-	protected Color oneOfNodeColor;
-	protected Color propertyNodeColor;
-	protected Color sameAsNodeColor;
-	protected Color someValuesFromNodeColor;
-	protected Color thingNodeColor;
+    protected Color allValuesFromNodeColor;
+    protected Color anonymousClassNodeColor;
+    protected Color cardinalityValueNodeColor;
+    protected Color classNodeColor;
+    protected Color dataTypeNodeColor;
+    protected Color differentNodeColor;
+    protected Color individualNodeColor;
+    protected Color informationNodeColor;
+    protected Color maxCardinalityValueNodeColor;
+    protected Color minCardinalityValueNodeColor;
+    protected Color nothingNodeColor;
+    protected Color oneOfNodeColor;
+    protected Color objectPropertyNodeColor;
+    protected Color dataPropertyNodeColor;
+    protected Color sameAsNodeColor;
+    protected Color someValuesFromNodeColor;
+    protected Color thingNodeColor;
 
-	public NodeColors()
-	{
-		setDefaultColors();
-	}
+    public NodeColors() {
+        setDefaultColors();
+    }
 
-	protected void setDefaultColors() {
-		// kolory domyślne
-		classNodeColor = new Color(0, 182, 193);
-		thingNodeColor = Color.GREEN;
-		nothingNodeColor = Color.RED;
-		individualNodeColor = new Color(200, 194, 183);
-		differentNodeColor = new Color(209, 174, 114);
-		sameAsNodeColor = differentNodeColor;
-		propertyNodeColor = new Color(146, 61, 255);
-		someValuesFromNodeColor = new Color(203, 61, 255);
-		allValuesFromNodeColor = new Color(159, 152, 255);
-		dataTypeNodeColor = new Color(61, 255, 155);
-		anonymousClassNodeColor = Color.YELLOW;
-		cardinalityValueNodeColor = new Color(255, 171, 0);
-		minCardinalityValueNodeColor = new Color(162, 255, 0);
-		maxCardinalityValueNodeColor = new Color(255, 73, 0);
-		informationNodeColor = new Color(200, 113, 55);
+    protected void setDefaultColors() {
+        // kolory domyślne
+//		classNodeColor = new Color(0, 182, 193);
+//		thingNodeColor = Color.GREEN;
+//		nothingNodeColor = Color.RED;
+//		individualNodeColor = new Color(200, 194, 183);
+//		differentNodeColor = new Color(209, 174, 114);
+//		sameAsNodeColor = differentNodeColor;
+//		propertyNodeColor = new Color(146, 61, 255);
+//		someValuesFromNodeColor = new Color(203, 61, 255);
+//		allValuesFromNodeColor = new Color(159, 152, 255);
+//		dataTypeNodeColor = new Color(61, 255, 155);
+//		anonymousClassNodeColor = Color.YELLOW;
+//		cardinalityValueNodeColor = new Color(255, 171, 0);
+//		minCardinalityValueNodeColor = new Color(162, 255, 0);
+//		maxCardinalityValueNodeColor = new Color(255, 73, 0);
+//		informationNodeColor = new Color(200, 113, 55);
+        classNodeColor = new Color(204, 159, 42);
+        thingNodeColor = Color.GREEN;
+        nothingNodeColor = Color.RED;
+        individualNodeColor = new Color(83, 24, 82);
+        differentNodeColor = new Color(209, 174, 114);
+        sameAsNodeColor = differentNodeColor;
+        objectPropertyNodeColor = new Color(48, 111, 162);
+        dataPropertyNodeColor = new Color(107, 142, 35);
+        someValuesFromNodeColor = new Color(203, 61, 255);
+        allValuesFromNodeColor = new Color(159, 152, 255);
+        dataTypeNodeColor = new Color(41, 167, 121);
+        anonymousClassNodeColor = Color.YELLOW;
+        cardinalityValueNodeColor = new Color(255, 171, 0);
+        minCardinalityValueNodeColor = new Color(162, 255, 0);
+        maxCardinalityValueNodeColor = new Color(255, 73, 0);
+        informationNodeColor = new Color(0, 182, 193);
 
-		//niewykorzystywane kolory - usunięte
+        //unused
 		    /*transitivePropertyNodeColor = informationNodeColor;
-		functionalPropertyNodeColor = informationNodeColor;
-		inverseFunctionalPropertyColor = informationNodeColor;
-		symmetricPropertyNodeColor = informationNodeColor;
+         functionalPropertyNodeColor = informationNodeColor;
+         inverseFunctionalPropertyColor = informationNodeColor;
+         symmetricPropertyNodeColor = informationNodeColor;
 
-		cardinalityNodeColor = anonymousClassNodeColor;
-		complementOfNodeColor = anonymousClassNodeColor;
-		unionOfNodeColor = anonymousClassNodeColor;
-		intersectionOfNodeColor = anonymousClassNodeColor;*/
-	}
+         cardinalityNodeColor = anonymousClassNodeColor;
+         complementOfNodeColor = anonymousClassNodeColor;
+         unionOfNodeColor = anonymousClassNodeColor;
+         intersectionOfNodeColor = anonymousClassNodeColor;*/
+    }
 
-	public NodeColors(VisualizationProperties colorProperties)
-	{
-		setDefaultColors();
-		loadColors(colorProperties);
-	}
+    public NodeColors(VisualizationProperties colorProperties) {
+        setDefaultColors();
+        loadColors(colorProperties);
+    }
 
-	/**
-	 * Zmienia ustawienia kolorów na załadowane w VisualizationProperies.
-	 * Changes color setting to ones loaded in VisualizationProperies.
-	 */
-	public void loadColors(VisualizationProperties colorProperties)
-	{
-		String prefix = "node.color.";
+    /**
+     * Zmienia ustawienia kolorów na załadowane w VisualizationProperies.
+     * Changes color setting to ones loaded in VisualizationProperies.
+     */
+    public void loadColors(VisualizationProperties colorProperties) {
+        String prefix = "node.color.";
 
-		classNodeColor = colorProperties.getPropertyColor(prefix + "classNodeColor", classNodeColor);
-		thingNodeColor = colorProperties.getPropertyColor(prefix + "thingNodeColor", thingNodeColor);
-		nothingNodeColor = colorProperties.getPropertyColor(prefix + "nothingNodeColor", nothingNodeColor);
-		individualNodeColor = colorProperties.getPropertyColor(prefix + "individualNodeColor", individualNodeColor);
-		differentNodeColor = colorProperties.getPropertyColor(prefix + "differentNodeColor", differentNodeColor);
-		sameAsNodeColor = colorProperties.getPropertyColor(prefix + "sameAsNodeColor", sameAsNodeColor);
-		propertyNodeColor = colorProperties.getPropertyColor(prefix + "propertyNodeColor", propertyNodeColor);
-		someValuesFromNodeColor = colorProperties.getPropertyColor(prefix + "someValuesFromNodeColor", someValuesFromNodeColor);
-		allValuesFromNodeColor = colorProperties.getPropertyColor(prefix + "allValuesFromNodeColor", allValuesFromNodeColor);
-		dataTypeNodeColor = colorProperties.getPropertyColor(prefix + "dataTypeNodeColor", dataTypeNodeColor);
-		anonymousClassNodeColor = colorProperties.getPropertyColor(prefix + "anonymousClassNodeColor", anonymousClassNodeColor);
-		cardinalityValueNodeColor = colorProperties.getPropertyColor(prefix + "cardinalityValueNodeColor", cardinalityValueNodeColor);
-		minCardinalityValueNodeColor = colorProperties.getPropertyColor(prefix + "minCardinalityValueNodeColor", minCardinalityValueNodeColor);
-		maxCardinalityValueNodeColor = colorProperties.getPropertyColor(prefix + "maxCardinalityValueNodeColor", maxCardinalityValueNodeColor);
-		informationNodeColor = colorProperties.getPropertyColor(prefix + "informationNodeColor", informationNodeColor);
-	}
+        classNodeColor = colorProperties.getPropertyColor(prefix + "classNodeColor", classNodeColor);
+        thingNodeColor = colorProperties.getPropertyColor(prefix + "thingNodeColor", thingNodeColor);
+        nothingNodeColor = colorProperties.getPropertyColor(prefix + "nothingNodeColor", nothingNodeColor);
+        individualNodeColor = colorProperties.getPropertyColor(prefix + "individualNodeColor", individualNodeColor);
+        differentNodeColor = colorProperties.getPropertyColor(prefix + "differentNodeColor", differentNodeColor);
+        sameAsNodeColor = colorProperties.getPropertyColor(prefix + "sameAsNodeColor", sameAsNodeColor);
+        objectPropertyNodeColor = colorProperties.getPropertyColor(prefix + "objectPropertyNodeColor", objectPropertyNodeColor);
+        dataPropertyNodeColor = colorProperties.getPropertyColor(prefix + "dataPropertyNodeColor", dataPropertyNodeColor);
+        someValuesFromNodeColor = colorProperties.getPropertyColor(prefix + "someValuesFromNodeColor", someValuesFromNodeColor);
+        allValuesFromNodeColor = colorProperties.getPropertyColor(prefix + "allValuesFromNodeColor", allValuesFromNodeColor);
+        dataTypeNodeColor = colorProperties.getPropertyColor(prefix + "dataTypeNodeColor", dataTypeNodeColor);
+        anonymousClassNodeColor = colorProperties.getPropertyColor(prefix + "anonymousClassNodeColor", anonymousClassNodeColor);
+        cardinalityValueNodeColor = colorProperties.getPropertyColor(prefix + "cardinalityValueNodeColor", cardinalityValueNodeColor);
+        minCardinalityValueNodeColor = colorProperties.getPropertyColor(prefix + "minCardinalityValueNodeColor", minCardinalityValueNodeColor);
+        maxCardinalityValueNodeColor = colorProperties.getPropertyColor(prefix + "maxCardinalityValueNodeColor", maxCardinalityValueNodeColor);
+        informationNodeColor = colorProperties.getPropertyColor(prefix + "informationNodeColor", informationNodeColor);
+    }
 
-	public Color getAllValuesFromNodeColor()
-	{
-		return allValuesFromNodeColor;
-	}
+    public Color getAllValuesFromNodeColor() {
+        return allValuesFromNodeColor;
+    }
 
-	public void setAllValuesFromNodeColor(Color val)
-	{
-		this.allValuesFromNodeColor = val;
-	}
+    public void setAllValuesFromNodeColor(Color val) {
+        this.allValuesFromNodeColor = val;
+    }
 
-	public Color getAnonymousClassNodeColor()
-	{
-		return anonymousClassNodeColor;
-	}
+    public Color getAnonymousClassNodeColor() {
+        return anonymousClassNodeColor;
+    }
 
-	public void setAnonymousClassNodeColor(Color val)
-	{
-		this.anonymousClassNodeColor = val;
-	}
+    public void setAnonymousClassNodeColor(Color val) {
+        this.anonymousClassNodeColor = val;
+    }
 
-	public Color getCardinalityValueNodeColor()
-	{
-		return cardinalityValueNodeColor;
-	}
+    public Color getCardinalityValueNodeColor() {
+        return cardinalityValueNodeColor;
+    }
 
-	public void setCardinalityValueNodeColor(Color val)
-	{
-		this.cardinalityValueNodeColor = val;
-	}
+    public void setCardinalityValueNodeColor(Color val) {
+        this.cardinalityValueNodeColor = val;
+    }
 
-	public Color getClassNodeColor()
-	{
-		return classNodeColor;
-	}
+    public Color getClassNodeColor() {
+        return classNodeColor;
+    }
 
-	public void setClassNodeColor(Color val)
-	{
-		this.classNodeColor = val;
-	}
+    public void setClassNodeColor(Color val) {
+        this.classNodeColor = val;
+    }
 
-	public Color getDataTypeNodeColor()
-	{
-		return dataTypeNodeColor;
-	}
+    public Color getDataTypeNodeColor() {
+        return dataTypeNodeColor;
+    }
 
-	public void setDataTypeNodeColor(Color val)
-	{
-		this.dataTypeNodeColor = val;
-	}
+    public void setDataTypeNodeColor(Color val) {
+        this.dataTypeNodeColor = val;
+    }
 
-	public Color getDifferentNodeColor()
-	{
-		return differentNodeColor;
-	}
+    public Color getDifferentNodeColor() {
+        return differentNodeColor;
+    }
 
-	public void setDifferentNodeColor(Color val)
-	{
-		this.differentNodeColor = val;
-	}
+    public void setDifferentNodeColor(Color val) {
+        this.differentNodeColor = val;
+    }
 
-	public Color getIndividualNodeColor()
-	{
-		return individualNodeColor;
-	}
+    public Color getIndividualNodeColor() {
+        return individualNodeColor;
+    }
 
-	public void setIndividualNodeColor(Color val)
-	{
-		this.individualNodeColor = val;
-	}
+    public void setIndividualNodeColor(Color val) {
+        this.individualNodeColor = val;
+    }
 
-	public Color getInformationNodeColor()
-	{
-		return informationNodeColor;
-	}
+    public Color getInformationNodeColor() {
+        return informationNodeColor;
+    }
 
-	public void setInformationNodeColor(Color val)
-	{
-		this.informationNodeColor = val;
-	}
+    public void setInformationNodeColor(Color val) {
+        this.informationNodeColor = val;
+    }
 
-	public Color getMaxCardinalityValueNodeColor()
-	{
-		return maxCardinalityValueNodeColor;
-	}
+    public Color getMaxCardinalityValueNodeColor() {
+        return maxCardinalityValueNodeColor;
+    }
 
-	public void setMaxCardinalityValueNodeColor(Color val)
-	{
-		this.maxCardinalityValueNodeColor = val;
-	}
+    public void setMaxCardinalityValueNodeColor(Color val) {
+        this.maxCardinalityValueNodeColor = val;
+    }
 
-	public Color getMinCardinalityValueNodeColor()
-	{
-		return minCardinalityValueNodeColor;
-	}
+    public Color getMinCardinalityValueNodeColor() {
+        return minCardinalityValueNodeColor;
+    }
 
-	public void setMinCardinalityValueNodeColor(Color val)
-	{
-		this.minCardinalityValueNodeColor = val;
-	}
+    public void setMinCardinalityValueNodeColor(Color val) {
+        this.minCardinalityValueNodeColor = val;
+    }
 
-	public Color getNothingNodeColor()
-	{
-		return nothingNodeColor;
-	}
+    public Color getNothingNodeColor() {
+        return nothingNodeColor;
+    }
 
-	public void setNothingNodeColor(Color val)
-	{
-		this.nothingNodeColor = val;
-	}
+    public void setNothingNodeColor(Color val) {
+        this.nothingNodeColor = val;
+    }
 
-	public Color getOneOfNodeColor()
-	{
-		return oneOfNodeColor;
-	}
+    public Color getOneOfNodeColor() {
+        return oneOfNodeColor;
+    }
 
-	public void setOneOfNodeColor(Color val)
-	{
-		this.oneOfNodeColor = val;
-	}
+    public void setOneOfNodeColor(Color val) {
+        this.oneOfNodeColor = val;
+    }
 
-	public Color getPropertyNodeColor()
-	{
-		return propertyNodeColor;
-	}
+    public Color getObjectPropertyNodeColor() {
+        return objectPropertyNodeColor;
+    }
 
-	public void setPropertyNodeColor(Color val)
-	{
-		this.propertyNodeColor = val;
-	}
+    public void setObjectPropertyNodeColor(Color val) {
+        this.objectPropertyNodeColor = val;
+    }
 
-	public Color getSameAsNodeColor()
-	{
-		return sameAsNodeColor;
-	}
+    public Color getDataPropertyNodeColor() {
+        return dataPropertyNodeColor;
+    }
 
-	public void setSameAsNodeColor(Color val)
-	{
-		this.sameAsNodeColor = val;
-	}
+    public void setDataPropertyNodeColor(Color val) {
+        this.dataPropertyNodeColor = val;
+    }
 
-	public Color getSomeValuesFromNodeColor()
-	{
-		return someValuesFromNodeColor;
-	}
+    public Color getSameAsNodeColor() {
+        return sameAsNodeColor;
+    }
 
-	public void setSomeValuesFromNodeColor(Color val)
-	{
-		this.someValuesFromNodeColor = val;
-	}
+    public void setSameAsNodeColor(Color val) {
+        this.sameAsNodeColor = val;
+    }
 
-	public Color getThingNodeColor()
-	{
-		return thingNodeColor;
-	}
+    public Color getSomeValuesFromNodeColor() {
+        return someValuesFromNodeColor;
+    }
 
-	public void setThingNodeColor(Color val)
-	{
-		this.thingNodeColor = val;
-	}
+    public void setSomeValuesFromNodeColor(Color val) {
+        this.someValuesFromNodeColor = val;
+    }
+
+    public Color getThingNodeColor() {
+        return thingNodeColor;
+    }
+
+    public void setThingNodeColor(Color val) {
+        this.thingNodeColor = val;
+    }
 }
-

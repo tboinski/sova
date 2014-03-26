@@ -27,14 +27,17 @@ import java.awt.Color;
 import org.pg.eti.kask.sova.options.NodeColors;
 
 /**
- * Klasa reprezentuje węzeł Property typu SomeValuesFrom.
+ * Klasa reprezentuje węzeł ObjectProperty, do którego są dołączane związki
+ * określające jego zakres (Domain oraz Range) oraz cechy (np. transitive).
  */
-public class SomeValuesFromPropertyNode extends ObjectPropertyNode
+public class DataPropertyNode extends Node
 {
 
-	public SomeValuesFromPropertyNode()
+	public DataPropertyNode()
 	{
 		super();
+		//setStrokeWitdh(2f);
+		//setRounded(true);
 	}
 
 	/**
@@ -44,17 +47,7 @@ public class SomeValuesFromPropertyNode extends ObjectPropertyNode
 	@Override
 	public Color getFillColorFromScheme(NodeColors colorScheme)
 	{
-		return colorScheme.getSomeValuesFromNodeColor();
+		return colorScheme.getDataPropertyNodeColor();
 	}
-
-	/**
-	 * Przed właściwą etykietą tego węzła dołączany jest znak "∃:".
-	 * @param label etykieta węzła
-	 */
-	@Override
-	public void setLabel(String label)
-	{
-		this.label = "∃:" + label;
-	}
-
 }
+

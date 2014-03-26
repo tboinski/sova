@@ -29,7 +29,7 @@ import org.pg.eti.kask.sova.options.NodeColors;
 /**
  * Klasa reprezentuje węzeł Property typu AllValuesFrom.
  */
-public class AllValuesFromPropertyNode extends PropertyNode
+public class AllValuesFromPropertyNode extends ObjectPropertyNode
 {
 
 	public AllValuesFromPropertyNode()
