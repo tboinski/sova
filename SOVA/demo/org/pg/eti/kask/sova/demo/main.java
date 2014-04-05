@@ -66,7 +66,7 @@ public class main {
                 System.exit(0);
             }
 
-            JFrame frame = new JFrame("SOVA - Simple Ontology Visualization API 2010 ");
+            JFrame frame = new JFrame("SOVA - Simple Ontology Visualization API");
             SovaVisualizationPanel panel = new SovaVisualizationPanel(ontology);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             JPanel mainPanel = new JPanel();

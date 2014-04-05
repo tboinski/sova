@@ -62,7 +62,8 @@ public class NodeColors {
 //		individualNodeColor = new Color(200, 194, 183);
 //		differentNodeColor = new Color(209, 174, 114);
 //		sameAsNodeColor = differentNodeColor;
-//		propertyNodeColor = new Color(146, 61, 255);
+//                objectPropertyNodeColor = new Color(146, 61, 255);
+//                dataPropertyNodeColor = new Color(146,193,49);//new Color(107, 142, 35);
 //		someValuesFromNodeColor = new Color(203, 61, 255);
 //		allValuesFromNodeColor = new Color(159, 152, 255);
 //		dataTypeNodeColor = new Color(61, 255, 155);
@@ -71,22 +72,23 @@ public class NodeColors {
 //		minCardinalityValueNodeColor = new Color(162, 255, 0);
 //		maxCardinalityValueNodeColor = new Color(255, 73, 0);
 //		informationNodeColor = new Color(200, 113, 55);
-        classNodeColor = new Color(204, 159, 42);
+
+        classNodeColor = new Color(234,238,49);//new Color(204, 159, 42);
         thingNodeColor = Color.GREEN;
         nothingNodeColor = Color.RED;
-        individualNodeColor = new Color(83, 24, 82);
-        differentNodeColor = new Color(209, 174, 114);
+        individualNodeColor = new Color(203, 61, 255);//new Color(83, 24, 82);
+        differentNodeColor = new Color(226,190,128);//new Color(209, 174, 114);
         sameAsNodeColor = differentNodeColor;
-        objectPropertyNodeColor = new Color(48, 111, 162);
-        dataPropertyNodeColor = new Color(107, 142, 35);
-        someValuesFromNodeColor = new Color(203, 61, 255);
+        objectPropertyNodeColor = new Color(55,108,255);//new Color(48, 111, 162);
+        dataPropertyNodeColor = new Color(146,193,49);//new Color(107, 142, 35);
+        someValuesFromNodeColor = new Color(177,0,99);//new Color(203, 61, 255);
         allValuesFromNodeColor = new Color(159, 152, 255);
         dataTypeNodeColor = new Color(41, 167, 121);
-        anonymousClassNodeColor = Color.YELLOW;
+        anonymousClassNodeColor = Color.ORANGE;// YELLOW;
         cardinalityValueNodeColor = new Color(255, 171, 0);
         minCardinalityValueNodeColor = new Color(162, 255, 0);
         maxCardinalityValueNodeColor = new Color(255, 73, 0);
-        informationNodeColor = new Color(0, 182, 193);
+        informationNodeColor = new Color(200, 113, 55);//new Color(0, 182, 193);
 
         //unused
 		    /*transitivePropertyNodeColor = informationNodeColor;
