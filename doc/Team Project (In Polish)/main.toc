@@ -1,0 +1,144 @@
+\contentsline {section}{\numberline {1}Zlecenie projektowe }{6}{section.1}
+\contentsline {subsection}{\numberline {1.1}Cele i opis projektu}{7}{subsection.1.1}
+\contentsline {paragraph}{}{7}{section*.2}
+\contentsline {subsection}{\numberline {1.2}Zleceniodawca}{7}{subsection.1.2}
+\contentsline {paragraph}{}{7}{section*.3}
+\contentsline {subsection}{\numberline {1.3}Zleceniobiorca}{7}{subsection.1.3}
+\contentsline {paragraph}{}{7}{section*.4}
+\contentsline {subsection}{\numberline {1.4}Zakres prac}{7}{subsection.1.4}
+\contentsline {paragraph}{}{7}{section*.5}
+\contentsline {paragraph}{}{8}{section*.6}
+\contentsline {section}{\numberline {2}Infrastruktura projektu}{9}{section.2}
+\contentsline {subsection}{\numberline {2.1}Organizacja zespo\IeC {\l }u projektu}{10}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Dokumentacja}{10}{subsection.2.2}
+\contentsline {paragraph}{}{10}{section*.7}
+\contentsline {subsection}{\numberline {2.3}Narz\IeC {\k e}dzia i wymiana informacji}{10}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}Narz\IeC {\k e}dzia programistyczne}{10}{subsubsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.2}Biblioteki i \IeC {\'s}rodowisko}{10}{subsubsection.2.3.2}
+\contentsline {subsubsection}{\numberline {2.3.3}Komunikacja w zespole}{10}{subsubsection.2.3.3}
+\contentsline {subsubsection}{\numberline {2.3.4}Tworzenie dokumentacji}{10}{subsubsection.2.3.4}
+\contentsline {subsubsection}{\numberline {2.3.5}Inne u\IeC {\.z}ywane programy}{10}{subsubsection.2.3.5}
+\contentsline {section}{\numberline {3}Studium wykonalno\IeC {\'s}ci}{11}{section.3}
+\contentsline {subsection}{\numberline {3.1}Za\IeC {\l }o\IeC {\.z}enia realizacji studium}{12}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Podstawa wykonania i temat studium}{12}{subsubsection.3.1.1}
+\contentsline {paragraph}{}{12}{section*.8}
+\contentsline {subsubsection}{\numberline {3.1.2}Cel studium}{12}{subsubsection.3.1.2}
+\contentsline {paragraph}{}{12}{section*.9}
+\contentsline {subsubsection}{\numberline {3.1.3}Ograniczenia}{12}{subsubsection.3.1.3}
+\contentsline {paragraph}{}{12}{section*.10}
+\contentsline {subsection}{\numberline {3.2}Stan istniej\IeC {\k a}cy}{12}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Inne systemy i zasoby maj\IeC {\k a}ce wp\IeC {\l }yw lub b\IeC {\k e}d\IeC {\k a}ce pod wyp\IeC {\l }ywem planowanego produktu}{12}{subsubsection.3.2.1}
+\contentsline {subsubsection}{\numberline {3.2.2}Istniej\IeC {\k a}ce na rynku podobne rozwi\IeC {\k a}zania}{12}{subsubsection.3.2.2}
+\contentsline {subsubsection}{\numberline {3.2.3}Problem i motywacja wdro\IeC {\.z}enia nowego produktu}{12}{subsubsection.3.2.3}
+\contentsline {paragraph}{}{12}{section*.11}
+\contentsline {subsection}{\numberline {3.3}Og\IeC {\'o}lne wymagania stawiane produktowi i ich priorytety}{12}{subsection.3.3}
+\contentsline {paragraph}{}{12}{section*.12}
+\contentsline {subsubsection}{\numberline {3.3.1}U\IeC {\.z}ytkownicy}{13}{subsubsection.3.3.1}
+\contentsline {paragraph}{}{13}{section*.13}
+\contentsline {subsubsection}{\numberline {3.3.2}Dane}{13}{subsubsection.3.3.2}
+\contentsline {paragraph}{Obs\IeC {\l }ugiwane formaty}{13}{section*.14}
+\contentsline {paragraph}{Wczytywanie danych}{13}{section*.15}
+\contentsline {paragraph}{Modyfikowalno\IeC {\'s}\IeC {\'c} danych}{13}{section*.16}
+\contentsline {subsubsection}{\numberline {3.3.3}Funkcjonalno\IeC {\'s}\IeC {\'c}}{13}{subsubsection.3.3.3}
+\contentsline {paragraph}{}{13}{section*.17}
+\contentsline {subsubsection}{\numberline {3.3.4}Wymogi techniczno - technologiczne}{13}{subsubsection.3.3.4}
+\contentsline {paragraph}{}{13}{section*.18}
+\contentsline {subsection}{\numberline {3.4}Og\IeC {\'o}lna ocena ryzyka i planowany spos\IeC {\'o}b zarz\IeC {\k a}dzania nim}{14}{subsection.3.4}
+\contentsline {paragraph}{Schemat opisu czynnika ryzyka}{14}{section*.19}
+\contentsline {subsubsection}{\numberline {3.4.1}Czynniki ryzyka}{14}{subsubsection.3.4.1}
+\contentsline {subsection}{\numberline {3.5}Uwarunkowania prawne i inne}{15}{subsection.3.5}
+\contentsline {paragraph}{}{15}{section*.20}
+\contentsline {subsection}{\numberline {3.6}Proponowane rozwi\IeC {\k a}zania}{15}{subsection.3.6}
+\contentsline {paragraph}{}{15}{section*.21}
+\contentsline {subsubsection}{\numberline {3.6.1}Wersja OWL}{15}{subsubsection.3.6.1}
+\contentsline {paragraph}{}{15}{section*.22}
+\contentsline {subsubsection}{\numberline {3.6.2}Proponowane biblioteki do wizualizacji graf\IeC {\'o}w}{16}{subsubsection.3.6.2}
+\contentsline {subsection}{\numberline {3.7}Rekomendowany wariant}{16}{subsection.3.7}
+\contentsline {paragraph}{OWL:}{16}{section*.23}
+\contentsline {paragraph}{Biblioteka:}{16}{section*.24}
+\contentsline {subsection}{\numberline {3.8}Strategia i wst\IeC {\k e}pny harmonogram}{16}{subsection.3.8}
+\contentsline {paragraph}{}{16}{section*.25}
+\contentsline {paragraph}{}{17}{section*.26}
+\contentsline {subsubsection}{\numberline {3.8.1}Harmonogram na I semestr}{18}{subsubsection.3.8.1}
+\contentsline {subsubsection}{\numberline {3.8.2}Harmonogram na II semestr}{19}{subsubsection.3.8.2}
+\contentsline {section}{\numberline {4}Specyfikacja wymaga\IeC {\'n} systemowych}{20}{section.4}
+\contentsline {subsection}{\numberline {4.1}Cele systemu}{21}{subsection.4.1}
+\contentsline {subsubsection}{\numberline {4.1.1}Cele biznesowe}{21}{subsubsection.4.1.1}
+\contentsline {subsubsection}{\numberline {4.1.2}Cele funkcjonalne}{22}{subsubsection.4.1.2}
+\contentsline {subsection}{\numberline {4.2}Otoczenie systemu}{22}{subsection.4.2}
+\contentsline {subsubsection}{\numberline {4.2.1}U\IeC {\.z}ytkownicy}{22}{subsubsection.4.2.1}
+\contentsline {subsubsection}{\numberline {4.2.2}Systemy zewn\IeC {\k e}trzne}{22}{subsubsection.4.2.2}
+\contentsline {subsection}{\numberline {4.3}Przewidywane komponenty systemu}{22}{subsection.4.3}
+\contentsline {subsubsection}{\numberline {4.3.1}Podsystemy}{22}{subsubsection.4.3.1}
+\contentsline {subsubsection}{\numberline {4.3.2}Komponenty sprz\IeC {\k e}towe}{22}{subsubsection.4.3.2}
+\contentsline {subsubsection}{\numberline {4.3.3}Programowe}{23}{subsubsection.4.3.3}
+\contentsline {subsection}{\numberline {4.4}Wymagania funkcjonalne}{23}{subsection.4.4}
+\contentsline {subsubsection}{\numberline {4.4.1}Wymagania wizualizacji ontologii}{24}{subsubsection.4.4.1}
+\contentsline {subsubsection}{\numberline {4.4.2}Projekt wizualizacji}{25}{subsubsection.4.4.2}
+\contentsline {subsection}{\numberline {4.5}Wymagania na dane}{26}{subsection.4.5}
+\contentsline {subsection}{\numberline {4.6}Wymagania jako\IeC {\'s}ciowe}{27}{subsection.4.6}
+\contentsline {subsubsection}{\numberline {4.6.1}Wymagania w zakresie wiarygodno\IeC {\'s}ci}{27}{subsubsection.4.6.1}
+\contentsline {subsubsection}{\numberline {4.6.2}Wymagania w zakresie wydajno\IeC {\'s}ci}{27}{subsubsection.4.6.2}
+\contentsline {subsubsection}{\numberline {4.6.3}Wymagania w zakresie elastyczno\IeC {\'s}ci}{27}{subsubsection.4.6.3}
+\contentsline {subsubsection}{\numberline {4.6.4}Wymagania w zakresie u\IeC {\.z}yteczno\IeC {\'s}ci}{27}{subsubsection.4.6.4}
+\contentsline {subsection}{\numberline {4.7}Sytuacje wyj\IeC {\k a}tkowe}{27}{subsection.4.7}
+\contentsline {subsection}{\numberline {4.8}Dodatkowe wymagania}{27}{subsection.4.8}
+\contentsline {subsubsection}{\numberline {4.8.1}Wymagania sprz\IeC {\k e}towe}{27}{subsubsection.4.8.1}
+\contentsline {subsubsection}{\numberline {4.8.2}Wymagania programowe}{28}{subsubsection.4.8.2}
+\contentsline {subsubsection}{\numberline {4.8.3}Inne wymagania}{28}{subsubsection.4.8.3}
+\contentsline {subsection}{\numberline {4.9}Kryteria akceptacyjne}{28}{subsection.4.9}
+\contentsline {section}{\numberline {5}Analiza obiektowa}{29}{section.5}
+\contentsline {subsection}{\numberline {5.1}Pakiety}{30}{subsection.5.1}
+\contentsline {subsubsection}{\numberline {5.1.1}Diagram}{30}{subsubsection.5.1.1}
+\contentsline {subsubsection}{\numberline {5.1.2}Opis pakiet\IeC {\'o}w}{31}{subsubsection.5.1.2}
+\contentsline {subsection}{\numberline {5.2}Pakiet options}{32}{subsection.5.2}
+\contentsline {subsubsection}{\numberline {5.2.1}Diagram}{32}{subsubsection.5.2.1}
+\contentsline {subsubsection}{\numberline {5.2.2}Opis klasy}{32}{subsubsection.5.2.2}
+\contentsline {subsection}{\numberline {5.3}Pakiet nodes}{36}{subsection.5.3}
+\contentsline {subsubsection}{\numberline {5.3.1}Diagram}{36}{subsubsection.5.3.1}
+\contentsline {subsubsection}{\numberline {5.3.2}Opis klasy}{36}{subsubsection.5.3.2}
+\contentsline {subsection}{\numberline {5.4}Pakiet edges}{42}{subsection.5.4}
+\contentsline {subsubsection}{\numberline {5.4.1}Diagram}{42}{subsubsection.5.4.1}
+\contentsline {subsubsection}{\numberline {5.4.2}Opis klasy}{42}{subsubsection.5.4.2}
+\contentsline {subsection}{\numberline {5.5}Pakiet visualization }{46}{subsection.5.5}
+\contentsline {subsubsection}{\numberline {5.5.1}Diagram}{46}{subsubsection.5.5.1}
+\contentsline {subsubsection}{\numberline {5.5.2}Opis klasy}{46}{subsubsection.5.5.2}
+\contentsline {subsection}{\numberline {5.6}Pakiet graph}{49}{subsection.5.6}
+\contentsline {subsubsection}{\numberline {5.6.1}Diagram}{49}{subsubsection.5.6.1}
+\contentsline {subsubsection}{\numberline {5.6.2}Opis klasy}{49}{subsubsection.5.6.2}
+\contentsline {subsection}{\numberline {5.7}Pakiet utils}{51}{subsection.5.7}
+\contentsline {subsubsection}{\numberline {5.7.1}Diagram}{51}{subsubsection.5.7.1}
+\contentsline {subsubsection}{\numberline {5.7.2}Opis klasy}{52}{subsubsection.5.7.2}
+\contentsline {section}{\numberline {6}Spis plik\IeC {\'o}w konfiguracyjnych}{53}{section.6}
+\contentsline {subsection}{\numberline {6.1}Visualization.properties}{54}{subsection.6.1}
+\contentsline {subsubsection}{\numberline {6.1.1}Opis pliku}{54}{subsubsection.6.1.1}
+\contentsline {paragraph}{}{54}{section*.27}
+\contentsline {subsubsection}{\numberline {6.1.2}Przyk\IeC {\l }adowa zawarto\IeC {\'s}\IeC {\'c}}{54}{subsubsection.6.1.2}
+\contentsline {section}{\numberline {7}Podsumowanie projektu}{56}{section.7}
+\contentsline {subsection}{\numberline {7.1}Ocena realizacji cel\IeC {\'o}w projektu}{57}{subsection.7.1}
+\contentsline {paragraph}{}{57}{section*.28}
+\contentsline {subsubsection}{\numberline {7.1.1} Ocena realizacji za\IeC {\l }o\IeC {\.z}onych cel\IeC {\'o}w biznesowych}{57}{subsubsection.7.1.1}
+\contentsline {subsubsection}{\numberline {7.1.2}Ocena realizacji cel\IeC {\'o}w funkcjonalnych}{58}{subsubsection.7.1.2}
+\contentsline {subsection}{\numberline {7.2}Ocena realizacji wymaga\IeC {\'n}}{58}{subsection.7.2}
+\contentsline {paragraph}{}{58}{section*.29}
+\contentsline {subsubsection}{\numberline {7.2.1}Wymagania funkcjonalne}{58}{subsubsection.7.2.1}
+\contentsline {subsubsection}{\numberline {7.2.2}Wymagania wizualizacji ontologii}{59}{subsubsection.7.2.2}
+\contentsline {subsubsection}{\numberline {7.2.3}Wykorzystanie projektu wizualizacji}{59}{subsubsection.7.2.3}
+\contentsline {paragraph}{}{59}{section*.30}
+\contentsline {subsubsection}{\numberline {7.2.4}Wymagania na dane}{59}{subsubsection.7.2.4}
+\contentsline {subsubsection}{\numberline {7.2.5}Wymagania jako\IeC {\'s}ciowe}{59}{subsubsection.7.2.5}
+\contentsline {subsubsection}{\numberline {7.2.6}Wymagania w zakresie wiarygodno\IeC {\'s}ci}{59}{subsubsection.7.2.6}
+\contentsline {subsubsection}{\numberline {7.2.7}Wymagania w zakresie elastyczno\IeC {\'s}ci}{60}{subsubsection.7.2.7}
+\contentsline {subsubsection}{\numberline {7.2.8}Wymagania programowe}{60}{subsubsection.7.2.8}
+\contentsline {subsubsection}{\numberline {7.2.9}Inne wymagania}{60}{subsubsection.7.2.9}
+\contentsline {subsection}{\numberline {7.3}Spe\IeC {\l }nienie kryterii akceptacyjnych}{60}{subsection.7.3}
+\contentsline {subsection}{\numberline {7.4}Wnioski i uwagi ko\IeC {\'n}cowe}{60}{subsection.7.4}
+\contentsline {paragraph}{}{60}{section*.31}
+\contentsline {paragraph}{}{61}{section*.32}
+\contentsline {paragraph}{}{61}{section*.33}
+\contentsline {paragraph}{}{61}{section*.34}
+\contentsline {section}{\numberline {8}S\IeC {\l }ownik}{62}{section.8}
+\contentsline {subsection}{\numberline {8.1}Jak korzysta\IeC {\'c} ze slownika}{63}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Poj\IeC {\k e}cia og\IeC {\'o}lne}{63}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.3}Poj\IeC {\k e}cia specificzne dla projektu}{64}{subsection.8.3}
+\contentsline {section}{\numberline {9}Za\IeC {\l }\IeC {\k a}czniki}{65}{section.9}

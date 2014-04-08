@@ -1,0 +1,111 @@
+\BOOKMARK [1][-]{section.1}{Zlecenie projektowe }{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Cele i opis projektu}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Zleceniodawca}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Zleceniobiorca}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.4}{Zakres prac}{section.1}% 5
+\BOOKMARK [1][-]{section.2}{Infrastruktura projektu}{}% 6
+\BOOKMARK [2][-]{subsection.2.1}{Organizacja zespo\233u projektu}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.2}{Dokumentacja}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.3}{Narzedzia i wymiana informacji}{section.2}% 9
+\BOOKMARK [3][-]{subsubsection.2.3.1}{Narzedzia programistyczne}{subsection.2.3}% 10
+\BOOKMARK [3][-]{subsubsection.2.3.2}{Biblioteki i srodowisko}{subsection.2.3}% 11
+\BOOKMARK [3][-]{subsubsection.2.3.3}{Komunikacja w zespole}{subsection.2.3}% 12
+\BOOKMARK [3][-]{subsubsection.2.3.4}{Tworzenie dokumentacji}{subsection.2.3}% 13
+\BOOKMARK [3][-]{subsubsection.2.3.5}{Inne uzywane programy}{subsection.2.3}% 14
+\BOOKMARK [1][-]{section.3}{Studium wykonalnosci}{}% 15
+\BOOKMARK [2][-]{subsection.3.1}{Za\233ozenia realizacji studium}{section.3}% 16
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Podstawa wykonania i temat studium}{subsection.3.1}% 17
+\BOOKMARK [3][-]{subsubsection.3.1.2}{Cel studium}{subsection.3.1}% 18
+\BOOKMARK [3][-]{subsubsection.3.1.3}{Ograniczenia}{subsection.3.1}% 19
+\BOOKMARK [2][-]{subsection.3.2}{Stan istniejacy}{section.3}% 20
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Inne systemy i zasoby majace wp\233yw lub bedace pod wyp\233ywem planowanego produktu}{subsection.3.2}% 21
+\BOOKMARK [3][-]{subsubsection.3.2.2}{Istniejace na rynku podobne rozwiazania}{subsection.3.2}% 22
+\BOOKMARK [3][-]{subsubsection.3.2.3}{Problem i motywacja wdrozenia nowego produktu}{subsection.3.2}% 23
+\BOOKMARK [2][-]{subsection.3.3}{Og\363lne wymagania stawiane produktowi i ich priorytety}{section.3}% 24
+\BOOKMARK [3][-]{subsubsection.3.3.1}{Uzytkownicy}{subsection.3.3}% 25
+\BOOKMARK [3][-]{subsubsection.3.3.2}{Dane}{subsection.3.3}% 26
+\BOOKMARK [3][-]{subsubsection.3.3.3}{Funkcjonalnosc}{subsection.3.3}% 27
+\BOOKMARK [3][-]{subsubsection.3.3.4}{Wymogi techniczno - technologiczne}{subsection.3.3}% 28
+\BOOKMARK [2][-]{subsection.3.4}{Og\363lna ocena ryzyka i planowany spos\363b zarzadzania nim}{section.3}% 29
+\BOOKMARK [3][-]{subsubsection.3.4.1}{Czynniki ryzyka}{subsection.3.4}% 30
+\BOOKMARK [2][-]{subsection.3.5}{Uwarunkowania prawne i inne}{section.3}% 31
+\BOOKMARK [2][-]{subsection.3.6}{Proponowane rozwiazania}{section.3}% 32
+\BOOKMARK [3][-]{subsubsection.3.6.1}{Wersja OWL}{subsection.3.6}% 33
+\BOOKMARK [3][-]{subsubsection.3.6.2}{Proponowane biblioteki do wizualizacji graf\363w}{subsection.3.6}% 34
+\BOOKMARK [2][-]{subsection.3.7}{Rekomendowany wariant}{section.3}% 35
+\BOOKMARK [2][-]{subsection.3.8}{Strategia i wstepny harmonogram}{section.3}% 36
+\BOOKMARK [3][-]{subsubsection.3.8.1}{Harmonogram na I semestr}{subsection.3.8}% 37
+\BOOKMARK [3][-]{subsubsection.3.8.2}{Harmonogram na II semestr}{subsection.3.8}% 38
+\BOOKMARK [1][-]{section.4}{Specyfikacja wymagan systemowych}{}% 39
+\BOOKMARK [2][-]{subsection.4.1}{Cele systemu}{section.4}% 40
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Cele biznesowe}{subsection.4.1}% 41
+\BOOKMARK [3][-]{subsubsection.4.1.2}{Cele funkcjonalne}{subsection.4.1}% 42
+\BOOKMARK [2][-]{subsection.4.2}{Otoczenie systemu}{section.4}% 43
+\BOOKMARK [3][-]{subsubsection.4.2.1}{Uzytkownicy}{subsection.4.2}% 44
+\BOOKMARK [3][-]{subsubsection.4.2.2}{Systemy zewnetrzne}{subsection.4.2}% 45
+\BOOKMARK [2][-]{subsection.4.3}{Przewidywane komponenty systemu}{section.4}% 46
+\BOOKMARK [3][-]{subsubsection.4.3.1}{Podsystemy}{subsection.4.3}% 47
+\BOOKMARK [3][-]{subsubsection.4.3.2}{Komponenty sprzetowe}{subsection.4.3}% 48
+\BOOKMARK [3][-]{subsubsection.4.3.3}{Programowe}{subsection.4.3}% 49
+\BOOKMARK [2][-]{subsection.4.4}{Wymagania funkcjonalne}{section.4}% 50
+\BOOKMARK [3][-]{subsubsection.4.4.1}{Wymagania wizualizacji ontologii}{subsection.4.4}% 51
+\BOOKMARK [3][-]{subsubsection.4.4.2}{Projekt wizualizacji}{subsection.4.4}% 52
+\BOOKMARK [2][-]{subsection.4.5}{Wymagania na dane}{section.4}% 53
+\BOOKMARK [2][-]{subsection.4.6}{Wymagania jakosciowe}{section.4}% 54
+\BOOKMARK [3][-]{subsubsection.4.6.1}{Wymagania w zakresie wiarygodnosci}{subsection.4.6}% 55
+\BOOKMARK [3][-]{subsubsection.4.6.2}{Wymagania w zakresie wydajnosci}{subsection.4.6}% 56
+\BOOKMARK [3][-]{subsubsection.4.6.3}{Wymagania w zakresie elastycznosci}{subsection.4.6}% 57
+\BOOKMARK [3][-]{subsubsection.4.6.4}{Wymagania w zakresie uzytecznosci}{subsection.4.6}% 58
+\BOOKMARK [2][-]{subsection.4.7}{Sytuacje wyjatkowe}{section.4}% 59
+\BOOKMARK [2][-]{subsection.4.8}{Dodatkowe wymagania}{section.4}% 60
+\BOOKMARK [3][-]{subsubsection.4.8.1}{Wymagania sprzetowe}{subsection.4.8}% 61
+\BOOKMARK [3][-]{subsubsection.4.8.2}{Wymagania programowe}{subsection.4.8}% 62
+\BOOKMARK [3][-]{subsubsection.4.8.3}{Inne wymagania}{subsection.4.8}% 63
+\BOOKMARK [2][-]{subsection.4.9}{Kryteria akceptacyjne}{section.4}% 64
+\BOOKMARK [1][-]{section.5}{Analiza obiektowa}{}% 65
+\BOOKMARK [2][-]{subsection.5.1}{Pakiety}{section.5}% 66
+\BOOKMARK [3][-]{subsubsection.5.1.1}{Diagram}{subsection.5.1}% 67
+\BOOKMARK [3][-]{subsubsection.5.1.2}{Opis pakiet\363w}{subsection.5.1}% 68
+\BOOKMARK [2][-]{subsection.5.2}{Pakiet options}{section.5}% 69
+\BOOKMARK [3][-]{subsubsection.5.2.1}{Diagram}{subsection.5.2}% 70
+\BOOKMARK [3][-]{subsubsection.5.2.2}{Opis klasy}{subsection.5.2}% 71
+\BOOKMARK [2][-]{subsection.5.3}{Pakiet nodes}{section.5}% 72
+\BOOKMARK [3][-]{subsubsection.5.3.1}{Diagram}{subsection.5.3}% 73
+\BOOKMARK [3][-]{subsubsection.5.3.2}{Opis klasy}{subsection.5.3}% 74
+\BOOKMARK [2][-]{subsection.5.4}{Pakiet edges}{section.5}% 75
+\BOOKMARK [3][-]{subsubsection.5.4.1}{Diagram}{subsection.5.4}% 76
+\BOOKMARK [3][-]{subsubsection.5.4.2}{Opis klasy}{subsection.5.4}% 77
+\BOOKMARK [2][-]{subsection.5.5}{Pakiet visualization }{section.5}% 78
+\BOOKMARK [3][-]{subsubsection.5.5.1}{Diagram}{subsection.5.5}% 79
+\BOOKMARK [3][-]{subsubsection.5.5.2}{Opis klasy}{subsection.5.5}% 80
+\BOOKMARK [2][-]{subsection.5.6}{Pakiet graph}{section.5}% 81
+\BOOKMARK [3][-]{subsubsection.5.6.1}{Diagram}{subsection.5.6}% 82
+\BOOKMARK [3][-]{subsubsection.5.6.2}{Opis klasy}{subsection.5.6}% 83
+\BOOKMARK [2][-]{subsection.5.7}{Pakiet utils}{section.5}% 84
+\BOOKMARK [3][-]{subsubsection.5.7.1}{Diagram}{subsection.5.7}% 85
+\BOOKMARK [3][-]{subsubsection.5.7.2}{Opis klasy}{subsection.5.7}% 86
+\BOOKMARK [1][-]{section.6}{Spis plik\363w konfiguracyjnych}{}% 87
+\BOOKMARK [2][-]{subsection.6.1}{Visualization.properties}{section.6}% 88
+\BOOKMARK [3][-]{subsubsection.6.1.1}{Opis pliku}{subsection.6.1}% 89
+\BOOKMARK [3][-]{subsubsection.6.1.2}{Przyk\233adowa zawartosc}{subsection.6.1}% 90
+\BOOKMARK [1][-]{section.7}{Podsumowanie projektu}{}% 91
+\BOOKMARK [2][-]{subsection.7.1}{Ocena realizacji cel\363w projektu}{section.7}% 92
+\BOOKMARK [3][-]{subsubsection.7.1.1}{ Ocena realizacji za\233ozonych cel\363w biznesowych}{subsection.7.1}% 93
+\BOOKMARK [3][-]{subsubsection.7.1.2}{Ocena realizacji cel\363w funkcjonalnych}{subsection.7.1}% 94
+\BOOKMARK [2][-]{subsection.7.2}{Ocena realizacji wymagan}{section.7}% 95
+\BOOKMARK [3][-]{subsubsection.7.2.1}{Wymagania funkcjonalne}{subsection.7.2}% 96
+\BOOKMARK [3][-]{subsubsection.7.2.2}{Wymagania wizualizacji ontologii}{subsection.7.2}% 97
+\BOOKMARK [3][-]{subsubsection.7.2.3}{Wykorzystanie projektu wizualizacji}{subsection.7.2}% 98
+\BOOKMARK [3][-]{subsubsection.7.2.4}{Wymagania na dane}{subsection.7.2}% 99
+\BOOKMARK [3][-]{subsubsection.7.2.5}{Wymagania jakosciowe}{subsection.7.2}% 100
+\BOOKMARK [3][-]{subsubsection.7.2.6}{Wymagania w zakresie wiarygodnosci}{subsection.7.2}% 101
+\BOOKMARK [3][-]{subsubsection.7.2.7}{Wymagania w zakresie elastycznosci}{subsection.7.2}% 102
+\BOOKMARK [3][-]{subsubsection.7.2.8}{Wymagania programowe}{subsection.7.2}% 103
+\BOOKMARK [3][-]{subsubsection.7.2.9}{Inne wymagania}{subsection.7.2}% 104
+\BOOKMARK [2][-]{subsection.7.3}{Spe\233nienie kryterii akceptacyjnych}{section.7}% 105
+\BOOKMARK [2][-]{subsection.7.4}{Wnioski i uwagi koncowe}{section.7}% 106
+\BOOKMARK [1][-]{section.8}{S\233ownik}{}% 107
+\BOOKMARK [2][-]{subsection.8.1}{Jak korzystac ze slownika}{section.8}% 108
+\BOOKMARK [2][-]{subsection.8.2}{Pojecia og\363lne}{section.8}% 109
+\BOOKMARK [2][-]{subsection.8.3}{Pojecia specificzne dla projektu}{section.8}% 110
+\BOOKMARK [1][-]{section.9}{Za\233aczniki}{}% 111
