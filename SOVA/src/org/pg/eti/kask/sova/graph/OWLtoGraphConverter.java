@@ -52,6 +52,7 @@ public class OWLtoGraphConverter {
     Hashtable<String, Integer> properties;
     Hashtable<String, Integer> individuals;
     Hashtable<String, Integer> dataProperties;
+    Hashtable<String, Integer> dataProperties2;
     Hashtable<String, Integer> dataTypes;
     Hashtable<String, Integer> anonyms;
     int thingNumber = 0;
@@ -65,6 +66,7 @@ public class OWLtoGraphConverter {
         classes = new Hashtable<String, Integer>();
         properties = new Hashtable<String, Integer>();
         dataProperties = new Hashtable<String, Integer>();
+        dataProperties2 = new Hashtable<String, Integer>();
         dataTypes = new Hashtable<String, Integer>();
         individuals = new Hashtable<String, Integer>();
         anonyms = new Hashtable<String, Integer>();
@@ -75,7 +77,14 @@ public class OWLtoGraphConverter {
 //		return INSTANCE;
 //	}
 //	
-    private void insertDataType(OWLOntology ontology, Graph graph) {
+    /**
+     * Umieszcza w grafie wszystkie zdefiniowane w ontologii data properties
+     *
+     * @param ontology
+     * @param graph
+     * @param properties
+     */
+    private void insertDataProperties(OWLOntology ontology, Graph graph) {
         for (OWLDataProperty prop : ontology.getDataPropertiesInSignature(true)) {
 
 //            System.out.println("DATATYPE :  " + prop.toString());
@@ -99,7 +108,7 @@ public class OWLtoGraphConverter {
                 OWLDataRange r = it.next();
                 if (r.isDatatype()) {
                     int dataTypeRowNr = 0;
-                    if (!dataTypes.containsKey(r.toString())) {
+                    if (!dataProperties2.containsKey(r.toString())) {
                         Node dataType = graph.addNode();
                         org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.DataTypeNode();
                         node.setLabel(r.toString());
@@ -109,9 +118,9 @@ public class OWLtoGraphConverter {
                             dataType.set(COLUMN_NAME_NODE, r.asOWLDatatype().getIRI().getFragment());
                         }
                         dataTypeRowNr = dataType.getRow();
-                        dataTypes.put(r.toString(), dataTypeRowNr);
+                        dataProperties2.put(r.toString(), dataTypeRowNr);
                     } else {
-                        dataTypeRowNr = dataTypes.get(r.toString());
+                        dataTypeRowNr = dataProperties2.get(r.toString());
                     }
                     int row = edges.addRow();
                     edges.set(row, "source", dataPropertyRowNr);
@@ -122,6 +131,27 @@ public class OWLtoGraphConverter {
             }
         }
 
+    }
+
+    /**
+     * Umieszcza w grafie wszystkie zdefiniowane w ontologii data type
+     *
+     * @param ontology
+     * @param graph
+     * @param properties
+     */
+    private void insertDataTypes(OWLOntology ontology, Graph graph) {
+        // dodajemy wszystkie definicje property
+        for (OWLDatatype dt : ontology.getDatatypesInSignature(true)) {
+            Node n = graph.addNode();
+            org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.DataTypeNode();
+            node.setLabel(dt.getIRI().getFragment());
+            n.set(COLUMN_NODE, node);
+            n.set(COLUMN_IRI, dt.getIRI());
+            n.set(COLUMN_NAME_NODE, dt.getIRI().getFragment());
+            dataTypes.put(dt.toString(), n.getRow());
+            System.out.println("DT: " + dt.toString());
+        }
     }
 
     /**
@@ -160,7 +190,7 @@ public class OWLtoGraphConverter {
     }
 
     /**
-     * Umieszcza w grafie wszystkie zdefiniowane w ontologii property
+     * Umieszcza w grafie wszystkie zdefiniowane w ontologii object property
      *
      * @param ontology
      * @param graph
@@ -807,7 +837,8 @@ public class OWLtoGraphConverter {
         this.insertBaseClasses(ontology, graph);
         this.insertObjectProperties(ontology, graph);
         this.insertBaseIndividuals(ontology, graph);
-        this.insertDataType(ontology, graph);
+        this.insertDataProperties(ontology, graph);
+        this.insertDataTypes(ontology, graph);
         /*
          * Node n = graph.addNode(); org.eti.kask.sova.nodes.Node node = new
          * org.eti.kask.sova.nodes.ClassNode(); node.setLabel(cls.toString());
@@ -1158,13 +1189,32 @@ public class OWLtoGraphConverter {
                     edges.set(row, "edge", new org.pg.eti.kask.sova.edges.Edge());
 
                 }
-//            } else if (axiom instanceof OWLDataPropertyAssertionAxiom) {
-//                System.out.println("DATA PROPERTY: " + axiom.toString());
-////					OWLDataProperty dp = (OWLDataProperty)axiom;
-//                OWLDataPropertyAssertionAxiom a = (OWLDataPropertyAssertionAxiom) axiom;
-//                Set<?> s = a.getProperty().getRanges(ontology);
+            } else if (axiom instanceof OWLDataPropertyAssertionAxiom) {
+                System.out.println("DATA PROPERTY: " + axiom.toString());
+                OWLDataPropertyAssertionAxiom a = (OWLDataPropertyAssertionAxiom) axiom;
+                OWLIndividual ind = a.getSubject();
+                if (ind.isNamed()) {
+                    int id1 = individuals.get(ind.asOWLNamedIndividual().getIRI().getFragment());
 
-                //System.out.println(	a.getAxiomType().toString());
+                    OWLLiteral lit = a.getObject();
+                    Node anonymNode = graph.addNode();
+                    org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.DataTypeNode();
+                    anonymNode.set(COLUMN_NODE, node);
+                    node.setLabel(lit.getLiteral());
+                    anonyms.put(lit.toString(), anonymNode.getRow());
+
+//                    OWLDataPropertyExpression dp = a.getProperty();
+//                    int id2 = dataProperties.get(dp.asOWLDataProperty().getIRI().getFragment());
+                    
+                    int row = edges.addRow();
+                    edges.set(row, "source", id1);
+                    edges.set(row, "target", anonymNode.getRow());
+                    edges.set(row, "edge", new org.pg.eti.kask.sova.edges.InstanceOfEdge());
+                }
+
+//                a.getIndividualsInSignature();
+//                Set<?> s = a.getProperty().getRanges(ontology);
+                System.out.println(a.getAxiomType().toString());
             } else if (axiom instanceof OWLFunctionalDataPropertyAxiom) {
                 // System.out.println("FUNC OBJ PRO " + axiom.toString() +
                 // " dodany" );

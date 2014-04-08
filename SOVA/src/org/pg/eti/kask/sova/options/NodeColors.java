@@ -83,7 +83,7 @@ public class NodeColors {
         dataPropertyNodeColor = new Color(146,193,49);//new Color(107, 142, 35);
         someValuesFromNodeColor = new Color(177,0,99);//new Color(203, 61, 255);
         allValuesFromNodeColor = new Color(159, 152, 255);
-        dataTypeNodeColor = new Color(41, 167, 121);
+        dataTypeNodeColor = new Color(61, 255, 155);//new Color(41, 167, 121);
         anonymousClassNodeColor = Color.ORANGE;// YELLOW;
         cardinalityValueNodeColor = new Color(255, 171, 0);
         minCardinalityValueNodeColor = new Color(162, 255, 0);
