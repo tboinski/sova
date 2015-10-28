@@ -450,7 +450,9 @@ public class OWLtoGraphConverter {
                     //tutaj zmieniłem
                     allValNode.set(COLUMN_NODE, sNode);
 
-                    int definitionID = properties.get(((OWLObjectHasValue) description).getProperty().asOWLObjectProperty().getIRI().getFragment());
+                    System.out.println(((OWLObjectHasValue) description).getProperty().asOWLObjectProperty().getIRI().getFragment());
+                    System.out.println(((OWLObjectHasValue) description).getProperty().asOWLObjectProperty().getIRI());
+                    int definitionID = properties.get("<"+((OWLObjectHasValue) description).getProperty().asOWLObjectProperty().getIRI()+">");
                     //tu zmieniłem
                     int someRow = edges.addRow();
                     edges.set(someRow, "source", definitionID);

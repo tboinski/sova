@@ -43,7 +43,7 @@
 		<description>
 	    Kompilacja pluginu
 		</description>
-		<javac destdir="${classes}" srcdir="${src}" deprecation="on">
+		<javac target="1.6" destdir="${classes}" srcdir="${src}" deprecation="on">
 			<classpath refid="project.classpath" />
 		</javac>
 	</target>
