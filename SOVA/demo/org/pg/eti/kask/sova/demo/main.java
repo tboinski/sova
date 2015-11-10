@@ -21,6 +21,7 @@
  */
 package org.pg.eti.kask.sova.demo;
 
+import java.io.File;
 import java.io.PrintStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -57,7 +58,8 @@ public class main {
             // wczytanie propertiesów -klasa singleton 
             VisualizationProperties.instanceOf().loadProperties(Constants.PROPERTIES);
 
-            IRI physicalIRI = IRI.create(Constants.ONTO_TEST_DIRECTORY);
+            //IRI physicalIRI = IRI.create(Constants.ONTO_TEST_DIRECTORY);
+            File physicalIRI = new File(Constants.ONTO_TEST_DIRECTORY);
             try {// wczytanie ontologi z pliku 
                 ontology = OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(physicalIRI);
 
