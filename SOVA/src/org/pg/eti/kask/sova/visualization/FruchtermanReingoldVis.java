@@ -22,12 +22,17 @@
 
 package org.pg.eti.kask.sova.visualization;
 
+import org.semanticweb.owlapi.model.OWLOntology;
 import prefuse.action.ActionList;
 import prefuse.action.RepaintAction;
 import prefuse.action.layout.graph.FruchtermanReingoldLayout;
 import prefuse.activity.Activity;
 
 public class FruchtermanReingoldVis extends OVVisualization  {
+
+    public FruchtermanReingoldVis(OWLOntology o) {
+        super(o);
+    }
 
     /**
      * ustawienie vizualizacji

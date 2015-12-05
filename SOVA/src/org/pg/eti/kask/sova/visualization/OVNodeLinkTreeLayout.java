@@ -25,6 +25,7 @@ package org.pg.eti.kask.sova.visualization;
 import java.awt.geom.Point2D;
 
 import org.pg.eti.kask.sova.graph.Constants;
+import org.semanticweb.owlapi.model.OWLOntology;
 
 
 import prefuse.Visualization;
@@ -70,6 +71,10 @@ public class OVNodeLinkTreeLayout extends OVVisualization{
     private EdgeRenderer m_edgeRenderer;
     private int m_orientation = prefuse.Constants.ORIENT_LEFT_RIGHT;
     private FisheyeTreeFilter fishTreeFilter = null;
+
+    public OVNodeLinkTreeLayout(OWLOntology o) {
+        super(o);
+    }
     private FisheyeTreeFilter getFishTreeFilter(){
     	if (fishTreeFilter== null){
     		fishTreeFilter = new FisheyeTreeFilter(TREE, distance);

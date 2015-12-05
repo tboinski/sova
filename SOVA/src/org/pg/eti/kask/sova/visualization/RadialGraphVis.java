@@ -25,6 +25,7 @@ package org.pg.eti.kask.sova.visualization;
 import java.util.Iterator;
 
 import org.pg.eti.kask.sova.graph.Constants;
+import org.semanticweb.owlapi.model.OWLOntology;
 
 import prefuse.Visualization;
 import prefuse.action.ActionList;
@@ -52,6 +53,10 @@ public class RadialGraphVis extends OVVisualization {
     private static final String tree = Constants.GRAPH;
     private static final String treeNodes = Constants.GRAPH_NODES;
     private static final String linear = "linear";
+
+    public RadialGraphVis(OWLOntology o) {
+        super(o);
+    }
     @Override
     public void setVisualizationLayout() {
      

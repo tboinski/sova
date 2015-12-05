@@ -109,7 +109,7 @@ public class OVDisplay extends Display {
     }
 
     private void initFruchtermanReingoldVis() {
-        visualizationFruchtermanReingold = new FruchtermanReingoldVis();
+        visualizationFruchtermanReingold = new FruchtermanReingoldVis(this.ontology);
         VisualGraph visualGraph = visualizationFruchtermanReingold.addGraph(Constants.GRAPH, this.getGraph());
         visualizationFruchtermanReingold.setVisualizationSettings();
         if (visualGraph.getNodeCount() > 0) {
@@ -137,7 +137,7 @@ public class OVDisplay extends Display {
     }
 
     private void initRadialGraphVis() {
-        visualizationRadialGraph = new RadialGraphVis();
+        visualizationRadialGraph = new RadialGraphVis(this.ontology);
 //		visualizationRadialGraph = getGraphLayoutVis();
         visualizationRadialGraph.addGraph(Constants.GRAPH, this.getGraph());
         visualizationRadialGraph.setVisualizationSettings();
@@ -251,7 +251,7 @@ public class OVDisplay extends Display {
     public void generateTreeFromOWl() {
         try {
             // this.setGraph(OWLtoGraphConverter.getInstance().OWLtoGraph(ont));
-            visualizationTree = new OVNodeLinkTreeLayout();
+            visualizationTree = new OVNodeLinkTreeLayout(this.ontology);
             OWLtoHierarchyTreeConverter con = new OWLtoHierarchyTreeConverter();
             visualizationTree.add(Constants.TREE, con.OWLtoTree(getOntology()));
             visualizationTree.setVisualizationSettings();
