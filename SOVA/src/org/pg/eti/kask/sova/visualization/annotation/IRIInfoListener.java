@@ -48,7 +48,7 @@ public class IRIInfoListener extends ControlAdapter {
 		if (o==null){
 			iriInof.setIRIInfo("");
 		}else{
-			iriInof.setIRIInfo(((IRI)o).toString());
+			iriInof.setIRIInfo("Iri info: " + ((IRI)o).toString());
 		}
 	}
 	@Override

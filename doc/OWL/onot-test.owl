@@ -19,19 +19,25 @@
   </owl:Ontology>
 
   <owl:Class rdf:ID="KlasaA">
-</owl:Class>
+    <rdfs:label>Class A label</rdfs:label>
+    <rdfs:comment xml:lang="en">class A comment ontology</rdfs:comment>
+  </owl:Class>
 
 
   <owl:Class rdf:ID="KlasaB">
-<rdfs:subClassOf>
-      <owl:Class rdf:ID="KlasaA"/>
+    <rdfs:label>Class B label</rdfs:label>
+    <rdfs:comment xml:lang="en">class B comment ontology</rdfs:comment>
+    <rdfs:subClassOf>
+        <owl:Class rdf:ID="KlasaA"/>
     </rdfs:subClassOf>
-</owl:Class>
+  </owl:Class>
 
 
   <owl:Class rdf:ID="KlasaC">
-<rdfs:subClassOf>
-      <owl:Class rdf:ID="KlasaA"/>
-    </rdfs:subClassOf>
-</owl:Class>
-</rdf:RDF>
+    <rdfs:label>Class C label</rdfs:label>
+    <rdfs:comment xml:lang="en">class C comment ontology</rdfs:comment>
+    <rdfs:subClassOf>
+       <owl:Class rdf:ID="KlasaA"/>
+     </rdfs:subClassOf>
+    </owl:Class>
+  </rdf:RDF>

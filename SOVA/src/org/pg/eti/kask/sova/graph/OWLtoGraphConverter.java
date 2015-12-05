@@ -87,7 +87,7 @@ public class OWLtoGraphConverter {
     private void insertDataProperties(OWLOntology ontology, Graph graph) {
         for (OWLDataProperty prop : ontology.getDataPropertiesInSignature(true)) {
 
-//            System.out.println("DATATYPE :  " + prop.toString());
+            System.out.println("DATATYPE :  " + prop.toString());
             Set<OWLDataRange> s = prop.getRanges(ontology);
             Iterator<OWLDataRange> it = s.iterator();
             int dataPropertyRowNr = 0;
@@ -259,14 +259,14 @@ public class OWLtoGraphConverter {
             // dodaj anonimowe node - uchwyt do niego powinien byc zwrocony
 
             if (anonyms.containsKey(description.toString())) {
-                // System.out.println("ZWROCONO JUZ ISTNIEJACY  anonym" +
-                // description.toString() );
+                 System.out.println("ZWROCONO JUZ ISTNIEJACY  anonym" +
+                 description.toString() );
                 return anonyms.get(description.toString());
 
             } else {
                 // anonyms.put(description.toString(), description.hashCode());
-                // System.out.println("ANONYM NODE DLA " +
-                // description.toString() + "dodany" );
+                 System.out.println("ANONYM NODE DLA " +
+                 description.toString() + "dodany" );
                 Node anonymNode = graph.addNode();
                 org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.AnonymousClassNode();
                 anonymNode.set(COLUMN_NODE, node);
