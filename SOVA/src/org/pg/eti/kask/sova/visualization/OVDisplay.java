@@ -120,7 +120,7 @@ public class OVDisplay extends Display {
     }
 
     private void initForceDirectedVis() {
-        visualizationForceDirected = new ForceDirectedVis();
+        visualizationForceDirected = new ForceDirectedVis(this.ontology);
         VisualGraph visualGraph = visualizationForceDirected.addGraph(Constants.GRAPH, this.getGraph());
         visualizationForceDirected.setVisualizationSettings();
         // ustawienie podswietlonej klasy

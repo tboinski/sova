@@ -23,6 +23,7 @@
 package org.pg.eti.kask.sova.visualization;
 
 import javax.swing.JPanel;
+import org.semanticweb.owlapi.model.OWLOntology;
 import prefuse.action.ActionList;
 import prefuse.action.RepaintAction;
 import prefuse.action.layout.graph.ForceDirectedLayout;
@@ -35,6 +36,10 @@ import prefuse.util.ui.JForcePanel;
  * @author Piotr Kunowski
  */
 public class ForceDirectedVis extends OVVisualization {
+
+    public ForceDirectedVis(OWLOntology o) {
+        super(o);
+    }
 
     /**
      * ustawienie vizualizacji

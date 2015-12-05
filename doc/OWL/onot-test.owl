@@ -9,11 +9,10 @@
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
     xmlns:dc="http://purl.org/dc/elements/1.1/"
   xml:base="http://www.co-ode.org/ontologies/pizza/2005/10/18/pizza.owl">
+  
   <owl:Ontology rdf:about="">
-    <protege:defaultLanguage rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >en</protege:defaultLanguage>
-    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >version 1.3</owl:versionInfo>
+    <protege:defaultLanguage rdf:datatype="http://www.w3.org/2001/XMLSchema#string">en</protege:defaultLanguage>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">version 1.3</owl:versionInfo>
     <rdfs:comment xml:lang="en">An example ontology that contains all constructs required for the various versions of the Pizza Tutorial run by Manchester University (see http://www.co-ode.org/resources/tutorials/)</rdfs:comment>
     <owl:imports rdf:resource="http://protege.stanford.edu/plugins/owl/protege"/>
   </owl:Ontology>
@@ -23,22 +22,11 @@
     <rdfs:comment xml:lang="en">class A comment ontology</rdfs:comment>
     <rdfs:comment xml:lang="pl">klasa A komentarz ontology</rdfs:comment>
   </owl:Class>
-
-
-  <owl:Class rdf:ID="KlasaB">
+  
+ <owl:Class rdf:ID="KlasaB">
     <rdfs:label>Class B label</rdfs:label>
     <rdfs:comment xml:lang="en">class B comment ontology</rdfs:comment>
-    <rdfs:subClassOf>
-        <owl:Class rdf:ID="KlasaA"/>
-    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="pl">klasa B komentarz ontology</rdfs:comment>
   </owl:Class>
-
-
-  <owl:Class rdf:ID="KlasaC">
-    <rdfs:label>Class C label</rdfs:label>
-    <rdfs:comment xml:lang="en">class C comment ontology</rdfs:comment>
-    <rdfs:subClassOf>
-       <owl:Class rdf:ID="KlasaA"/>
-     </rdfs:subClassOf>
-    </owl:Class>
+  
   </rdf:RDF>

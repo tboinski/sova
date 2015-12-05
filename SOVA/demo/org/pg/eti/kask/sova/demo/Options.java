@@ -52,7 +52,6 @@ import prefuse.util.ui.JValueSlider;
  */
 public class Options extends JFrame {
 
-        private static final String CHECKBOX_LABELS_COMMAND = "checkbox_labels";
 	private static final String CHECKBOX_SUBCLASS_COMMAND = "checkbox_subclass";
 	private static final String CHECKBOX_CLASS_COMMAND = "checkbox_class";
 	private static final String CHECKBOX_ANONYMOUSE_COMMAND = "checkbox_anonymouse";
@@ -79,6 +78,7 @@ public class Options extends JFrame {
 	private static final String CHECKBOX_DOMAIN_COMMAND = "checkbox_domain";
 	private static final String CHECKBOX_RANGE_COMMAND = "checkbox_drange";
 	private static final String CHECKBOX_SHOW_IRI = "checkbox_showiri";
+        private static final String CHECKBOX_LABELS_COMMAND = "checkbox_labels";
 	private static final int DEFAULT_WIDTH = 300;
 	private static final int DEFAULT_HEIGHT = 600;
 	private JButton exitButt;
@@ -194,13 +194,13 @@ public class Options extends JFrame {
 		chClass.setSelected(true);
 		chClass.addActionListener(checkboxListener);
 		checkboxPanel.add(chClass);
-                
+                                     
                 chLabels = new JCheckBox("ID/Lables");
-		chClass.setActionCommand(CHECKBOX_LABELS_COMMAND);
-		chClass.setSelected(true);
-		chClass.addActionListener(checkboxListener);
+		chLabels.setActionCommand(CHECKBOX_LABELS_COMMAND);
+		chLabels.setSelected(true);
+		chLabels.addActionListener(checkboxListener);
 		checkboxPanel.add(chLabels);
-           		
+                
 		chAnonymouse = new JCheckBox("Anonymouse");
 		chAnonymouse.setActionCommand(CHECKBOX_ANONYMOUSE_COMMAND);
 		chAnonymouse.setSelected(true);
@@ -279,7 +279,7 @@ public class Options extends JFrame {
 		choneof.setSelected(true);
 		checkboxPanel.add(choneof);
 		visValues.add(checkboxPanel);
-
+                
 		// property
 
 		chproperty = new JCheckBox("Property");

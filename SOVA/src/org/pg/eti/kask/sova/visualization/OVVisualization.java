@@ -23,6 +23,7 @@
 package org.pg.eti.kask.sova.visualization;
 
 import org.pg.eti.kask.sova.graph.Constants;
+import org.semanticweb.owlapi.model.OWLOntology;
 import prefuse.Visualization;
 import prefuse.action.ActionList;
 import prefuse.action.ItemAction;
@@ -58,11 +59,12 @@ abstract public class OVVisualization extends Visualization {
     protected GraphDistanceFilter filterDist = null;
     protected OVItemFilter itemVisualizationFilter = null;
     protected boolean gravitation = true;
+    private OWLOntology ontology = null;
 
 
-
-    public OVVisualization() {
+    public OVVisualization(OWLOntology o) {
         super();
+        this.ontology = o;  
     }
     /**
      *
@@ -83,7 +85,7 @@ abstract public class OVVisualization extends Visualization {
      * 
      */
     protected void initItemVisualizationFilter(){
-    	itemVisualizationFilter = new OVItemFilter();
+    	itemVisualizationFilter = new OVItemFilter(ontology);
     }
     
     protected void addRepaintAction(){
