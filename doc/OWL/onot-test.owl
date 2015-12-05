@@ -21,6 +21,7 @@
   <owl:Class rdf:ID="KlasaA">
     <rdfs:label>Class A label</rdfs:label>
     <rdfs:comment xml:lang="en">class A comment ontology</rdfs:comment>
+    <rdfs:comment xml:lang="pl">klasa A komentarz ontology</rdfs:comment>
   </owl:Class>
 
 

@@ -52,6 +52,7 @@ import prefuse.util.ui.JValueSlider;
  */
 public class Options extends JFrame {
 
+        private static final String CHECKBOX_LABELS_COMMAND = "checkbox_labels";
 	private static final String CHECKBOX_SUBCLASS_COMMAND = "checkbox_subclass";
 	private static final String CHECKBOX_CLASS_COMMAND = "checkbox_class";
 	private static final String CHECKBOX_ANONYMOUSE_COMMAND = "checkbox_anonymouse";
@@ -84,7 +85,7 @@ public class Options extends JFrame {
 	private OVDisplay display;
 
 	private JButton options = null;
-	private JCheckBox chClass = null, chSubClass = null, chDisjointEdge = null,
+	private JCheckBox chLabels = null, chClass = null, chSubClass = null, chDisjointEdge = null,
 			chCardinalityNode = null, chUnionOf = null, chIntersecionOf = null,
 			chComplementOf = null, chEquivalent = null, chAnonymouse=null;
 	private JCheckBox chIndywidual = null, chInstanceOf = null,
@@ -182,17 +183,24 @@ public class Options extends JFrame {
 		visValues.add(buttonPanel);
 
 		CheckBoxListener checkboxListener = new CheckBoxListener();
-		JPanel checkboxPanel = new JPanel(new GridLayout(15, 2));
+		JPanel checkboxPanel = new JPanel(new GridLayout(16, 2));
 		checkboxPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory
 				.createEtchedBorder(), "Filter"));
 
-		chClass = new JCheckBox("Class");
+                
+                chClass = new JCheckBox("Class");
 		chClass.setToolTipText("Enable/Disable owl:class element");
 		chClass.setActionCommand(CHECKBOX_CLASS_COMMAND);
 		chClass.setSelected(true);
 		chClass.addActionListener(checkboxListener);
 		checkboxPanel.add(chClass);
-		
+                
+                chLabels = new JCheckBox("ID/Lables");
+		chClass.setActionCommand(CHECKBOX_LABELS_COMMAND);
+		chClass.setSelected(true);
+		chClass.addActionListener(checkboxListener);
+		checkboxPanel.add(chLabels);
+           		
 		chAnonymouse = new JCheckBox("Anonymouse");
 		chAnonymouse.setActionCommand(CHECKBOX_ANONYMOUSE_COMMAND);
 		chAnonymouse.setSelected(true);
@@ -392,13 +400,20 @@ public class Options extends JFrame {
 					chEquivalent.setEnabled(false);
 					FilterOptions.setAnonymouse(false);
 				}
-			} else if (e.getActionCommand().equals(CHECKBOX_ANONYMOUSE_COMMAND)) {
+                        } else if (e.getActionCommand().equals(CHECKBOX_ANONYMOUSE_COMMAND)) {
 				if (chAnonymouse.isSelected()) {
 					FilterOptions.setAnonymouse(true);
 				} else {
 					FilterOptions.setAnonymouse(false);
 				}
-			}
+			
+			} else if (e.getActionCommand().equals(CHECKBOX_LABELS_COMMAND)) {
+				if (chLabels.isSelected()) {
+					FilterOptions.setLabels(true);
+				} else {
+					FilterOptions.setLabels(false);
+				}
+                        }
 			else if (e.getActionCommand().equals(CHECKBOX_SUBCLASS_COMMAND)) {
 				if (chSubClass.isSelected()) {
 					FilterOptions.setSubClassEdge(true);

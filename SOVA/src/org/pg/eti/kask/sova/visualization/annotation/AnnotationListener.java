@@ -50,7 +50,9 @@ public class AnnotationListener extends ControlAdapter {
     private AnnotationComponent descriptComponent = null;
     private OWLOntologyManager manager = null;
     private OWLOntology ontology = null;
-
+    private String lang = "";
+    
+    
     public AnnotationListener(AnnotationComponent component, OWLOntology ontology) {
         this.descriptComponent = component;
         this.ontology = ontology;
@@ -64,6 +66,22 @@ public class AnnotationListener extends ControlAdapter {
      * @see prefuse.controls.Control#itemClicked(prefuse.visual.VisualItem,
      * java.awt.event.MouseEvent)
      */
+    
+    private void returnProperty(OWLAnnotation elem){
+        OWLAnnotationProperty prop = elem.getProperty();
+        String label = prop.getIRI().getFragment();
+        if (label.equals("label")) {
+            OWLAnnotationValue val = elem.getValue();
+            String l = val.toString();
+            descriptComponent.setLabelText(l);
+        } else if (label.equals("comment")) {
+            OWLAnnotationValue val = elem.getValue();
+            String l = val.toString();
+            descriptComponent.setCommentText(l);
+        }           
+    }
+    
+    
     @Override
     public void itemClicked(VisualItem item, MouseEvent e) {
         Object o = item.get(OWLtoGraphConverter.COLUMN_IRI);
@@ -77,18 +95,8 @@ public class AnnotationListener extends ControlAdapter {
 
             Set<OWLAnnotation> set = currentClass.getAnnotations(ontology);
 
-            for (OWLAnnotation elem : set) {
-                OWLAnnotationProperty prop = elem.getProperty();
-                String label = prop.getIRI().getFragment();
-                if (label.equals("label")) {
-                    OWLAnnotationValue val = elem.getValue();
-                    String l = val.toString();
-                    descriptComponent.setLabelText(l);
-                } else if (label.equals("comment")) {
-                    OWLAnnotationValue val = elem.getValue();
-                    String l = val.toString();
-                    descriptComponent.setCommentText(l);
-                }
+            for (OWLAnnotation elem : set) {  
+                returnProperty(elem);
             }
         }
     }
