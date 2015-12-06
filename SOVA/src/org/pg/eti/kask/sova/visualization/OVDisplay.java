@@ -29,6 +29,8 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.FileOutputStream;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -43,7 +45,13 @@ import org.pg.eti.kask.sova.visualization.annotation.AnnotationComponent;
 import org.pg.eti.kask.sova.visualization.annotation.AnnotationListener;
 import org.pg.eti.kask.sova.visualization.annotation.IRIInfoComponent;
 import org.pg.eti.kask.sova.visualization.annotation.IRIInfoListener;
+import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLAnnotation;
+import org.semanticweb.owlapi.model.OWLAnnotationProperty;
+import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyManager;
 import prefuse.Display;
 import prefuse.Visualization;
 import prefuse.controls.DragControl;
@@ -55,6 +63,7 @@ import prefuse.controls.WheelZoomControl;
 import prefuse.controls.ZoomControl;
 import prefuse.controls.ZoomToFitControl;
 import prefuse.data.Graph;
+import prefuse.data.Node;
 import prefuse.data.Table;
 import prefuse.data.query.SearchQueryBinding;
 import prefuse.data.search.SearchTupleSet;
@@ -73,7 +82,8 @@ public class OVDisplay extends Display {
 
     public static final int FORCE_DIRECTED_LAYOUT = 1;
     public static final int RADIAL_TREE_LAYOUT = 2;
-    public static final int FRUCHTERMAN_REINGOLD_LAYOUT = 3;
+    public static final int FRUCHTERMAN_REINGOLD_LAYOUT = 3;  
+    public enum VisualizationEnums {LABELS, ID};   
     private int graphLayout = FORCE_DIRECTED_LAYOUT;
     private Graph graph = null;
     private OVVisualization visualizationForceDirected = null;
@@ -82,6 +92,60 @@ public class OVDisplay extends Display {
     private OVVisualization visualizationTree = null;
     private boolean canPan = true;
     private OWLOntology ontology = null;
+    
+    
+    private void changeNodeAndEdges(Object item, boolean flag){
+//        ((VisualItem) item).setVisible(flag);
+//        Node n = ((Node) item);
+//        Iterator egdesToRemove = n.edges();
+//        while (egdesToRemove.hasNext()) {
+//            ((VisualItem) egdesToRemove.next()).setVisible(flag);
+//        }
+    }
+    
+    public void changeGraphVisualization(VisualizationEnums e){
+        this.removeAll();
+        OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+        Iterator items = m_vis.items();
+        while (items.hasNext()) {
+            VisualItem item = (VisualItem) items.next();
+            Object o = ((VisualItem) item).get(Constants.GRAPH_NODES);
+            if ((o instanceof org.pg.eti.kask.sova.nodes.ClassNode )) {  
+
+                Object element = ((VisualItem) item).get(OWLtoGraphConverter.COLUMN_IRI);
+                OWLClass currentClass = manager.getOWLDataFactory().getOWLClass(IRI.create(((IRI) element).toURI()));
+                Set<OWLAnnotation> set = currentClass.getAnnotations(this.ontology);
+                
+                String stringProp = "";
+                for (OWLAnnotation elem : set) {  
+                    OWLAnnotationProperty prop = elem.getProperty();
+                    stringProp = prop.getIRI().getFragment();
+                    if (stringProp.equals("label")){ 
+                        stringProp = elem.getValue().toString();
+                        break;
+                    }
+                    stringProp = "";
+                }
+                
+                switch (e) {          
+                    case LABELS:    
+                        if (!stringProp.isEmpty()){ 
+                            ((org.pg.eti.kask.sova.nodes.ClassNode) o).setLabel(stringProp);
+                        }else{ changeNodeAndEdges(item, false);}
+                        break;
+
+                    case ID:  
+                       ((org.pg.eti.kask.sova.nodes.ClassNode) o).setLabel(currentClass.getIRI().getFragment());
+                       changeNodeAndEdges(item, true);
+                       break;
+
+                    default:
+                       break;
+                }
+            }
+        }
+        this.repaint();
+    }
 
     private OVVisualization getGraphLayoutVis() {
 
@@ -109,7 +173,7 @@ public class OVDisplay extends Display {
     }
 
     private void initFruchtermanReingoldVis() {
-        visualizationFruchtermanReingold = new FruchtermanReingoldVis(this.ontology);
+        visualizationFruchtermanReingold = new FruchtermanReingoldVis();
         VisualGraph visualGraph = visualizationFruchtermanReingold.addGraph(Constants.GRAPH, this.getGraph());
         visualizationFruchtermanReingold.setVisualizationSettings();
         if (visualGraph.getNodeCount() > 0) {
@@ -117,10 +181,11 @@ public class OVDisplay extends Display {
             visualizationFruchtermanReingold.getGroup(Visualization.FOCUS_ITEMS).setTuple(currentClass);
             currentClass.setFixed(true);
         }
+      
     }
 
     private void initForceDirectedVis() {
-        visualizationForceDirected = new ForceDirectedVis(this.ontology);
+        visualizationForceDirected = new ForceDirectedVis();
         VisualGraph visualGraph = visualizationForceDirected.addGraph(Constants.GRAPH, this.getGraph());
         visualizationForceDirected.setVisualizationSettings();
         // ustawienie podswietlonej klasy
@@ -137,11 +202,10 @@ public class OVDisplay extends Display {
     }
 
     private void initRadialGraphVis() {
-        visualizationRadialGraph = new RadialGraphVis(this.ontology);
+        visualizationRadialGraph = new RadialGraphVis();
 //		visualizationRadialGraph = getGraphLayoutVis();
         visualizationRadialGraph.addGraph(Constants.GRAPH, this.getGraph());
         visualizationRadialGraph.setVisualizationSettings();
-
     }
 
     /**
@@ -251,7 +315,7 @@ public class OVDisplay extends Display {
     public void generateTreeFromOWl() {
         try {
             // this.setGraph(OWLtoGraphConverter.getInstance().OWLtoGraph(ont));
-            visualizationTree = new OVNodeLinkTreeLayout(this.ontology);
+            visualizationTree = new OVNodeLinkTreeLayout();
             OWLtoHierarchyTreeConverter con = new OWLtoHierarchyTreeConverter();
             visualizationTree.add(Constants.TREE, con.OWLtoTree(getOntology()));
             visualizationTree.setVisualizationSettings();

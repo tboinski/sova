@@ -26,16 +26,6 @@ import java.util.Set;
 
 import org.pg.eti.kask.sova.edges.Edge;
 import org.pg.eti.kask.sova.graph.Constants;
-import org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
-import org.semanticweb.owlapi.apibinding.OWLManager;
-import org.semanticweb.owlapi.model.IRI;
-import org.semanticweb.owlapi.model.OWLAnnotation;
-import org.semanticweb.owlapi.model.OWLAnnotationProperty;
-import org.semanticweb.owlapi.model.OWLAnnotationValue;
-import org.semanticweb.owlapi.model.OWLClass;
-import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.model.OWLOntologyManager;
-
 import prefuse.action.GroupAction;
 import prefuse.data.Node;
 import prefuse.visual.EdgeItem;
@@ -52,13 +42,7 @@ import prefuse.visual.tuple.TableEdgeItem;
 public class OVItemFilter extends GroupAction {
 
     private boolean rememberOldState = true;
-
-    private OWLOntology ontology = null;
-    
-    public OVItemFilter(OWLOntology o){
-        this.ontology = o;
-    }
-    
+ 
     public boolean isRememberOldState() {
         return rememberOldState;
     }
@@ -272,31 +256,6 @@ public class OVItemFilter extends GroupAction {
                 ((VisualItem) item).setVisible(false);
             }
 
-        }
-            
-        
-        OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-        items = m_vis.items(m_group);
-        while (items.hasNext()) {
-            VisualItem item = (VisualItem) items.next();
-            Object o = ((VisualItem) item).get(Constants.GRAPH_NODES);
-            if ((o instanceof org.pg.eti.kask.sova.nodes.ClassNode )) {  
-
-               Object element = ((VisualItem) item).get(OWLtoGraphConverter.COLUMN_IRI);
-               OWLClass currentClass = manager.getOWLDataFactory().getOWLClass(IRI.create(((IRI) element).toURI()));
-               Set<OWLAnnotation> set = currentClass.getAnnotations(this.ontology);
-               for (OWLAnnotation elem : set) {  
-                   
-                   OWLAnnotationProperty prop = elem.getProperty();
-                   String label = prop.getIRI().getFragment();
-
-                   if (!FilterOptions.isLabelsOn() && label.equals("label")) {
-                        ((org.pg.eti.kask.sova.nodes.ClassNode) o).setLabel(elem.getValue().toString());
-                   }else if(FilterOptions.isLabelsOn()){
-                        ((org.pg.eti.kask.sova.nodes.ClassNode) o).setLabel(currentClass.getIRI().getFragment());
-                   }
-                }       
-            }
-        }
+        } 
     }
 }

@@ -27,7 +27,7 @@ package org.pg.eti.kask.sova.demo;
  */
 public class Constants {
 //     public static final String ONTO_TEST_DIRECTORY = "file:/home/boing/index.rdf";
-    public static final String ONTO_TEST_DIRECTORY = "X:\\Repozytoria\\sova\\doc\\OWL\\pizza2.owl";
+    public static final String ONTO_TEST_DIRECTORY = "X:\\Repozytoria\\sova\\doc\\OWL\\onot-test.owl";
 //    public static final String ONTO_TEST_DIRECTORY = "file:/home/boing/ontologies/ontC.owl";//risk_ENISA.owl";
 //    public static final String ONTO_TEST_DIRECTORY = "file:/home/boing/ontologies/moduły/moduł_podstawowy/RiskCoreConcepts.owl";
 //    public static final String ONTO_TEST_DIRECTORY = "file:/home/boing/ontologies/dziedzinowe/testy/00-wyjsciowa.rdf";

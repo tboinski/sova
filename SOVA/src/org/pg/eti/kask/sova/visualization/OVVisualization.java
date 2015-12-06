@@ -59,13 +59,8 @@ abstract public class OVVisualization extends Visualization {
     protected GraphDistanceFilter filterDist = null;
     protected OVItemFilter itemVisualizationFilter = null;
     protected boolean gravitation = true;
-    private OWLOntology ontology = null;
 
-
-    public OVVisualization(OWLOntology o) {
-        super();
-        this.ontology = o;  
-    }
+        
     /**
      *
      * @return filtr na wyświetlane elementy
@@ -85,7 +80,7 @@ abstract public class OVVisualization extends Visualization {
      * 
      */
     protected void initItemVisualizationFilter(){
-    	itemVisualizationFilter = new OVItemFilter(ontology);
+    	itemVisualizationFilter = new OVItemFilter();
     }
     
     protected void addRepaintAction(){

@@ -28,6 +28,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.AbstractButton;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -160,8 +161,7 @@ public class Options extends JFrame {
 		forceDirectedRadial.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
-				display
-						.changeVisualizationLayout(OVDisplay.FORCE_DIRECTED_LAYOUT);
+				display.changeVisualizationLayout(OVDisplay.FORCE_DIRECTED_LAYOUT);
 
 			}
 		});
@@ -181,6 +181,40 @@ public class Options extends JFrame {
 
 		buttonPanel.add(radialTreeRadial);
 		visValues.add(buttonPanel);
+                
+                //****************************************************************
+                // Label ID
+                
+                JPanel buttonVisual = new JPanel(new GridLayout(2, 1));
+		buttonVisual.setBorder(BorderFactory.createTitledBorder(BorderFactory
+				.createEtchedBorder(), "Visualization subject"));
+
+		JRadioButton labelRationButton = new JRadioButton("Label", false);
+		labelRationButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {  
+                            display.changeGraphVisualization(OVDisplay.VisualizationEnums.LABELS);
+			}
+		});
+		JRadioButton idRationButton = new JRadioButton("ID", true);
+		idRationButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {
+                            display.changeGraphVisualization(OVDisplay.VisualizationEnums.ID);
+			}
+		});
+		ButtonGroup subjectGroup = new ButtonGroup();
+                
+		subjectGroup.add(labelRationButton);
+		subjectGroup.add(idRationButton);
+                
+		buttonVisual.add(labelRationButton);
+		buttonVisual.add(idRationButton);
+                
+		visValues.add(buttonVisual);
+                
+                //****************************************************************
+                
 
 		CheckBoxListener checkboxListener = new CheckBoxListener();
 		JPanel checkboxPanel = new JPanel(new GridLayout(16, 2));
@@ -195,11 +229,6 @@ public class Options extends JFrame {
 		chClass.addActionListener(checkboxListener);
 		checkboxPanel.add(chClass);
                                      
-                chLabels = new JCheckBox("ID/Lables");
-		chLabels.setActionCommand(CHECKBOX_LABELS_COMMAND);
-		chLabels.setSelected(true);
-		chLabels.addActionListener(checkboxListener);
-		checkboxPanel.add(chLabels);
                 
 		chAnonymouse = new JCheckBox("Anonymouse");
 		chAnonymouse.setActionCommand(CHECKBOX_ANONYMOUSE_COMMAND);
@@ -407,13 +436,7 @@ public class Options extends JFrame {
 					FilterOptions.setAnonymouse(false);
 				}
 			
-			} else if (e.getActionCommand().equals(CHECKBOX_LABELS_COMMAND)) {
-				if (chLabels.isSelected()) {
-					FilterOptions.setLabels(true);
-				} else {
-					FilterOptions.setLabels(false);
-				}
-                        }
+			}
 			else if (e.getActionCommand().equals(CHECKBOX_SUBCLASS_COMMAND)) {
 				if (chSubClass.isSelected()) {
 					FilterOptions.setSubClassEdge(true);

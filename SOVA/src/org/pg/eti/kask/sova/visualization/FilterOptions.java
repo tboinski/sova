@@ -28,7 +28,6 @@ package org.pg.eti.kask.sova.visualization;
  */
 public class FilterOptions {
 
-    private static boolean labels = true;
     private static boolean classFilter = true;
     private static boolean subClassEdge = true;
     private static boolean equivalentClassEdge = true;
@@ -724,30 +723,5 @@ public class FilterOptions {
      */
     public static synchronized void setShowIRI(boolean showURI) {
         FilterOptions.showIRI = showURI;
-    }  
-    
-     /** filtr wizualizacji po etykietach
-     * <ul>
-     * <li> <b>false</b> - filtr wyłączony - element jest wizualizowany po eykiecie
-     * <li> <b>true</b> -  filtr włączony - element jest wizualizowany po ID
-     * </ul>
-     * @see <a href="http://www.w3.org/TR/2004/REC-owl-features-20040210/#Class">W3C - opis OWL</a>
-     */
-    public static synchronized boolean isLabelsOn() {
-        return labels;
-    }
-    
-    /** filtr wizualizacji klas po etykietach
-     * Odpowiada również za klasy anonimowe.
-     * <ul>
-     * <li> <b>false</b> - filtr wyłączony - element jest wizualizowany po eykiecie
-     * <li> <b>true</b> -  filtr włączony - element jest wizualizowany po ID
-     * </ul>
-     * @see <a href="http://www.w3.org/TR/2004/REC-owl-features-20040210/#Class">W3C - opis OWL</a>
-     */
-    public static synchronized void setLabels(boolean labelFilter) {
-        FilterOptions.labels = labelFilter;
-    }
-    
-    
+    }      
 }
