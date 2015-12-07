@@ -94,6 +94,8 @@ public class OVDisplay extends Display {
     private OWLOntology ontology = null;
     
     
+    // Wyświetl w węzłach wybrane przez użytkownika atrybuty
+    // Label lub ID klasy
     public void changeGraphVisualization(VisualizationEnums e){
         this.removeAll();
         OWLOntologyManager manager = OWLManager.createOWLOntologyManager();

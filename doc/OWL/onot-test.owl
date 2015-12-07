@@ -18,13 +18,16 @@
   </owl:Ontology>
 
   <owl:Class rdf:ID="KlasaA">
-    <rdfs:comment xml:lang="pl">klasa A komentarz ontology</rdfs:comment>
+    <rdfs:comment xml:lang="es">Clase Un comentario ontología</rdfs:comment>
+    <rdfs:comment xml:lang="pl">Tekst komentarza w języku polskim</rdfs:comment>
   </owl:Class>
   
  <owl:Class rdf:ID="KlasaB">
-    <rdfs:label>Class B label</rdfs:label>
-    <rdfs:comment xml:lang="en">class B comment ontology</rdfs:comment>
-    <rdfs:comment xml:lang="pl">klasa B komentarz ontology</rdfs:comment>
+    <rdfs:label xml:lang="en">Class B label</rdfs:label>
+    <rdfs:label xml:lang="pl">Labelka po polsku</rdfs:label>
+    <rdfs:comment xml:lang="en">Comment in english</rdfs:comment>
+    <rdfs:comment xml:lang="pl">Komentarz w języku polskim</rdfs:comment>
+    <rdfs:comment xml:lang="de">Kommentar auf Deutsch</rdfs:comment>
   </owl:Class>
   
   </rdf:RDF>

@@ -56,18 +56,17 @@ public class AnnotationListener extends ControlAdapter {
     private AnnotationComponent descriptComponent = null;
     private OWLOntologyManager manager = null;
     private OWLOntology ontology = null;
-    private String lang = "";
-
     private Map<String, String> commentsLangs = new HashMap<String, String>();
     private Map<String, String> labelsLangs = new HashMap<String, String>();
-
+    private enum Selection { ALL, COMMENT, LABEL }
+    
     public AnnotationListener(AnnotationComponent component, OWLOntology ontology) {
         this.descriptComponent = component;
         this.ontology = ontology;
         this.manager = OWLManager.createOWLOntologyManager();
 
     }
-
+    
     /**
      * Obsługa akcji kliknięcia na obiekt
      *
@@ -84,7 +83,7 @@ public class AnnotationListener extends ControlAdapter {
 
         if (label.equals("label")) {
 
-            if (parts.length == 1) {
+            if (parts.length == 1 || parts[1].isEmpty()) {
                 descriptComponent.setLabelText(parts[0]);
                 return;
             }
@@ -93,7 +92,7 @@ public class AnnotationListener extends ControlAdapter {
 
         } else if (label.equals("comment")) {
 
-            if (parts.length == 1) {
+            if (parts.length == 1 || parts[1].isEmpty()) {
                 descriptComponent.setCommentText(parts[0]);
                 return;
             }
@@ -102,18 +101,32 @@ public class AnnotationListener extends ControlAdapter {
         }
     }
 
-    private void changeContent() {
-        if (commentsLangs.size() > 0) {
-            Object comment = descriptComponent.getCommentLang().getSelectedItem();
-            descriptComponent.setCommentText(commentsLangs.get(comment));
-        }
-
-        if (labelsLangs.size() > 0) {
-            Object label = descriptComponent.getCommentLang().getSelectedItem();
-            descriptComponent.setLabelText(labelsLangs.get(label));
+    //Załaduj wybrany element z Combo box'a
+    private void changeContent(Selection selected) {
+        
+        Object comment = descriptComponent.getCommentLang().getSelectedItem();
+        Object label = descriptComponent.getLabelLang().getSelectedItem();
+        
+        switch(selected){
+        
+            case ALL:
+                descriptComponent.setCommentText(commentsLangs.get(comment));
+                descriptComponent.setLabelText(labelsLangs.get(label));
+                break;
+            case COMMENT:     
+                descriptComponent.setCommentText(commentsLangs.get(comment));
+                break;
+            case LABEL:        
+                descriptComponent.setLabelText(labelsLangs.get(label));
+                break;
+                
+            default:
+                break;
+        
         }
     }
 
+    //Uzupełnij Combo box'a o dostępne języki 
     private void fullFillComboBox(JComboBox box, Map<String, String> map) {
 
         box.removeAllItems();
@@ -146,13 +159,22 @@ public class AnnotationListener extends ControlAdapter {
 
             fullFillComboBox(descriptComponent.getCommentLang(), commentsLangs);
             fullFillComboBox(descriptComponent.getLabelLang(), labelsLangs);
-            changeContent();
+            changeContent(Selection.ALL);
         }
 
+        //Listener dla combo box'a z językami dostępnymi dla komentarzy
         descriptComponent.getCommentLang().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                changeContent();
+                changeContent(Selection.COMMENT);
+            }
+        });
+
+        //Listener dla combo box'a z językami dostępnymi dla labelów
+        descriptComponent.getLabelLang().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changeContent(Selection.LABEL);
             }
         });
     }
