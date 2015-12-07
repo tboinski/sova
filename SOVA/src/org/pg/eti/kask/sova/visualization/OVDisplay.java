@@ -94,15 +94,6 @@ public class OVDisplay extends Display {
     private OWLOntology ontology = null;
     
     
-    private void changeNodeAndEdges(Object item, boolean flag){
-//        ((VisualItem) item).setVisible(flag);
-//        Node n = ((Node) item);
-//        Iterator egdesToRemove = n.edges();
-//        while (egdesToRemove.hasNext()) {
-//            ((VisualItem) egdesToRemove.next()).setVisible(flag);
-//        }
-    }
-    
     public void changeGraphVisualization(VisualizationEnums e){
         this.removeAll();
         OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
@@ -131,12 +122,11 @@ public class OVDisplay extends Display {
                     case LABELS:    
                         if (!stringProp.isEmpty()){ 
                             ((org.pg.eti.kask.sova.nodes.ClassNode) o).setLabel(stringProp);
-                        }else{ changeNodeAndEdges(item, false);}
+                        }
                         break;
 
                     case ID:  
                        ((org.pg.eti.kask.sova.nodes.ClassNode) o).setLabel(currentClass.getIRI().getFragment());
-                       changeNodeAndEdges(item, true);
                        break;
 
                     default:

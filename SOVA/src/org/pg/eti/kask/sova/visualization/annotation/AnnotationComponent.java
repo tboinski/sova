@@ -21,6 +21,9 @@
  */
 
 package org.pg.eti.kask.sova.visualization.annotation;
+
+import javax.swing.JComboBox;
+
 /**
  * Interfejs zawiera metody, które musi posiadać formatka wyświetlająca 
  * informacje o zaznaczonym wierzchołku 
@@ -44,4 +47,7 @@ public interface AnnotationComponent {
 	 */
 	public void setCommentText(String coment);
 	
+        public JComboBox getCommentLang();
+        
+        public JComboBox getLabelLang();
 }

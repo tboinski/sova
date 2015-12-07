@@ -25,7 +25,10 @@ package org.pg.eti.kask.sova.demo;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -43,10 +46,23 @@ public class AnnotationPanel extends JPanel implements AnnotationComponent{
 	private JTextArea name = null;
 	private JTextArea label = null;
 	private JTextArea comment = null;
+        private JComboBox labelLang = null;
+        private JComboBox commentLang = null;
+        
 	public AnnotationPanel(){
-		initPanel();
+            initPanel();
 	}
 	
+        @Override
+        public JComboBox getCommentLang(){
+            return commentLang;
+        }
+        
+        @Override
+        public JComboBox getLabelLang(){
+            return labelLang;
+        }
+                
 	private void initPanel(){
 		setSize(PANEL_WIDTH,300);
 		// pole nazwy
@@ -77,23 +93,45 @@ public class AnnotationPanel extends JPanel implements AnnotationComponent{
 		comment.setWrapStyleWord(true);
 		comment.setText("");
 		comment.setFont(FontLib.getFont("Tahoma", 10));
+                
 		JScrollPane pane = new JScrollPane(comment);
 		pane.setAlignmentX(Component.LEFT_ALIGNMENT);
 		pane.setPreferredSize(new Dimension(PANEL_WIDTH-10,200));
 		pane.setMaximumSize(new Dimension(PANEL_WIDTH-5, 200));
 		pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+                
+
 		JLabel nameLabel = new JLabel("Name:");
 		nameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 		this.add(nameLabel);
 		this.add(name);
-		
-		JLabel labelLabel = new JLabel("Label:");
+
+                
+		JLabel labelLabel = new JLabel("Label ");
 		labelLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-		this.add(labelLabel);		
+                
+                JLabel langL = new JLabel("Lang: ");
+		labelLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+                
+                labelLang = new JComboBox();
+                labelLang.setAlignmentX(AnnotationPanel.BOTTOM_ALIGNMENT);
+                
+                this.add(labelLabel);
+                this.add(langL);
+                this.add(labelLang);
+
 		this.add(label);
-		JLabel commentLabel = new JLabel("Comment:");
-		commentLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-		this.add(commentLabel);
+                
+		JLabel commentLabel = new JLabel("Comment ");
+		commentLabel.setAlignmentX(LEFT_ALIGNMENT);  
+                commentLang = new JComboBox();   
+
+                JLabel langC = new JLabel("Lang: ");
+                 
+                this.add(commentLabel);
+                this.add(langC);
+                this.add(commentLang);
+
 		this.add(pane);
 		this.setPreferredSize(new Dimension(PANEL_WIDTH,300));
 		this.setBorder(BorderFactory.createTitledBorder("Properties"));
@@ -103,11 +141,13 @@ public class AnnotationPanel extends JPanel implements AnnotationComponent{
 	@Override
 	public void setCommentText(String coment) {
 		this.comment.setText(coment);
+                repaint();
 	}
 
 	@Override
 	public void setLabelText(String label) {
 		this.label.setText(label);
+                repaint();
 	}
 
 	@Override
@@ -115,6 +155,5 @@ public class AnnotationPanel extends JPanel implements AnnotationComponent{
 		this.name.setText(name);
 		repaint();
 	}
-	
-	
+        
 }

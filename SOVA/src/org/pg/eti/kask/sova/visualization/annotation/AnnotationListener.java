@@ -21,9 +21,15 @@
  */
 package org.pg.eti.kask.sova.visualization.annotation;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
+import javax.swing.JComboBox;
 import org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
@@ -51,8 +57,10 @@ public class AnnotationListener extends ControlAdapter {
     private OWLOntologyManager manager = null;
     private OWLOntology ontology = null;
     private String lang = "";
-    
-    
+
+    private Map<String, String> commentsLangs = new HashMap<String, String>();
+    private Map<String, String> labelsLangs = new HashMap<String, String>();
+
     public AnnotationListener(AnnotationComponent component, OWLOntology ontology) {
         this.descriptComponent = component;
         this.ontology = ontology;
@@ -66,22 +74,56 @@ public class AnnotationListener extends ControlAdapter {
      * @see prefuse.controls.Control#itemClicked(prefuse.visual.VisualItem,
      * java.awt.event.MouseEvent)
      */
-    
-    private void returnProperty(OWLAnnotation elem){
+    private void createDictionaries(OWLAnnotation elem) {
+
         OWLAnnotationProperty prop = elem.getProperty();
         String label = prop.getIRI().getFragment();
+        OWLAnnotationValue val = elem.getValue();
+        String l = val.toString();
+        String[] parts = l.split("@");
+
         if (label.equals("label")) {
-            OWLAnnotationValue val = elem.getValue();
-            String l = val.toString();
-            descriptComponent.setLabelText(l);
+
+            if (parts.length == 1) {
+                descriptComponent.setLabelText(parts[0]);
+                return;
+            }
+
+            labelsLangs.put(parts[1], parts[0]);
+
         } else if (label.equals("comment")) {
-            OWLAnnotationValue val = elem.getValue();
-            String l = val.toString();
-            descriptComponent.setCommentText(l);
-        }           
+
+            if (parts.length == 1) {
+                descriptComponent.setCommentText(parts[0]);
+                return;
+            }
+
+            commentsLangs.put(parts[1], parts[0]);
+        }
     }
-    
-    
+
+    private void changeContent() {
+        if (commentsLangs.size() > 0) {
+            Object comment = descriptComponent.getCommentLang().getSelectedItem();
+            descriptComponent.setCommentText(commentsLangs.get(comment));
+        }
+
+        if (labelsLangs.size() > 0) {
+            Object label = descriptComponent.getCommentLang().getSelectedItem();
+            descriptComponent.setLabelText(labelsLangs.get(label));
+        }
+    }
+
+    private void fullFillComboBox(JComboBox box, Map<String, String> map) {
+
+        box.removeAllItems();
+        Iterator it = map.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            box.addItem(pair.getKey());
+        }
+    }
+
     @Override
     public void itemClicked(VisualItem item, MouseEvent e) {
         Object o = item.get(OWLtoGraphConverter.COLUMN_IRI);
@@ -95,9 +137,23 @@ public class AnnotationListener extends ControlAdapter {
 
             Set<OWLAnnotation> set = currentClass.getAnnotations(ontology);
 
-            for (OWLAnnotation elem : set) {  
-                returnProperty(elem);
+            commentsLangs.clear();
+            labelsLangs.clear();
+
+            for (OWLAnnotation elem : set) {
+                createDictionaries(elem);
             }
+
+            fullFillComboBox(descriptComponent.getCommentLang(), commentsLangs);
+            fullFillComboBox(descriptComponent.getLabelLang(), labelsLangs);
+            changeContent();
         }
+
+        descriptComponent.getCommentLang().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changeContent();
+            }
+        });
     }
 }
