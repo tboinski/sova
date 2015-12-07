@@ -115,6 +115,9 @@ public class OVDisplay extends Display {
                     stringProp = prop.getIRI().getFragment();
                     if (stringProp.equals("label")){ 
                         stringProp = elem.getValue().toString();
+                        if(stringProp.contains("@")){
+                            stringProp = stringProp.substring(0, stringProp.length()-3);
+                        }  
                         break;
                     }
                     stringProp = "";

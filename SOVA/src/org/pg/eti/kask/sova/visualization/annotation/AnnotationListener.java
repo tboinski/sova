@@ -30,6 +30,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import javax.swing.JComboBox;
+import org.pg.eti.kask.sova.graph.Constants;
 import org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
@@ -59,12 +60,19 @@ public class AnnotationListener extends ControlAdapter {
     private Map<String, String> commentsLangs = new HashMap<String, String>();
     private Map<String, String> labelsLangs = new HashMap<String, String>();
     private enum Selection { ALL, COMMENT, LABEL }
+    private Object currentObj = null;
+    private Object comment;
+    private Object label;
+    private JComboBox commentBox;
+    private JComboBox labelBox;
+    private String currentLangKey;
     
     public AnnotationListener(AnnotationComponent component, OWLOntology ontology) {
         this.descriptComponent = component;
         this.ontology = ontology;
         this.manager = OWLManager.createOWLOntologyManager();
-
+        this.commentBox = descriptComponent.getCommentLang();
+        this.labelBox = descriptComponent.getLabelLang();
     }
     
     /**
@@ -104,14 +112,14 @@ public class AnnotationListener extends ControlAdapter {
     //Załaduj wybrany element z Combo box'a
     private void changeContent(Selection selected) {
         
-        Object comment = descriptComponent.getCommentLang().getSelectedItem();
-        Object label = descriptComponent.getLabelLang().getSelectedItem();
+        comment = commentBox.getSelectedItem();
+        label = labelBox.getSelectedItem();
         
         switch(selected){
         
             case ALL:
-                descriptComponent.setCommentText(commentsLangs.get(comment));
                 descriptComponent.setLabelText(labelsLangs.get(label));
+                descriptComponent.setCommentText(commentsLangs.get(comment));
                 break;
             case COMMENT:     
                 descriptComponent.setCommentText(commentsLangs.get(comment));
@@ -139,10 +147,14 @@ public class AnnotationListener extends ControlAdapter {
 
     @Override
     public void itemClicked(VisualItem item, MouseEvent e) {
-        Object o = item.get(OWLtoGraphConverter.COLUMN_IRI);
+
+        Object o = item.get(OWLtoGraphConverter.COLUMN_IRI);     
+        currentObj = ((VisualItem) item).get(Constants.GRAPH_NODES);
+        
         descriptComponent.setNameText("");
         descriptComponent.setLabelText("");
         descriptComponent.setCommentText("");
+        
         if (o != null) {
             OWLClass currentClass = manager.getOWLDataFactory().getOWLClass(IRI.create(((IRI) o).toURI()));
 
@@ -156,10 +168,28 @@ public class AnnotationListener extends ControlAdapter {
             for (OWLAnnotation elem : set) {
                 createDictionaries(elem);
             }
-
-            fullFillComboBox(descriptComponent.getCommentLang(), commentsLangs);
-            fullFillComboBox(descriptComponent.getLabelLang(), labelsLangs);
+           
+            //Sprawdź czy została ustawiona wizualizacja po labelach czy po ID
+            String currentNodeLabel = ((org.pg.eti.kask.sova.nodes.ClassNode) currentObj).getLabel();     
+            currentLangKey = "";
+            if(labelsLangs.containsValue(currentNodeLabel)){
+                Iterator it = labelsLangs.entrySet().iterator();
+                while (it.hasNext()) {
+                    Map.Entry pair = (Map.Entry) it.next();
+                    if(pair.getValue().equals(currentNodeLabel)){
+                        currentLangKey = pair.getKey().toString();
+                        break;
+                    }
+                }   
+            }
+            
+            fullFillComboBox(commentBox, commentsLangs);
+            fullFillComboBox(labelBox, labelsLangs);
             changeContent(Selection.ALL);
+            
+            //Ustawia wybrany wcześniej język w combo box
+            if(!currentLangKey.isEmpty())
+                labelBox.setSelectedItem(currentLangKey);
         }
 
         //Listener dla combo box'a z językami dostępnymi dla komentarzy
@@ -175,6 +205,10 @@ public class AnnotationListener extends ControlAdapter {
             @Override
             public void actionPerformed(ActionEvent e) {
                 changeContent(Selection.LABEL);
+                Object label = labelBox.getSelectedItem();
+                if(labelsLangs.containsKey(currentLangKey)){
+                    ((org.pg.eti.kask.sova.nodes.ClassNode) currentObj).setLabel(labelsLangs.get(label));
+                }
             }
         });
     }
