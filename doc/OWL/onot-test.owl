@@ -30,4 +30,8 @@
     <rdfs:comment xml:lang="de">Kommentar auf Deutsch</rdfs:comment>
   </owl:Class>
   
+   <owl:Class rdf:ID="KlasaC">
+      <rdfs:label>Labela C bez lang</rdfs:label>
+  </owl:Class>
+  
   </rdf:RDF>

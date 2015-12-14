@@ -118,8 +118,10 @@ public class AnnotationListener extends ControlAdapter {
         switch(selected){
         
             case ALL:
-                descriptComponent.setLabelText(labelsLangs.get(label));
-                descriptComponent.setCommentText(commentsLangs.get(comment));
+                if(labelsLangs.size() > 0)
+                    descriptComponent.setLabelText(labelsLangs.get(label));
+                if(commentsLangs.size() > 0)
+                    descriptComponent.setCommentText(commentsLangs.get(comment));
                 break;
             case COMMENT:     
                 descriptComponent.setCommentText(commentsLangs.get(comment));
@@ -183,8 +185,10 @@ public class AnnotationListener extends ControlAdapter {
                 }   
             }
             
+
             fullFillComboBox(commentBox, commentsLangs);
             fullFillComboBox(labelBox, labelsLangs);
+            
             changeContent(Selection.ALL);
             
             //Ustawia wybrany wcześniej język w combo box

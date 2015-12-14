@@ -28,6 +28,9 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 import javax.swing.AbstractButton;
 
 import javax.swing.BorderFactory;
@@ -36,16 +39,27 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
 
 import org.pg.eti.kask.sova.visualization.FilterOptions;
 import org.pg.eti.kask.sova.visualization.OVDisplay;
+import org.pg.eti.kask.sova.visualization.annotation.AnnotationListener;
+import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLAnnotation;
+import org.semanticweb.owlapi.model.OWLAnnotationProperty;
+import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import prefuse.util.ui.JValueSlider;
+import prefuse.visual.VisualItem;
 /**
  * Okno opcji wizualizacji
  * @author Piotr Kunowski
@@ -84,7 +98,10 @@ public class Options extends JFrame {
 	private static final int DEFAULT_HEIGHT = 600;
 	private JButton exitButt;
 	private OVDisplay display;
+        public JComboBox langBox;
 
+        private JRadioButton labelRationButton;
+        
 	private JButton options = null;
 	private JCheckBox chLabels = null, chClass = null, chSubClass = null, chDisjointEdge = null,
 			chCardinalityNode = null, chUnionOf = null, chIntersecionOf = null,
@@ -127,6 +144,7 @@ public class Options extends JFrame {
 			}
 		});
 		this.add(exitButt, BorderLayout.SOUTH);
+                
 	}
 
 	private void initVisValuesPanel() {
@@ -185,37 +203,85 @@ public class Options extends JFrame {
                 //****************************************************************
                 // Label ID
                 
-                JPanel buttonVisual = new JPanel(new GridLayout(2, 1));
+                JPanel buttonVisual = new JPanel(new GridLayout(2, 2));
 		buttonVisual.setBorder(BorderFactory.createTitledBorder(BorderFactory
 				.createEtchedBorder(), "Visualization subject"));
 
-		JRadioButton labelRationButton = new JRadioButton("Label", false);
+		labelRationButton = new JRadioButton("Label", false);
 		labelRationButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {  
-                            display.changeGraphVisualization(OVDisplay.VisualizationEnums.LABELS);
+                            display.changeGraphVisualization(OVDisplay.VisualizationEnums.LABELS, langBox);
 			}
 		});
 		JRadioButton idRationButton = new JRadioButton("ID", true);
 		idRationButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
-                            display.changeGraphVisualization(OVDisplay.VisualizationEnums.ID);
+                            display.changeGraphVisualization(OVDisplay.VisualizationEnums.ID, null);
 			}
 		});
 		ButtonGroup subjectGroup = new ButtonGroup();
                 
+                JLabel labelLang = new JLabel("Available languages");
+                
+                // Inicjacja ComboBox'a
+                langBox = new JComboBox();
+                
+                // Listener do zamiany labelek w oknie z menu
+                langBox.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if(labelRationButton.isSelected())
+                            display.changeGraphVisualization(OVDisplay.VisualizationEnums.LABELS, langBox);
+                    }
+                });
+                
+                // Iteracja po elementach ontologii w celu stworzenia unikatowej listy
+                // wszystkich dostępnych języków
+                
+                HashSet<String> langArray = new HashSet<String>();   
+                OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+                Iterator items = display.getVisualization().items();
+                while (items.hasNext()) {
+                    VisualItem item = (VisualItem) items.next();
+                    Object o = ((VisualItem) item).get(org.pg.eti.kask.sova.graph.Constants.GRAPH_NODES);
+                    if ((o instanceof org.pg.eti.kask.sova.nodes.ClassNode )) {  
+
+                        Object element = ((VisualItem) item).get(OWLtoGraphConverter.COLUMN_IRI);
+                        OWLClass currentClass = manager.getOWLDataFactory().getOWLClass(IRI.create(((IRI) element).toURI()));
+                        Set<OWLAnnotation> set = currentClass.getAnnotations(display.getOntology());
+                        for (OWLAnnotation elem : set) {  
+                            OWLAnnotationProperty prop = elem.getProperty();
+                            String lang =  prop.getIRI().getFragment();
+                             if (lang.equals("label")){ 
+                                lang = elem.getValue().toString();
+                                if(lang.contains("@")){
+                                    langArray.add(lang.substring(lang.length() - 2, lang.length()));
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                // Uzupełnij ComboBoxa o dostępne języki
+                for(String l : langArray){
+                    langBox.addItem(l);
+                }
+                
 		subjectGroup.add(labelRationButton);
 		subjectGroup.add(idRationButton);
                 
+                // Dodaj elementy do głównego konenera
 		buttonVisual.add(labelRationButton);
 		buttonVisual.add(idRationButton);
-                
+                buttonVisual.add(labelLang);
+                buttonVisual.add(langBox);
+                 
 		visValues.add(buttonVisual);
                 
                 //****************************************************************
-                
-
+               
 		CheckBoxListener checkboxListener = new CheckBoxListener();
 		JPanel checkboxPanel = new JPanel(new GridLayout(16, 2));
 		checkboxPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory

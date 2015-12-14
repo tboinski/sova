@@ -29,13 +29,17 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.FileOutputStream;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 import org.pg.eti.kask.sova.graph.Constants;
@@ -49,7 +53,11 @@ import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
+import org.semanticweb.owlapi.model.OWLAnnotationValue;
 import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLDataProperty;
+import org.semanticweb.owlapi.model.OWLEntity;
+import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import prefuse.Display;
@@ -93,11 +101,12 @@ public class OVDisplay extends Display {
     private boolean canPan = true;
     private OWLOntology ontology = null;
     
-    
+
     // Wyświetl w węzłach wybrane przez użytkownika atrybuty
     // Label lub ID klasy
-    public void changeGraphVisualization(VisualizationEnums e){
-        this.removeAll();
+    public void changeGraphVisualization(VisualizationEnums e, JComboBox comboBox){
+        this.removeAll();       
+        // Iteracja po wszytkich elementach ontologii
         OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
         Iterator items = m_vis.items();
         while (items.hasNext()) {
@@ -109,24 +118,34 @@ public class OVDisplay extends Display {
                 OWLClass currentClass = manager.getOWLDataFactory().getOWLClass(IRI.create(((IRI) element).toURI()));
                 Set<OWLAnnotation> set = currentClass.getAnnotations(this.ontology);
                 
-                String stringProp = "";
+                String stringPropoperty;
+                String labelValue = "";
+                String langValue = "";
+                
                 for (OWLAnnotation elem : set) {  
                     OWLAnnotationProperty prop = elem.getProperty();
-                    stringProp = prop.getIRI().getFragment();
-                    if (stringProp.equals("label")){ 
-                        stringProp = elem.getValue().toString();
-                        if(stringProp.contains("@")){
-                            stringProp = stringProp.substring(0, stringProp.length()-3);
-                        }  
-                        break;
+                    stringPropoperty = prop.getIRI().getFragment();
+                    if (stringPropoperty.equals("label")){ 
+                        stringPropoperty = elem.getValue().toString();
+                        if(stringPropoperty.contains("@")){
+                            labelValue = stringPropoperty.substring(0, stringPropoperty.length() - 3);
+                            langValue = stringPropoperty.substring(stringPropoperty.length() - 2, stringPropoperty.length());  
+                        }else{
+                            labelValue = stringPropoperty;
+                            break;
+                        } 
+
+                        if(comboBox != null && langValue.equals(comboBox.getSelectedItem())){
+                            break;
+                        }
                     }
-                    stringProp = "";
+                    labelValue = "";
                 }
                 
                 switch (e) {          
                     case LABELS:    
-                        if (!stringProp.isEmpty()){ 
-                            ((org.pg.eti.kask.sova.nodes.ClassNode) o).setLabel(stringProp);
+                        if (!labelValue.isEmpty()){ 
+                            ((org.pg.eti.kask.sova.nodes.ClassNode) o).setLabel(labelValue);
                         }
                         break;
 
