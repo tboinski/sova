@@ -93,6 +93,7 @@ public class AnnotationListener extends ControlAdapter {
 
             if (parts.length == 1 || parts[1].isEmpty()) {
                 descriptComponent.setLabelText(parts[0]);
+                labelsLangs.put("-", parts[0]);
                 return;
             }
 
@@ -102,6 +103,7 @@ public class AnnotationListener extends ControlAdapter {
 
             if (parts.length == 1 || parts[1].isEmpty()) {
                 descriptComponent.setCommentText(parts[0]);
+                commentsLangs.put("-", parts[0]);
                 return;
             }
 
@@ -193,6 +195,7 @@ public class AnnotationListener extends ControlAdapter {
             //Ustawia wybrany wcześniej język w combo box
             if (!currentLangKey.isEmpty()) {
                 labelBox.setSelectedItem(currentLangKey);
+                changeContent(Selection.LABEL);
             }
         }
 
