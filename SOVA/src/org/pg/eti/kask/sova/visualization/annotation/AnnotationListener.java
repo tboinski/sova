@@ -24,7 +24,6 @@ package org.pg.eti.kask.sova.visualization.annotation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.net.URI;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -35,12 +34,9 @@ import org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
-import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
 import org.semanticweb.owlapi.model.OWLAnnotationValue;
-import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
-import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import prefuse.controls.ControlAdapter;
@@ -57,16 +53,20 @@ public class AnnotationListener extends ControlAdapter {
     private AnnotationComponent descriptComponent = null;
     private OWLOntologyManager manager = null;
     private OWLOntology ontology = null;
-    private Map<String, String> commentsLangs = new HashMap<String, String>();
-    private Map<String, String> labelsLangs = new HashMap<String, String>();
-    private enum Selection { ALL, COMMENT, LABEL }
+    private final Map<String, String> commentsLangs = new HashMap<String, String>();
+    private final Map<String, String> labelsLangs = new HashMap<String, String>();
+
+    private enum Selection {
+
+        ALL, COMMENT, LABEL
+    }
     private Object currentObj = null;
     private Object comment;
     private Object label;
-    private JComboBox commentBox;
-    private JComboBox labelBox;
+    private final JComboBox commentBox;
+    private final JComboBox labelBox;
     private String currentLangKey;
-    
+
     public AnnotationListener(AnnotationComponent component, OWLOntology ontology) {
         this.descriptComponent = component;
         this.ontology = ontology;
@@ -74,7 +74,7 @@ public class AnnotationListener extends ControlAdapter {
         this.commentBox = descriptComponent.getCommentLang();
         this.labelBox = descriptComponent.getLabelLang();
     }
-    
+
     /**
      * Obsługa akcji kliknięcia na obiekt
      *
@@ -111,28 +111,30 @@ public class AnnotationListener extends ControlAdapter {
 
     //Załaduj wybrany element z Combo box'a
     private void changeContent(Selection selected) {
-        
+
         comment = commentBox.getSelectedItem();
         label = labelBox.getSelectedItem();
-        
-        switch(selected){
-        
+
+        switch (selected) {
+
             case ALL:
-                if(labelsLangs.size() > 0)
+                if (labelsLangs.size() > 0) {
                     descriptComponent.setLabelText(labelsLangs.get(label));
-                if(commentsLangs.size() > 0)
+                }
+                if (commentsLangs.size() > 0) {
                     descriptComponent.setCommentText(commentsLangs.get(comment));
+                }
                 break;
-            case COMMENT:     
+            case COMMENT:
                 descriptComponent.setCommentText(commentsLangs.get(comment));
                 break;
-            case LABEL:        
+            case LABEL:
                 descriptComponent.setLabelText(labelsLangs.get(label));
                 break;
-                
+
             default:
                 break;
-        
+
         }
     }
 
@@ -150,13 +152,15 @@ public class AnnotationListener extends ControlAdapter {
     @Override
     public void itemClicked(VisualItem item, MouseEvent e) {
 
-        Object o = item.get(OWLtoGraphConverter.COLUMN_IRI);     
+        Object o = item.get(OWLtoGraphConverter.COLUMN_IRI);
         currentObj = ((VisualItem) item).get(Constants.GRAPH_NODES);
-        
+
         descriptComponent.setNameText("");
         descriptComponent.setLabelText("");
         descriptComponent.setCommentText("");
-        
+        commentBox.removeAllItems();
+        labelBox.removeAllItems();
+
         if (o != null) {
             OWLClass currentClass = manager.getOWLDataFactory().getOWLClass(IRI.create(((IRI) o).toURI()));
 
@@ -170,30 +174,30 @@ public class AnnotationListener extends ControlAdapter {
             for (OWLAnnotation elem : set) {
                 createDictionaries(elem);
             }
-           
+
             //Sprawdź czy została ustawiona wizualizacja po labelach czy po ID
-            String currentNodeLabel = ((org.pg.eti.kask.sova.nodes.ClassNode) currentObj).getLabel();     
+            String currentNodeLabel = ((org.pg.eti.kask.sova.nodes.ClassNode) currentObj).getLabel();
             currentLangKey = "";
-            if(labelsLangs.containsValue(currentNodeLabel)){
+            if (labelsLangs.containsValue(currentNodeLabel)) {
                 Iterator it = labelsLangs.entrySet().iterator();
                 while (it.hasNext()) {
                     Map.Entry pair = (Map.Entry) it.next();
-                    if(pair.getValue().equals(currentNodeLabel)){
+                    if (pair.getValue().equals(currentNodeLabel)) {
                         currentLangKey = pair.getKey().toString();
                         break;
                     }
-                }   
+                }
             }
-            
 
             fullFillComboBox(commentBox, commentsLangs);
             fullFillComboBox(labelBox, labelsLangs);
-            
+
             changeContent(Selection.ALL);
-            
+
             //Ustawia wybrany wcześniej język w combo box
-            if(!currentLangKey.isEmpty())
+            if (!currentLangKey.isEmpty()) {
                 labelBox.setSelectedItem(currentLangKey);
+            }
         }
 
         //Listener dla combo box'a z językami dostępnymi dla komentarzy
@@ -209,10 +213,6 @@ public class AnnotationListener extends ControlAdapter {
             @Override
             public void actionPerformed(ActionEvent e) {
                 changeContent(Selection.LABEL);
-                Object label = labelBox.getSelectedItem();
-                if(labelsLangs.containsKey(currentLangKey)){
-                    ((org.pg.eti.kask.sova.nodes.ClassNode) currentObj).setLabel(labelsLangs.get(label));
-                }
             }
         });
     }

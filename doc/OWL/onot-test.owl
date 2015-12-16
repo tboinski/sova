@@ -23,15 +23,17 @@
   </owl:Class>
   
  <owl:Class rdf:ID="KlasaB">
-    <rdfs:label xml:lang="en">Class B label</rdfs:label>
-    <rdfs:label xml:lang="pl">Labelka po polsku</rdfs:label>
+    <rdfs:label xml:lang="en">English B label</rdfs:label>
+    <rdfs:label xml:lang="pl">Polish B label</rdfs:label>
+    <rdfs:label xml:lang="es">Spanish B label</rdfs:label>
     <rdfs:comment xml:lang="en">Comment in english</rdfs:comment>
     <rdfs:comment xml:lang="pl">Komentarz w języku polskim</rdfs:comment>
     <rdfs:comment xml:lang="de">Kommentar auf Deutsch</rdfs:comment>
   </owl:Class>
   
    <owl:Class rdf:ID="KlasaC">
-      <rdfs:label>Labela C bez lang</rdfs:label>
+      <rdfs:label>C label without lang</rdfs:label>
+      <rdfs:label xml:lang="pl">Polish C label</rdfs:label>
   </owl:Class>
   
   </rdf:RDF>

@@ -25,14 +25,11 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.FileOutputStream;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Map;
+
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,11 +50,7 @@ import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
-import org.semanticweb.owlapi.model.OWLAnnotationValue;
 import org.semanticweb.owlapi.model.OWLClass;
-import org.semanticweb.owlapi.model.OWLDataProperty;
-import org.semanticweb.owlapi.model.OWLEntity;
-import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import prefuse.Display;
@@ -71,7 +64,6 @@ import prefuse.controls.WheelZoomControl;
 import prefuse.controls.ZoomControl;
 import prefuse.controls.ZoomToFitControl;
 import prefuse.data.Graph;
-import prefuse.data.Node;
 import prefuse.data.Table;
 import prefuse.data.query.SearchQueryBinding;
 import prefuse.data.search.SearchTupleSet;
@@ -84,14 +76,19 @@ import prefuse.visual.sort.TreeDepthItemSorter;
 /**
  * Display wizualizowanej ontologii. Pozwala na generowanie graficznej
  * reprezentacji ontologii na podstawie podanego obiektu ontologii.
+ *
  * @author Piotr Kunowski
  */
 public class OVDisplay extends Display {
 
     public static final int FORCE_DIRECTED_LAYOUT = 1;
     public static final int RADIAL_TREE_LAYOUT = 2;
-    public static final int FRUCHTERMAN_REINGOLD_LAYOUT = 3;  
-    public enum VisualizationEnums {LABELS, ID};   
+    public static final int FRUCHTERMAN_REINGOLD_LAYOUT = 3;
+
+    public enum VisualizationEnums {
+
+        LABELS, ID
+    };
     private int graphLayout = FORCE_DIRECTED_LAYOUT;
     private Graph graph = null;
     private OVVisualization visualizationForceDirected = null;
@@ -100,61 +97,63 @@ public class OVDisplay extends Display {
     private OVVisualization visualizationTree = null;
     private boolean canPan = true;
     private OWLOntology ontology = null;
-    
 
     // Wyświetl w węzłach wybrane przez użytkownika atrybuty
     // Label lub ID klasy
-    public void changeGraphVisualization(VisualizationEnums e, JComboBox comboBox){
-        this.removeAll();       
+    public void changeGraphVisualization(VisualizationEnums e, JComboBox comboBox) {
+        this.removeAll();
         // Iteracja po wszytkich elementach ontologii
         OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
         Iterator items = m_vis.items();
         while (items.hasNext()) {
             VisualItem item = (VisualItem) items.next();
             Object o = ((VisualItem) item).get(Constants.GRAPH_NODES);
-            if ((o instanceof org.pg.eti.kask.sova.nodes.ClassNode )) {  
+            if ((o instanceof org.pg.eti.kask.sova.nodes.ClassNode)) {
 
                 Object element = ((VisualItem) item).get(OWLtoGraphConverter.COLUMN_IRI);
                 OWLClass currentClass = manager.getOWLDataFactory().getOWLClass(IRI.create(((IRI) element).toURI()));
                 Set<OWLAnnotation> set = currentClass.getAnnotations(this.ontology);
-                
+
                 String stringPropoperty;
                 String labelValue = "";
                 String langValue = "";
-                
-                for (OWLAnnotation elem : set) {  
+                String labelValueWithoutLang = "";
+
+                for (OWLAnnotation elem : set) {
                     OWLAnnotationProperty prop = elem.getProperty();
                     stringPropoperty = prop.getIRI().getFragment();
-                    if (stringPropoperty.equals("label")){ 
+                    if (stringPropoperty.equals("label")) {
                         stringPropoperty = elem.getValue().toString();
-                        if(stringPropoperty.contains("@")){
+                        if (stringPropoperty.contains("@")) {
                             labelValue = stringPropoperty.substring(0, stringPropoperty.length() - 3);
-                            langValue = stringPropoperty.substring(stringPropoperty.length() - 2, stringPropoperty.length());  
-                        }else{
-                            labelValue = stringPropoperty;
-                            break;
-                        } 
+                            langValue = stringPropoperty.substring(stringPropoperty.length() - 2, stringPropoperty.length());
+                        } else {
+                            labelValueWithoutLang = stringPropoperty;
+                        }
 
-                        if(comboBox != null && langValue.equals(comboBox.getSelectedItem())){
+                        if (comboBox != null && langValue.equals(comboBox.getSelectedItem())) {
                             break;
                         }
                     }
+                    langValue = "";
                     labelValue = "";
                 }
-                
-                switch (e) {          
-                    case LABELS:    
-                        if (!labelValue.isEmpty()){ 
+
+                switch (e) {
+                    case LABELS:
+                        if (!labelValue.isEmpty()) {
                             ((org.pg.eti.kask.sova.nodes.ClassNode) o).setLabel(labelValue);
+                        } else if (!labelValueWithoutLang.isEmpty()) {
+                            ((org.pg.eti.kask.sova.nodes.ClassNode) o).setLabel(labelValueWithoutLang);
                         }
                         break;
 
-                    case ID:  
-                       ((org.pg.eti.kask.sova.nodes.ClassNode) o).setLabel(currentClass.getIRI().getFragment());
-                       break;
+                    case ID:
+                        ((org.pg.eti.kask.sova.nodes.ClassNode) o).setLabel(currentClass.getIRI().getFragment());
+                        break;
 
                     default:
-                       break;
+                        break;
                 }
             }
         }
@@ -195,7 +194,7 @@ public class OVDisplay extends Display {
             visualizationFruchtermanReingold.getGroup(Visualization.FOCUS_ITEMS).setTuple(currentClass);
             currentClass.setFixed(true);
         }
-      
+
     }
 
     private void initForceDirectedVis() {
@@ -224,6 +223,7 @@ public class OVDisplay extends Display {
 
     /**
      * Ustawienie trybu wyświetlania
+     *
      * @param graphLayout
      */
     public void setGraphLayout(int graphLayout) {
@@ -281,7 +281,8 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * Dodaje komponent nasłuchujący na zmiany zaznaczonego wierzchołka 
+     * Dodaje komponent nasłuchujący na zmiany zaznaczonego wierzchołka
+     *
      * @param component
      * @param manager
      */
@@ -290,7 +291,8 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * Dodaje komponent nasłuchujący na zmiany wskazanego wierzchołka  
+     * Dodaje komponent nasłuchujący na zmiany wskazanego wierzchołka
+     *
      * @param component
      */
     public void addIRIInfoComponent(IRIInfoComponent component) {
@@ -299,6 +301,7 @@ public class OVDisplay extends Display {
 
     /**
      * metoda wizualizuje zadaną ontologię
+     *
      * @param ont ontologia zapisana w OWLAPI
      */
     public void generateGraphFromOWl(OWLOntology ont) {
@@ -342,6 +345,7 @@ public class OVDisplay extends Display {
 
     /**
      * metoda generuje drzewo wnioskowania dla zadanej obiektu owl
+     *
      * @param ont ontologia zapisana w OWLAPI
      */
     public void generateTreeFromOWl(OWLOntology ont) {
@@ -351,6 +355,7 @@ public class OVDisplay extends Display {
 
     /**
      * Zmiana algorytmu wizualizacji
+     *
      * @param visLayout
      */
     public void changeVisualizationLayout(int visLayout) {
@@ -385,7 +390,7 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * Wyświetla całe drzewo wywnioskowanej hierarchii 
+     * Wyświetla całe drzewo wywnioskowanej hierarchii
      */
     public void showFullTree() {
         if (visualizationTree != null) {
@@ -395,7 +400,7 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * Ukrywa drzewo wywnioskowanej hierarchii do podstawowej postaci 
+     * Ukrywa drzewo wywnioskowanej hierarchii do podstawowej postaci
      */
     public void hideFullTree() {
         if (visualizationTree != null) {
