@@ -142,9 +142,7 @@ public class AnnotationListener extends ControlAdapter {
     private void fullFillComboBox(JComboBox box, Map<String, String> map) {
 
         box.removeAllItems();
-        Iterator it = map.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry) it.next();
+        for (Map.Entry pair : map.entrySet()) {
             box.addItem(pair.getKey());
         }
     }
@@ -179,9 +177,7 @@ public class AnnotationListener extends ControlAdapter {
             String currentNodeLabel = ((org.pg.eti.kask.sova.nodes.ClassNode) currentObj).getLabel();
             currentLangKey = "";
             if (labelsLangs.containsValue(currentNodeLabel)) {
-                Iterator it = labelsLangs.entrySet().iterator();
-                while (it.hasNext()) {
-                    Map.Entry pair = (Map.Entry) it.next();
+                for (Map.Entry pair : labelsLangs.entrySet()) {
                     if (pair.getValue().equals(currentNodeLabel)) {
                         currentLangKey = pair.getKey().toString();
                         break;
