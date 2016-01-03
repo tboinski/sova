@@ -112,5 +112,13 @@ public class AnnotationPanel extends JPanel implements AnnotationComponent{
 		repaint();
 	}
 	
-	
+	@Override
+    public JComboBox getCommentLang() {
+        return commentLang;
+    }
+
+    @Override
+    public JComboBox getLabelLang() {
+        return labelLang;
+    }	
 }
