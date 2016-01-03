@@ -26,6 +26,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JComboBox;
 
 import org.pg.eti.kask.sova.visualization.annotation.AnnotationComponent;
 import prefuse.util.FontLib;
@@ -39,6 +40,8 @@ public class AnnotationPanel extends JPanel implements AnnotationComponent{
 	private JTextArea name = null;
 	private JTextArea label = null;
 	private JTextArea comment = null;
+	private JComboBox labelLang = null;
+    private JComboBox commentLang = null;
 	public AnnotationPanel(){
 		initPanel();
 	}
