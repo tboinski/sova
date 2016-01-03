@@ -61,7 +61,7 @@
 					<Bundle-DocURL>http://www.eti.pg.gda.pl</Bundle-DocURL>
 					<Update-Url>http://www.eti.pg.gda.pl</Update-Url>
 					<Bundle-SymbolicName>org.pg.eti.kask.ont.pluginSova;singleton:=true</Bundle-SymbolicName>
-					<Bundle-Version>0.7.6</Bundle-Version>
+					<Bundle-Version>${SOVA.version}</Bundle-Version>
 					<Bundle-Activator>org.protege.editor.core.plugin.DefaultPluginActivator</Bundle-Activator>
 					<Bundle-Classpath>.,lib/SOVA-${SOVA.version}.jar,lib/prefuse-beta-20071021.jar</Bundle-Classpath>
 					<Require-Bundle>org.eclipse.equinox.registry, org.eclipse.equinox.common, org.protege.editor.core.application, org.protege.editor.owl, org.semanticweb.owl.owlapi

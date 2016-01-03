@@ -144,7 +144,7 @@ public class AnnotationPanel extends JPanel implements AnnotationComponent {
         repaint();
     }
     
-        @Override
+    @Override
     public JComboBox getCommentLang() {
         return commentLang;
     }
