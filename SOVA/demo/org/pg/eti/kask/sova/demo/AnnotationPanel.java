@@ -24,8 +24,6 @@ package org.pg.eti.kask.sova.demo;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -51,16 +49,6 @@ public class AnnotationPanel extends JPanel implements AnnotationComponent {
 
     public AnnotationPanel() {
         initPanel();
-    }
-
-    @Override
-    public JComboBox getCommentLang() {
-        return commentLang;
-    }
-
-    @Override
-    public JComboBox getLabelLang() {
-        return labelLang;
     }
 
     private void initPanel() {
@@ -154,6 +142,16 @@ public class AnnotationPanel extends JPanel implements AnnotationComponent {
     public void setNameText(String name) {
         this.name.setText(name);
         repaint();
+    }
+    
+        @Override
+    public JComboBox getCommentLang() {
+        return commentLang;
+    }
+
+    @Override
+    public JComboBox getLabelLang() {
+        return labelLang;
     }
 
 }

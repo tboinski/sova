@@ -56,12 +56,14 @@ public interface AnnotationComponent {
     /**
      * getter ComboBoxa dla komentarzy
      *
+     * @return 
      */
     public JComboBox getCommentLang();
 
     /**
      * getter ComboBoxa dla labelów
      *
+     * @return 
      */
     public JComboBox getLabelLang();
 }
