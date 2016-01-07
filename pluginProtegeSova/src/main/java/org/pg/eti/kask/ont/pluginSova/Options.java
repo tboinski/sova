@@ -20,7 +20,7 @@
  *
  */
 
-package org.pg.eti.kask.sova.demo;
+package org.pg.eti.kask.ont.pluginSova;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
