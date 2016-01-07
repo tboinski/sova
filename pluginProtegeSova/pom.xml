@@ -93,10 +93,12 @@
 		<artifactId>org.protege.editor.owl</artifactId>
 		<version>4.3.0</version>
 	</dependency>
-	<dependency>
-		<groupId>net.sourceforge.owlapi</groupId>
-		<artifactId>owlapi-impl</artifactId>
-		<version>4.1.3</version>
+        <dependency>
+		<groupId>owlapi-bin</groupId>
+		<artifactId>owlapi-bin</artifactId>
+		<version>1</version>
+		<scope>system</scope>
+		<systemPath>${basedir}/lib/owlapi-bin.jar</systemPath>
 	</dependency>
 	<dependency>
 		<groupId>org.pg.eti.kask.sova</groupId>

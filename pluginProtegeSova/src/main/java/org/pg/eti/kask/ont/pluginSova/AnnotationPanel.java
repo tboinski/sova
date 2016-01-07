@@ -81,18 +81,39 @@ public class AnnotationPanel extends JPanel implements AnnotationComponent{
         pane.setPreferredSize(new Dimension(PANEL_WIDTH-10,200));
         pane.setMaximumSize(new Dimension(PANEL_WIDTH-5, 200));
         pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        
         JLabel nameLabel = new JLabel("Name:");
         nameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         this.add(nameLabel);
         this.add(name);
 
-        JLabel labelLabel = new JLabel("Label:");
+        JLabel labelLabel = new JLabel("Label ");
         labelLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        this.add(labelLabel);		
+
+        JLabel langL = new JLabel("Lang: ");
+        labelLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        //Combo box dla labelów
+        labelLang = new JComboBox();
+        labelLang.setAlignmentX(AnnotationPanel.BOTTOM_ALIGNMENT);
+
+        this.add(labelLabel);
+        this.add(langL);
+        this.add(labelLang);
+
         this.add(label);
-        JLabel commentLabel = new JLabel("Comment:");
-        commentLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        JLabel commentLabel = new JLabel("Comment ");
+        commentLabel.setAlignmentX(LEFT_ALIGNMENT);
+
+        //Combo box dla komentarzy
+        commentLang = new JComboBox();
+        JLabel langC = new JLabel("Lang: ");
+
         this.add(commentLabel);
+        this.add(langC);
+        this.add(commentLang);
+        
         this.add(pane);
         this.setPreferredSize(new Dimension(PANEL_WIDTH,300));
         this.setBorder(BorderFactory.createTitledBorder("Properties"));
