@@ -1,8 +1,12 @@
 /*
  *
+ * Copyright (c) 2010 Gdańsk University of Technology
  * Copyright (c) 2010 Kunowski Piotr
+ * Copyright (c) 2010 Jaworska Anna
+ * Copyright (c) 2010 Kleczkowski Radosław
+ * Copyright (c) 2010 Orłowski Piotr
  *
- * This file is part of OCS.  OCS is free software: you can
+ * This file is part of SOVA.  SOVA is free software: you can
  * redistribute it and/or modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, version 3.
  *
@@ -16,7 +20,7 @@
  *
  */
 
-package org.pg.eti.kask.ont.pluginSova;
+package org.pg.eti.kask.sova.demo;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -27,6 +31,7 @@ import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import javax.swing.AbstractButton;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -45,6 +50,7 @@ import org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
 
 import org.pg.eti.kask.sova.visualization.FilterOptions;
 import org.pg.eti.kask.sova.visualization.OVDisplay;
+import org.pg.eti.kask.sova.visualization.annotation.AnnotationListener;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
@@ -52,14 +58,18 @@ import org.semanticweb.owlapi.model.OWLAnnotationProperty;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
-
 import prefuse.util.ui.JValueSlider;
 import prefuse.visual.VisualItem;
-
+/**
+ * Okno opcji wizualizacji
+ * @author Piotr Kunowski
+ *
+ */
 public class Options extends JFrame {
 
 	private static final String CHECKBOX_SUBCLASS_COMMAND = "checkbox_subclass";
 	private static final String CHECKBOX_CLASS_COMMAND = "checkbox_class";
+	private static final String CHECKBOX_ANONYMOUSE_COMMAND = "checkbox_anonymouse";
 	private static final String CHECKBOX_DISJOINT_CLASS_COMMAND = "checkbox_disjoint_class";
 	private static final String CHECKBOX_EQUIVALENT_CLASS_COMMAND = "checkbox_equvalent_class";
 	private static final String CHECKBOX_CARDINALITY_COMMAND = "checkbox_cardinality_class";
@@ -82,17 +92,20 @@ public class Options extends JFrame {
 	private static final String CHECKBOX_INSTANCEPROPERTY_COMMAND = "checkbox_instanceproperty";
 	private static final String CHECKBOX_DOMAIN_COMMAND = "checkbox_domain";
 	private static final String CHECKBOX_RANGE_COMMAND = "checkbox_drange";
+	private static final String CHECKBOX_SHOW_IRI = "checkbox_showiri";
+        private static final String CHECKBOX_LABELS_COMMAND = "checkbox_labels";
 	private static final int DEFAULT_WIDTH = 300;
 	private static final int DEFAULT_HEIGHT = 600;
 	private JButton exitButt;
 	private OVDisplay display;
         public JComboBox langBox;
+
         private JRadioButton labelRationButton;
         
 	private JButton options = null;
-	private JCheckBox chClass = null, chSubClass = null, chDisjointEdge = null,
+	private JCheckBox chLabels = null, chClass = null, chSubClass = null, chDisjointEdge = null,
 			chCardinalityNode = null, chUnionOf = null, chIntersecionOf = null,
-			chComplementOf = null, chEquivalent = null;
+			chComplementOf = null, chEquivalent = null, chAnonymouse=null;
 	private JCheckBox chIndywidual = null, chInstanceOf = null,
 			chDifferent = null, chsameas = null, choneof = null;
 	private JCheckBox chproperty = null, chInstanceProperty = null,
@@ -100,6 +113,7 @@ public class Options extends JFrame {
 			chSubProperty = null, chEquivalentProperty = null,
 			chFunctionalProperty = null, chInversFunctionalProperty = null,
 			chSymmetricProperty = null, chTransitiveProperty = null;
+        private JCheckBox chShowIRI = null;
 	private JPanel visValues = null;
 	private boolean isOptionFrameShow = false;
 
@@ -130,6 +144,7 @@ public class Options extends JFrame {
 			}
 		});
 		this.add(exitButt, BorderLayout.SOUTH);
+                
 	}
 
 	private void initVisValuesPanel() {
@@ -164,8 +179,7 @@ public class Options extends JFrame {
 		forceDirectedRadial.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
-				display
-						.changeVisualizationLayout(OVDisplay.FORCE_DIRECTED_LAYOUT);
+				display.changeVisualizationLayout(OVDisplay.FORCE_DIRECTED_LAYOUT);
 
 			}
 		});
@@ -185,13 +199,6 @@ public class Options extends JFrame {
 
 		buttonPanel.add(radialTreeRadial);
 		visValues.add(buttonPanel);
-
-		CheckBoxListener checkboxListener = new CheckBoxListener();
-		JPanel checkboxPanel = new JPanel(new GridLayout(15, 2));
-		checkboxPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory
-				.createEtchedBorder(), "Filter"));
-
-                
                 
                 //****************************************************************
                 // Label ID
@@ -274,14 +281,27 @@ public class Options extends JFrame {
 		visValues.add(buttonVisual);
                 
                 //****************************************************************
+               
+		CheckBoxListener checkboxListener = new CheckBoxListener();
+		JPanel checkboxPanel = new JPanel(new GridLayout(16, 2));
+		checkboxPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory
+				.createEtchedBorder(), "Filter"));
+
                 
-                
-		chClass = new JCheckBox("Class");
+                chClass = new JCheckBox("Class");
+		chClass.setToolTipText("Enable/Disable owl:class element");
 		chClass.setActionCommand(CHECKBOX_CLASS_COMMAND);
 		chClass.setSelected(true);
 		chClass.addActionListener(checkboxListener);
 		checkboxPanel.add(chClass);
-
+                                     
+                
+		chAnonymouse = new JCheckBox("Anonymouse");
+		chAnonymouse.setActionCommand(CHECKBOX_ANONYMOUSE_COMMAND);
+		chAnonymouse.setSelected(true);
+		chAnonymouse.addActionListener(checkboxListener);
+		checkboxPanel.add(chAnonymouse);	
+		
 		chSubClass = new JCheckBox("SubClass edge");
 		chSubClass.setActionCommand(CHECKBOX_SUBCLASS_COMMAND);
 		chSubClass.setSelected(true);
@@ -354,7 +374,7 @@ public class Options extends JFrame {
 		choneof.setSelected(true);
 		checkboxPanel.add(choneof);
 		visValues.add(checkboxPanel);
-
+                
 		// property
 
 		chproperty = new JCheckBox("Property");
@@ -439,11 +459,18 @@ public class Options extends JFrame {
 		checkboxPanel.add(chRange);
 		visValues.add(checkboxPanel);
 
+                //show IRI
+		chShowIRI = new JCheckBox("Show full URI");
+		chShowIRI.setActionCommand(CHECKBOX_SHOW_IRI);
+		chShowIRI.addActionListener(checkboxListener);
+		chShowIRI.setSelected(false);
+		checkboxPanel.add(chShowIRI);
+		visValues.add(checkboxPanel);
 	}
 
 	private class CheckBoxListener implements ActionListener {
 
-	
+		@Override
 		public void actionPerformed(ActionEvent e) {
 
 			if (e.getActionCommand().equals(CHECKBOX_CLASS_COMMAND)) {
@@ -456,7 +483,7 @@ public class Options extends JFrame {
 					chCardinalityNode.setEnabled(true);
 					chComplementOf.setEnabled(true);
 					chEquivalent.setEnabled(true);
-
+					FilterOptions.setAnonymouse(true);
 				} else {
 					FilterOptions.setClassFilter(false);
 					chSubClass.setEnabled(false);
@@ -466,8 +493,17 @@ public class Options extends JFrame {
 					chCardinalityNode.setEnabled(false);
 					chComplementOf.setEnabled(false);
 					chEquivalent.setEnabled(false);
+					FilterOptions.setAnonymouse(false);
 				}
-			} else if (e.getActionCommand().equals(CHECKBOX_SUBCLASS_COMMAND)) {
+                        } else if (e.getActionCommand().equals(CHECKBOX_ANONYMOUSE_COMMAND)) {
+				if (chAnonymouse.isSelected()) {
+					FilterOptions.setAnonymouse(true);
+				} else {
+					FilterOptions.setAnonymouse(false);
+				}
+			
+			}
+			else if (e.getActionCommand().equals(CHECKBOX_SUBCLASS_COMMAND)) {
 				if (chSubClass.isSelected()) {
 					FilterOptions.setSubClassEdge(true);
 				} else {
@@ -647,6 +683,12 @@ public class Options extends JFrame {
 					FilterOptions.setRange(true);
 				} else {
 					FilterOptions.setRange(false);
+				}
+			} else if (e.getActionCommand().equals(CHECKBOX_SHOW_IRI)) {
+				if (chShowIRI.isSelected()) {
+					FilterOptions.setShowIRI(true);
+				} else {
+					FilterOptions.setShowIRI(false);
 				}
 			}
 			display.getVisualization().refreshFilter();
