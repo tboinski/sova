@@ -20,7 +20,7 @@
  *
  */
 
-package org.pg.eti.kask.sova.options;
+package main.java.org.pg.eti.kask.sova.options;
 
 import java.awt.Polygon;
 

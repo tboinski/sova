@@ -27,7 +27,7 @@ import java.awt.Dimension;
 
 import javax.swing.JTextField;
 
-import org.pg.eti.kask.sova.visualization.annotation.IRIInfoComponent;
+import main.java.org.pg.eti.kask.sova.visualization.annotation.IRIInfoComponent;
 
 public class IRITextField extends JTextField implements IRIInfoComponent {
 

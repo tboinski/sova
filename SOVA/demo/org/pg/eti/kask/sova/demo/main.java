@@ -30,8 +30,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import org.pg.eti.kask.sova.utils.Debug;
-import org.pg.eti.kask.sova.utils.VisualizationProperties;
+import main.java.org.pg.eti.kask.sova.utils.Debug;
+import main.java.org.pg.eti.kask.sova.utils.VisualizationProperties;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntology;

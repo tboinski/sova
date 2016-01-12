@@ -21,7 +21,7 @@
  */
 
 
-package org.pg.eti.kask.sova.utils;
+package main.java.org.pg.eti.kask.sova.utils;
 
 import java.awt.Color;
 import java.io.File;

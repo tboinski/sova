@@ -20,11 +20,11 @@
  *
  */
 
-package org.pg.eti.kask.sova.nodes;
+package main.java.org.pg.eti.kask.sova.nodes;
 
 import java.awt.Color;
 
-import org.pg.eti.kask.sova.options.NodeColors;
+import main.java.org.pg.eti.kask.sova.options.NodeColors;
 
 /**
  * Klasa reprezentuje węzeł Property typu SomeValuesFrom.

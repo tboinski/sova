@@ -20,9 +20,9 @@
  *
  */
 
-package org.pg.eti.kask.sova.visualization;
+package main.java.org.pg.eti.kask.sova.visualization;
 
-import org.pg.eti.kask.sova.edges.Edge;
+import main.java.org.pg.eti.kask.sova.edges.Edge;
 
 import prefuse.data.Tuple;
 import prefuse.data.expression.AbstractPredicate;
@@ -83,10 +83,10 @@ public class OVPredicate extends AbstractPredicate {
     public boolean getBoolean(Tuple t) {
         if ((t instanceof Edge) || (t instanceof EdgeItem)) {
             Object o = t.get(EDGE);
-            if (isDisjointEdgeFilter() && (o instanceof org.pg.eti.kask.sova.edges.DisjointEdge)) {
+            if (isDisjointEdgeFilter() && (o instanceof main.java.org.pg.eti.kask.sova.edges.DisjointEdge)) {
                 return false;
             }
-            if (isSubEdgeFilter() && (o instanceof org.pg.eti.kask.sova.edges.SubClassEdge)) {
+            if (isSubEdgeFilter() && (o instanceof main.java.org.pg.eti.kask.sova.edges.SubClassEdge)) {
                 return false;
             }
             return true;

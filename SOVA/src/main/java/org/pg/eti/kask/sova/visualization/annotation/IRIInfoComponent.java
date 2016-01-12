@@ -23,7 +23,7 @@
 /**
  * 
  */
-package org.pg.eti.kask.sova.visualization.annotation;
+package main.java.org.pg.eti.kask.sova.visualization.annotation;
 
 /**
  * Interfejs zawiera metody, które musi posiadać klasa formatki 

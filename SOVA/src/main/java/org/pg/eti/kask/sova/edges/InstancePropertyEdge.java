@@ -20,11 +20,11 @@
  *
  */
 
-package org.pg.eti.kask.sova.edges;
+package main.java.org.pg.eti.kask.sova.edges;
 
 import java.awt.Color;
 
-import org.pg.eti.kask.sova.options.EdgeColors;
+import main.java.org.pg.eti.kask.sova.options.EdgeColors;
 
 /**
  * Klasa reprezentująca krawędź łączącą wystąpienie property (sameValueFrom i

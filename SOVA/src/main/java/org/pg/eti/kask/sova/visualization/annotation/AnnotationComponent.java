@@ -19,7 +19,7 @@
  * this program; If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.pg.eti.kask.sova.visualization.annotation;
+package main.java.org.pg.eti.kask.sova.visualization.annotation;
 
 import javax.swing.JComboBox;
 

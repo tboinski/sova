@@ -19,7 +19,7 @@
  * this program; If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.pg.eti.kask.sova.visualization.annotation;
+package main.java.org.pg.eti.kask.sova.visualization.annotation;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,8 +29,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import javax.swing.JComboBox;
-import org.pg.eti.kask.sova.graph.Constants;
-import org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
+import main.java.org.pg.eti.kask.sova.graph.Constants;
+import main.java.org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
@@ -176,7 +176,7 @@ public class AnnotationListener extends ControlAdapter {
             }
 
             //Sprawdź czy została ustawiona wizualizacja po labelach czy po ID
-            String currentNodeLabel = ((org.pg.eti.kask.sova.nodes.ClassNode) currentObj).getLabel();
+            String currentNodeLabel = ((main.java.org.pg.eti.kask.sova.nodes.ClassNode) currentObj).getLabel();
             currentLangKey = "";
             if (labelsLangs.containsValue(currentNodeLabel)) {
                 for (Map.Entry pair : labelsLangs.entrySet()) {

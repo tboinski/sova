@@ -20,13 +20,13 @@
  *
  */
 
-package org.pg.eti.kask.sova.nodes;
+package main.java.org.pg.eti.kask.sova.nodes;
 
 import java.awt.Color;
 
-import org.pg.eti.kask.sova.options.NodeColors;
-import org.pg.eti.kask.sova.options.NodeShapeType;
-import org.pg.eti.kask.sova.options.NodeShapes;
+import main.java.org.pg.eti.kask.sova.options.NodeColors;
+import main.java.org.pg.eti.kask.sova.options.NodeShapeType;
+import main.java.org.pg.eti.kask.sova.options.NodeShapes;
 
 /**
  * Reprezentuje węzeł instancji klasy (OWL Individual).

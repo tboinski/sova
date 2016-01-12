@@ -20,7 +20,7 @@
  *
  */
 
-package org.pg.eti.kask.sova.visualization;
+package main.java.org.pg.eti.kask.sova.visualization;
 
 import javax.swing.JPanel;
 import prefuse.action.ActionList;

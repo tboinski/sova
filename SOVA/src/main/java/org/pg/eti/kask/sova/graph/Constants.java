@@ -20,7 +20,7 @@
  *
  */
 
-package org.pg.eti.kask.sova.graph;
+package main.java.org.pg.eti.kask.sova.graph;
 /**
  * Klasa za stałymi projektus
  * @author Piotr Kunowski

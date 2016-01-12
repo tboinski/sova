@@ -20,7 +20,7 @@
  *
  */
 
-package org.pg.eti.kask.sova.nodes;
+package main.java.org.pg.eti.kask.sova.nodes;
 
 /**
  * Klasa reprezentuje węzeł klasy anonimowej powstałej w wyniku nałożenia

@@ -19,7 +19,7 @@
  * this program; If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.pg.eti.kask.sova.visualization;
+package main.java.org.pg.eti.kask.sova.visualization;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -39,13 +39,13 @@ import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-import org.pg.eti.kask.sova.graph.Constants;
-import org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
-import org.pg.eti.kask.sova.graph.OWLtoHierarchyTreeConverter;
-import org.pg.eti.kask.sova.visualization.annotation.AnnotationComponent;
-import org.pg.eti.kask.sova.visualization.annotation.AnnotationListener;
-import org.pg.eti.kask.sova.visualization.annotation.IRIInfoComponent;
-import org.pg.eti.kask.sova.visualization.annotation.IRIInfoListener;
+import main.java.org.pg.eti.kask.sova.graph.Constants;
+import main.java.org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
+import main.java.org.pg.eti.kask.sova.graph.OWLtoHierarchyTreeConverter;
+import main.java.org.pg.eti.kask.sova.visualization.annotation.AnnotationComponent;
+import main.java.org.pg.eti.kask.sova.visualization.annotation.AnnotationListener;
+import main.java.org.pg.eti.kask.sova.visualization.annotation.IRIInfoComponent;
+import main.java.org.pg.eti.kask.sova.visualization.annotation.IRIInfoListener;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
@@ -108,7 +108,7 @@ public class OVDisplay extends Display {
         while (items.hasNext()) {
             VisualItem item = (VisualItem) items.next();
             Object o = ((VisualItem) item).get(Constants.GRAPH_NODES);
-            if ((o instanceof org.pg.eti.kask.sova.nodes.ClassNode)) {
+            if ((o instanceof main.java.org.pg.eti.kask.sova.nodes.ClassNode)) {
 
                 Object element = ((VisualItem) item).get(OWLtoGraphConverter.COLUMN_IRI);
                 OWLClass currentClass = manager.getOWLDataFactory().getOWLClass(IRI.create(((IRI) element).toURI()));
@@ -142,14 +142,14 @@ public class OVDisplay extends Display {
                 switch (e) {
                     case LABELS:
                         if (!labelValue.isEmpty()) {
-                            ((org.pg.eti.kask.sova.nodes.ClassNode) o).setLabel(labelValue);
+                            ((main.java.org.pg.eti.kask.sova.nodes.ClassNode) o).setLabel(labelValue);
                         } else if (!labelValueWithoutLang.isEmpty()) {
-                            ((org.pg.eti.kask.sova.nodes.ClassNode) o).setLabel(labelValueWithoutLang);
+                            ((main.java.org.pg.eti.kask.sova.nodes.ClassNode) o).setLabel(labelValueWithoutLang);
                         }
                         break;
 
                     case ID:
-                        ((org.pg.eti.kask.sova.nodes.ClassNode) o).setLabel(currentClass.getIRI().getFragment());
+                        ((main.java.org.pg.eti.kask.sova.nodes.ClassNode) o).setLabel(currentClass.getIRI().getFragment());
                         break;
 
                     default:

@@ -20,11 +20,11 @@
  *
  */
 
-package org.pg.eti.kask.sova.graph;
+package main.java.org.pg.eti.kask.sova.graph;
 
 import java.util.HashSet;
 import java.util.Set;
-import org.pg.eti.kask.sova.utils.ReasonerLoader;
+import main.java.org.pg.eti.kask.sova.utils.ReasonerLoader;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataFactory;
@@ -76,7 +76,7 @@ public class OWLtoHierarchyTreeConverter {
 
         this.usedClasses = new HashSet<String>();
         tree = new Tree();
-        tree.addColumn(Constants.TREE_NODES, org.pg.eti.kask.sova.nodes.Node.class);
+        tree.addColumn(Constants.TREE_NODES, main.java.org.pg.eti.kask.sova.nodes.Node.class);
 
         //inicjalizacja reasonera
         try {
@@ -133,14 +133,14 @@ public class OWLtoHierarchyTreeConverter {
                 }
                 usedClasses.add(currentClass.getIRI().getFragment());
                 //tu zmienilem
-                org.pg.eti.kask.sova.nodes.Node node = null;
+                main.java.org.pg.eti.kask.sova.nodes.Node node = null;
 
                 if (currentClass.isOWLThing()) {
-                    node = new org.pg.eti.kask.sova.nodes.ThingNode();
+                    node = new main.java.org.pg.eti.kask.sova.nodes.ThingNode();
                     node.setLabel("T");
 
                 } else {
-                    node = new org.pg.eti.kask.sova.nodes.ClassNode();
+                    node = new main.java.org.pg.eti.kask.sova.nodes.ClassNode();
                     node.setLabel(currentClass.getIRI().getFragment());
                 }
                 currentNode.set(Constants.TREE_NODES, node);
@@ -163,7 +163,7 @@ public class OWLtoHierarchyTreeConverter {
 
             if (!currentIndividual.isAnonymous()) {
                 currentNode = tree.addChild(parentNode);
-                org.pg.eti.kask.sova.nodes.Node node = new org.pg.eti.kask.sova.nodes.IndividualNode();
+                main.java.org.pg.eti.kask.sova.nodes.Node node = new main.java.org.pg.eti.kask.sova.nodes.IndividualNode();
                 node.setLabel(currentIndividual.asOWLNamedIndividual().getIRI().getFragment());
                 //tu zmieniłem
                 currentNode.set(Constants.TREE_NODES, node);

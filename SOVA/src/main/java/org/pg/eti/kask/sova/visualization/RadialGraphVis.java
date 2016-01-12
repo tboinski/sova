@@ -20,11 +20,11 @@
  *
  */
 
-package org.pg.eti.kask.sova.visualization;
+package main.java.org.pg.eti.kask.sova.visualization;
 
 import java.util.Iterator;
 
-import org.pg.eti.kask.sova.graph.Constants;
+import main.java.org.pg.eti.kask.sova.graph.Constants;
 import org.semanticweb.owlapi.model.OWLOntology;
 
 import prefuse.Visualization;

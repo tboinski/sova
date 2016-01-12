@@ -20,15 +20,15 @@
  *
  */
 
-package org.pg.eti.kask.sova.options;
+package main.java.org.pg.eti.kask.sova.options;
 
 import java.awt.Color;
 
-import org.pg.eti.kask.sova.utils.VisualizationProperties;
+import main.java.org.pg.eti.kask.sova.utils.VisualizationProperties;
 
 /**
  * Klasa przechowująca informacje o ustawieniach kolorów dla krawędzi.
- * @see org.pg.eti.kask.sova.edges.Edge
+ * @see main.java.org.pg.eti.kask.sova.edges.Edge
  */
 public class EdgeColors
 {

@@ -36,7 +36,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import org.pg.eti.kask.sova.visualization.OVDisplay;
+import main.java.org.pg.eti.kask.sova.visualization.OVDisplay;
 import org.semanticweb.owlapi.model.OWLOntology;
 import prefuse.Display;
 
