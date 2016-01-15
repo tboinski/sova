@@ -41,9 +41,8 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import prefuse.controls.ControlAdapter;
 import prefuse.visual.VisualItem;
-import main.java.org.pg.eti.kask.sova.nodes.ClassNode;
-import main.java.org.pg.eti.kask.sova.nodes.DataPropertyNode;
-import main.java.org.pg.eti.kask.sova.nodes.ObjectPropertyNode;
+import main.java.org.pg.eti.kask.sova.nodes.Node;
+
 
 /**
  * Klasa listenera ustawiająca opisy zaznaczonego elementu w zadanym komponencie
@@ -179,15 +178,8 @@ public class AnnotationListener extends ControlAdapter {
             }
 
             //Sprawdź czy została ustawiona wizualizacja po labelach czy po ID
-            String currentNodeLabel = "";
-                
-            if (currentObj instanceof ClassNode)
-                currentNodeLabel = ((ClassNode) currentObj).getLabel();
-            if( o instanceof ObjectPropertyNode)
-                currentNodeLabel = ((ObjectPropertyNode) currentObj).getLabel();
-            if( o instanceof DataPropertyNode)
-                currentNodeLabel = ((DataPropertyNode) currentObj).getLabel();
-            
+            String currentNodeLabel = ((Node) currentObj).getLabel();
+                          
             currentLangKey = "";
             if (labelsLangs.containsValue(currentNodeLabel)) {
                 for (Map.Entry pair : labelsLangs.entrySet()) {

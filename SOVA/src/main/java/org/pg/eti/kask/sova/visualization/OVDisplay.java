@@ -143,15 +143,8 @@ public class OVDisplay extends Display {
                     labelValue = "";
                 }
                 
-                Node castedObject = null;
-                
-                if (o instanceof ClassNode)
-                    castedObject = ClassNode.class.cast(o); 
-                if( o instanceof ObjectPropertyNode)
-                    castedObject = ObjectPropertyNode.class.cast(o);
-                if( o instanceof DataPropertyNode)
-                    castedObject = DataPropertyNode.class.cast(o);
-                
+                Node castedObject = Node.class.cast(o);
+                                
                 switch (e) {
                     case LABELS:
                         if (!labelValue.isEmpty()) {
