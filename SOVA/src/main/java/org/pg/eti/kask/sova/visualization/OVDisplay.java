@@ -72,6 +72,10 @@ import prefuse.util.ui.JSearchPanel;
 import prefuse.visual.VisualGraph;
 import prefuse.visual.VisualItem;
 import prefuse.visual.sort.TreeDepthItemSorter;
+import main.java.org.pg.eti.kask.sova.nodes.ClassNode;
+import main.java.org.pg.eti.kask.sova.nodes.Node;
+import main.java.org.pg.eti.kask.sova.nodes.ObjectPropertyNode;
+import main.java.org.pg.eti.kask.sova.nodes.DataPropertyNode;
 
 /**
  * Display wizualizowanej ontologii. Pozwala na generowanie graficznej
@@ -108,7 +112,7 @@ public class OVDisplay extends Display {
         while (items.hasNext()) {
             VisualItem item = (VisualItem) items.next();
             Object o = ((VisualItem) item).get(Constants.GRAPH_NODES);
-            if ((o instanceof main.java.org.pg.eti.kask.sova.nodes.ClassNode)) {
+            if (o instanceof ClassNode || o instanceof ObjectPropertyNode || o instanceof DataPropertyNode) {
 
                 Object element = ((VisualItem) item).get(OWLtoGraphConverter.COLUMN_IRI);
                 OWLClass currentClass = manager.getOWLDataFactory().getOWLClass(IRI.create(((IRI) element).toURI()));
@@ -138,18 +142,27 @@ public class OVDisplay extends Display {
                     langValue = "";
                     labelValue = "";
                 }
-
+                
+                Node castedObject = null;
+                
+                if (o instanceof ClassNode)
+                    castedObject = ClassNode.class.cast(o); 
+                if( o instanceof ObjectPropertyNode)
+                    castedObject = ObjectPropertyNode.class.cast(o);
+                if( o instanceof DataPropertyNode)
+                    castedObject = DataPropertyNode.class.cast(o);
+                
                 switch (e) {
                     case LABELS:
                         if (!labelValue.isEmpty()) {
-                            ((main.java.org.pg.eti.kask.sova.nodes.ClassNode) o).setLabel(labelValue);
+                            castedObject.setLabel(labelValue);
                         } else if (!labelValueWithoutLang.isEmpty()) {
-                            ((main.java.org.pg.eti.kask.sova.nodes.ClassNode) o).setLabel(labelValueWithoutLang);
+                            castedObject.setLabel(labelValueWithoutLang);
                         }
                         break;
 
                     case ID:
-                        ((main.java.org.pg.eti.kask.sova.nodes.ClassNode) o).setLabel(currentClass.getIRI().getFragment());
+                        castedObject.setLabel(currentClass.getIRI().getFragment());
                         break;
 
                     default:

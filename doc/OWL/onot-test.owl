@@ -38,4 +38,14 @@
       <rdfs:comment >Comment without lang</rdfs:comment>
   </owl:Class>
   
+   <owl:ObjectProperty rdf:ID="ObjectPropertyTest">
+      <rdfs:label>Object without lang</rdfs:label>
+      <rdfs:label xml:lang="pl">Polish lang for Object</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:DatatypeProperty rdf:ID="DatatypePropertyTest">
+    <rdfs:label>DatatypeProperty without lang</rdfs:label>
+    <rdfs:label xml:lang="pl">Polish lang for DatatypeProperty</rdfs:label>
+  </owl:DatatypeProperty>
+  
   </rdf:RDF>
