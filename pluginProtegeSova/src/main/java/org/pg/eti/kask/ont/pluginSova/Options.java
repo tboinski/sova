@@ -31,8 +31,6 @@ import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import javax.swing.AbstractButton;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -46,18 +44,18 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
+import main.java.org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
 
-import org.pg.eti.kask.sova.visualization.FilterOptions;
-import org.pg.eti.kask.sova.visualization.OVDisplay;
-import org.pg.eti.kask.sova.visualization.annotation.AnnotationListener;
+import main.java.org.pg.eti.kask.sova.visualization.FilterOptions;
+import main.java.org.pg.eti.kask.sova.visualization.OVDisplay;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
-
+import main.java.org.pg.eti.kask.sova.graph.Constants;
+import main.java.org.pg.eti.kask.sova.nodes.ClassNode;
 import prefuse.util.ui.JValueSlider;
 import prefuse.visual.VisualItem;
 /**
@@ -245,8 +243,8 @@ public class Options extends JFrame {
                 Iterator items = display.getVisualization().items();
                 while (items.hasNext()) {
                     VisualItem item = (VisualItem) items.next();
-                    Object o = ((VisualItem) item).get(org.pg.eti.kask.sova.graph.Constants.GRAPH_NODES);
-                    if ((o instanceof org.pg.eti.kask.sova.nodes.ClassNode )) {  
+                    Object o = ((VisualItem) item).get(Constants.GRAPH_NODES);
+                    if ((o instanceof ClassNode )) {  
 
                         Object element = ((VisualItem) item).get(OWLtoGraphConverter.COLUMN_IRI);
                         OWLClass currentClass = manager.getOWLDataFactory().getOWLClass(IRI.create(((IRI) element).toURI()));

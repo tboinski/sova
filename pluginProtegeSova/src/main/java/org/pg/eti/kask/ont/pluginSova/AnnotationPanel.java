@@ -28,7 +28,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 
-import org.pg.eti.kask.sova.visualization.annotation.AnnotationComponent;
+import main.java.org.pg.eti.kask.sova.visualization.annotation.AnnotationComponent;
 import prefuse.util.FontLib;
 
 public class AnnotationPanel extends JPanel implements AnnotationComponent{

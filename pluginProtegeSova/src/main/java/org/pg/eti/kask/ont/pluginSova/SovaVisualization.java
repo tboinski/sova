@@ -31,13 +31,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
-
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
-import org.pg.eti.kask.sova.visualization.OVDisplay;
+import main.java.org.pg.eti.kask.sova.visualization.OVDisplay;
 import org.protege.editor.owl.ui.view.AbstractOWLViewComponent;
 
 public class SovaVisualization extends AbstractOWLViewComponent {
