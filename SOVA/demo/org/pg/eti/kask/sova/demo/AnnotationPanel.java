@@ -21,10 +21,13 @@
  */
 package org.pg.eti.kask.sova.demo;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -93,34 +96,35 @@ public class AnnotationPanel extends JPanel implements AnnotationComponent {
         this.add(nameLabel);
         this.add(name);
 
-        JLabel labelLabel = new JLabel("Label ");
-        labelLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-        JLabel langL = new JLabel("Lang: ");
-        labelLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-
+        JPanel labelLangPanel = new JPanel(new GridLayout(0, 2));
+        labelLangPanel.setPreferredSize(new Dimension(PANEL_WIDTH - 10, 20));
+        labelLangPanel.setMaximumSize(new Dimension(PANEL_WIDTH - 5, 20));
+        JLabel labelLabel = new JLabel("Label");
+   
         //Combo box dla labelów
         labelLang = new JComboBox();
-        labelLang.setAlignmentX(AnnotationPanel.BOTTOM_ALIGNMENT);
-
-        this.add(labelLabel);
-        this.add(langL);
-        this.add(labelLang);
+        
+        labelLangPanel.add(labelLabel);
+        labelLangPanel.add(labelLang);
+        
+        this.add(labelLangPanel);
 
         this.add(label);
 
-        JLabel commentLabel = new JLabel("Comment ");
-        commentLabel.setAlignmentX(LEFT_ALIGNMENT);
+        JPanel commentPanel = new JPanel(new GridLayout(0, 2));
+        commentPanel.setPreferredSize(new Dimension(PANEL_WIDTH - 10, 20));
+        commentPanel.setMaximumSize(new Dimension(PANEL_WIDTH - 5, 20));
 
+        JLabel commentLabel = new JLabel("Comment");
         //Combo box dla komentarzy
         commentLang = new JComboBox();
-        JLabel langC = new JLabel("Lang: ");
-
-        this.add(commentLabel);
-        this.add(langC);
-        this.add(commentLang);
+ 
+        commentPanel.add(commentLabel);
+        commentPanel.add(commentLang);
+        this.add(commentPanel);
 
         this.add(pane);
+        
         this.setPreferredSize(new Dimension(PANEL_WIDTH, 300));
         this.setBorder(BorderFactory.createTitledBorder("Properties"));
 //		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
