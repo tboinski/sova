@@ -105,7 +105,6 @@ public class OVDisplay extends Display {
     // Wyświetl w węzłach wybrane przez użytkownika atrybuty
     // Label lub ID klasy
     public void changeGraphVisualization(VisualizationEnums e, JComboBox comboBox) {
-        this.removeAll();
         // Iteracja po wszytkich elementach ontologii
         OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
         Iterator items = m_vis.items();
@@ -160,10 +159,10 @@ public class OVDisplay extends Display {
 
                     default:
                         break;
-                }
+                }            
+                this.repaint();
             }
         }
-        this.repaint();
     }
 
     private OVVisualization getGraphLayoutVis() {
