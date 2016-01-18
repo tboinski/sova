@@ -25,7 +25,6 @@ package main.java.org.pg.eti.kask.sova.visualization;
 import java.util.Iterator;
 
 import main.java.org.pg.eti.kask.sova.graph.Constants;
-import org.semanticweb.owlapi.model.OWLOntology;
 
 import prefuse.Visualization;
 import prefuse.action.ActionList;

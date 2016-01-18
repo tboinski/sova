@@ -22,7 +22,6 @@
 package main.java.org.pg.eti.kask.sova.visualization;
 
 import java.util.Iterator;
-import java.util.Set;
 
 import main.java.org.pg.eti.kask.sova.edges.Edge;
 import main.java.org.pg.eti.kask.sova.graph.Constants;
