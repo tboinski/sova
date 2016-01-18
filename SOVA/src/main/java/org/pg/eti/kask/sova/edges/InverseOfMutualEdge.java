@@ -22,11 +22,11 @@
 
 
 
-package main.java.org.pg.eti.kask.sova.edges;
+package org.pg.eti.kask.sova.edges;
 
 import java.awt.Color;
 
-import main.java.org.pg.eti.kask.sova.options.EdgeColors;
+import org.pg.eti.kask.sova.options.EdgeColors;
 
 /**
  * Klasa reprezentująca krawędź oznaczającą wzajemną odwrotność (OWL InverseOf)

@@ -20,7 +20,7 @@
  *
  */
 
-package main.java.org.pg.eti.kask.sova.utils;
+package org.pg.eti.kask.sova.utils;
 
 import org.semanticweb.HermiT.Reasoner;
 

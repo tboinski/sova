@@ -19,7 +19,7 @@
  * this program; If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package main.java.org.pg.eti.kask.sova.visualization;
+package org.pg.eti.kask.sova.visualization;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -39,13 +39,13 @@ import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-import main.java.org.pg.eti.kask.sova.graph.Constants;
-import main.java.org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
-import main.java.org.pg.eti.kask.sova.graph.OWLtoHierarchyTreeConverter;
-import main.java.org.pg.eti.kask.sova.visualization.annotation.AnnotationComponent;
-import main.java.org.pg.eti.kask.sova.visualization.annotation.AnnotationListener;
-import main.java.org.pg.eti.kask.sova.visualization.annotation.IRIInfoComponent;
-import main.java.org.pg.eti.kask.sova.visualization.annotation.IRIInfoListener;
+import org.pg.eti.kask.sova.graph.Constants;
+import org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
+import org.pg.eti.kask.sova.graph.OWLtoHierarchyTreeConverter;
+import org.pg.eti.kask.sova.visualization.annotation.AnnotationComponent;
+import org.pg.eti.kask.sova.visualization.annotation.AnnotationListener;
+import org.pg.eti.kask.sova.visualization.annotation.IRIInfoComponent;
+import org.pg.eti.kask.sova.visualization.annotation.IRIInfoListener;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
@@ -72,10 +72,10 @@ import prefuse.util.ui.JSearchPanel;
 import prefuse.visual.VisualGraph;
 import prefuse.visual.VisualItem;
 import prefuse.visual.sort.TreeDepthItemSorter;
-import main.java.org.pg.eti.kask.sova.nodes.ClassNode;
-import main.java.org.pg.eti.kask.sova.nodes.Node;
-import main.java.org.pg.eti.kask.sova.nodes.ObjectPropertyNode;
-import main.java.org.pg.eti.kask.sova.nodes.DataPropertyNode;
+import org.pg.eti.kask.sova.nodes.ClassNode;
+import org.pg.eti.kask.sova.nodes.Node;
+import org.pg.eti.kask.sova.nodes.ObjectPropertyNode;
+import org.pg.eti.kask.sova.nodes.DataPropertyNode;
 
 /**
  * Display wizualizowanej ontologii. Pozwala na generowanie graficznej

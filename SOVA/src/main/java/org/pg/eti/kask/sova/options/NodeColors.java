@@ -19,16 +19,16 @@
  * this program; If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package main.java.org.pg.eti.kask.sova.options;
+package org.pg.eti.kask.sova.options;
 
 import java.awt.Color;
 
-import main.java.org.pg.eti.kask.sova.utils.VisualizationProperties;
+import org.pg.eti.kask.sova.utils.VisualizationProperties;
 
 /**
  * Klasa przechowująca informacje o ustawieniach kolorów dla węzłów.
  *
- * @see main.java.org.pg.eti.kask.sova.nodes.Node
+ * @see org.pg.eti.kask.sova.nodes.Node
  */
 public class NodeColors {
 

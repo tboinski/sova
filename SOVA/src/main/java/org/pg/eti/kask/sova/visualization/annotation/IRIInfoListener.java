@@ -20,11 +20,11 @@
  *
  */
 
-package main.java.org.pg.eti.kask.sova.visualization.annotation;
+package org.pg.eti.kask.sova.visualization.annotation;
 
 import java.awt.event.MouseEvent;
 
-import main.java.org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
+import org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
 import org.semanticweb.owlapi.model.IRI;
 import prefuse.controls.ControlAdapter;
 import prefuse.visual.VisualItem;

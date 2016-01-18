@@ -19,7 +19,7 @@
  * this program; If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package main.java.org.pg.eti.kask.sova.visualization.annotation;
+package org.pg.eti.kask.sova.visualization.annotation;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,8 +28,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import javax.swing.JComboBox;
-import main.java.org.pg.eti.kask.sova.graph.Constants;
-import main.java.org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
+import org.pg.eti.kask.sova.graph.Constants;
+import org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
@@ -40,7 +40,7 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import prefuse.controls.ControlAdapter;
 import prefuse.visual.VisualItem;
-import main.java.org.pg.eti.kask.sova.nodes.Node;
+import org.pg.eti.kask.sova.nodes.Node;
 
 
 /**

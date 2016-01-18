@@ -25,7 +25,7 @@
  * and open the template in the editor.
  */
 
-package main.java.org.pg.eti.kask.sova.utils;
+package org.pg.eti.kask.sova.utils;
 
 import java.io.PrintStream;
 

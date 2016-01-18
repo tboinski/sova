@@ -20,7 +20,7 @@
  *
  */
 
-package main.java.org.pg.eti.kask.sova.visualization;
+package org.pg.eti.kask.sova.visualization;
 
 import prefuse.util.GraphicsLib;
 import java.awt.Graphics2D;
@@ -29,10 +29,10 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
-import main.java.org.pg.eti.kask.sova.edges.Edge;
-import main.java.org.pg.eti.kask.sova.graph.Constants;
-import main.java.org.pg.eti.kask.sova.options.EdgeColors;
-import main.java.org.pg.eti.kask.sova.utils.VisualizationProperties;
+import org.pg.eti.kask.sova.edges.Edge;
+import org.pg.eti.kask.sova.graph.Constants;
+import org.pg.eti.kask.sova.options.EdgeColors;
+import org.pg.eti.kask.sova.utils.VisualizationProperties;
 
 import prefuse.util.ColorLib;
 import prefuse.visual.EdgeItem;

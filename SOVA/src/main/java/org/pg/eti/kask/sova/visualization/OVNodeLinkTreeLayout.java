@@ -20,11 +20,11 @@
  *
  */
 
-package main.java.org.pg.eti.kask.sova.visualization;
+package org.pg.eti.kask.sova.visualization;
 
 import java.awt.geom.Point2D;
 
-import main.java.org.pg.eti.kask.sova.graph.Constants;
+import org.pg.eti.kask.sova.graph.Constants;
 
 
 import prefuse.Visualization;

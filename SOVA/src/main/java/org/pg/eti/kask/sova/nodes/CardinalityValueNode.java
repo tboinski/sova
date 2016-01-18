@@ -20,13 +20,13 @@
  *
  */
 
-package main.java.org.pg.eti.kask.sova.nodes;
+package org.pg.eti.kask.sova.nodes;
 
 import java.awt.Color;
 
-import main.java.org.pg.eti.kask.sova.options.NodeColors;
-import main.java.org.pg.eti.kask.sova.options.NodeShapeType;
-import main.java.org.pg.eti.kask.sova.options.NodeShapes;
+import org.pg.eti.kask.sova.options.NodeColors;
+import org.pg.eti.kask.sova.options.NodeShapeType;
+import org.pg.eti.kask.sova.options.NodeShapes;
 
 /**
  * Klasa reprezentuje węzeł z dokładnym ograniczeniem

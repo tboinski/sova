@@ -19,7 +19,7 @@
  * this program; If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package main.java.org.pg.eti.kask.sova.visualization;
+package org.pg.eti.kask.sova.visualization;
 
 /**
  * Klasa przechowująca informacje o włączonych filtrach.

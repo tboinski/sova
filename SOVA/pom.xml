@@ -33,12 +33,13 @@
   </dependencies>
   <build>
 	  <resources>
-			<resource>
-				<directory>src/main/java</directory>
-				<includes>
-					<include>**/*.properties</include>
-				</includes>
-			</resource>
-		</resources>
-	</build>
+            <resource>
+                    <directory>src/main/java</directory>
+                    <includes>
+                            <include>**/*.properties</include>
+                            <include>**/*.png</include>
+                    </includes>
+            </resource>
+        </resources>
+    </build>
 </project>

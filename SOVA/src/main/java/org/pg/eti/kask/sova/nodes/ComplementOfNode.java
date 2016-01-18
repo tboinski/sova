@@ -20,7 +20,7 @@
  *
  */
 
-package main.java.org.pg.eti.kask.sova.nodes;
+package org.pg.eti.kask.sova.nodes;
 
 /**
  * Klasa reprezentuje węzeł klasy anonimowej OWL będącej wynikiem

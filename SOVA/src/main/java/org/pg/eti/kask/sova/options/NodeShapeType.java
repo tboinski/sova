@@ -20,7 +20,7 @@
  *
  */
 
-package main.java.org.pg.eti.kask.sova.options;
+package org.pg.eti.kask.sova.options;
 
 /**
  * Rodzaje kształtów dla węzłów grafu.
