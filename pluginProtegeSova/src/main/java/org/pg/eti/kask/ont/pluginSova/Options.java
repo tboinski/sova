@@ -225,7 +225,6 @@ public class Options extends JFrame {
                 
                 // Inicjacja ComboBox'a
                 langBox = new JComboBox();
-                
                 // Listener do zamiany labelek w oknie z menu
                 langBox.addActionListener(new ActionListener() {
                     @Override
@@ -271,9 +270,9 @@ public class Options extends JFrame {
 		subjectGroup.add(idRationButton);
                 
                 // Dodaj elementy do głównego konenera
-		buttonVisual.add(labelRationButton);
-		buttonVisual.add(idRationButton);
-                buttonVisual.add(labelLang);
+		buttonVisual.add(labelRationButton, BorderLayout.WEST);
+		buttonVisual.add(idRationButton, BorderLayout.WEST);
+                buttonVisual.add(labelLang, BorderLayout.WEST);
                 buttonVisual.add(langBox);
                  
 		visValues.add(buttonVisual);
