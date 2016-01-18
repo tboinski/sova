@@ -11,7 +11,7 @@
 	<SOVA.version>${project.version}</SOVA.version>
   </properties>  
 	<modules>
-		<module>SOVA</module>
 		<module>pluginProtegeSova</module>
+		<module>DEMO</module>
 	</modules>
 </project>

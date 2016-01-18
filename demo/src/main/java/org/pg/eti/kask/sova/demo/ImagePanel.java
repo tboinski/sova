@@ -22,27 +22,39 @@
 
 package org.pg.eti.kask.sova.demo;
 
-import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+/**
+ * Panel z grafiką
+ * @author Piotr Kunowski
+ *
+ */
+class ImagePanel extends JPanel {
 
-import javax.swing.JTextField;
+	  private Image img;
 
-import main.java.org.pg.eti.kask.sova.visualization.annotation.IRIInfoComponent;
+	  public ImagePanel(String img) {
+	    this(new ImageIcon(img).getImage());
+	  }
 
-public class IRITextField extends JTextField implements IRIInfoComponent {
+	  public ImagePanel(Image img) {
+	    this.img = img;
+	    if (img==null || img.getWidth(null) <=0 || img.getHeight(null)<=0 ){
+	    	System.out.println("Brak grafiki!!!");
+	    }
+	    Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
+	    setPreferredSize(size);
+	    setMinimumSize(size);
+	    setMaximumSize(size);
+	    setSize(size);
+	    setLayout(null);
+	  }
 
-	{	/* blok inicjujacy */
-		this.setSize(new Dimension(500,20));
-		this.setMaximumSize(new Dimension(500,20));
-		this.setMinimumSize(new Dimension(500,20));
-		this.setColumns(50);
-		this.setEditable(false);
-		this.setBackground(Color.WHITE);
+	  public void paintComponent(Graphics g) {
+	    g.drawImage(img, 0, 0, null);
+	  }
+
 	}
-	@Override
-	public void setIRIInfo(String iri) {
-		this.setText(iri);
-
-	}
-
-}

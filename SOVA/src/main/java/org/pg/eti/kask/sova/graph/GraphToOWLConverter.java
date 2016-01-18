@@ -20,7 +20,7 @@
  *
  */
 
-package main.java.org.pg.eti.kask.sova.graph;
+package org.pg.eti.kask.sova.graph;
 
 import org.semanticweb.owlapi.model.OWLOntology;
 

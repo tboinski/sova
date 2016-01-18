@@ -20,11 +20,11 @@
  *
  */
 
-package main.java.org.pg.eti.kask.sova.visualization;
+package org.pg.eti.kask.sova.visualization;
 
 import java.util.Iterator;
 
-import main.java.org.pg.eti.kask.sova.graph.Constants;
+import org.pg.eti.kask.sova.graph.Constants;
 
 import prefuse.Visualization;
 import prefuse.action.ActionList;

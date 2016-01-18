@@ -19,12 +19,12 @@
  * this program; If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package main.java.org.pg.eti.kask.sova.visualization;
+package org.pg.eti.kask.sova.visualization;
 
 import java.util.Iterator;
 
-import main.java.org.pg.eti.kask.sova.edges.Edge;
-import main.java.org.pg.eti.kask.sova.graph.Constants;
+import org.pg.eti.kask.sova.edges.Edge;
+import org.pg.eti.kask.sova.graph.Constants;
 import prefuse.action.GroupAction;
 import prefuse.data.Node;
 import prefuse.visual.EdgeItem;
@@ -67,25 +67,25 @@ public class OVItemFilter extends GroupAction {
             if (isVisualItemVisible || !rememberOldState) {
                 if ((item instanceof Edge) || (item instanceof EdgeItem) || (item instanceof TableEdgeItem)) {//krawędzie
                     Object o = ((VisualItem) item).get(Constants.GRAPH_EDGES);
-                    if ((o instanceof main.java.org.pg.eti.kask.sova.edges.DisjointEdge) && (!FilterOptions.isClassFilter() || !FilterOptions.isDisjointClassEdge())) {
+                    if ((o instanceof org.pg.eti.kask.sova.edges.DisjointEdge) && (!FilterOptions.isClassFilter() || !FilterOptions.isDisjointClassEdge())) {
                         ((VisualItem) item).setVisible(false);
-                    } else if ((o instanceof main.java.org.pg.eti.kask.sova.edges.SubClassEdge) && (!FilterOptions.isClassFilter() || !FilterOptions.isSubClassEdge())) {
+                    } else if ((o instanceof org.pg.eti.kask.sova.edges.SubClassEdge) && (!FilterOptions.isClassFilter() || !FilterOptions.isSubClassEdge())) {
                         ((VisualItem) item).setVisible(false);
-                    } else if ((o instanceof main.java.org.pg.eti.kask.sova.edges.EquivalentEdge) && (!FilterOptions.isClassFilter() || !FilterOptions.isEquivalentClassEdge())) {
+                    } else if ((o instanceof org.pg.eti.kask.sova.edges.EquivalentEdge) && (!FilterOptions.isClassFilter() || !FilterOptions.isEquivalentClassEdge())) {
                         ((VisualItem) item).setVisible(false);
-                    } else if ((o instanceof main.java.org.pg.eti.kask.sova.edges.InstanceOfEdge) && (!FilterOptions.isIndividual() || !FilterOptions.isInstanceOfEdge())) {
+                    } else if ((o instanceof org.pg.eti.kask.sova.edges.InstanceOfEdge) && (!FilterOptions.isIndividual() || !FilterOptions.isInstanceOfEdge())) {
                         ((VisualItem) item).setVisible(false);
-                    } else if ((o instanceof main.java.org.pg.eti.kask.sova.edges.InstancePropertyEdge) && (!FilterOptions.isProperty() || !FilterOptions.isInstanceProperty())) {
+                    } else if ((o instanceof org.pg.eti.kask.sova.edges.InstancePropertyEdge) && (!FilterOptions.isProperty() || !FilterOptions.isInstanceProperty())) {
                         ((VisualItem) item).setVisible(false);
-                    } else if ((o instanceof main.java.org.pg.eti.kask.sova.edges.SubPropertyEdge) && (!FilterOptions.isProperty() || !FilterOptions.isSubPropertyEdge())) {
+                    } else if ((o instanceof org.pg.eti.kask.sova.edges.SubPropertyEdge) && (!FilterOptions.isProperty() || !FilterOptions.isSubPropertyEdge())) {
                         ((VisualItem) item).setVisible(false);
-                    } else if ((o instanceof main.java.org.pg.eti.kask.sova.edges.EquivalentPropertyEdge) && (!FilterOptions.isProperty() || !FilterOptions.isEquivalentPropertyEdge())) {
+                    } else if ((o instanceof org.pg.eti.kask.sova.edges.EquivalentPropertyEdge) && (!FilterOptions.isProperty() || !FilterOptions.isEquivalentPropertyEdge())) {
                         ((VisualItem) item).setVisible(false);
-                    } else if ((o instanceof main.java.org.pg.eti.kask.sova.edges.DomainEdge) && (!FilterOptions.isProperty() || !FilterOptions.isDomain())) {
+                    } else if ((o instanceof org.pg.eti.kask.sova.edges.DomainEdge) && (!FilterOptions.isProperty() || !FilterOptions.isDomain())) {
                         ((VisualItem) item).setVisible(false);
-                    } else if ((o instanceof main.java.org.pg.eti.kask.sova.edges.RangeEdge) && (!FilterOptions.isProperty() || !FilterOptions.isRange())) {
+                    } else if ((o instanceof org.pg.eti.kask.sova.edges.RangeEdge) && (!FilterOptions.isProperty() || !FilterOptions.isRange())) {
                         ((VisualItem) item).setVisible(false);
-                    } else if ((o instanceof main.java.org.pg.eti.kask.sova.edges.InverseOfEdge || o instanceof main.java.org.pg.eti.kask.sova.edges.InverseOfMutualEdge)
+                    } else if ((o instanceof org.pg.eti.kask.sova.edges.InverseOfEdge || o instanceof org.pg.eti.kask.sova.edges.InverseOfMutualEdge)
                             && (!FilterOptions.isProperty() || !FilterOptions.isInverseOfProperty())) {
                         ((VisualItem) item).setVisible(false);
                     } else { // pozostałe krawdzie są widoczne
@@ -95,8 +95,8 @@ public class OVItemFilter extends GroupAction {
                 } else {//wierzchołki
                     Object o = ((VisualItem) item).get(Constants.GRAPH_NODES);
                     //Class node
-                    if ((o instanceof main.java.org.pg.eti.kask.sova.nodes.ClassNode || o instanceof main.java.org.pg.eti.kask.sova.nodes.ThingNode
-                            || o instanceof main.java.org.pg.eti.kask.sova.nodes.NothingNode) && (!FilterOptions.isClassFilter())) {
+                    if ((o instanceof org.pg.eti.kask.sova.nodes.ClassNode || o instanceof org.pg.eti.kask.sova.nodes.ThingNode
+                            || o instanceof org.pg.eti.kask.sova.nodes.NothingNode) && (!FilterOptions.isClassFilter())) {
                         ((VisualItem) item).setVisible(false);
                         //usunięcie kwawędzi powiązanej z wierzchołkiem
                         Node n = ((Node) item);
@@ -105,7 +105,7 @@ public class OVItemFilter extends GroupAction {
                             ((VisualItem) egdesToRemove.next()).setVisible(false);
                         }
                     } else // class - uninOf
-                    if ((o instanceof main.java.org.pg.eti.kask.sova.nodes.UnionOfNode)
+                    if ((o instanceof org.pg.eti.kask.sova.nodes.UnionOfNode)
                             && (!FilterOptions.isClassFilter() || !FilterOptions.isUnionOf())) {
                         ((VisualItem) item).setVisible(false);
                         //usunięcie kwawędzi powiązanej z wierzchołkiem
@@ -116,7 +116,7 @@ public class OVItemFilter extends GroupAction {
                         }
 
                     } else // class - anonymouse 
-                    if ((o.getClass() == main.java.org.pg.eti.kask.sova.nodes.AnonymousClassNode.class)
+                    if ((o.getClass() == org.pg.eti.kask.sova.nodes.AnonymousClassNode.class)
                             && (!FilterOptions.isClassFilter() || !FilterOptions.isAnonymouse())) {
                         ((VisualItem) item).setVisible(false);
                         //usunięcie kwawędzi powiązanej z wierzchołkiem
@@ -126,7 +126,7 @@ public class OVItemFilter extends GroupAction {
                             ((VisualItem) egdesToRemove.next()).setVisible(false);
                         }
                     } else // Class -  intersectionOf
-                    if ((o instanceof main.java.org.pg.eti.kask.sova.nodes.IntersectionOfNode)
+                    if ((o instanceof org.pg.eti.kask.sova.nodes.IntersectionOfNode)
                             && (!FilterOptions.isClassFilter() || !FilterOptions.isIntersectionOf())) {
                         ((VisualItem) item).setVisible(false);
                         //usunięcie kwawędzi powiązanej z wierzchołkiem
@@ -136,7 +136,7 @@ public class OVItemFilter extends GroupAction {
                             ((VisualItem) egdesToRemove.next()).setVisible(false);
                         }
                     } else // Class - ComplementOf
-                    if ((o instanceof main.java.org.pg.eti.kask.sova.nodes.ComplementOfNode)
+                    if ((o instanceof org.pg.eti.kask.sova.nodes.ComplementOfNode)
                             && (!FilterOptions.isClassFilter() || !FilterOptions.isComplementOf())) {
                         ((VisualItem) item).setVisible(false);
                         //usunięcie kwawędzi powiązanej z wierzchołkiem
@@ -146,8 +146,8 @@ public class OVItemFilter extends GroupAction {
                             ((VisualItem) egdesToRemove.next()).setVisible(false);
                         }
                     } else // Cardinality               	
-                    if ((o instanceof main.java.org.pg.eti.kask.sova.nodes.CardinalityValueNode
-                            || o instanceof main.java.org.pg.eti.kask.sova.nodes.CardinalityNode)
+                    if ((o instanceof org.pg.eti.kask.sova.nodes.CardinalityValueNode
+                            || o instanceof org.pg.eti.kask.sova.nodes.CardinalityNode)
                             && (!FilterOptions.isClassFilter() || !FilterOptions.isCardinality())) {
                         ((VisualItem) item).setVisible(false);
                         //usunięcie kwawędzi powiązanej z wierzchołkiem
@@ -157,7 +157,7 @@ public class OVItemFilter extends GroupAction {
                             ((VisualItem) egdesToRemove.next()).setVisible(false);
                         }
                     } else // Individual               	
-                    if ((o instanceof main.java.org.pg.eti.kask.sova.nodes.IndividualNode)
+                    if ((o instanceof org.pg.eti.kask.sova.nodes.IndividualNode)
                             && (!FilterOptions.isIndividual())) {
                         ((VisualItem) item).setVisible(false);
                         //usunięcie kwawędzi powiązanej z wierzchołkiem
@@ -167,7 +167,7 @@ public class OVItemFilter extends GroupAction {
                             ((VisualItem) egdesToRemove.next()).setVisible(false);
                         }
                     } else // Indywidual differentFrom/allDifferenr                 	
-                    if ((o instanceof main.java.org.pg.eti.kask.sova.nodes.DifferentNode)
+                    if ((o instanceof org.pg.eti.kask.sova.nodes.DifferentNode)
                             && (!FilterOptions.isIndividual() || !FilterOptions.isDifferent())) {
                         ((VisualItem) item).setVisible(false);
                         //usunięcie kwawędzi powiązanej z wierzchołkiem
@@ -178,7 +178,7 @@ public class OVItemFilter extends GroupAction {
                         }
 
                     } else // Indywidual -  sameAs                 	
-                    if ((o instanceof main.java.org.pg.eti.kask.sova.nodes.SameAsNode)
+                    if ((o instanceof org.pg.eti.kask.sova.nodes.SameAsNode)
                             && (!FilterOptions.isIndividual() || !FilterOptions.isSameAs())) {
                         ((VisualItem) item).setVisible(false);
                         //usunięcie kwawędzi powiązanej z wierzchołkiem
@@ -188,7 +188,7 @@ public class OVItemFilter extends GroupAction {
                             ((VisualItem) egdesToRemove.next()).setVisible(false);
                         }
                     } else //Indywidual - oneOf                	
-                    if ((o instanceof main.java.org.pg.eti.kask.sova.nodes.OneOfNode)
+                    if ((o instanceof org.pg.eti.kask.sova.nodes.OneOfNode)
                             && (!FilterOptions.isIndividual() || !FilterOptions.isOneOf())) {
                         ((VisualItem) item).setVisible(false);
                         //usunięcie kwawędzi powiązanej z wierzchołkiem
@@ -198,7 +198,7 @@ public class OVItemFilter extends GroupAction {
                             ((VisualItem) egdesToRemove.next()).setVisible(false);
                         }
                     } else // Property node
-                    if ((o instanceof main.java.org.pg.eti.kask.sova.nodes.ObjectPropertyNode || o instanceof main.java.org.pg.eti.kask.sova.nodes.DataPropertyNode)
+                    if ((o instanceof org.pg.eti.kask.sova.nodes.ObjectPropertyNode || o instanceof org.pg.eti.kask.sova.nodes.DataPropertyNode)
                             && (!FilterOptions.isProperty())) {
                         ((VisualItem) item).setVisible(false);
                         //usunięcie kwawędzi powiązanej z wierzchołkiem
@@ -208,7 +208,7 @@ public class OVItemFilter extends GroupAction {
                             ((VisualItem) egdesToRemove.next()).setVisible(false);
                         }
                     } else //Property - FunctionalProperty node
-                    if ((o instanceof main.java.org.pg.eti.kask.sova.nodes.FunctionalPropertyNode)
+                    if ((o instanceof org.pg.eti.kask.sova.nodes.FunctionalPropertyNode)
                             && (!FilterOptions.isProperty() || !FilterOptions.isFunctionalProperty())) {
                         ((VisualItem) item).setVisible(false);
                         //usunięcie kwawędzi powiązanej z wierzchołkiem
@@ -218,7 +218,7 @@ public class OVItemFilter extends GroupAction {
                             ((VisualItem) egdesToRemove.next()).setVisible(false);
                         }
                     } else //Property - InverseFunctionalProperty node
-                    if ((o instanceof main.java.org.pg.eti.kask.sova.nodes.InverseFunctionalPropertyNode)
+                    if ((o instanceof org.pg.eti.kask.sova.nodes.InverseFunctionalPropertyNode)
                             && (!FilterOptions.isProperty() || !FilterOptions.isInverseFunctionalProperty())) {
                         ((VisualItem) item).setVisible(false);
                         //usunięcie kwawędzi powiązanej z wierzchołkiem
@@ -228,7 +228,7 @@ public class OVItemFilter extends GroupAction {
                             ((VisualItem) egdesToRemove.next()).setVisible(false);
                         }
                     } else //Property - SymmetricProperty node
-                    if ((o instanceof main.java.org.pg.eti.kask.sova.nodes.SymmetricPropertyNode)
+                    if ((o instanceof org.pg.eti.kask.sova.nodes.SymmetricPropertyNode)
                             && (!FilterOptions.isProperty() || !FilterOptions.isSymmetricProperty())) {
                         ((VisualItem) item).setVisible(false);
                         //usunięcie kwawędzi powiązanej z wierzchołkiem
@@ -238,7 +238,7 @@ public class OVItemFilter extends GroupAction {
                             ((VisualItem) egdesToRemove.next()).setVisible(false);
                         }
                     } else //Property - TransitiveProperty node
-                    if ((o instanceof main.java.org.pg.eti.kask.sova.nodes.TransitivePropertyNode)
+                    if ((o instanceof org.pg.eti.kask.sova.nodes.TransitivePropertyNode)
                             && (!FilterOptions.isProperty() || !FilterOptions.isTransitiveProperty())) {
                         ((VisualItem) item).setVisible(false);
                         //usunięcie kwawędzi powiązanej z wierzchołkiem

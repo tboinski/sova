@@ -93,7 +93,7 @@
 		<artifactId>org.protege.editor.owl</artifactId>
 		<version>4.3.0</version>
 	</dependency>
-        <dependency>
+    <dependency>
 		<groupId>owlapi-bin</groupId>
 		<artifactId>owlapi-bin</artifactId>
 		<version>1</version>

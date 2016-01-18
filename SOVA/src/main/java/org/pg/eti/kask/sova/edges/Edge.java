@@ -20,12 +20,12 @@
  *
  */
 
-package main.java.org.pg.eti.kask.sova.edges;
+package org.pg.eti.kask.sova.edges;
 
 import java.awt.Color;
 import java.awt.Polygon;
 
-import main.java.org.pg.eti.kask.sova.options.EdgeColors;
+import org.pg.eti.kask.sova.options.EdgeColors;
 
 /**
  * Nadklasa dla wszystkich krawędzi, zwykła czarna krawędź.
