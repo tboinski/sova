@@ -12,6 +12,7 @@
   </properties>  
 	<modules>
 		<module>pluginProtegeSova</module>
+		<module>SOVA</module>
 		<module>DEMO</module>
 	</modules>
 </project>
