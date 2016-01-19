@@ -1,45 +1,44 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <groupId>org.pg.eti.kask.ont.pluginSova</groupId>
-    <artifactId>pluginSovaBuild</artifactId>
-    <version>0.8.5</version>
-	<relativePath>../pom.xml</relativePath>
-  </parent>
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.pg.eti.kask.sova</groupId>
-  <artifactId>SOVA</artifactId>
-  <packaging>jar</packaging>
-  <name>SOVA</name>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-  <dependencies>
-	<dependency>
-		<groupId>com.hermit-reasoner</groupId>
-		<artifactId>org.semanticweb.hermit</artifactId>
-		<version>1.3.8.1</version>
-	</dependency>
-	<dependency>
-		<groupId>org.prefuse</groupId>
-		<artifactId>prefuse</artifactId>
-		<version>beta-20071021</version>
-	</dependency>
-	<dependency>
-		<groupId>net.sourceforge.owlapi</groupId>
-		<artifactId>owlapi-impl</artifactId>
-		<version>4.1.3</version>
-	</dependency>
-  </dependencies>
-  <build>
-	  <resources>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.pg.eti.kask.ont.pluginSova</groupId>
+        <artifactId>pluginSovaBuild</artifactId>
+        <version>0.8.5</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.pg.eti.kask.sova</groupId>
+    <artifactId>SOVA</artifactId>
+    <packaging>jar</packaging>
+    <name>SOVA</name>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <build>
+        <resources>
             <resource>
-                    <directory>src/main/java</directory>
-                    <includes>
-                            <include>**/*.properties</include>
-                            <include>**/*.png</include>
-                    </includes>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                </includes>
             </resource>
         </resources>
     </build>
+    <dependencies>
+        <dependency>
+            <groupId>com.hermit-reasoner</groupId>
+            <artifactId>org.semanticweb.hermit</artifactId>
+            <version>1.3.8.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.prefuse</groupId>
+            <artifactId>prefuse</artifactId>
+            <version>beta-20071021</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sourceforge.owlapi</groupId>
+            <artifactId>owlapi-impl</artifactId>
+            <version>4.1.3</version>
+        </dependency>
+    </dependencies>
 </project>
