@@ -35,7 +35,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import main.java.org.pg.eti.kask.sova.visualization.OVDisplay;
+import org.pg.eti.kask.sova.visualization.OVDisplay;
 import org.protege.editor.owl.ui.view.AbstractOWLViewComponent;
 
 public class SovaVisualization extends AbstractOWLViewComponent {

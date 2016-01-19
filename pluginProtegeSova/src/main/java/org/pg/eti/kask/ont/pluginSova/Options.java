@@ -44,18 +44,18 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import main.java.org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
+import org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
 
-import main.java.org.pg.eti.kask.sova.visualization.FilterOptions;
-import main.java.org.pg.eti.kask.sova.visualization.OVDisplay;
+import org.pg.eti.kask.sova.visualization.FilterOptions;
+import org.pg.eti.kask.sova.visualization.OVDisplay;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
-import main.java.org.pg.eti.kask.sova.graph.Constants;
-import main.java.org.pg.eti.kask.sova.nodes.ClassNode;
+import org.pg.eti.kask.sova.graph.Constants;
+import org.pg.eti.kask.sova.nodes.ClassNode;
 import prefuse.util.ui.JValueSlider;
 import prefuse.visual.VisualItem;
 /**

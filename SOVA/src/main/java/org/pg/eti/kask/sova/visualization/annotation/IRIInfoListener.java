@@ -1,10 +1,10 @@
 /*
  *
- * Copyright (c) 2010 Gdańsk University of Technology
+ * Copyright (c) 2010 GdaÅ„sk University of Technology
  * Copyright (c) 2010 Kunowski Piotr
  * Copyright (c) 2010 Jaworska Anna
- * Copyright (c) 2010 Kleczkowski Radosław
- * Copyright (c) 2010 Orłowski Piotr
+ * Copyright (c) 2010 Kleczkowski RadosÅ‚aw
+ * Copyright (c) 2010 OrÅ‚owski Piotr
  *
  * This file is part of SOVA.  SOVA is free software: you can
  * redistribute it and/or modify it under the terms of the GNU Lesser General Public
