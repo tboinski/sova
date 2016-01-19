@@ -35,8 +35,8 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import main.java.org.pg.eti.kask.sova.utils.ReasonerLoader;
-import main.java.org.pg.eti.kask.sova.visualization.OVDisplay;
+import org.pg.eti.kask.sova.utils.ReasonerLoader;
+import org.pg.eti.kask.sova.visualization.OVDisplay;
 import org.protege.editor.owl.ui.view.AbstractOWLViewComponent;
 
 public class HierarchyTreeVis extends AbstractOWLViewComponent {

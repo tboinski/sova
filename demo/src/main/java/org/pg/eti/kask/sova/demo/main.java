@@ -33,7 +33,6 @@ import javax.swing.JPanel;
 import org.pg.eti.kask.sova.utils.Debug;
 import org.pg.eti.kask.sova.utils.VisualizationProperties;
 import org.semanticweb.owlapi.apibinding.OWLManager;
-import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;

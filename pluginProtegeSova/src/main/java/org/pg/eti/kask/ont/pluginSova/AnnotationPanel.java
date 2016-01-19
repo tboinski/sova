@@ -32,7 +32,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import main.java.org.pg.eti.kask.sova.visualization.annotation.AnnotationComponent;
+import org.pg.eti.kask.sova.visualization.annotation.AnnotationComponent;
 import prefuse.util.FontLib;
 
 public class AnnotationPanel extends JPanel implements AnnotationComponent {
