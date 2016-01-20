@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.PrintStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -38,12 +39,32 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 /**
+ * Helper class
+ *
+ */
+class OntologyFileGetter{
+    //Path platform independent  
+    public static String GetOntologyFilePath(String file){
+        File currentDirFile = new File("");
+        String currentDirPath = currentDirFile.getAbsolutePath();
+        String[] subDirs = currentDirPath.split(Pattern.quote(File.separator));
+        String ontoPath = "";
+        for(int i = 0; i < subDirs.length - 1; i++){
+            ontoPath += subDirs[i] + File.separator;
+        }
+        
+        ontoPath += "doc" + File.separator + "OWL" + 
+                            File.separator + file;        
+        return ontoPath;
+    }
+}
+
+/**
  * Klasa main
  * @author Piotr Kunowski
  *
  */
 public class main {
-
     /**
      * @param args
      */
@@ -58,7 +79,7 @@ public class main {
             VisualizationProperties.instanceOf().loadProperties(Constants.PROPERTIES);
 
             //IRI physicalIRI = IRI.create(Constants.ONTO_TEST_DIRECTORY);
-            File physicalIRI = new File(Constants.ONTO_TEST_DIRECTORY);
+            File physicalIRI = new File(OntologyFileGetter.GetOntologyFilePath(Constants.ONTO_TEST_FILE));
             try {// wczytanie ontologi z pliku 
                 ontology = OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(physicalIRI);
 
