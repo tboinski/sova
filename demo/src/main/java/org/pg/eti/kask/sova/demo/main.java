@@ -23,6 +23,7 @@ package org.pg.eti.kask.sova.demo;
 
 import java.io.File;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -37,34 +38,44 @@ import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.apache.commons.lang.ArrayUtils;
 
 /**
  * Helper class
  *
  */
-class OntologyFileGetter{
+class OntologyFileGetter {
+
     //Path platform independent  
-    public static String GetOntologyFilePath(String file){
+    public static String GetOntologyFilePath(String file) {
         File currentDirFile = new File("");
         String currentDirPath = currentDirFile.getAbsolutePath();
         String[] subDirs = currentDirPath.split(Pattern.quote(File.separator));
-        String ontoPath = "";
-        for(int i = 0; i < subDirs.length - 1; i++){
-            ontoPath += subDirs[i] + File.separator;
+        ArrayList<String> cleanedDir = new ArrayList();
+        for (String dir : subDirs) {
+            if (dir.equals("demo") || dir.equals("target")) {
+                continue;
+            }
+            cleanedDir.add(dir);
         }
-        
-        ontoPath += "doc" + File.separator + "OWL" + 
-                            File.separator + file;        
+        String ontoPath = "";
+        for (Object subDir : cleanedDir) {
+            ontoPath += subDir + File.separator;
+        }
+        ontoPath += "doc" + File.separator + "OWL"
+                + File.separator + file;
         return ontoPath;
     }
 }
 
 /**
  * Klasa main
+ *
  * @author Piotr Kunowski
  *
  */
 public class main {
+
     /**
      * @param args
      */
