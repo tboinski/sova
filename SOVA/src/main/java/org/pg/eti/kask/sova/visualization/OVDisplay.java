@@ -1,10 +1,10 @@
 /*
  *
- * Copyright (c) 2010 Gdańsk University of Technology
+ * Copyright (c) 2010 GdaÅ„sk University of Technology
  * Copyright (c) 2010 Kunowski Piotr
  * Copyright (c) 2010 Jaworska Anna
- * Copyright (c) 2010 Kleczkowski Radosław
- * Copyright (c) 2010 Orłowski Piotr
+ * Copyright (c) 2010 Kleczkowski RadosÅ‚aw
+ * Copyright (c) 2010 OrÅ‚owski Piotr
  *
  * This file is part of SOVA.  SOVA is free software: you can
  * redistribute it and/or modify it under the terms of the GNU Lesser General Public
@@ -36,6 +36,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 import javax.swing.BorderFactory;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
@@ -88,21 +89,25 @@ public class OVDisplay extends Display {
     public static final int FORCE_DIRECTED_LAYOUT = 1;
     public static final int RADIAL_TREE_LAYOUT = 2;
     public static final int FRUCHTERMAN_REINGOLD_LAYOUT = 3;
+    public static final int NOTE_LINK_TREE_LAYOUT = 4;
 
     public enum VisualizationEnums {
 
         LABELS, ID
     };
+
     private int graphLayout = FORCE_DIRECTED_LAYOUT;
     private Graph graph = null;
     private OVVisualization visualizationForceDirected = null;
     private OVVisualization visualizationRadialGraph = null;
     private OVVisualization visualizationFruchtermanReingold = null;
+    private OVVisualization visualizationNodeLinkTree = null;
     private OVVisualization visualizationTree = null;
+    private JCheckBox spanningTreeBox;
     private boolean canPan = true;
     private OWLOntology ontology = null;
 
-    // Wyświetl w węzłach wybrane przez użytkownika atrybuty
+    // WyÅ›wietl w wÄ™zÅ‚ach wybrane przez uÅ¼ytkownika atrybuty
     // Label lub ID klasy
     public void changeGraphVisualization(VisualizationEnums e, JComboBox comboBox) {
         // Iteracja po wszytkich elementach ontologii
@@ -141,9 +146,9 @@ public class OVDisplay extends Display {
                     langValue = "";
                     labelValue = "";
                 }
-                
+
                 Node castedObject = Node.class.cast(o);
-                                
+
                 switch (e) {
                     case LABELS:
                         if (!labelValue.isEmpty()) {
@@ -159,7 +164,7 @@ public class OVDisplay extends Display {
 
                     default:
                         break;
-                }            
+                }
                 this.repaint();
             }
         }
@@ -183,6 +188,12 @@ public class OVDisplay extends Display {
                     initFruchtermanReingoldVis();
                 }
                 return visualizationFruchtermanReingold;
+            case 4:
+                if (visualizationNodeLinkTree == null) {
+                    initNodeLinkTreeVis();
+                }
+                return visualizationNodeLinkTree;
+
         }
         if (visualizationForceDirected == null) {
             initForceDirectedVis();
@@ -199,7 +210,6 @@ public class OVDisplay extends Display {
             visualizationFruchtermanReingold.getGroup(Visualization.FOCUS_ITEMS).setTuple(currentClass);
             currentClass.setFixed(true);
         }
-
     }
 
     private void initForceDirectedVis() {
@@ -216,18 +226,25 @@ public class OVDisplay extends Display {
             pan(350, 350);
             canPan = false;
         }
+    }
 
+    private void initNodeLinkTreeVis() {
+        visualizationNodeLinkTree = new NodeLinkTreeVis();
+        visualizationNodeLinkTree = getGraphLayoutVis();
+        visualizationNodeLinkTree.addGraph(Constants.GRAPH, this.getGraph());
+        visualizationNodeLinkTree.setVisualizationSettings();
     }
 
     private void initRadialGraphVis() {
         visualizationRadialGraph = new RadialGraphVis();
-//		visualizationRadialGraph = getGraphLayoutVis();
+        visualizationRadialGraph.setSpanningTreeMode(spanningTreeBox);
+        visualizationRadialGraph = getGraphLayoutVis();
         visualizationRadialGraph.addGraph(Constants.GRAPH, this.getGraph());
         visualizationRadialGraph.setVisualizationSettings();
     }
 
     /**
-     * Ustawienie trybu wyświetlania
+     * Ustawienie trybu wyÅ›wietlania
      *
      * @param graphLayout
      */
@@ -265,9 +282,13 @@ public class OVDisplay extends Display {
         this.ontology = ontology;
     }
 
+    public void setSpanningTreeCheckBox(JCheckBox box) {
+        this.spanningTreeBox = box;
+    }
+
     public OVDisplay() {
         super();
-        //włączenie pełnego odświeżania
+        //wÅ‚Ä…czenie peÅ‚nego odÅ›wieÅ¼ania
         this.setDamageRedraw(false);
         this.setSize(1500, 1500);
         this.setHighQuality(true);
@@ -286,7 +307,7 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * Dodaje komponent nasłuchujący na zmiany zaznaczonego wierzchołka
+     * Dodaje komponent nasÅ‚uchujÄ…cy na zmiany zaznaczonego wierzchoÅ‚ka
      *
      * @param component
      * @param manager
@@ -296,7 +317,7 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * Dodaje komponent nasłuchujący na zmiany wskazanego wierzchołka
+     * Dodaje komponent nasÅ‚uchujÄ…cy na zmiany wskazanego wierzchoÅ‚ka
      *
      * @param component
      */
@@ -305,7 +326,7 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * metoda wizualizuje zadaną ontologię
+     * metoda wizualizuje zadanÄ… ontologiÄ™
      *
      * @param ont ontologia zapisana w OWLAPI
      */
@@ -315,7 +336,7 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * metoda wizualizuje zadaną ontologię
+     * metoda wizualizuje zadanÄ… ontologiÄ™
      */
     public void generateGraphFromOWl() {
         try {
@@ -385,6 +406,12 @@ public class OVDisplay extends Display {
                 visualizationTree.reset();
             }
             visualizationTree = null;
+
+            if (visualizationNodeLinkTree != null) {
+                visualizationNodeLinkTree.reset();
+            }
+            visualizationNodeLinkTree = null;
+
             graph.clear();
             graph.clearSpanningTree();
             graph.removeAllGraphModelListeners();
@@ -395,7 +422,7 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * Wyświetla całe drzewo wywnioskowanej hierarchii
+     * WyÅ›wietla caÅ‚e drzewo wywnioskowanej hierarchii
      */
     public void showFullTree() {
         if (visualizationTree != null) {
