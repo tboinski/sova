@@ -24,15 +24,18 @@ package org.pg.eti.kask.sova.visualization;
 import java.util.Iterator;
 
 import org.pg.eti.kask.sova.graph.Constants;
+import static org.pg.eti.kask.sova.visualization.OVVisualization.treeNodes;
 
 import prefuse.Visualization;
 import prefuse.action.ActionList;
 import prefuse.action.GroupAction;
+import prefuse.action.ItemAction;
 import prefuse.action.RepaintAction;
 import prefuse.action.animate.ColorAnimator;
 import prefuse.action.animate.PolarLocationAnimator;
 import prefuse.action.animate.QualityControlAnimator;
 import prefuse.action.animate.VisibilityAnimator;
+import prefuse.action.assignment.FontAction;
 import prefuse.action.layout.CollapsedSubtreeLayout;
 import prefuse.action.layout.graph.RadialTreeLayout;
 import prefuse.activity.SlowInSlowOutPacer;
@@ -40,8 +43,11 @@ import prefuse.data.Graph;
 import prefuse.data.Node;
 import prefuse.data.Tuple;
 import prefuse.data.event.TupleSetListener;
+import prefuse.data.search.PrefixSearchTupleSet;
+import prefuse.data.search.SearchTupleSet;
 import prefuse.data.tuple.DefaultTupleSet;
 import prefuse.data.tuple.TupleSet;
+import prefuse.util.FontLib;
 
 /**
  * klasa wizualizująca graf w oparciu o algorytm RadialGraph
@@ -53,12 +59,13 @@ public class RadialGraphVis extends OVVisualization {
     private static final String tree = Constants.GRAPH;
     private static final String treeNodes = Constants.GRAPH_NODES;
     private static final String linear = "linear";
-
+    
     @Override
     public void setVisualizationLayout() {
-
+  
         addRepaintAction();
-
+        setInteractive(treeEdges, null, false);
+                     
         // create the tree layout action
         RadialTreeLayout treeLayout = new RadialTreeLayout(tree);
         //treeLayout.setAngularBounds(-Math.PI/2, Math.PI);
@@ -112,8 +119,43 @@ public class RadialGraphVis extends OVVisualization {
                         }
                     }
                 }
-        );
+        );   
+        
+        ItemAction nodeColor = new NodeColorAction(treeNodes);
+        ItemAction textColor = new TextColorAction(treeNodes);
+        putAction("textColor", textColor);
 
+        FontAction fonts = new FontAction(treeNodes,
+                FontLib.getFont("Tahoma", 10));
+        fonts.add("ingroup('_focus_')", FontLib.getFont("Tahoma", 11));
+
+        // recolor
+        ActionList recolor = new ActionList();
+        recolor.add(nodeColor);
+        recolor.add(textColor);
+        putAction("recolor", recolor);
+
+        // repaint
+        ActionList repaint = new ActionList();
+        repaint.add(recolor);
+        repaint.add(new RepaintAction());
+        putAction("repaint", repaint);
+        
+        // animate paint change
+        ActionList animatePaint = new ActionList(400);
+        animatePaint.add(new ColorAnimator(treeNodes));
+        animatePaint.add(new RepaintAction());
+        putAction("animatePaint", animatePaint);
+        
+        SearchTupleSet search = new PrefixSearchTupleSet();
+        addFocusGroup(Visualization.SEARCH_ITEMS, search);
+        search.addTupleSetListener(new TupleSetListener() {
+            public void tupleSetChanged(TupleSet t, Tuple[] add, Tuple[] rem) {
+                cancel("animatePaint");
+                run("recolor");
+                run("animatePaint");
+            }
+        });
     }
 
     /**

@@ -77,6 +77,7 @@ import org.pg.eti.kask.sova.nodes.ClassNode;
 import org.pg.eti.kask.sova.nodes.Node;
 import org.pg.eti.kask.sova.nodes.ObjectPropertyNode;
 import org.pg.eti.kask.sova.nodes.DataPropertyNode;
+import prefuse.data.tuple.TupleSet;
 
 /**
  * Display wizualizowanej ontologii. Pozwala na generowanie graficznej
@@ -96,7 +97,7 @@ public class OVDisplay extends Display {
         LABELS, ID
     };
 
-    private int graphLayout = FORCE_DIRECTED_LAYOUT;
+    private int graphLayout = RADIAL_TREE_LAYOUT;
     private Graph graph = null;
     private OVVisualization visualizationForceDirected = null;
     private OVVisualization visualizationRadialGraph = null;
@@ -230,7 +231,7 @@ public class OVDisplay extends Display {
 
     private void initNodeLinkTreeVis() {
         visualizationNodeLinkTree = new NodeLinkTreeVis();
-        visualizationNodeLinkTree = getGraphLayoutVis();
+        visualizationRadialGraph.setSpanningTreeMode(spanningTreeBox);
         visualizationNodeLinkTree.addGraph(Constants.GRAPH, this.getGraph());
         visualizationNodeLinkTree.setVisualizationSettings();
     }
@@ -238,8 +239,7 @@ public class OVDisplay extends Display {
     private void initRadialGraphVis() {
         visualizationRadialGraph = new RadialGraphVis();
         visualizationRadialGraph.setSpanningTreeMode(spanningTreeBox);
-        visualizationRadialGraph = getGraphLayoutVis();
-        visualizationRadialGraph.addGraph(Constants.GRAPH, this.getGraph());
+        visualizationRadialGraph.add(Constants.GRAPH, this.getGraph());
         visualizationRadialGraph.setVisualizationSettings();
     }
 
@@ -450,9 +450,11 @@ public class OVDisplay extends Display {
     }
 
     private void addJSearch() {
+           
         SearchQueryBinding sq = new SearchQueryBinding(
-                (Table) getVisualization().getGroup("graph.nodes"), "node.name",
+                (Table) getVisualization().getGroup("graph.nodes"), "node.name", 
                 (SearchTupleSet) getVisualization().getGroup(Visualization.SEARCH_ITEMS));
+        
         JSearchPanel search = sq.createSearchPanel();
         search.setShowResultCount(true);
         search.setBorder(BorderFactory.createEmptyBorder(5, 5, 4, 0));

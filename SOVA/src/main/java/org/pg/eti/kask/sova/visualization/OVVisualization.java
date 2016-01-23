@@ -48,7 +48,11 @@ import prefuse.visual.expression.InGroupPredicate;
  */
 abstract public class OVVisualization extends Visualization {
 
-    private OVPredicate filterOVPredicate;
+    private OVPredicate filterOVPredicate;   
+    protected static final String tree = "tree";
+    protected static final String treeNodes = "tree.nodes";
+    protected static final String treeEdges = "tree.edges";
+    protected static final String linear = "linear";   
     protected static final String GRAPH = "graph";
     public static final String LAYOUT_ACTION = "layout";
     protected static final String FILTER_ACTION = "filter";
@@ -72,8 +76,8 @@ abstract public class OVVisualization extends Visualization {
      * ustawienie podstawowego layoutu i domyślnych filtrów.
      */
     public void setVisualizationSettings() {
+        
         setVisualizationRender();
-
         setVisualizationLayout();
     }
 
@@ -150,6 +154,7 @@ abstract public class OVVisualization extends Visualization {
         recolor.add(nodeColor);
         recolor.add(textColor);
         this.putAction("recolor", recolor);
+        
         SearchTupleSet search = new PrefixSearchTupleSet();
         this.addFocusGroup(Visualization.SEARCH_ITEMS, search);
         search.addTupleSetListener(new TupleSetListener() {
@@ -160,7 +165,7 @@ abstract public class OVVisualization extends Visualization {
             }
         });
     }
-
+    
     protected void addFilters() {
         ActionList filtersItmDist = new ActionList();
         if (!FilterOptions.isDistanceFilter()) {
