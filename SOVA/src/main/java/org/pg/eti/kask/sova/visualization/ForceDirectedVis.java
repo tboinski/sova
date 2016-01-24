@@ -23,6 +23,7 @@
 package org.pg.eti.kask.sova.visualization;
 
 import javax.swing.JPanel;
+import org.pg.eti.kask.sova.graph.Constants;
 import prefuse.action.ActionList;
 import prefuse.action.RepaintAction;
 import prefuse.action.layout.graph.ForceDirectedLayout;
@@ -51,7 +52,7 @@ public class ForceDirectedVis extends OVVisualization {
         layout.add(new RepaintAction());
         this.putAction(LAYOUT_ACTION, layout);
         addRepaintAction();
-        addSearch();
+        addSearch(Constants.graphNodes);
 
     }
     /**

@@ -1,10 +1,10 @@
 /*
  *
- * Copyright (c) 2010 GdaÅ„sk University of Technology
+ * Copyright (c) 2010 GdaÃ…â€žsk University of Technology
  * Copyright (c) 2010 Kunowski Piotr
  * Copyright (c) 2010 Jaworska Anna
- * Copyright (c) 2010 Kleczkowski RadosÅ‚aw
- * Copyright (c) 2010 OrÅ‚owski Piotr
+ * Copyright (c) 2010 Kleczkowski RadosÃ…â€šaw
+ * Copyright (c) 2010 OrÃ…â€šowski Piotr
  *
  * This file is part of SOVA.  SOVA is free software: you can
  * redistribute it and/or modify it under the terms of the GNU Lesser General Public
@@ -77,7 +77,6 @@ import org.pg.eti.kask.sova.nodes.ClassNode;
 import org.pg.eti.kask.sova.nodes.Node;
 import org.pg.eti.kask.sova.nodes.ObjectPropertyNode;
 import org.pg.eti.kask.sova.nodes.DataPropertyNode;
-import prefuse.data.tuple.TupleSet;
 
 /**
  * Display wizualizowanej ontologii. Pozwala na generowanie graficznej
@@ -97,7 +96,7 @@ public class OVDisplay extends Display {
         LABELS, ID
     };
 
-    private int graphLayout = RADIAL_TREE_LAYOUT;
+    private int graphLayout = FORCE_DIRECTED_LAYOUT;
     private Graph graph = null;
     private OVVisualization visualizationForceDirected = null;
     private OVVisualization visualizationRadialGraph = null;
@@ -107,8 +106,9 @@ public class OVDisplay extends Display {
     private JCheckBox spanningTreeBox;
     private boolean canPan = true;
     private OWLOntology ontology = null;
+    private JPanel sovaPanel = null;
 
-    // WyÅ›wietl w wÄ™zÅ‚ach wybrane przez uÅ¼ytkownika atrybuty
+    // WyÃ…â€ºwietl w wÃ„â„¢zÃ…â€šach wybrane przez uÃ…Â¼ytkownika atrybuty
     // Label lub ID klasy
     public void changeGraphVisualization(VisualizationEnums e, JComboBox comboBox) {
         // Iteracja po wszytkich elementach ontologii
@@ -231,7 +231,7 @@ public class OVDisplay extends Display {
 
     private void initNodeLinkTreeVis() {
         visualizationNodeLinkTree = new NodeLinkTreeVis();
-        visualizationRadialGraph.setSpanningTreeMode(spanningTreeBox);
+        visualizationNodeLinkTree.setSpanningTreeMode(spanningTreeBox);
         visualizationNodeLinkTree.addGraph(Constants.GRAPH, this.getGraph());
         visualizationNodeLinkTree.setVisualizationSettings();
     }
@@ -239,12 +239,12 @@ public class OVDisplay extends Display {
     private void initRadialGraphVis() {
         visualizationRadialGraph = new RadialGraphVis();
         visualizationRadialGraph.setSpanningTreeMode(spanningTreeBox);
-        visualizationRadialGraph.add(Constants.GRAPH, this.getGraph());
+        visualizationRadialGraph.addGraph(Constants.GRAPH, this.getGraph());
         visualizationRadialGraph.setVisualizationSettings();
     }
 
     /**
-     * Ustawienie trybu wyÅ›wietlania
+     * Ustawienie trybu wyÃ…â€ºwietlania
      *
      * @param graphLayout
      */
@@ -282,13 +282,20 @@ public class OVDisplay extends Display {
         this.ontology = ontology;
     }
 
+        public JPanel getSovaPanel(){
+        return this.sovaPanel;
+    }
+    
+    public void setSovaPanel(JPanel panel){
+        this.sovaPanel = panel;
+    }
+    
     public void setSpanningTreeCheckBox(JCheckBox box) {
         this.spanningTreeBox = box;
     }
 
-    public OVDisplay() {
-        super();
-        //wÅ‚Ä…czenie peÅ‚nego odÅ›wieÅ¼ania
+    private void Init(){
+           //wÃ…â€šÃ„â€¦czenie peÃ…â€šnego odÃ…â€ºwieÃ…Â¼ania
         this.setDamageRedraw(false);
         this.setSize(1500, 1500);
         this.setHighQuality(true);
@@ -305,9 +312,15 @@ public class OVDisplay extends Display {
         addControlListener(new FocusControl(1, RadialGraphVis.FILTERS));
         addControlListener(new HoverActionControl(OVVisualization.REPAINT_ACTION));
     }
+    
+    
+    public OVDisplay() {
+        super();
+        Init();
+    }
 
     /**
-     * Dodaje komponent nasÅ‚uchujÄ…cy na zmiany zaznaczonego wierzchoÅ‚ka
+     * Dodaje komponent nasÃ…â€šuchujÃ„â€¦cy na zmiany zaznaczonego wierzchoÃ…â€ška
      *
      * @param component
      * @param manager
@@ -317,7 +330,7 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * Dodaje komponent nasÅ‚uchujÄ…cy na zmiany wskazanego wierzchoÅ‚ka
+     * Dodaje komponent nasÃ…â€šuchujÃ„â€¦cy na zmiany wskazanego wierzchoÃ…â€ška
      *
      * @param component
      */
@@ -326,7 +339,7 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * metoda wizualizuje zadanÄ… ontologiÄ™
+     * metoda wizualizuje zadanÃ„â€¦ ontologiÃ„â„¢
      *
      * @param ont ontologia zapisana w OWLAPI
      */
@@ -336,7 +349,7 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * metoda wizualizuje zadanÄ… ontologiÄ™
+     * metoda wizualizuje zadanÃ„â€¦ ontologiÃ„â„¢
      */
     public void generateGraphFromOWl() {
         try {
@@ -349,7 +362,6 @@ public class OVDisplay extends Display {
         } catch (Exception ex) {
             Logger.getLogger(OVDisplay.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     /**
@@ -390,6 +402,7 @@ public class OVDisplay extends Display {
         this.setVisualization(getGraphLayoutVis());
         this.repaint();
         this.getVisualization().refreshFilter();
+        generateGraphFromOWl();
     }
 
     public void removeDisplayVis() {
@@ -422,7 +435,7 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * WyÅ›wietla caÅ‚e drzewo wywnioskowanej hierarchii
+     * WyÃ…â€ºwietla caÃ…â€še drzewo wywnioskowanej hierarchii
      */
     public void showFullTree() {
         if (visualizationTree != null) {

@@ -54,7 +54,9 @@ public class SovaVisualizationPanel extends JPanel {
     private AnnotationPanel annotation;
     private OWLOntology ontology = null;
     private IRITextField iriInfo = null;
-
+    private JPanel stopka = null;
+    public JButton but2 = null;
+    
     protected void disposeOWLView() {
         display.removeDisplayVis();
     }
@@ -65,6 +67,7 @@ public class SovaVisualizationPanel extends JPanel {
         annotation = new AnnotationPanel();
         iriInfo = new IRITextField();
         display = new OVDisplay(ontology);
+        display.setSovaPanel(this);
         display.setSize(800, 600);
         display.addAnnotationComponent(annotation);
         display.addIRIInfoComponent(iriInfo);
@@ -102,12 +105,11 @@ public class SovaVisualizationPanel extends JPanel {
         });
         but.setSize(100, 80);
         buttonPanel.add(but);
-        JButton but2 = new JButton("Reset");
+        but2 = new JButton("Reset");
         but2.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent arg0) {
-                display.removeDisplayVis();
-                display.generateGraphFromOWl(ontology);
+                resetSearchBox();
                 doLayout = true;
             }
         });
@@ -258,32 +260,30 @@ public class SovaVisualizationPanel extends JPanel {
         rightPanel.setMinimumSize(new Dimension(170, Integer.MAX_VALUE));
     }
 
+    public void resetSearchBox(){
+        display.removeDisplayVis();
+        display.generateGraphFromOWl(ontology);
+        leftPanel.removeAll();
+        initLeftPanel();
+        leftPanel.revalidate();
+        optionFrame.getIDRadioButton().setSelected(true);
+    }
+    
     /**
      * inicjalizacja panelu wizualizacji
      */
     private void initLeftPanel() {
-        leftPanel = new JPanel();
-        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+        if (leftPanel == null) {
+            leftPanel = new JPanel();
+            leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+        }
         leftPanel.add(display);
-        JPanel stopka = new JPanel();
+        stopka = new JPanel();
         stopka.setLayout(new BoxLayout(stopka, BoxLayout.X_AXIS));
         stopka.setSize(Integer.MAX_VALUE, 20);
         stopka.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
         stopka.setMinimumSize(new Dimension(Integer.MAX_VALUE, 20));
         stopka.setBackground(Color.WHITE);
-
-
-//		JPanel searchPanel = new JPanel(new GridLayout(1, 10));
-//		searchPanel.setSize(stopka.getSize().width/2, stopka.getSize().height);
-//		JTextField searchText = new JTextField(10);
-//		searchPanel.add(searchText);
-//		JButton bSearch = new JButton("Search");
-//		
-//		searchPanel.add(bSearch);
-//		stopka.add(searchPanel);
-//		iriInfo.setSize(stopka.getSize().width/2, stopka.getSize().height);
-
-
         stopka.add(iriInfo);
         stopka.add(display.getSearchPanel());
         leftPanel.add(stopka);

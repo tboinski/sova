@@ -100,6 +100,7 @@ public class Options extends JFrame {
     public JComboBox langBox;
 
     private JRadioButton labelRationButton;
+    private JRadioButton idRationButton;
     JCheckBox spanningTreeBox;
 
     private JButton options = null;
@@ -147,6 +148,10 @@ public class Options extends JFrame {
 
     }
 
+    public JRadioButton getIDRadioButton(){
+        return this.idRationButton;
+    }
+    
     private void initVisValuesPanel() {
         visValues = new JPanel();
         visValues.setLayout(new BoxLayout(visValues, BoxLayout.Y_AXIS));
@@ -180,6 +185,7 @@ public class Options extends JFrame {
 
             public void actionPerformed(ActionEvent arg0) {
                 display.changeVisualizationLayout(OVDisplay.FORCE_DIRECTED_LAYOUT);
+                ((SovaVisualizationPanel)display.getSovaPanel()).resetSearchBox();
 
             }
         });
@@ -191,7 +197,7 @@ public class Options extends JFrame {
             public void actionPerformed(ActionEvent arg0) {
                 display.setSpanningTreeCheckBox(spanningTreeBox);
                 display.changeVisualizationLayout(OVDisplay.RADIAL_TREE_LAYOUT);
-
+                ((SovaVisualizationPanel)display.getSovaPanel()).resetSearchBox();
             }
         });
 
@@ -202,6 +208,7 @@ public class Options extends JFrame {
             public void actionPerformed(ActionEvent arg0) {
                 display.setSpanningTreeCheckBox(spanningTreeBox);
                 display.changeVisualizationLayout(OVDisplay.NOTE_LINK_TREE_LAYOUT);
+                ((SovaVisualizationPanel)display.getSovaPanel()).resetSearchBox();
             }
         });
 
@@ -231,7 +238,7 @@ public class Options extends JFrame {
                 display.changeGraphVisualization(OVDisplay.VisualizationEnums.LABELS, langBox);
             }
         });
-        JRadioButton idRationButton = new JRadioButton("ID", true);
+        idRationButton = new JRadioButton("ID", true);
         idRationButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent arg0) {

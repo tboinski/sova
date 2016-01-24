@@ -22,10 +22,12 @@
 package org.pg.eti.kask.sova.visualization;
 
 import javax.swing.JCheckBox;
+import org.pg.eti.kask.sova.graph.Constants;
 import prefuse.Visualization;
 import prefuse.action.ActionList;
 import prefuse.action.ItemAction;
 import prefuse.action.RepaintAction;
+import prefuse.action.animate.ColorAnimator;
 import prefuse.action.assignment.ColorAction;
 import prefuse.action.assignment.FontAction;
 import prefuse.action.filter.GraphDistanceFilter;
@@ -54,6 +56,7 @@ abstract public class OVVisualization extends Visualization {
     protected static final String treeEdges = "tree.edges";
     protected static final String linear = "linear";   
     protected static final String GRAPH = "graph";
+    protected static final String graphNodes = "graph.nodes";   
     public static final String LAYOUT_ACTION = "layout";
     protected static final String FILTER_ACTION = "filter";
     protected static final String FILTER_ITEM = "item_filter";
@@ -64,6 +67,10 @@ abstract public class OVVisualization extends Visualization {
     protected boolean gravitation = true;
     private JCheckBox spanningTreeBox;
 
+    enum VisualizationType{
+        GRAPH, TREE
+    }
+    
     /**
      *
      * @return filtr na wyświetlane elementy
@@ -140,28 +147,40 @@ abstract public class OVVisualization extends Visualization {
 
     }
 
-    protected void addSearch() {
-        ItemAction nodeColor = new NodeColorAction("graph.nodes");
-        ItemAction textColor = new TextColorAction("graph.nodes");
-        this.putAction("textColor", textColor);
-
-        FontAction fonts = new FontAction("graph.nodes",
-                FontLib.getFont("Tahoma", 10));
-        fonts.add("ingroup('_search_')", FontLib.getFont("Tahoma", 20));
-
+    protected void addSearch(String type) {
+        
+        ItemAction nodeColor = new NodeColorAction(type);
+        ItemAction textColor = new TextColorAction(type);
+        
         // recolor
         ActionList recolor = new ActionList();
         recolor.add(nodeColor);
         recolor.add(textColor);
-        this.putAction("recolor", recolor);
+        putAction("recolor", recolor);
+
+        // repaint
+        ActionList repaint = new ActionList();
+        repaint.add(recolor);
+        repaint.add(new RepaintAction());
+        putAction("repaint", repaint);
+        
+        // animate paint change
+        ActionList animatePaint = new ActionList(400);
+        animatePaint.add(new ColorAnimator(type));
+        animatePaint.add(new RepaintAction());
+        putAction("animatePaint", animatePaint);
+        
+        FontAction fonts = new FontAction(type,
+                FontLib.getFont("Tahoma", 10));
+        fonts.add("ingroup('_search_')", FontLib.getFont("Tahoma", 20));
         
         SearchTupleSet search = new PrefixSearchTupleSet();
-        this.addFocusGroup(Visualization.SEARCH_ITEMS, search);
+        addFocusGroup(Visualization.SEARCH_ITEMS, search);
         search.addTupleSetListener(new TupleSetListener() {
             public void tupleSetChanged(TupleSet t, Tuple[] add, Tuple[] rem) {
-
+                cancel("animatePaint");
                 run("recolor");
-
+                run("animatePaint");
             }
         });
     }
