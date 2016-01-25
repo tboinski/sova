@@ -26,6 +26,7 @@ import java.util.Iterator;
 
 import org.pg.eti.kask.sova.graph.Constants;
 import static org.pg.eti.kask.sova.visualization.OVVisualization.FILTERS;
+import prefuse.Display;
 
 import prefuse.Visualization;
 import prefuse.action.ActionList;
@@ -52,7 +53,7 @@ public class NodeLinkTreeVis extends OVVisualization {
     private static final String linear = "linear";
     
     @Override
-    public void setVisualizationLayout() {
+    public void setVisualizationLayout(Display d) {
   
         addRepaintAction();
    
@@ -111,7 +112,7 @@ public class NodeLinkTreeVis extends OVVisualization {
                 }
         );   
         
-        addSearch(Constants.treeNodes);   
+        addSearch(Constants.treeNodes, d);   
     }
 
     /**

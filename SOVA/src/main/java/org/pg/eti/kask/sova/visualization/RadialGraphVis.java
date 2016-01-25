@@ -24,6 +24,7 @@ package org.pg.eti.kask.sova.visualization;
 import java.util.Iterator;
 
 import org.pg.eti.kask.sova.graph.Constants;
+import prefuse.Display;
 
 import prefuse.Visualization;
 import prefuse.action.ActionList;
@@ -56,7 +57,7 @@ public class RadialGraphVis extends OVVisualization {
     private static final String linear = "linear";
     
     @Override
-    public void setVisualizationLayout() {
+    public void setVisualizationLayout(Display d) {
   
         addRepaintAction();
    
@@ -115,7 +116,7 @@ public class RadialGraphVis extends OVVisualization {
                 }
         );   
         
-        addSearch(Constants.treeNodes);   
+        addSearch(Constants.treeNodes, d);   
     }
 
     /**

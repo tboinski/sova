@@ -107,7 +107,12 @@ public class OVDisplay extends Display {
     private boolean canPan = true;
     private OWLOntology ontology = null;
     private JPanel sovaPanel = null;
-
+    private JSearchPanel search;
+    
+    public JSearchPanel getSearchBox(){
+        return this.search;
+    }
+    
     // WyÃ…â€ºwietl w wÃ„â„¢zÃ…â€šach wybrane przez uÃ…Â¼ytkownika atrybuty
     // Label lub ID klasy
     public void changeGraphVisualization(VisualizationEnums e, JComboBox comboBox) {
@@ -205,7 +210,7 @@ public class OVDisplay extends Display {
     private void initFruchtermanReingoldVis() {
         visualizationFruchtermanReingold = new FruchtermanReingoldVis();
         VisualGraph visualGraph = visualizationFruchtermanReingold.addGraph(Constants.GRAPH, this.getGraph());
-        visualizationFruchtermanReingold.setVisualizationSettings();
+        visualizationFruchtermanReingold.setVisualizationSettings(this);
         if (visualGraph.getNodeCount() > 0) {
             VisualItem currentClass = (VisualItem) visualGraph.getNode(0);
             visualizationFruchtermanReingold.getGroup(Visualization.FOCUS_ITEMS).setTuple(currentClass);
@@ -216,7 +221,7 @@ public class OVDisplay extends Display {
     private void initForceDirectedVis() {
         visualizationForceDirected = new ForceDirectedVis();
         VisualGraph visualGraph = visualizationForceDirected.addGraph(Constants.GRAPH, this.getGraph());
-        visualizationForceDirected.setVisualizationSettings();
+        visualizationForceDirected.setVisualizationSettings(this);
         // ustawienie podswietlonej klasy
         if (visualGraph.getNodeCount() > 0) {
             VisualItem currentClass = (VisualItem) visualGraph.getNode(0);
@@ -233,14 +238,14 @@ public class OVDisplay extends Display {
         visualizationNodeLinkTree = new NodeLinkTreeVis();
         visualizationNodeLinkTree.setSpanningTreeMode(spanningTreeBox);
         visualizationNodeLinkTree.addGraph(Constants.GRAPH, this.getGraph());
-        visualizationNodeLinkTree.setVisualizationSettings();
+        visualizationNodeLinkTree.setVisualizationSettings(this);
     }
 
     private void initRadialGraphVis() {
         visualizationRadialGraph = new RadialGraphVis();
         visualizationRadialGraph.setSpanningTreeMode(spanningTreeBox);
         visualizationRadialGraph.addGraph(Constants.GRAPH, this.getGraph());
-        visualizationRadialGraph.setVisualizationSettings();
+        visualizationRadialGraph.setVisualizationSettings(this);
     }
 
     /**
@@ -373,7 +378,7 @@ public class OVDisplay extends Display {
             visualizationTree = new OVNodeLinkTreeLayout();
             OWLtoHierarchyTreeConverter con = new OWLtoHierarchyTreeConverter();
             visualizationTree.add(Constants.TREE, con.OWLtoTree(getOntology()));
-            visualizationTree.setVisualizationSettings();
+            visualizationTree.setVisualizationSettings(this);
             this.setVisualization(visualizationTree);
             setItemSorter(new TreeDepthItemSorter());
         } catch (Exception ex) {
@@ -468,7 +473,7 @@ public class OVDisplay extends Display {
                 (Table) getVisualization().getGroup("graph.nodes"), "node.name", 
                 (SearchTupleSet) getVisualization().getGroup(Visualization.SEARCH_ITEMS));
         
-        JSearchPanel search = sq.createSearchPanel();
+        search = sq.createSearchPanel();
         search.setShowResultCount(true);
         search.setBorder(BorderFactory.createEmptyBorder(5, 5, 4, 0));
         search.setFont(FontLib.getFont("Tahoma", Font.PLAIN, 11));

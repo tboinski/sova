@@ -21,8 +21,10 @@
  */
 package org.pg.eti.kask.sova.visualization;
 
+import java.awt.geom.Point2D;
 import javax.swing.JCheckBox;
 import org.pg.eti.kask.sova.graph.Constants;
+import prefuse.Display;
 import prefuse.Visualization;
 import prefuse.action.ActionList;
 import prefuse.action.ItemAction;
@@ -66,7 +68,9 @@ abstract public class OVVisualization extends Visualization {
     protected OVItemFilter itemVisualizationFilter = null;
     protected boolean gravitation = true;
     private JCheckBox spanningTreeBox;
-
+    protected Display display;
+    protected SearchTupleSet search;
+    
     enum VisualizationType{
         GRAPH, TREE
     }
@@ -82,10 +86,10 @@ abstract public class OVVisualization extends Visualization {
     /**
      * ustawienie podstawowego layoutu i domyślnych filtrów.
      */
-    public void setVisualizationSettings() {
+    public void setVisualizationSettings(Display d) {
         
         setVisualizationRender();
-        setVisualizationLayout();
+        setVisualizationLayout(d);
     }
 
     /**
@@ -147,11 +151,11 @@ abstract public class OVVisualization extends Visualization {
 
     }
 
-    protected void addSearch(String type) {
+    protected void addSearch(String type, Display d) {
         
         ItemAction nodeColor = new NodeColorAction(type);
         ItemAction textColor = new TextColorAction(type);
-        
+        this.display = d;
         // recolor
         ActionList recolor = new ActionList();
         recolor.add(nodeColor);
@@ -174,13 +178,25 @@ abstract public class OVVisualization extends Visualization {
                 FontLib.getFont("Tahoma", 10));
         fonts.add("ingroup('_search_')", FontLib.getFont("Tahoma", 20));
         
-        SearchTupleSet search = new PrefixSearchTupleSet();
+        search = new PrefixSearchTupleSet();
         addFocusGroup(Visualization.SEARCH_ITEMS, search);
         search.addTupleSetListener(new TupleSetListener() {
             public void tupleSetChanged(TupleSet t, Tuple[] add, Tuple[] rem) {
+                
+                if(search.getQuery().length() == 0){
+                    OVDisplay.class.cast(display).getSearchBox().repaint();
+                    return;
+                }
+                
                 cancel("animatePaint");
                 run("recolor");
                 run("animatePaint");
+                VisualItem item = (VisualItem)add[0];
+                Double x = item.getX();
+                Double y = item.getY();
+                if(add.length == 1){
+                    display.animatePanToAbs(new Point2D.Double(x,y), 400);
+                }
             }
         });
     }
@@ -238,8 +254,9 @@ abstract public class OVVisualization extends Visualization {
 
     /**
      *
+     * @param d
      */
-    public abstract void setVisualizationLayout();
+    public abstract void setVisualizationLayout(Display d);
 
     /**
      * odswieżenie filtrów, funkcja powinna byc wywołana po zmianach w
