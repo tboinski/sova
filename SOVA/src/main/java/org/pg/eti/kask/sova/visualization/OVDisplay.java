@@ -25,8 +25,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.FileOutputStream;
@@ -35,13 +33,14 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 
 import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 import org.pg.eti.kask.sova.graph.Constants;
 import org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
@@ -80,8 +79,6 @@ import org.pg.eti.kask.sova.nodes.ClassNode;
 import org.pg.eti.kask.sova.nodes.Node;
 import org.pg.eti.kask.sova.nodes.ObjectPropertyNode;
 import org.pg.eti.kask.sova.nodes.DataPropertyNode;
-import prefuse.data.search.PrefixSearchTupleSet;
-import prefuse.data.tuple.TupleSet;
 
 /**
  * Display wizualizowanej ontologii. Pozwala na generowanie graficznej
@@ -122,62 +119,73 @@ public class OVDisplay extends Display {
     // Label lub ID klasy
     public void changeGraphVisualization(VisualizationEnums e, JComboBox comboBox) {
         // Iteracja po wszytkich elementach ontologii
-        OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-        Iterator items = m_vis.items();
-        while (items.hasNext()) {
-            VisualItem item = (VisualItem) items.next();
-            Object o = ((VisualItem) item).get(Constants.GRAPH_NODES);
-            if (o instanceof ClassNode || o instanceof ObjectPropertyNode || o instanceof DataPropertyNode) {
+        try{
+            OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+            Iterator items = m_vis.items();
+            while (items.hasNext()) {
+                VisualItem item = (VisualItem) items.next();
+                Object o = ((VisualItem) item).get(Constants.GRAPH_NODES);
+                if (o instanceof ClassNode || o instanceof ObjectPropertyNode || o instanceof DataPropertyNode) {
 
-                Object element = ((VisualItem) item).get(OWLtoGraphConverter.COLUMN_IRI);
-                OWLClass currentClass = manager.getOWLDataFactory().getOWLClass(IRI.create(((IRI) element).toURI()));
-                Set<OWLAnnotation> set = currentClass.getAnnotations(this.ontology);
+                    Object element = ((VisualItem) item).get(OWLtoGraphConverter.COLUMN_IRI);
+                    OWLClass currentClass = manager.getOWLDataFactory().getOWLClass(IRI.create(((IRI) element).toURI()));
+                    Set<OWLAnnotation> set = currentClass.getAnnotations(this.ontology);
 
-                String stringPropoperty;
-                String labelValue = "";
-                String langValue = "";
-                String labelValueWithoutLang = "";
+                    String stringPropoperty;
+                    String labelValue = "";
+                    String langValue = "";
+                    String labelValueWithoutLang = "";
+                    Pattern TAG_REGEX = Pattern.compile("\"(.+?)\"");
 
-                for (OWLAnnotation elem : set) {
-                    OWLAnnotationProperty prop = elem.getProperty();
-                    stringPropoperty = prop.getIRI().getFragment();
-                    if (stringPropoperty.equals("label")) {
-                        stringPropoperty = elem.getValue().toString();
-                        if (stringPropoperty.contains("@")) {
-                            labelValue = stringPropoperty.substring(0, stringPropoperty.length() - 3);
-                            langValue = stringPropoperty.substring(stringPropoperty.length() - 2, stringPropoperty.length());
-                        } else {
-                            labelValueWithoutLang = stringPropoperty;
+                    for (OWLAnnotation elem : set) {
+                        OWLAnnotationProperty prop = elem.getProperty();
+                        stringPropoperty = prop.getIRI().getFragment();
+                        
+                        if (stringPropoperty.equals("label")) {
+                            stringPropoperty = elem.getValue().toString();
+                            if (stringPropoperty.contains("@")) {
+                                labelValue = stringPropoperty.substring(0, stringPropoperty.length() - 3);
+                                Matcher matcher = TAG_REGEX.matcher(labelValue);
+                                matcher.find();
+                                labelValue = matcher.group(1);
+                                langValue = stringPropoperty.substring(stringPropoperty.length() - 2, stringPropoperty.length());
+                            } else {
+                                Matcher matcher = TAG_REGEX.matcher(stringPropoperty);
+                                matcher.find();
+                                labelValueWithoutLang = matcher.group(1);
+                            }
+
+                            if (comboBox != null && langValue.equals(comboBox.getSelectedItem())) {
+                                break;
+                            }
                         }
-
-                        if (comboBox != null && langValue.equals(comboBox.getSelectedItem())) {
-                            break;
-                        }
+                        langValue = "";
+                        labelValue = "";
                     }
-                    langValue = "";
-                    labelValue = "";
+
+                    Node castedObject = Node.class.cast(o);
+
+                    switch (e) {
+                        case LABELS:
+                            if (!labelValue.isEmpty()) {
+                                castedObject.setLabel(labelValue);
+                            } else if (!labelValueWithoutLang.isEmpty()) {
+                                castedObject.setLabel(labelValueWithoutLang);
+                            }
+                            break;
+
+                        case ID:
+                            castedObject.setLabel(currentClass.getIRI().getFragment());
+                            break;
+
+                        default:
+                            break;
+                    }
+                    this.repaint();
                 }
-
-                Node castedObject = Node.class.cast(o);
-
-                switch (e) {
-                    case LABELS:
-                        if (!labelValue.isEmpty()) {
-                            castedObject.setLabel(labelValue);
-                        } else if (!labelValueWithoutLang.isEmpty()) {
-                            castedObject.setLabel(labelValueWithoutLang);
-                        }
-                        break;
-
-                    case ID:
-                        castedObject.setLabel(currentClass.getIRI().getFragment());
-                        break;
-
-                    default:
-                        break;
-                }
-                this.repaint();
             }
+        }catch(Exception exception){
+            exception.getMessage();
         }
     }
 

@@ -117,6 +117,7 @@
       </owl:Class>
     </owl:equivalentClass>
     <rdfs:label xml:lang="pt">Pais</rdfs:label>
+    <rdfs:label xml:lang="pl">Paryż</rdfs:label>
     <rdfs:comment>No comment</rdfs:comment>
     <rdfs:comment xml:lang="en">A class that is equivalent to the set of individuals that are described in the enumeration - ie Countries can only be either America, England, France, Germany or Italy and nothing else. Note that these individuals have been asserted to be allDifferent from each other.</rdfs:comment>
   </owl:Class>
@@ -143,6 +144,7 @@
       <owl:Class rdf:ID="VegetarianPizza"/>
     </owl:disjointWith>
     <rdfs:label xml:lang="pt">PizzaNaoVegetariana</rdfs:label>
+    <rdfs:label xml:lang="pl">PizzaPoPolsku</rdfs:label>
     <rdfs:comment xml:lang="en">Any Pizza that is not a VegetarianPizza</rdfs:comment>
     <owl:equivalentClass>
       <owl:Class>

@@ -84,16 +84,22 @@ abstract public class OVVisualization extends Visualization {
         if(selectedItem != null)
             switch (keyCode) {
                 case 38://UP KEY       
-                    if(ItemIterator == 0)
-                        ItemIterator = selectedItem.length - 1;                   
-                    animateToItem((VisualItem)selectedItem[ItemIterator]);
+                    if(ItemIterator == 0){
+                        ItemIterator = selectedItem.length - 1;       
+                        animateToItem((VisualItem)selectedItem[ItemIterator]);
+                        break;
+                    }
                     --ItemIterator; 
+                    animateToItem((VisualItem)selectedItem[ItemIterator]);
                     break;
                 case 40://DOWN KEY
-                    animateToItem((VisualItem)selectedItem[ItemIterator]);
-                    ++ItemIterator; 
-                    if(ItemIterator == selectedItem.length)
+                    if(ItemIterator == selectedItem.length - 1){
                         ItemIterator = 0;
+                        animateToItem((VisualItem)selectedItem[ItemIterator]);
+                        break;
+                    }
+                    ++ItemIterator;
+                    animateToItem((VisualItem)selectedItem[ItemIterator]);
                     break;
             }
     }
