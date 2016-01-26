@@ -274,7 +274,8 @@ public class SovaVisualizationPanel extends JPanel {
         leftPanel.removeAll();
         initLeftPanel();
         leftPanel.revalidate();
-        optionFrame.getIDRadioButton().setSelected(true);
+        if(optionFrame != null)
+            optionFrame.getIDRadioButton().setSelected(true);
     }
     
     /**
