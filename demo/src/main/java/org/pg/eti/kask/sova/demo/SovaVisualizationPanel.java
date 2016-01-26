@@ -24,11 +24,16 @@ package org.pg.eti.kask.sova.demo;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FileDialog;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridLayout;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -38,10 +43,13 @@ import java.io.IOException;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.pg.eti.kask.sova.visualization.OVDisplay;
 import org.semanticweb.owlapi.model.OWLOntology;
+import prefuse.util.FontLib;
 
 public class SovaVisualizationPanel extends JPanel {
 
@@ -56,14 +64,14 @@ public class SovaVisualizationPanel extends JPanel {
     private IRITextField iriInfo = null;
     private JPanel stopka = null;
     public JButton but2 = null;
+    private final boolean enterFlag = false;
     
     protected void disposeOWLView() {
         display.removeDisplayVis();
     }
 
     public SovaVisualizationPanel(OWLOntology onto) {
-        this.ontology = onto;
-
+        this.ontology = onto;        
         annotation = new AnnotationPanel();
         iriInfo = new IRITextField();
         display = new OVDisplay(ontology);
@@ -286,6 +294,22 @@ public class SovaVisualizationPanel extends JPanel {
         stopka.setBackground(Color.WHITE);
         stopka.add(iriInfo);
         stopka.add(display.getSearchPanel());
+        JLabel info = new JLabel("      Use keys ↑↓ to navigate");
+        info.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        stopka.add(info);
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(
+            new KeyEventDispatcher()  { 
+                public boolean dispatchKeyEvent(KeyEvent e){
+                    if(e.getID() == KeyEvent.KEY_PRESSED && e.isActionKey()){
+                        display.getGraphLayoutVis().handleKeyPress(e.getKeyCode());
+                        return true;                        
+                    }
+                    return false;
+                }  
+            });
+        
+        this.setFocusable(true);
+        this.requestFocusInWindow();
         leftPanel.add(stopka);
     }
 

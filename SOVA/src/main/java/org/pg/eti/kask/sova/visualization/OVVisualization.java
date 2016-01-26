@@ -21,9 +21,9 @@
  */
 package org.pg.eti.kask.sova.visualization;
 
+
 import java.awt.geom.Point2D;
 import javax.swing.JCheckBox;
-import org.pg.eti.kask.sova.graph.Constants;
 import prefuse.Display;
 import prefuse.Visualization;
 import prefuse.action.ActionList;
@@ -70,6 +70,33 @@ abstract public class OVVisualization extends Visualization {
     private JCheckBox spanningTreeBox;
     protected Display display;
     protected SearchTupleSet search;
+    protected Tuple[] selectedItem = null;
+    protected int ItemIterator = 0;
+    
+        
+    protected void animateToItem(VisualItem item){
+        Double x = item.getX();
+        Double y = item.getY();
+        display.animatePanToAbs(new Point2D.Double(x,y), 400);
+    }
+    
+    public void handleKeyPress(int keyCode) {  
+        if(selectedItem != null)
+            switch (keyCode) {
+                case 38://UP KEY       
+                    if(ItemIterator == 0)
+                        ItemIterator = selectedItem.length - 1;                   
+                    animateToItem((VisualItem)selectedItem[ItemIterator]);
+                    --ItemIterator; 
+                    break;
+                case 40://DOWN KEY
+                    animateToItem((VisualItem)selectedItem[ItemIterator]);
+                    ++ItemIterator; 
+                    if(ItemIterator == selectedItem.length)
+                        ItemIterator = 0;
+                    break;
+            }
+    }
     
     enum VisualizationType{
         GRAPH, TREE
@@ -183,19 +210,19 @@ abstract public class OVVisualization extends Visualization {
         search.addTupleSetListener(new TupleSetListener() {
             public void tupleSetChanged(TupleSet t, Tuple[] add, Tuple[] rem) {
                 
+                selectedItem = add;
+                
                 if(search.getQuery().length() == 0){
                     OVDisplay.class.cast(display).getSearchBox().repaint();
                     return;
                 }
-                
+               
                 cancel("animatePaint");
                 run("recolor");
                 run("animatePaint");
-                VisualItem item = (VisualItem)add[0];
-                Double x = item.getX();
-                Double y = item.getY();
-                if(add.length == 1){
-                    display.animatePanToAbs(new Point2D.Double(x,y), 400);
+                
+                if(selectedItem.length == 1){
+                    animateToItem((VisualItem)selectedItem[0]);
                 }
             }
         });

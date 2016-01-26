@@ -186,7 +186,6 @@ public class Options extends JFrame {
             public void actionPerformed(ActionEvent arg0) {
                 display.changeVisualizationLayout(OVDisplay.FORCE_DIRECTED_LAYOUT);
                 ((SovaVisualizationPanel)display.getSovaPanel()).resetSearchBox();
-
             }
         });
 

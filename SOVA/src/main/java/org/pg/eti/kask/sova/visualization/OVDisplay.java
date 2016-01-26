@@ -25,6 +25,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.FileOutputStream;
@@ -39,6 +41,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import org.pg.eti.kask.sova.graph.Constants;
 import org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
@@ -77,6 +80,8 @@ import org.pg.eti.kask.sova.nodes.ClassNode;
 import org.pg.eti.kask.sova.nodes.Node;
 import org.pg.eti.kask.sova.nodes.ObjectPropertyNode;
 import org.pg.eti.kask.sova.nodes.DataPropertyNode;
+import prefuse.data.search.PrefixSearchTupleSet;
+import prefuse.data.tuple.TupleSet;
 
 /**
  * Display wizualizowanej ontologii. Pozwala na generowanie graficznej
@@ -176,7 +181,7 @@ public class OVDisplay extends Display {
         }
     }
 
-    private OVVisualization getGraphLayoutVis() {
+    public OVVisualization getGraphLayoutVis() {
 
         switch (graphLayout) {
             case 1:
@@ -299,6 +304,7 @@ public class OVDisplay extends Display {
         this.spanningTreeBox = box;
     }
 
+    
     private void Init(){
            //wÃ…â€šÃ„â€¦czenie peÃ…â€šnego odÃ…â€ºwieÃ…Â¼ania
         this.setDamageRedraw(false);
@@ -466,7 +472,7 @@ public class OVDisplay extends Display {
         }
         return jSearch;
     }
-
+    
     private void addJSearch() {
            
         SearchQueryBinding sq = new SearchQueryBinding(
@@ -477,7 +483,7 @@ public class OVDisplay extends Display {
         search.setShowResultCount(true);
         search.setBorder(BorderFactory.createEmptyBorder(5, 5, 4, 0));
         search.setFont(FontLib.getFont("Tahoma", Font.PLAIN, 11));
-        jSearch = (JPanel) search;
+        jSearch = (JPanel) search; 
     }
 
     public void saveFullImage(FileOutputStream os, double scale) {
