@@ -45,11 +45,11 @@ public class OWLtoGraphConverter {
 //	private static final OWLtoGraphConverter INSTANCE = new OWLtoGraphConverter();
     Graph graph;
     public static final String COLUMN_IRI = "IRI";
-    private static final String COLUMN_NAME_NODE = "node.name";
-    private static String COLUMN_NODE = "node";
+    public static final String COLUMN_NAME_NODE = "node.name";
+    public static String COLUMN_NODE = "node";
     private Table edges;
-    Hashtable<String, Integer> classes;
-    Hashtable<String, Integer> properties;
+    public Hashtable<String, Integer> classes;
+    public Hashtable<String, Integer> properties;
     Hashtable<String, Integer> individuals;
     Hashtable<String, Integer> dataProperties;
     Hashtable<String, Integer> dataProperties2;

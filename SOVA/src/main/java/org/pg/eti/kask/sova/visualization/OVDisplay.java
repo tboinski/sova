@@ -44,6 +44,9 @@ import javax.swing.JPanel;
 
 import org.pg.eti.kask.sova.graph.Constants;
 import org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
+import static org.pg.eti.kask.sova.graph.OWLtoGraphConverter.COLUMN_IRI;
+import static org.pg.eti.kask.sova.graph.OWLtoGraphConverter.COLUMN_NAME_NODE;
+import static org.pg.eti.kask.sova.graph.OWLtoGraphConverter.COLUMN_NODE;
 import org.pg.eti.kask.sova.graph.OWLtoHierarchyTreeConverter;
 import org.pg.eti.kask.sova.visualization.annotation.AnnotationComponent;
 import org.pg.eti.kask.sova.visualization.annotation.AnnotationListener;
@@ -79,6 +82,7 @@ import org.pg.eti.kask.sova.nodes.ClassNode;
 import org.pg.eti.kask.sova.nodes.Node;
 import org.pg.eti.kask.sova.nodes.ObjectPropertyNode;
 import org.pg.eti.kask.sova.nodes.DataPropertyNode;
+import org.semanticweb.owlapi.model.OWLObjectProperty;
 
 /**
  * Display wizualizowanej ontologii. Pozwala na generowanie graficznej
@@ -110,6 +114,7 @@ public class OVDisplay extends Display {
     private OWLOntology ontology = null;
     private JPanel sovaPanel = null;
     private JSearchPanel search;
+    private OWLtoGraphConverter converter = null;
     
     public JSearchPanel getSearchBox(){
         return this.search;
@@ -125,23 +130,24 @@ public class OVDisplay extends Display {
             while (items.hasNext()) {
                 VisualItem item = (VisualItem) items.next();
                 Object o = ((VisualItem) item).get(Constants.GRAPH_NODES);
-                if (o instanceof ClassNode || o instanceof ObjectPropertyNode || o instanceof DataPropertyNode) {
+                if (o instanceof ClassNode) {//|| o instanceof ObjectPropertyNode || o instanceof DataPropertyNode) {
 
                     Object element = ((VisualItem) item).get(OWLtoGraphConverter.COLUMN_IRI);
+                    String iri = ((IRI)element).getFragment();
                     OWLClass currentClass = manager.getOWLDataFactory().getOWLClass(IRI.create(((IRI) element).toURI()));
                     Set<OWLAnnotation> set = currentClass.getAnnotations(this.ontology);
 
-                    String stringPropoperty;
+                    String stringPropoperty = "";
                     String labelValue = "";
                     String langValue = "";
                     String labelValueWithoutLang = "";
                     Pattern TAG_REGEX = Pattern.compile("\"(.+?)\"");
-
+                    
                     for (OWLAnnotation elem : set) {
                         OWLAnnotationProperty prop = elem.getProperty();
                         stringPropoperty = prop.getIRI().getFragment();
-                        
                         if (stringPropoperty.equals("label")) {
+                            
                             stringPropoperty = elem.getValue().toString();
                             if (stringPropoperty.contains("@")) {
                                 labelValue = stringPropoperty.substring(0, stringPropoperty.length() - 3);
@@ -162,15 +168,19 @@ public class OVDisplay extends Display {
                         langValue = "";
                         labelValue = "";
                     }
-
+                                        
+                    int index = converter.classes.get(iri);
+                    prefuse.data.Node node = graph.getNode(index);                        
                     Node castedObject = Node.class.cast(o);
-
+                    
                     switch (e) {
                         case LABELS:
                             if (!labelValue.isEmpty()) {
                                 castedObject.setLabel(labelValue);
+                                node.set(OWLtoGraphConverter.COLUMN_NAME_NODE, labelValue);
                             } else if (!labelValueWithoutLang.isEmpty()) {
                                 castedObject.setLabel(labelValueWithoutLang);
+                                node.set(OWLtoGraphConverter.COLUMN_NAME_NODE, labelValueWithoutLang);
                             }
                             break;
 
@@ -182,6 +192,7 @@ public class OVDisplay extends Display {
                             break;
                     }
                     this.repaint();
+                    this.resetJSearch();
                 }
             }
         }catch(Exception exception){
@@ -372,8 +383,8 @@ public class OVDisplay extends Display {
      */
     public void generateGraphFromOWl() {
         try {
-            OWLtoGraphConverter con = new OWLtoGraphConverter();
-            this.setGraph(con.OWLtoGraph(getOntology()));
+            converter = new OWLtoGraphConverter();
+            this.setGraph(converter.OWLtoGraph(getOntology()));
             OVVisualization vis = getGraphLayoutVis();
             this.setVisualization(vis);
             vis.startLayout();
@@ -479,6 +490,11 @@ public class OVDisplay extends Display {
             jSearch = new JPanel();
         }
         return jSearch;
+    }
+    
+    private void resetJSearch(){
+        jSearch = new JPanel();
+        addJSearch();
     }
     
     private void addJSearch() {
