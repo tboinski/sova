@@ -192,12 +192,12 @@ public class OVDisplay extends Display {
                             break;
                     }
                     this.repaint();
-                    this.resetJSearch();
                 }
             }
         }catch(Exception exception){
             exception.getMessage();
         }
+        this.resetJSearch();
     }
 
     public OVVisualization getGraphLayoutVis() {
