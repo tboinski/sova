@@ -114,7 +114,6 @@ public class Options extends JFrame {
             chSubProperty = null, chEquivalentProperty = null,
             chFunctionalProperty = null, chInversFunctionalProperty = null,
             chSymmetricProperty = null, chTransitiveProperty = null;
-    private JCheckBox chShowIRI = null;
     private JPanel visValues = null;
     private boolean isOptionFrameShow = false;
 
@@ -148,10 +147,10 @@ public class Options extends JFrame {
 
     }
 
-    public JRadioButton getIDRadioButton() {
+    public JRadioButton getIDRadioButton(){
         return this.idRationButton;
     }
-
+    
     private void initVisValuesPanel() {
         visValues = new JPanel();
         visValues.setLayout(new BoxLayout(visValues, BoxLayout.Y_AXIS));
@@ -185,8 +184,7 @@ public class Options extends JFrame {
 
             public void actionPerformed(ActionEvent arg0) {
                 display.changeVisualizationLayout(OVDisplay.FORCE_DIRECTED_LAYOUT);
-                ((SovaVisualization) display.getSovaPanel()).resetSearchBox();
-
+                ((SovaVisualization)display.getSovaPanel()).resetSearchBox();
             }
         });
 
@@ -197,7 +195,7 @@ public class Options extends JFrame {
             public void actionPerformed(ActionEvent arg0) {
                 display.setSpanningTreeCheckBox(spanningTreeBox);
                 display.changeVisualizationLayout(OVDisplay.RADIAL_TREE_LAYOUT);
-                ((SovaVisualization) display.getSovaPanel()).resetSearchBox();
+                ((SovaVisualization)display.getSovaPanel()).resetSearchBox();
             }
         });
 
@@ -208,7 +206,7 @@ public class Options extends JFrame {
             public void actionPerformed(ActionEvent arg0) {
                 display.setSpanningTreeCheckBox(spanningTreeBox);
                 display.changeVisualizationLayout(OVDisplay.NOTE_LINK_TREE_LAYOUT);
-                ((SovaVisualization) display.getSovaPanel()).resetSearchBox();
+                ((SovaVisualization)display.getSovaPanel()).resetSearchBox();
             }
         });
 
@@ -477,14 +475,6 @@ public class Options extends JFrame {
         chRange.setSelected(true);
         checkboxPanel.add(chRange);
         visValues.add(checkboxPanel);
-
-        //show IRI
-        chShowIRI = new JCheckBox("Show full URI");
-        chShowIRI.setActionCommand(CHECKBOX_SHOW_IRI);
-        chShowIRI.addActionListener(checkboxListener);
-        chShowIRI.setSelected(false);
-        checkboxPanel.add(chShowIRI);
-        visValues.add(checkboxPanel);
     }
 
     private class CheckBoxListener implements ActionListener {
@@ -701,13 +691,7 @@ public class Options extends JFrame {
                     FilterOptions.setRange(true);
                 } else {
                     FilterOptions.setRange(false);
-                }
-            } else if (e.getActionCommand().equals(CHECKBOX_SHOW_IRI)) {
-                if (chShowIRI.isSelected()) {
-                    FilterOptions.setShowIRI(true);
-                } else {
-                    FilterOptions.setShowIRI(false);
-                }
+                }        
             }
             display.getVisualization().refreshFilter();
         }
