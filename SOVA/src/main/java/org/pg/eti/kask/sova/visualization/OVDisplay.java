@@ -77,6 +77,7 @@ import prefuse.visual.VisualItem;
 import prefuse.visual.sort.TreeDepthItemSorter;
 import org.pg.eti.kask.sova.nodes.ClassNode;
 import org.pg.eti.kask.sova.nodes.Node;
+import prefuse.util.ui.JValueSlider;
 /**
  * Display wizualizowanej ontologii. Pozwala na generowanie graficznej
  * reprezentacji ontologii na podstawie podanego obiektu ontologii.
@@ -89,6 +90,7 @@ public class OVDisplay extends Display {
     public static final int RADIAL_TREE_LAYOUT = 2;
     public static final int FRUCHTERMAN_REINGOLD_LAYOUT = 3;
     public static final int NOTE_LINK_TREE_LAYOUT = 4;
+    private static final int SIZE_SLIDER_VALUE = 100;
 
     public enum VisualizationEnums {
 
@@ -108,6 +110,16 @@ public class OVDisplay extends Display {
     private JPanel sovaPanel = null;
     private JSearchPanel search;
     private OWLtoGraphConverter converter = null;
+    private JValueSlider ActualSlider;
+    private double ActualSliderValue;
+    
+    public void setActualRadius(JValueSlider radius){
+        this.ActualSlider = radius;
+    }
+    
+    public void setActualSliderValue(double s){
+        this.ActualSliderValue = s;
+    }
     
     public JSearchPanel getSearchBox(){
         return this.search;
@@ -252,14 +264,15 @@ public class OVDisplay extends Display {
     }
 
     private void initNodeLinkTreeVis() {
-        visualizationNodeLinkTree = new NodeLinkTreeVis();
+        visualizationNodeLinkTree = new NodeLinkTreeVis(ActualSliderValue);
         visualizationNodeLinkTree.setSpanningTreeMode(spanningTreeBox);
         visualizationNodeLinkTree.addGraph(Constants.GRAPH, this.getGraph());
         visualizationNodeLinkTree.setVisualizationSettings(this);
+
     }
 
     private void initRadialGraphVis() {
-        visualizationRadialGraph = new RadialGraphVis();
+        visualizationRadialGraph = new RadialGraphVis(ActualSliderValue);
         visualizationRadialGraph.setSpanningTreeMode(spanningTreeBox);
         visualizationRadialGraph.addGraph(Constants.GRAPH, this.getGraph());
         visualizationRadialGraph.setVisualizationSettings(this);
@@ -420,6 +433,7 @@ public class OVDisplay extends Display {
      * @param visLayout
      */
     public void changeVisualizationLayout(int visLayout) {
+        ActualSlider.setValue(SIZE_SLIDER_VALUE);
         this.setGraphLayout(visLayout);
         this.removeAll();
         this.setVisualization(getGraphLayoutVis());

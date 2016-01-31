@@ -21,6 +21,9 @@
  */
 package org.pg.eti.kask.sova.visualization;
 
+import java.awt.Point;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.util.Iterator;
 
 import org.pg.eti.kask.sova.graph.Constants;
@@ -55,6 +58,23 @@ public class RadialGraphVis extends OVVisualization {
     private static final String tree = Constants.GRAPH;
     private static final String treeNodes = Constants.GRAPH_NODES;
     private static final String linear = "linear";
+    private RadialTreeLayout treeLayout;
+    private double Size;
+    
+    public RadialTreeLayout getRadialTreeLayout(){
+        return this.treeLayout;
+    }
+    
+    public void setRadius(double radius){
+        this.treeLayout.setAutoScale(false);
+        this.treeLayout.setRadiusIncrement(radius);
+        this.treeLayout.run();
+    } 
+    
+    public RadialGraphVis(double actualSize){
+        super();
+        this.Size = actualSize;
+    }
     
     @Override
     public void setVisualizationLayout(Display d) {
@@ -62,13 +82,12 @@ public class RadialGraphVis extends OVVisualization {
         addRepaintAction();
    
         // create the tree layout action
-        RadialTreeLayout treeLayout = new RadialTreeLayout(tree);
-        //treeLayout.setAngularBounds(-Math.PI/2, Math.PI);
+        treeLayout = new RadialTreeLayout(tree, (int) Size);
         this.putAction("treeLayout", treeLayout);
-
+        treeLayout.setAutoScale(true);
         CollapsedSubtreeLayout subLayout = new CollapsedSubtreeLayout(tree);
         this.putAction("subLayout", subLayout);
-
+        
         // create the filtering and layout
         ActionList filter = new ActionList();
         filter.add(new TreeRootAction(tree, this));

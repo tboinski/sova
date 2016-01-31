@@ -19,7 +19,6 @@
  * this program; If not, see <http://www.gnu.org/licenses/>.
  *
  */
-
 package org.pg.eti.kask.sova.visualization;
 
 import java.util.Iterator;
@@ -46,22 +45,37 @@ import prefuse.data.event.TupleSetListener;
 import prefuse.data.tuple.DefaultTupleSet;
 import prefuse.data.tuple.TupleSet;
 
-
 public class NodeLinkTreeVis extends OVVisualization {
-  private static final String tree = Constants.GRAPH;
+
+    private static final String tree = Constants.GRAPH;
     private static final String treeNodes = Constants.GRAPH_NODES;
     private static final String linear = "linear";
+    private NodeLinkTreeLayout treeLayout;
+    private double Size;
+    
+    public void setSize(double s){
+        treeLayout.setDepthSpacing(s);
+        treeLayout.setBreadthSpacing(s/6.0);
+        this.treeLayout.run();
+    }
+    
+    public NodeLinkTreeVis(double actualSize){
+        super();
+        this.Size = actualSize;
+    }
     
     @Override
     public void setVisualizationLayout(Display d) {
-  
+
         addRepaintAction();
-   
+
         // create the tree layout action
-        NodeLinkTreeLayout treeLayout = new NodeLinkTreeLayout(tree);
+        treeLayout = new NodeLinkTreeLayout(tree);
+        treeLayout.setDepthSpacing(Size);
+        treeLayout.setBreadthSpacing(Size/6.0);
         //treeLayout.setAngularBounds(-Math.PI/2, Math.PI);
         this.putAction("treeLayout", treeLayout);
-
+        
         CollapsedSubtreeLayout subLayout = new CollapsedSubtreeLayout(tree);
         this.putAction("subLayout", subLayout);
 
@@ -110,9 +124,9 @@ public class NodeLinkTreeVis extends OVVisualization {
                         }
                     }
                 }
-        );   
-        
-        addSearch(Constants.treeNodes, d);   
+        );
+
+        addSearch(Constants.treeNodes, d);
     }
 
     /**

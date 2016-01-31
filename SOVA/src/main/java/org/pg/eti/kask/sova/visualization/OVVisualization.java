@@ -194,12 +194,6 @@ abstract public class OVVisualization extends Visualization {
         recolor.add(nodeColor);
         recolor.add(textColor);
         putAction("recolor", recolor);
-
-        // repaint
-        ActionList repaint = new ActionList();
-        repaint.add(recolor);
-        repaint.add(new RepaintAction());
-        putAction("repaint", repaint);
         
         // animate paint change
         ActionList animatePaint = new ActionList(400);

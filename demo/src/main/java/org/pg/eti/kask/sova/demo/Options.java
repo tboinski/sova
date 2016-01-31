@@ -55,6 +55,8 @@ import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.pg.eti.kask.sova.graph.Constants;
 import org.pg.eti.kask.sova.nodes.ClassNode;
+import org.pg.eti.kask.sova.visualization.NodeLinkTreeVis;
+import org.pg.eti.kask.sova.visualization.RadialGraphVis;
 import prefuse.util.ui.JValueSlider;
 import prefuse.visual.VisualItem;
 
@@ -91,10 +93,8 @@ public class Options extends JFrame {
     private static final String CHECKBOX_INSTANCEPROPERTY_COMMAND = "checkbox_instanceproperty";
     private static final String CHECKBOX_DOMAIN_COMMAND = "checkbox_domain";
     private static final String CHECKBOX_RANGE_COMMAND = "checkbox_drange";
-    private static final String CHECKBOX_SHOW_IRI = "checkbox_showiri";
-    private static final String CHECKBOX_LABELS_COMMAND = "checkbox_labels";
     private static final int DEFAULT_WIDTH = 300;
-    private static final int DEFAULT_HEIGHT = 600;
+    private static final int DEFAULT_HEIGHT = 630;
     private JButton exitButt;
     private OVDisplay display;
     public JComboBox langBox;
@@ -116,7 +116,7 @@ public class Options extends JFrame {
             chSymmetricProperty = null, chTransitiveProperty = null;
     private JPanel visValues = null;
     private boolean isOptionFrameShow = false;
-
+    public JValueSlider radius;
     public synchronized boolean isOptionFrameShow() {
         return isOptionFrameShow;
     }
@@ -164,19 +164,44 @@ public class Options extends JFrame {
                 display.getVisualization().refreshFilter();
             }
         });
-        slider.setBackground(Color.WHITE);
-        Box cf = new Box(BoxLayout.Y_AXIS);
-        cf.setSize(new Dimension(300, 70));
+        slider.setBackground(visValues.getBackground());
+        slider.setPreferredSize(new Dimension(430, 20));
+        slider.setMaximumSize(new Dimension(430, 20));
+        JPanel cf = new JPanel(new GridLayout(1, 1));
         cf.add(slider);
-        cf.setBorder(BorderFactory.createTitledBorder("Connectivity Filter"));
-        JPanel panelDist = new JPanel();
-        panelDist.add(cf);
-
-        visValues.add(panelDist);
-
+        cf.setBorder(BorderFactory.createTitledBorder(BorderFactory
+                .createEtchedBorder(),"Connectivity Filter"));
+        visValues.add(cf);
+ 
+        radius = new JValueSlider("Size", 1, 1000, 100); 
+        display.setActualRadius(radius);
+        radius.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                display.setActualSliderValue(radius.getValue().intValue());
+                if(display.getVisualization() instanceof RadialGraphVis){
+                    ((RadialGraphVis)display.getVisualization()).setRadius(radius.getValue().intValue());
+                    display.repaint();
+                }
+                
+                if(display.getVisualization() instanceof NodeLinkTreeVis){
+                    ((NodeLinkTreeVis)display.getVisualization()).setSize(radius.getValue().intValue());
+                    display.repaint();
+                }
+            }
+        });
+        radius.setBackground(visValues.getBackground());
+        radius.setPreferredSize(new Dimension(400, 20));
+        radius.setMaximumSize(new Dimension(400, 20));
+        JPanel rf = new JPanel(new GridLayout(1, 1));
+        rf.add(radius);
+        rf.setBorder(BorderFactory.createTitledBorder(BorderFactory
+                .createEtchedBorder(),"Tree Visualization"));
+        visValues.add(rf);
+        
+        
         JPanel buttonPanel = new JPanel(new GridLayout(4, 1));
         buttonPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory
-                .createEtchedBorder(), "Visualization types"));
+                .createEtchedBorder(), "Visualization Types"));
         // buttonPanel.setSize(new Dimension(300, 80));
         JRadioButton forceDirectedRadial = new JRadioButton(
                 "ForceDirectedLayout", true);
@@ -227,7 +252,7 @@ public class Options extends JFrame {
         // Label ID
         JPanel buttonVisual = new JPanel(new GridLayout(2, 2));
         buttonVisual.setBorder(BorderFactory.createTitledBorder(BorderFactory
-                .createEtchedBorder(), "Visualization subject"));
+                .createEtchedBorder(), "Visualization Subject"));
 
         labelRationButton = new JRadioButton("Label", false);
         labelRationButton.addActionListener(new ActionListener() {
