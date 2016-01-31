@@ -44,9 +44,6 @@ import javax.swing.JPanel;
 
 import org.pg.eti.kask.sova.graph.Constants;
 import org.pg.eti.kask.sova.graph.OWLtoGraphConverter;
-import static org.pg.eti.kask.sova.graph.OWLtoGraphConverter.COLUMN_IRI;
-import static org.pg.eti.kask.sova.graph.OWLtoGraphConverter.COLUMN_NAME_NODE;
-import static org.pg.eti.kask.sova.graph.OWLtoGraphConverter.COLUMN_NODE;
 import org.pg.eti.kask.sova.graph.OWLtoHierarchyTreeConverter;
 import org.pg.eti.kask.sova.visualization.annotation.AnnotationComponent;
 import org.pg.eti.kask.sova.visualization.annotation.AnnotationListener;
@@ -80,10 +77,6 @@ import prefuse.visual.VisualItem;
 import prefuse.visual.sort.TreeDepthItemSorter;
 import org.pg.eti.kask.sova.nodes.ClassNode;
 import org.pg.eti.kask.sova.nodes.Node;
-import org.pg.eti.kask.sova.nodes.ObjectPropertyNode;
-import org.pg.eti.kask.sova.nodes.DataPropertyNode;
-import org.semanticweb.owlapi.model.OWLObjectProperty;
-
 /**
  * Display wizualizowanej ontologii. Pozwala na generowanie graficznej
  * reprezentacji ontologii na podstawie podanego obiektu ontologii.
