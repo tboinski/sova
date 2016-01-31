@@ -19,11 +19,13 @@
  * this program; If not, see <http://www.gnu.org/licenses/>.
  *
  */
+
 package org.pg.eti.kask.sova.visualization;
 
 import java.util.Iterator;
 
 import org.pg.eti.kask.sova.graph.Constants;
+import static org.pg.eti.kask.sova.visualization.OVVisualization.FILTERS;
 import prefuse.Display;
 
 import prefuse.Visualization;
@@ -35,24 +37,18 @@ import prefuse.action.animate.PolarLocationAnimator;
 import prefuse.action.animate.QualityControlAnimator;
 import prefuse.action.animate.VisibilityAnimator;
 import prefuse.action.layout.CollapsedSubtreeLayout;
-import prefuse.action.layout.graph.RadialTreeLayout;
+import prefuse.action.layout.graph.NodeLinkTreeLayout;
 import prefuse.activity.SlowInSlowOutPacer;
 import prefuse.data.Graph;
 import prefuse.data.Node;
 import prefuse.data.Tuple;
 import prefuse.data.event.TupleSetListener;
-
 import prefuse.data.tuple.DefaultTupleSet;
 import prefuse.data.tuple.TupleSet;
 
-/**
- * klasa wizualizująca graf w oparciu o algorytm RadialGraph
- *
- * @author Piotr Kunowski
- */
-public class RadialGraphVis extends OVVisualization {
 
-    private static final String tree = Constants.GRAPH;
+public class NodeLinkTreeVis extends OVVisualization {
+  private static final String tree = Constants.GRAPH;
     private static final String treeNodes = Constants.GRAPH_NODES;
     private static final String linear = "linear";
     
@@ -62,7 +58,7 @@ public class RadialGraphVis extends OVVisualization {
         addRepaintAction();
    
         // create the tree layout action
-        RadialTreeLayout treeLayout = new RadialTreeLayout(tree);
+        NodeLinkTreeLayout treeLayout = new NodeLinkTreeLayout(tree);
         //treeLayout.setAngularBounds(-Math.PI/2, Math.PI);
         this.putAction("treeLayout", treeLayout);
 
@@ -174,7 +170,7 @@ public class RadialGraphVis extends OVVisualization {
                 return;
             }
 
-            if (RadialGraphVis.super.getSpanningTreeMode().isSelected()) {
+            if (NodeLinkTreeVis.super.getSpanningTreeMode().isSelected()) {
                 g.getSpanningTree(f);
             }
         }

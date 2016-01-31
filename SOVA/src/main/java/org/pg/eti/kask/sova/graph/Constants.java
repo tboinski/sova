@@ -33,4 +33,6 @@ public final class Constants {
     public static final String GRAPH_EDGES = "edge";
     public static final String TREE_NODES = GRAPH_NODES;
     public static final String TREE_EDGES = GRAPH_EDGES;
+    public static final String treeNodes = "tree.nodes";
+    public static final String graphNodes = "graph.nodes";   
 }

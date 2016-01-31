@@ -50,7 +50,7 @@ public class main_hierarchy {
             VisualizationProperties.instanceOf().loadProperties(Constants.PROPERTIES);
             manager = OWLManager.createOWLOntologyManager();
 
-            IRI physicalIRI = IRI.create(Constants.ONTO_TEST_DIRECTORY);
+            IRI physicalIRI = IRI.create(OntologyFileGetter.GetOntologyFilePath(Constants.ONTO_TEST_FILE));
             try {// wczytanie ontologi z pliku 
                 ontology = manager.loadOntologyFromOntologyDocument(physicalIRI);
 

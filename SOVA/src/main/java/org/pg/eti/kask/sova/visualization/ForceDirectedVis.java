@@ -23,6 +23,8 @@
 package org.pg.eti.kask.sova.visualization;
 
 import javax.swing.JPanel;
+import org.pg.eti.kask.sova.graph.Constants;
+import prefuse.Display;
 import prefuse.action.ActionList;
 import prefuse.action.RepaintAction;
 import prefuse.action.layout.graph.ForceDirectedLayout;
@@ -41,7 +43,7 @@ public class ForceDirectedVis extends OVVisualization {
      * ustawienie vizualizacji
      */
     @Override
-    public void setVisualizationLayout() {
+    public void setVisualizationLayout(Display d) {
 
         ForceDirectedLayout graphLayout =  new ForceDirectedLayout(GRAPH);
         ActionList layout = new ActionList(Activity.INFINITY);
@@ -51,7 +53,7 @@ public class ForceDirectedVis extends OVVisualization {
         layout.add(new RepaintAction());
         this.putAction(LAYOUT_ACTION, layout);
         addRepaintAction();
-        addSearch();
+        addSearch(Constants.graphNodes, d);
 
     }
     /**
@@ -65,10 +67,11 @@ public class ForceDirectedVis extends OVVisualization {
     }
     /**
      * ustawienie podstawowego layoutu i domyślnych filtrów.
+     * @param d
      */
     @Override
-    public void setVisualizationSettings() {
-        super.setVisualizationSettings();
+    public void setVisualizationSettings(Display d) {
+        super.setVisualizationSettings(d);
         this.addFilters();
 
     }

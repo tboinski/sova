@@ -25,6 +25,7 @@ package org.pg.eti.kask.sova.visualization;
 import java.awt.geom.Point2D;
 
 import org.pg.eti.kask.sova.graph.Constants;
+import prefuse.Display;
 
 
 import prefuse.Visualization;
@@ -85,7 +86,7 @@ public class OVNodeLinkTreeLayout extends OVVisualization{
     	getFishTreeFilter().setDistance(distance);
     }
 	@Override
-	public void setVisualizationLayout() {
+	public void setVisualizationLayout(Display d) {
 
         m_nodeRenderer =  (LabelRenderer) new NodeRenderer(Constants.TREE_NODES);
         m_nodeRenderer.setHorizontalAlignment(prefuse.Constants.LEFT);

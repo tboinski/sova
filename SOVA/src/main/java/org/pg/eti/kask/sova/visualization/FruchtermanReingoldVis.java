@@ -23,6 +23,7 @@
 package org.pg.eti.kask.sova.visualization;
 
 
+import prefuse.Display;
 import prefuse.action.ActionList;
 import prefuse.action.RepaintAction;
 import prefuse.action.layout.graph.FruchtermanReingoldLayout;
@@ -33,9 +34,10 @@ public class FruchtermanReingoldVis extends OVVisualization  {
 
     /**
      * ustawienie vizualizacji
+     * @param d
      */
     @Override
-    public void setVisualizationLayout() {
+    public void setVisualizationLayout(Display d) {
 
     	FruchtermanReingoldLayout graphLayout =  new FruchtermanReingoldLayout(GRAPH);
         ActionList layout = new ActionList(Activity.INFINITY);
@@ -51,8 +53,8 @@ public class FruchtermanReingoldVis extends OVVisualization  {
      * ustawienie podstawowego layoutu i domyślnych filtrów.
      */
     @Override
-    public void setVisualizationSettings() {
-        super.setVisualizationSettings();
+    public void setVisualizationSettings(Display d) {
+        super.setVisualizationSettings(d);
         this.addFilters();
 
     }
