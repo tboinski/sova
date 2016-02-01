@@ -148,12 +148,10 @@ public class OVDisplay extends Display {
 
                 if (!(o instanceof ThingNode)) {
                     castedObject.setLabel(iri);
-                    this.repaint();
                 }
 
                 if (e == VisualizationEnums.IRI && !(o instanceof ThingNode)) {
                     castedObject.setLabel(element.toString());
-                    this.repaint();
                     continue;
                 }
 
@@ -215,13 +213,12 @@ public class OVDisplay extends Display {
                         default:
                             break;
                     }
-                    this.repaint();
                 }
             } catch (Exception exception) {
                 exception.getMessage();
             }
         }
-
+        this.repaint();
         this.resetJSearch();
     }
 
