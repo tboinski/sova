@@ -76,8 +76,12 @@ import prefuse.visual.VisualGraph;
 import prefuse.visual.VisualItem;
 import prefuse.visual.sort.TreeDepthItemSorter;
 import org.pg.eti.kask.sova.nodes.ClassNode;
+import org.pg.eti.kask.sova.nodes.DataPropertyNode;
 import org.pg.eti.kask.sova.nodes.Node;
+import org.pg.eti.kask.sova.nodes.ObjectPropertyNode;
+import org.pg.eti.kask.sova.nodes.ThingNode;
 import prefuse.util.ui.JValueSlider;
+
 /**
  * Display wizualizowanej ontologii. Pozwala na generowanie graficznej
  * reprezentacji ontologii na podstawie podanego obiektu ontologii.
@@ -94,9 +98,10 @@ public class OVDisplay extends Display {
 
     public enum VisualizationEnums {
 
-        LABELS, ID, IRI
+        LABELS, ID, IRI, RESET
     };
 
+    private VisualizationEnums CurrentVisualizationEnum;
     private int graphLayout = FORCE_DIRECTED_LAYOUT;
     private Graph graph = null;
     private OVVisualization visualizationForceDirected = null;
@@ -112,47 +117,59 @@ public class OVDisplay extends Display {
     private OWLtoGraphConverter converter = null;
     private JValueSlider ActualSlider;
     private double ActualSliderValue;
-    
-    public void setActualRadius(JValueSlider radius){
+
+    public void setActualRadius(JValueSlider radius) {
         this.ActualSlider = radius;
     }
-    
-    public void setActualSliderValue(double s){
+
+    public void setActualSliderValue(double s) {
         this.ActualSliderValue = s;
     }
-    
-    public JSearchPanel getSearchBox(){
+
+    public JSearchPanel getSearchBox() {
         return this.search;
     }
-    
-    // WyÃ…â€ºwietl w wÃ„â„¢zÃ…â€šach wybrane przez uÃ…Â¼ytkownika atrybuty
+
     // Label lub ID klasy
     public void changeGraphVisualization(VisualizationEnums e, JComboBox comboBox) {
         // Iteracja po wszytkich elementach ontologii
-        try{
-            OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-            Iterator items = m_vis.items();
-            while (items.hasNext()) {
+        CurrentVisualizationEnum = e;
+
+        OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+        Iterator items = m_vis.items();
+        while (items.hasNext()) {
+            try {
                 VisualItem item = (VisualItem) items.next();
                 Object o = ((VisualItem) item).get(Constants.GRAPH_NODES);
-                if (o instanceof ClassNode) {//|| o instanceof ObjectPropertyNode || o instanceof DataPropertyNode) {
+                Object element = ((VisualItem) item).get(OWLtoGraphConverter.COLUMN_IRI);
+                String iri = ((IRI) element).getFragment();
+                
+                Node castedObject = Node.class.cast(o);               
+                if (e == VisualizationEnums.IRI && !(o instanceof ThingNode)) {
+                    Node.class.cast(o).setLabel(element.toString());
+                    continue;
+                    
+                }else if (e == VisualizationEnums.RESET && !(o instanceof ThingNode)) {
+                    Node.class.cast(o).setLabel(iri);
+                    continue;
+                }
 
-                    Object element = ((VisualItem) item).get(OWLtoGraphConverter.COLUMN_IRI);
-                    String iri = ((IRI)element).getFragment();
+                if (o instanceof ClassNode || o instanceof ObjectPropertyNode || o instanceof DataPropertyNode) {
+
                     OWLClass currentClass = manager.getOWLDataFactory().getOWLClass(IRI.create(((IRI) element).toURI()));
                     Set<OWLAnnotation> set = currentClass.getAnnotations(this.ontology);
 
-                    String stringPropoperty = "";
+                    String stringPropoperty;
                     String labelValue = "";
                     String langValue = "";
                     String labelValueWithoutLang = "";
                     Pattern TAG_REGEX = Pattern.compile("\"(.+?)\"");
-                    
+
                     for (OWLAnnotation elem : set) {
                         OWLAnnotationProperty prop = elem.getProperty();
                         stringPropoperty = prop.getIRI().getFragment();
                         if (stringPropoperty.equals("label")) {
-                            
+
                             stringPropoperty = elem.getValue().toString();
                             if (stringPropoperty.contains("@")) {
                                 labelValue = stringPropoperty.substring(0, stringPropoperty.length() - 3);
@@ -173,11 +190,10 @@ public class OVDisplay extends Display {
                         langValue = "";
                         labelValue = "";
                     }
-                                        
-                    int index = converter.classes.get(iri);
-                    prefuse.data.Node node = graph.getNode(index);                        
-                    Node castedObject = Node.class.cast(o);
                     
+                    int index = converter.classes.get(iri);
+                    prefuse.data.Node node = graph.getNode(index);
+                
                     switch (e) {
                         case LABELS:
                             if (!labelValue.isEmpty()) {
@@ -193,18 +209,16 @@ public class OVDisplay extends Display {
                             castedObject.setLabel(currentClass.getIRI().getFragment());
                             break;
 
-                        case IRI:
-                            castedObject.setLabel(currentClass.getIRI().toString());
-                            break;
                         default:
                             break;
                     }
                     this.repaint();
                 }
+            } catch (Exception exception) {
+                exception.getMessage();
             }
-        }catch(Exception exception){
-            exception.getMessage();
         }
+
         this.resetJSearch();
     }
 
@@ -320,21 +334,20 @@ public class OVDisplay extends Display {
         this.ontology = ontology;
     }
 
-        public JPanel getSovaPanel(){
+    public JPanel getSovaPanel() {
         return this.sovaPanel;
     }
-    
-    public void setSovaPanel(JPanel panel){
+
+    public void setSovaPanel(JPanel panel) {
         this.sovaPanel = panel;
     }
-    
+
     public void setSpanningTreeCheckBox(JCheckBox box) {
         this.spanningTreeBox = box;
     }
 
-    
-    private void Init(){
-           //wÃ…â€šÃ„â€¦czenie peÃ…â€šnego odÃ…â€ºwieÃ…Â¼ania
+    private void Init() {
+        //wÃ…â€šÃ„â€¦czenie peÃ…â€šnego odÃ…â€ºwieÃ…Â¼ania
         this.setDamageRedraw(false);
         this.setSize(1500, 1500);
         this.setHighQuality(true);
@@ -351,15 +364,15 @@ public class OVDisplay extends Display {
         addControlListener(new FocusControl(1, RadialGraphVis.FILTERS));
         addControlListener(new HoverActionControl(OVVisualization.REPAINT_ACTION));
     }
-    
-    
+
     public OVDisplay() {
         super();
         Init();
     }
 
     /**
-     * Dodaje komponent nasÃ…â€šuchujÃ„â€¦cy na zmiany zaznaczonego wierzchoÃ…â€ška
+     * Dodaje komponent nasÃ…â€šuchujÃ„â€¦cy na zmiany zaznaczonego
+     * wierzchoÃ…â€ška
      *
      * @param component
      * @param manager
@@ -369,7 +382,8 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * Dodaje komponent nasÃ…â€šuchujÃ„â€¦cy na zmiany wskazanego wierzchoÃ…â€ška
+     * Dodaje komponent nasÃ…â€šuchujÃ„â€¦cy na zmiany wskazanego
+     * wierzchoÃ…â€ška
      *
      * @param component
      */
@@ -501,23 +515,32 @@ public class OVDisplay extends Display {
         }
         return jSearch;
     }
-    
-    private void resetJSearch(){
+
+    private void resetJSearch() {
         jSearch = new JPanel();
         addJSearch();
     }
-    
+
     private void addJSearch() {
-           
+
+        String searchSubject = OWLtoGraphConverter.COLUMN_NAME_NODE;
+        if (CurrentVisualizationEnum != null) {
+            switch (CurrentVisualizationEnum) {
+                case IRI:
+                    searchSubject = OWLtoGraphConverter.COLUMN_IRI;
+                    break;
+            }
+        }
+
         SearchQueryBinding sq = new SearchQueryBinding(
-                (Table) getVisualization().getGroup("graph.nodes"), "node.name", 
+                (Table) getVisualization().getGroup("graph.nodes"), searchSubject,
                 (SearchTupleSet) getVisualization().getGroup(Visualization.SEARCH_ITEMS));
-        
+
         search = sq.createSearchPanel();
         search.setShowResultCount(true);
         search.setBorder(BorderFactory.createEmptyBorder(5, 5, 4, 0));
         search.setFont(FontLib.getFont("Tahoma", Font.PLAIN, 11));
-        jSearch = (JPanel) search; 
+        jSearch = (JPanel) search;
     }
 
     public void saveFullImage(FileOutputStream os, double scale) {
