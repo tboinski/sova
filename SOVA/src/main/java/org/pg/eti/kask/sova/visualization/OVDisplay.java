@@ -94,7 +94,7 @@ public class OVDisplay extends Display {
 
     public enum VisualizationEnums {
 
-        LABELS, ID
+        LABELS, ID, IRI
     };
 
     private int graphLayout = FORCE_DIRECTED_LAYOUT;
@@ -193,6 +193,9 @@ public class OVDisplay extends Display {
                             castedObject.setLabel(currentClass.getIRI().getFragment());
                             break;
 
+                        case IRI:
+                            castedObject.setLabel(currentClass.getIRI().toString());
+                            break;
                         default:
                             break;
                     }

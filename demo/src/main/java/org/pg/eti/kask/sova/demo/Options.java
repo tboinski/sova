@@ -94,13 +94,14 @@ public class Options extends JFrame {
     private static final String CHECKBOX_DOMAIN_COMMAND = "checkbox_domain";
     private static final String CHECKBOX_RANGE_COMMAND = "checkbox_drange";
     private static final int DEFAULT_WIDTH = 300;
-    private static final int DEFAULT_HEIGHT = 630;
+    private static final int DEFAULT_HEIGHT = 660;
     private JButton exitButt;
     private OVDisplay display;
     public JComboBox langBox;
 
     private JRadioButton labelRationButton;
     private JRadioButton idRationButton;
+    private JRadioButton IRIRationButton;
     JCheckBox spanningTreeBox;
 
     private JButton options = null;
@@ -250,7 +251,7 @@ public class Options extends JFrame {
 
         //****************************************************************
         // Label ID
-        JPanel buttonVisual = new JPanel(new GridLayout(2, 2));
+        JPanel buttonVisual = new JPanel(new GridLayout(3, 3));
         buttonVisual.setBorder(BorderFactory.createTitledBorder(BorderFactory
                 .createEtchedBorder(), "Visualization Subject"));
 
@@ -258,6 +259,7 @@ public class Options extends JFrame {
         labelRationButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent arg0) {
+                display.changeGraphVisualization(OVDisplay.VisualizationEnums.ID, null);
                 display.changeGraphVisualization(OVDisplay.VisualizationEnums.LABELS, langBox);
             }
         });
@@ -268,6 +270,15 @@ public class Options extends JFrame {
                 display.changeGraphVisualization(OVDisplay.VisualizationEnums.ID, null);
             }
         });
+        IRIRationButton = new JRadioButton("IRI", true);
+        IRIRationButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent arg0) {
+                display.changeGraphVisualization(OVDisplay.VisualizationEnums.IRI, null);
+            }
+        });
+        
+        
         ButtonGroup subjectGroup = new ButtonGroup();
 
         JLabel labelLang = new JLabel("Available languages");
@@ -317,12 +328,16 @@ public class Options extends JFrame {
 
         subjectGroup.add(labelRationButton);
         subjectGroup.add(idRationButton);
+        subjectGroup.add(IRIRationButton);
 
         // Dodaj elementy do głównego konenera
         buttonVisual.add(labelRationButton, BorderLayout.WEST);
         buttonVisual.add(idRationButton, BorderLayout.WEST);
+        buttonVisual.add(IRIRationButton, BorderLayout.WEST);
+        buttonVisual.add(new JLabel());
         buttonVisual.add(labelLang, BorderLayout.WEST);
-        buttonVisual.add(langBox);
+        buttonVisual.add(langBox, BorderLayout.LINE_END);
+        
 
         visValues.add(buttonVisual);
 
