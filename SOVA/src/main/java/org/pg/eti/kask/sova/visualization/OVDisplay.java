@@ -143,14 +143,17 @@ public class OVDisplay extends Display {
                 Object o = ((VisualItem) item).get(Constants.GRAPH_NODES);
                 Object element = ((VisualItem) item).get(OWLtoGraphConverter.COLUMN_IRI);
                 String iri = ((IRI) element).getFragment();
-                
-                Node castedObject = Node.class.cast(o);               
+
+                Node castedObject = Node.class.cast(o);
+
+                if (!(o instanceof ThingNode)) {
+                    castedObject.setLabel(iri);
+                    this.repaint();
+                }
+
                 if (e == VisualizationEnums.IRI && !(o instanceof ThingNode)) {
-                    Node.class.cast(o).setLabel(element.toString());
-                    continue;
-                    
-                }else if (e == VisualizationEnums.RESET && !(o instanceof ThingNode)) {
-                    Node.class.cast(o).setLabel(iri);
+                    castedObject.setLabel(element.toString());
+                    this.repaint();
                     continue;
                 }
 
@@ -190,10 +193,10 @@ public class OVDisplay extends Display {
                         langValue = "";
                         labelValue = "";
                     }
-                    
+
                     int index = converter.classes.get(iri);
                     prefuse.data.Node node = graph.getNode(index);
-                
+
                     switch (e) {
                         case LABELS:
                             if (!labelValue.isEmpty()) {

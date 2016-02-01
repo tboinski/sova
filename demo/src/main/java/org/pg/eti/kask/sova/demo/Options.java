@@ -259,7 +259,6 @@ public class Options extends JFrame {
         labelRationButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent arg0) {
-                display.changeGraphVisualization(OVDisplay.VisualizationEnums.RESET, null);
                 display.changeGraphVisualization(OVDisplay.VisualizationEnums.LABELS, langBox);
             }
         });
