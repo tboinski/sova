@@ -1,10 +1,10 @@
 /*
  *
- * Copyright (c) 2010 GdaÃ…â€žsk University of Technology
+ * Copyright (c) 2010 GdaÃƒâ€¦Ã¢â‚¬Å¾sk University of Technology
  * Copyright (c) 2010 Kunowski Piotr
  * Copyright (c) 2010 Jaworska Anna
- * Copyright (c) 2010 Kleczkowski RadosÃ…â€šaw
- * Copyright (c) 2010 OrÃ…â€šowski Piotr
+ * Copyright (c) 2010 Kleczkowski RadosÃƒâ€¦Ã¢â‚¬Å¡aw
+ * Copyright (c) 2010 OrÃƒâ€¦Ã¢â‚¬Å¡owski Piotr
  *
  * This file is part of SOVA.  SOVA is free software: you can
  * redistribute it and/or modify it under the terms of the GNU Lesser General Public
@@ -285,7 +285,6 @@ public class OVDisplay extends Display {
         visualizationNodeLinkTree.setSpanningTreeMode(spanningTreeBox);
         visualizationNodeLinkTree.addGraph(Constants.GRAPH, this.getGraph());
         visualizationNodeLinkTree.setVisualizationSettings(this);
-
     }
 
     private void initRadialGraphVis() {
@@ -296,7 +295,7 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * Ustawienie trybu wyÃ…â€ºwietlania
+     * Ustawienie trybu wyÃƒâ€¦Ã¢â‚¬Âºwietlania
      *
      * @param graphLayout
      */
@@ -347,7 +346,7 @@ public class OVDisplay extends Display {
     }
 
     private void Init() {
-        //wÃ…â€šÃ„â€¦czenie peÃ…â€šnego odÃ…â€ºwieÃ…Â¼ania
+        //wÃƒâ€¦Ã¢â‚¬Å¡Ãƒâ€žÃ¢â‚¬Â¦czenie peÃƒâ€¦Ã¢â‚¬Å¡nego odÃƒâ€¦Ã¢â‚¬ÂºwieÃƒâ€¦Ã‚Â¼ania
         this.setDamageRedraw(false);
         this.setSize(1500, 1500);
         this.setHighQuality(true);
@@ -371,8 +370,8 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * Dodaje komponent nasÃ…â€šuchujÃ„â€¦cy na zmiany zaznaczonego
-     * wierzchoÃ…â€ška
+     * Dodaje komponent nasÃƒâ€¦Ã¢â‚¬Å¡uchujÃƒâ€žÃ¢â‚¬Â¦cy na zmiany zaznaczonego
+     * wierzchoÃƒâ€¦Ã¢â‚¬Å¡ka
      *
      * @param component
      * @param manager
@@ -382,8 +381,8 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * Dodaje komponent nasÃ…â€šuchujÃ„â€¦cy na zmiany wskazanego
-     * wierzchoÃ…â€ška
+     * Dodaje komponent nasÃƒâ€¦Ã¢â‚¬Å¡uchujÃƒâ€žÃ¢â‚¬Â¦cy na zmiany wskazanego
+     * wierzchoÃƒâ€¦Ã¢â‚¬Å¡ka
      *
      * @param component
      */
@@ -392,7 +391,7 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * metoda wizualizuje zadanÃ„â€¦ ontologiÃ„â„¢
+     * metoda wizualizuje zadanÃƒâ€žÃ¢â‚¬Â¦ ontologiÃƒâ€žÃ¢â€žÂ¢
      *
      * @param ont ontologia zapisana w OWLAPI
      */
@@ -402,7 +401,7 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * metoda wizualizuje zadanÃ„â€¦ ontologiÃ„â„¢
+     * metoda wizualizuje zadanÃƒâ€žÃ¢â‚¬Â¦ ontologiÃƒâ€žÃ¢â€žÂ¢
      */
     public void generateGraphFromOWl() {
         try {
@@ -489,7 +488,7 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * WyÃ…â€ºwietla caÃ…â€še drzewo wywnioskowanej hierarchii
+     * WyÃƒâ€¦Ã¢â‚¬Âºwietla caÃƒâ€¦Ã¢â‚¬Å¡e drzewo wywnioskowanej hierarchii
      */
     public void showFullTree() {
         if (visualizationTree != null) {

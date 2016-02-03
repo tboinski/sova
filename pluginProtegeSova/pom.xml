@@ -97,8 +97,6 @@
             <groupId>owlapi-bin</groupId>
             <artifactId>owlapi-bin</artifactId>
             <version>1</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/owlapi-bin.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.pg.eti.kask.sova</groupId>
