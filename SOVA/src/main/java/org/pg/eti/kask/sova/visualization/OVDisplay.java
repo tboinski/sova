@@ -1,10 +1,10 @@
 /*
  *
- * Copyright (c) 2010 GdaÃƒâ€¦Ã¢â‚¬Å¾sk University of Technology
+ * Copyright (c) 2010 Gdańsk University of Technology
  * Copyright (c) 2010 Kunowski Piotr
  * Copyright (c) 2010 Jaworska Anna
- * Copyright (c) 2010 Kleczkowski RadosÃƒâ€¦Ã¢â‚¬Å¡aw
- * Copyright (c) 2010 OrÃƒâ€¦Ã¢â‚¬Å¡owski Piotr
+ * Copyright (c) 2010 Kleczkowski Radosław
+ * Copyright (c) 2010 Orłowski Piotr
  *
  * This file is part of SOVA.  SOVA is free software: you can
  * redistribute it and/or modify it under the terms of the GNU Lesser General Public
@@ -295,7 +295,7 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * Ustawienie trybu wyÃƒâ€¦Ã¢â‚¬Âºwietlania
+     * Ustawienie trybu wyświetlania
      *
      * @param graphLayout
      */
@@ -346,7 +346,6 @@ public class OVDisplay extends Display {
     }
 
     private void Init() {
-        //wÃƒâ€¦Ã¢â‚¬Å¡Ãƒâ€žÃ¢â‚¬Â¦czenie peÃƒâ€¦Ã¢â‚¬Å¡nego odÃƒâ€¦Ã¢â‚¬ÂºwieÃƒâ€¦Ã‚Â¼ania
         this.setDamageRedraw(false);
         this.setSize(1500, 1500);
         this.setHighQuality(true);
@@ -370,8 +369,8 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * Dodaje komponent nasÃƒâ€¦Ã¢â‚¬Å¡uchujÃƒâ€žÃ¢â‚¬Â¦cy na zmiany zaznaczonego
-     * wierzchoÃƒâ€¦Ã¢â‚¬Å¡ka
+     * Dodaje komponent nasłuchujący na zmiany zaznaczonego
+     * wierzchołka
      *
      * @param component
      * @param manager
@@ -381,8 +380,8 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * Dodaje komponent nasÃƒâ€¦Ã¢â‚¬Å¡uchujÃƒâ€žÃ¢â‚¬Â¦cy na zmiany wskazanego
-     * wierzchoÃƒâ€¦Ã¢â‚¬Å¡ka
+     * Dodaje komponent nasłuchujący na zmiany wskazanego
+     * wierzchołka
      *
      * @param component
      */
@@ -391,7 +390,7 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * metoda wizualizuje zadanÃƒâ€žÃ¢â‚¬Â¦ ontologiÃƒâ€žÃ¢â€žÂ¢
+     * metoda wizualizuje zadaną ontologię
      *
      * @param ont ontologia zapisana w OWLAPI
      */
@@ -401,7 +400,7 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * metoda wizualizuje zadanÃƒâ€žÃ¢â‚¬Â¦ ontologiÃƒâ€žÃ¢â€žÂ¢
+     * metoda wizualizuje zadaną ontologię
      */
     public void generateGraphFromOWl() {
         try {
@@ -488,7 +487,7 @@ public class OVDisplay extends Display {
     }
 
     /**
-     * WyÃƒâ€¦Ã¢â‚¬Âºwietla caÃƒâ€¦Ã¢â‚¬Å¡e drzewo wywnioskowanej hierarchii
+     * Wyświetla całe drzewo wywnioskowanej hierarchii
      */
     public void showFullTree() {
         if (visualizationTree != null) {
