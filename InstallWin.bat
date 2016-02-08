@@ -8,5 +8,5 @@ if not exist %repo% (
 	call mvn install:install-file -Dfile=owlapi-bin.jar -DgroupId=owlapi-bin -DartifactId=owlapi-bin -Dversion=1 -Dpackaging=jar
 	cd ../
 )
-call mvn install
+call mvn clean install
 pause
