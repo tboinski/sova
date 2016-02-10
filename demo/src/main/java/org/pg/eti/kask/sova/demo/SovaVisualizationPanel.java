@@ -33,7 +33,6 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -43,13 +42,11 @@ import java.io.IOException;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.pg.eti.kask.sova.visualization.OVDisplay;
 import org.semanticweb.owlapi.model.OWLOntology;
-import prefuse.util.FontLib;
 
 public class SovaVisualizationPanel extends JPanel {
 

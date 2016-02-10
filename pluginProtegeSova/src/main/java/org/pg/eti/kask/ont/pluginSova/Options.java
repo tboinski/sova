@@ -22,7 +22,6 @@
 package org.pg.eti.kask.ont.pluginSova;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -31,7 +30,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -55,6 +53,8 @@ import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.pg.eti.kask.sova.graph.Constants;
 import org.pg.eti.kask.sova.nodes.ClassNode;
+import org.pg.eti.kask.sova.visualization.NodeLinkTreeVis;
+import org.pg.eti.kask.sova.visualization.RadialGraphVis;
 import prefuse.util.ui.JValueSlider;
 import prefuse.visual.VisualItem;
 
@@ -91,16 +91,15 @@ public class Options extends JFrame {
     private static final String CHECKBOX_INSTANCEPROPERTY_COMMAND = "checkbox_instanceproperty";
     private static final String CHECKBOX_DOMAIN_COMMAND = "checkbox_domain";
     private static final String CHECKBOX_RANGE_COMMAND = "checkbox_drange";
-    private static final String CHECKBOX_SHOW_IRI = "checkbox_showiri";
-    private static final String CHECKBOX_LABELS_COMMAND = "checkbox_labels";
     private static final int DEFAULT_WIDTH = 300;
-    private static final int DEFAULT_HEIGHT = 600;
+    private static final int DEFAULT_HEIGHT = 660;
     private JButton exitButt;
     private OVDisplay display;
     public JComboBox langBox;
 
     private JRadioButton labelRationButton;
     private JRadioButton idRationButton;
+    private JRadioButton IRIRationButton;
     JCheckBox spanningTreeBox;
 
     private JButton options = null;
@@ -116,7 +115,7 @@ public class Options extends JFrame {
             chSymmetricProperty = null, chTransitiveProperty = null;
     private JPanel visValues = null;
     private boolean isOptionFrameShow = false;
-
+    public JValueSlider radius;
     public synchronized boolean isOptionFrameShow() {
         return isOptionFrameShow;
     }
@@ -164,19 +163,44 @@ public class Options extends JFrame {
                 display.getVisualization().refreshFilter();
             }
         });
-        slider.setBackground(Color.WHITE);
-        Box cf = new Box(BoxLayout.Y_AXIS);
-        cf.setSize(new Dimension(300, 70));
+        slider.setBackground(visValues.getBackground());
+        slider.setPreferredSize(new Dimension(430, 20));
+        slider.setMaximumSize(new Dimension(430, 20));
+        JPanel cf = new JPanel(new GridLayout(1, 1));
         cf.add(slider);
-        cf.setBorder(BorderFactory.createTitledBorder("Connectivity Filter"));
-        JPanel panelDist = new JPanel();
-        panelDist.add(cf);
-
-        visValues.add(panelDist);
-
+        cf.setBorder(BorderFactory.createTitledBorder(BorderFactory
+                .createEtchedBorder(),"Connectivity Filter"));
+        visValues.add(cf);
+ 
+        radius = new JValueSlider("Size", 1, 1000, 100); 
+        display.setActualRadius(radius);
+        radius.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                display.setActualSliderValue(radius.getValue().intValue());
+                if(display.getVisualization() instanceof RadialGraphVis){
+                    ((RadialGraphVis)display.getVisualization()).setRadius(radius.getValue().intValue());
+                    display.repaint();
+                }
+                
+                if(display.getVisualization() instanceof NodeLinkTreeVis){
+                    ((NodeLinkTreeVis)display.getVisualization()).setSize(radius.getValue().intValue());
+                    display.repaint();
+                }
+            }
+        });
+        radius.setBackground(visValues.getBackground());
+        radius.setPreferredSize(new Dimension(400, 20));
+        radius.setMaximumSize(new Dimension(400, 20));
+        JPanel rf = new JPanel(new GridLayout(1, 1));
+        rf.add(radius);
+        rf.setBorder(BorderFactory.createTitledBorder(BorderFactory
+                .createEtchedBorder(),"Tree Visualization"));
+        visValues.add(rf);
+        
+        
         JPanel buttonPanel = new JPanel(new GridLayout(4, 1));
         buttonPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory
-                .createEtchedBorder(), "Visualization types"));
+                .createEtchedBorder(), "Visualization Types"));
         // buttonPanel.setSize(new Dimension(300, 80));
         JRadioButton forceDirectedRadial = new JRadioButton(
                 "ForceDirectedLayout", true);
@@ -225,9 +249,9 @@ public class Options extends JFrame {
 
         //****************************************************************
         // Label ID
-        JPanel buttonVisual = new JPanel(new GridLayout(2, 2));
+        JPanel buttonVisual = new JPanel(new GridLayout(3, 3));
         buttonVisual.setBorder(BorderFactory.createTitledBorder(BorderFactory
-                .createEtchedBorder(), "Visualization subject"));
+                .createEtchedBorder(), "Visualization Subject"));
 
         labelRationButton = new JRadioButton("Label", false);
         labelRationButton.addActionListener(new ActionListener() {
@@ -243,6 +267,15 @@ public class Options extends JFrame {
                 display.changeGraphVisualization(OVDisplay.VisualizationEnums.ID, null);
             }
         });
+        IRIRationButton = new JRadioButton("IRI", true);
+        IRIRationButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent arg0) {
+                display.changeGraphVisualization(OVDisplay.VisualizationEnums.IRI, null);
+            }
+        });
+        
+        
         ButtonGroup subjectGroup = new ButtonGroup();
 
         JLabel labelLang = new JLabel("Available languages");
@@ -292,12 +325,16 @@ public class Options extends JFrame {
 
         subjectGroup.add(labelRationButton);
         subjectGroup.add(idRationButton);
+        subjectGroup.add(IRIRationButton);
 
         // Dodaj elementy do głównego konenera
         buttonVisual.add(labelRationButton, BorderLayout.WEST);
         buttonVisual.add(idRationButton, BorderLayout.WEST);
+        buttonVisual.add(IRIRationButton, BorderLayout.WEST);
+        buttonVisual.add(new JLabel());
         buttonVisual.add(labelLang, BorderLayout.WEST);
-        buttonVisual.add(langBox);
+        buttonVisual.add(langBox, BorderLayout.LINE_END);
+        
 
         visValues.add(buttonVisual);
 
