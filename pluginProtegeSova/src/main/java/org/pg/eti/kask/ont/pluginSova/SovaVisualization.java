@@ -5,6 +5,7 @@
  * Copyright (c) 2010 Jaworska Anna
  * Copyright (c) 2010 Kleczkowski Radosław
  * Copyright (c) 2010 Orłowski Piotr
+ * Copyright (c) 2016 Wojciech Zielonka 
  *
  * This file is part of SOVA.  SOVA is free software: you can
  * redistribute it and/or modify it under the terms of the GNU Lesser General Public
